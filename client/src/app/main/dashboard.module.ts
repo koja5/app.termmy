@@ -13,6 +13,7 @@ import { MiscellaneousModule } from "./pages/miscellaneous/miscellaneous.module"
 import { HomeComponent } from "./sample/home.component";
 import { SampleComponent } from "./sample/sample.component";
 import { RouterModule } from "@angular/router";
+import { SettingsComponent } from "./pages/settings/settings.component";
 
 const routes = [
   {
@@ -25,10 +26,16 @@ const routes = [
     component: HomeComponent,
     data: { animation: "home" },
   },
+  {
+    path: "settings",
+    component: SettingsComponent,
+    loadChildren: () =>
+      import("./pages/settings/settings.module").then((m) => m.SettingsModule),
+  },
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [SettingsComponent],
   imports: [
     CommonModule,
     CoreCommonModule,

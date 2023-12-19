@@ -1,5 +1,5 @@
 <!-- Vertical Menu -->
-<ng-container *ngIf="layout === 'vertical'">
+<ng-container *ngIf="layout === 'vertical'&&menu">
   <ng-container *ngFor="let item of menu">
     <!-- section -->
     <li core-menu-vertical-section *ngIf="item.type == 'section'" [item]="item" class="navigation-header"></li>
@@ -46,7 +46,7 @@
 <!--/ Vertical Menu -->
 
 <!-- Horizontal Menu -->
-<ng-container *ngIf="layout === 'horizontal'">
+<ng-container *ngIf="layout === 'horizontal'&&menu">
   <ng-container *ngFor="let item of menu">
     <!-- section -->
     <li core-menu-horizontal-collapsible *ngIf="item.type == 'section'" [item]="item" class="dropdown nav-item"></li>

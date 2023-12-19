@@ -1,0 +1,38 @@
+{
+  "contentHeader": {
+    "headerTitle": "Settings",
+    "actionButton": true,
+    "breadcrumb": {
+      "type": "",
+      "links": [
+        {
+          "name": "dashboard",
+          "isLink": false,
+          "link": "/"
+        },
+        {
+          "name": "settings",
+          "isLink": false,
+          "link": "/"
+        },
+        {
+          "name": "worktime",
+          "isLink": false,
+          "link": "/"
+        }
+      ]
+    }
+  },
+  "navigations": [
+    {
+      "title": "Worktime",
+      "link": "/dashboard/settings/worktime",
+      "icon": "briefcase"
+    },
+    {
+      "title": "Customization",
+      "link": "/dashboard/settings/customization",
+      "icon": "tool"
+    }
+  ]
+}

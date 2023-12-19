@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "/pages/miscellaneous/error",
+    redirectTo: "/dashboard/miscellaneous/error",
   },
 ];
 

@@ -1,35 +1,48 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
-import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
+import { CoreMenuService } from "@core/components/core-menu/core-menu.service";
+import { ConfigurationService } from "app/services/configuration.service";
 
 @Component({
-  selector: '[core-menu]',
-  templateUrl: './core-menu.component.html',
-  styleUrls: ['./core-menu.component.scss'],
+  selector: "[core-menu]",
+  templateUrl: "./core-menu.component.html",
+  styleUrls: ["./core-menu.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoreMenuComponent implements OnInit {
   currentUser: any;
 
   @Input()
-  layout = 'vertical';
+  layout = "vertical";
 
-  @Input()
-  menu: any;
+  public menu: any;
 
   // Private
   private _unsubscribeAll: Subject<any>;
+  private path = "navigation-menu";
+  private file = "navigation-menu.json";
 
   /**
    *
    * @param {ChangeDetectorRef} _changeDetectorRef
    * @param {CoreMenuService} _coreMenuService
    */
-  constructor(private _changeDetectorRef: ChangeDetectorRef, private _coreMenuService: CoreMenuService) {
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _coreMenuService: CoreMenuService,
+    private _configurationService: ConfigurationService
+  ) {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
@@ -45,13 +58,15 @@ export class CoreMenuComponent implements OnInit {
     this.menu = this.menu || this._coreMenuService.getCurrentMenu();
 
     // Subscribe to the current menu changes
-    this._coreMenuService.onMenuChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
-      this.currentUser = this._coreMenuService.currentUser;
+    this._coreMenuService.onMenuChanged
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.currentUser = this._coreMenuService.currentUser;
 
-      // Load menu
-      this.menu = this._coreMenuService.getCurrentMenu();
+        // Load menu
+        this.menu = this._coreMenuService.getCurrentMenu();
 
-      this._changeDetectorRef.markForCheck();
-    });
+        this._changeDetectorRef.markForCheck();
+      });
   }
 }
