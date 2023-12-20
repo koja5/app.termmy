@@ -9,6 +9,7 @@ const fs = require("fs");
 const sha1 = require("sha1");
 const stripe = require("stripe")(process.env.stripe_key);
 const jwt = require("jsonwebtoken");
+const auth = require("./config/auth");
 
 module.exports = router;
 
@@ -445,10 +446,112 @@ router.get("/getBookingSettings/:superadminId", async (req, res, next) => {
   }
 });
 
+router.get("/getUsers", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users",
+          req.params.category,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setWorktime", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.location_id = req.user.user.id;
+    req.body.value = convertToString(req.body.value);
+
+    if (req.body.id) {
+      conn.query(
+        "update worktimes set ? where id = ?",
+        [req.body, req.body.id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "insert into worktimes SET ?",
+        [req.body],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+router.get("/getWorktime", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from worktimes where location_id = ?",
+          req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);
 }
 
 function copyValue(value) {
   return JSON.parse(JSON.stringify(value));
+}
+
+function convertToString(value) {
+  return JSON.stringify(value);
 }

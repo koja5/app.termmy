@@ -19,6 +19,7 @@ import { AppComponent } from "app/app.component";
 import { LayoutModule } from "app/layout/layout.module";
 import { SampleModule } from "app/main/sample/sample.module";
 import { CookieModule, CookieService } from "ngx-cookie";
+import { CommonModule } from "@angular/common";
 
 const appRoutes: Routes = [
   {
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

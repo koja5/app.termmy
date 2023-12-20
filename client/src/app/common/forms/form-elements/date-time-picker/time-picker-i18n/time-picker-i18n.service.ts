@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { NgbTimepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimepickerI18n } from "@ng-bootstrap/ng-bootstrap";
 
 const I18N_VALUES = {
-  el: { periods: ['πμ', 'μμ'] }
+  el: { periods: ["πμ", "μμ"] },
   // other languages you would support
 };
 
@@ -11,7 +11,7 @@ const I18N_VALUES = {
 // use the Angular LOCALE_ID value
 @Injectable()
 export class I18n {
-  language = 'el';
+  language = "el";
 }
 
 // Define custom service providing the "AM" and "PM" translations.

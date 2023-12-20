@@ -111,4 +111,16 @@ export class HelpService {
       typeof value === "string" ? value : JSON.stringify(value)
     );
   }
+
+  converToMiliseconds(hour: number, minutes: number, seconds: number) {
+    return (
+      hour * 3600 * 1000 +
+      (minutes ? minutes : 0) * 60 * 1000 +
+      (seconds ? seconds : 0) * 1000
+    );
+  }
+
+  convertStringToJson(value: string) {
+    return JSON.parse(value);
+  }
 }
