@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CoreCommonModule } from '@core/common.module';
 
-import { ErrorComponent } from 'app/main/pages/miscellaneous/error/error.component';
+import { ErrorComponent } from 'app/dashboard/pages/error-pages/miscellaneous/error/error.component';
 
 // routing
 const routes: Routes = [

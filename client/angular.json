@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "hammerjs",
               "node-waves",
-              "app/main/ui/icons/feather/feather.component",
+              "app/dashboard/ui/icons/feather/feather.component",
               "@angularclass/hmr",
               "ngx-quill",
               "lodash",

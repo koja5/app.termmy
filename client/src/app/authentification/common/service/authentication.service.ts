@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { environment } from "environments/environment";
-import { User, Role } from "app/auth/models";
+import { User, Role } from "app/authentification/common/models";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "app/services/storage.service";
 

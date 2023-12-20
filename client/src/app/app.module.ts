@@ -17,7 +17,7 @@ import { coreConfig } from "app/app-config";
 
 import { AppComponent } from "app/app.component";
 import { LayoutModule } from "app/layout/layout.module";
-import { SampleModule } from "app/main/sample/sample.module";
+import { SampleModule } from "app/dashboard/sample/sample.module";
 import { CookieModule, CookieService } from "ngx-cookie";
 import { CommonModule } from "@angular/common";
 
@@ -25,12 +25,12 @@ const appRoutes: Routes = [
   {
     path: "dashboard",
     loadChildren: () =>
-      import("./main/dashboard.module").then((m) => m.DashboardModule),
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
     path: "auth",
     loadChildren: () =>
-      import("./main/pages/authentication/authentication.module").then(
+      import("./authentification/authentication.module").then(
         (m) => m.AuthenticationModule
       ),
   },

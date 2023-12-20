@@ -15,4 +15,12 @@ export const menu = [
     icon: "settings",
     url: "dashboard/settings/worktime",
   },
+  {
+    id: "superadmin-all-users",
+    title: "All users",
+    translate: "All users",
+    type: "item",
+    icon: "user",
+    url: "dashboard/superadmin/all-users",
+  },
 ];
