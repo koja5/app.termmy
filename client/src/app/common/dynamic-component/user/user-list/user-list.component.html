@@ -1,9 +1,9 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl p-0" *ngIf="config">
   <div class="content-body">
     <!-- User List -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
-      <div class="card">
+      <div class="card" *ngIf="config.searchFilter">
         <h5 class="card-header">Search Filter</h5>
         <div class="card-body">
           <div class="users-list-filter">
@@ -87,7 +87,61 @@
             </ng-template>
           </ngx-datatable-column> -->
           <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title" [prop]="item.field"
-            [width]="200"></ngx-datatable-column>
+            [width]="200">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <div *ngIf="item.template">
+                <div *ngIf="item.template.choices" class="datatable-body-cell">
+                  <div *ngFor="let item of item.template.choices">
+                    <!-- directly html code -->
+                    <div *ngIf="item.html">
+                      <div *ngIf="
+                      item.operator === '==' && value === item.value
+                    " [innerHtml]="item.html"></div>
+                      <div *ngIf="
+                      item.operator === '!=' && value !== item.value
+                    " [innerHtml]="item.html"></div>
+                      <div *ngIf="item.operator === '>' && value > item.value" [innerHtml]="item.html"></div>
+                      <div *ngIf="item.operator === '>' && value < item.value" [innerHtml]="item.html"></div>
+                    </div>
+                    <!-- END -->
+
+                    <div *ngIf="item.apart" class="datatable-body-cell-label">
+                      <div *ngIf="item.operator === '==' && value === item.value"
+                        class="{{item.apart.badge ? item.apart.badge : ''}}">
+                        <i *ngIf="item.apart.icon" class="{{item.apart.icon}} font-medium-3"></i>
+                        <span *ngIf="item.apart.title"
+                          class="{{item.apart.titleClass ? item.apart.titleClass : ''}} {{item.apart.icon ? 'title-left' : ''}}">{{item.apart.title}}</span>
+                      </div>
+                      <div *ngIf="item.operator === '!=' && value !== item.value"
+                        class="{{item.badge ? item.badge : ''}}">
+                        <i *ngIf="item.icon" class="{{item.icon}} font-medium-3"></i>
+                        <span *ngIf="item.title"
+                          class="{{item.titleClass ? item.titleClass : ''}}">{{item.title}}</span>
+                      </div>
+                      <div *ngIf="item.operator === '>' && value > item.value" class="{{item.badge ? item.badge : ''}}">
+                        <i *ngIf="item.icon" class="{{item.icon}} font-medium-3"></i>
+                        <span *ngIf="item.title"
+                          class="{{item.titleClass ? item.titleClass : ''}}">{{item.title}}</span>
+                      </div>
+                      <div *ngIf="item.operator === '>' && value < item.value" class="{{item.badge ? item.badge : ''}}">
+                        <i *ngIf="item.icon" class="{{item.icon}} font-medium-3"></i>
+                        <span *ngIf="item.title"
+                          class="{{item.titleClass ? item.titleClass : ''}}">{{item.title}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!item.template">
+                {{value}}
+              </div>
+              <!-- <div>
+                <i class="feather icon-edit-2 text-info font-medium-3"></i>
+                {{ value }} {{item.template | json}}
+              </div> -->
+            </ng-template>
+
+          </ngx-datatable-column>
           <!-- <ngx-datatable-column name="Email" prop="email" [width]="200"></ngx-datatable-column>
           <ngx-datatable-column name="Role" prop="role" [width]="100">
             <ng-template let-role="value" ngx-datatable-cell-template>
@@ -140,7 +194,10 @@
   <!-- New User Sidebar -->
   <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="new-user-sidebar"
     overlayClass="modal-backdrop">
-    <app-new-user-sidebar></app-new-user-sidebar>
+    <!-- <app-new-user-sidebar></app-new-user-sidebar> -->
+    <app-dynamic-forms *ngIf="config.config && config.config.length > 0" [config]="config" [partOfGrid]="true"
+      (submit)="submitEmitter($event)" #form="dynamicForm">
+    </app-dynamic-forms>
   </core-sidebar>
   <!--/ New User Sidebar -->
 </div>

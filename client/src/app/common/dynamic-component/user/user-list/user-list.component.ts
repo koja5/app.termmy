@@ -209,28 +209,6 @@ export class UserListComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    // this._coreConfigService.config
-    //   .pipe(takeUntil(this._unsubscribeAll))
-    //   .subscribe((config) => {
-    //     if (config.layout.animation === "zoomIn") {
-    //       setTimeout(() => {
-    //         this._userListService.onUserListChanged
-    //           .pipe(takeUntil(this._unsubscribeAll))
-    //           .subscribe((response) => {
-    //             this.rows = response;
-    //             this.tempData = this.rows;
-    //           });
-    //       }, 450);
-    //     } else {
-    //       this._userListService.onUserListChanged
-    //         .pipe(takeUntil(this._unsubscribeAll))
-    //         .subscribe((response) => {
-    //           this.rows = response;
-    //           this.tempData = this.rows;
-    //         });
-    //     }
-    //   });
-
     this.initializeConfig();
   }
 

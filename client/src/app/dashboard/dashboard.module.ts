@@ -9,24 +9,15 @@ import { CoreCommonModule } from "@core/common.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 
 import { AuthenticationModule } from "../authentification/authentication.module";
-import { MiscellaneousModule } from "./pages/error-pages/miscellaneous/miscellaneous.module";
+import { MiscellaneousModule } from "./pages/miscellaneous/miscellaneous.module";
 import { HomeComponent } from "./sample/home.component";
 import { SampleComponent } from "./sample/sample.component";
 import { RouterModule } from "@angular/router";
 import { SettingsComponent } from "./pages/settings/settings.component";
 import { SuperadminModule } from "./pages/superadmin/superadmin.module";
+import { AccountSettingsComponent } from "./common-pages/account-settings/account-settings.component";
 
 const routes = [
-  {
-    path: "sample",
-    component: SampleComponent,
-    data: { animation: "sample" },
-  },
-  {
-    path: "home",
-    component: HomeComponent,
-    data: { animation: "home" },
-  },
   {
     path: "settings",
     component: SettingsComponent,
@@ -34,14 +25,24 @@ const routes = [
       import("./pages/settings/settings.module").then((m) => m.SettingsModule),
   },
   {
+    path: "account-settings",
+    component: AccountSettingsComponent,
+    loadChildren: () =>
+      import("./common-pages/account-settings/account-settings.module").then(
+        (m) => m.AccountSettingsModule
+      ),
+  },
+  {
     path: "superadmin",
     loadChildren: () =>
-      import("./pages/superadmin/superadmin.module").then((m) => m.SuperadminModule),
+      import("./pages/superadmin/superadmin.module").then(
+        (m) => m.SuperadminModule
+      ),
   },
 ];
 
 @NgModule({
-  declarations: [SettingsComponent],
+  declarations: [SettingsComponent, AccountSettingsComponent],
   imports: [
     CommonModule,
     CoreCommonModule,
@@ -52,7 +53,7 @@ const routes = [
     AuthenticationModule,
     MiscellaneousModule,
     RouterModule.forChild(routes),
-    SuperadminModule
+    SuperadminModule,
   ],
 
   providers: [],

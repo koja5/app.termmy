@@ -10,6 +10,7 @@ import { CoreConfigService } from "@core/services/config.service";
   selector: "app-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignupComponent implements OnInit {
   // Public

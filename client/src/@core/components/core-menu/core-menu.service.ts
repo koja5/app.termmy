@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
-import { AuthenticationService } from 'app/authentification/common/service';
-import { User } from 'app/authentification/common/models';
+import { AuthenticationService } from "app/authentification/common/service";
+import { User } from "app/authentification/common/models";
+import { UserTypes } from "app/enums/user-types";
+import { StorageService } from "app/services/storage.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CoreMenuService {
   currentUser: User;
@@ -27,8 +29,14 @@ export class CoreMenuService {
    * @param {Router} _router
    * @param {AuthenticationService} _authenticationService
    */
-  constructor(private _router: Router, private _authenticationService: AuthenticationService) {
-    this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
+  constructor(
+    private _router: Router,
+    private _authenticationService: AuthenticationService,
+    private _storageService: StorageService
+  ) {
+    this._authenticationService.currentUser.subscribe(
+      (x) => (this.currentUser = x)
+    );
 
     // Set defaults
     this.onItemCollapsed = new Subject();
@@ -83,7 +91,9 @@ export class CoreMenuService {
   register(key, menu): void {
     // Confirm if the key already used
     if (this._registry[key]) {
-      console.error(`Menu with the key '${key}' already exists. Either unregister it first or use a unique key.`);
+      console.error(
+        `Menu with the key '${key}' already exists. Either unregister it first or use a unique key.`
+      );
 
       return;
     }
@@ -127,6 +137,8 @@ export class CoreMenuService {
       return;
     }
 
+    this.checkMenuForDifferentUser(key);
+
     // Return sidebar
     return this._registry[key];
   }
@@ -142,7 +154,6 @@ export class CoreMenuService {
 
       return;
     }
-
     return this.getMenu(this._currentMenuKey);
   }
 
@@ -164,5 +175,26 @@ export class CoreMenuService {
 
     // Notify subject
     this._onMenuChanged.next(key);
+  }
+
+  checkMenuForDifferentUser(key) {
+    const user = this._storageService.getDecodeToken();
+    for (let i = 0; i < this._registry[key].length; i++) {
+      if (
+        this._registry[key][i].users &&
+        this.checkUserType(this._registry[key][i].users, user.type)
+      ) {
+        this._registry[key].splice(i, 1);
+      }
+    }
+  }
+
+  checkUserType(users: any, type: any) {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i] === UserTypes[type]) {
+        return false;
+      }
+    }
+    return true;
   }
 }

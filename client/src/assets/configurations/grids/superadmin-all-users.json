@@ -145,29 +145,32 @@
                         "field": "type",
                         "value": 0,
                         "operator": "==",
-                        "html": "<span class='e-badge e-badge-dark'>Admin</span>"
+                        "apart": {
+                            "title": "Superadmin",
+                            "icon": "feather icon-edit-2 text-info"
+                        }
                     },
                     {
                         "field": "type",
                         "value": 1,
                         "operator": "==",
-                        "html": "<span class='e-badge e-badge-success'>Händler</span>"
+                        "apart": {
+                            "title": "Admin",
+                            "icon": "feather icon-user-check text-success"
+                        }
                     },
                     {
                         "field": "type",
                         "value": 2,
                         "operator": "==",
-                        "html": "<span class='e-badge e-badge-warning'>Kindergarten</span>"
-                    },
-                    {
-                        "field": "type",
-                        "value": 3,
-                        "operator": "==",
-                        "html": "<span class='e-badge e-badge-info'>Kunde</span>"
+                        "apart": {
+                            "title": "Partner",
+                            "icon": "feather icon-user-plus text-warning"
+                        }
                     }
                 ]
             },
-            "field": "type_name",
+            "field": "type",
             "filter": {
                 "type": "CheckBox"
             }
@@ -194,7 +197,8 @@
             "field": "email",
             "validation": {
                 "required": true
-            }
+            },
+            "template": "test"
         },
         {
             "title": "userTelephone",
@@ -321,17 +325,23 @@
                         "field": "active",
                         "value": 0,
                         "operator": "==",
-                        "html": "<span class='e-badge e-badge-danger'>Inaktiv</span>"
+                        "apart": {
+                            "title": "inactive",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
                     },
                     {
                         "field": "active",
                         "value": 1,
                         "operator": "==",
-                        "html": "<span class='e-badge e-badge-success'>Aktiv</span>"
+                        "apart": {
+                            "title": "active",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
                     }
                 ]
             },
-            "field": "active_name",
+            "field": "active",
             "filter": {
                 "type": "CheckBox"
             }
@@ -410,18 +420,18 @@
             "field": "telephone"
         },
         {
-            "type": "combobox",
+            "type": "multiselect",
             "width": "col-md-12",
             "class": "e-outline",
             "name": "country_id",
             "title": "userCountry",
             "field": {
-                "text": "name",
+                "text": "firstname",
                 "value": "id"
             },
             "request": {
                 "type": "GET",
-                "api": "/api/getCountries",
+                "api": "/api/getUsers",
                 "parameters": [],
                 "fields": "",
                 "root": ""
@@ -491,7 +501,7 @@
         },
         {
             "type": "switch",
-            "width": "col-md-12 pt-2",
+            "width": "col-6",
             "class": "e-outline",
             "name": "newsletter",
             "title": "userNewsletter",
@@ -499,7 +509,7 @@
         },
         {
             "type": "switch",
-            "width": "col-md-12 pt-2",
+            "width": "col-6",
             "class": "e-outline",
             "name": "verified",
             "title": "userVerified",
@@ -507,30 +517,20 @@
         },
         {
             "type": "switch",
-            "width": "col-md-12 pt-2",
+            "width": "col-md-12",
             "class": "e-outline",
             "name": "active",
             "title": "userActive",
             "field": "active"
         },
         {
-            "type": "datetimepicker",
-            "width": "col-md-12 pt-2",
-            "class": "e-outline",
-            "readonly": true,
-            "format": "dd.MM.yyyy. HH:mm:ss",
-            "name": "signup_time",
-            "title": "userSignUpTime",
-            "field": "signup_time"
-        },
-        {
             "type": "button",
             "width": "col-md-12",
-            "class": "e-info button-action",
+            "class": "btn btn-primary",
             "name": "submit",
             "title": "userSave",
             "field": "submit",
-            "positionClass": "position-end mt-3 col-md-12"
+            "positionClass": "text-right mt-3 col-md-12"
         }
     ]
 }

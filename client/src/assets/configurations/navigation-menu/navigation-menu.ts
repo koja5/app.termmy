@@ -22,5 +22,6 @@ export const menu = [
     type: "item",
     icon: "user",
     url: "dashboard/superadmin/all-users",
+    users: ['admin', 'superadmin'],
   },
 ];

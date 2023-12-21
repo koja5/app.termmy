@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import * as CryptoJS from "crypto-js";
 import { environment } from "../../environments/environment.prod";
+import { UserTypes } from "app/enums/user-types";
+import { StorageService } from "./storage.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class HelpService {
-  constructor() {}
+  constructor(private _storageService: StorageService) {}
 
   postRequestDataParameters(body: any, data: any, parameters: string[]) {
     for (let i = 0; i < parameters.length; i++) {
@@ -122,5 +124,26 @@ export class HelpService {
 
   convertStringToJson(value: string) {
     return JSON.parse(value);
+  }
+
+  getTypeOfName(type: any) {
+    for (var item in UserTypes) {
+      if (Number(item) === type) {
+        return UserTypes[item];
+      }
+    }
+    return UserTypes[UserTypes.admin];
+  }
+
+  checkRights(rights: any) {
+    const type = this.getTypeOfName(this._storageService.getDecodeToken().type);
+    if (rights) {
+      for (let i = 0; i < rights.length; i++) {
+        if (rights[i] === type) {
+          return true;
+        }
+      }
+      return false;
+    } else return true;
   }
 }

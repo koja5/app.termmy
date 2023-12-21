@@ -20,15 +20,20 @@ import { LayoutModule } from "app/layout/layout.module";
 import { SampleModule } from "app/dashboard/sample/sample.module";
 import { CookieModule, CookieService } from "ngx-cookie";
 import { CommonModule } from "@angular/common";
+import { LoginGuardService } from "./services/login-guard/login-guard.service";
+import { LoggedGuard } from "./services/login-guard/logged-guard.service";
+import { SuperadminGuardService } from "./services/guards/superadmin-guard.service";
 
 const appRoutes: Routes = [
   {
     path: "dashboard",
+    canActivate: [LoginGuardService],
     loadChildren: () =>
       import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
     path: "auth",
+    canActivate: [LoggedGuard],
     loadChildren: () =>
       import("./authentification/authentication.module").then(
         (m) => m.AuthenticationModule

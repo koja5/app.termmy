@@ -1,0 +1,34 @@
+<div *ngIf="data" [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
+  <label *ngIf="config?.title" class="custom-label">{{language[config.title] ? language[config.title] :
+    config.title
+    }}</label>
+
+  <!-- <ejs-multiselect cssClass="{{ config.class }}" [id]="config.name" [dataSource]="data" [fields]="config.field"
+    [placeholder]="language[config!.placeholder] ? language[config!.placeholder] : (config.placeholder ?  config.placeholder : '')"
+    [allowFiltering]="config.fieldConfig?.filter" [ignoreAccent]="config.fieldConfig?.ignoreAccent"
+    [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder" [formControlName]="config.name"
+    [readonly]="config.readonly">
+    <ng-template *ngIf="data" #noRecordsTemplate>
+      <span class="norecord"> {{language?.noRecords}}</span>
+    </ng-template>
+  </ejs-multiselect> -->
+
+  <ng-select [items]="data" [bindLabel]="config.field.text" [bindValue]="config.field.value" [multiple]="true"
+    [closeOnSelect]="config.closeOnSelect" [searchable]="config.searchable" [loading]="loading"
+    cssClass="{{ config.class }}" [id]="config.name"
+    [placeholder]="language[config!.placeholder] ? language[config!.placeholder] : (config.placeholder ?  config.placeholder : '')"
+    [allowFiltering]="config.fieldConfig?.filter" [ignoreAccent]="config.fieldConfig?.ignoreAccent"
+    [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder" [formControlName]="config.name"
+    [readonly]="config.readonly">
+    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+      <span *ngIf="!config.complexField" class="ng-value-label"> {{ item[config.field.text] }}</span>
+      <span *ngIf="config.complexField" class="ng-value-label"> <span *ngFor="let field of config.complexField">{{
+          item[field] }}</span>
+      </span>
+      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+    </ng-template>
+  </ng-select>
+</div>
+
+
+<app-loader-svg *ngIf="!data"></app-loader-svg>

@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
@@ -10,6 +14,7 @@ import { CoreConfigService } from "@core/services/config.service";
   selector: "app-forgot-password",
   templateUrl: "./forgot-password.component.html",
   styleUrls: ["./forgot-password.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ForgotPasswordComponent implements OnInit {
   // Public
