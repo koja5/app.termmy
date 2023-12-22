@@ -11,7 +11,7 @@
                         <li class="nav-item" ngbNavItem>
                             <a *ngFor="let item of config.navigations"
                                 class="nav-link d-flex py-75 {{router === item.link ? 'active' : ''}}"
-                                routerLink="{{item.link}}">
+                                routerLink="{{item.link}}" (click)="changeRouter(item.link)">
                                 <i [data-feather]="item.icon" class="font-medium-3 mr-1"></i>
                                 <span class="font-weight-bold">{{item.title}}</span>
                             </a>

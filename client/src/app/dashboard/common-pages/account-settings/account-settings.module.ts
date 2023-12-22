@@ -7,14 +7,20 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { GeneralComponent } from "./general/general.component";
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { InformationComponent } from "./information/information.component";
 
 const routes = [
   { path: "general", component: GeneralComponent },
   { path: "change-password", component: ChangePasswordComponent },
+  { path: "information", component: InformationComponent },
 ];
 
 @NgModule({
-  declarations: [GeneralComponent, ChangePasswordComponent],
+  declarations: [
+    GeneralComponent,
+    ChangePasswordComponent,
+    InformationComponent,
+  ],
   imports: [
     CommonModule,
     DatePickerI18nModule,

@@ -16,12 +16,13 @@ import { ButtonComponent } from "./buttons/button/button.component";
 import { SwitchComponent } from "./buttons/switch/switch.component";
 import { ComboboxComponent } from "./dropdowns/combobox/combobox.component";
 import { MultiselectComponent } from "./dropdowns/multiselect/multiselect.component";
+import { LabelComponent } from "./label/label.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
   // numeric: NumericTextboxComponent,
   // password: TextBoxComponent,
-  // label: LabelComponent,
+  label: LabelComponent,
   button: ButtonComponent,
   combobox: ComboboxComponent,
   multiselect: MultiselectComponent,

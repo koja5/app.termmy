@@ -117,6 +117,63 @@ router.post("/login", function (req, res, next) {
   });
 });
 
+// PROFILE INFO
+router.get("/getProfileInfo", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where id = ?",
+          [req.user.user.id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/saveProfileInfo", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    const query = prepareProperty(req.body);
+    console.log(query);
+
+    conn.query(
+      "update users set " + query + " where id = ?",
+      [req.user.user.id],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        } else {
+          res.json(true);
+        }
+      }
+    );
+  });
+});
+
+//END PROFILE INFO
+
 router.get("/checkReservedAppointments/:storeId", async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
@@ -174,22 +231,6 @@ router.get("/checkUser/:value", async (req, res, next) => {
 });
 
 router.post("/pay", (req, res, next) => {
-  // stripe.charges.create(
-  //   {
-  //     amount: req.body.price * 100,
-  //     currency: "EUR",
-  //     description: req.body.description,
-  //     source: req.body.token.id,
-  //   },
-  //   (err, charge) => {
-  //     if (err) {
-  //       res.json(false);
-  //     } else {
-  //       res.json(true);
-  //     }
-  //   }
-  // );
-
   stripe.paymentIntents.create(
     {
       amount: req.body.price * 100,
@@ -474,6 +515,8 @@ router.get("/getUsers", auth, async (req, res, next) => {
   }
 });
 
+//worktime
+
 router.post("/setWorktime", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {
@@ -544,6 +587,104 @@ router.get("/getWorktime", auth, async (req, res, next) => {
   }
 });
 
+//end worktime
+
+// LOCATIONS
+
+router.get("/getMyLocations", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from locations where admin_id = ?",
+          req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setLocation", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.id;
+
+    if (req.body.id) {
+      conn.query(
+        "update locations set ? where id = ?",
+        [req.body, req.body.id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "insert into locations SET ?",
+        [req.body],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+router.post("/deleteLocation", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from locations where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//END LOCATIONS
+
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);
 }
@@ -554,4 +695,18 @@ function copyValue(value) {
 
 function convertToString(value) {
   return JSON.stringify(value);
+}
+
+function prepareProperty(property) {
+  let query = "";
+  let index = 0;
+  let array = Object.entries(property);
+  for (const [key, value] of array) {
+    query += key + "='" + value + "'";
+    index++;
+    if (index < array.length) {
+      query += ", ";
+    }
+  }
+  return query;
 }

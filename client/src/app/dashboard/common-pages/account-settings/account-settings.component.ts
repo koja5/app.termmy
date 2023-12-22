@@ -16,6 +16,7 @@ import { ConfigurationService } from "app/services/configuration.service";
   selector: "app-account-settings",
   templateUrl: "./account-settings.component.html",
   styleUrls: ["./account-settings.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AccountSettingsComponent implements OnInit {
   private path = "pages/account-settings";
@@ -136,5 +137,9 @@ export class AccountSettingsComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+
+  changeRouter(router: string) {
+    this.router = router;
   }
 }

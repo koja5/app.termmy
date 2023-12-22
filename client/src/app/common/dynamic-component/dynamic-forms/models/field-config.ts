@@ -1,6 +1,6 @@
-import { ValidatorFn } from '@angular/forms';
-import { Request } from './complex-properties/request';
-import { DropDown } from './specific-property/dropdown';
+import { ValidatorFn } from "@angular/forms";
+import { Request } from "./complex-properties/request";
+import { DropDown } from "./specific-property/dropdown";
 
 export class FieldConfig {
   title!: string;
@@ -38,4 +38,6 @@ export class FieldConfig {
   max?: string;
   parameters?: any[];
   allowCustom?: boolean;
+  response?: string;
+  body?: any;
 }

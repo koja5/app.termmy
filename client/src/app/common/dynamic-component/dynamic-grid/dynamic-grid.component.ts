@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnInit,
+  TemplateRef,
   ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
@@ -15,8 +16,11 @@ import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.s
 
 import { ConfigurationService } from "app/services/configuration.service";
 import { CallApiService } from "app/services/call-api.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HelpService } from "app/services/help.service";
+import { DynamicFormsComponent } from "../dynamic-forms/dynamic-forms.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-dynamic-grid",
@@ -27,6 +31,8 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 export class DynamicGridComponent {
   @Input() public path: string;
   @Input() public file: string;
+  @ViewChild("modal") modal: TemplateRef<any>;
+  @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
 
   // Public
   public sidebarToggleRef = false;
@@ -37,6 +43,9 @@ export class DynamicGridComponent {
   public previousRoleFilter = "";
   public previousPlanFilter = "";
   public previousStatusFilter = "";
+  public data: any;
+  public executeActionConfig: any;
+  public modalDialog: any;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -86,8 +95,11 @@ export class DynamicGridComponent {
     private _coreConfigService: CoreConfigService,
     private _configurationService: ConfigurationService,
     private _service: CallApiService,
-    private _router: ActivatedRoute,
-    // private _toastr: ToastrComponent
+    private _activateRouter: ActivatedRoute,
+    private _router: Router,
+    private _helpService: HelpService,
+    private _toastr: ToastrComponent,
+    private _modalService: NgbModal
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -231,7 +243,7 @@ export class DynamicGridComponent {
             if (config.layout.animation === "zoomIn") {
               setTimeout(() => {
                 this._service
-                  .callApi(this.config, this._router)
+                  .callApi(this.config, this._activateRouter)
                   .subscribe((data) => {
                     this.rows = data;
                     this.tempData = this.rows;
@@ -239,7 +251,7 @@ export class DynamicGridComponent {
               }, 450);
             } else {
               this._service
-                .callApi(this.config, this._router)
+                .callApi(this.config, this._activateRouter)
                 .subscribe((data) => {
                   this.rows = data;
                   this.tempData = this.rows;
@@ -254,20 +266,24 @@ export class DynamicGridComponent {
   }
 
   submitEmitter(event: any) {
-    this.callServerMethod(this.config.editSettingsRequest.add, event);
+    if (this._helpService.checkUndefinedProperty(event)) {
+      this.callServerMethod(this.config.editSettingsRequest.add, event);
+    }
   }
 
   callServerMethod(request: any, event: any) {
     this._service
-      .callServerMethod(request, event, this._router)
+      .callServerMethod(request, event, this._activateRouter)
       .subscribe((data: any) => {
         if (data) {
-          // this._toastr.showSuccess();
-          this._service.callApi(this.config, this._router).subscribe((data) => {
-            this.setResponseData(data);
-          });
+          this._toastr.showSuccess();
+          this._service
+            .callApi(this.config, this._activateRouter)
+            .subscribe((data) => {
+              this.setResponseData(data);
+            });
         } else {
-          // this._toastr.showError();
+          this._toastr.showError();
         }
       });
   }
@@ -276,5 +292,59 @@ export class DynamicGridComponent {
     if (this.config.request.type === "GET") {
       this.rows = data;
     }
+    if (
+      this.executeActionConfig &&
+      this.executeActionConfig.closeSidebarAfterExecute
+    ) {
+      this.toggleSidebar("new-user-sidebar");
+    }
+  }
+
+  actionColumn(item, value, row) {
+    if (item.routerLink) {
+      if (value && item.routerLink.indexOf("{{value}}") != -1) {
+        item.routerLink = item.routerLink.replace("{{value}}", value);
+      }
+      this._router.navigate([item.routerLink]);
+    } else if (item.sidebar) {
+      this.executeActionConfig = item.sidebar;
+      setTimeout(() => {
+        this.setValue(this.config.config, row);
+      }, 50);
+      this.toggleSidebar("new-user-sidebar");
+    } else if (item.executeAction) {
+      if (item.executeAction.showQuestionBeforeExecute) {
+        this.executeActionConfig = item.executeAction;
+        this.executeActionConfig.body = row;
+        this.showQuestionModal(this.modal, item.executeAction.modalConfig);
+      }
+    }
+  }
+
+  setValue(fields: any, values: any) {
+    for (let i = 0; i < fields.length; i++) {
+      this.form.setValue(
+        fields[i]["name"],
+        values[fields[i]["name"]],
+        fields[i]["type"]
+      );
+    }
+  }
+
+  showQuestionModal(modal: TemplateRef<any>, modalConfig) {
+    this.modalDialog = this._modalService.open(modal, {
+      centered: true,
+      windowClass: modalConfig.windowClass
+        ? modalConfig.windowClass
+        : "modal modal-danger",
+    });
+  }
+
+  allowExecuteActionFromModal() {
+    this.callServerMethod(
+      this.executeActionConfig.request,
+      this.executeActionConfig.body
+    );
+    this.modalDialog.close();
   }
 }

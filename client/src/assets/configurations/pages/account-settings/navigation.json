@@ -33,6 +33,11 @@
             "title": "Change password",
             "link": "/dashboard/account-settings/change-password",
             "icon": "briefcase"
+        },
+        {
+            "title": "Information",
+            "link": "/dashboard/account-settings/information",
+            "icon": "briefcase"
         }
     ]
 }

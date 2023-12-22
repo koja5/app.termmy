@@ -9,19 +9,20 @@
     "config": [
         {
             "type": "textbox",
-            "width": "col-md-6",
+            "width": "col-md-12",
             "class": "e-outline",
-            "name": "firstname",
-            "title": "firstname",
-            "field": "firstname"
+            "name": "bio",
+            "title": "bio",
+            "field": "bio",
+            "multiline": true
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
-            "name": "lastname",
-            "title": "lastname",
-            "field": "lastname"
+            "name": "telephone",
+            "title": "telephone",
+            "field": "telephone"
         },
         {
             "type": "textbox",
@@ -33,17 +34,33 @@
         },
         {
             "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "address",
+            "title": "address",
+            "field": "address"
+        },
+        {
+            "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
-            "name": "company",
-            "title": "company",
-            "field": "company"
+            "name": "zip",
+            "title": "zip",
+            "field": "zip"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "city",
+            "title": "city",
+            "field": "city"
         },
         {
             "type": "button",
             "request": {
                 "type": "POST",
-                "api": "/api/createUser",
+                "api": "/api/saveProfileInfo",
                 "parameters": [],
                 "fields": "",
                 "root": ""

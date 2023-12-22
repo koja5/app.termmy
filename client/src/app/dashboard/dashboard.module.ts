@@ -39,6 +39,11 @@ const routes = [
         (m) => m.SuperadminModule
       ),
   },
+  {
+    path: "admin",
+    loadChildren: () =>
+      import("./pages/admin/admin.module").then((m) => m.AdminModule),
+  },
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { CorePipesModule } from "@core/pipes/pipes.module";
 import { CoreDirectivesModule } from "@core/directives/directives";
 import { CoreSidebarModule } from "@core/components";
+import { ToastrComponent } from "../toastr/toastr.component";
 
 @NgModule({
   declarations: [DynamicGridComponent, DynamicFormsComponent],
@@ -29,7 +30,7 @@ import { CoreSidebarModule } from "@core/components";
     CoreDirectivesModule,
     CoreSidebarModule,
   ],
-  providers: [],
+  providers: [ToastrComponent],
   exports: [DynamicGridComponent, DynamicFormsComponent],
   entryComponents: [DynamicFormsComponent, DynamicFormsComponent],
 })

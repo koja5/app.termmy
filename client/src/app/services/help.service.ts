@@ -146,4 +146,13 @@ export class HelpService {
       return false;
     } else return true;
   }
+
+  checkUndefinedProperty(property) {
+    for (let [key, value] of Object.entries(property)) {
+      if (value != undefined) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

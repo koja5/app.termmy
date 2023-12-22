@@ -22,6 +22,15 @@ export const menu = [
     type: "item",
     icon: "user",
     url: "dashboard/superadmin/all-users",
-    users: ['admin', 'superadmin'],
+    users: ["admin", "superadmin"],
+  },
+  {
+    id: "my-locations",
+    title: "My locations",
+    translate: "myLocations",
+    type: "item",
+    icon: "map-pin",
+    url: "dashboard/admin/my-locations",
+    users: ["admin", "superadmin"],
   },
 ];

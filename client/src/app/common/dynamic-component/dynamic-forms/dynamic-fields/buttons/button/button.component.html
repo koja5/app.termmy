@@ -3,7 +3,10 @@
   [ngClass]="[config.positionClass]"
 > -->
 <div *ngIf="config && checkRights()" [ngClass]="[config.positionClass]" class="form-group form-custom">
-  <button [class]="config.class" [disabled]="config.disabled" type="submit">
+  <button *ngIf="!config.request" [class]="config.class" [disabled]="config.disabled" type="submit">
+    {{ language[config.title] ? language[config.title] : config.title }}
+  </button>
+  <button *ngIf="config.request" [class]="config.class" [disabled]="config.disabled" (click)="clickRequest()">
     {{ language[config.title] ? language[config.title] : config.title }}
   </button>
 </div>
