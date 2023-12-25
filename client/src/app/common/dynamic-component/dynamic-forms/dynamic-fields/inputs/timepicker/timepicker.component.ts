@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Component } from "@angular/core";
 import { FieldConfig } from "../../../models/field-config";
+import { FormGroup } from "@angular/forms";
 import { HelpService } from "app/services/help.service";
 
 @Component({
-  selector: "app-datetimepicker",
-  templateUrl: "./datetimepicker.component.html",
-  styleUrls: ["./datetimepicker.component.scss"],
+  selector: "app-timepicker",
+  templateUrl: "./timepicker.component.html",
+  styleUrls: ["./timepicker.component.scss"],
 })
-export class DatetimepickerComponent implements OnInit {
+export class TimepickerComponent {
   public config: FieldConfig;
   public group: FormGroup;
   public language: any;

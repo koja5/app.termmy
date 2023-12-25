@@ -1,13 +1,18 @@
 <div *ngIf="config.schedule === undefined" [ngClass]="[config.width]" [formGroup]="group"
   class="form-group form-custom {{config.hide ? 'hide' : ''}}">
   <label *ngIf="config.title" class="custom-label">{{config.title
-    }}</label>
-  <input *ngIf="!config.multiline" [type]="config.type" #default class="form-control" cssClass="{{ config.class }}"
-    [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
-    [readonly]="config.readonly" [disabled]="config.disabled!" [multiline]="config.multiline" />
-  <textarea *ngIf="config.multiline" type="text" #default class="form-control" cssClass="{{ config.class }}"
-    [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
-    [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows" [cols]="config.cols"></textarea>
+    }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
+  <input *ngIf="!config.multiline" [type]="config.type" #default
+    class="form-control {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}"
+    cssClass="{{ config.class }}" [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
+    [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
+    [multiline]="config.multiline" />
+  <textarea *ngIf="config.multiline" type="text" #default
+    class="form-control {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}"
+    cssClass="{{ config.class }}" [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
+    [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows"
+    [cols]="config.cols"></textarea>
+  <span *ngIf="group.controls[config.field].status === 'INVALID'" class="error">{{mustFillThisField}}</span>
 </div>
 
 <div *ngIf="config.schedule" [ngClass]="[config.width]" [formGroup]="group">
@@ -15,12 +20,15 @@
     config.title
     }}</label>
   <div class="e-input-group e-control-wrapper e-outline">
-    <input *ngIf="!config.multiline" class="{{
+    <input *ngIf="!config.multiline"
+      class="{{
         config.class
-      }} e-field e-input e-control e-textbox e-lib e-input " value="" name="{{ config.name }}"
-      type="{{ config.type }}" />
-    <textarea *ngIf="config.multiline" class="{{
+      }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input " value=""
+      name="{{ config.name }}" type="{{ config.type }}" />
+    <textarea *ngIf="config.multiline"
+      class="{{
         config.class
-      }} e-field e-input e-control e-textbox e-lib e-input  border-none" value="" name="{{ config.name }}"></textarea>
+      }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input  border-none" value=""
+      name="{{ config.name }}"></textarea>
   </div>
 </div>

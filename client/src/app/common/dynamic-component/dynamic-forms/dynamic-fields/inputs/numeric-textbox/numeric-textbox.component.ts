@@ -4,11 +4,11 @@ import { FieldConfig } from "../../../models/field-config";
 import { HelpService } from "app/services/help.service";
 
 @Component({
-  selector: "app-datetimepicker",
-  templateUrl: "./datetimepicker.component.html",
-  styleUrls: ["./datetimepicker.component.scss"],
+  selector: "app-numeric-textbox",
+  templateUrl: "./numeric-textbox.component.html",
+  styleUrls: ["./numeric-textbox.component.sass"],
 })
-export class DatetimepickerComponent implements OnInit {
+export class NumericTextboxComponent implements OnInit {
   public config: FieldConfig;
   public group: FormGroup;
   public language: any;
@@ -20,8 +20,5 @@ export class DatetimepickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.language = this.helpService.getLanguage();
-    this.initialization();
   }
-
-  initialization() {}
 }

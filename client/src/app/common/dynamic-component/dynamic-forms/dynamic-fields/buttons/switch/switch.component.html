@@ -5,7 +5,7 @@
         [formControlName]="config.name" [disabled]="config.disabled!"> <label *ngIf="config.title"
         class="custom-control-label" [for]="config.name">{{
         config.title
-        }}</label>
+        }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
     </div>
   </div>
 </div>

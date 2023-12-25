@@ -231,7 +231,17 @@
             "class": "e-outline",
             "name": "name",
             "title": "name",
-            "field": "name"
+            "field": "name",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "uid",
+            "title": "uid",
+            "field": "uid",
+            "required": true
         },
         {
             "type": "textbox",
@@ -263,7 +273,8 @@
             "class": "e-outline",
             "name": "email",
             "title": "email",
-            "field": "email"
+            "field": "email",
+            "required": true
         },
         {
             "type": "textbox",
@@ -272,6 +283,24 @@
             "name": "telephone",
             "title": "telephone",
             "field": "telephone"
+        },
+        {
+            "type": "timepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "worktime_from",
+            "title": "worktimeTo",
+            "field": "worktime_from",
+            "required": true
+        },
+        {
+            "type": "timepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "worktime_to",
+            "title": "worktimeTo",
+            "field": "worktime_to",
+            "required": true
         },
         {
             "type": "switch",

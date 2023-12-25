@@ -17,10 +17,12 @@ import { SwitchComponent } from "./buttons/switch/switch.component";
 import { ComboboxComponent } from "./dropdowns/combobox/combobox.component";
 import { MultiselectComponent } from "./dropdowns/multiselect/multiselect.component";
 import { LabelComponent } from "./label/label.component";
+import { TimepickerComponent } from "./inputs/timepicker/timepicker.component";
+import { NumericTextboxComponent } from "./inputs/numeric-textbox/numeric-textbox.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
-  // numeric: NumericTextboxComponent,
+  numeric: NumericTextboxComponent,
   // password: TextBoxComponent,
   label: LabelComponent,
   button: ButtonComponent,
@@ -29,6 +31,7 @@ const components: { [type: string]: Type<Field> } = {
   // datepicker: DatepickerComponent,
   // datetimepicker: DatetimepickerComponent,
   switch: SwitchComponent,
+  timepicker: TimepickerComponent,
   // color: ColorpickerComponent
 };
 

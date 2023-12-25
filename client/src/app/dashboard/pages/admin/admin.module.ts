@@ -8,6 +8,7 @@ import { AllUsersComponent } from "../superadmin/all-users/all-users.component";
 import { LocationsComponent } from "./locations/locations.component";
 import { AdminGuardService } from "app/services/guards/admin-guard.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { ServicesComponent } from "./services/services.component";
 
 const routes = [
   {
@@ -15,15 +16,20 @@ const routes = [
     canActivate: [AdminGuardService],
     component: LocationsComponent,
   },
+  {
+    path: "my-services",
+    canActivate: [AdminGuardService],
+    component: ServicesComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [LocationsComponent],
+  declarations: [LocationsComponent, ServicesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     UserModule,
-    DynamicModule
+    DynamicModule,
   ],
   providers: [],
   exports: [RouterModule],

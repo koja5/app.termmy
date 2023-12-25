@@ -210,15 +210,17 @@ export class DynamicFormsComponent implements OnInit {
 
   createControl(config: FieldConfig) {
     const { disabled, validation, value } = config;
-    return this.fb.control({ disabled, value }, validation);
+    return this.fb.control({ disabled, value }, [config.required ? Validators.required : Validators.nullValidator]);
   }
 
   handleSubmit(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.submit.emit(this.value);
-    if (this.file === "personalize.json") {
-      this.messageService.sendOrientation(this.value.orientation);
+    if (this.form.valid) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.submit.emit(this.value);
+      if (this.file === "personalize.json") {
+        this.messageService.sendOrientation(this.value.orientation);
+      }
     }
   }
 

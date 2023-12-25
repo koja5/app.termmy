@@ -591,6 +591,15 @@ router.get("/getWorktime", auth, async (req, res, next) => {
 
 // LOCATIONS
 
+function convertWorkTimesToObject(rows) {
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].worktime_from = convertToObject(rows[i].worktime_from);
+    rows[i].worktime_to = convertToObject(rows[i].worktime_to);
+  }
+  console.log(rows);
+  return rows;
+}
+
 router.get("/getMyLocations", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
@@ -607,6 +616,7 @@ router.get("/getMyLocations", auth, async (req, res, next) => {
               logger.log("error", err.sql + ". " + err.sqlMessage);
               res.json(err);
             } else {
+              rows = convertWorkTimesToObject(rows);
               res.json(rows);
             }
           }
@@ -627,6 +637,8 @@ router.post("/setLocation", auth, function (req, res) {
     }
 
     req.body.admin_id = req.user.user.id;
+    req.body.worktime_from = convertToString(req.body.worktime_from);
+    req.body.worktime_to = convertToString(req.body.worktime_to);
 
     if (req.body.id) {
       conn.query(
@@ -685,6 +697,102 @@ router.post("/deleteLocation", auth, function (req, res) {
 
 //END LOCATIONS
 
+//services
+router.get("/getMyServices", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from services where admin_id = ?",
+          req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              rows = convertWorkTimesToObject(rows);
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setService", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.id;
+
+    if (req.body.id) {
+      conn.query(
+        "update services set ? where id = ?",
+        [req.body, req.body.id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "insert into services SET ?",
+        [req.body],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+router.post("/deleteService", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from services where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//end services
+
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);
 }
@@ -695,6 +803,13 @@ function copyValue(value) {
 
 function convertToString(value) {
   return JSON.stringify(value);
+}
+
+function convertToObject(value) {
+  if (value && value.indexOf("{") != -1) {
+    return JSON.parse(value);
+  }
+  return value;
 }
 
 function prepareProperty(property) {

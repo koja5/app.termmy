@@ -33,4 +33,13 @@ export const menu = [
     url: "dashboard/admin/my-locations",
     users: ["admin", "superadmin"],
   },
+  {
+    id: "my-services",
+    title: "My services",
+    translate: "myServices",
+    type: "item",
+    icon: "map-pin",
+    url: "dashboard/admin/my-services",
+    users: ["admin", "superadmin"],
+  },
 ];

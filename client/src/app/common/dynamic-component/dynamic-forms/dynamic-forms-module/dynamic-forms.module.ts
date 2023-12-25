@@ -11,25 +11,31 @@ import { ComboboxComponent } from "../dynamic-fields/dropdowns/combobox/combobox
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { MultiselectComponent } from "../dynamic-fields/dropdowns/multiselect/multiselect.component";
+import { TimepickerComponent } from "../dynamic-fields/inputs/timepicker/timepicker.component";
+import { NumericTextboxComponent } from "../dynamic-fields/inputs/numeric-textbox/numeric-textbox.component";
 
 @NgModule({
   declarations: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
     ComboboxComponent,
     MultiselectComponent,
+    TimepickerComponent,
   ],
   exports: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
     ComboboxComponent,
     MultiselectComponent,
+    TimepickerComponent,
   ],
   imports: [
     CommonModule,
@@ -41,11 +47,13 @@ import { MultiselectComponent } from "../dynamic-fields/dropdowns/multiselect/mu
   entryComponents: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
     ComboboxComponent,
     MultiselectComponent,
+    TimepickerComponent,
   ],
 })
 export class DynamicFormsModule {}
