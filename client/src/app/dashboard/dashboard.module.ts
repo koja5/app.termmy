@@ -16,6 +16,7 @@ import { RouterModule } from "@angular/router";
 import { SettingsComponent } from "./pages/settings/settings.component";
 import { SuperadminModule } from "./pages/superadmin/superadmin.module";
 import { AccountSettingsComponent } from "./common-pages/account-settings/account-settings.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 const routes = [
   {
@@ -59,6 +60,8 @@ const routes = [
     MiscellaneousModule,
     RouterModule.forChild(routes),
     SuperadminModule,
+
+    TranslateModule,
   ],
 
   providers: [],

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FieldConfig } from "../../../models/field-config";
 import { FormGroup } from "@angular/forms";
 import { HelpService } from "app/services/help.service";
+import { CoreTranslationService } from "@core/services/translation.service";
 
 @Component({
   selector: "app-timepicker",

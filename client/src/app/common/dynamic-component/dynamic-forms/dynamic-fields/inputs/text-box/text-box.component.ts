@@ -16,7 +16,5 @@ export class TextBoxComponent implements OnInit {
     this.group = new FormGroup({});
   }
 
-  ngOnInit(): void {
-    console.log(this.group);
-  }
+  ngOnInit(): void {}
 }

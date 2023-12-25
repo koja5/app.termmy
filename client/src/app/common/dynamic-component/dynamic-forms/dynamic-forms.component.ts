@@ -18,6 +18,7 @@ import { ConfigurationService } from "app/services/configuration.service";
 import { CallApiService } from "app/services/call-api.service";
 import { MessageService } from "app/services/message.service";
 import { FieldType } from "app/enums/field-type";
+import { CoreTranslationService } from "@core/services/translation.service";
 
 @Component({
   exportAs: "dynamicForm",
@@ -62,8 +63,11 @@ export class DynamicFormsComponent implements OnInit {
     private configurationService: ConfigurationService,
     private apiService: CallApiService,
     private router: ActivatedRoute,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private _coreTranslationService: CoreTranslationService
+  ) {
+    this._coreTranslationService.setAllTranslations();
+  }
 
   ngOnInit() {
     if (this.path && this.file && !this.data) {
@@ -210,7 +214,9 @@ export class DynamicFormsComponent implements OnInit {
 
   createControl(config: FieldConfig) {
     const { disabled, validation, value } = config;
-    return this.fb.control({ disabled, value }, [config.required ? Validators.required : Validators.nullValidator]);
+    return this.fb.control({ disabled, value }, [
+      config.required ? Validators.required : Validators.nullValidator,
+    ]);
   }
 
   handleSubmit(event: Event) {

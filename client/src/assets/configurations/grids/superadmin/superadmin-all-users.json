@@ -424,7 +424,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "country_id",
-            "title": "userCountry",
+            "title": "allUsers.name",
             "field": {
                 "text": "firstname",
                 "value": "id"
@@ -436,7 +436,6 @@
                 "fields": "",
                 "root": ""
             },
-            "placeholder": "userCountryForPlaceholder",
             "fieldConfig": {
                 "ignoreAccent": false,
                 "filter": true
@@ -492,7 +491,6 @@
                 "fields": "",
                 "root": ""
             },
-            "placeholder": "userCountryForPlaceholder",
             "fieldConfig": {
                 "ignoreAccent": false,
                 "filter": true

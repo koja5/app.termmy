@@ -230,7 +230,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "name",
-            "title": "name",
+            "title": "myLocations.name",
             "field": "name",
             "required": true
         },

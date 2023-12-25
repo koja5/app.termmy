@@ -1,0 +1,25 @@
+{
+    "lang": "en",
+    "data": {
+        "form": {
+            "mustFillThisField": "Please fill this field!"
+        },
+        "allUsers": {
+            "name": "Name"
+        },
+        "myLocations": {
+            "name": "Name of location"
+        },
+        "navigations": {
+            "home": "Home",
+            "settings": "Settings",
+            "allUsers": "All users",
+            "myLocations": "My locations",
+            "myServices": "My services"
+        },
+        "SAMPLE": {
+            "CONGRATULATIONS": "Congratulations",
+            "BADGE": "You have won gold medal"
+        }
+    }
+}

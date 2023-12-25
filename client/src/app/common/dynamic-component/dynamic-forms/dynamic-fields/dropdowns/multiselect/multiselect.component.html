@@ -1,12 +1,10 @@
 <div *ngIf="data" [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
-  <label *ngIf="config?.title" class="custom-label">{{language[config.title] ? language[config.title] :
-    config.title
+  <label *ngIf="config?.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
   <ng-select [items]="data" [bindLabel]="config.field.text" [bindValue]="config.field.value" [multiple]="true"
     [closeOnSelect]="config.closeOnSelect" [searchable]="config.searchable" [loading]="loading"
-    cssClass="{{ config.class }}" [id]="config.name"
-    [placeholder]="language[config!.placeholder] ? language[config!.placeholder] : (config.placeholder ?  config.placeholder : '')"
-    [allowFiltering]="config.fieldConfig?.filter" [ignoreAccent]="config.fieldConfig?.ignoreAccent"
+    cssClass="{{ config.class }}" [id]="config.name" [placeholder]="config.placeholder ? (config.placeholder) : ''"
+    [allowFiltering]=" config.fieldConfig?.filter" [ignoreAccent]="config.fieldConfig?.ignoreAccent"
     [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder" [formControlName]="config.name"
     [readonly]="config.readonly">
     <ng-template ng-label-tmp let-item="item" let-clear="clear">
@@ -17,8 +15,6 @@
       <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
     </ng-template>
   </ng-select>
-  <span *ngIf="group.controls[config.field].status === 'INVALID'" class="error">{{mustFillThisField}}</span>
+  <span *ngIf="group.controls[config.field]&&group.controls[config.field].status === 'INVALID'"
+    class="error">{{form.mustFillThisField | translate}}</span>
 </div>
-
-
-<app-loader-svg *ngIf="!data"></app-loader-svg>

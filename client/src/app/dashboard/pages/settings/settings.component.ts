@@ -5,6 +5,9 @@ import { takeUntil } from "rxjs/operators";
 import { FlatpickrOptions } from "ng2-flatpickr";
 import { ActivatedRoute } from "@angular/router";
 import { ConfigurationService } from "app/services/configuration.service";
+import { CoreTranslationService } from "@core/services/translation.service";
+
+import myConfig from "../../../../assets/configurations/i18n/en.json";
 
 @Component({
   selector: "app-settings",
@@ -34,9 +37,14 @@ export class SettingsComponent implements OnInit {
    * Constructor
    *
    * @param {AccountSettingsService} _accountSettingsService
+   * @param {CoreTranslationService} _coreTranslationService
    */
-  constructor(private _configurationService: ConfigurationService) {
+  constructor(
+    private _configurationService: ConfigurationService,
+    private _coreTranslationService: CoreTranslationService
+  ) {
     this._unsubscribeAll = new Subject();
+    this._coreTranslationService.setAllTranslations();
   }
 
   // Public Methods

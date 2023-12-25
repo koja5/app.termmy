@@ -1,6 +1,6 @@
 <div *ngIf="config.schedule === undefined" [ngClass]="[config.width]" [formGroup]="group"
   class="form-group form-custom {{config.hide ? 'hide' : ''}}">
-  <label *ngIf="config.title" class="custom-label">{{config.title
+  <label *ngIf="config.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
   <input *ngIf="!config.multiline" [type]="config.type" #default
     class="form-control {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}"

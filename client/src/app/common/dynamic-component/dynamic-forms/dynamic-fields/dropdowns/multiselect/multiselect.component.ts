@@ -6,6 +6,8 @@ import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { ConfigurationService } from "app/services/configuration.service";
 
+import { CoreTranslationService } from "@core/services/translation.service";
+
 @Component({
   selector: "app-multiselect",
   templateUrl: "./multiselect.component.html",
@@ -16,11 +18,9 @@ export class MultiselectComponent implements OnInit {
   public group: FormGroup;
 
   public data: any;
-  public language: any;
 
   constructor(
     private callApi: CallApiService,
-    private helpService: HelpService,
     private configurationService: ConfigurationService
   ) {
     this.config = new FieldConfig();
@@ -40,7 +40,6 @@ export class MultiselectComponent implements OnInit {
         this.config.value = Number(this.config.value);
       }
     }
-    this.language = this.helpService.getLanguage();
     if (this.config.data && this.config.data["translation"]) {
       this.config.field = this.config.data["translation"]["fields"];
     } else {

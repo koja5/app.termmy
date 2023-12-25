@@ -2,7 +2,7 @@ export const menu = [
   {
     id: "home",
     title: "Home",
-    translate: "MENU.HOME",
+    translate: "navigations.home",
     type: "item",
     icon: "home",
     url: "home",
@@ -10,7 +10,7 @@ export const menu = [
   {
     id: "settings",
     title: "Settings",
-    translate: "Settings",
+    translate: "navigations.settings",
     type: "item",
     icon: "settings",
     url: "dashboard/settings/worktime",
@@ -18,7 +18,7 @@ export const menu = [
   {
     id: "superadmin-all-users",
     title: "All users",
-    translate: "All users",
+    translate: "navigations.allUsers",
     type: "item",
     icon: "user",
     url: "dashboard/superadmin/all-users",
@@ -27,7 +27,7 @@ export const menu = [
   {
     id: "my-locations",
     title: "My locations",
-    translate: "myLocations",
+    translate: "navigations.myLocations",
     type: "item",
     icon: "map-pin",
     url: "dashboard/admin/my-locations",
@@ -36,9 +36,9 @@ export const menu = [
   {
     id: "my-services",
     title: "My services",
-    translate: "myServices",
+    translate: "navigations.myServices",
     type: "item",
-    icon: "map-pin",
+    icon: "life-buoy",
     url: "dashboard/admin/my-services",
     users: ["admin", "superadmin"],
   },

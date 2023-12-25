@@ -36,18 +36,25 @@
 
   <ul class="nav navbar-nav align-items-center ml-auto">
     <!-- ? Language selection | Uncomment if needed-->
-    <!-- <li ngbDropdown class="nav-item dropdown dropdown-language">
+    <li ngbDropdown class="nav-item dropdown dropdown-language">
       <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle>
-        <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i
-        ><span class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a
-      >
+        <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i><span
+          class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a>
       <div ngbDropdownMenu aria-labelledby="dropdown-flag">
         <a *ngFor="let lang of _translateService.getLangs()" ngbDropdownItem (click)="setLanguage(lang)">
           <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
         </a>
       </div>
-    </li> -->
+    </li>
     <!--/ Language selection -->
+
+    <!-- Toggle skin -->
+    <!-- <li class="nav-item d-none d-lg-block">
+      <a class="nav-link nav-link-style btn" (click)="toggleDarkSkin()">
+        <span [ngClass]="currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'" class="ficon font-medium-5 feather"></span>
+      </a>
+    </li> -->
+    <!--/ Toggle skin -->
 
     <!-- User Dropdown -->
     <li ngbDropdown class="nav-item dropdown-user">
@@ -61,9 +68,10 @@
             alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
       </a>
       <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
-        <a ngbDropdownItem [routerLink]="['/dashboard/account-settings/general']"><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a><a
-          ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'" [class]="'mr-50'"></span> Inbox</a><a
-          ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'check-square'" [class]="'mr-50'"></span>
+        <a ngbDropdownItem [routerLink]="['/dashboard/account-settings/general']"><span [data-feather]="'user'"
+            [class]="'mr-50'"></span> Profile</a><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'"
+            [class]="'mr-50'"></span> Inbox</a><a ngbDropdownItem [routerLink]="['/']"><span
+            [data-feather]="'check-square'" [class]="'mr-50'"></span>
           Task</a><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'message-square'"
             [class]="'mr-50'"></span> Chats</a>
         <div class="dropdown-divider"></div>
