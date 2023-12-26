@@ -10,20 +10,20 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
 
 import { AuthenticationModule } from "../authentification/authentication.module";
 import { MiscellaneousModule } from "./pages/miscellaneous/miscellaneous.module";
-import { HomeComponent } from "./sample/home.component";
-import { SampleComponent } from "./sample/sample.component";
 import { RouterModule } from "@angular/router";
-import { SettingsComponent } from "./pages/settings/settings.component";
 import { SuperadminModule } from "./pages/superadmin/superadmin.module";
 import { AccountSettingsComponent } from "./common-pages/account-settings/account-settings.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { SettingsComponent } from "./pages/admin/settings/settings.component";
 
 const routes = [
   {
     path: "settings",
     component: SettingsComponent,
     loadChildren: () =>
-      import("./pages/settings/settings.module").then((m) => m.SettingsModule),
+      import("./pages/admin/settings/settings.module").then(
+        (m) => m.SettingsModule
+      ),
   },
   {
     path: "account-settings",

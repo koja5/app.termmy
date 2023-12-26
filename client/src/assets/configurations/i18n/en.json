@@ -14,7 +14,8 @@
             "settings": "Settings",
             "allUsers": "All users",
             "myLocations": "My locations",
-            "myServices": "My services"
+            "myServices": "My services",
+            "myCalendar": "My calendar"
         },
         "generalDialog": {
             "areYouSure": "Are you sure?",
@@ -64,6 +65,20 @@
             "name": "Name of service",
             "timeDuration": "Time duration",
             "price": "Price"
+        },
+        "settings": {
+            "worktime": "Worktime",
+            "connections": "Connections",
+            "customization": "Customization"
+        },
+        "connections": {
+            "title": "Connections",
+            "text": "Connect your external accounts",
+            "googleTitle": "Google",
+            "googleText": "Connect your Google calendar and synchronize with app",
+            "outlookTitle": "Outlook",
+            "outlookText": "Connect your Outlook calendar and synchronize with app",
+            "connect": "Connect"
         },
         "worktime": {
             "moday": "Monday",

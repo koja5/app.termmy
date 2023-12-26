@@ -1,0 +1,55 @@
+@import "../../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css";
+
+.dark-layout .e-schedule .e-schedule-toolbar .e-toolbar-items.e-tbar-pos {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-time-cells-wrap table td {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-date-header-wrap table tbody td {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-work-cells {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-left-indent-wrap table tbody td {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule .e-month-view .e-work-days,
+.e-schedule .e-month-agenda-view .e-work-days,
+.dark-layout .e-schedule .e-month-view .e-work-cells,
+.e-schedule .e-month-agenda-view .e-work-cells,
+.e-schedule .e-month-view .e-date-header-wrap table td,
+.dark-layout .e-schedule .e-month-agenda-view .e-date-header-wrap table td,
+.dark-layout .e-schedule .e-agenda-view .e-empty-event {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons {
+  color: #fff !important;
+}

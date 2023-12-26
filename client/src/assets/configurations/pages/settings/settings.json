@@ -25,12 +25,17 @@
   },
   "navigations": [
     {
-      "title": "Worktime",
+      "title": "settings.worktime",
       "link": "/dashboard/settings/worktime",
       "icon": "briefcase"
     },
     {
-      "title": "Customization",
+      "title": "settings.connections",
+      "link": "/dashboard/settings/connections",
+      "icon": "link"
+    },
+    {
+      "title": "settings.customization",
       "link": "/dashboard/settings/customization",
       "icon": "tool"
     }

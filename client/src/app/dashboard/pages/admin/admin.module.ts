@@ -9,6 +9,8 @@ import { LocationsComponent } from "./locations/locations.component";
 import { AdminGuardService } from "app/services/guards/admin-guard.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { ServicesComponent } from "./services/services.component";
+import { CalendarComponent } from "./calendar/calendar.component";
+import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-schedule/dynamic-scheduler.module";
 
 const routes = [
   {
@@ -21,17 +23,23 @@ const routes = [
     canActivate: [AdminGuardService],
     component: ServicesComponent,
   },
+  {
+    path: "my-calendar",
+    canActivate: [AdminGuardService],
+    component: CalendarComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [LocationsComponent, ServicesComponent],
+  declarations: [LocationsComponent, ServicesComponent, CalendarComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     UserModule,
     DynamicModule,
+    DynamicSchedulerModule,
   ],
   providers: [],
-  exports: [RouterModule],
+  exports: [RouterModule, DynamicSchedulerModule],
 })
 export class AdminModule {}

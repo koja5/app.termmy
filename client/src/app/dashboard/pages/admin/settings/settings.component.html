@@ -13,7 +13,7 @@
                                 class="nav-link d-flex py-75 {{router === item.link ? 'active' : ''}}"
                                 routerLink="{{item.link}}">
                                 <i [data-feather]="item.icon" class="font-medium-3 mr-1"></i>
-                                <span class="font-weight-bold">{{item.title}}</span>
+                                <span class="font-weight-bold">{{item.title | translate}}</span>
                             </a>
 
                             <ng-template ngbNavContent>

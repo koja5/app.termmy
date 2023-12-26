@@ -42,4 +42,13 @@ export const menu = [
     url: "dashboard/admin/my-services",
     users: ["admin", "superadmin"],
   },
+  {
+    id: "my-calendar",
+    title: "My calendar",
+    translate: "navigations.myCalendar",
+    type: "item",
+    icon: "calendar",
+    url: "dashboard/admin/my-calendar",
+    users: ["admin", "superadmin"],
+  },
 ];

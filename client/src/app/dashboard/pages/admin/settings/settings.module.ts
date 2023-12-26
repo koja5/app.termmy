@@ -6,11 +6,15 @@ import { CommonModule } from "@angular/common";
 import { TimePickerI18nModule } from "app/common/forms/form-elements/date-time-picker/time-picker-i18n/time-picker-i18n.module";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { ConnectionsComponent } from "./connections/connections.component";
 
-const routes = [{ path: "worktime", component: WorktimeComponent }];
+const routes = [
+  { path: "worktime", component: WorktimeComponent },
+  { path: "connections", component: ConnectionsComponent },
+];
 
 @NgModule({
-  declarations: [WorktimeComponent],
+  declarations: [WorktimeComponent, ConnectionsComponent],
   imports: [
     CommonModule,
     DatePickerI18nModule,

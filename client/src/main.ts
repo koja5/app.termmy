@@ -6,6 +6,10 @@ import { environment } from './environments/environment';
 
 import { hmrBootstrap } from './hmr';
 
+import { registerLicense } from '@syncfusion/ej2-base';
+
+registerLicense('Ngo9BigBOggjHTQxAR8/V1NHaF5cWWdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWH1cdnRSRWNcUkB0V0E=');
+
 if (environment.production) {
   enableProdMode();
 }
