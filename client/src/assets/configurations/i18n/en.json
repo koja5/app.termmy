@@ -1,14 +1,13 @@
 {
     "lang": "en",
     "data": {
-        "form": {
-            "mustFillThisField": "Please fill this field!"
-        },
-        "allUsers": {
-            "name": "Name"
-        },
-        "myLocations": {
-            "name": "Name of location"
+        "general": {
+            "save": "Save",
+            "searchFilter": "Search",
+            "addNew": "Add new",
+            "show": "Show",
+            "entries": "entries",
+            "newEntrie": "New entrie"
         },
         "navigations": {
             "home": "Home",
@@ -17,9 +16,70 @@
             "myLocations": "My locations",
             "myServices": "My services"
         },
-        "SAMPLE": {
-            "CONGRATULATIONS": "Congratulations",
-            "BADGE": "You have won gold medal"
+        "generalDialog": {
+            "areYouSure": "Are you sure?",
+            "deleteQuestion": "If you perform this action, lost data cannot be recovered!",
+            "yes": "Yes, I want",
+            "no": "No"
+        },
+        "form": {
+            "mustFillThisField": "Please fill this field!",
+            "fieldIsRequired": "Data is required"
+        },
+        "allUsers": {
+            "firstname": "Firstname",
+            "lastname": "Lastname",
+            "number": "Number",
+            "type": "Type",
+            "superadmin": "Superadmin",
+            "admin": "Admin",
+            "partner": "Partner",
+            "company": "Company",
+            "email": "Email",
+            "telephone": "Telephone",
+            "country": "Country",
+            "address": "Address",
+            "zip": "Zip",
+            "city": "City",
+            "vat": "VAT",
+            "newsletter": "Newsletter",
+            "verified": "Verified",
+            "active": "Active",
+            "signUpTime": "Signup time"
+        },
+        "myLocations": {
+            "name": "Name of location",
+            "uid": "UID",
+            "address": "Address",
+            "zip": "Zip",
+            "city": "City",
+            "email": "Email",
+            "telephone": "Telephone",
+            "allowOnline": "Allow online",
+            "worktimeFrom": "Worktime from",
+            "worktimeTo": "Worktime to",
+            "action": "Actions"
+        },
+        "myServices": {
+            "name": "Name of service",
+            "timeDuration": "Time duration",
+            "price": "Price"
+        },
+        "worktime": {
+            "moday": "Monday",
+            "tuesday": "Tuesday",
+            "wednesday": "Wednesday",
+            "thursday": "Thursday",
+            "friday": "Friday",
+            "saturday": "Saturday",
+            "sunday": "Sunday",
+            "title": "Worktime",
+            "text": "Please fill your worktime calendar!",
+            "from": "From",
+            "to": "To",
+            "remove": "Remove",
+            "addTime": "Add time",
+            "save": "Save time"
         }
     }
 }

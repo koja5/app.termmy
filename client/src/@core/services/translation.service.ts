@@ -11,6 +11,7 @@ import en from "../../assets/configurations/i18n/en.json";
 import de from "../../assets/configurations/i18n/de.json";
 import fr from "../../assets/configurations/i18n/fr.json";
 import pt from "../../assets/configurations/i18n/pt.json";
+import rs from "../../assets/configurations/i18n/rs.json";
 
 export interface Locale {
   lang: string;
@@ -38,7 +39,7 @@ export class CoreTranslationService {
    */
 
   setAllTranslations() {
-    this.translate(en, de, fr, pt);
+    this.translate(en, de, fr, pt, rs);
   }
 
   translate(...args: Locale[]): void {

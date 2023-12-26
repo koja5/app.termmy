@@ -18,11 +18,10 @@ import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.s
 import { CoreConfigService } from "@core/services/config.service";
 import { CoreMediaService } from "@core/services/media.service";
 
-import { User } from "app/authentification/common/models";
-
-import { coreConfig } from "app/app-config";
 import { Router } from "@angular/router";
 import { StorageService } from "app/services/storage.service";
+
+import languages from "../../../../assets/configurations/i18n/languages.json";
 
 @Component({
   selector: "app-navbar",
@@ -99,24 +98,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       (x) => (this.currentUser = x)
     );
 
-    this.languageOptions = {
-      en: {
-        title: "English",
-        flag: "us",
-      },
-      fr: {
-        title: "French",
-        flag: "fr",
-      },
-      de: {
-        title: "German",
-        flag: "de",
-      },
-      pt: {
-        title: "Portuguese",
-        flag: "pt",
-      },
-    };
+    this.languageOptions = languages;
 
     // Set the private defaults
     this._unsubscribeAll = new Subject();

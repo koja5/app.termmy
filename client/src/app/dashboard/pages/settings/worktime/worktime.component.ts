@@ -75,7 +75,6 @@ export class WorktimeComponent implements OnInit {
           this.data.value[i].times[j].end.seconds
         )
       ) {
-        console.log("START VECI OD KRAJA");
         this.notCorrectTime[i] = "NOT CORRECT";
       } else {
         this.notCorrectTime[i] = null;
@@ -93,7 +92,6 @@ export class WorktimeComponent implements OnInit {
           this.data.value[i].times[j].start.seconds
         )
       ) {
-        console.log("KRAJ PRETHODNI VECI OD POCETKA SLEDECEG!");
         this.notCorrectTime[i] = "NOT CORRECT";
       } else {
         this.notCorrectTime[i] = null;

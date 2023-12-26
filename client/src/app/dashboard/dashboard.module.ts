@@ -60,7 +60,6 @@ const routes = [
     MiscellaneousModule,
     RouterModule.forChild(routes),
     SuperadminModule,
-
     TranslateModule,
   ],
 

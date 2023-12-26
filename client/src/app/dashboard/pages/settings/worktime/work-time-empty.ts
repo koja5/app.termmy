@@ -2,7 +2,7 @@ export class WorkTimeEmpty {
   static value = [
     {
       id: 1,
-      name: "Mon",
+      name: "worktime.monday",
       active: 1,
       times: [
         {
@@ -13,7 +13,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 2,
-      name: "Tue",
+      name: "worktime.tuesday",
       active: 1,
       times: [
         {
@@ -24,7 +24,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 3,
-      name: "Wed",
+      name: "worktime.wednesday",
       active: 1,
       times: [
         {
@@ -35,7 +35,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 4,
-      name: "Thu",
+      name: "worktime.thursday",
       active: 1,
       times: [
         {
@@ -46,7 +46,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 5,
-      name: "Fri",
+      name: "worktime.friday",
       active: 1,
       times: [
         {
@@ -57,7 +57,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 6,
-      name: "Sat",
+      name: "worktime.saturday",
       active: 0,
       times: [
         {
@@ -68,7 +68,7 @@ export class WorkTimeEmpty {
     },
     {
       id: 0,
-      name: "Sun",
+      name: "worktime.sunday",
       active: 0,
       times: [
         {

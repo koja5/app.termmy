@@ -8,8 +8,8 @@
                 <div class="col-12">
                     <div class="align-items-center mb-2">
                         <i data-feather="link" class="font-medium-3"></i>
-                        <h4 class="ml-75">Worktime</h4>
-                        <h6 class="ml-75">Please fill your worktime calendar!</h6>
+                        <h4 class="ml-75">{{'worktime.title' | translate}}</h4>
+                        <h6 class="ml-75">{{'worktime.text' | translate}}</h6>
                     </div>
                 </div>
                 <div class="col-12 pt-2 pb-2 border-top border-bottom" *ngFor="let item of data.value; let i = index">
@@ -18,21 +18,21 @@
                             <div class="custom-control custom-switch custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="{{item.id}}" name="{{item.id}}"
                                     (change)="item.active = !item.active" [checked]="item.active" />
-                                <label class="custom-control-label" for="{{item.id}}">{{item.name}}
+                                <label class="custom-control-label" for="{{item.id}}">{{item.name | translate}}
                                     {{model}}</label>
                             </div>
                         </div>
                         <div class="row" *ngFor="let time of item.times; let j = index">
                             <div class="d-flex m-auto text-center">
                                 <div class="form-group m-2">
-                                    <label for="account-twitter">From</label>
+                                    <label for="account-twitter">{{'worktime.from' | translate}}</label>
 
                                     <time-picker-i18n [value]="time.start"
                                         (changeValue)="time.start = $event; validateEntry(i, j)"
                                         [disabled]="!item.active"></time-picker-i18n>
                                 </div>
                                 <div class="form-group m-2">
-                                    <label for="account-twitter">To</label>
+                                    <label for="account-twitter">{{'worktime.to' | translate}}</label>
 
                                     <time-picker-i18n [value]="time.end"
                                         (changeValue)="time.end = $event;  validateEntry(i, j)"
@@ -41,7 +41,7 @@
                                 <div class="d-flex align-items-center">
                                     <button type="button" class="btn btn-outline-danger h-35 ml-3 mt-2" rippleEffect
                                         [disabled]="!item.active || item.times.length === 1"
-                                        (click)="removeWorkTimeForDay(i, j)">Remove</button>
+                                        (click)="removeWorkTimeForDay(i, j)">{{'worktime.remove' | translate}}</button>
                                 </div>
                             </div>
                         </div>
@@ -50,13 +50,14 @@
 
                         <div class="col-12 text-center">
                             <button type="button" class="btn btn-outline-primary w-50" rippleEffect
-                                [disabled]="!item.active" (click)="addNewWorkTimeForDay(i)">Add time</button>
+                                [disabled]="!item.active" (click)="addNewWorkTimeForDay(i)">{{'worktime.addTime' |
+                                translate}}</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 mt-3 text-right">
                     <button type="button" class="btn btn-primary" rippleEffect (click)="saveWorkTime()"><span
-                            data-feather="save"></span> Save</button>
+                            data-feather="save"></span> {{'worktime.save' | translate}}</button>
                 </div>
             </div>
         </form>

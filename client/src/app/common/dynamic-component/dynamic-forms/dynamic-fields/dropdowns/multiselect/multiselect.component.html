@@ -1,6 +1,6 @@
 <div *ngIf="data" [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
   <label *ngIf="config?.title" class="custom-label">{{config.title | translate
-    }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
+    }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
   <ng-select [items]="data" [bindLabel]="config.field.text" [bindValue]="config.field.value" [multiple]="true"
     [closeOnSelect]="config.closeOnSelect" [searchable]="config.searchable" [loading]="loading"
     cssClass="{{ config.class }}" [id]="config.name" [placeholder]="config.placeholder ? (config.placeholder) : ''"
@@ -16,5 +16,5 @@
     </ng-template>
   </ng-select>
   <span *ngIf="group.controls[config.field]&&group.controls[config.field].status === 'INVALID'"
-    class="error">{{form.mustFillThisField | translate}}</span>
+    class="error">{{'form.mustFillThisField' | translate}}</span>
 </div>

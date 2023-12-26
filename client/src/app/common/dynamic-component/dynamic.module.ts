@@ -14,6 +14,7 @@ import { CorePipesModule } from "@core/pipes/pipes.module";
 import { CoreDirectivesModule } from "@core/directives/directives";
 import { CoreSidebarModule } from "@core/components";
 import { ToastrComponent } from "../toastr/toastr.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [DynamicGridComponent, DynamicFormsComponent],
@@ -29,6 +30,7 @@ import { ToastrComponent } from "../toastr/toastr.component";
     CorePipesModule,
     CoreDirectivesModule,
     CoreSidebarModule,
+    TranslateModule
   ],
   providers: [ToastrComponent],
   exports: [DynamicGridComponent, DynamicFormsComponent],

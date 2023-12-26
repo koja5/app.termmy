@@ -103,7 +103,7 @@
             "allowEditing": false
         },
         {
-            "title": "userNumber",
+            "title": "allUsers.number",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -114,7 +114,7 @@
             "allowEditing": false
         },
         {
-            "title": "userFirstname",
+            "title": "allUsers.firstname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -126,7 +126,7 @@
             }
         },
         {
-            "title": "userLastname",
+            "title": "allUsers.lastname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -138,7 +138,7 @@
             }
         },
         {
-            "title": "userType",
+            "title": "allUsers.type",
             "template": {
                 "choices": [
                     {
@@ -146,7 +146,7 @@
                         "value": 0,
                         "operator": "==",
                         "apart": {
-                            "title": "Superadmin",
+                            "title": "allUsers.superadmin",
                             "icon": "feather icon-edit-2 text-info"
                         }
                     },
@@ -155,7 +155,7 @@
                         "value": 1,
                         "operator": "==",
                         "apart": {
-                            "title": "Admin",
+                            "title": "allUsers.admin",
                             "icon": "feather icon-user-check text-success"
                         }
                     },
@@ -164,7 +164,7 @@
                         "value": 2,
                         "operator": "==",
                         "apart": {
-                            "title": "Partner",
+                            "title": "allUsers.partner",
                             "icon": "feather icon-user-plus text-warning"
                         }
                     }
@@ -176,7 +176,7 @@
             }
         },
         {
-            "title": "userCompany",
+            "title": "allUsers.company",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -188,7 +188,7 @@
             }
         },
         {
-            "title": "userEmail",
+            "title": "allUsers.email",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -201,7 +201,7 @@
             "template": "test"
         },
         {
-            "title": "userTelephone",
+            "title": "allUsers.telephone",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -213,7 +213,7 @@
             }
         },
         {
-            "title": "userCountry",
+            "title": "allUsers.country",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -225,7 +225,7 @@
             }
         },
         {
-            "title": "userAddress",
+            "title": "allUsers.address",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -237,7 +237,7 @@
             }
         },
         {
-            "title": "userZip",
+            "title": "allUsers.zip",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -249,7 +249,7 @@
             }
         },
         {
-            "title": "userCity",
+            "title": "allUsers.city",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -261,7 +261,7 @@
             }
         },
         {
-            "title": "userVat",
+            "title": "allUsers.vat",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -273,7 +273,7 @@
             }
         },
         {
-            "title": "userNewsletter",
+            "title": "allUsers.newsletter",
             "template": {
                 "choices": [
                     {
@@ -296,7 +296,7 @@
             }
         },
         {
-            "title": "userVerified",
+            "title": "allUsers.verified",
             "template": {
                 "choices": [
                     {
@@ -318,7 +318,7 @@
             "filter": "date"
         },
         {
-            "title": "userActive",
+            "title": "allUsers.active",
             "template": {
                 "choices": [
                     {
@@ -347,7 +347,7 @@
             }
         },
         {
-            "title": "userSignUpTime",
+            "title": "allUsers.signUpTime",
             "filterable": false,
             "hideable": true,
             "filter": "date",
@@ -375,7 +375,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "user_number",
-            "title": "userNumber",
+            "title": "allUsers.number",
             "field": "user_number"
         },
         {
@@ -383,7 +383,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "firstname",
-            "title": "userFirstname",
+            "title": "allUsers.firstname",
             "field": "firstname"
         },
         {
@@ -391,7 +391,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "lastname",
-            "title": "userLastname",
+            "title": "allUsers.lastname",
             "field": "lastname"
         },
         {
@@ -399,7 +399,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "company",
-            "title": "userCompany",
+            "title": "allUsers.company",
             "field": "company"
         },
         {
@@ -407,7 +407,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
-            "title": "userEmail",
+            "title": "allUsers.email",
             "field": "email",
             "readonly": true
         },
@@ -416,7 +416,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "telephone",
-            "title": "userTelephone",
+            "title": "allUsers.telephone",
             "field": "telephone"
         },
         {
@@ -447,7 +447,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "address",
-            "title": "userAddress",
+            "title": "allUsers.address",
             "field": "address"
         },
         {
@@ -455,7 +455,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "zip",
-            "title": "userZip",
+            "title": "allUsers.zip",
             "field": "zip"
         },
         {
@@ -463,7 +463,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "city",
-            "title": "userCity",
+            "title": "allUsers.city",
             "field": "city"
         },
         {
@@ -471,7 +471,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "vat",
-            "title": "userVat",
+            "title": "allUsers.vat",
             "field": "vat"
         },
         {
@@ -479,7 +479,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "type",
-            "title": "userAccountType",
+            "title": "allUsers.type",
             "field": {
                 "text": "name",
                 "value": "id"
@@ -502,7 +502,7 @@
             "width": "col-6",
             "class": "e-outline",
             "name": "newsletter",
-            "title": "userNewsletter",
+            "title": "allUsers.newsletter",
             "field": "newsletter"
         },
         {
@@ -510,7 +510,7 @@
             "width": "col-6",
             "class": "e-outline",
             "name": "verified",
-            "title": "userVerified",
+            "title": "allUsers.verified",
             "field": "verified"
         },
         {
@@ -518,7 +518,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "active",
-            "title": "userActive",
+            "title": "allUsers.active",
             "field": "active"
         },
         {
@@ -526,7 +526,7 @@
             "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
-            "title": "userSave",
+            "title": "general.save",
             "field": "submit",
             "positionClass": "text-right mt-3 col-md-12"
         }

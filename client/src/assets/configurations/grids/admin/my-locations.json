@@ -91,7 +91,7 @@
     },
     "columns": [
         {
-            "title": "name",
+            "title": "myLocations.name",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -102,7 +102,7 @@
             "allowEditing": false
         },
         {
-            "title": "address",
+            "title": "myLocations.address",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -114,7 +114,7 @@
             }
         },
         {
-            "title": "zip",
+            "title": "myLocations.zip",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -126,7 +126,7 @@
             }
         },
         {
-            "title": "city",
+            "title": "myLocations.city",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -138,7 +138,7 @@
             }
         },
         {
-            "title": "telephone",
+            "title": "myLocations.telephone",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -150,7 +150,7 @@
             }
         },
         {
-            "title": "allowOnline",
+            "title": "myLocations.allowOnline",
             "template": {
                 "choices": [
                     {
@@ -176,7 +176,7 @@
             "field": "allow_online"
         },
         {
-            "title": "allowOnline",
+            "title": "myLocations.action",
             "template": {
                 "type": "action",
                 "actionMode": {
@@ -239,7 +239,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "uid",
-            "title": "uid",
+            "title": "myLocations.uid",
             "field": "uid",
             "required": true
         },
@@ -248,7 +248,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "address",
-            "title": "address",
+            "title": "myLocations.address",
             "field": "address"
         },
         {
@@ -256,7 +256,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "zip",
-            "title": "zip",
+            "title": "myLocations.zip",
             "field": "zip"
         },
         {
@@ -264,7 +264,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "city",
-            "title": "city",
+            "title": "myLocations.city",
             "field": "city"
         },
         {
@@ -272,7 +272,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "email",
-            "title": "email",
+            "title": "myLocations.email",
             "field": "email",
             "required": true
         },
@@ -281,7 +281,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "telephone",
-            "title": "telephone",
+            "title": "myLocations.telephone",
             "field": "telephone"
         },
         {
@@ -289,7 +289,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "worktime_from",
-            "title": "worktimeTo",
+            "title": "myLocations.worktimeTo",
             "field": "worktime_from",
             "required": true
         },
@@ -298,7 +298,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "worktime_to",
-            "title": "worktimeTo",
+            "title": "myLocations.worktimeTo",
             "field": "worktime_to",
             "required": true
         },
@@ -307,7 +307,7 @@
             "width": "col-12",
             "class": "e-outline",
             "name": "allow_online",
-            "title": "Allow online",
+            "title": "myLocations.allowOnline",
             "field": "allow_online"
         },
         {
@@ -315,7 +315,7 @@
             "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
-            "title": "userSave",
+            "title": "general.save",
             "field": "submit",
             "positionClass": "text-right mt-3 col-md-12"
         }

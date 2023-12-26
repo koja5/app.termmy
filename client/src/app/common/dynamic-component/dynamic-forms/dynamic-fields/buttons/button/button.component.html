@@ -4,16 +4,16 @@
 > -->
 <div *ngIf="config && checkRights()" [ngClass]="[config.positionClass]" class="form-group form-custom">
   <button *ngIf="!config.request" [class]="config.class" [disabled]="config.disabled" type="submit">
-    {{ config.title }}
+    {{ config.title | translate }}
   </button>
   <button *ngIf="config.request" [class]="config.class" [disabled]="config.disabled" (click)="clickRequest()">
-    {{ config.title }}
+    {{ config.title | translate }}
   </button>
 </div>
 
 <div *ngIf="title || icon">
   <button class="e-btn {{ class }}" (click)="clickButton()">
     <app-dynamic-icon *ngIf="icon" [icon]="icon"></app-dynamic-icon>
-    {{ title }}
+    {{ title | translate }}
   </button>
 </div>

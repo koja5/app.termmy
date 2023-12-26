@@ -91,7 +91,7 @@
     },
     "columns": [
         {
-            "title": "name",
+            "title": "myServices.name",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -102,7 +102,7 @@
             "allowEditing": false
         },
         {
-            "title": "timeDuration",
+            "title": "myServices.timeDuration",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -114,7 +114,7 @@
             }
         },
         {
-            "title": "price",
+            "title": "myServices.price",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -140,7 +140,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "name",
-            "title": "name",
+            "title": "myServices.name",
             "field": "name",
             "required": true
         },
@@ -149,7 +149,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "time_duration",
-            "title": "timeDuration",
+            "title": "myServices.timeDuration",
             "field": "time_duration",
             "required": true
         },
@@ -158,7 +158,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "price",
-            "title": "price",
+            "title": "myServices.price",
             "field": "price",
             "required": true
         },
@@ -167,7 +167,7 @@
             "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
-            "title": "userSave",
+            "title": "general.save",
             "field": "submit",
             "positionClass": "text-right mt-3 col-md-12"
         }

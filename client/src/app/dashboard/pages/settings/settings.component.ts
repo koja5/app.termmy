@@ -1,13 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
 
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 import { FlatpickrOptions } from "ng2-flatpickr";
-import { ActivatedRoute } from "@angular/router";
 import { ConfigurationService } from "app/services/configuration.service";
-import { CoreTranslationService } from "@core/services/translation.service";
-
-import myConfig from "../../../../assets/configurations/i18n/en.json";
 
 @Component({
   selector: "app-settings",
@@ -37,14 +32,9 @@ export class SettingsComponent implements OnInit {
    * Constructor
    *
    * @param {AccountSettingsService} _accountSettingsService
-   * @param {CoreTranslationService} _coreTranslationService
    */
-  constructor(
-    private _configurationService: ConfigurationService,
-    private _coreTranslationService: CoreTranslationService
-  ) {
+  constructor(private _configurationService: ConfigurationService) {
     this._unsubscribeAll = new Subject();
-    this._coreTranslationService.setAllTranslations();
   }
 
   // Public Methods
