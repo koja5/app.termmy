@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule, Routes } from "@angular/router";
+import { Router, RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 
 import "hammerjs";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -22,6 +22,7 @@ import { CookieModule, CookieService } from "ngx-cookie";
 import { CommonModule } from "@angular/common";
 import { LoginGuardService } from "./services/login-guard/login-guard.service";
 import { LoggedGuard } from "./services/login-guard/logged-guard.service";
+import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service";
 
 const appRoutes: Routes = [
   {
@@ -71,7 +72,16 @@ const appRoutes: Routes = [
     SampleModule,
     CookieModule.withOptions(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useFactory: function (router: Router) {
+        return new AuthInterceptor(router);
+      },
+      multi: true,
+      deps: [Router],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
