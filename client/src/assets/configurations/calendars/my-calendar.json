@@ -1,0 +1,29 @@
+{
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-field",
+            "id": "title",
+            "name": "title",
+            "title": "title",
+            "field": "title"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-field",
+            "name": "firstname",
+            "title": "firstname",
+            "field": "firstname"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-field",
+            "name": "lastname",
+            "title": "lastname",
+            "field": "lastname"
+        }
+    ]
+}

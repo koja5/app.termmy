@@ -5,9 +5,10 @@ import { CommonModule } from "@angular/common";
 import { TimePickerI18nModule } from "app/common/forms/form-elements/date-time-picker/time-picker-i18n/time-picker-i18n.module";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { GeneralComponent } from "./general/general.component";
-import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { InformationComponent } from "./information/information.component";
+import { AccountSettingsComponent } from "./account-settings.component";
+import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 
 const routes = [
   { path: "general", component: GeneralComponent },
@@ -20,6 +21,7 @@ const routes = [
     GeneralComponent,
     ChangePasswordComponent,
     InformationComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,8 @@ import { TimePickerI18nModule } from "app/common/forms/form-elements/date-time-p
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { ConnectionsComponent } from "./connections/connections.component";
+import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
+import { SettingsComponent } from "./settings.component";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
@@ -14,15 +16,21 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [WorktimeComponent, ConnectionsComponent],
+  declarations: [SettingsComponent, WorktimeComponent, ConnectionsComponent],
   imports: [
     CommonModule,
     DatePickerI18nModule,
     TimePickerI18nModule,
     RouterModule.forChild(routes),
     TranslateModule,
+    DynamicModule,
   ],
   providers: [ToastrComponent],
-  exports: [RouterModule, DatePickerI18nModule, TimePickerI18nModule],
+  exports: [
+    RouterModule,
+    DatePickerI18nModule,
+    TimePickerI18nModule,
+    DynamicModule,
+  ],
 })
 export class SettingsModule {}

@@ -3,9 +3,8 @@
     <label *ngIf="config.title" class="custom-label">{{ config.title | translate
         }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
             ''}}</span></label>
-    <ngb-timepicker cssClass="{{ config.class }}"
-        class="{{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}" [id]="config.name"
-        [formControlName]="config.name" [disabled]="config.disabled!" [readonly]="config.readonly!"
+    <ngb-timepicker class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}"
+        [id]="config.name" [formControlName]="config.name" [disabled]="config.disabled!" [readonly]="config.readonly!"
         [format]="config.format" [meridian]="meridian ? meridian : false" [disabled]="disabled"></ngb-timepicker>
     <span *ngIf="group.controls[config.field].status === 'INVALID'" class="error">{{'form.mustFillThisField' |
         translate}}</span>

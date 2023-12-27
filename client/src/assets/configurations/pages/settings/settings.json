@@ -1,4 +1,5 @@
 {
+  "type": "vertical",
   "contentHeader": {
     "headerTitle": "Settings",
     "actionButton": true,

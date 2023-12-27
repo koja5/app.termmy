@@ -48,7 +48,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [SettingsComponent, AccountSettingsComponent],
+  declarations: [],
   imports: [
     CommonModule,
     CoreCommonModule,

@@ -793,6 +793,37 @@ router.post("/deleteService", auth, function (req, res) {
 
 //end services
 
+//EXTERNAL API
+router.get("/getExternalAccount", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from external_accounts where admin_id = ?",
+          req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+//END EXTERNAL API
+
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);
 }

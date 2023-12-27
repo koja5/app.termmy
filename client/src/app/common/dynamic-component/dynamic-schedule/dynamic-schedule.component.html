@@ -3,7 +3,18 @@
         <section class="users-list-wrapper">
             <!-- users filter start -->
             <div class="card">
-                <ejs-schedule> </ejs-schedule>
+                <ejs-schedule (actionBegin)="onActionBegin($event)">
+                    <ng-template #editorTemplate let-data>
+                        <table class="custom-event-editor" width="100%" cellpadding="5">
+                            <tbody>
+                                <app-dynamic-forms *ngIf="config && config.config.length > 0" [config]="config"
+                                    [partOfGrid]="true" [data]="data" (onChangeData)="onChangeData($event)"
+                                    #form="dynamicForm">
+                                </app-dynamic-forms>
+                            </tbody>
+                        </table>
+                    </ng-template>
+                </ejs-schedule>
             </div>
         </section>
     </div>

@@ -40,6 +40,7 @@ export class DynamicFormsComponent implements OnInit {
 
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onChangeData = new EventEmitter<any>();
 
   form!: FormGroup;
   public loader: boolean = true;
@@ -201,6 +202,7 @@ export class DynamicFormsComponent implements OnInit {
           );
           this.form.addControl(name!, this.createControl(config!));
         });
+      this.onChangeData.emit(this.form.value);
     }
   }
 

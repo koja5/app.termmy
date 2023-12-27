@@ -13,10 +13,12 @@ import {
   AgendaService,
 } from "@syncfusion/ej2-angular-schedule";
 import { DynamicScheduleComponent } from "./dynamic-schedule.component";
+import { CommonModule } from "@angular/common";
+import { DynamicModule } from "../dynamic.module";
 
 @NgModule({
   declarations: [DynamicScheduleComponent],
-  imports: [ScheduleModule],
+  imports: [CommonModule, ScheduleModule, DynamicModule],
   providers: [
     DayService,
     WeekService,
