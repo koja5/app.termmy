@@ -522,6 +522,16 @@
             "field": "active"
         },
         {
+            "type": "datetimepicker",
+            "width": "col-md-12 pt-2",
+            "class": "e-outline",
+            "readonly": true,
+            "format": "dd.MM.yyyy. HH:mm:ss",
+            "name": "signup_time",
+            "title": "userSignUpTime",
+            "field": "signup_time"
+        },
+        {
             "type": "button",
             "width": "col-md-12",
             "class": "btn btn-primary",

@@ -5,9 +5,9 @@
             "width": "col-md-12",
             "class": "e-field",
             "id": "title",
-            "name": "title",
+            "name": "Subject",
             "title": "title",
-            "field": "title"
+            "field": "Subject"
         },
         {
             "type": "textbox",
@@ -24,6 +24,22 @@
             "name": "lastname",
             "title": "lastname",
             "field": "lastname"
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-12",
+            "class": "e-field",
+            "name": "StartTime",
+            "title": "lastname",
+            "field": "StartTime"
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-12",
+            "class": "e-field",
+            "name": "EndTime",
+            "title": "lastname",
+            "field": "EndTime"
         }
     ]
 }

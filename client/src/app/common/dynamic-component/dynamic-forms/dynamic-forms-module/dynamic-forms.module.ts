@@ -13,6 +13,12 @@ import { MultiselectComponent } from "../dynamic-fields/dropdowns/multiselect/mu
 import { TimepickerComponent } from "../dynamic-fields/inputs/timepicker/timepicker.component";
 import { NumericTextboxComponent } from "../dynamic-fields/inputs/numeric-textbox/numeric-textbox.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { DatetimepickerComponent } from "../dynamic-fields/inputs/datetimepicker/datetimepicker.component";
+import {
+  DatePickerModule,
+  DateTimePickerModule,
+} from "@syncfusion/ej2-angular-calendars";
+import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepicker.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +31,8 @@ import { TranslateModule } from "@ngx-translate/core";
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
+    DatepickerComponent,
+    DatetimepickerComponent,
   ],
   exports: [
     DynamicFieldsDirective,
@@ -36,6 +44,8 @@ import { TranslateModule } from "@ngx-translate/core";
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
+    DatepickerComponent,
+    DatetimepickerComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +54,8 @@ import { TranslateModule } from "@ngx-translate/core";
     NgbModule,
     NgSelectModule,
     TranslateModule,
+    DatePickerModule,
+    DateTimePickerModule,
   ],
   entryComponents: [
     DynamicFieldsDirective,
@@ -55,6 +67,8 @@ import { TranslateModule } from "@ngx-translate/core";
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
+    DatepickerComponent,
+    DatetimepickerComponent,
   ],
 })
 export class DynamicFormsModule {}

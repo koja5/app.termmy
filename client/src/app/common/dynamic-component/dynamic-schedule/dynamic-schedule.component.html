@@ -8,8 +8,7 @@
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <app-dynamic-forms *ngIf="config && config.config.length > 0" [config]="config"
-                                    [partOfGrid]="true" [data]="data" (onChangeData)="onChangeData($event)"
-                                    #form="dynamicForm">
+                                    [partOfGrid]="true" [data]="data" #form="dynamicForm">
                                 </app-dynamic-forms>
                             </tbody>
                         </table>

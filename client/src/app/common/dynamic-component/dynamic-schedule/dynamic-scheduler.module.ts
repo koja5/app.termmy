@@ -18,7 +18,7 @@ import { DynamicModule } from "../dynamic.module";
 
 @NgModule({
   declarations: [DynamicScheduleComponent],
-  imports: [CommonModule, ScheduleModule, DynamicModule],
+  imports: [CommonModule, ScheduleModule, DynamicModule,],
   providers: [
     DayService,
     WeekService,
