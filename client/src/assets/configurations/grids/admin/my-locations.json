@@ -27,6 +27,10 @@
             "type": "Menu"
         }
     },
+    "formDialog": {
+        "type": "modal",
+        "size": "lg"
+    },
     "customGrouping": false,
     "allowResizing": true,
     "reorderable": true,
@@ -186,8 +190,9 @@
                         {
                             "actionName": "Edit",
                             "icon": "edit",
-                            "sidebar": {
-                                "closeSidebarAfterExecute": true
+                            "formDialog": {
+                                "type": "modal",
+                                "closeAfterExecute": true
                             }
                         },
                         {

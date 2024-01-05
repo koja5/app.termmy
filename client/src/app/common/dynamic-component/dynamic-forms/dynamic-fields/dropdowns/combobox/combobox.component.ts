@@ -94,4 +94,8 @@ export class ComboboxComponent implements OnInit {
   onChange(event: any) {
     this.config.value = Number(event);
   }
+
+  createNew(city) {
+    alert("Create New Clicked : " + city);
+  }
 }

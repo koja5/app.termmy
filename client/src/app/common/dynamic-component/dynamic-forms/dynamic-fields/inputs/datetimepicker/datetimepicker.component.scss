@@ -1,3 +1,7 @@
 .datetime-full-width {
     width: 100%;
 }
+
+.date-none .e-input-group-icon e-date-icon e-icons {
+    display: none !important;
+}

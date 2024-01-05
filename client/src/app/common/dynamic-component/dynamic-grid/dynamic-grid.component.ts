@@ -32,6 +32,7 @@ export class DynamicGridComponent {
   @Input() public path: string;
   @Input() public file: string;
   @ViewChild("modal") modal: TemplateRef<any>;
+  @ViewChild("modalForm") modalForm: TemplateRef<any>;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
 
   // Public
@@ -46,6 +47,7 @@ export class DynamicGridComponent {
   public data: any;
   public executeActionConfig: any;
   public modalDialog: any;
+  public modalFormDialog: any;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -294,24 +296,34 @@ export class DynamicGridComponent {
     }
     if (
       this.executeActionConfig &&
-      this.executeActionConfig.closeSidebarAfterExecute
+      this.executeActionConfig.closeAfterExecute != false
     ) {
-      this.toggleSidebar("new-user-sidebar");
+      if (this.executeActionConfig.type === "sidebar") {
+        this.toggleSidebar("sidebar");
+      } else {
+        this.modalDialog.close();
+      }
     }
   }
 
+  // check here which is action and then check additionall configuration - l
   actionColumn(item, value, row) {
     if (item.routerLink) {
       if (value && item.routerLink.indexOf("{{value}}") != -1) {
         item.routerLink = item.routerLink.replace("{{value}}", value);
       }
       this._router.navigate([item.routerLink]);
-    } else if (item.sidebar) {
-      this.executeActionConfig = item.sidebar;
+    } else if (item.formDialog) {
+      this.executeActionConfig = item.formDialog;
       setTimeout(() => {
         this.setValue(this.config.config, row);
       }, 50);
-      this.toggleSidebar("new-user-sidebar");
+
+      if (item.formDialog.type === "sidebar") {
+        this.toggleSidebar("sidebar");
+      } else {
+        this.showModalFormDialog();
+      }
     } else if (item.executeAction) {
       if (item.executeAction.showQuestionBeforeExecute) {
         this.executeActionConfig = item.executeAction;
@@ -337,6 +349,20 @@ export class DynamicGridComponent {
       windowClass: modalConfig.windowClass
         ? modalConfig.windowClass
         : "modal modal-danger",
+    });
+  }
+
+  showModalFormDialog() {
+    this.modalDialog = this._modalService.open(this.modalForm, {
+      centered: true,
+      windowClass:
+        this.config.formDialog && this.config.formDialog.windowClass
+          ? this.config.formDialog.windowClass
+          : "modal modal-default",
+      size:
+        this.config.formDialog && this.config.formDialog.size
+          ? this.config.formDialog.size
+          : "md",
     });
   }
 

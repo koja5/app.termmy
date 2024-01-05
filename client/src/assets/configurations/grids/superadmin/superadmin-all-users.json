@@ -27,6 +27,10 @@
             "type": "Menu"
         }
     },
+    "formDialog": {
+        "type": "sidebar",
+        "size": "lg"
+    },
     "customGrouping": false,
     "allowResizing": true,
     "reorderable": true,
@@ -421,6 +425,8 @@
         },
         {
             "type": "multiselect",
+            "addTag": true,
+            "addTagText": "general.newEntrie",
             "width": "col-md-12",
             "class": "e-outline",
             "name": "country_id",

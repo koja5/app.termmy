@@ -28,7 +28,7 @@
         {
             "type": "datetimepicker",
             "width": "col-md-12",
-            "class": "e-field",
+            "class": "e-field date-none",
             "name": "StartTime",
             "title": "lastname",
             "field": "StartTime"
@@ -36,7 +36,7 @@
         {
             "type": "datetimepicker",
             "width": "col-md-12",
-            "class": "e-field",
+            "class": "e-field date-none",
             "name": "EndTime",
             "title": "lastname",
             "field": "EndTime"

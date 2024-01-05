@@ -93,4 +93,8 @@ export class MultiselectComponent implements OnInit {
         this.data = data;
       });
   }
+
+  createNew(city) {
+    alert("Create New Clicked : " + city);
+  }
 }
