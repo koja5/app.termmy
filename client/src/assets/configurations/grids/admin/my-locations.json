@@ -232,7 +232,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "name",
             "title": "myLocations.name",
@@ -241,7 +241,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "uid",
             "title": "myLocations.uid",
@@ -250,7 +250,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "address",
             "title": "myLocations.address",
@@ -258,7 +258,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-3",
             "class": "e-outline",
             "name": "zip",
             "title": "myLocations.zip",
@@ -266,7 +266,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-3",
             "class": "e-outline",
             "name": "city",
             "title": "myLocations.city",
@@ -274,7 +274,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
             "title": "myLocations.email",
@@ -283,7 +283,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "telephone",
             "title": "myLocations.telephone",

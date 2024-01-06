@@ -91,8 +91,8 @@ export class LoginComponent implements OnInit {
       .callPostMethod("/api/login", this.loginForm.value)
       .subscribe((data: any) => {
         if (data && data.token) {
-          this._router.navigate(["dashboard/settings/worktime"]);
           this._storageService.setToken(data.token);
+          this._router.navigate(["dashboard/settings/worktime"]);
           this.loading = false;
         }
       });

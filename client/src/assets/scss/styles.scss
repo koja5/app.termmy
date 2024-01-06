@@ -1,7 +1,15 @@
 .form-custom {
-	display: inline-block;
+  display: inline-block;
 }
 
 .hidden {
-	display: none !important;
+  display: none !important;
+}
+
+.date-none .e-date-icon {
+  display: none !important;
+}
+
+.must-label {
+  font-size: 12px;
 }
