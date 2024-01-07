@@ -1,10 +1,11 @@
 <div *ngIf="config.schedule === undefined" [ngClass]="[config.width]" [formGroup]="group" class="form-group">
   <label *ngIf="config?.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
-  <p *ngIf="group.controls[config.field].status === 'INVALID'" class="error must-label m-0">{{'form.mustFillThisField' |
+  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    class="error must-label m-0">{{'form.mustFillThisField' |
     translate}}</p>
   <input *ngIf="!config.multiline" type="number" #default
-    class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}"
+    class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
     [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
     [readonly]="config.readonly" [disabled]="config.disabled!">
 
@@ -13,6 +14,9 @@
 <div *ngIf="config.schedule" [ngClass]="[config?.width]" [formGroup]="group">
   <label *ngIf="config?.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
+  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    class="error must-label m-0">{{'form.mustFillThisField' |
+    translate}}</p>
   <div class="e-input-group e-control-wrapper e-outline">
     <input *ngIf="!config?.multiline" class="{{
         config?.class
@@ -21,7 +25,5 @@
     <textarea *ngIf="config?.multiline" class="{{
         config?.class
       }} e-field e-input e-control e-textbox e-lib e-input  border-none" value="" name="{{ config?.name }}"></textarea>
-    <span *ngIf="group.controls[config.field].status === 'INVALID'" class="error">{{'form.mustFillThisField' |
-      translate}}</span>
   </div>
 </div>

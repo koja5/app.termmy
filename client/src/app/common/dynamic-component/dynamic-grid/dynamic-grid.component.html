@@ -233,8 +233,7 @@
     </div>
 
     <!-- Sidebar -->
-    <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="sidebar"
-        overlayClass="modal-backdrop">
+    <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="sidebar" overlayClass="modal-backdrop">
         <div class="slideout-content">
             <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
                 <div class="modal-dialog">
@@ -261,7 +260,7 @@
     <!--/ Sidebar -->
 
     <!-- Dialog -->
-    <ng-template #modalForm let-modal class="modal-dialog modal-lg modal-dialog-centered">
+    <ng-template #modalForm let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
         <div class="modal-header">
             <h5 class="modal-title" id="myModalLabel160">{{'general.newEntrie' | translate}}</h5>
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">

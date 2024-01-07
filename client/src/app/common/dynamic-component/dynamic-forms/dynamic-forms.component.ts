@@ -39,7 +39,7 @@ export class DynamicFormsComponent implements OnInit {
   @Input() data!: any;
 
   @Output()
-  submit: EventEmitter<any> = new EventEmitter<any>();
+  public submit: EventEmitter<any> = new EventEmitter<any>();
   @Output() onChangeData = new EventEmitter<any>();
 
   form!: FormGroup;
@@ -144,33 +144,6 @@ export class DynamicFormsComponent implements OnInit {
     }
   }
 
-  // callApi(data: any) {
-  //   if (data.request.type === 'POST') {
-  //     if (data.request.url) {
-  //       data.body = this.helpService.postRequestDataParameters(
-  //         data.body,
-  //         this.router.snapshot.params,
-  //         data.request.url
-  //       );
-  //     }
-  //     this.callApiPost(data.request.api, data.body);
-  //   } else {
-  //     if (data.request.url) {
-  //       const dataValue = this.helpService.getRequestDataParameters(
-  //         this.router.snapshot.params,
-  //         data.request.url
-  //       );
-  //       this.callApiGet(data.request.api, dataValue);
-  //     } else {
-  //       const dataValue = this.helpService.getRequestDataParameters(
-  //         this.router.snapshot.params,
-  //         data.request.parameters
-  //       );
-  //       this.callApiGet(data.request.api, dataValue);
-  //     }
-  //   }
-  // }
-
   callApiPost(api: string, body: any) {
     this.apiService.callPostMethod(api, body).subscribe((data) => {
       this.data = data;
@@ -222,13 +195,13 @@ export class DynamicFormsComponent implements OnInit {
   }
 
   handleSubmit(event: Event) {
+    console.log(this.form);
     if (this.form.valid) {
       event.preventDefault();
       event.stopPropagation();
       this.submit.emit(this.value);
-      if (this.file === "personalize.json") {
-        this.messageService.sendOrientation(this.value.orientation);
-      }
+    } else {
+      this.form.markAsDirty();
     }
   }
 

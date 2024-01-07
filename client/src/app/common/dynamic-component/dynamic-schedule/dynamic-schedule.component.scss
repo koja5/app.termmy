@@ -63,6 +63,31 @@
 .dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
 .dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons,
 .dark-layout .e-btn.e-flat,
-.e-css.e-btn.e-flat {
+.e-css.e-btn.e-flat,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-date-time-details,
+.e-quick-popup-wrapper .e-cell-popup .e-location-details,
+.e-quick-popup-wrapper .e-cell-popup .e-time-zone-details,
+.e-quick-popup-wrapper .e-cell-popup .e-description-details,
+.e-quick-popup-wrapper .e-cell-popup .e-resource-details,
+.e-quick-popup-wrapper .e-event-popup .e-date-time-details,
+.e-quick-popup-wrapper .e-event-popup .e-location-details,
+.e-quick-popup-wrapper .e-event-popup .e-time-zone-details,
+.e-quick-popup-wrapper .e-event-popup .e-description-details,
+.e-quick-popup-wrapper .e-event-popup .e-resource-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-date-time-icon,
+.e-quick-popup-wrapper .e-cell-popup .e-location-icon,
+.e-quick-popup-wrapper .e-cell-popup .e-time-zone-icon,
+.e-quick-popup-wrapper .e-cell-popup .e-description-icon,
+.e-quick-popup-wrapper .e-cell-popup .e-resource-icon,
+.e-quick-popup-wrapper .e-event-popup .e-date-time-icon,
+.e-quick-popup-wrapper .e-event-popup .e-location-icon,
+.e-quick-popup-wrapper .e-event-popup .e-time-zone-icon,
+.e-quick-popup-wrapper .e-event-popup .e-description-icon,
+.e-quick-popup-wrapper .e-event-popup .e-resource-icon {
+  color: #fff !important;
+}
+
+.dark-layout .e-popup.e-popup-open {
+  background-color: #283046 !important;
   color: #fff !important;
 }

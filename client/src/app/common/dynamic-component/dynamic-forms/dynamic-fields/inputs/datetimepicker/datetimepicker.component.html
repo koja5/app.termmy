@@ -3,19 +3,24 @@
   <label *ngIf="config.title" class="custom-label">{{ config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
       ''}}</span></label>
-  <p *ngIf="group.controls[config.field].status === 'INVALID'" class="error must-label m-0">{{'form.mustFillThisField' |
+  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    class="error must-label m-0">{{'form.mustFillThisField' |
     translate}}</p>
-  <!-- <ejs-datetimepicker class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}" [id]="config.name" [name]="config.name" [formControlName]="config.name"
+  <!-- <ejs-datetimepicker class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}" [id]="config.name" [name]="config.name" [formControlName]="config.name"
     [disabled]="config.disabled!" [readonly]="config.readonly!" [format]="config.format"></ejs-datetimepicker> -->
   <ejs-datetimepicker cssClass="e-outline"
-    class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}}" [id]="config.name"
-    [formControlName]="config.name" [readonly]="config.readonly!" [format]="config.format"></ejs-datetimepicker>
+    class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+    [id]="config.name" [formControlName]="config.name" [readonly]="config.readonly!"
+    [format]="config.format"></ejs-datetimepicker>
 </div>
 
 <div *ngIf="config?.schedule" class="{{ config?.width }}">
   <label *ngIf="config.title" class="custom-label">{{ config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
       ''}}</span></label>
+  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    class="error must-label m-0">{{'form.mustFillThisField' |
+    translate}}</p>
   <div class="e-input-group e-control-wrapper e-outline e-ddl e-valid-input">
     <ejs-datetimepicker class="{{
         config?.class

@@ -104,6 +104,7 @@ export class DynamicGridComponent {
     private _modalService: NgbModal
   ) {
     this._unsubscribeAll = new Subject();
+    this._modalService.dismissAll();
   }
 
   // Public Methods
@@ -295,10 +296,13 @@ export class DynamicGridComponent {
       this.rows = data;
     }
     if (
-      this.executeActionConfig &&
+      !this.executeActionConfig ||
       this.executeActionConfig.closeAfterExecute != false
     ) {
-      if (this.executeActionConfig.type === "sidebar") {
+      if (
+        this.executeActionConfig &&
+        this.executeActionConfig.type === "sidebar"
+      ) {
         this.toggleSidebar("sidebar");
       } else {
         this.modalDialog.close();
