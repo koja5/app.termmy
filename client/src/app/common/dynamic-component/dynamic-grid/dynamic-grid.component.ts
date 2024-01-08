@@ -317,23 +317,29 @@ export class DynamicGridComponent {
         item.routerLink = item.routerLink.replace("{{value}}", value);
       }
       this._router.navigate([item.routerLink]);
-    } else if (item.formDialog) {
-      this.executeActionConfig = item.formDialog;
-      setTimeout(() => {
-        this.setValue(this.config.config, row);
-      }, 50);
-
-      if (item.formDialog.type === "sidebar") {
-        this.toggleSidebar("sidebar");
-      } else {
-        this.showModalFormDialog();
+    } else if (item.type) {
+      if (item.type === "edit") {
+        this.checkConfigurationFunctionsForEditOption(item, row);
       }
-    } else if (item.executeAction) {
-      if (item.executeAction.showQuestionBeforeExecute) {
+
+      if (item.executeAction && item.executeAction.showQuestionBeforeExecute) {
         this.executeActionConfig = item.executeAction;
         this.executeActionConfig.body = row;
         this.showQuestionModal(this.modal, item.executeAction.modalConfig);
       }
+    }
+  }
+
+  checkConfigurationFunctionsForEditOption(item, row) {
+    this.executeActionConfig = item.formDialog;
+    setTimeout(() => {
+      this.setValue(this.config.config, row);
+    }, 50);
+
+    if (item.formDialog.type === "sidebar") {
+      this.toggleSidebar("sidebar");
+    } else {
+      this.showModalFormDialog();
     }
   }
 

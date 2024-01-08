@@ -146,6 +146,11 @@
         },
         {
             "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "myServices.min",
+                "groupPosition": "right"
+            },
             "width": "col-md-12",
             "class": "e-outline",
             "name": "time_duration",
@@ -155,6 +160,11 @@
         },
         {
             "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "myServices.currency",
+                "groupPosition": "right"
+            },
             "width": "col-md-12",
             "class": "e-outline",
             "name": "price",

@@ -1,7 +1,8 @@
-<div *ngIf="language && config && checkRights()" [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
+<div *ngIf="language && config && checkRights()" [ngClass]="[config.width]" [formGroup]="group"
+  class="form-group form-custom">
   <div class="form-check form-check-inline">
     <div class="custom-control custom-switch custom-control-inline">
-      <input type="checkbox" class="custom-control-input" [id]="config.name" [name]="config.name" [checked]="true"
+      <input type="checkbox" class="custom-control-input" [id]="config.name" [name]="config.name"
         [formControlName]="config.name" [disabled]="config.disabled!"> <label *ngIf="config.title"
         class="custom-control-label" [for]="config.name">{{
         config.title

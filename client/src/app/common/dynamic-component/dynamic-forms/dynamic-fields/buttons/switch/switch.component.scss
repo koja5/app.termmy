@@ -1,0 +1,149 @@
+.form-switch {
+  padding-left: 3.5rem;
+}
+
+.form-switch .form-check-input {
+  width: 3rem;
+  margin-left: -3.5rem;
+  background-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+  background-position: left center;
+  border-radius: 3rem;
+  transition: background-position 0.15s ease-in-out, background-color 0.1s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-switch .form-check-input {
+    transition: none;
+  }
+}
+
+.form-switch .form-check-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked {
+  background-position: right center;
+  background-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+}
+
+.form-switch {
+  position: relative;
+  /*For Switch Handle Animation*/
+}
+
+.form-switch .form-check-input {
+  height: 1.7rem;
+}
+
+.form-switch .form-check-input:checked {
+  box-shadow: none !important;
+}
+
+.form-switch .form-check-input {
+  border: none;
+}
+
+.form-switch .form-check-input:not(:checked) {
+  background-color: #e2e2e2;
+}
+
+.form-switch .form-check-input:active {
+  filter: none;
+}
+
+.form-switch .form-check-input:not(:disabled):checked,
+.form-switch .form-check-input:not(:disabled):focus {
+  box-shadow: none !important;
+}
+
+.form-switch .form-check-label {
+  line-height: 1.7rem;
+  /*For Switch text*/
+}
+
+.form-switch .form-check-label .switch-text-left,
+.form-switch .form-check-label .switch-text-right,
+.form-switch .form-check-label .switch-icon-left,
+.form-switch .form-check-label .switch-icon-right {
+  position: absolute;
+  user-select: none;
+  line-height: 1.65;
+}
+
+.form-switch .form-check-label .switch-text-left i,
+.form-switch .form-check-label .switch-text-left svg,
+.form-switch .form-check-label .switch-text-right i,
+.form-switch .form-check-label .switch-text-right svg,
+.form-switch .form-check-label .switch-icon-left i,
+.form-switch .form-check-label .switch-icon-left svg,
+.form-switch .form-check-label .switch-icon-right i,
+.form-switch .form-check-label .switch-icon-right svg {
+  height: 13px;
+  width: 13px;
+  font-size: 13px;
+}
+
+.form-switch .form-check-label .switch-text-left,
+.form-switch .form-check-label .switch-icon-left {
+  left: 6px;
+  top: 0;
+  color: #fff;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.1s ease, transform 0.15s ease;
+}
+
+.form-switch .form-check-label .switch-text-right,
+.form-switch .form-check-label .switch-icon-right {
+  left: 25px;
+  top: 0;
+  opacity: 1;
+  transform: translateX(0px);
+  transition: opacity 0.08s ease, transform 0.15s ease;
+}
+
+.form-switch .form-check-label:focus {
+  outline: 0;
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label::before {
+  box-shadow: none;
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label::after {
+  transform: translateX(1.4rem);
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label .switch-text-left,
+.form-switch .form-check-input:checked ~ .form-check-label .switch-icon-left {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label .switch-text-right,
+.form-switch .form-check-input:checked ~ .form-check-label .switch-icon-right {
+  transform: translateX(-8px);
+  opacity: 0;
+}
+
+.form-switch
+  .form-check-input:not(:checked)
+  ~ .form-check-label
+  .switch-text-left {
+  opacity: 0;
+}
+
+.form-switch
+  .form-check-input:not(:checked)
+  ~ .form-check-label
+  .switch-text-right {
+  opacity: 1;
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label .switch-text-right {
+  opacity: 0;
+}
+
+.form-switch .form-check-input:checked ~ .form-check-label .switch-text-left {
+  opacity: 1;
+}

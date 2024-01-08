@@ -10,6 +10,13 @@
         "myLocations": {
             "name": "Ime lokacije"
         },
+        "myServices": {
+            "name": "Ime usluge",
+            "timeDuration": "Vreme trajanja terapije",
+            "price": "Cena",
+            "min": "minuta",
+            "currency": "RSD"
+        },
         "navigations": {
             "home": "Početna",
             "settings": "Podešavanja",

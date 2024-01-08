@@ -188,6 +188,7 @@
                     "menuIcon": "more-vertical",
                     "menu": [
                         {
+                            "type": "edit",
                             "actionName": "Edit",
                             "icon": "edit",
                             "formDialog": {
@@ -196,6 +197,7 @@
                             }
                         },
                         {
+                            "type": "delete",
                             "actionName": "Delete",
                             "icon": "trash",
                             "executeAction": {
@@ -294,7 +296,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "worktime_from",
-            "title": "myLocations.worktimeTo",
+            "title": "myLocations.worktimeFrom",
             "field": "worktime_from",
             "required": true
         },

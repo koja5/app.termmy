@@ -5,16 +5,41 @@
   <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
     class="error must-label m-0">{{'form.mustFillThisField' |
     translate}}</p>
-  <input *ngIf="!config.multiline" [type]="config.type" #default
-    class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
-    [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
-    [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
-    [multiline]="config.multiline" />
-  <textarea *ngIf="config.multiline" type="text" #default
-    class="form-control {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
-    [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
-    [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows" [cols]="config.cols"></textarea>
+
+  <!-- SIMPLE -->
+  <div *ngIf="!config.subType">
+
+    <input *ngIf="!config.multiline" [type]="config.type" #default
+      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+      [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
+      [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
+      [multiline]="config.multiline" />
+    <textarea *ngIf="config.multiline" type="text" #default
+      class="form-control {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+      [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
+      [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows" [cols]="config.cols" suffix=" $"
+      mask="0000"></textarea>
+  </div>
+  <!--/ SIMPLE -->
+
+  <!-- GROUP -->
+  <div class="input-group mb-2" *ngIf="config.subType === 'group'">
+    <div class="input-group-prepend" *ngIf="config.groupSettings.groupPosition === 'left'">
+      <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
+    </div>
+    <input [type]="config.type" #default
+      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+      [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
+      [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
+      [multiline]="config.multiline" />
+    <div class="input-group-append" *ngIf="config.groupSettings.groupPosition === 'right'">
+      <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
+    </div>
+  </div>
+  <!-- / GROUP -->
+
 </div>
+
 
 <div *ngIf="config.schedule" [ngClass]="[config.width]" [formGroup]="group">
   <label *ngIf="config.title" class="custom-label">{{
@@ -28,11 +53,11 @@
       class="{{
         config.class
       }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input " value=""
-      name="{{ config.name }}" type="{{ config.type }}" />
+      name="{{ config.name }}" type="{{ config.type }}" suffix=" $" mask="0000" />
     <textarea *ngIf="config.multiline"
       class="{{
         config.class
       }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input  border-none" value=""
-      name="{{ config.name }}"></textarea>
+      name="{{ config.name }}" suffix=" $" mask="0000"></textarea>
   </div>
 </div>

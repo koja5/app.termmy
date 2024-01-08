@@ -64,7 +64,9 @@
         "myServices": {
             "name": "Name of service",
             "timeDuration": "Time duration",
-            "price": "Price"
+            "price": "Price",
+            "min": "minutes",
+            "currency": "€"
         },
         "settings": {
             "worktime": "Worktime",
