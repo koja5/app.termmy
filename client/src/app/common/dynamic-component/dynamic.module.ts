@@ -16,10 +16,8 @@ import { CoreSidebarModule } from "@core/components";
 import { ToastrComponent } from "../toastr/toastr.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterModule } from "@angular/router";
-import { DynamicTabsModule } from "./dynamic-tabs/dynamic-tabs.module";
 import { DynamicTabsComponent } from "./dynamic-tabs/dynamic-tabs.component";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
-import { DynamicSchedulerModule } from "./dynamic-schedule/dynamic-scheduler.module";
 
 @NgModule({
   declarations: [

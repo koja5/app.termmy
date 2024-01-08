@@ -3,10 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ConfigurationFile } from "../../../models/complex-properties/configuration-file";
 import { FieldConfig } from "../../../models/field-config";
 import { CallApiService } from "app/services/call-api.service";
-import { HelpService } from "app/services/help.service";
 import { ConfigurationService } from "app/services/configuration.service";
-
-import { CoreTranslationService } from "@core/services/translation.service";
 
 @Component({
   selector: "app-multiselect",
@@ -28,6 +25,7 @@ export class MultiselectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.group);
     if (this.config.value && typeof this.config.value === "string") {
       if (this.config.value.split(",").length > 0) {
         let arrayValue = this.config.value.split(",");

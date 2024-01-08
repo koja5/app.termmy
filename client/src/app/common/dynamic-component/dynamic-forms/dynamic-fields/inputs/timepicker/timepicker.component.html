@@ -8,7 +8,7 @@
         |
         translate}}</p>
     <ngb-timepicker
-        class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
+        class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
         [id]="config.name" [formControlName]="config.name" [disabled]="config.disabled!" [readonly]="config.readonly!"
         [format]="config.format" [meridian]="meridian ? meridian : false" [disabled]="disabled"></ngb-timepicker>
 </div>

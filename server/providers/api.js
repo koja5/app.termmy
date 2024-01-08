@@ -793,6 +793,122 @@ router.post("/deleteService", auth, function (req, res) {
 
 //end services
 
+//EMPLOYEE
+router.get("/getMyEmployees", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where admin_id = ?",
+          req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setEmployee", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.id;
+
+    //check if email exists
+    conn.query(
+      "select * from users where email = ?",
+      [req.body.email],
+      function (err, rows) {
+        if (!err) {
+          if (rows.length) {
+            conn.release();
+            res.json(false);
+          } else {
+            // update employee info
+            if (req.body.id) {
+              conn.query(
+                "update users set ? where id = ? and admin_id = ?",
+                [req.body, req.body.id, req.user.user.id],
+                function (err, rows) {
+                  conn.release();
+                  if (!err) {
+                    res.json(true);
+                  } else {
+                    logger.log("error", err.sql + ". " + err.sqlMessage);
+                    res.json(false);
+                  }
+                }
+              );
+            } else {
+              // insert new employee
+              req.body.type = 3;
+              req.body.password = sha1(req.body.password);
+              conn.query(
+                "insert into users SET ?",
+                [req.body],
+                function (err, rows) {
+                  conn.release();
+                  if (!err) {
+                    res.json(true);
+                  } else {
+                    logger.log("error", err.sql + ". " + err.sqlMessage);
+                    res.json(false);
+                  }
+                }
+              );
+            }
+          }
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/deleteEmployee", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from users where id = ? and admin_id = ?",
+      [req.body.id, req.user.user.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//END EMPLOYEE
+
 //EXTERNAL API
 router.get("/getExternalAccount", auth, async (req, res, next) => {
   try {

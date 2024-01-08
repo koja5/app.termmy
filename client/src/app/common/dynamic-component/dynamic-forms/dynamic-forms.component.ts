@@ -64,7 +64,6 @@ export class DynamicFormsComponent implements OnInit {
     private configurationService: ConfigurationService,
     private apiService: CallApiService,
     private router: ActivatedRoute,
-    private messageService: MessageService,
     private _coreTranslationService: CoreTranslationService
   ) {
     this._coreTranslationService.setAllTranslations();

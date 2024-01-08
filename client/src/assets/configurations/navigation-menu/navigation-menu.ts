@@ -51,4 +51,13 @@ export const menu = [
     url: "dashboard/admin/my-calendar",
     users: ["admin", "superadmin"],
   },
+  {
+    id: "my-employees",
+    title: "My employees",
+    translate: "navigations.myEmployees",
+    type: "item",
+    icon: "user-check",
+    url: "dashboard/admin/my-employees",
+    users: ["admin", "superadmin"],
+  },
 ];

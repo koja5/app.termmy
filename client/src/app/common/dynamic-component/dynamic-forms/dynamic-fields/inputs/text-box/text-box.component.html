@@ -1,5 +1,4 @@
-<div *ngIf="config.schedule === undefined" [ngClass]="[config.width]" [formGroup]="group"
-  class="form-group form-custom {{config.hide ? 'hide' : ''}}">
+<div [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom {{config.hide ? 'hide' : ''}}">
   <label *ngIf="config.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
   <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
@@ -8,17 +7,15 @@
 
   <!-- SIMPLE -->
   <div *ngIf="!config.subType">
-
     <input *ngIf="!config.multiline" [type]="config.type" #default
-      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
+      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
       [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
       [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
       [multiline]="config.multiline" />
     <textarea *ngIf="config.multiline" type="text" #default
-      class="form-control {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
+      class="form-control {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
       [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
-      [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows" [cols]="config.cols" suffix=" $"
-      mask="0000"></textarea>
+      [readonly]="config.readonly" [disabled]="config.disabled!" [rows]="config.rows" [cols]="config.cols"></textarea>
   </div>
   <!--/ SIMPLE -->
 
@@ -28,7 +25,7 @@
       <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
     </div>
     <input [type]="config.type" #default
-      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
+      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
       [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
       [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
       [multiline]="config.multiline" />
@@ -38,26 +35,4 @@
   </div>
   <!-- / GROUP -->
 
-</div>
-
-
-<div *ngIf="config.schedule" [ngClass]="[config.width]" [formGroup]="group">
-  <label *ngIf="config.title" class="custom-label">{{
-    config.title
-    }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
-  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
-    class="error must-label m-0">{{'form.mustFillThisField' |
-    translate}}</p>
-  <div class="e-input-group e-control-wrapper e-outline">
-    <input *ngIf="!config.multiline"
-      class="{{
-        config.class
-      }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input " value=""
-      name="{{ config.name }}" type="{{ config.type }}" suffix=" $" mask="0000" />
-    <textarea *ngIf="config.multiline"
-      class="{{
-        config.class
-      }} {{group.controls[config.field].status === 'INVALID' ? 'error' : ''}} e-field e-input e-control e-textbox e-lib e-input  border-none" value=""
-      name="{{ config.name }}" suffix=" $" mask="0000"></textarea>
-  </div>
 </div>

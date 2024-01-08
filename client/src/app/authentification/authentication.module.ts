@@ -10,7 +10,7 @@ import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
-import { CookieService } from "ngx-cookie";
+import { TranslateModule } from "@ngx-translate/core";
 
 // routing
 const routes: Routes = [
@@ -48,6 +48,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CoreCommonModule,
+    TranslateModule,
   ],
   providers: [],
 })

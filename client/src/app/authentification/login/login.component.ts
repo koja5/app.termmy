@@ -94,6 +94,9 @@ export class LoginComponent implements OnInit {
           this._storageService.setToken(data.token);
           this._router.navigate(["dashboard/settings/worktime"]);
           this.loading = false;
+        } else {
+          this.error = data.type;
+          this.loading = false;
         }
       });
   }

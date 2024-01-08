@@ -1,0 +1,248 @@
+{
+    "pageSize": 10,
+    "request": {
+        "type": "GET",
+        "api": "/api/getMyEmployees",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "paging": {
+        "enable": true,
+        "settings": {
+            "pageSizes": true,
+            "pageSize": 20
+        }
+    },
+    "sorting": {
+        "enable": true
+    },
+    "grouping": {
+        "enable": true,
+        "group": []
+    },
+    "filtering": {
+        "enable": true,
+        "settings": {
+            "type": "Menu"
+        }
+    },
+    "formDialog": {
+        "type": "modal",
+        "size": "lg"
+    },
+    "customGrouping": false,
+    "allowResizing": true,
+    "reorderable": true,
+    "selectable": true,
+    "scrollable": false,
+    "hideable": true,
+    "refresh": false,
+    "reset": true,
+    "editSettingsRequest": {
+        "add": {
+            "type": "POST",
+            "api": "/api/setEmployee",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        },
+        "edit": {
+            "type": "POST",
+            "api": "/api/updateEmployee",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        },
+        "delete": {
+            "type": "POST",
+            "api": "/api/deleteEmployee",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        }
+    },
+    "columns": [
+        {
+            "title": "allUsers.firstname",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "firstname",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "allUsers.lastname",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "lastname",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "allUsers.email",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "email",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "allUsers.active",
+            "template": {
+                "choices": [
+                    {
+                        "field": "active",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "inactive",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "active",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "active",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
+            },
+            "field": "active",
+            "filter": {
+                "type": "CheckBox"
+            }
+        },
+        {
+            "title": "myLocations.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "menu",
+                    "menuIcon": "more-vertical",
+                    "menu": [
+                        {
+                            "type": "edit",
+                            "actionName": "Edit",
+                            "icon": "edit",
+                            "formDialog": {
+                                "type": "modal",
+                                "closeAfterExecute": true
+                            }
+                        },
+                        {
+                            "type": "delete",
+                            "actionName": "Delete",
+                            "icon": "trash",
+                            "executeAction": {
+                                "request": {
+                                    "type": "POST",
+                                    "api": "/api/deleteEmployee",
+                                    "parameters": [],
+                                    "fields": "",
+                                    "root": ""
+                                },
+                                "response": "toastr",
+                                "showQuestionBeforeExecute": true,
+                                "modalConfig": {
+                                    "modalTitle": "",
+                                    "modalText": "",
+                                    "windowClass": "modal modal-danger"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "field": "allow_online"
+        }
+    ],
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "id",
+            "title": "ID",
+            "field": "id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "firstname",
+            "title": "allUsers.firstname",
+            "field": "firstname",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "lastname",
+            "title": "allUsers.lastname",
+            "field": "lastname",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "email",
+            "title": "allUsers.email",
+            "field": "email",
+            "required": true
+        },
+        {
+            "type": "password",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "password",
+            "title": "allUsers.password",
+            "field": "password",
+            "required": true
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "verified",
+            "title": "allUsers.verified",
+            "field": "verified"
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "active",
+            "title": "allUsers.active",
+            "field": "active"
+        },
+        {
+            "type": "button",
+            "width": "col-md-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-md-12"
+        }
+    ]
+}

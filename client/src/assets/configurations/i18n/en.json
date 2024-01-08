@@ -9,13 +9,19 @@
             "entries": "entries",
             "newEntrie": "New entrie"
         },
+        "login": {
+            "verifiedError": "You need to verified your email address!",
+            "activeError": "Your account is not active!",
+            "notExistsError": "Account does not exist!"
+        },
         "navigations": {
             "home": "Home",
             "settings": "Settings",
             "allUsers": "All users",
             "myLocations": "My locations",
             "myServices": "My services",
-            "myCalendar": "My calendar"
+            "myCalendar": "My calendar",
+            "myEmployees": "My employees"
         },
         "generalDialog": {
             "areYouSure": "Are you sure?",
@@ -46,7 +52,8 @@
             "newsletter": "Newsletter",
             "verified": "Verified",
             "active": "Active",
-            "signUpTime": "Signup time"
+            "signUpTime": "Signup time",
+            "password": "Password"
         },
         "myLocations": {
             "name": "Name of location",

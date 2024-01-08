@@ -19,11 +19,13 @@ import {
   DateTimePickerModule,
 } from "@syncfusion/ej2-angular-calendars";
 import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepicker.component";
+import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password-box/password-box.component";
 
 @NgModule({
   declarations: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    PasswordBoxComponent,
     NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,
@@ -37,6 +39,7 @@ import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepic
   exports: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    PasswordBoxComponent,
     NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,
@@ -60,6 +63,7 @@ import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepic
   entryComponents: [
     DynamicFieldsDirective,
     TextBoxComponent,
+    PasswordBoxComponent,
     NumericTextboxComponent,
     LabelComponent,
     ButtonComponent,

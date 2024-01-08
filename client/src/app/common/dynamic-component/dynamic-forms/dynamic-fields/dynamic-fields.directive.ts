@@ -21,11 +21,12 @@ import { TimepickerComponent } from "./inputs/timepicker/timepicker.component";
 import { NumericTextboxComponent } from "./inputs/numeric-textbox/numeric-textbox.component";
 import { DatetimepickerComponent } from "./inputs/datetimepicker/datetimepicker.component";
 import { DatepickerComponent } from "./inputs/datepicker/datepicker.component";
+import { PasswordBoxComponent } from "./inputs/text-box/password-box/password-box.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
   numeric: NumericTextboxComponent,
-  // password: TextBoxComponent,
+  password: PasswordBoxComponent,
   label: LabelComponent,
   button: ButtonComponent,
   combobox: ComboboxComponent,

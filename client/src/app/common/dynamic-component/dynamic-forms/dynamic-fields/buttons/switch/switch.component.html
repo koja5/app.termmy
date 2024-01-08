@@ -5,7 +5,7 @@
       <input type="checkbox" class="custom-control-input" [id]="config.name" [name]="config.name"
         [formControlName]="config.name" [disabled]="config.disabled!"> <label *ngIf="config.title"
         class="custom-control-label" [for]="config.name">{{
-        config.title
+        config.title | translate
         }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
     </div>
   </div>

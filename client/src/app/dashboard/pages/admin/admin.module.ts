@@ -11,6 +11,7 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { ServicesComponent } from "./services/services.component";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-schedule/dynamic-scheduler.module";
+import { EmployeesComponent } from "./employees/employees.component";
 
 const routes = [
   {
@@ -28,10 +29,20 @@ const routes = [
     canActivate: [AdminGuardService],
     component: CalendarComponent,
   },
+  {
+    path: "my-employees",
+    canActivate: [AdminGuardService],
+    component: EmployeesComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [LocationsComponent, ServicesComponent, CalendarComponent],
+  declarations: [
+    LocationsComponent,
+    ServicesComponent,
+    CalendarComponent,
+    EmployeesComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

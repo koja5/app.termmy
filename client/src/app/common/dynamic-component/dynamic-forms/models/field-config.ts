@@ -19,6 +19,7 @@ export class FieldConfig {
   options?: string[];
   placeholder!: string;
   type!: string;
+  subType!: string;
   validation?: ValidatorFn[];
   value?: any;
   multiline?: boolean;

@@ -3,13 +3,14 @@
         config.title | translate
         }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
             ''}}</span></label>
-    <p *ngIf="group.controls[config.field]&&group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
+    <p *ngIf="group.controls[config.name]&&group.controls[config.name].status === 'INVALID' && (group.pending || group.controls[config.name].touched)"
         class="error must-label m-0">{{'form.mustFillThisField'
         |
         translate}}</p>
     <ng-select [items]="data" [bindLabel]="config.field.text" [bindValue]="config.field.value"
         [closeOnSelect]="config.closeOnSelect" [searchable]="config.searchable" [loading]="loading"
-        class="{{ config.class }}" [id]="config.name" [placeholder]="config.placeholder ? (config.placeholder) : ''"
+        class="{{ config.class }} {{group.controls[config.name].status === 'INVALID' && (group.pending || group.controls[config.name].touched) ? 'error' : ''}}"
+        [id]="config.name" [placeholder]="config.placeholder ? (config.placeholder) : ''"
         [ignoreAccent]="config.fieldConfig?.ignoreAccent" [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder"
         [formControlName]="config.name" [readonly]="config.readonly" [hideSelected]="config.hideSelected"
         [clearSearchOnAdd]="config.clearSearchOnAdd" [deselectOnClick]="config.deselectOnClick"

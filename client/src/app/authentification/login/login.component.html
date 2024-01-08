@@ -24,7 +24,9 @@
 
         <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
           <div class="alert-body">
-            <p>{{ error }}</p>
+            <p *ngIf="error === 'verified'">{{ 'login.verifiedError' | translate }}</p>
+            <p *ngIf="error === 'active'">{{ 'login.activeError' | translate }}</p>
+            <p *ngIf="error === 'exist'">{{ 'login.notExistsError' | translate }}</p>
           </div>
         </ngb-alert>
 
