@@ -201,7 +201,7 @@ export class DynamicFormsComponent implements OnInit {
       event.stopPropagation();
       this.submit.emit(this.value);
     } else {
-      this.form.markAsDirty();
+      this.form.markAsPending();
     }
   }
 

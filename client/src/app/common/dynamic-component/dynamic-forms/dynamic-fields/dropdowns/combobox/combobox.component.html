@@ -3,7 +3,7 @@
         config.title | translate
         }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
             ''}}</span></label>
-    <p *ngIf="group.controls[config.field]&&group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    <p *ngIf="group.controls[config.field]&&group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
         class="error must-label m-0">{{'form.mustFillThisField'
         |
         translate}}</p>

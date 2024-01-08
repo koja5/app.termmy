@@ -1,11 +1,11 @@
 <div *ngIf="config.schedule === undefined" [ngClass]="[config.width]" [formGroup]="group" class="form-group">
   <label *ngIf="config?.title" class="custom-label">{{config.title | translate
     }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' : ''}}</span></label>
-  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+  <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
     class="error must-label m-0">{{'form.mustFillThisField' |
     translate}}</p>
   <input *ngIf="!config.subType" type="number" #default
-    class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+    class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
     [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
     [readonly]="config.readonly" [disabled]="config.disabled!">
   <div class="input-group mb-2" *ngIf="config.subType === 'group'">
@@ -13,7 +13,7 @@
       <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
     </div>
     <input type="number" #default
-      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched) ? 'error' : ''}}"
+      class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'error' : ''}}"
       [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
       [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
       [multiline]="config.multiline" />
@@ -26,7 +26,7 @@
     <label *ngIf="config?.title" class="custom-label">{{config.title | translate
       }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
         ''}}</span></label>
-    <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.dirty || group.controls[config.field].touched)"
+    <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
       class="error must-label m-0">{{'form.mustFillThisField' |
       translate}}</p>
     <div class="e-input-group e-control-wrapper e-outline">
