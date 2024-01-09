@@ -1,44 +1,73 @@
 {
+    "showOtherCalendar": true,
+    "locations": {
+        "title": "myCalendar.locations",
+        "multi": false,
+        "request": {
+            "type": "GET",
+            "api": "/api/getAdminLocations",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        }
+    },
+    "employees": {
+        "title": "myCalendar.employees",
+        "multi": false,
+        "request": {
+            "type": "GET",
+            "api": "/api/getAdminEmployees",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        }
+    },
     "config": [
         {
-            "type": "textbox",
+            "type": "combobox",
             "width": "col-md-12",
-            "class": "e-field",
-            "id": "title",
-            "name": "Subject",
-            "title": "title",
-            "field": "Subject"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-field",
-            "name": "firstname",
-            "title": "firstname",
-            "field": "firstname"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-field",
-            "name": "lastname",
-            "title": "lastname",
-            "field": "lastname"
+            "class": "e-outline",
+            "name": "country_id",
+            "title": "myCalendar.customer",
+            "field": {
+                "text": "firstname",
+                "value": "id"
+            },
+            "fieldTemplate": {
+                "fields": [
+                    {
+                        "type": "text",
+                        "values": ["firstname", "","lastname"]
+                    }
+                ]
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getUsers",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
+            "required": true
         },
         {
             "type": "datetimepicker",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-field date-none",
             "name": "StartTime",
-            "title": "lastname",
+            "title": "myCalendar.termineFrom",
             "field": "StartTime"
         },
         {
             "type": "datetimepicker",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-field date-none",
             "name": "EndTime",
-            "title": "lastname",
+            "title": "myCalendar.termineTo",
             "field": "EndTime"
         }
     ]

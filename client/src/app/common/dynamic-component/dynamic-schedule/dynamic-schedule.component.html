@@ -1,7 +1,25 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl p-0" *ngIf="config">
     <div class="content-body">
         <section class="users-list-wrapper">
             <!-- users filter start -->
+            <div class="row mb-2">
+                <div class="col-md-6" *ngIf="config.locations.multi">
+                    <label *ngIf="config.locations.title" class="custom-label">{{
+                        config.locations.title | translate
+                        }} </label>
+                    <ng-select *ngIf="allLocations" [items]="allLocations" [bindLabel]="'name'" [bindValue]="'id'"
+                        [(ngModel)]="selectLocation">
+                    </ng-select>
+                </div>
+                <div class="col-md-6" *ngIf="config.employees.multi">
+                    <label *ngIf="config.locations.title" class="custom-label">{{
+                        config.employees.title | translate
+                        }} </label>
+                    <ng-select *ngIf="allEmployees" [items]="allEmployees" [bindLabel]="'firstname'" [bindValue]="'id'"
+                        [(ngModel)]="selectEmployees" [multiple]="true">
+                    </ng-select>
+                </div>
+            </div>
             <div class="card">
                 <ejs-schedule (actionBegin)="onActionBegin($event)">
                     <ng-template #editorTemplate let-data>

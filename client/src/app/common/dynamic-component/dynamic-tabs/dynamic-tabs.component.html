@@ -9,8 +9,8 @@
                     <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column nav-left">
                         <li class="nav-item" ngbNavItem>
                             <a *ngFor="let item of config.navigations"
-                                class="nav-link d-flex py-75 {{router === item.link ? 'active' : ''}}"
-                                routerLink="{{item.link}}" (click)="changeRouter(item.link)">
+                                class="nav-link d-flex py-75 {{activePath === item.link ? 'active' : ''}}"
+                                (click)="changeRouter(item.link)">
                                 <i [data-feather]="item.icon" class="font-medium-3 mr-1"></i>
                                 <span class="font-weight-bold">{{item.title | translate}}</span>
                             </a>
@@ -36,7 +36,7 @@
                         <ul class="nav nav-pills mb-2">
                             <!-- account -->
                             <li *ngFor="let item of config.navigations" class="nav-item">
-                                <a class="nav-link {{router === item.link ? 'active' : ''}}" routerLink="{{item.link}}"
+                                <a class="nav-link {{activePath === item.link ? 'active' : ''}}"
                                     (click)="changeRouter(item.link)">
                                     <i [data-feather]="item.icon" class="font-medium-3 me-50"></i>
                                     <span class="fw-bold">{{item.title | translate}}</span>

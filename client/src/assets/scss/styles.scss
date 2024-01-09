@@ -2,7 +2,8 @@
   display: inline-block;
 }
 
-.hidden, .hide {
+.hidden,
+.hide {
   display: none !important;
 }
 
@@ -25,7 +26,7 @@
 .e-outline.e-input-group.e-control-wrapper.e-float-icon-left:not(
     .e-input-focus
   ) {
-  border-color: #404656 !important;
+  border-color: #d8d6de !important;
 }
 
 .e-outline.e-input-group.e-input-focus:hover:not(.e-success):not(

@@ -1,10 +1,10 @@
 <div *ngIf="language && config && checkRights()" [ngClass]="[config.width]" [formGroup]="group"
   class="form-group form-custom">
-  <div class="form-check form-check-inline">
-    <div class="custom-control custom-switch custom-control-inline">
-      <input type="checkbox" class="custom-control-input" [id]="config.name" [name]="config.name"
-        [formControlName]="config.name" [disabled]="config.disabled!"> <label *ngIf="config.title"
-        class="custom-control-label" [for]="config.name">{{
+  <div class="form-check">
+    <div class="form-check form-switch">
+      <input type="checkbox" class="form-check-input" [id]="config.name" [name]="config.name"
+        [formControlName]="config.name">
+      <label *ngIf="config.title" class="form-check-label" [for]="config.name">{{
         config.title | translate
         }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
     </div>

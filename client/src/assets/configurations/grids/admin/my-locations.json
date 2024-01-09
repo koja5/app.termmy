@@ -184,8 +184,24 @@
             "template": {
                 "type": "action",
                 "actionMode": {
+                    "type": "button",
+                    "icon": "eye",
+                    "routerLink": {
+                        "link": "/dashboard/admin/location-view/#id",
+                        "parameters": ["id"],
+                        "saveParametersInSessionStorage": true
+                    }
+                }
+            },
+            "field": "allow_online"
+        },
+        {
+            "title": "myLocations.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
                     "type": "menu",
-                    "menuIcon": "more-vertical",
+                    "icon": "more-vertical",
                     "menu": [
                         {
                             "type": "edit",

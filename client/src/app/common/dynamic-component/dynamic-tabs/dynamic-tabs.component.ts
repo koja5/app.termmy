@@ -11,6 +11,7 @@ import { takeUntil } from "rxjs/operators";
 import { FlatpickrOptions } from "ng2-flatpickr";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ConfigurationService } from "app/services/configuration.service";
+import { HelpService } from "app/services/help.service";
 
 @Component({
   selector: "app-dynamic-tabs",
@@ -25,7 +26,7 @@ export class DynamicTabsComponent {
 
   // private
   private _unsubscribeAll: Subject<any>;
-  public router: string;
+  public activePath: string;
   public config: any;
 
   /**
@@ -33,7 +34,11 @@ export class DynamicTabsComponent {
    *
    * @param {AccountSettingsService} _accountSettingsService
    */
-  constructor(private _configurationService: ConfigurationService) {
+  constructor(
+    private _configurationService: ConfigurationService,
+    private _router: Router,
+    private _helpService: HelpService
+  ) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -41,7 +46,7 @@ export class DynamicTabsComponent {
    * On init
    */
   ngOnInit() {
-    this.router = window.location.pathname;
+    this.activePath = window.location.pathname;
 
     this._configurationService
       .getConfiguration(this.path, this.file)
@@ -85,6 +90,15 @@ export class DynamicTabsComponent {
   }
 
   changeRouter(router: string) {
-    this.router = router;
+    this.activePath = router;
+    if (router.indexOf("/#") != -1) {
+      let parameters = this._helpService.getSessionStorage("parameter")
+        ? JSON.parse(this._helpService.getSessionStorage("parameter"))
+        : [];
+      for (let i = 0; i < parameters.length; i++) {
+        router = router.replace('#' + parameters[i].key, parameters[i].value);
+      }
+    }
+    this._router.navigate([router]);
   }
 }

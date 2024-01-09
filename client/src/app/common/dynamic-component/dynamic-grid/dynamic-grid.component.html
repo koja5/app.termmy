@@ -149,7 +149,7 @@
                                     <div *ngIf="item.template.actionMode.type === 'menu'">
                                         <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
                                             rippleEffect>
-                                            <span [data-feather]="item.template.actionMode.menuIcon"
+                                            <span [data-feather]="item.template.actionMode.icon"
                                                 [class]="'cursor-pointer'"></span>
                                         </button>
                                         <div ngbDropdownMenu>
@@ -169,7 +169,10 @@
                                         </div>
                                     </div>
                                     <div *ngIf="item.template.actionMode.type === 'button'">
-
+                                        <button *ngIf="item.template.actionMode.routerLink" type="button" class="btn icon-btn btn-sm hide-arrow" (click)="openLink(item.template.actionMode.routerLink, row)" rippleEffect>
+                                            <span [data-feather]="item.template.actionMode.icon"
+                                                [class]="'cursor-pointer'"></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,20 @@
+{
+    "type": "horizontal",
+    "navigations": [
+        {
+            "title": "General",
+            "link": "/dashboard/admin/location-view/#id",
+            "icon": "briefcase"
+        },
+        {
+            "title": "Change password",
+            "link": "/dashboard/account-settings/change-password",
+            "icon": "briefcase"
+        },
+        {
+            "title": "Information",
+            "link": "/dashboard/account-settings/information",
+            "icon": "briefcase"
+        }
+    ]
+}

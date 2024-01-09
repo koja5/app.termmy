@@ -424,9 +424,12 @@
             "field": "telephone"
         },
         {
-            "type": "multiselect",
-            "addTag": true,
-            "addTagText": "general.newEntrie",
+            "type": "combobox",
+            "addTag": {
+                "text": "general.newEntrie",
+                "clickTagPath": "forms",
+                "clickTagFile": "employee.json"
+            },
             "width": "col-md-12",
             "class": "e-outline",
             "name": "country_id",

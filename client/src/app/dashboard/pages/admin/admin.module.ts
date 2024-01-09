@@ -12,12 +12,22 @@ import { ServicesComponent } from "./services/services.component";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-schedule/dynamic-scheduler.module";
 import { EmployeesComponent } from "./employees/employees.component";
+import { LocationViewComponent } from "./locations/location-view/location-view.component";
 
 const routes = [
   {
     path: "my-locations",
     canActivate: [AdminGuardService],
     component: LocationsComponent,
+  },
+  {
+    path: "location-view/:id",
+    canActivate: [AdminGuardService],
+    component: LocationViewComponent,
+    loadChildren: () =>
+      import("./locations/location-view/location-view.module").then(
+        (m) => m.LocationViewModule
+      ),
   },
   {
     path: "my-services",
@@ -42,6 +52,7 @@ const routes = [
     ServicesComponent,
     CalendarComponent,
     EmployeesComponent,
+    LocationViewComponent,
   ],
   imports: [
     CommonModule,

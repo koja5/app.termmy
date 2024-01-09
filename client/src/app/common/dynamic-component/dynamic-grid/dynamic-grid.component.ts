@@ -383,4 +383,26 @@ export class DynamicGridComponent {
     );
     this.modalDialog.close();
   }
+
+  openLink(routerLink: any, data: any) {
+    let generateLink = routerLink.link;
+    let parametersInSessionStorage = [];
+    for (let i = 0; i < routerLink.parameters.length; i++) {
+      generateLink = generateLink.replace(
+        "#" + routerLink.parameters[i],
+        data[routerLink.parameters[i]]
+      );
+      parametersInSessionStorage.push({
+        key: routerLink.parameters[i],
+        value: data[routerLink.parameters[i]],
+      });
+    }
+    if (routerLink.saveParametersInSessionStorage) {
+      this._helpService.setSessionStorage(
+        "parameter",
+        parametersInSessionStorage
+      );
+    }
+    this._router.navigate([generateLink]);
+  }
 }

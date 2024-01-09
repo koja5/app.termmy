@@ -52,6 +52,7 @@ router.post("/login", function (req, res, next) {
               {
                 user: {
                   id: rows[0].id,
+                  admin_id: rows[0].admin_id ? rows[0].admin_id : rows[0].id,
                   firstname: rows[0].firstname,
                   lastname: rows[0].lastname,
                   type: rows[0].type,
@@ -77,6 +78,7 @@ router.post("/login", function (req, res, next) {
               {
                 user: {
                   id: rows[0].id,
+                  admin_id: rows[0].admin_id ? rows[0].admin_id : rows[0].id,
                   firstname: rows[0].firstname,
                   lastname: rows[0].lastname,
                   type: rows[0].type,
@@ -831,33 +833,32 @@ router.post("/setEmployee", auth, function (req, res) {
 
     req.body.admin_id = req.user.user.id;
 
-    //check if email exists
-    conn.query(
-      "select * from users where email = ?",
-      [req.body.email],
-      function (err, rows) {
-        if (!err) {
-          if (rows.length) {
-            conn.release();
-            res.json(false);
+    if (req.body.id) {
+      conn.query(
+        "update users set ? where id = ? and admin_id = ?",
+        [req.body, req.body.id, req.user.user.id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
           } else {
-            // update employee info
-            if (req.body.id) {
-              conn.query(
-                "update users set ? where id = ? and admin_id = ?",
-                [req.body, req.body.id, req.user.user.id],
-                function (err, rows) {
-                  conn.release();
-                  if (!err) {
-                    res.json(true);
-                  } else {
-                    logger.log("error", err.sql + ". " + err.sqlMessage);
-                    res.json(false);
-                  }
-                }
-              );
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      // insert new employee
+      //check if email exists
+      conn.query(
+        "select * from users where email = ?",
+        [req.body.email],
+        function (err, rows) {
+          if (!err) {
+            if (rows.length) {
+              conn.release();
+              res.json(false);
             } else {
-              // insert new employee
               req.body.type = 3;
               req.body.password = sha1(req.body.password);
               conn.query(
@@ -874,13 +875,13 @@ router.post("/setEmployee", auth, function (req, res) {
                 }
               );
             }
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
           }
-        } else {
-          logger.log("error", err.sql + ". " + err.sqlMessage);
-          res.json(false);
         }
-      }
-    );
+      );
+    }
   });
 });
 
@@ -939,6 +940,66 @@ router.get("/getExternalAccount", auth, async (req, res, next) => {
 });
 
 //END EXTERNAL API
+
+// CALENDARS
+
+router.get("/getAdminLocations", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from locations where admin_id = ?",
+          [req.user.user.admin_id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.get("/getAdminEmployees", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where admin_id = ?",
+          [req.user.user.admin_id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+//END CALENDARS
 
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);

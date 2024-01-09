@@ -51,9 +51,11 @@
             "vat": "VAT",
             "newsletter": "Newsletter",
             "verified": "Verified",
+            "notVerified": "Not verified",
             "active": "Active",
             "signUpTime": "Signup time",
-            "password": "Password"
+            "password": "Password",
+            "location": "Location"
         },
         "myLocations": {
             "name": "Name of location",
@@ -66,7 +68,9 @@
             "allowOnline": "Allow online",
             "worktimeFrom": "Worktime from",
             "worktimeTo": "Worktime to",
-            "action": "Actions"
+            "action": "Actions",
+            "locations": "Locations",
+            "employees": "Employees"
         },
         "myServices": {
             "name": "Name of service",
@@ -74,6 +78,11 @@
             "price": "Price",
             "min": "minutes",
             "currency": "€"
+        },
+        "myCalendar": {
+            "customer": "Customer",
+            "termineFrom": "Time from",
+            "termineTo": "Time to"
         },
         "settings": {
             "worktime": "Worktime",

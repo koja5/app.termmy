@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ConfigurationFile } from "../../../models/complex-properties/configuration-file";
 import { FieldConfig } from "../../../models/field-config";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DynamicFormsComponent } from "../../../dynamic-forms.component";
 
 @Component({
   selector: "app-combobox",
@@ -14,22 +16,27 @@ import { ConfigurationService } from "app/services/configuration.service";
 export class ComboboxComponent implements OnInit {
   public config: FieldConfig;
   public group: FormGroup;
+  @ViewChild("modalForm") modalForm: TemplateRef<any>;
+  @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
 
   public data: any;
   public language: any;
   public loading = false;
+  public modalDialog: any;
+  public configForm: any;
 
   constructor(
-    private callApi: CallApiService,
-    private helpService: HelpService,
-    private configurationService: ConfigurationService
+    private service: CallApiService,
+    private _helpService: HelpService,
+    private _configurationService: ConfigurationService,
+    private _modalService: NgbModal
   ) {
     this.config = new FieldConfig();
     this.group = new FormGroup({});
   }
 
   ngOnInit(): void {
-    this.language = this.helpService.getLanguage();
+    this.language = this._helpService.getLanguage();
     if (this.config.data && this.config.data["translation"]) {
       this.config.field = this.config.data["translation"]["fields"];
     } else {
@@ -49,9 +56,9 @@ export class ComboboxComponent implements OnInit {
   }
 
   postApiRequest() {
-    this.callApi.callPostMethod(
+    this.service.callPostMethod(
       this.config.request!.api,
-      this.callApi.packParametarPost(
+      this.service.packParametarPost(
         this.config.data,
         this.config.request!.fields
       )
@@ -60,10 +67,10 @@ export class ComboboxComponent implements OnInit {
 
   getApiRequest() {
     this.loading = true;
-    this.callApi
+    this.service
       .callGetMethod(
         this.config.request!.api,
-        this.callApi.packParametarGet(
+        this.service.packParametarGet(
           this.config.data,
           this.config.request!.fields
         )
@@ -84,7 +91,7 @@ export class ComboboxComponent implements OnInit {
   }
 
   getLocalData(localDataRequest: ConfigurationFile) {
-    this.configurationService
+    this._configurationService
       .getConfiguration(localDataRequest.path!, localDataRequest.file!)
       .subscribe((data) => {
         this.data = data;
@@ -95,7 +102,33 @@ export class ComboboxComponent implements OnInit {
     this.config.value = Number(event);
   }
 
-  createNew(city) {
-    alert("Create New Clicked : " + city);
+  clickOnTag() {
+    this._configurationService
+      .getConfiguration(
+        this.config.addTag.clickTagPath,
+        this.config.addTag.clickTagFile
+      )
+      .subscribe((data) => {
+        this.configForm = data;
+        this.modalDialog = this._modalService.open(this.modalForm, {
+          centered: true,
+          windowClass:
+            this.configForm.formDialog && this.configForm.formDialog.windowClass
+              ? this.configForm.formDialog.windowClass
+              : "modal modal-default",
+          size:
+            this.configForm.formDialog && this.configForm.formDialog.size
+              ? this.configForm.formDialog.size
+              : "md",
+        });
+      });
+  }
+
+  customSearchFn(term: string, item: any) {
+    term = term.toLocaleLowerCase();
+    return (
+      item.code.toLocaleLowerCase().indexOf(term) > -1 ||
+      item.countryName.toLocaleLowerCase() === term
+    );
   }
 }

@@ -129,19 +129,45 @@
             }
         },
         {
+            "title": "allUsers.verified",
+            "template": {
+                "choices": [
+                    {
+                        "field": "active",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.notVerified",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "active",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.verified",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
+            },
+            "field": "verified"
+        },
+        {
             "title": "myLocations.action",
             "template": {
                 "type": "action",
                 "actionMode": {
                     "type": "menu",
-                    "menuIcon": "more-vertical",
+                    "icon": "more-vertical",
                     "menu": [
                         {
                             "type": "edit",
                             "actionName": "Edit",
                             "icon": "edit",
                             "formDialog": {
-                                "type": "modal",
+                                "type": "sidebar",
                                 "closeAfterExecute": true
                             }
                         },
@@ -217,6 +243,29 @@
             "name": "password",
             "title": "allUsers.password",
             "field": "password",
+            "required": true
+        },
+        {
+            "type": "combobox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "location_id",
+            "title": "allUsers.location",
+            "field": {
+                "text": "name",
+                "value": "id"
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getMyLocations",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
             "required": true
         },
         {
