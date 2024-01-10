@@ -3,16 +3,16 @@
         <section class="users-list-wrapper">
             <!-- users filter start -->
             <div class="row mb-2">
-                <div class="col-md-6" *ngIf="config.locations.multi">
-                    <label *ngIf="config.locations.title" class="custom-label">{{
+                <div class="col-md-6" *ngIf="config.filters.locations.multi">
+                    <label *ngIf="config.filters.locations.title" class="custom-label">{{
                         config.locations.title | translate
                         }} </label>
                     <ng-select *ngIf="allLocations" [items]="allLocations" [bindLabel]="'name'" [bindValue]="'id'"
                         [(ngModel)]="selectLocation">
                     </ng-select>
                 </div>
-                <div class="col-md-6" *ngIf="config.employees.multi">
-                    <label *ngIf="config.locations.title" class="custom-label">{{
+                <div class="col-md-6" *ngIf="config.filters.employees.multi">
+                    <label *ngIf="config.filters.employees.title" class="custom-label">{{
                         config.employees.title | translate
                         }} </label>
                     <ng-select *ngIf="allEmployees" [items]="allEmployees" [bindLabel]="'firstname'" [bindValue]="'id'"
@@ -21,7 +21,8 @@
                 </div>
             </div>
             <div class="card">
-                <ejs-schedule (actionBegin)="onActionBegin($event)">
+                <ejs-schedule #calendar [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)"
+                    (popupOpen)="onPopupOpen($event)" (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)">
                     <ng-template #editorTemplate let-data>
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
@@ -31,6 +32,12 @@
                             </tbody>
                         </table>
                     </ng-template>
+                    <e-resources>
+                        <e-resource field='DoctorId' title='Doctor Name' name='Doctors'
+                            [dataSource]='resourceDataSource' textField='text' idField='id' colorField='color'
+                            workDaysField='workDays' startHourField='startHour' endHourField='endHour'>
+                        </e-resource>
+                    </e-resources>
                 </ejs-schedule>
             </div>
         </section>

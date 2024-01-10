@@ -1,3 +1,8 @@
+:root {
+  --dark: #283046;
+  --light: #b4b7bd;
+}
+
 .form-custom {
   display: inline-block;
 }
@@ -27,6 +32,23 @@
     .e-input-focus
   ) {
   border-color: #d8d6de !important;
+}
+
+.dark-layout .e-outline.e-input-group:not(.e-input-focus),
+.dark-layout
+  .e-outline.e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(
+    .e-float-icon-left
+  ):not(.e-input-focus),
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper:not(.e-success):not(
+    .e-warning
+  ):not(.e-error):not(.e-float-icon-left):not(.e-input-focus),
+.dark-layout .e-outline.e-input-group.e-float-icon-left:not(.e-input-focus),
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper.e-float-icon-left:not(
+    .e-input-focus
+  ) {
+  border-color: #3b4253 !important;
 }
 
 .e-outline.e-input-group.e-input-focus:hover:not(.e-success):not(
@@ -61,4 +83,76 @@
   ):not(.e-error):not(.e-disabled) {
   border-color: #7367f0 !important;
   box-shadow: none !important;
+}
+
+.dark-layout .e-outline.e-input-group,
+.dark-layout .e-outline.e-input-group.e-control-wrapper,
+.dark-layout .e-outline.e-float-input,
+.dark-layout .e-outline.e-float-input.e-input-group,
+.dark-layout .e-outline.e-float-input.e-control-wrapper,
+.dark-layout .e-outline.e-float-input.e-input-group.e-control-wrapper,
+.dark-layout
+  .e-outline.e-input-group
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-bigger
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group
+  .e-input-group-icon.e-bigger
+  + .e-input-group-icon.e-bigger:last-child,
+.dark-layout
+  .e-bigger
+  .e-outline.e-input-group
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-small
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-small.e-bigger
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-small
+  .e-input-group-icon.e-bigger
+  + .e-input-group-icon.e-bigger:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper.e-bigger
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper
+  .e-input-group-icon.e-bigger
+  + .e-input-group-icon.e-bigger:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper.e-small
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper.e-small.e-bigger
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-outline.e-input-group.e-control-wrapper.e-small
+  .e-input-group-icon.e-bigger
+  + .e-input-group-icon.e-bigger:last-child,
+.dark-layout
+  .e-bigger
+  .e-outline.e-input-group.e-control-wrapper.e-small
+  .e-input-group-icon
+  + .e-input-group-icon:last-child,
+.dark-layout
+  .e-bigger
+  .e-outline.e-input-group.e-small
+  .e-input-group-icon
+  + .e-input-group-icon:last-child {
+  color: var(--light) !important;
 }

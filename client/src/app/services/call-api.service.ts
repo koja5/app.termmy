@@ -22,7 +22,10 @@ export class CallApiService {
           data.request.url
         );
       }
-      return this.callPostMethod(data.request.api, data.body);
+      return this.callPostMethod(
+        data.request.api,
+        data.body ? data.body : router.body
+      );
     } else {
       if (data && data.request.url) {
         const dataValue = this.helpService.getRequestDataParameters(

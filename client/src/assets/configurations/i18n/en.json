@@ -82,7 +82,8 @@
         "myCalendar": {
             "customer": "Customer",
             "termineFrom": "Time from",
-            "termineTo": "Time to"
+            "termineTo": "Time to",
+            "service": "Service"
         },
         "settings": {
             "worktime": "Worktime",

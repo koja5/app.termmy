@@ -75,6 +75,49 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
 
 //GENERAL
 
+// CREATE TERMINE
+router.post("/createTermine", auth, async (req, res) => {
+  oauth2Client.setCredentials({
+    refresh_token:
+      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+  });
+
+  await calendar.events.insert({
+    calendarId: "primary",
+    auth: oauth2Client,
+    requestBody: {
+      summary: req.body.Subject,
+      description: JSON.stringify(req.body),
+      start: {
+        dateTime: req.body.StartTime,
+        timeZone: "Europe/Belgrade",
+      },
+      end: {
+        dateTime: req.body.EndTime,
+        timeZone: "Europe/Belgrade",
+      },
+    },
+  });
+
+  res.send(true);
+});
+
+router.get("/getTermines", async (req, res) => {
+  oauth2Client.setCredentials({
+    refresh_token:
+      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+  });
+
+  const events = await calendar.events.list({
+    calendarId: "primary",
+    auth: oauth2Client,
+  });
+
+  res.send(events);
+});
+
+//END CREATE TERMINE
+
 // GOOGLE
 
 const calendar = google.calendar({

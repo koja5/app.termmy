@@ -10,6 +10,7 @@ export class FieldConfig {
   fieldClass?: string;
   width?: string;
   field?: any;
+  additionalField?: string;
   rows?: string;
   required?: boolean;
   disabled?: boolean;

@@ -1,22 +1,42 @@
 {
     "showOtherCalendar": true,
-    "locations": {
-        "title": "myCalendar.locations",
-        "multi": false,
-        "request": {
-            "type": "GET",
-            "api": "/api/getAdminLocations",
-            "parameters": [],
-            "fields": "",
-            "root": ""
+    "filters": {
+        "locations": {
+            "title": "myCalendar.locations",
+            "multi": false,
+            "request": {
+                "type": "GET",
+                "api": "/api/getAdminLocations",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        },
+        "employees": {
+            "title": "myCalendar.employees",
+            "multi": false,
+            "request": {
+                "type": "GET",
+                "api": "/api/getAdminEmployees",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
         }
     },
-    "employees": {
-        "title": "myCalendar.employees",
-        "multi": false,
-        "request": {
-            "type": "GET",
-            "api": "/api/getAdminEmployees",
+    "editSettingsRequest": {
+        "add": {
+            "request": {
+                "type": "POST",
+                "api": "/api/calendar/setTermine",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        },
+        "delete": {
+            "type": "POST",
+            "api": "/api/deleteTermine",
             "parameters": [],
             "fields": "",
             "root": ""
@@ -27,17 +47,22 @@
             "type": "combobox",
             "width": "col-md-12",
             "class": "e-outline",
-            "name": "country_id",
+            "name": "customer_id",
             "title": "myCalendar.customer",
             "field": {
                 "text": "firstname",
                 "value": "id"
             },
+            "additionalField": "Subject",
             "fieldTemplate": {
                 "fields": [
                     {
                         "type": "text",
-                        "values": ["firstname", "","lastname"]
+                        "values": [
+                            "firstname",
+                            "",
+                            "lastname"
+                        ]
                     }
                 ]
             },
@@ -55,12 +80,45 @@
             "required": true
         },
         {
+            "type": "combobox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "service_id",
+            "title": "myCalendar.service",
+            "field": {
+                "text": "name",
+                "value": "id"
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getMyServices",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "Subject",
+            "title": "Title",
+            "field": "Subject"
+        },
+        {
             "type": "datetimepicker",
             "width": "col-md-6",
             "class": "e-field date-none",
             "name": "StartTime",
             "title": "myCalendar.termineFrom",
-            "field": "StartTime"
+            "field": "StartTime",
+            "format": "dd.MM.yyyy HH:mm",
+            "timeFormat": "HH:mm"
         },
         {
             "type": "datetimepicker",
@@ -68,7 +126,9 @@
             "class": "e-field date-none",
             "name": "EndTime",
             "title": "myCalendar.termineTo",
-            "field": "EndTime"
+            "field": "EndTime",
+            "format": "dd.MM.yyyy HH:mm",
+            "timeFormat": "HH:mm"
         }
     ]
 }

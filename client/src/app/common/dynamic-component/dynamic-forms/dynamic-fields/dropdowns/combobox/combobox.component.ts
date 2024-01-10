@@ -98,10 +98,6 @@ export class ComboboxComponent implements OnInit {
       });
   }
 
-  onChange(event: any) {
-    this.config.value = Number(event);
-  }
-
   clickOnTag() {
     this._configurationService
       .getConfiguration(
@@ -130,5 +126,21 @@ export class ComboboxComponent implements OnInit {
       item.code.toLocaleLowerCase().indexOf(term) > -1 ||
       item.countryName.toLocaleLowerCase() === term
     );
+  }
+
+  onChange(event: any) {
+    if (this.config.additionalField) {
+      this.group.controls[this.config.additionalField].setValue(
+        event.firstname + " " + event.lastname
+      );
+    }
+    this.group.controls[this.config.name].setValue(
+      event[this.config.field.value]
+    );
+  }
+
+  submitEmitter(event: any) {
+    console.log(event);
+    this.config.value = event.firstname + " " + event.lastname;
   }
 }

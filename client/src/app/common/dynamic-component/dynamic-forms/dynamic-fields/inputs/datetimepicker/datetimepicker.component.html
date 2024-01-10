@@ -11,7 +11,7 @@
   <ejs-datetimepicker cssClass="e-outline"
     class="{{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
     [id]="config.name" [formControlName]="config.name" [readonly]="config.readonly!"
-    [format]="config.format"></ejs-datetimepicker>
+    [format]="config.format" [timeFormat]="config.timeFormat"></ejs-datetimepicker>
 </div>
 
 <div *ngIf="config?.schedule" class="{{ config?.width }}">

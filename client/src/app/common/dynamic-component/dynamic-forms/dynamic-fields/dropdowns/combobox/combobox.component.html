@@ -14,7 +14,19 @@
         [ignoreAccent]="config.fieldConfig?.ignoreAccent" [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder"
         [formControlName]="config.name" [readonly]="config.readonly" [hideSelected]="config.hideSelected"
         [clearSearchOnAdd]="config.clearSearchOnAdd" [deselectOnClick]="config.deselectOnClick"
-        [minTermLength]="config.minTermLength">
+        [minTermLength]="config.minTermLength" (change)="onChange($event)">
+        <ng-template *ngIf="config.fieldTemplate" ng-label-tmp let-item="item" let-clear="clear">
+            <div *ngFor="let field of config.fieldTemplate.fields">
+                <span *ngFor="let value of field.values"><span *ngIf="value === ''">&nbsp;</span><span
+                        *ngIf="value != ''">{{item[value]}}</span></span>
+            </div>
+        </ng-template>
+        <ng-template *ngIf="config.fieldTemplate" ng-value-tmp let-item="item">
+            <div *ngFor="let field of config.fieldTemplate.fields">
+                <span *ngFor="let value of field.values"><span *ngIf="value === ''">&nbsp;</span><span
+                        *ngIf="value != ''">{{item[value]}}</span></span>
+            </div>
+        </ng-template>
         <ng-template *ngIf="config.fieldTemplate" ng-option-tmp let-item="item">
             <div *ngFor="let field of config.fieldTemplate.fields">
                 <span *ngFor="let value of field.values"><span *ngIf="value === ''">&nbsp;</span><span
