@@ -20,10 +20,7 @@ var connection = mysql.createPool({
   database: process.env.database,
 });
 
-connection.getConnection(function (err, conn) {
-  console.log(err);
-  console.log(conn);
-});
+connection.getConnection(function (err, conn) {});
 
 /* GET api listing. */
 router.get("/", (req, res) => {
@@ -156,8 +153,6 @@ router.post("/saveProfileInfo", auth, function (req, res, next) {
     }
 
     const query = prepareProperty(req.body);
-    console.log(query);
-
     conn.query(
       "update users set " + query + " where id = ?",
       [req.user.user.id],
@@ -526,7 +521,7 @@ router.post("/setWorktime", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.location_id = req.user.user.id;
+    req.body.admin_id = req.user.user.id;
     req.body.value = convertToString(req.body.value);
 
     if (req.body.id) {
@@ -569,7 +564,7 @@ router.get("/getWorktime", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from worktimes where location_id = ?",
+          "select * from worktimes where admin_id = ?",
           req.user.user.id,
           function (err, rows, fields) {
             conn.release();
@@ -598,7 +593,6 @@ function convertWorkTimesToObject(rows) {
     rows[i].worktime_from = convertToObject(rows[i].worktime_from);
     rows[i].worktime_to = convertToObject(rows[i].worktime_to);
   }
-  console.log(rows);
   return rows;
 }
 
@@ -919,7 +913,7 @@ router.get("/getExternalAccount", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from external_accounts where admin_id = ?",
+          "select * from external_accounts where user_id = ?",
           req.user.user.id,
           function (err, rows, fields) {
             conn.release();

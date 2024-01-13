@@ -22,6 +22,7 @@ import { NumericTextboxComponent } from "./inputs/numeric-textbox/numeric-textbo
 import { DatetimepickerComponent } from "./inputs/datetimepicker/datetimepicker.component";
 import { DatepickerComponent } from "./inputs/datepicker/datepicker.component";
 import { PasswordBoxComponent } from "./inputs/text-box/password-box/password-box.component";
+import { ColorPickerComponent } from "./inputs/color-picker/color-picker.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
@@ -35,7 +36,7 @@ const components: { [type: string]: Type<Field> } = {
   datetimepicker: DatetimepickerComponent,
   switch: SwitchComponent,
   timepicker: TimepickerComponent,
-  // color: ColorpickerComponent
+  color: ColorPickerComponent,
 };
 
 @Directive({

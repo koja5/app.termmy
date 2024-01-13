@@ -6,8 +6,11 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 import {
   EventRenderedArgs,
   EventSettingsModel,
+  GroupModel,
+  RenderCellEventArgs,
   ScheduleComponent,
 } from "@syncfusion/ej2-angular-schedule";
+import { StorageService } from "app/services/storage.service";
 // https://stackblitz.com/edit/angular-schedule-different-work-hours-u4cpe8?file=app.component.ts
 // https://www.syncfusion.com/forums/169264/setting-different-work-hours-on-different-days
 @Component({
@@ -26,26 +29,14 @@ export class DynamicScheduleComponent {
   public resourceDataSource: Object[] = [
     {
       text: "Will Smith",
-      id: 1,
+      id: 15,
       color: "#ea7a57",
       startHour: "08:00",
       endHour: "15:00",
     },
-    {
-      text: "Alice",
-      id: 2,
-      color: "rgb(53, 124, 210)",
-      startHour: "08:00",
-      endHour: "17:00",
-    },
-    {
-      text: "Robson",
-      id: 3,
-      color: "#7fa900",
-      startHour: "08:00",
-      endHour: "16:00",
-    },
   ];
+
+  public group: GroupModel = { byDate: true, resources: ["Doctors"] };
 
   public workHours1: any = [
     { startHour: "07:00", endHour: "16:00" }, // for Sunday
@@ -64,14 +55,31 @@ export class DynamicScheduleComponent {
   public selectLocation: any;
   public allEmployees: any;
   public selectEmployees: any;
+  public externalAccounts: any;
+  public workTimes: any;
 
   constructor(
     private _configurationService: ConfigurationService,
     private _service: CallApiService,
-    private _toastr: ToastrComponent
+    private _toastr: ToastrComponent,
+    private _storageService: StorageService
   ) {}
 
   ngOnInit() {
+    this.checkExternalAccounts();
+    this.getConfigurations();
+  }
+
+  initialize() {
+    this.getWorkTimes();
+    this.getTermines();
+    this.getAdminLocations();
+    this.getAdminEmployees();
+  }
+
+  //#region  Initialize functions
+
+  getConfigurations() {
     this._configurationService
       .getConfiguration(this.path, this.file)
       .subscribe((data) => {
@@ -80,10 +88,75 @@ export class DynamicScheduleComponent {
       });
   }
 
-  initialize() {
-    this.getTerminesFromGoogleCalendar();
-    this.getAdminLocations();
-    this.getAdminEmployees();
+  getTermines() {
+    if (this.externalAccounts.google) {
+      this.getTerminesFromGoogleCalendar();
+    }
+  }
+
+  getAdminLocations() {
+    if (this.config.filters.locations) {
+      this._service
+        .callApi(null, this.config.filters.locations.request)
+        .subscribe((data) => {
+          this.allLocations = data;
+        });
+    }
+  }
+
+  getAdminEmployees() {
+    if (this.config.filters.employees) {
+      this._service
+        .callApi(null, this.config.filters.employees.request)
+        .subscribe((data) => {
+          this.allEmployees = data;
+        });
+    }
+  }
+
+  checkExternalAccounts() {
+    this.externalAccounts = this._storageService.getExternalAccountSettings();
+  }
+
+  //#endregion
+
+  //#region Google Calendar
+
+  executeActionForGoogleCalendar(event: any) {
+    if (event.requestType === "eventRemove") {
+      this.deleteTerminForGoogleCalendar(event.data[0].ExternalId);
+    } else if (event.requestType === "eventChange") {
+      this.setValue(
+        this.config.config,
+        JSON.parse(event.changedRecords[0].Description)
+      );
+      if (this.isValidForm()) {
+        this.updateTermineForGoogleCalendar(event.data);
+      } else {
+        this._toastr.showError();
+      }
+    } else if (event.requestType === "eventCreate") {
+      if (this.isValidForm()) {
+        this.createTermineForGoogleCalendar();
+      } else {
+        this._toastr.showError();
+      }
+    }
+  }
+
+  onPopupForGoogleCalendar(event: any) {
+    if (event && event.data.Description) {
+      setTimeout(() => {
+        this.setValue(
+          this.config.config,
+          event.data.Description ? JSON.parse(event.data.Description) : []
+        );
+      }, 50);
+    } else {
+      setTimeout(() => {
+        this.setValue(this.config.config, event.data);
+      }, 50);
+    }
   }
 
   getTerminesFromGoogleCalendar() {
@@ -113,72 +186,71 @@ export class DynamicScheduleComponent {
             : termines[i].end.date
         ),
         Description: termines[i].description,
+        ExternalId: termines[i].id,
       });
     }
     return prepactedTermines;
   }
 
-  getAdminLocations() {
-    if (this.config.filters.locations) {
-      this._service
-        .callApi(null, this.config.filters.locations.request)
-        .subscribe((data) => {
-          this.allLocations = data;
-        });
-    }
+  createTermineForGoogleCalendar() {
+    this.setCreatorId();
+    this._service
+      .callPostMethod("/api/google/createTermine", this.form.form.value)
+      .subscribe((data) => {
+        this._toastr.showSuccess();
+        this.getTermines();
+        // this.calendar?.refreshTemplates("cellTemplate");
+      });
   }
 
-  getAdminEmployees() {
-    if (this.config.filters.employees) {
-      this._service
-        .callApi(null, this.config.filters.employees.request)
-        .subscribe((data) => {
-          this.allEmployees = data;
-        });
-    }
+  updateTermineForGoogleCalendar(data: any) {
+    this._service
+      .callPostMethod("/api/google/updateTermine", data)
+      .subscribe((data) => {
+        this._toastr.showSuccess();
+        this.getTermines();
+        // this.calendar?.refreshTemplates("cellTemplate");
+      });
   }
+
+  deleteTerminForGoogleCalendar(id) {
+    this._service
+      .callGetMethod("/api/google/deleteTermine", id)
+      .subscribe((data) => {
+        this.getTermines();
+        // this.calendar?.refreshTemplates("cellTemplate");
+      });
+  }
+  //#endregion
+
+  //#region SQL
+
+  createTermineInSql() {
+    this._service
+      .callApi(this.config.editSettingsRequest.add, {
+        body: this.form.form.value,
+      })
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  //#endregion
+
+  //#region Events
 
   submitEmitter(event: any) {}
 
   onActionBegin(event: any) {
-    if (this.form) {
-      if (this.form.form.valid) {
-        this._service
-          .callApi(this.config.editSettingsRequest.add, {
-            body: this.form.form.value,
-          })
-          .subscribe((data) => {
-            console.log(data);
-          });
-
-        this.createTermineToGoogleCalendar();
-      } else {
-        this._toastr.showError();
-      }
+    if (this.externalAccounts.google) {
+      this.executeActionForGoogleCalendar(event);
     }
   }
 
   onPopupOpen(event: any) {
-    if (event && event.data.Description) {
-      setTimeout(() => {
-        this.setValue(
-          this.config.config,
-          event.data.Description ? JSON.parse(event.data.Description) : []
-        );
-      }, 50);
-    } else {
-      if (event.type === "Editor" && event.data.Id) {
-        event.cancel = true;
-      }
+    if (this.externalAccounts.google) {
+      this.onPopupForGoogleCalendar(event);
     }
-  }
-
-  createTermineToGoogleCalendar() {
-    this._service
-      .callPostMethod("/api/google/createTermine", this.form.form.value)
-      .subscribe((data) => {
-        console.log(data);
-      });
   }
 
   onChangeData(event) {
@@ -196,31 +268,105 @@ export class DynamicScheduleComponent {
   }
 
   public onEventRendered(args: EventRenderedArgs): void {
-    const categoryColor: string = args.data.CategoryColor as string;
-    if (!args.element || !categoryColor) {
-      return;
-    }
-    // if (this.currentView === "Agenda") {
-    //   (args.element.firstChild as HTMLElement).style.borderLeftColor =
-    //     categoryColor;
-    // } else {
-    //   args.element.style.backgroundColor = categoryColor;
+    // const categoryColor: string = args.data.CategoryColor as string;
+    // if (!args.element || !categoryColor) {
+    //   return;
     // }
+    // args.element.style.backgroundColor = "#000";
   }
 
   onDataBound(args): void {
     var renderedDates = this.calendar.activeView.getRenderDates();
     this.calendar.resetWorkHours();
+    var days: Date[] = [];
     for (var i = 0; i < renderedDates.length; i++) {
       var dayIndex = renderedDates[i].getDay();
       if (dayIndex !== 0 && dayIndex !== 6) {
+        days.push(renderedDates[i]);
         this.calendar.setWorkHours(
-          [renderedDates[i]],
+          days,
           this.workHours1[dayIndex].startHour,
-          this.workHours1[dayIndex].endHour,
-          this.workHours1[dayIndex].groupIndex
+          this.workHours1[dayIndex].endHour
         );
       }
     }
   }
+
+  onRenderCell(args: any): void {
+    if (args.date! < new Date()) {
+      args.element.classList.add("e-disable-dates");
+    } else if (args.elementType === "workCells") {
+      this.setWorkTimeInCalendar(args);
+    }
+
+    // args.date
+  }
+  //#endregion
+
+  //#region Helpful functions
+  isValidForm() {
+    return this.form && this.form.form.valid;
+  }
+
+  setCreatorId() {
+    this.form.setValue(
+      "employee_id",
+      this._storageService.getUserId(),
+      "numeric"
+    );
+    this.form.setValue(
+      "ResourcesIndex",
+      this._storageService.getUserId(),
+      "numeric"
+    );
+  }
+
+  setWorkTimeInCalendar(args) {
+    const day = args.date.getDay();
+    const hour = args.date.getHours();
+    const minutes = args.date.getMinutes();
+    const workTimeForDay = this.getWorkTimeForDay(day);
+    if (workTimeForDay.active && this.workTimes.color) {
+      let notWorkTime = true;
+      for (let i = 0; i < workTimeForDay.times.length; i++) {
+        if (
+          (hour >= workTimeForDay.times[i].start.hour &&
+            hour < workTimeForDay.times[i].end.hour) ||
+          (hour === workTimeForDay.times[i].start.hour &&
+            minutes > workTimeForDay.times[i].start.minutes &&
+            hour === workTimeForDay.times[i].end.hour &&
+            minutes < workTimeForDay.times[i].end.minutes)
+        ) {
+          args.element.style.backgroundColor = this.workTimes.color;
+          notWorkTime = false;
+          break;
+        }
+      }
+      if (notWorkTime) {
+        args.element.classList.add("pointer-event-none");
+      }
+    } else {
+      args.element.classList.add("pointer-event-none");
+    }
+  }
+
+  getWorkTimeForDay(day) {
+    for (let i = 0; i < this.workTimes.value.length; i++) {
+      if (this.workTimes.value[i].id == day) {
+        return this.workTimes.value[i];
+      }
+    }
+  }
+
+  getWorkTimes() {
+    this._service.callGetMethod("/api/getWorktime", "").subscribe((data) => {
+      if (data) {
+        this.workTimes = {
+          color: data[0].color,
+          value: JSON.parse(data[0].value),
+        };
+      }
+    });
+  }
+  //#endregion
 }

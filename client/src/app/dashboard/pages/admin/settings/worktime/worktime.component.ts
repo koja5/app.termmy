@@ -22,6 +22,7 @@ export class WorktimeComponent implements OnInit {
   public data: any = {};
   public model: any;
   public notCorrectTime = [];
+  public worktimeColor = '#000';
 
   constructor(
     private _helpService: HelpService,

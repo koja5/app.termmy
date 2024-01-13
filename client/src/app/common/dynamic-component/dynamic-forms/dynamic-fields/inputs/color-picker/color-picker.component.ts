@@ -3,11 +3,11 @@ import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../models/field-config";
 
 @Component({
-  selector: "app-text-box",
-  templateUrl: "./text-box.component.html",
-  styleUrls: ["./text-box.component.sass"],
+  selector: "app-color-picker",
+  templateUrl: "./color-picker.component.html",
+  styleUrls: ["./color-picker.component.scss"],
 })
-export class TextBoxComponent implements OnInit {
+export class ColorPickerComponent {
   public config: FieldConfig;
   public group: FormGroup;
   constructor() {

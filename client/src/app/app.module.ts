@@ -70,7 +70,7 @@ const appRoutes: Routes = [
     // App modules
     LayoutModule,
     SampleModule,
-    CookieModule.withOptions(),
+    CookieModule.withOptions()
   ],
   providers: [
     {

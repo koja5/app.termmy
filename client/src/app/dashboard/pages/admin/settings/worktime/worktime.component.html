@@ -48,12 +48,17 @@
 
                         <p class="text-center error">{{notCorrectTime[i]}}</p>
 
+
+
                         <div class="col-12 text-center">
                             <button type="button" class="btn btn-outline-primary w-50" rippleEffect
                                 [disabled]="!item.active" (click)="addNewWorkTimeForDay(i)">{{'worktime.addTime' |
                                 translate}}</button>
                         </div>
                     </div>
+                </div>
+                <div class="worktime-color">
+                    <input ejs-colorpicker type="color" id="color" name="color" [(value)]="data.color" />
                 </div>
                 <div class="col-12 mt-3 text-right">
                     <button type="button" class="btn btn-primary" rippleEffect (click)="saveWorkTime()"><span

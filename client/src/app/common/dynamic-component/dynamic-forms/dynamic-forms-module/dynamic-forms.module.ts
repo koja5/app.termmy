@@ -20,6 +20,8 @@ import {
 } from "@syncfusion/ej2-angular-calendars";
 import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepicker.component";
 import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password-box/password-box.component";
+import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
+import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/color-picker.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password
     TimepickerComponent,
     DatepickerComponent,
     DatetimepickerComponent,
+    ColorPickerComponent,
   ],
   exports: [
     DynamicFieldsDirective,
@@ -49,6 +52,7 @@ import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password
     TimepickerComponent,
     DatepickerComponent,
     DatetimepickerComponent,
+    ColorPickerComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +63,7 @@ import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password
     TranslateModule,
     DatePickerModule,
     DateTimePickerModule,
+    ColorPickerModule,
   ],
   entryComponents: [
     DynamicFieldsDirective,
@@ -73,6 +78,7 @@ import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password
     TimepickerComponent,
     DatepickerComponent,
     DatetimepickerComponent,
+    ColorPickerComponent,
   ],
 })
 export class DynamicFormsModule {}

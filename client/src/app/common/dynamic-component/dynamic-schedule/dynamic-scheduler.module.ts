@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import {
+  DragAndDropService,
   MonthAgendaService,
+  ResizeService,
   ScheduleModule,
   TimelineMonthService,
   TimelineViewsService,
@@ -24,8 +26,6 @@ import { TranslateModule } from "@ngx-translate/core";
   declarations: [DynamicScheduleComponent],
   imports: [
     CommonModule,
-    NgbModule,
-    NgSelectModule,
     ScheduleModule,
     DynamicModule,
     FormsModule,
@@ -40,6 +40,8 @@ import { TranslateModule } from "@ngx-translate/core";
     MonthAgendaService,
     TimelineViewsService,
     TimelineMonthService,
+    ResizeService,
+    DragAndDropService,
   ],
   exports: [DynamicScheduleComponent],
   entryComponents: [DynamicScheduleComponent],

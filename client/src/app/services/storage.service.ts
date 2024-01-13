@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import * as CryptoJS from "crypto-js";
+import { environment } from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: "root",
@@ -111,4 +113,59 @@ export class StorageService {
     }
     return false;
   }
+
+  getUserId() {
+    if (this.getToken()) {
+      return this.helper.decodeToken(this.getToken()).user.id;
+    }
+    return false;
+  }
+
+  // EXTERNAL ACCOUNTS
+
+  setExternalAccountSettings(value: any) {
+    // let externalAccountSettings =
+    //   localStorage.getItem("external-accounts") || "";
+    // let decrypt = CryptoJS.AES.decrypt(
+    //   externalAccountSettings,
+    //   environment.ENCRIPTY_KEY
+    // ).toString(CryptoJS.enc.Utf8);
+
+    // if (decrypt) {
+    //   decrypt = JSON.parse(decrypt);
+    // }
+
+    // decrypt = value;
+
+    let encrypt = CryptoJS.AES.encrypt(
+      JSON.stringify(value),
+      environment.ENCRIPTY_KEY
+    ).toString();
+
+    localStorage.setItem("external-accounts", encrypt);
+  }
+
+  getExternalAccountSettings() {
+    const externalAccounts = localStorage.getItem("external-accounts") || "";
+    const decrypt = CryptoJS.AES.decrypt(
+      externalAccounts,
+      environment.ENCRIPTY_KEY
+    ).toString(CryptoJS.enc.Utf8);
+    return JSON.parse(decrypt);
+  }
+
+  encrypt(value: any) {
+    return CryptoJS.AES.encrypt(
+      JSON.stringify(value),
+      environment.ENCRIPTY_KEY
+    ).toString();
+  }
+
+  decrypt(value: any) {
+    return CryptoJS.AES.decrypt(value, environment.ENCRIPTY_KEY).toString(
+      CryptoJS.enc.Utf8
+    );
+  }
+
+  // END EXTERNAL ACCOUNTS
 }

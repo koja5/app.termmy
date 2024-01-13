@@ -1,6 +1,4 @@
 import { Injectable } from "@angular/core";
-import * as CryptoJS from "crypto-js";
-import { environment } from "../../environments/environment.prod";
 import { UserTypes } from "app/enums/user-types";
 import { StorageService } from "./storage.service";
 
@@ -76,36 +74,6 @@ export class HelpService {
     return JSON.parse(JSON.stringify(value));
   }
 
-  setBookingSettings(value: any) {
-    const encrypt = CryptoJS.AES.encrypt(
-      JSON.stringify(value),
-      environment.ENCRIPTY_KEY
-    ).toString();
-
-    localStorage.setItem("booking-settings", encrypt);
-  }
-
-  getBookingSettings() {
-    const bookingSettings = localStorage.getItem("booking-settings") || "";
-    const decrypt = CryptoJS.AES.decrypt(
-      bookingSettings,
-      environment.ENCRIPTY_KEY
-    ).toString(CryptoJS.enc.Utf8);
-    return JSON.parse(decrypt);
-  }
-
-  encrypt(value: any) {
-    return CryptoJS.AES.encrypt(
-      JSON.stringify(value),
-      environment.ENCRIPTY_KEY
-    ).toString();
-  }
-
-  decrypt(value: any) {
-    return CryptoJS.AES.decrypt(value, environment.ENCRIPTY_KEY).toString(
-      CryptoJS.enc.Utf8
-    );
-  }
 
   setLocalStorage(key: string, value: any) {
     localStorage.setItem(

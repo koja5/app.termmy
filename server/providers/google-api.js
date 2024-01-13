@@ -26,7 +26,7 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.id;
+    req.body.user_id = req.user.user.id;
     delete req.body.token;
 
     conn.query(
@@ -75,12 +75,17 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
 
 //GENERAL
 
-// CREATE TERMINE
+// TERMINEs
 router.post("/createTermine", auth, async (req, res) => {
   oauth2Client.setCredentials({
     refresh_token:
       "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
   });
+
+  req.body.creator_id = req.user.user.id;
+  req.body.employee_id = req.body.employee_id
+    ? req.body.employee_id
+    : req.user.user.id;
 
   await calendar.events.insert({
     calendarId: "primary",
@@ -102,6 +107,48 @@ router.post("/createTermine", auth, async (req, res) => {
   res.send(true);
 });
 
+router.post("/updateTermine", auth, async (req, res) => {
+  oauth2Client.setCredentials({
+    refresh_token:
+      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+  });
+
+  await calendar.events.update({
+    calendarId: "primary",
+    auth: oauth2Client,
+    eventId: req.body.ExternalId,
+    requestBody: {
+      summary: req.body.Subject,
+      description: req.body.Description,
+      start: {
+        dateTime: req.body.StartTime,
+        timeZone: "Europe/Belgrade",
+      },
+      end: {
+        dateTime: req.body.EndTime,
+        timeZone: "Europe/Belgrade",
+      },
+    },
+  });
+
+  res.send(true);
+});
+
+router.get("/deleteTermine/:id", async (req, res) => {
+  oauth2Client.setCredentials({
+    refresh_token:
+      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+  });
+
+  const events = await calendar.events.delete({
+    calendarId: "primary",
+    auth: oauth2Client,
+    eventId: req.params.id,
+  });
+
+  res.send(events);
+});
+
 router.get("/getTermines", async (req, res) => {
   oauth2Client.setCredentials({
     refresh_token:
@@ -116,7 +163,7 @@ router.get("/getTermines", async (req, res) => {
   res.send(events);
 });
 
-//END CREATE TERMINE
+//END TERMINE
 
 // GOOGLE
 

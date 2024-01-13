@@ -1,0 +1,11 @@
+<div *ngIf="config&&group" [ngClass]="[config.width]" [formGroup]="group"
+    class="form-group form-custom {{config.hide ? 'hide' : ''}}">
+    <label *ngIf="config.title" class="custom-label">{{config.title | translate
+        }} <span class="error" title="{{'form.fieldIsRequired' | translate}}">{{config.required ? '*' :
+            ''}}</span></label>
+    <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
+        class="error must-label m-0">{{'form.mustFillThisField' |
+        translate}}</p>
+    <ejs-input ejs-colorpicker cssClass="{{ config.class }}" [id]="config.name"
+        [formControlName]="config.name"></ejs-input>
+</div>

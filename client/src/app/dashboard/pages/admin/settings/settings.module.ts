@@ -9,6 +9,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { ConnectionsComponent } from "./connections/connections.component";
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { SettingsComponent } from "./settings.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
@@ -24,6 +26,7 @@ const routes = [
     RouterModule.forChild(routes),
     TranslateModule,
     DynamicModule,
+    ColorPickerModule,
   ],
   providers: [ToastrComponent],
   exports: [

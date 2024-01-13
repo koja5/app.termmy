@@ -44,6 +44,38 @@
     },
     "config": [
         {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "employee_id",
+            "title": "employee_id",
+            "field": "employee_id"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "Subject",
+            "title": "Title",
+            "field": "Subject"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "ResourcesIndex",
+            "title": "ResourcesIndex",
+            "field": "ResourcesIndex"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "groupIndex",
+            "title": "groupIndex",
+            "field": "groupIndex"
+        },
+        {
             "type": "combobox",
             "width": "col-md-12",
             "class": "e-outline",
@@ -101,14 +133,6 @@
                 "filter": true
             },
             "required": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12 hidden",
-            "class": "e-field",
-            "name": "Subject",
-            "title": "Title",
-            "field": "Subject"
         },
         {
             "type": "datetimepicker",
