@@ -285,6 +285,19 @@
             "field": "active"
         },
         {
+            "type": "radio",
+            "name": "gender",
+            "dataArray": [
+                {
+                    "title": "Man",
+                    "id": "man"
+                }
+            ],
+            "width": "col-12",
+            "title": "allUsers.active",
+            "field": "gender"
+        },
+        {
             "type": "button",
             "width": "col-md-12",
             "class": "btn btn-primary",

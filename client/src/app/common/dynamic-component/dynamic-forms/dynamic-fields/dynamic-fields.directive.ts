@@ -23,6 +23,7 @@ import { DatetimepickerComponent } from "./inputs/datetimepicker/datetimepicker.
 import { DatepickerComponent } from "./inputs/datepicker/datepicker.component";
 import { PasswordBoxComponent } from "./inputs/text-box/password-box/password-box.component";
 import { ColorPickerComponent } from "./inputs/color-picker/color-picker.component";
+import { RadioComponent } from "./buttons/radio/radio.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
@@ -30,11 +31,12 @@ const components: { [type: string]: Type<Field> } = {
   password: PasswordBoxComponent,
   label: LabelComponent,
   button: ButtonComponent,
+  switch: SwitchComponent,
+  radio: RadioComponent,
   combobox: ComboboxComponent,
   multiselect: MultiselectComponent,
   datepicker: DatepickerComponent,
   datetimepicker: DatetimepickerComponent,
-  switch: SwitchComponent,
   timepicker: TimepickerComponent,
   color: ColorPickerComponent,
 };

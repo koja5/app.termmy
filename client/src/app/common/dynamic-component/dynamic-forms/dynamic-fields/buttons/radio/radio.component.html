@@ -1,0 +1,10 @@
+<div [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
+
+    <div class="custom-control custom-radio" *ngFor="let item of config.dataArray">
+        <input type="radio" class="custom-control-input" [name]="config.name" [value]="item.id" [id]="item.id"
+            [formControlName]="config.name" />
+        <label class="custom-control-label" [for]="item.id">{{
+            item.title | translate
+            }}</label>
+    </div>
+</div>

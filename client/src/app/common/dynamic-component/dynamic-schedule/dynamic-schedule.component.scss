@@ -54,10 +54,10 @@
 }
 
 .dark-layout .e-schedule .e-month-view .e-work-days,
-.e-schedule .e-month-agenda-view .e-work-days,
-.dark-layout .e-schedule .e-month-view .e-work-cells,
-.e-schedule .e-month-agenda-view .e-work-cells,
-.e-schedule .e-month-view .e-date-header-wrap table td,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-days,
+.dark-layout .dark-layout .e-schedule .e-month-view .e-work-cells,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
+.dark-layout .e-schedule .e-month-view .e-date-header-wrap table td,
 .dark-layout .e-schedule .e-month-agenda-view .e-date-header-wrap table td,
 .dark-layout .e-schedule .e-agenda-view .e-empty-event {
   background-color: #283046 !important;
@@ -67,7 +67,7 @@
 .dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
 .dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons,
 .dark-layout .e-btn.e-flat,
-.e-css.e-btn.e-flat,
+.dark-layout .e-css.e-btn.e-flat,
 .dark-layout .e-quick-popup-wrapper .e-cell-popup .e-date-time-details,
 .dark-layout .e-quick-popup-wrapper .e-cell-popup .e-location-details,
 .dark-layout .e-quick-popup-wrapper .e-cell-popup .e-time-zone-details,
@@ -99,4 +99,14 @@
 .dark-layout .e-dialog .e-dlg-header-content + .e-dlg-content {
   background-color: var(--dark);
   color: var(--white);
+}
+
+.e-toolbar .e-toolbar-item .e-tbar-btn,
+.e-toolbar .e-toolbar-items {
+  background: #fff !important;
+}
+
+.e-schedule .e-vertical-view .e-left-indent-wrap table tbody td.e-header-cells.e-week-number {
+  height: 82px;
+  font-size: 32px;
 }

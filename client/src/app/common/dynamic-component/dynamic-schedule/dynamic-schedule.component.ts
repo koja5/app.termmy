@@ -26,21 +26,13 @@ export class DynamicScheduleComponent {
   @ViewChild("calendar") calendar: ScheduleComponent;
 
   //CALENDAR VARIABLES
-  public resourceDataSource: Object[] = [
-    {
-      text: "Will Smith",
-      id: 15,
-      color: "#ea7a57",
-      startHour: "08:00",
-      endHour: "15:00",
-    },
-  ];
+  public resourceDataSource: Object[] = [];
 
-  public group: GroupModel = { byDate: true, resources: ["Doctors"] };
+  public group: GroupModel = { byDate: false, resources: ["Doctors"] };
 
   public workHours1: any = [
     { startHour: "07:00", endHour: "16:00" }, // for Sunday
-    { startHour: "06:00", endHour: "17:00", groupIndex: 0 }, // for Monday
+    { startHour: "06:00", endHour: "17:00", groupIndex: 12 }, // for Monday
     { startHour: "05:00", endHour: "18:00", groupIndex: 1 }, // for Tuesday
     { startHour: "06:30", endHour: "19:00", groupIndex: 2 }, // for Wednesday
     { startHour: "05:30", endHour: "20:00", groupIndex: 0 }, // for Thursday
@@ -71,6 +63,7 @@ export class DynamicScheduleComponent {
   }
 
   initialize() {
+    this.checkCalendarConfigurations();
     this.getWorkTimes();
     this.getTermines();
     this.getAdminLocations();
@@ -166,6 +159,7 @@ export class DynamicScheduleComponent {
         if (data) {
           this.calendar.eventSettings.dataSource =
             this.packTerminesFromGoogleCalendar(data.data.items);
+          console.log(this.calendar.eventSettings.dataSource);
         }
       });
   }
@@ -187,6 +181,10 @@ export class DynamicScheduleComponent {
         ),
         Description: termines[i].description,
         ExternalId: termines[i].id,
+        CreatorId:
+          termines[i].description && termines[i].description.indexOf("{") != -1
+            ? JSON.parse(termines[i].description).creator_id
+            : null,
       });
     }
     return prepactedTermines;
@@ -272,6 +270,7 @@ export class DynamicScheduleComponent {
     // if (!args.element || !categoryColor) {
     //   return;
     // }
+    //SET COLOR FOR EVENT
     // args.element.style.backgroundColor = "#000";
   }
 
@@ -367,6 +366,21 @@ export class DynamicScheduleComponent {
         };
       }
     });
+  }
+
+  checkCalendarConfigurations() {
+    this.checkIfPersonalOrGroupCalendar();
+  }
+
+  checkIfPersonalOrGroupCalendar() {
+    const token = this._storageService.getDecodeToken();
+    if (this.config.showOtherCalendar) {
+    } else {
+      this.resourceDataSource.push({
+        text: "Aleksandar Kojic",
+        id: token.id,
+      });
+    }
   }
   //#endregion
 }

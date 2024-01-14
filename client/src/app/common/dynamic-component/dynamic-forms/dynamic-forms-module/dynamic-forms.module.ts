@@ -22,6 +22,7 @@ import { DatepickerComponent } from "../dynamic-fields/inputs/datepicker/datepic
 import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password-box/password-box.component";
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/color-picker.component";
+import { RadioComponent } from "../dynamic-fields/buttons/radio/radio.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/colo
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
+    RadioComponent,
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
@@ -47,6 +49,7 @@ import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/colo
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
+    RadioComponent,
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
@@ -73,6 +76,7 @@ import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/colo
     LabelComponent,
     ButtonComponent,
     SwitchComponent,
+    RadioComponent,
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,

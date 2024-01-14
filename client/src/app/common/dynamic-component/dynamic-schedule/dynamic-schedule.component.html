@@ -21,17 +21,20 @@
                 </div>
             </div>
             <div class="card">
-                <ejs-schedule #calendar width='100%' height='80vh' [eventSettings]="eventSettings" 
-                    (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
+                <ejs-schedule #calendar width='100%' height='80vh' [eventSettings]="eventSettings" [group]="group"
+                    [showWeekNumber]="true" (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
                     (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
                     (renderCell)="onRenderCell($event)">
-                    <!-- <ng-template #resourceHeaderTemplate let-data>
-                        <div class='template-wrap'>
+                    <ng-template #resourceHeaderTemplate let-data>
+                        <div class='template-wrap d-inline-flex align-items-center'>
+                            <div class="resource-image avatar mr-1"><img height="40" width="40"
+                                    src="../../../../assets/images/portrait/small/avatar-s-11.jpg"></div>
                             <div class="resource-details">
-                                <div class="resource-name">Pera</div>
+                                <div class="resource-name">Aleksandar Kojic</div>
+                                <div class="resource-designation">Doctor</div>
                             </div>
                         </div>
-                    </ng-template> -->
+                    </ng-template>
                     <ng-template #editorTemplate let-data>
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
@@ -41,10 +44,10 @@
                             </tbody>
                         </table>
                     </ng-template>
-                    <e-resources>
-                        <e-resource field='Id' title='Doctor Name' name='Doctors' [dataSource]='resourceDataSource'
-                            textField='text' idField='id' colorField='color' startHourField='startHour'
-                            endHourField='endHour'>
+                    <e-resources *ngIf="resourceDataSource">
+                        <e-resource field='CreatorId' title='Doctor Name' name='Doctors'
+                            [dataSource]='resourceDataSource' textField='text' idField='id' colorField='color'
+                            startHourField='startHour' [allowMultiple]="true" endHourField='endHour'>
                         </e-resource>
                     </e-resources>
                 </ejs-schedule>

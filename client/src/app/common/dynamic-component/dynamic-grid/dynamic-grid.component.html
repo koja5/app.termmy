@@ -92,7 +92,8 @@
               </ng-template>
             </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
-                        [prop]="item.field" [width]="200">
+                        [prop]="item.field" [width]="item.width ? item.width : auto" [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'"
+                        class="{{item.class}}">
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                             <div *ngIf="item.template">
                                 <div *ngIf="item.template.choices" class="datatable-body-cell">
@@ -169,14 +170,16 @@
                                         </div>
                                     </div>
                                     <div *ngIf="item.template.actionMode.type === 'button'">
-                                        <button *ngIf="item.template.actionMode.routerLink" type="button" class="btn icon-btn btn-sm hide-arrow" (click)="openLink(item.template.actionMode.routerLink, row)" rippleEffect>
+                                        <button *ngIf="item.template.actionMode.routerLink" type="button"
+                                            class="btn icon-btn btn-sm hide-arrow"
+                                            (click)="openLink(item.template.actionMode.routerLink, row)" rippleEffect>
                                             <span [data-feather]="item.template.actionMode.icon"
                                                 [class]="'cursor-pointer'"></span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="!item.template">
+                            <div *ngIf="!item.template" class="{{item.class}}">
                                 {{value}}
                             </div>
                             <!-- <div>

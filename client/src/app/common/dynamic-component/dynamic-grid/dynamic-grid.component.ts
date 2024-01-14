@@ -48,6 +48,7 @@ export class DynamicGridComponent {
   public executeActionConfig: any;
   public modalDialog: any;
   public modalFormDialog: any;
+  public innerWidth: any;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -223,6 +224,7 @@ export class DynamicGridComponent {
    * On init
    */
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
     this.initializeConfig();
   }
 

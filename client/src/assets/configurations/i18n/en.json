@@ -115,7 +115,9 @@
             "to": "To",
             "remove": "Remove",
             "addTime": "Add time",
-            "save": "Save time"
+            "save": "Save time",
+            "colorTitle": "Color",
+            "colorText": "Worktime color settings for cell in calendar"
         }
     }
 }

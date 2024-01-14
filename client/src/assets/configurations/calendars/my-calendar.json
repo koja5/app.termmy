@@ -1,5 +1,5 @@
 {
-    "showOtherCalendar": true,
+    "showOtherCalendar": false,
     "filters": {
         "locations": {
             "title": "myCalendar.locations",
