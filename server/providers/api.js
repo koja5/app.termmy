@@ -521,7 +521,7 @@ router.post("/setWorktime", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.id;
+    req.body.admin_id = req.user.user.admin_id;
     req.body.value = convertToString(req.body.value);
 
     if (req.body.id) {
@@ -632,7 +632,7 @@ router.post("/setLocation", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.id;
+    req.body.admin_id = req.user.user.admin_id;
     req.body.worktime_from = convertToString(req.body.worktime_from);
     req.body.worktime_to = convertToString(req.body.worktime_to);
 
@@ -730,7 +730,7 @@ router.post("/setService", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.id;
+    req.body.admin_id = req.user.user.admin_id;
 
     if (req.body.id) {
       conn.query(
@@ -789,7 +789,7 @@ router.post("/deleteService", auth, function (req, res) {
 
 //end services
 
-//EMPLOYEE
+// #region EMPLOYEE
 router.get("/getMyEmployees", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
@@ -825,7 +825,7 @@ router.post("/setEmployee", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.id;
+    req.body.admin_id = req.user.user.admin_id;
 
     if (req.body.id) {
       conn.query(
@@ -888,7 +888,7 @@ router.post("/deleteEmployee", auth, function (req, res) {
 
     conn.query(
       "delete from users where id = ? and admin_id = ?",
-      [req.body.id, req.user.user.id],
+      [req.body.id, req.user.user.admin_id],
       function (err, rows) {
         conn.release();
         if (!err) {
@@ -902,7 +902,118 @@ router.post("/deleteEmployee", auth, function (req, res) {
   });
 });
 
-//END EMPLOYEE
+//#endregion EMPLOYEE
+
+// #region CLIENTS
+router.get("/getMyClients", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from clients where admin_id = ?",
+          req.user.user.admin_id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setClient", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    if (req.body.id) {
+      conn.query(
+        "update clients set ? where id = ? and admin_id = ?",
+        [req.body, req.body.id, req.user.user.admin_id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "select * from clients where email = ?",
+        [req.body.email],
+        function (err, rows) {
+          if (!err) {
+            if (rows.length) {
+              conn.release();
+              res.json(false);
+            } else {
+              conn.query(
+                "insert into clients SET ?",
+                [req.body],
+                function (err, rows) {
+                  conn.release();
+                  if (!err) {
+                    res.json(true);
+                  } else {
+                    logger.log("error", err.sql + ". " + err.sqlMessage);
+                    res.json(false);
+                  }
+                }
+              );
+            }
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+router.post("/deleteClient", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from clients where id = ? and admin_id = ?",
+      [req.body.id, req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//#endregion CLIENTS
 
 //EXTERNAL API
 router.get("/getExternalAccount", auth, async (req, res, next) => {

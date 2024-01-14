@@ -60,4 +60,13 @@ export const menu = [
     url: "dashboard/admin/my-employees",
     users: ["admin", "superadmin"],
   },
+  {
+    id: "my-clients",
+    title: "My clients",
+    translate: "navigations.myClients",
+    type: "item",
+    icon: "users",
+    url: "dashboard/admin/my-clients",
+    users: ["admin", "superadmin"],
+  },
 ];

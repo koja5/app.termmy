@@ -100,7 +100,7 @@
             },
             "request": {
                 "type": "GET",
-                "api": "/api/getUsers",
+                "api": "/api/getMyClients",
                 "parameters": [],
                 "fields": "",
                 "root": ""

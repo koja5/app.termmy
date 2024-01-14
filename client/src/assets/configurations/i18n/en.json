@@ -7,7 +7,26 @@
             "addNew": "Add new",
             "show": "Show",
             "entries": "entries",
-            "newEntrie": "New entrie"
+            "newEntrie": "New entrie",
+            "edit": "Edit",
+            "delete": "Delete",
+            "update": "Update"
+        },
+        "commonFields": {
+            "firstname": "Firstname",
+            "lastname": "Lastname",
+            "gender": "Gender",
+            "birthday": "Birthday",
+            "email": "Email",
+            "password": "Password",
+            "telephone": "Telephone",
+            "address": "Address",
+            "zip": "Zip",
+            "city": "City",
+            "active": "Active",
+            "action": "Action",
+            "man": "Man",
+            "woman": "Woman"
         },
         "login": {
             "verifiedError": "You need to verified your email address!",
@@ -21,7 +40,8 @@
             "myLocations": "My locations",
             "myServices": "My services",
             "myCalendar": "My calendar",
-            "myEmployees": "My employees"
+            "myEmployees": "My employees",
+            "myClients": "My clients"
         },
         "generalDialog": {
             "areYouSure": "Are you sure?",

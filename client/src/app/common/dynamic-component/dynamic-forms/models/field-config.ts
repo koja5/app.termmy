@@ -37,10 +37,12 @@ export class FieldConfig {
   mode?: string;
   rights?: string[];
   format?: string;
+  timeFormat?: string;
   min?: string;
   max?: string;
   parameters?: any[];
   allowCustom?: boolean;
   response?: string;
   body?: any;
+  oneLine?: boolean;
 }

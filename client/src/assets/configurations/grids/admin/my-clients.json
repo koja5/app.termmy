@@ -2,7 +2,7 @@
     "pageSize": 10,
     "request": {
         "type": "GET",
-        "api": "/api/getMyEmployees",
+        "api": "/api/getMyClients",
         "parameters": [],
         "fields": "",
         "root": ""
@@ -42,21 +42,14 @@
     "editSettingsRequest": {
         "add": {
             "type": "POST",
-            "api": "/api/setEmployee",
-            "parameters": [],
-            "fields": "",
-            "root": ""
-        },
-        "edit": {
-            "type": "POST",
-            "api": "/api/updateEmployee",
+            "api": "/api/setClient",
             "parameters": [],
             "fields": "",
             "root": ""
         },
         "delete": {
             "type": "POST",
-            "api": "/api/deleteEmployee",
+            "api": "/api/deleteClient",
             "parameters": [],
             "fields": "",
             "root": ""
@@ -64,7 +57,7 @@
     },
     "columns": [
         {
-            "title": "allUsers.firstname",
+            "title": "commonFields.firstname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -76,7 +69,7 @@
             }
         },
         {
-            "title": "allUsers.lastname",
+            "title": "commonFields.lastname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -88,7 +81,7 @@
             }
         },
         {
-            "title": "allUsers.email",
+            "title": "commonFields.email",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -100,62 +93,7 @@
             }
         },
         {
-            "title": "allUsers.active",
-            "template": {
-                "choices": [
-                    {
-                        "field": "active",
-                        "value": 0,
-                        "operator": "==",
-                        "apart": {
-                            "title": "inactive",
-                            "badge": "badge badge-pill badge-light-danger"
-                        }
-                    },
-                    {
-                        "field": "active",
-                        "value": 1,
-                        "operator": "==",
-                        "apart": {
-                            "title": "active",
-                            "badge": "badge badge-pill badge-light-success"
-                        }
-                    }
-                ]
-            },
-            "field": "active",
-            "filter": {
-                "type": "CheckBox"
-            }
-        },
-        {
-            "title": "allUsers.verified",
-            "template": {
-                "choices": [
-                    {
-                        "field": "active",
-                        "value": 0,
-                        "operator": "==",
-                        "apart": {
-                            "title": "allUsers.notVerified",
-                            "badge": "badge badge-pill badge-light-danger"
-                        }
-                    },
-                    {
-                        "field": "active",
-                        "value": 1,
-                        "operator": "==",
-                        "apart": {
-                            "title": "allUsers.verified",
-                            "badge": "badge badge-pill badge-light-success"
-                        }
-                    }
-                ]
-            },
-            "field": "verified"
-        },
-        {
-            "title": "myLocations.action",
+            "title": "commonFields.action",
             "template": {
                 "type": "action",
                 "actionMode": {
@@ -164,7 +102,7 @@
                     "menu": [
                         {
                             "type": "edit",
-                            "actionName": "Edit",
+                            "actionName": "general.edit",
                             "icon": "edit",
                             "formDialog": {
                                 "type": "sidebar",
@@ -173,7 +111,7 @@
                         },
                         {
                             "type": "delete",
-                            "actionName": "Delete",
+                            "actionName": "general.delete",
                             "icon": "trash",
                             "executeAction": {
                                 "request": {
@@ -194,8 +132,7 @@
                         }
                     ]
                 }
-            },
-            "field": "allow_online"
+            }
         }
     ],
     "config": [
@@ -214,7 +151,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "firstname",
-            "title": "allUsers.firstname",
+            "title": "commonFields.firstname",
             "field": "firstname",
             "required": true
         },
@@ -223,85 +160,80 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "lastname",
-            "title": "allUsers.lastname",
+            "title": "commonFields.lastname",
             "field": "lastname",
             "required": true
+        },
+        {
+            "type": "radio",
+            "width": "col-md-6",
+            "name": "gender",
+            "title": "commonFields.gender",
+            "dataArray": [
+                {
+                    "title": "commonFields.man",
+                    "id": "man",
+                    "class": "mb-75"
+                },
+                {
+                    "title": "commonFields.woman",
+                    "id": "woman"
+                }
+            ],
+            "oneLine": true,
+            "field": "gender"
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "birthday",
+            "title": "commonFields.birthday",
+            "field": "birthday"
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
-            "title": "allUsers.email",
+            "title": "commonFields.email",
             "field": "email",
             "required": true
         },
         {
-            "type": "password",
+            "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
-            "name": "password",
-            "title": "allUsers.password",
-            "field": "password",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone",
             "required": true
         },
         {
-            "type": "combobox",
-            "width": "col-md-12",
+            "type": "textbox",
+            "width": "col-md-6",
             "class": "e-outline",
-            "name": "location_id",
-            "title": "allUsers.location",
-            "field": {
-                "text": "name",
-                "value": "id"
-            },
-            "request": {
-                "type": "GET",
-                "api": "/api/getMyLocations",
-                "parameters": [],
-                "fields": "",
-                "root": ""
-            },
-            "fieldConfig": {
-                "ignoreAccent": false,
-                "filter": true
-            },
+            "name": "address",
+            "title": "commonFields.address",
+            "field": "address",
             "required": true
         },
         {
-            "type": "switch",
-            "width": "col-12",
+            "type": "textbox",
+            "width": "col-md-3",
             "class": "e-outline",
-            "name": "verified",
-            "title": "allUsers.verified",
-            "field": "verified"
+            "name": "zip",
+            "title": "commonFields.zip",
+            "field": "zip",
+            "required": true
         },
         {
-            "type": "switch",
-            "width": "col-12",
+            "type": "textbox",
+            "width": "col-md-3",
             "class": "e-outline",
-            "name": "active",
-            "title": "allUsers.active",
-            "field": "active"
-        },
-        {
-            "type": "radio",
-            "name": "gender",
-            "dataArray": [
-                {
-                    "title": "Man",
-                    "id": "man",
-                    "class": "mb-75"
-                },
-                {
-                    "title": "Woman",
-                    "id": "woman"
-                }
-            ],
-            "oneLine": true,
-            "width": "col-12",
-            "title": "allUsers.gender",
-            "field": "gender"
+            "name": "address",
+            "title": "commonFields.address",
+            "field": "address",
+            "required": true
         },
         {
             "type": "button",

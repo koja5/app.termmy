@@ -13,6 +13,7 @@ import { CalendarComponent } from "./calendar/calendar.component";
 import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-schedule/dynamic-scheduler.module";
 import { EmployeesComponent } from "./employees/employees.component";
 import { LocationViewComponent } from "./locations/location-view/location-view.component";
+import { ClientsComponent } from "./clients/clients.component";
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     canActivate: [AdminGuardService],
     component: EmployeesComponent,
   },
+  {
+    path: "my-clients",
+    canActivate: [AdminGuardService],
+    component: ClientsComponent,
+  },
 ];
 
 @NgModule({
@@ -53,6 +59,7 @@ const routes = [
     CalendarComponent,
     EmployeesComponent,
     LocationViewComponent,
+    ClientsComponent
   ],
   imports: [
     CommonModule,
