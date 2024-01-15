@@ -38,7 +38,7 @@
 }
 
 .dark-layout .e-schedule .e-vertical-view .e-work-cells {
-  background-color: #283046 !important;
+  background-color: #283046;
 }
 
 .dark-layout .e-schedule .e-vertical-view .e-left-indent-wrap table tbody td {
@@ -59,7 +59,11 @@
 .dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
 .dark-layout .e-schedule .e-month-view .e-date-header-wrap table td,
 .dark-layout .e-schedule .e-month-agenda-view .e-date-header-wrap table td,
-.dark-layout .e-schedule .e-agenda-view .e-empty-event {
+.dark-layout .e-schedule .e-agenda-view .e-empty-event,
+.dark-layout .e-schedule .e-month-view .e-work-cells,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
+.dark-layout .e-schedule .e-agenda-view,
+.dark-layout .e-schedule .e-agenda-view .e-appointment:hover {
   background-color: #283046 !important;
   color: #fff !important;
 }
@@ -87,7 +91,12 @@
 .dark-layout .e-quick-popup-wrapper .e-event-popup .e-location-icon,
 .dark-layout .e-quick-popup-wrapper .e-event-popup .e-time-zone-icon,
 .dark-layout .e-quick-popup-wrapper .e-event-popup .e-description-icon,
-.dark-layout .e-quick-popup-wrapper .e-event-popup .e-resource-icon {
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-resource-icon,
+.dark-layout .e-schedule .e-agenda-view .e-subject,
+.dark-layout .e-schedule .e-agenda-view .e-date-time,
+.dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-date,
+.dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-day,
+.dark-layout .e-schedule .e-agenda-view .e-resource-column {
   color: #fff !important;
 }
 
@@ -106,7 +115,34 @@
   background: #fff !important;
 }
 
-.e-schedule .e-vertical-view .e-left-indent-wrap table tbody td.e-header-cells.e-week-number {
+.e-schedule
+  .e-vertical-view
+  .e-left-indent-wrap
+  table
+  tbody
+  td.e-header-cells.e-week-number {
   height: 82px;
   font-size: 32px;
+}
+
+.e-treeview .e-list-item.e-active > .e-fullrow {
+  height: 60px;
+}
+
+.need-to-select-container {
+  display: flex;
+  height: 70vh;
+}
+
+.need-to-select {
+  text-align: center;
+  margin: auto;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.need-to-select img {
+  width: 260px;
+  margin: auto;
 }

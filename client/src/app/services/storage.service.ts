@@ -3,6 +3,7 @@ import { CookieService } from "ngx-cookie";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import * as CryptoJS from "crypto-js";
 import { environment } from "../../environments/environment.prod";
+import { CalendarSettings } from "app/models/calendar-settings";
 
 @Injectable({
   providedIn: "root",
@@ -165,6 +166,22 @@ export class StorageService {
     return CryptoJS.AES.decrypt(value, environment.ENCRIPTY_KEY).toString(
       CryptoJS.enc.Utf8
     );
+  }
+
+  setCalendarConfig(value: any) {
+    let config = this.getLocalStorageObject("config")
+      ? this.getLocalStorageObject("config")
+      : {};
+    config.calendar = value ? value : new CalendarSettings();
+
+    this.setLocalStorage("config", config);
+  }
+
+  getCalendarConfig() {
+    let config = this.getLocalStorageObject("config")
+      ? this.getLocalStorageObject("config")
+      : {};
+    return config.calendar ? config.calendar : new CalendarSettings();
   }
 
   // END EXTERNAL ACCOUNTS

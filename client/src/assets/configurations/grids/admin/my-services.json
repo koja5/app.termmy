@@ -91,41 +91,6 @@
     },
     "columns": [
         {
-            "title": "myServices.name",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "name",
-            "isPrimaryKey": true,
-            "allowEditing": false
-        },
-        {
-            "title": "myServices.timeDuration",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "time_duration",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "myServices.price",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "price",
-            "validation": {
-                "required": true
-            }
-        },
-        {
             "title": "myLocations.action",
             "template": {
                 "type": "action",
@@ -167,6 +132,41 @@
                 }
             },
             "field": "allow_online"
+        },
+        {
+            "title": "myServices.name",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "name",
+            "isPrimaryKey": true,
+            "allowEditing": false
+        },
+        {
+            "title": "myServices.timeDuration",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "time_duration",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "myServices.price",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "price",
+            "validation": {
+                "required": true
+            }
         }
     ],
     "config": [

@@ -11,6 +11,7 @@ import {
   ScheduleComponent,
 } from "@syncfusion/ej2-angular-schedule";
 import { StorageService } from "app/services/storage.service";
+import { CalendarSettings } from "app/models/calendar-settings";
 // https://stackblitz.com/edit/angular-schedule-different-work-hours-u4cpe8?file=app.component.ts
 // https://www.syncfusion.com/forums/169264/setting-different-work-hours-on-different-days
 @Component({
@@ -44,11 +45,15 @@ export class DynamicScheduleComponent {
 
   public config: any;
   public allLocations: any;
-  public selectLocation: any;
+  public selectedLocation: any;
   public allEmployees: any;
-  public selectEmployees: any;
+  public selectedEmployees: any;
   public externalAccounts: any;
   public workTimes: any;
+  public calendarSettings = new CalendarSettings();
+  public calendarRights: any;
+  public employeeId: number;
+  public loader = false;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -63,11 +68,10 @@ export class DynamicScheduleComponent {
   }
 
   initialize() {
-    this.checkCalendarConfigurations();
+    this.checkStorage();
+    this.getCalendarRights();
     this.getWorkTimes();
     this.getTermines();
-    this.getAdminLocations();
-    this.getAdminEmployees();
   }
 
   //#region  Initialize functions
@@ -109,6 +113,21 @@ export class DynamicScheduleComponent {
 
   checkExternalAccounts() {
     this.externalAccounts = this._storageService.getExternalAccountSettings();
+  }
+
+  getCalendarRights() {
+    this._service
+      .callGetMethod("/api/getCalendarRights", "")
+      .subscribe((data: any) => {
+        if (data.length) {
+          this.calendarSettings.rights = data[0];
+        }
+        this.checkCalendarRights();
+      });
+  }
+
+  checkStorage() {
+    this.calendarSettings = this._storageService.getCalendarConfig();
   }
 
   //#endregion
@@ -156,10 +175,13 @@ export class DynamicScheduleComponent {
     this._service
       .callGetMethod("/api/google/getTermines", "")
       .subscribe((data: any) => {
-        if (data) {
-          this.calendar.eventSettings.dataSource =
-            this.packTerminesFromGoogleCalendar(data.data.items);
-          console.log(this.calendar.eventSettings.dataSource);
+        if (this.calendar) {
+          if (data) {
+            this.calendar.eventSettings.dataSource =
+              this.packTerminesFromGoogleCalendar(data.data.items);
+          } else {
+            this.calendar.eventSettings.dataSource = [];
+          }
         }
       });
   }
@@ -181,9 +203,9 @@ export class DynamicScheduleComponent {
         ),
         Description: termines[i].description,
         ExternalId: termines[i].id,
-        CreatorId:
+        EmployeeId:
           termines[i].description && termines[i].description.indexOf("{") != -1
-            ? JSON.parse(termines[i].description).creator_id
+            ? JSON.parse(termines[i].description).employee_id
             : null,
       });
     }
@@ -246,6 +268,7 @@ export class DynamicScheduleComponent {
   }
 
   onPopupOpen(event: any) {
+    this.employeeId = event.data.EmployeeId;
     if (this.externalAccounts.google) {
       this.onPopupForGoogleCalendar(event);
     }
@@ -282,11 +305,11 @@ export class DynamicScheduleComponent {
       var dayIndex = renderedDates[i].getDay();
       if (dayIndex !== 0 && dayIndex !== 6) {
         days.push(renderedDates[i]);
-        this.calendar.setWorkHours(
-          days,
-          this.workHours1[dayIndex].startHour,
-          this.workHours1[dayIndex].endHour
-        );
+        // this.calendar.setWorkHours(
+        //   days,
+        //   this.workHours1[dayIndex].startHour,
+        //   this.workHours1[dayIndex].endHour
+        // );
       }
     }
   }
@@ -300,6 +323,44 @@ export class DynamicScheduleComponent {
 
     // args.date
   }
+
+  changeLocation(event: any) {
+    // get employees for this location
+    // this.calendarSettings.location = event;
+    this.calendarSettings.selectedEmployees = [];
+    this.calendarSettings.selectedEmployeesFullInfo = [];
+    this._storageService.setCalendarConfig(this.calendarSettings);
+    this._service
+      .callGetMethod(
+        "/api/getEmployeesForLocation",
+        this.calendarSettings.location
+      )
+      .subscribe((data) => {
+        this.allEmployees = data;
+      });
+  }
+
+  changeEmployees(event: any) {
+    this.calendarSettings.selectedEmployeesFullInfo = event;
+    this._storageService.setCalendarConfig(this.calendarSettings);
+    this.checkIfPersonalOrGroupCalendar();
+    this.getTermines();
+  }
+  //#endregion
+
+  //#region API functions
+
+  getWorkTimes() {
+    this._service.callGetMethod("/api/getWorktime", "").subscribe((data) => {
+      if (data) {
+        this.workTimes = {
+          color: data[0].color,
+          value: JSON.parse(data[0].value),
+        };
+      }
+    });
+  }
+
   //#endregion
 
   //#region Helpful functions
@@ -310,12 +371,12 @@ export class DynamicScheduleComponent {
   setCreatorId() {
     this.form.setValue(
       "employee_id",
-      this._storageService.getUserId(),
+      this.employeeId ? this.employeeId : this._storageService.getUserId(),
       "numeric"
     );
     this.form.setValue(
       "ResourcesIndex",
-      this._storageService.getUserId(),
+      this.employeeId ? this.employeeId : this._storageService.getUserId(),
       "numeric"
     );
   }
@@ -357,30 +418,88 @@ export class DynamicScheduleComponent {
     }
   }
 
-  getWorkTimes() {
-    this._service.callGetMethod("/api/getWorktime", "").subscribe((data) => {
-      if (data) {
-        this.workTimes = {
-          color: data[0].color,
-          value: JSON.parse(data[0].value),
-        };
-      }
-    });
-  }
-
   checkCalendarConfigurations() {
     this.checkIfPersonalOrGroupCalendar();
   }
 
   checkIfPersonalOrGroupCalendar() {
+    this.resourceDataSource = [];
     const token = this._storageService.getDecodeToken();
-    if (this.config.showOtherCalendar) {
+    if (
+      this.config.showOtherCalendar &&
+      this.calendarSettings.rights &&
+      this.calendarSettings.rights.show_other_calendar
+    ) {
+      if (this.calendarSettings.selectedEmployeesFullInfo) {
+        for (
+          let i = 0;
+          i < this.calendarSettings.selectedEmployeesFullInfo.length;
+          i++
+        ) {
+          this.resourceDataSource.push({
+            text:
+              this.calendarSettings.selectedEmployeesFullInfo[i].firstname +
+              " " +
+              this.calendarSettings.selectedEmployeesFullInfo[i].lastname,
+            id: this.calendarSettings.selectedEmployeesFullInfo[i].id,
+            position:
+              this.calendarSettings.selectedEmployeesFullInfo[i].position,
+          });
+        }
+      }
     } else {
       this.resourceDataSource.push({
-        text: "Aleksandar Kojic",
+        text: token.firstname + " " + token.lastname,
         id: token.id,
       });
     }
   }
+
+  checkCalendarRights() {
+    if (
+      this.config.showOtherCalendar &&
+      this.calendarSettings.rights.show_other_calendar
+    ) {
+      this.getAdminLocations();
+      this.getAdminEmployees();
+    }
+
+    this.checkCalendarConfigurations();
+  }
+
+  checkCalendarVisibility() {
+    return (
+      this.workTimes &&
+      ((this.calendarSettings.rights &&
+        this.calendarSettings.rights.show_other_calendar &&
+        this.calendarSettings.selectedEmployees &&
+        this.calendarSettings.selectedEmployees.length) ||
+        !this.calendarSettings.rights ||
+        !this.calendarSettings.rights.show_other_calendar)
+    );
+  }
+
+  getStartHourForLocation() {
+    const time = this.calendarSettings.location.worktime_from
+      ? JSON.parse(this.calendarSettings.location.worktime_from)
+      : null;
+    if (time) {
+      return time.hour + ":" + time.minute;
+    } else {
+      return null;
+    }
+  }
+
+  getEndHourForLocation() {
+    const time = this.calendarSettings.location.worktime_to
+      ? JSON.parse(this.calendarSettings.location.worktime_to)
+      : null;
+    if (time) {
+      return time.hour + ":" + time.minute;
+    } else {
+      return null;
+    }
+  }
+
   //#endregion
 }

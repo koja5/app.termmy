@@ -14,8 +14,14 @@ import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-sch
 import { EmployeesComponent } from "./employees/employees.component";
 import { LocationViewComponent } from "./locations/location-view/location-view.component";
 import { ClientsComponent } from "./clients/clients.component";
+type PathMatch = "full" | "prefix" | undefined;
 
 const routes = [
+  {
+    path: "",
+    redirectTo: "my-calendar",
+    pathMatch: 'full' as PathMatch
+  },
   {
     path: "my-locations",
     canActivate: [AdminGuardService],
@@ -59,7 +65,7 @@ const routes = [
     CalendarComponent,
     EmployeesComponent,
     LocationViewComponent,
-    ClientsComponent
+    ClientsComponent,
   ],
   imports: [
     CommonModule,

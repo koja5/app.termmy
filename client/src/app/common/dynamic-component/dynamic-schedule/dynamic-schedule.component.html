@@ -1,37 +1,43 @@
-<div class="content-wrapper container-xxl p-0" *ngIf="config&&workTimes">
+<div class="content-wrapper p-0" *ngIf="config">
     <div class="content-body">
         <section class="users-list-wrapper">
             <!-- users filter start -->
-            <div class="row mb-2">
-                <div class="col-md-6" *ngIf="config.filters.locations.multi">
+            <div class="row mb-2"
+                *ngIf="config.showOtherCalendar && (calendarSettings.rights && calendarSettings.rights.show_other_calendar)">
+                <div class="col-md-6">
                     <label *ngIf="config.filters.locations.title" class="custom-label">{{
-                        config.locations.title | translate
+                        config.filters.locations.title | translate
                         }} </label>
                     <ng-select *ngIf="allLocations" [items]="allLocations" [bindLabel]="'name'" [bindValue]="'id'"
-                        [(ngModel)]="selectLocation">
+                        [(ngModel)]="calendarSettings.location" (change)="changeLocation($event)">
                     </ng-select>
                 </div>
-                <div class="col-md-6" *ngIf="config.filters.employees.multi">
+                <div class="col-md-6">
                     <label *ngIf="config.filters.employees.title" class="custom-label">{{
-                        config.employees.title | translate
+                        config.filters.employees.title | translate
                         }} </label>
                     <ng-select *ngIf="allEmployees" [items]="allEmployees" [bindLabel]="'firstname'" [bindValue]="'id'"
-                        [(ngModel)]="selectEmployees" [multiple]="true">
+                        [(ngModel)]="calendarSettings.selectedEmployees" [multiple]="true"
+                        (change)="changeEmployees($event)">
                     </ng-select>
                 </div>
             </div>
-            <div class="card">
-                <ejs-schedule #calendar width='100%' height='80vh' [eventSettings]="eventSettings" [group]="group"
-                    [showWeekNumber]="true" (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
+            <div class="card" *ngIf="checkCalendarVisibility()">
+                <ejs-schedule #calendar width='100%'
+                    [height]="config.showOtherCalendar && (calendarSettings.rights && calendarSettings.rights.show_other_calendar) ? '73vh' : '80vh'"
+                    [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
+                    [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()"
+                    (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
                     (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
                     (renderCell)="onRenderCell($event)">
-                    <ng-template #resourceHeaderTemplate let-data>
+                    <ng-template #resourceHeaderTemplate let-data let-item>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1"><img height="40" width="40"
-                                    src="../../../../assets/images/portrait/small/avatar-s-11.jpg"></div>
+                                    src="../../../../assets/images/avatars/no-user-profile.png"></div>
                             <div class="resource-details">
-                                <div class="resource-name">Aleksandar Kojic</div>
-                                <div class="resource-designation">Doctor</div>
+                                <div class="resource-name">{{item.resourceData.text}}</div>
+                                <div *ngIf="item.resourceData.position" class="resource-designation">
+                                    {{item.resourceData.position}}</div>
                             </div>
                         </div>
                     </ng-template>
@@ -45,12 +51,18 @@
                         </table>
                     </ng-template>
                     <e-resources *ngIf="resourceDataSource">
-                        <e-resource field='CreatorId' title='Doctor Name' name='Doctors'
+                        <e-resource field='EmployeeId' title='Doctor Name' name='Doctors'
                             [dataSource]='resourceDataSource' textField='text' idField='id' colorField='color'
                             startHourField='startHour' [allowMultiple]="true" endHourField='endHour'>
                         </e-resource>
                     </e-resources>
                 </ejs-schedule>
+            </div>
+            <div class="need-to-select-container" *ngIf="!checkCalendarVisibility()">
+                <div class="need-to-select">
+                    <img src="../../../../assets/images/illustration/calendar.png">
+                    <h3 class="mt-1">Please select location and user to see calendar</h3>
+                </div>
             </div>
         </section>
     </div>

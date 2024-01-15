@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data: any) => {
         if (data && data.token) {
           this._storageService.setToken(data.token);
-          this._router.navigate(["dashboard/settings/worktime"]);
+          this._router.navigate(["dashboard/admin"]);
           this.loading = false;
           this.setExternalAccountSettings();
         } else {

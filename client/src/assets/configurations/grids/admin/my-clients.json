@@ -57,42 +57,6 @@
     },
     "columns": [
         {
-            "title": "commonFields.firstname",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "firstname",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "commonFields.lastname",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "lastname",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "commonFields.email",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "email",
-            "validation": {
-                "required": true
-            }
-        },
-        {
             "title": "commonFields.action",
             "template": {
                 "type": "action",
@@ -132,6 +96,42 @@
                         }
                     ]
                 }
+            }
+        },
+        {
+            "title": "commonFields.firstname",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "firstname",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.lastname",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "lastname",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.email",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "email",
+            "validation": {
+                "required": true
             }
         }
     ],

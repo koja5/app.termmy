@@ -30,6 +30,7 @@ import { TranslateModule } from "@ngx-translate/core";
     DynamicModule,
     FormsModule,
     TranslateModule,
+    NgSelectModule,
   ],
   providers: [
     DayService,

@@ -64,7 +64,50 @@
     },
     "columns": [
         {
-            "title": "allUsers.firstname",
+            "title": "commonFields.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "menu",
+                    "icon": "more-vertical",
+                    "menu": [
+                        {
+                            "type": "edit",
+                            "actionName": "general.edit",
+                            "icon": "edit",
+                            "formDialog": {
+                                "type": "sidebar",
+                                "closeAfterExecute": true
+                            }
+                        },
+                        {
+                            "type": "delete",
+                            "actionName": "general.delete",
+                            "icon": "trash",
+                            "executeAction": {
+                                "request": {
+                                    "type": "POST",
+                                    "api": "/api/deleteEmployee",
+                                    "parameters": [],
+                                    "fields": "",
+                                    "root": ""
+                                },
+                                "response": "toastr",
+                                "showQuestionBeforeExecute": true,
+                                "modalConfig": {
+                                    "modalTitle": "",
+                                    "modalText": "",
+                                    "windowClass": "modal modal-danger"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "field": "allow_online"
+        },
+        {
+            "title": "commonFields.firstname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -76,7 +119,7 @@
             }
         },
         {
-            "title": "allUsers.lastname",
+            "title": "commonFields.lastname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -88,7 +131,7 @@
             }
         },
         {
-            "title": "allUsers.email",
+            "title": "commonFields.email",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -100,7 +143,7 @@
             }
         },
         {
-            "title": "allUsers.active",
+            "title": "commonFields.active",
             "template": {
                 "choices": [
                     {
@@ -129,7 +172,7 @@
             }
         },
         {
-            "title": "allUsers.verified",
+            "title": "commonFields.verified",
             "template": {
                 "choices": [
                     {
@@ -153,49 +196,6 @@
                 ]
             },
             "field": "verified"
-        },
-        {
-            "title": "myLocations.action",
-            "template": {
-                "type": "action",
-                "actionMode": {
-                    "type": "menu",
-                    "icon": "more-vertical",
-                    "menu": [
-                        {
-                            "type": "edit",
-                            "actionName": "Edit",
-                            "icon": "edit",
-                            "formDialog": {
-                                "type": "sidebar",
-                                "closeAfterExecute": true
-                            }
-                        },
-                        {
-                            "type": "delete",
-                            "actionName": "Delete",
-                            "icon": "trash",
-                            "executeAction": {
-                                "request": {
-                                    "type": "POST",
-                                    "api": "/api/deleteEmployee",
-                                    "parameters": [],
-                                    "fields": "",
-                                    "root": ""
-                                },
-                                "response": "toastr",
-                                "showQuestionBeforeExecute": true,
-                                "modalConfig": {
-                                    "modalTitle": "",
-                                    "modalText": "",
-                                    "windowClass": "modal modal-danger"
-                                }
-                            }
-                        }
-                    ]
-                }
-            },
-            "field": "allow_online"
         }
     ],
     "config": [
@@ -214,7 +214,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "firstname",
-            "title": "allUsers.firstname",
+            "title": "commonFields.firstname",
             "field": "firstname",
             "required": true
         },
@@ -223,7 +223,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "lastname",
-            "title": "allUsers.lastname",
+            "title": "commonFields.lastname",
             "field": "lastname",
             "required": true
         },
@@ -232,7 +232,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
-            "title": "allUsers.email",
+            "title": "commonFields.email",
             "field": "email",
             "required": true
         },
@@ -241,16 +241,24 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "password",
-            "title": "allUsers.password",
+            "title": "commonFields.password",
             "field": "password",
             "required": true
         },
         {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "position",
+            "title": "myEmployee.position",
+            "field": "position"
+        },
+        {
             "type": "combobox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "location_id",
-            "title": "allUsers.location",
+            "title": "myEmployee.location",
             "field": {
                 "text": "name",
                 "value": "id"
@@ -273,7 +281,7 @@
             "width": "col-12",
             "class": "e-outline",
             "name": "verified",
-            "title": "allUsers.verified",
+            "title": "commonFields.verified",
             "field": "verified"
         },
         {
@@ -281,27 +289,8 @@
             "width": "col-12",
             "class": "e-outline",
             "name": "active",
-            "title": "allUsers.active",
+            "title": "commonFields.active",
             "field": "active"
-        },
-        {
-            "type": "radio",
-            "name": "gender",
-            "dataArray": [
-                {
-                    "title": "Man",
-                    "id": "man",
-                    "class": "mb-75"
-                },
-                {
-                    "title": "Woman",
-                    "id": "woman"
-                }
-            ],
-            "oneLine": true,
-            "width": "col-12",
-            "title": "allUsers.gender",
-            "field": "gender"
         },
         {
             "type": "button",

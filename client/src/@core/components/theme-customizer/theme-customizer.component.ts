@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 
 @Component({
   selector: 'core-theme-customizer',
@@ -78,7 +79,8 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
         customizer: new UntypedFormControl(),
         scrollTop: new UntypedFormControl(),
         buyNow: new UntypedFormControl()
-      })
+      }),
+      calendar: new CalendarModule
     });
 
     // Subscribe to the config changes

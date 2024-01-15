@@ -29,4 +29,6 @@ export class ConnectionsComponent {
         window.open(data);
       });
   }
+
+  disconnectFromGoogle () {}
 }

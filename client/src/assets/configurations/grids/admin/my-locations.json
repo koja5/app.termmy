@@ -95,6 +95,49 @@
     },
     "columns": [
         {
+            "title": "myLocations.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "menu",
+                    "icon": "more-vertical",
+                    "menu": [
+                        {
+                            "type": "edit",
+                            "actionName": "Edit",
+                            "icon": "edit",
+                            "formDialog": {
+                                "type": "modal",
+                                "closeAfterExecute": true
+                            }
+                        },
+                        {
+                            "type": "delete",
+                            "actionName": "Delete",
+                            "icon": "trash",
+                            "executeAction": {
+                                "request": {
+                                    "type": "POST",
+                                    "api": "/api/deleteLocation",
+                                    "parameters": [],
+                                    "fields": "",
+                                    "root": ""
+                                },
+                                "response": "toastr",
+                                "showQuestionBeforeExecute": true,
+                                "modalConfig": {
+                                    "modalTitle": "",
+                                    "modalText": "",
+                                    "windowClass": "modal modal-danger"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "field": "allow_online"
+        },
+        {
             "title": "myLocations.name",
             "filterable": true,
             "hideable": true,
@@ -188,52 +231,11 @@
                     "icon": "eye",
                     "routerLink": {
                         "link": "/dashboard/admin/location-view/#id",
-                        "parameters": ["id"],
+                        "parameters": [
+                            "id"
+                        ],
                         "saveParametersInSessionStorage": true
                     }
-                }
-            },
-            "field": "allow_online"
-        },
-        {
-            "title": "myLocations.action",
-            "template": {
-                "type": "action",
-                "actionMode": {
-                    "type": "menu",
-                    "icon": "more-vertical",
-                    "menu": [
-                        {
-                            "type": "edit",
-                            "actionName": "Edit",
-                            "icon": "edit",
-                            "formDialog": {
-                                "type": "modal",
-                                "closeAfterExecute": true
-                            }
-                        },
-                        {
-                            "type": "delete",
-                            "actionName": "Delete",
-                            "icon": "trash",
-                            "executeAction": {
-                                "request": {
-                                    "type": "POST",
-                                    "api": "/api/deleteLocation",
-                                    "parameters": [],
-                                    "fields": "",
-                                    "root": ""
-                                },
-                                "response": "toastr",
-                                "showQuestionBeforeExecute": true,
-                                "modalConfig": {
-                                    "modalTitle": "",
-                                    "modalText": "",
-                                    "windowClass": "modal modal-danger"
-                                }
-                            }
-                        }
-                    ]
                 }
             },
             "field": "allow_online"

@@ -1,9 +1,8 @@
 {
-    "showOtherCalendar": false,
+    "showOtherCalendar": true,
     "filters": {
         "locations": {
             "title": "myCalendar.locations",
-            "multi": false,
             "request": {
                 "type": "GET",
                 "api": "/api/getAdminLocations",
@@ -14,7 +13,6 @@
         },
         "employees": {
             "title": "myCalendar.employees",
-            "multi": false,
             "request": {
                 "type": "GET",
                 "api": "/api/getAdminEmployees",

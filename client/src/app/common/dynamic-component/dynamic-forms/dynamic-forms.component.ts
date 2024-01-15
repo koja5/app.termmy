@@ -194,7 +194,6 @@ export class DynamicFormsComponent implements OnInit {
   }
 
   handleSubmit(event: Event) {
-    console.log(this.form);
     if (this.form.valid) {
       event.preventDefault();
       event.stopPropagation();

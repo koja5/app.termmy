@@ -25,6 +25,7 @@
             "city": "City",
             "active": "Active",
             "action": "Action",
+            "verified": "Verified",
             "man": "Man",
             "woman": "Woman"
         },
@@ -103,7 +104,13 @@
             "customer": "Customer",
             "termineFrom": "Time from",
             "termineTo": "Time to",
-            "service": "Service"
+            "service": "Service",
+            "locations": "Locations",
+            "employees": "Employees"
+        },
+        "myEmployee": {
+            "position": "Position",
+            "location": "Location"
         },
         "settings": {
             "worktime": "Worktime",
