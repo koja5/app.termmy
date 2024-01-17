@@ -34,4 +34,11 @@ export interface CoreConfig {
     scrollTop: boolean;
     buyNow: boolean;
   };
+  calendar: {
+    rights: any;
+    selectedEmployees: any;
+    selectedEmployeesFullInfo: any;
+    location_id: any;
+    location_data: any;
+  };
 }

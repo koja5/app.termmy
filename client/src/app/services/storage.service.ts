@@ -181,7 +181,9 @@ export class StorageService {
     let config = this.getLocalStorageObject("config")
       ? this.getLocalStorageObject("config")
       : {};
-    return config.calendar ? config.calendar : new CalendarSettings();
+    return Object.values(config.calendar).length != 0
+      ? config.calendar
+      : new CalendarSettings();
   }
 
   // END EXTERNAL ACCOUNTS

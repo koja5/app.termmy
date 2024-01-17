@@ -1,4 +1,4 @@
-import { CoreConfig } from '@core/types';
+import { CoreConfig } from "@core/types";
 
 /**
  * Default App Config
@@ -48,5 +48,12 @@ export const coreConfig: CoreConfig = {
     customizer  : true,                       // Boolean: true, false (Enable theme customizer)
     scrollTop   : false,                       // Boolean: true, false (Enable scroll to top button)
     buyNow      : false                        // Boolean: true, false (Set false in real project, For demo purpose only)
+  },
+  calendar: {
+    rights: null,
+    selectedEmployees: [],
+    selectedEmployeesFullInfo: [],
+    location_id: null,
+    location_data: null
   }
 }

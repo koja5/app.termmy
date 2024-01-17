@@ -9,7 +9,7 @@
                         config.filters.locations.title | translate
                         }} </label>
                     <ng-select *ngIf="allLocations" [items]="allLocations" [bindLabel]="'name'" [bindValue]="'id'"
-                        [(ngModel)]="calendarSettings.location" (change)="changeLocation($event)">
+                        [(ngModel)]="calendarSettings.location_id" (change)="changeLocation($event)">
                     </ng-select>
                 </div>
                 <div class="col-md-6">
@@ -51,7 +51,7 @@
                         </table>
                     </ng-template>
                     <e-resources *ngIf="resourceDataSource">
-                        <e-resource field='EmployeeId' title='Doctor Name' name='Doctors'
+                        <e-resource field='employeeId' title='Employees' name='Doctors'
                             [dataSource]='resourceDataSource' textField='text' idField='id' colorField='color'
                             startHourField='startHour' [allowMultiple]="true" endHourField='endHour'>
                         </e-resource>

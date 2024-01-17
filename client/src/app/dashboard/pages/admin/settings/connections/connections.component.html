@@ -15,19 +15,24 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body pt-2">
+                        <div class="pt-2">
 
                             <!-- Connections -->
-                            <div class="d-flex mt-2">
-                                <div class="flex-shrink-0">
+                            <div class="d-md-flex mt-2">
+                                <div class="d-flex flex-shrink-0">
                                     <img src="../../../../../../assets/images/icons/google.png" alt="google"
                                         class="me-1" height="38" width="38" />
-                                </div>
-                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
                                     <div class="me-1 ml-1">
-                                        <p class="fw-bolder mb-0">{{'connections.googleTitle' | translate}}</p>
-                                        <span>{{'connections.googleText' | translate}}</span>
+                                        <span class="fw-bolder mb-0">{{'connections.googleTitle' | translate}}</span>
+                                        <span *ngIf="data && data.google" type="button"
+                                            class="badge badge-light-success ml-75">{{'connections.successfullyConnected'
+                                            |
+                                            translate}}</span>
+                                        <p>{{'connections.googleText' | translate}}</p>
                                     </div>
+                                </div>
+                                <div class="flex-grow-1 text-right">
+
                                     <div class="mt-50 mt-sm-0">
                                         <div class="form-check form-switch form-check-primary">
                                             <div class="form-check form-switch form-check-primary">
@@ -35,10 +40,7 @@
                                                     class="btn btn-outline-primary"
                                                     (click)="connectToGoogle()">{{'connections.connect' |
                                                     translate}}</button>
-                                                <span *ngIf="data && data.google" type="button"
-                                                    class="badge badge-light-success m-1">{{'connections.successfullyConnected'
-                                                    |
-                                                    translate}}</span>
+
                                                 <button *ngIf="data && data.google" type="button"
                                                     class="btn btn-outline-danger"
                                                     (click)="disconnectFromGoogle()">{{'connections.disconnect' |
@@ -48,16 +50,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex mt-2">
-                                <div class="flex-shrink-0">
+                            <div class="d-md-flex mt-2">
+                                <div class="d-flex flex-shrink-0">
                                     <img src="../../../../../../assets/images/icons/outlook.png" alt="outlook"
                                         class="me-1" height="38" width="38" />
-                                </div>
-                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
                                     <div class="me-1 ml-1">
                                         <p class="fw-bolder mb-0">{{'connections.outlookTitle' | translate}}</p>
                                         <span>{{'connections.outlookText' | translate}}</span>
                                     </div>
+                                </div>
+                                <div class="flex-grow-1 text-right">
                                     <div class="mt-50 mt-sm-0">
                                         <div class="form-check form-switch form-check-primary">
                                             <button type="button"

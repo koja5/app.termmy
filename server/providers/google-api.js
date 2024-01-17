@@ -85,6 +85,8 @@ router.post("/createTermine", auth, async (req, res) => {
   req.body.creator_id = req.user.user.id;
   req.body.employee_id = req.body.employee_id
     ? req.body.employee_id
+    : req.body.employeeId
+    ? req.body.employeeId
     : req.user.user.id;
 
   await calendar.events.insert({
@@ -116,10 +118,13 @@ router.post("/updateTermine", auth, async (req, res) => {
   await calendar.events.update({
     calendarId: "primary",
     auth: oauth2Client,
-    eventId: req.body.ExternalId,
+    eventId: req.body.externalId,
     requestBody: {
       summary: req.body.Subject,
-      description: req.body.Description,
+      description:
+        typeof req.body.description === "object"
+          ? JSON.stringify(req.body.description)
+          : req.body.description,
       start: {
         dateTime: req.body.StartTime,
         timeZone: "Europe/Belgrade",

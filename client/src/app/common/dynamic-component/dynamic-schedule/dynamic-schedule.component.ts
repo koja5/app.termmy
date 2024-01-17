@@ -136,11 +136,13 @@ export class DynamicScheduleComponent {
 
   executeActionForGoogleCalendar(event: any) {
     if (event.requestType === "eventRemove") {
-      this.deleteTerminForGoogleCalendar(event.data[0].ExternalId);
+      this.deleteTerminForGoogleCalendar(event.data[0].externalId);
     } else if (event.requestType === "eventChange") {
       this.setValue(
         this.config.config,
-        JSON.parse(event.changedRecords[0].Description)
+        typeof event.data.description === "object"
+          ? event.data.description
+          : JSON.parse(event.data.description)
       );
       if (this.isValidForm()) {
         this.updateTermineForGoogleCalendar(event.data);
@@ -157,11 +159,13 @@ export class DynamicScheduleComponent {
   }
 
   onPopupForGoogleCalendar(event: any) {
-    if (event && event.data.Description) {
+    if (event && event.data.description) {
       setTimeout(() => {
         this.setValue(
           this.config.config,
-          event.data.Description ? JSON.parse(event.data.Description) : []
+          typeof event.data.description === "object"
+            ? event.data.description
+            : JSON.parse(event.data.description)
         );
       }, 50);
     } else {
@@ -201,12 +205,12 @@ export class DynamicScheduleComponent {
             ? termines[i].end.dateTime
             : termines[i].end.date
         ),
-        Description: termines[i].description,
-        ExternalId: termines[i].id,
-        EmployeeId:
-          termines[i].description && termines[i].description.indexOf("{") != -1
-            ? JSON.parse(termines[i].description).employee_id
-            : null,
+        description: termines[i].description,
+        externalId: termines[i].id,
+        employeeId:
+          typeof termines[i].description === "object"
+            ? typeof termines[i].description.employee_id
+            : JSON.parse(termines[i].description).employee_id,
       });
     }
     return prepactedTermines;
@@ -218,19 +222,23 @@ export class DynamicScheduleComponent {
       .callPostMethod("/api/google/createTermine", this.form.form.value)
       .subscribe((data) => {
         this._toastr.showSuccess();
-        this.getTermines();
+        // this.getTermines();
         // this.calendar?.refreshTemplates("cellTemplate");
       });
   }
 
-  updateTermineForGoogleCalendar(data: any) {
-    this._service
-      .callPostMethod("/api/google/updateTermine", data)
-      .subscribe((data) => {
+  updateTermineForGoogleCalendar(value: any) {
+    this.updateGoogleTermineLocally(value);
+    this.setNewValueForGoogleUpdate(value);
+    this._service.callPostMethod("/api/google/updateTermine", value).subscribe(
+      (data) => {
         this._toastr.showSuccess();
+      },
+      (error) => {
+        this._toastr.showError();
         this.getTermines();
-        // this.calendar?.refreshTemplates("cellTemplate");
-      });
+      }
+    );
   }
 
   deleteTerminForGoogleCalendar(id) {
@@ -240,6 +248,35 @@ export class DynamicScheduleComponent {
         this.getTermines();
         // this.calendar?.refreshTemplates("cellTemplate");
       });
+  }
+
+  updateGoogleTermineLocally(event: any) {
+    for (let i = 0; i < this.calendar.eventSettings.dataSource["length"]; i++) {
+      if (
+        this.calendar.eventSettings.dataSource[i].externalId ===
+        event.externalId
+      ) {
+        this.calendar.eventSettings.dataSource[i].StartTime = event.StartTime;
+        this.calendar.eventSettings.dataSource[i].EndTime = event.EndTime;
+        this.calendar.eventSettings.dataSource[i].description =
+          this.form.form.value;
+        this.calendar.eventSettings.dataSource[i].employeeId = event.employeeId
+          ? event.employeeId
+          : event.employee_id;
+        this.calendar.eventSettings.dataSource[i].description.employee_id =
+          event.employeeId ? event.employeeId : event.employee_id;
+        this.calendar.refreshEvents();
+      }
+    }
+  }
+
+  setNewValueForGoogleUpdate(value: any) {
+    value.description = this.form.form.value;
+    value.description.StartTime = value.StartTime;
+    value.description.EndTime = value.EndTime;
+    value.description.employee_id = value.employeeId
+      ? value.employeeId
+      : value.employee_id;
   }
   //#endregion
 
@@ -268,7 +305,7 @@ export class DynamicScheduleComponent {
   }
 
   onPopupOpen(event: any) {
-    this.employeeId = event.data.EmployeeId;
+    this.employeeId = event.data.employeeId;
     if (this.externalAccounts.google) {
       this.onPopupForGoogleCalendar(event);
     }
@@ -329,11 +366,12 @@ export class DynamicScheduleComponent {
     // this.calendarSettings.location = event;
     this.calendarSettings.selectedEmployees = [];
     this.calendarSettings.selectedEmployeesFullInfo = [];
+    this.calendarSettings.location_data = event;
     this._storageService.setCalendarConfig(this.calendarSettings);
     this._service
       .callGetMethod(
         "/api/getEmployeesForLocation",
-        this.calendarSettings.location
+        this.calendarSettings.location_id
       )
       .subscribe((data) => {
         this.allEmployees = data;
@@ -480,8 +518,8 @@ export class DynamicScheduleComponent {
   }
 
   getStartHourForLocation() {
-    const time = this.calendarSettings.location.worktime_from
-      ? JSON.parse(this.calendarSettings.location.worktime_from)
+    const time = this.calendarSettings.location_data.worktime_from
+      ? JSON.parse(this.calendarSettings.location_data.worktime_from)
       : null;
     if (time) {
       return time.hour + ":" + time.minute;
@@ -491,8 +529,8 @@ export class DynamicScheduleComponent {
   }
 
   getEndHourForLocation() {
-    const time = this.calendarSettings.location.worktime_to
-      ? JSON.parse(this.calendarSettings.location.worktime_to)
+    const time = this.calendarSettings.location_data.worktime_to
+      ? JSON.parse(this.calendarSettings.location_data.worktime_to)
       : null;
     if (time) {
       return time.hour + ":" + time.minute;
