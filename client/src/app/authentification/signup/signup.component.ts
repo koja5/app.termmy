@@ -1,10 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
+import { CallApiService } from "app/services/call-api.service";
+import { ResponseModel } from "app/models/response-model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
@@ -18,6 +25,7 @@ export class SignupComponent implements OnInit {
   public passwordTextType: boolean;
   public registerForm: UntypedFormGroup;
   public submitted = false;
+  public response = new ResponseModel();
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -30,7 +38,9 @@ export class SignupComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _formBuilder: UntypedFormBuilder
+    private _formBuilder: UntypedFormBuilder,
+    private _service: CallApiService,
+    private _router: Router
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -69,11 +79,13 @@ export class SignupComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-
+    console.log(this.registerForm);
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
+
+    this.signUp(this.registerForm.value);
   }
 
   // Lifecycle Hooks
@@ -84,9 +96,9 @@ export class SignupComponent implements OnInit {
    */
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
-      username: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
+      rePassword: ["", Validators.required],
     });
 
     // Subscribe to config changes
@@ -105,4 +117,22 @@ export class SignupComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+  //#region
+
+  signUp(data: any) {
+    this.response = new ResponseModel();
+    this._service.callPostMethod("/api/signUp", data).subscribe((data) => {
+      if (data) {
+        this.response.verifyYourMail = true;
+        setTimeout(() => {
+          this._router.navigate(["/login"]);
+        }, 6000);
+      } else {
+        this.response.mailExists = true;
+      }
+    });
+  }
+
+  //#endregion
 }

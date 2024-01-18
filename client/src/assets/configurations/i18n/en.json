@@ -76,6 +76,7 @@
             "active": "Active",
             "signUpTime": "Signup time",
             "password": "Password",
+            "rePassword": "Re-password",
             "location": "Location"
         },
         "myLocations": {
@@ -145,6 +146,21 @@
             "save": "Save time",
             "colorTitle": "Color",
             "colorText": "Worktime color settings for cell in calendar"
+        },
+        "signUp": {
+            "title": "Adventure starts here 🚀",
+            "text": "Make your app management easy and fun!",
+            "emailIsRequired": "Email is required",
+            "emailMustBeValid": "Email must be a valid email address",
+            "passwordIsRequired": "Password is required",
+            "IAgreeTo": "I agree to",
+            "privacy": "privacy policy & terms",
+            "signUp": "Sign up",
+            "alreadyHaveAnAccount": "Already have an account?",
+            "signInInstead": "Sign in instead",
+            "fillRequredFields": "Please fill required fields",
+            "mailExists": "This mail address exists. Please enter another email address or reset your password.",
+            "verifyYouMail": "Please check your email to verify it."
         }
     }
 }

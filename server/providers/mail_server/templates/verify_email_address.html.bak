@@ -13,6 +13,7 @@
     </style>
   <![endif]-->
     <title>Verify Email Address</title>
+    <link href="./Verify Email Address_files/css" rel="stylesheet" media="screen">
     <style>
       .hover-underline:hover {
         text-decoration: underline !important;

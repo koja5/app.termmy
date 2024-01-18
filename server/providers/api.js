@@ -117,6 +117,49 @@ router.post("/login", function (req, res, next) {
   });
 });
 
+router.post("/signUp", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where email = ?",
+      [req.body.email],
+      function (err, rows, fields) {
+        if (!rows.length) {
+          delete req.body.rePassword;
+          req.body.password = setSha1Password(req.body.password);
+          req.body.type = 1;
+
+          conn.query(
+            "insert into users set ?",
+            [req.body],
+            function (err, rows, fields) {
+              conn.release();
+              if (err) {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              } else {
+                var options = prepareOptionsForRequest(
+                  req.body,
+                  "mail-server/verifyEmailAddress"
+                );
+                console.log(options);
+                makeRequest(options, res);
+              }
+            }
+          );
+        } else {
+          conn.release();
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 // #endregion
 
 // #region PROFILE INFO
@@ -898,5 +941,29 @@ function prepareProperty(property) {
 function prepareUser(data) {}
 
 function prepareUserRights(data) {}
+
+function prepareOptionsForRequest(body, api) {
+  return {
+    url: process.env.link_api + api,
+    method: "POST",
+    body: body,
+    json: true,
+  };
+}
+
+function makeRequest(options, res) {
+  request(options, function (error, response, body) {
+    console.log(error);
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+}
+
+function setSha1Password(password) {
+  return sha1(password);
+}
 
 //#endregion HELP FUNCTION

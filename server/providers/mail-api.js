@@ -16,7 +16,10 @@ router.post("/sendBookingInfo", function (req, res, next) {
   body["template"] = "booking.hjs";
 
   body["firstname"] = req.body.personal.firstname;
-  body["greeting"] = body.greeting.replace("{firstname}", req.body.personal.firstname);
+  body["greeting"] = body.greeting.replace(
+    "{firstname}",
+    req.body.personal.firstname
+  );
   body["lastname"] = req.body.personal.lastname;
   body["birthday"] = moment(req.body.personal.birthday).format("DD.MM.yyyy");
   body["email"] = req.body.personal.email;
@@ -43,3 +46,37 @@ router.post("/sendBookingInfo", function (req, res, next) {
     }
   });
 });
+
+router.post("/verifyEmailAddress", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync("./providers/mail_server/mail_config/booking.json", "utf-8")
+  );
+
+  body["template"] = "verify_email_address.hjs";
+  body["email"] = req.body.email;
+
+  var options = prepareOptionsForRequest(body);
+
+  console.log(options);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
+//#region
+
+function prepareOptionsForRequest(body) {
+  return {
+    url: process.env.link_api + "mail-server/sendMail",
+    method: "POST",
+    body: body,
+    json: true,
+  };
+}
+
+//#endregion

@@ -1,3 +1,5 @@
+@import "syncfusion-calendar.scss";
+
 :root {
   --dark: #283046;
   --light: #b4b7bd;
@@ -167,5 +169,6 @@
   background: var(--dark);
 }
 
-
-@import "syncfusion-calendar.scss";
+.white-space-break {
+  white-space: break-spaces;
+}
