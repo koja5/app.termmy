@@ -54,6 +54,8 @@ router.post("/verifyEmailAddress", function (req, res, next) {
 
   body["template"] = "verify_email_address.hjs";
   body["email"] = req.body.email;
+  body["verified_mail_link"] =
+    process.env.link_api + "verifiedMailAndActive/" + sha1(req.body.email);
 
   var options = prepareOptionsForRequest(body);
 

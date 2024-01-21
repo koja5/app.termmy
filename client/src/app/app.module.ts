@@ -26,6 +26,11 @@ import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service
 
 const appRoutes: Routes = [
   {
+    path: "",
+    redirectTo: "/auth/login",
+    pathMatch: "full",
+  },
+  {
     path: "dashboard",
     canActivate: [LoginGuardService],
     loadChildren: () =>
@@ -40,8 +45,16 @@ const appRoutes: Routes = [
       ),
   },
   {
+    path: "miscellaneous",
+    canActivate: [LoggedGuard],
+    loadChildren: () =>
+      import("./dashboard/pages/miscellaneous/miscellaneous.module").then(
+        (m) => m.MiscellaneousModule
+      ),
+  },
+  {
     path: "**",
-    redirectTo: "/dashboard/miscellaneous/error",
+    redirectTo: "/miscellaneous/error",
   },
 ];
 
@@ -70,7 +83,7 @@ const appRoutes: Routes = [
     // App modules
     LayoutModule,
     SampleModule,
-    CookieModule.withOptions()
+    CookieModule.withOptions(),
   ],
   providers: [
     {

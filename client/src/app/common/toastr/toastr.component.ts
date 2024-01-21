@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -9,7 +10,10 @@ import { ToastrService } from "ngx-toastr";
 export class ToastrComponent implements OnInit {
   private language: any;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -42,10 +46,14 @@ export class ToastrComponent implements OnInit {
 
   showSuccess() {
     const language = JSON.parse(localStorage.getItem("language") ?? "{}");
-    this.toastr.success(language.generalSuccessfulyExecuteAction, "", {
-      timeOut: 7000,
-      positionClass: "toast-bottom-right",
-    });
+    this.toastr.success(
+      this.translate.instant("actionMessage.successExecuteActionTextDefault"),
+      this.translate.instant("actionMessage.successExecuteActionTitleDefault"),
+      {
+        timeOut: 7000,
+        positionClass: "toast-bottom-right",
+      }
+    );
   }
 
   showInfo() {

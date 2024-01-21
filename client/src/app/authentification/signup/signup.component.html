@@ -85,8 +85,11 @@
                             </label>
                         </div>
                     </div>
-                    <!-- ERROR LABELS -->
+                    <!-- LABELS -->
                     <div>
+
+                        <!-- NOT SUCCESSFULY MESSAGE -->
+
                         <div *ngIf="submitted && registerForm.invalid" class="text-center">
                             <p class="badge badge-light-danger badge-pill full-width p-1">{{'signUp.fillRequredFields' |
                                 translate}}</p>
@@ -98,14 +101,27 @@
                                 translate}}</p>
                         </div>
 
+                        <div *ngIf="response.passwordNotMatch" class="text-center">
+                            <p class="badge badge-light-danger badge-pill full-width p-1 white-space-break">
+                                {{'signUp.passwordNotMatch' |
+                                translate}}</p>
+                        </div>
+
+                        <!-- END NOT SUCCESSFULY MESSAGE -->
+
+                        <!-- SUCCESSFULY MESSAGE -->
+
                         <div *ngIf="response.verifyYourMail" class="text-center">
                             <p class="badge badge-light-success badge-pill full-width p-1 white-space-break">
                                 {{'signUp.verifyYouMail' |
                                 translate}}</p>
                         </div>
+
+                        <!-- END SUCCESSFULY MESSAGE -->
                     </div>
-                    <!-- END ERROR LABELS -->
-                    <button class="btn btn-primary btn-block" tabindex="5" rippleEffect>{{'signUp.signUp' |
+                    <!-- END LABELS -->
+                    <button class="btn btn-primary btn-block" tabindex="5" rippleEffect> <span *ngIf="loading"
+                            class="spinner-border spinner-border-sm mr-1"></span>{{'signUp.signUp' |
                         translate}}</button>
                 </form>
                 <p class="text-center mt-2">

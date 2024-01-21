@@ -11,9 +11,15 @@ import { SignupComponent } from "./signup/signup.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { VerifiedMailComponent } from "./other-auth-pages/verified-mail/verified-mail.component";
 
 // routing
 const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full",
+  },
   {
     path: "login",
     component: LoginComponent,
@@ -32,6 +38,10 @@ const routes: Routes = [
     path: "reset-password",
     component: ResetPasswordComponent,
   },
+  {
+    path: "verified-mail/:email",
+    component: VerifiedMailComponent,
+  },
 ];
 
 @NgModule({
@@ -40,6 +50,7 @@ const routes: Routes = [
     SignupComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    VerifiedMailComponent,
   ],
   imports: [
     CommonModule,

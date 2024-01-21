@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
   public registerForm: UntypedFormGroup;
   public submitted = false;
   public response = new ResponseModel();
+  public loading = false;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -122,16 +123,24 @@ export class SignupComponent implements OnInit {
 
   signUp(data: any) {
     this.response = new ResponseModel();
-    this._service.callPostMethod("/api/signUp", data).subscribe((data) => {
-      if (data) {
-        this.response.verifyYourMail = true;
-        setTimeout(() => {
-          this._router.navigate(["/login"]);
-        }, 6000);
-      } else {
-        this.response.mailExists = true;
-      }
-    });
+    this.loading = true;
+    if (data.password === data.rePassword) {
+      this._service.callPostMethod("/api/signUp", data).subscribe((data) => {
+        if (data) {
+          this.response.verifyYourMail = true;
+          this.loading = true;
+          setTimeout(() => {
+            this._router.navigate(["/auth/login"]);
+          }, 6000);
+        } else {
+          this.loading = true;
+          this.response.mailExists = true;
+        }
+      });
+    } else {
+      this.loading = true;
+      this.response.passwordNotMatch = true;
+    }
   }
 
   //#endregion

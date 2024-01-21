@@ -1,0 +1,24 @@
+<!-- Under maintenance-->
+<div class="misc-wrapper" *ngIf="display">
+    <!-- Brand logo--><a class="brand-logo d-flex p-2" href="javascript:void(0);">
+        <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
+        <h2 class="brand-text text-primary ml-1">{{ coreConfig.app.appName }}</h2>
+    </a>
+    <div class="misc-inner p-2 p-sm-3">
+        <div class="w-100 text-center">
+            <h2 class="mb-1">{{'verifiedMail.title' | translate}} </h2>
+            <p class="mb-3">{{'verifiedMail.text' | translate}}
+            </p>
+            <form class="row row-cols-md-auto row justify-content-center align-items-center m-0 mb-2 gx-3"
+                action="javascript:void(0)">
+                <div class="col-12 d-md-block d-grid ps-md-0 ps-auto">
+                    <button routerLink="/auth/login" class="btn btn-primary mb-1 btn-sm-block"
+                        type="submit">{{'verifiedMail.goToLogin' |
+                        translate}}</button>
+                </div>
+            </form><img class="img-fluid" src="../../../../assets/images/illustration/verified-mail.png"
+                alt="Under maintenance page" />
+        </div>
+    </div>
+</div>
+<!-- / Under maintenance-->

@@ -12,6 +12,10 @@
             "delete": "Delete",
             "update": "Update"
         },
+        "actionMessage": {
+            "successExecuteActionTitleDefault": "Successfuly changed!",
+            "successExecuteActionTextDefault": "Action is successfully executed!"
+        },
         "commonFields": {
             "firstname": "Firstname",
             "lastname": "Lastname",
@@ -160,7 +164,18 @@
             "signInInstead": "Sign in instead",
             "fillRequredFields": "Please fill required fields",
             "mailExists": "This mail address exists. Please enter another email address or reset your password.",
-            "verifyYouMail": "Please check your email to verify it."
+            "verifyYouMail": "Please check your email to verify it.",
+            "passwordNotMatch": "Password and Re-password do not match! Need to be same!"
+        },
+        "verifiedMail": {
+            "title": "Mail is verified! 🙌",
+            "text": "Thank you for your signup and verified your mail. Now you can login and configurable your account!",
+            "goToLogin": "Login now"
+        },
+        "somethingHappenedPage": {
+            "title": "Something unexpected happened! 🤔",
+            "text": "There was an error in the previous action. Please try again or contact our support for help.",
+            "backToHome": "Back to Home"
         }
     }
 }
