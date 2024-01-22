@@ -7,18 +7,13 @@ const logger = require("./config/logger");
 const request = require("request");
 const fs = require("fs");
 const sha1 = require("sha1");
-const stripe = require("stripe")(process.env.stripe_key);
 const jwt = require("jsonwebtoken");
 const auth = require("./config/auth");
+const sql = require("./config/sql-database");
 
 module.exports = router;
 
-var connection = mysql.createPool({
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database,
-});
+var connection = sql.connect();
 
 connection.getConnection(function (err, conn) {});
 
@@ -861,6 +856,34 @@ router.get("/getExternalAccount", auth, async (req, res, next) => {
         conn.query(
           "select * from external_accounts where user_id = ?",
           req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.get("/getExternalAccountAdmin", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from external_accounts_admin where admin_id = ?",
+          req.user.user.admin_id,
           function (err, rows, fields) {
             conn.release();
             if (err) {

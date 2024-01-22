@@ -10,7 +10,10 @@
             "newEntrie": "New entrie",
             "edit": "Edit",
             "delete": "Delete",
-            "update": "Update"
+            "update": "Update",
+            "setUp": "Set up",
+            "connected": "Connected",
+            "cancel": "Cancel"
         },
         "actionMessage": {
             "successExecuteActionTitleDefault": "Successfuly changed!",
@@ -41,6 +44,7 @@
         "navigations": {
             "home": "Home",
             "settings": "Settings",
+            "adminSettings": "Admin settings",
             "allUsers": "All users",
             "myLocations": "My locations",
             "myServices": "My services",
@@ -150,6 +154,16 @@
             "save": "Save time",
             "colorTitle": "Color",
             "colorText": "Worktime color settings for cell in calendar"
+        },
+        "adminSettings": {
+            "adminSettings": "Admin settings",
+            "onlinePayment": "Online payment"
+        },
+        "onlinePayment": {
+            "title": "Online payment",
+            "text": "Set up payment processing and received money online!",
+            "stripeTitle": "Stripe",
+            "stripeText": "Set up your Stripe account for 5 minutes!"
         },
         "signUp": {
             "title": "Adventure starts here 🚀",

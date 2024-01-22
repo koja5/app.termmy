@@ -122,6 +122,13 @@ export class StorageService {
     return false;
   }
 
+  getAdminIdSha1() {
+    if (this.getToken()) {
+      return this.helper.decodeToken(this.getToken()).user.admin_id;
+    }
+    return false;
+  }
+
   // EXTERNAL ACCOUNTS
 
   setExternalAccountSettings(value: any) {

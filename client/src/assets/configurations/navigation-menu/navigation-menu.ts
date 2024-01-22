@@ -67,6 +67,14 @@ export const menu = [
     translate: "navigations.settings",
     type: "item",
     icon: "settings",
-    url: "dashboard/settings/worktime",
+    url: "dashboard/admin/settings/worktime",
+  },
+  {
+    id: "admin-settings",
+    title: "Admin settings",
+    translate: "navigations.adminSettings",
+    type: "item",
+    icon: "settings",
+    url: "dashboard/admin/admin-settings/online-payment",
   },
 ];

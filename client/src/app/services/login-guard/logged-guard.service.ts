@@ -15,7 +15,7 @@ export class LoggedGuard {
     if (!this._storageService.getToken()) {
       return true;
     } else {
-      this._router.navigate(["/dashboard/settings/worktime"]);
+      this._router.navigate(["/dashboard/admin/settings/worktime"]);
       return false;
     }
   }

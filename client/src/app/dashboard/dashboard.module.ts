@@ -14,17 +14,8 @@ import { RouterModule } from "@angular/router";
 import { SuperadminModule } from "./pages/superadmin/superadmin.module";
 import { AccountSettingsComponent } from "./common-pages/account-settings/account-settings.component";
 import { TranslateModule } from "@ngx-translate/core";
-import { SettingsComponent } from "./pages/admin/settings/settings.component";
 
 const routes = [
-  {
-    path: "settings",
-    component: SettingsComponent,
-    loadChildren: () =>
-      import("./pages/admin/settings/settings.module").then(
-        (m) => m.SettingsModule
-      ),
-  },
   {
     path: "account-settings",
     component: AccountSettingsComponent,

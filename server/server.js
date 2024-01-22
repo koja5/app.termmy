@@ -4,11 +4,16 @@ const http = require("http");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
+//API
 const api = require("./providers/api");
 const mailApi = require("./providers/mail-api.js");
 const googleApi = require("./providers/google-api.js");
 const calendarApi = require("./providers/calendar-api.js");
 const mailServer = require("./providers/mail_server/mail-server");
+const payment = require("./providers/external_api/payment/payment.js");
+//END API
+
 const sqlDatabase = require("./providers/config/sql-database");
 var cors = require("cors");
 sqlDatabase.connect();
@@ -51,10 +56,11 @@ app.use(cookieParser());
 
 //providers
 app.use("/api", api);
-app.use("/api/mail-server", mailApi);
 app.use("/api/google", googleApi);
 app.use("/api/calendar", calendarApi);
+app.use("/api/mail-server", mailApi);
 app.use("/api/mail-server", mailServer);
+app.use("/api/payment", payment);
 
 app.use(express.static(path.join(__dirname, "../client/src")));
 

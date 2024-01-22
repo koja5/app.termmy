@@ -10,15 +10,11 @@ const sha1 = require("sha1");
 const stripe = require("stripe")(process.env.stripe_key);
 const jwt = require("jsonwebtoken");
 const auth = require("./config/auth");
+const sql = require("./config/sql-database");
 
 module.exports = router;
 
-var connection = mysql.createPool({
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database,
-});
+var connection = sql.connect();
 
 connection.getConnection(function (err, conn) {
   console.log(err);

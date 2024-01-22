@@ -8,10 +8,11 @@ import { CoreCommonModule } from '@core/common.module';
 
 import { BreadcrumbModule } from 'app/layout/components/content-header/breadcrumb/breadcrumb.module';
 import { ContentHeaderComponent } from 'app/layout/components/content-header/content-header.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ContentHeaderComponent],
-  imports: [CommonModule, RouterModule, CoreCommonModule, BreadcrumbModule, NgbModule],
+  imports: [CommonModule, RouterModule, CoreCommonModule, BreadcrumbModule, NgbModule, TranslateModule],
   exports: [ContentHeaderComponent]
 })
 export class ContentHeaderModule {}

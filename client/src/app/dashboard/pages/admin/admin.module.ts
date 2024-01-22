@@ -14,13 +14,27 @@ import { DynamicSchedulerModule } from "app/common/dynamic-component/dynamic-sch
 import { EmployeesComponent } from "./employees/employees.component";
 import { LocationViewComponent } from "./locations/location-view/location-view.component";
 import { ClientsComponent } from "./clients/clients.component";
+import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
+import { SettingsComponent } from "./settings/settings.component";
 type PathMatch = "full" | "prefix" | undefined;
 
 const routes = [
   {
+    path: "admin-settings",
+    component: AdminSettingsComponent,
+    loadChildren: () =>
+      import("./admin-settings/admin-settings.module").then((m) => m.AdminSettingsModule),
+  },
+  {
+    path: "settings",
+    component: SettingsComponent,
+    loadChildren: () =>
+      import("./settings/settings.module").then((m) => m.SettingsModule),
+  },
+  {
     path: "",
     redirectTo: "my-calendar",
-    pathMatch: 'full' as PathMatch
+    pathMatch: "full" as PathMatch,
   },
   {
     path: "my-locations",
@@ -66,6 +80,7 @@ const routes = [
     EmployeesComponent,
     LocationViewComponent,
     ClientsComponent,
+    AdminSettingsComponent,
   ],
   imports: [
     CommonModule,

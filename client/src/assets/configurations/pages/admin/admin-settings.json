@@ -1,0 +1,34 @@
+{
+    "type": "vertical",
+    "contentHeader": {
+        "headerTitle": "adminSettings.adminSettings",
+        "actionButton": true,
+        "breadcrumb": {
+            "type": "",
+            "links": [
+                {
+                    "name": "dashboard",
+                    "isLink": false,
+                    "link": "/"
+                },
+                {
+                    "name": "admin",
+                    "isLink": false,
+                    "link": "/"
+                },
+                {
+                    "name": "admin-settings",
+                    "isLink": false,
+                    "link": "/"
+                }
+            ]
+        }
+    },
+    "navigations": [
+        {
+            "title": "adminSettings.onlinePayment",
+            "link": "/dashboard/admin/admin-settings/online-payment",
+            "icon": "briefcase"
+        }
+    ]
+}

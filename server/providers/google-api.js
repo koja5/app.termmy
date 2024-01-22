@@ -7,15 +7,11 @@ const mysql = require("mysql");
 const auth = require("./config/auth");
 const request = require("request");
 const logger = require("./config/logger");
+const sql = require("./config/sql-database");
 
 module.exports = router;
 
-var connection = mysql.createPool({
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database,
-});
+var connection = sql.connect();
 
 //GENERAL
 
@@ -30,15 +26,14 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
     delete req.body.token;
 
     conn.query(
-      "select * from external_accounts where admin_id = ?",
-      [req.body.admin_id],
+      "select * from external_accounts where user_id = ?",
+      [req.user.user.id],
       function (err, rows) {
         if (!err) {
           if (rows.length) {
-            console.log(rows.length);
             conn.query(
               "update external_accounts set ? where admin_id = ?",
-              [req.body, req.body.admin_id],
+              [req.body, req.user.user.id],
               function (err, rows) {
                 conn.release();
                 if (!err) {
@@ -213,7 +208,9 @@ router.get("/redirect", async (req, res) => {
 
   request(options, function (error, response, body) {
     if (!error) {
-      res.redirect(process.env.link_client + "dashboard/settings/connections");
+      res.redirect(
+        process.env.link_client + "dashboard/admin/settings/connections"
+      );
     } else {
       res.json(false);
     }

@@ -28,11 +28,6 @@ const routes: Routes = [
     data: { animation: "misc" },
   },
   {
-    path: "error",
-    component: ErrorComponent,
-    data: { animation: "misc" },
-  },
-  {
     path: "something-happened",
     component: SomethingHappenedComponent,
     data: { animation: "misc" },

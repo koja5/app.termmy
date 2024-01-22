@@ -5,10 +5,10 @@
       <div class="row breadcrumbs-top">
         <div class="col-12 d-flex">
           <h2 class="content-header-title float-left mb-0">
-            {{ contentHeader.headerTitle }}
+            {{ contentHeader.headerTitle | translate }}
           </h2>
           <!-- app-breadcrumb component -->
-          <app-breadcrumb [breadcrumb]="contentHeader.breadcrumb"></app-breadcrumb>
+          <app-breadcrumb [breadcrumb]="contentHeader.breadcrumb | translate"></app-breadcrumb>
         </div>
       </div>
     </div>
