@@ -115,7 +115,8 @@
             "termineTo": "Time to",
             "service": "Service",
             "locations": "Locations",
-            "employees": "Employees"
+            "employees": "Employees",
+            "notSetWorkTimeForUser": "No working times have been set for this user"
         },
         "myEmployee": {
             "position": "Position",

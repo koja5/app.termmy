@@ -49,6 +49,7 @@ export class DynamicGridComponent {
   public modalDialog: any;
   public modalFormDialog: any;
   public innerWidth: any;
+  public loader = false;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -238,6 +239,7 @@ export class DynamicGridComponent {
   }
 
   initializeConfig() {
+    this.loader = true;
     this._configurationService
       .getConfiguration(this.path, this.file)
       .subscribe((data) => {
@@ -252,6 +254,7 @@ export class DynamicGridComponent {
                   .subscribe((data) => {
                     this.rows = data;
                     this.tempData = this.rows;
+                    this.loader = false;
                   });
               }, 450);
             } else {
@@ -260,13 +263,10 @@ export class DynamicGridComponent {
                 .subscribe((data) => {
                   this.rows = data;
                   this.tempData = this.rows;
+                  this.loader = false;
                 });
             }
           });
-        // this._service.callApi(this.config, this.router).subscribe((data) => {
-        //   this.rows = data;
-        //   this.tempData = this.rows;
-        // });
       });
   }
 

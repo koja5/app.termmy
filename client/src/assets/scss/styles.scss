@@ -58,6 +58,11 @@
   border-color: #3b4253 !important;
 }
 
+.dark-layout .e-input-group .e-input-group-icon,
+.e-input-group.e-control-wrapper .e-input-group-icon {
+  color: var(--light) !important;
+}
+
 .e-outline.e-input-group.e-input-focus:hover:not(.e-success):not(
     .e-warning
   ):not(.e-error):not(.e-disabled):not(.e-float-icon-left),

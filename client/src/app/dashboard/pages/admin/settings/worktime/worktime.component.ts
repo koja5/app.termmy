@@ -22,7 +22,8 @@ export class WorktimeComponent implements OnInit {
   public data: any = {};
   public model: any;
   public notCorrectTime = [];
-  public worktimeColor = '#000';
+  public worktimeColor = "#000";
+  public loader = false;
 
   constructor(
     private _helpService: HelpService,
@@ -31,8 +32,9 @@ export class WorktimeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loader = true;
     this._service
-      .callGetMethod("/api/getWorktime", "")
+      .callGetMethod("/api/getMyWorktime", "")
       .subscribe((data: any) => {
         if (data && data.length) {
           this.data = data[0];
@@ -40,8 +42,9 @@ export class WorktimeComponent implements OnInit {
             data[0].value
           );
         } else {
-          this.data = WorkTimeEmpty;
+          this.data = new WorkTimeEmpty();
         }
+        this.loader = false;
       });
   }
 

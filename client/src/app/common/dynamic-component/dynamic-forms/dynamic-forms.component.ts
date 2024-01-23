@@ -252,7 +252,14 @@ export class DynamicFormsComponent implements OnInit {
           this.form.controls[name].setValue(this.convertBooleanValue(value), {
             emitEvent: true,
           });
-        } else {
+        }
+        //  else if (type === "datetimepicker") {
+        //   console.log(new Date(value).toUTCString());
+        //   this.form.controls[name].setValue(new Date(value).toUTCString(), {
+        //     emitEvent: true,
+        //   });
+        // } 
+        else {
           this.form.controls[name].setValue(value, { emitEvent: true });
         }
       }

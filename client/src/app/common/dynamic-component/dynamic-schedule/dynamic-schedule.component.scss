@@ -10,6 +10,7 @@
 
 .e-schedule .e-vertical-view .e-work-cells.e-disable-dates {
   pointer-events: none;
+  background: rgba(0, 0, 0, 0.08) !important;
 }
 
 .dark-layout .e-schedule .e-schedule-toolbar .e-toolbar-items.e-tbar-pos,
@@ -96,7 +97,14 @@
 .dark-layout .e-schedule .e-agenda-view .e-date-time,
 .dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-date,
 .dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-day,
-.dark-layout .e-schedule .e-agenda-view .e-resource-column {
+.dark-layout .e-schedule .e-agenda-view .e-resource-column,
+.dark-layout
+  .e-schedule
+  .e-vertical-view
+  .e-left-indent-wrap
+  table
+  tbody
+  td.e-header-cells.e-week-number {
   color: #fff !important;
 }
 
@@ -145,4 +153,9 @@
 .need-to-select img {
   width: 260px;
   margin: auto;
+}
+
+.not-set-worktime {
+  font-size: 15px;
+  color: red;
 }

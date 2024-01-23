@@ -18,9 +18,9 @@ import { DynamicScheduleComponent } from "./dynamic-schedule.component";
 import { CommonModule } from "@angular/common";
 import { DynamicModule } from "../dynamic.module";
 import { FormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { TranslateModule } from "@ngx-translate/core";
+import { CommonCustomModule } from "app/common/common-custom.module";
 
 @NgModule({
   declarations: [DynamicScheduleComponent],
@@ -31,6 +31,7 @@ import { TranslateModule } from "@ngx-translate/core";
     FormsModule,
     TranslateModule,
     NgSelectModule,
+    CommonCustomModule
   ],
   providers: [
     DayService,

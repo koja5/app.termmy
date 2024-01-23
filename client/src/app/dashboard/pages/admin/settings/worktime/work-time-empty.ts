@@ -1,5 +1,5 @@
 export class WorkTimeEmpty {
-  static value = [
+  value = [
     {
       id: 1,
       name: "worktime.monday",

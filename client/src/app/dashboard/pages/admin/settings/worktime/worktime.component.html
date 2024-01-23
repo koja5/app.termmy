@@ -2,7 +2,10 @@
 
 <div class="card">
     <div class="card-body">
-        <form class="validate-form" *ngIf="data && data.value">
+        <div class="min-vh-100" *ngIf="loader">
+            <app-loader></app-loader>
+        </div>
+        <form class="validate-form" *ngIf="!loader">
             <div class="row">
                 <!-- social header -->
                 <div class="col-12">
@@ -39,8 +42,8 @@
                                         [disabled]="!item.active"></time-picker-i18n>
                                 </div>
                                 <div class="d-md-flex align-items-center">
-                                    <button type="button" class="btn btn-outline-danger h-35 ml-md-3 mt-md-2" rippleEffect
-                                        [disabled]="!item.active || item.times.length === 1"
+                                    <button type="button" class="btn btn-outline-danger h-35 ml-md-3 mt-md-2"
+                                        rippleEffect [disabled]="!item.active || item.times.length === 1"
                                         (click)="removeWorkTimeForDay(i, j)">{{'worktime.remove' | translate}}</button>
                                 </div>
                             </div>

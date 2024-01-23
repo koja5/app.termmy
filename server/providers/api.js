@@ -319,7 +319,7 @@ router.post("/setWorktime", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.admin_id;
+    req.body.user_id = req.user.user.id;
     req.body.value = convertToString(req.body.value);
 
     if (req.body.id) {
@@ -354,7 +354,7 @@ router.post("/setWorktime", auth, function (req, res) {
   });
 });
 
-router.get("/getWorktime", auth, async (req, res, next) => {
+router.get("/getMyWorktime", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
       if (err) {
@@ -362,8 +362,36 @@ router.get("/getWorktime", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from worktimes where admin_id = ?",
+          "select * from worktimes where user_id = ?",
           req.user.user.id,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.get("/getWorktimeForEmployee/:id", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from worktimes where user_id = ?",
+          req.params.id,
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -934,7 +962,7 @@ router.get("/getAdminLocations", auth, async (req, res, next) => {
   }
 });
 
-router.get("/getAdminEmployees", auth, async (req, res, next) => {
+router.get("/getAdminEmployees/:id", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
       if (err) {
@@ -942,8 +970,8 @@ router.get("/getAdminEmployees", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from users where admin_id = ?",
-          [req.user.user.admin_id],
+          "select * from users where location_id = ?",
+          [req.params.id],
           function (err, rows, fields) {
             conn.release();
             if (err) {

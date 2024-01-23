@@ -10,6 +10,7 @@ import { ConnectionsComponent } from "./connections/connections.component";
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { SettingsComponent } from "./settings.component";
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
+import { CommonCustomModule } from "app/common/common-custom.module";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
@@ -26,6 +27,7 @@ const routes = [
     TranslateModule,
     DynamicModule,
     ColorPickerModule,
+    CommonCustomModule,
   ],
   providers: [ToastrComponent],
   exports: [

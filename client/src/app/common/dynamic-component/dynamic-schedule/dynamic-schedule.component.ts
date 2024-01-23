@@ -49,7 +49,7 @@ export class DynamicScheduleComponent {
   public allEmployees: any;
   public selectedEmployees: any;
   public externalAccounts: any;
-  public workTimes: any;
+  public workTimes: any = {};
   public calendarSettings = new CalendarSettings();
   public calendarRights: any;
   public employeeId: number;
@@ -102,9 +102,13 @@ export class DynamicScheduleComponent {
   }
 
   getAdminEmployees() {
-    if (this.config.filters.employees) {
+    if (this.config.filters.employees && this.calendarSettings.location_id) {
+      this.config.filters.employees.body = this.calendarSettings.location_id;
       this._service
-        .callApi(null, this.config.filters.employees.request)
+        .callServerMethod(
+          this.config.filters.employees.request,
+          this.calendarSettings.location_id
+        )
         .subscribe((data) => {
           this.allEmployees = data;
         });
@@ -382,6 +386,7 @@ export class DynamicScheduleComponent {
     this.calendarSettings.selectedEmployeesFullInfo = event;
     this._storageService.setCalendarConfig(this.calendarSettings);
     this.checkIfPersonalOrGroupCalendar();
+    this.getWorkTimes();
     this.getTermines();
   }
   //#endregion
@@ -389,14 +394,42 @@ export class DynamicScheduleComponent {
   //#region API functions
 
   getWorkTimes() {
-    this._service.callGetMethod("/api/getWorktime", "").subscribe((data) => {
-      if (data) {
-        this.workTimes = {
-          color: data[0].color,
-          value: JSON.parse(data[0].value),
-        };
+    this.workTimes = {};
+    this.loader = true;
+    if (this.calendarSettings.selectedEmployees.length) {
+      for (let i = 0; i < this.calendarSettings.selectedEmployees.length; i++) {
+        this._service
+          .callGetMethod(
+            "/api/getWorktimeForEmployee",
+            this.calendarSettings.selectedEmployees[i]
+          )
+          .subscribe((data: any) => {
+            if (data && data.length) {
+              this.workTimes[i] = {
+                color: data[0].color,
+                value: JSON.parse(data[0].value),
+              };
+              this.loader = false;
+            } else {
+              this.workTimes[i] = null;
+              this.loader = false;
+            }
+          });
       }
-    });
+    } else {
+      this._service
+        .callGetMethod("/api/getMyWorktime", "")
+        .subscribe((data) => {
+          if (data) {
+            this.workTimes[0] = {
+              color: data[0].color,
+              value: JSON.parse(data[0].value),
+            };
+          }
+
+          this.loader = false;
+        });
+    }
   }
 
   //#endregion
@@ -423,21 +456,29 @@ export class DynamicScheduleComponent {
     const day = args.date.getDay();
     const hour = args.date.getHours();
     const minutes = args.date.getMinutes();
-    const workTimeForDay = this.getWorkTimeForDay(day);
-    if (workTimeForDay.active && this.workTimes.color) {
+    const workTimeForDay = this.getWorkTimeForDay(day, args.groupIndex);
+    if (
+      workTimeForDay &&
+      workTimeForDay.active &&
+      this.workTimes[args.groupIndex] &&
+      this.workTimes[args.groupIndex].color
+    ) {
       let notWorkTime = true;
       for (let i = 0; i < workTimeForDay.times.length; i++) {
-        if (
-          (hour >= workTimeForDay.times[i].start.hour &&
-            hour < workTimeForDay.times[i].end.hour) ||
-          (hour === workTimeForDay.times[i].start.hour &&
-            minutes > workTimeForDay.times[i].start.minutes &&
-            hour === workTimeForDay.times[i].end.hour &&
-            minutes < workTimeForDay.times[i].end.minutes)
-        ) {
-          args.element.style.backgroundColor = this.workTimes.color;
-          notWorkTime = false;
-          break;
+        if (workTimeForDay.times[i].start && workTimeForDay.times[i].end) {
+          if (
+            (hour >= workTimeForDay.times[i].start.hour &&
+              hour < workTimeForDay.times[i].end.hour) ||
+            (hour === workTimeForDay.times[i].start.hour &&
+              minutes > workTimeForDay.times[i].start.minutes &&
+              hour === workTimeForDay.times[i].end.hour &&
+              minutes < workTimeForDay.times[i].end.minutes)
+          ) {
+            args.element.style.backgroundColor =
+              this.workTimes[args.groupIndex].color;
+            notWorkTime = false;
+            break;
+          }
         }
       }
       if (notWorkTime) {
@@ -448,12 +489,15 @@ export class DynamicScheduleComponent {
     }
   }
 
-  getWorkTimeForDay(day) {
-    for (let i = 0; i < this.workTimes.value.length; i++) {
-      if (this.workTimes.value[i].id == day) {
-        return this.workTimes.value[i];
+  getWorkTimeForDay(day, groupIndex) {
+    if (this.workTimes[groupIndex]) {
+      for (let j = 0; j < this.workTimes[groupIndex].value.length; j++) {
+        if (this.workTimes[groupIndex].value[j].id == day) {
+          return this.workTimes[groupIndex].value[j];
+        }
       }
     }
+    return null;
   }
 
   checkCalendarConfigurations() {
@@ -482,6 +526,7 @@ export class DynamicScheduleComponent {
             id: this.calendarSettings.selectedEmployeesFullInfo[i].id,
             position:
               this.calendarSettings.selectedEmployeesFullInfo[i].position,
+            groupIndex: i,
           });
         }
       }
@@ -489,6 +534,7 @@ export class DynamicScheduleComponent {
       this.resourceDataSource.push({
         text: token.firstname + " " + token.lastname,
         id: token.id,
+        groupIndex: 0,
       });
     }
   }
@@ -507,7 +553,7 @@ export class DynamicScheduleComponent {
 
   checkCalendarVisibility() {
     return (
-      this.workTimes &&
+      Object.keys(this.workTimes).length &&
       ((this.calendarSettings.rights &&
         this.calendarSettings.rights.show_other_calendar &&
         this.calendarSettings.selectedEmployees &&

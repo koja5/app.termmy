@@ -1,4 +1,5 @@
-<div class="content-wrapper p-0" *ngIf="config">
+<app-loader *ngIf="loader"></app-loader>
+<div class="content-wrapper p-0" *ngIf="config&&!loader">
     <div class="content-body">
         <!-- User List -->
         <section class="users-list-wrapper">
@@ -92,8 +93,8 @@
               </ng-template>
             </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
-                        [prop]="item.field" [width]="item.width ? item.width : auto" [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'"
-                        class="{{item.class}}">
+                        [prop]="item.field" [width]="item.width ? item.width : auto"
+                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}">
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                             <div *ngIf="item.template">
                                 <div *ngIf="item.template.choices" class="datatable-body-cell">

@@ -18,6 +18,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { RouterModule } from "@angular/router";
 import { DynamicTabsComponent } from "./dynamic-tabs/dynamic-tabs.component";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
+import { CommonCustomModule } from "../common-custom.module";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
     TranslateModule,
     RouterModule,
     ContentHeaderModule,
+    CommonCustomModule,
   ],
   providers: [ToastrComponent],
   exports: [DynamicGridComponent, DynamicFormsComponent, DynamicTabsComponent],

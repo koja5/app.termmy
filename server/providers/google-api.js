@@ -92,11 +92,11 @@ router.post("/createTermine", auth, async (req, res) => {
       description: JSON.stringify(req.body),
       start: {
         dateTime: req.body.StartTime,
-        timeZone: "Europe/Belgrade",
+        timeZone: "UTC",
       },
       end: {
         dateTime: req.body.EndTime,
-        timeZone: "Europe/Belgrade",
+        timeZone: "UTC",
       },
     },
   });
@@ -122,11 +122,11 @@ router.post("/updateTermine", auth, async (req, res) => {
           : req.body.description,
       start: {
         dateTime: req.body.StartTime,
-        timeZone: "Europe/Belgrade",
+        timeZone: "UTC",
       },
       end: {
         dateTime: req.body.EndTime,
-        timeZone: "Europe/Belgrade",
+        timeZone: "UTC",
       },
     },
   });

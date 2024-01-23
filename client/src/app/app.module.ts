@@ -23,6 +23,7 @@ import { CommonModule } from "@angular/common";
 import { LoginGuardService } from "./services/login-guard/login-guard.service";
 import { LoggedGuard } from "./services/login-guard/logged-guard.service";
 import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service";
+import { LoaderComponent } from './common/loader/loader.component';
 
 const appRoutes: Routes = [
   {
