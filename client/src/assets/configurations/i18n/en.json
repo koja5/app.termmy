@@ -116,7 +116,8 @@
             "service": "Service",
             "locations": "Locations",
             "employees": "Employees",
-            "notSetWorkTimeForUser": "No working times have been set for this user"
+            "notSetWorkTimeForUser": "No working times have been set for this user",
+            "connectedThisCalendarWithGoogle": "This calendar is connected with google!"
         },
         "myEmployee": {
             "position": "Position",

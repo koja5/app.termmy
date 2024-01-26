@@ -94,7 +94,6 @@ export class LoginComponent implements OnInit {
           this._storageService.setToken(data.token);
           this._router.navigate(["dashboard/admin"]);
           this.loading = false;
-          this.setExternalAccountSettings();
         } else {
           this.error = data.type;
           this.loading = false;
@@ -132,15 +131,5 @@ export class LoginComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
-  }
-
-  setExternalAccountSettings() {
-    this._service
-      .callGetMethod("/api/getExternalAccount", "")
-      .subscribe((data: any) => {
-        if (data && data.length) {
-          this._storageService.setExternalAccountSettings(data[0]);
-        }
-      });
   }
 }

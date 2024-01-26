@@ -36,6 +36,7 @@ export interface CoreConfig {
   };
   calendar: {
     rights: any;
+    externalAccounts: any;
     selectedEmployees: any;
     selectedEmployeesFullInfo: any;
     location_id: any;

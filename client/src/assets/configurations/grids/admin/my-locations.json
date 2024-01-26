@@ -149,42 +149,6 @@
             "allowEditing": false
         },
         {
-            "title": "myLocations.address",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "address",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "myLocations.zip",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "zip",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "myLocations.city",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "city",
-            "validation": {
-                "required": true
-            }
-        },
-        {
             "title": "myLocations.telephone",
             "filterable": true,
             "hideable": true,

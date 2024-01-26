@@ -422,6 +422,35 @@ function convertWorkTimesToObject(rows) {
   return rows;
 }
 
+router.get("/getUserLocation", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select l.* from locations l join users u on l.id = u.location_id where u.id = ?",
+          [req.user.user.id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              rows = convertWorkTimesToObject(rows);
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
 router.get("/getMyLocations", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
@@ -874,7 +903,7 @@ router.post("/deleteClient", auth, function (req, res) {
 //#endregion CLIENTS
 
 // #region EXTERNAL API
-router.get("/getExternalAccount", auth, async (req, res, next) => {
+router.get("/getExternalAccounts", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
       if (err) {
@@ -930,6 +959,35 @@ router.get("/getExternalAccountAdmin", auth, async (req, res, next) => {
   }
 });
 
+router.post("/getExternalAccountsForMultiCalendar", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    const condition = packStringFromArrayForWhereCondition(
+      req.body,
+      false,
+      "user_id",
+      "or"
+    );
+
+    conn.query(
+      "select * from external_accounts where " + condition,
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(rows);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 // #endregion EXTERNAL API
 
 // #region CALENDARS
@@ -950,6 +1008,7 @@ router.get("/getAdminLocations", auth, async (req, res, next) => {
               logger.log("error", err.sql + ". " + err.sqlMessage);
               res.json(err);
             } else {
+              rows = convertWorkTimesToObject(rows);
               res.json(rows);
             }
           }
@@ -1081,6 +1140,23 @@ function makeRequest(options, res) {
 
 function setSha1Password(password) {
   return sha1(password);
+}
+
+function packStringFromArrayForWhereCondition(
+  array,
+  arrayField,
+  sqlField,
+  connective
+) {
+  let condition = "";
+  for (let i = 0; i < array.length; i++) {
+    condition +=
+      sqlField + " = " + (arrayField ? array[i][arrayField] : array[i]);
+    if (i < array.length - 1) {
+      condition += " " + connective + " ";
+    }
+  }
+  return condition;
 }
 
 //#endregion HELP FUNCTION

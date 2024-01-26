@@ -13,7 +13,7 @@ export class ConnectionsComponent {
 
   ngOnInit() {
     this._service
-      .callGetMethod("api/getExternalAccount", "")
+      .callGetMethod("api/getExternalAccounts", "")
       .subscribe((data: any) => {
         if (data.length) {
           this.data = data[0];

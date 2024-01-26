@@ -13,7 +13,7 @@ module.exports = router;
 
 var connection = sql.connect();
 
-//GENERAL
+// GENERAL
 
 router.post("/setExternalGoogleAccount", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
@@ -32,7 +32,7 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
         if (!err) {
           if (rows.length) {
             conn.query(
-              "update external_accounts set ? where admin_id = ?",
+              "update external_accounts set ? where user_id = ?",
               [req.body, req.user.user.id],
               function (err, rows) {
                 conn.release();
@@ -68,21 +68,22 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
   });
 });
 
-//GENERAL
+// GENERAL
 
-// TERMINEs
+// TERMINES
 router.post("/createTermine", auth, async (req, res) => {
   oauth2Client.setCredentials({
-    refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+    refresh_token: req.body.externalCalendar,
   });
 
   req.body.creator_id = req.user.user.id;
-  req.body.employee_id = req.body.employee_id
+  req.body.employeeId = req.body.employee_id
     ? req.body.employee_id
     : req.body.employeeId
     ? req.body.employeeId
     : req.user.user.id;
+
+  delete req.body.employee_id;
 
   await calendar.events.insert({
     calendarId: "primary",
@@ -107,19 +108,19 @@ router.post("/createTermine", auth, async (req, res) => {
 router.post("/updateTermine", auth, async (req, res) => {
   oauth2Client.setCredentials({
     refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+      typeof req.body === "object"
+        ? req.body.externalCalendar
+        : JSON.parse(req.body).externalCalendar,
   });
 
   await calendar.events.update({
     calendarId: "primary",
     auth: oauth2Client,
-    eventId: req.body.externalId,
+    eventId: req.body.id,
     requestBody: {
       summary: req.body.Subject,
       description:
-        typeof req.body.description === "object"
-          ? JSON.stringify(req.body.description)
-          : req.body.description,
+        typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
       start: {
         dateTime: req.body.StartTime,
         timeZone: "UTC",
@@ -134,22 +135,21 @@ router.post("/updateTermine", auth, async (req, res) => {
   res.send(true);
 });
 
-router.get("/deleteTermine/:id", async (req, res) => {
+router.post("/deleteTermine", async (req, res) => {
   oauth2Client.setCredentials({
-    refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+    refresh_token: req.body.externalCalendar,
   });
 
   const events = await calendar.events.delete({
     calendarId: "primary",
     auth: oauth2Client,
-    eventId: req.params.id,
+    eventId: req.body.id,
   });
 
   res.send(events);
 });
 
-router.get("/getTermines", async (req, res) => {
+router.get("/getMyTermines", async (req, res) => {
   oauth2Client.setCredentials({
     refresh_token:
       "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
@@ -160,7 +160,56 @@ router.get("/getTermines", async (req, res) => {
     auth: oauth2Client,
   });
 
-  res.send(events);
+  if (events && events.data) {
+    res.send(events.data.items);
+  } else {
+    res.send([]);
+  }
+});
+
+router.post("/getTerminesForMultiCalendar", async (req, res) => {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    const condition = packStringFromArrayForWhereCondition(
+      req.body,
+      false,
+      "user_id",
+      "or"
+    );
+
+    conn.query(
+      "select * from external_accounts where " + condition,
+      async function (err, rows) {
+        conn.release();
+        if (!err) {
+          let allEvents = [];
+          for (let i = 0; i < rows.length; i++) {
+            oauth2Client.setCredentials({
+              refresh_token: rows[i].google,
+            });
+
+            const events = await calendar.events.list({
+              calendarId: "primary",
+              auth: oauth2Client,
+            });
+
+            if (events && events.data) {
+              allEvents = allEvents.concat(events.data.items);
+            }
+          }
+
+          res.send(allEvents);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
 });
 
 //END TERMINE
@@ -248,3 +297,23 @@ router.get("/schedule_event", async (req, res) => {
 });
 
 // END GOOGLE
+
+//#region HELP FUNCTIOn
+function packStringFromArrayForWhereCondition(
+  array,
+  arrayField,
+  sqlField,
+  connective
+) {
+  let condition = "";
+  for (let i = 0; i < array.length; i++) {
+    condition +=
+      sqlField + " = " + (arrayField ? array[i][arrayField] : array[i]);
+    if (i < array.length - 1) {
+      condition += " " + connective + " ";
+    }
+  }
+  return condition;
+}
+
+//#endregion

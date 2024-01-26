@@ -159,3 +159,15 @@
   font-size: 15px;
   color: red;
 }
+
+.external-calendar-icon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: -5px;
+  bottom: 0px;
+  z-index: 111;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
+}

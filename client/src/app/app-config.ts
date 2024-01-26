@@ -51,6 +51,7 @@ export const coreConfig: CoreConfig = {
   },
   calendar: {
     rights: null,
+    externalAccounts: null,
     selectedEmployees: [],
     selectedEmployeesFullInfo: [],
     location_id: null,

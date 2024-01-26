@@ -1,9 +1,9 @@
-<div class="content-wrapper p-0" *ngIf="config">
+<app-loader *ngIf="loader"></app-loader>
+<div class="content-wrapper p-0" *ngIf="config&&!loader">
     <div class="content-body">
         <section class="users-list-wrapper">
             <!-- users filter start -->
-            <div class="row mb-2"
-                *ngIf="config.showOtherCalendar && (calendarSettings.rights && calendarSettings.rights.show_other_calendar)">
+            <div class="row mb-2" *ngIf="multiCalendar">
                 <div class="col-md-6">
                     <label *ngIf="config.filters.locations.title" class="custom-label">{{
                         config.filters.locations.title | translate
@@ -16,24 +16,28 @@
                     <label *ngIf="config.filters.employees.title" class="custom-label">{{
                         config.filters.employees.title | translate
                         }} </label>
-                    <ng-select *ngIf="allEmployees" [items]="allEmployees" [bindLabel]="'firstname'" [bindValue]="'id'"
+                    <ng-select [items]="allEmployees" [bindLabel]="'firstname'" [bindValue]="'id'"
                         [(ngModel)]="calendarSettings.selectedEmployees" [multiple]="true"
                         (change)="changeEmployees($event)">
                     </ng-select>
                 </div>
             </div>
-            <div class="card" *ngIf="checkCalendarVisibility()&&!loader">
-                <ejs-schedule #calendar width='100%'
-                    [height]="config.showOtherCalendar && (calendarSettings.rights && calendarSettings.rights.show_other_calendar) ? '71vh' : '80vh'"
+            <div class="card">
+                <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : '80vh'"
                     [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
                     [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()"
                     (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
-                    (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
-                    (renderCell)="onRenderCell($event)">
+                    (popupClose)="onPopupClose($event)" (eventRendered)="onEventRendered($event)"
+                    (dataBound)="onDataBound($event)" (renderCell)="onRenderCell($event)">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1"><img height="40" width="40"
-                                    src="../../../../assets/images/avatars/no-user-profile.png"></div>
+                                    src="../../../../assets/images/avatars/no-user-profile.png">
+                                <img class="external-calendar-icon"
+                                    *ngIf="calendarSettings.externalAccounts.google || checkExternalAccountForGoogle(item.resourceData.id)"
+                                    src="../../../../assets/images/icons/google.png"
+                                    title="{{'myCalendar.connectedThisCalendarWithGoogle' | translate}}">
+                            </div>
                             <div class="resource-details">
                                 <div class="resource-name">{{item.resourceData.text}} <span
                                         *ngIf="!workTimes[item.resourceData.groupIndex]"
@@ -69,7 +73,6 @@
                 </div>
             </div>
 
-            <app-loader *ngIf="loader"></app-loader>
         </section>
     </div>
 </div>
