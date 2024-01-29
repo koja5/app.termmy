@@ -96,7 +96,7 @@ router.get("/checkAccount/:stripe/:admin_id", (req, res, next) => {
   });
 });
 
-router.post("/setExternalStripeAccount", auth, function (req, res) {
+router.post("/setExternalStripeAccount", function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {
       logger.log("error", err.sql + ". " + err.sqlMessage);

@@ -15,11 +15,6 @@
                     "name": "settings",
                     "isLink": false,
                     "link": "/"
-                },
-                {
-                    "name": "worktime",
-                    "isLink": false,
-                    "link": "/"
                 }
             ]
         }

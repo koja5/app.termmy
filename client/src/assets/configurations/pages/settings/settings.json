@@ -34,11 +34,6 @@
       "title": "settings.connections",
       "link": "/dashboard/admin/settings/connections",
       "icon": "link"
-    },
-    {
-      "title": "settings.customization",
-      "link": "/dashboard/admin/settings/customization",
-      "icon": "tool"
     }
   ]
 }

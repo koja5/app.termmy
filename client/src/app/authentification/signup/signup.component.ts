@@ -128,17 +128,17 @@ export class SignupComponent implements OnInit {
       this._service.callPostMethod("/api/signUp", data).subscribe((data) => {
         if (data) {
           this.response.verifyYourMail = true;
-          this.loading = true;
+          this.loading = false;
           setTimeout(() => {
             this._router.navigate(["/auth/login"]);
           }, 6000);
         } else {
-          this.loading = true;
+          this.loading = false;
           this.response.mailExists = true;
         }
       });
     } else {
-      this.loading = true;
+      this.loading = false;
       this.response.passwordNotMatch = true;
     }
   }

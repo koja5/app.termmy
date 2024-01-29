@@ -34,7 +34,14 @@
             "action": "Action",
             "verified": "Verified",
             "man": "Man",
-            "woman": "Woman"
+            "woman": "Woman",
+            "position": "Position",
+            "company": "Company",
+            "location": "Location",
+            "biography": "Biography",
+            "oldPassword": "Old password",
+            "newPassword": "New password",
+            "confirmNewPassword": "Confirm new password"
         },
         "login": {
             "verifiedError": "You need to verified your email address!",
@@ -60,23 +67,17 @@
         },
         "form": {
             "mustFillThisField": "Please fill this field!",
-            "fieldIsRequired": "Data is required"
+            "fieldIsRequired": "Data is required",
+            "emailIsRequired": "Email is required",
+            "emailMustBeValid": "Email must be a valid email address",
+            "passwordIsRequired": "Password is required"
         },
         "allUsers": {
-            "firstname": "Firstname",
-            "lastname": "Lastname",
             "number": "Number",
             "type": "Type",
             "superadmin": "Superadmin",
             "admin": "Admin",
             "partner": "Partner",
-            "company": "Company",
-            "email": "Email",
-            "telephone": "Telephone",
-            "country": "Country",
-            "address": "Address",
-            "zip": "Zip",
-            "city": "City",
             "vat": "VAT",
             "newsletter": "Newsletter",
             "verified": "Verified",
@@ -84,8 +85,7 @@
             "active": "Active",
             "signUpTime": "Signup time",
             "password": "Password",
-            "rePassword": "Re-password",
-            "location": "Location"
+            "rePassword": "Re-password"
         },
         "myLocations": {
             "name": "Name of location",
@@ -110,18 +110,15 @@
             "currency": "€"
         },
         "myCalendar": {
-            "customer": "Customer",
+            "client": "Client",
             "termineFrom": "Time from",
             "termineTo": "Time to",
             "service": "Service",
             "locations": "Locations",
             "employees": "Employees",
             "notSetWorkTimeForUser": "No working times have been set for this user",
-            "connectedThisCalendarWithGoogle": "This calendar is connected with google!"
-        },
-        "myEmployee": {
-            "position": "Position",
-            "location": "Location"
+            "connectedThisCalendarWithGoogle": "This calendar is connected with google!",
+            "selectLocationAndEmployee": "Please select location and user to see calendar"
         },
         "settings": {
             "worktime": "Worktime",
@@ -167,12 +164,12 @@
             "stripeTitle": "Stripe",
             "stripeText": "Set up your Stripe account for 5 minutes!"
         },
+        "authGlobal": {
+            "backToLogin": "Back to login"
+        },
         "signUp": {
             "title": "Adventure starts here 🚀",
             "text": "Make your app management easy and fun!",
-            "emailIsRequired": "Email is required",
-            "emailMustBeValid": "Email must be a valid email address",
-            "passwordIsRequired": "Password is required",
             "IAgreeTo": "I agree to",
             "privacy": "privacy policy & terms",
             "signUp": "Sign up",
@@ -182,6 +179,22 @@
             "mailExists": "This mail address exists. Please enter another email address or reset your password.",
             "verifyYouMail": "Please check your email to verify it.",
             "passwordNotMatch": "Password and Re-password do not match! Need to be same!"
+        },
+        "forgot": {
+            "title": "Forgot Password? 🔒",
+            "text": "Enter your email and we'll send you instructions to reset your password",
+            "sendResetLink": "Send reset link",
+            "sendLinkForResetOnMail": "Send link for reset password to this mail address",
+            "mailNotExists": "Mail not exists! Please check with other email address!"
+        },
+        "resetPassword": {
+            "title": "Reset Password 🔒",
+            "text": "You can change your old password in the following form.",
+            "newPassword": "New Password",
+            "confirmPassword": "Confirm Password",
+            "passwordNotMatch": "The passwords do not match, please enter the same password in both fields!",
+            "setNewPassword": "Set New Password",
+            "changedPasswordSuccessfuly": "Changed password successfuly. Now you can login!"
         },
         "verifiedMail": {
             "title": "Mail is verified! 🙌",

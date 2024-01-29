@@ -86,6 +86,7 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
       }),
       calendar: this._formBuilder.group({
         rights: new UntypedFormControl(),
+        externalAccounts: new UntypedFormControl(),
         selectedEmployees: new UntypedFormControl(),
         selectedEmployeesFullInfo: new UntypedFormControl(),
         location_id: new UntypedFormControl(),

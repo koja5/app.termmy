@@ -70,7 +70,53 @@ router.post("/verifyEmailAddress", function (req, res, next) {
   });
 });
 
-//#region
+router.post("/verifyEmailAddress", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync("./providers/mail_server/mail_config/booking.json", "utf-8")
+  );
+
+  body["template"] = "verify_email_address.hjs";
+  body["email"] = req.body.email;
+  body["verified_mail_link"] =
+    process.env.link_api + "verifiedMailAndActive/" + sha1(req.body.email);
+
+  var options = prepareOptionsForRequest(body);
+
+  console.log(options);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
+router.post("/forgotPasswordLink", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync("./providers/mail_server/mail_config/booking.json", "utf-8")
+  );
+
+  body["template"] = "reset_password.hjs";
+  body["email"] = req.body.email;
+  body["forgot_password_link"] =
+    process.env.link_client + "auth/reset-password/" + sha1(req.body.email);
+
+  var options = prepareOptionsForRequest(body);
+
+  console.log(options);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
+//#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {
   return {

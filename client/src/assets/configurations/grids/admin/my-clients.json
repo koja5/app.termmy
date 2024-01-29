@@ -188,7 +188,8 @@
             "width": "col-md-6",
             "name": "birthday",
             "title": "commonFields.birthday",
-            "field": "birthday"
+            "field": "birthday",
+            "format": "dd.MM.yyyy"
         },
         {
             "type": "textbox",
@@ -230,9 +231,9 @@
             "type": "textbox",
             "width": "col-md-3",
             "class": "e-outline",
-            "name": "address",
-            "title": "commonFields.address",
-            "field": "address",
+            "name": "city",
+            "title": "commonFields.city",
+            "field": "city",
             "required": true
         },
         {

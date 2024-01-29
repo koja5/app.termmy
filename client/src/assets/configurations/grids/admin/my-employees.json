@@ -250,7 +250,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "position",
-            "title": "myEmployee.position",
+            "title": "commonFields.position",
             "field": "position"
         },
         {
@@ -258,7 +258,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "location_id",
-            "title": "myEmployee.location",
+            "title": "commonFields.location",
             "field": {
                 "text": "name",
                 "value": "id"

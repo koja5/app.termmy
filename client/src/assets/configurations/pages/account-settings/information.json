@@ -12,7 +12,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "bio",
-            "title": "bio",
+            "title": "commonFields.biography",
             "field": "bio",
             "multiline": true
         },
@@ -21,7 +21,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "telephone",
-            "title": "telephone",
+            "title": "commonFields.telephone",
             "field": "telephone"
         },
         {
@@ -29,15 +29,16 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
-            "title": "email",
-            "field": "email"
+            "title": "commonFields.email",
+            "field": "email",
+            "readonly": true
         },
         {
             "type": "textbox",
             "width": "col-md-12",
             "class": "e-outline",
             "name": "address",
-            "title": "address",
+            "title": "commonFields.address",
             "field": "address"
         },
         {
@@ -45,7 +46,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "zip",
-            "title": "zip",
+            "title": "commonFields.zip",
             "field": "zip"
         },
         {
@@ -53,7 +54,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "city",
-            "title": "city",
+            "title": "commonFields.city",
             "field": "city"
         },
         {
@@ -69,7 +70,7 @@
             "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
-            "title": "Save changes",
+            "title": "general.save",
             "field": "submitAndPay",
             "positionClass": "text-right mt-3 col-md-12"
         }

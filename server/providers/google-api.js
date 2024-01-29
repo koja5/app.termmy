@@ -68,6 +68,31 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
   });
 });
 
+router.post("/deleteExternalGoogleAccount", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.user_id = req.user.user.id;
+
+    conn.query(
+      "update external_accounts set google = null where user_id = ?",
+      [req.user.user.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 // GENERAL
 
 // TERMINES

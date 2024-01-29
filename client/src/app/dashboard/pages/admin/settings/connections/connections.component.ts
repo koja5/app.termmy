@@ -30,5 +30,13 @@ export class ConnectionsComponent {
       });
   }
 
-  disconnectFromGoogle () {}
+  disconnectFromGoogle() {
+    this._service
+      .callPostMethod("/api/google/deleteExternalGoogleAccount", "")
+      .subscribe((data) => {
+        if (data) {
+          this.data = null;
+        }
+      });
+  }
 }

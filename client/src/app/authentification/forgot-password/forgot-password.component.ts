@@ -9,6 +9,8 @@ import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
+import { CallApiService } from "app/services/call-api.service";
+import { ResponseModel } from "app/models/response-model";
 
 @Component({
   selector: "app-forgot-password",
@@ -22,6 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
   public coreConfig: any;
   public forgotPasswordForm: UntypedFormGroup;
   public submitted = false;
+  public response = new ResponseModel();
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -35,7 +38,8 @@ export class ForgotPasswordComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _formBuilder: UntypedFormBuilder
+    private _formBuilder: UntypedFormBuilder,
+    private _service: CallApiService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -72,6 +76,8 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.forgotPasswordForm.invalid) {
       return;
     }
+
+    this.sendResetLink();
   }
 
   // Lifecycle Hooks
@@ -100,5 +106,18 @@ export class ForgotPasswordComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+
+  sendResetLink() {
+    this.response = new ResponseModel();
+    this._service
+      .callPostMethod("/api/forgotPassword", this.forgotPasswordForm.value)
+      .subscribe((data) => {
+        if (data) {
+          this.response.sendLinkForResetOnMail = true;
+        } else {
+          this.response.mailNotExists = true;
+        }
+      });
   }
 }

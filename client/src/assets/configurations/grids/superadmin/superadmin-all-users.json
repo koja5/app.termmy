@@ -118,7 +118,7 @@
             "allowEditing": false
         },
         {
-            "title": "allUsers.firstname",
+            "title": "commonFields.firstname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -130,7 +130,7 @@
             }
         },
         {
-            "title": "allUsers.lastname",
+            "title": "commonFields.lastname",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -180,7 +180,7 @@
             }
         },
         {
-            "title": "allUsers.company",
+            "title": "commonFields.company",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -192,7 +192,7 @@
             }
         },
         {
-            "title": "allUsers.email",
+            "title": "commonFields.email",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -205,7 +205,7 @@
             "template": "test"
         },
         {
-            "title": "allUsers.telephone",
+            "title": "commonFields.telephone",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -217,7 +217,7 @@
             }
         },
         {
-            "title": "allUsers.country",
+            "title": "commonFields.country",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -229,7 +229,7 @@
             }
         },
         {
-            "title": "allUsers.address",
+            "title": "commonFields.address",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -241,7 +241,7 @@
             }
         },
         {
-            "title": "allUsers.zip",
+            "title": "commonFields.zip",
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -253,7 +253,7 @@
             }
         },
         {
-            "title": "allUsers.city",
+            "title": "commonFields.city",
             "filterable": true,
             "hideable": true,
             "filter": "date",

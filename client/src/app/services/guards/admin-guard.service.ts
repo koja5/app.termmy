@@ -16,7 +16,7 @@ export class AdminGuardService {
 
   canActivate() {
     const user = this._storageService.getDecodeToken();
-    if (user.type === UserTypes.superadmin) {
+    if (user.type === UserTypes.admin) {
       return true;
     } else {
       this._helpService.setLocalStorage("previousLink", window.location.hash);

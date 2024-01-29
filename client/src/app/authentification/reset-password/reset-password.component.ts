@@ -9,6 +9,9 @@ import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
+import { CallApiService } from "app/services/call-api.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ResponseModel } from "app/models/response-model";
 
 @Component({
   selector: "app-reset-password",
@@ -22,6 +25,7 @@ export class ResetPasswordComponent implements OnInit {
   public confPasswordTextType: boolean;
   public resetPasswordForm: UntypedFormGroup;
   public submitted = false;
+  public response = new ResponseModel();
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -34,7 +38,10 @@ export class ResetPasswordComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _formBuilder: UntypedFormBuilder
+    private _formBuilder: UntypedFormBuilder,
+    private _service: CallApiService,
+    private _activateRouter: ActivatedRoute,
+    private _router: Router
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -85,6 +92,8 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetPasswordForm.invalid) {
       return;
     }
+
+    this.resetPassword();
   }
 
   // Lifecycle Hooks
@@ -105,6 +114,8 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe((config) => {
         this.coreConfig = config;
       });
+
+    this.checkIfMailExists();
   }
 
   /**
@@ -114,5 +125,51 @@ export class ResetPasswordComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+
+  checkIfMailExists() {
+    this._service
+      .callGetMethod(
+        "/api/checkIfMailExists",
+        this._activateRouter.snapshot.params.email
+      )
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (data) => {
+          if (data) {
+            return;
+          } else {
+            this._router.navigate(["/miscellaneous/something-happened"]);
+          }
+        },
+        (error) => {
+          this._router.navigate(["/miscellaneous/something-happened"]);
+        }
+      );
+  }
+
+  resetPassword() {
+    this.response = new ResponseModel();
+    if (
+      this.resetPasswordForm.value.newPassword ===
+      this.resetPasswordForm.value.confirmPassword
+    ) {
+      const body = {
+        password: this.resetPasswordForm.value.newPassword,
+        email: this._activateRouter.snapshot.params.email,
+      };
+      this._service
+        .callPostMethod("/api/resetPassword", body)
+        .subscribe((data) => {
+          if (data) {
+            this.response.changedPasswordSuccessfuly = true;
+            setTimeout(() => {
+              this._router.navigate(["/auth/login"]);
+            }, 3000);
+          }
+        });
+    } else {
+      this.response.passwordNotMatch = true;
+    }
   }
 }

@@ -53,7 +53,6 @@ export class DynamicScheduleComponent {
   public externalAccountForEmployees: any = {};
   public workTimes: any = {};
   public calendarSettings = new CalendarSettings();
-  public calendarRights: any;
   public employeeId: number;
   public loader = false;
   public multiCalendar = false;
@@ -155,7 +154,10 @@ export class DynamicScheduleComponent {
       .subscribe((data: any) => {
         if (data.length) {
           this.calendarSettings.rights = data[0];
+        } else {
+          this.calendarSettings.rights = null;
         }
+        // this._storageService.setCalendarConfig(this.calendarSettings);
         this.checkCalendarRights();
       });
   }
@@ -232,21 +234,26 @@ export class DynamicScheduleComponent {
             "/api/getWorktimeForEmployee",
             this.calendarSettings.selectedEmployees[i]
           )
-          .subscribe((data: any) => {
-            if (data && data.length) {
-              this.workTimes[i] = {
-                color: data[0].color,
-                value: JSON.parse(data[0].value),
-              };
-              br++;
-              if (br === this.calendarSettings.selectedEmployees.length) {
+          .subscribe(
+            (data: any) => {
+              if (data && data.length) {
+                this.workTimes[i] = {
+                  color: data[0].color,
+                  value: JSON.parse(data[0].value),
+                };
+                br++;
+                if (br === this.calendarSettings.selectedEmployees.length) {
+                  this.loader = false;
+                }
+              } else {
+                this.workTimes[i] = null;
                 this.loader = false;
               }
-            } else {
-              this.workTimes[i] = null;
+            },
+            (error) => {
               this.loader = false;
             }
-          });
+          );
       }
     }
   }
@@ -301,6 +308,7 @@ export class DynamicScheduleComponent {
       .callPostMethod("/api/google/getTerminesForMultiCalendar", employees)
       .subscribe(
         (data: any) => {
+          this.loader = false;
           if (this.calendar) {
             if (data) {
               if ((this.calendar.eventSettings.dataSource as []).length) {
@@ -315,7 +323,6 @@ export class DynamicScheduleComponent {
               this.calendar.eventSettings.dataSource = [];
             }
           }
-          this.calendar.showSpinner();
         },
         (error) => {
           this.loader = false;
@@ -357,8 +364,7 @@ export class DynamicScheduleComponent {
       .subscribe(
         (data) => {
           this._toastr.showSuccess();
-          this.calendar.showSpinner();
-          this.getTermines();
+          this.refreshTermine(this.form.form.value, ExecuteAction.create);
         },
         (error) => {
           this._toastr.showError();
@@ -387,12 +393,15 @@ export class DynamicScheduleComponent {
     this._service
       .callPostMethod("/api/google/deleteTermine", {
         id: id,
-        externalCalendar:
-          this.calendarSettings.externalAccounts[this.employeeId].google,
+        externalCalendar: this.calendarSettings.externalAccounts[
+          this.employeeId
+        ]
+          ? this.calendarSettings.externalAccounts[this.employeeId].google
+          : this.calendarSettings.externalAccounts.google,
       })
       .subscribe(
         (data) => {
-          this.getTermines();
+          this.refreshTermine({ id: id }, ExecuteAction.delete);
           this._toastr.showSuccess();
         },
         (error) => {
@@ -403,13 +412,15 @@ export class DynamicScheduleComponent {
 
   getEmployeeWhoHaveConnectedGoogleCalendar() {
     let array = [];
-    for (let i = 0; i < this.calendarSettings.selectedEmployees.length; i++) {
-      if (
-        this.checkExternalAccountForGoogle(
-          this.calendarSettings.selectedEmployees[i]
-        )
-      ) {
-        array.push(this.calendarSettings.selectedEmployees[i]);
+    if (this.calendarSettings.selectedEmployees) {
+      for (let i = 0; i < this.calendarSettings.selectedEmployees.length; i++) {
+        if (
+          this.checkExternalAccountForGoogle(
+            this.calendarSettings.selectedEmployees[i]
+          )
+        ) {
+          array.push(this.calendarSettings.selectedEmployees[i]);
+        }
       }
     }
 
@@ -427,14 +438,17 @@ export class DynamicScheduleComponent {
         this.calendarSettings.selectedEmployees
       )
       .subscribe((data) => {
-        if ((this.calendar.eventSettings.dataSource as []).length) {
-          this.calendar.eventSettings.dataSource = (
-            this.calendar.eventSettings.dataSource as any[]
-          ).concat(this.packTerminesFromSQL(data));
-        } else {
-          this.calendar.eventSettings.dataSource =
-            this.packTerminesFromSQL(data);
-        }
+        this.loader = false;
+        setTimeout(() => {
+          if ((this.calendar.eventSettings.dataSource as []).length) {
+            this.calendar.eventSettings.dataSource = (
+              this.calendar.eventSettings.dataSource as any[]
+            ).concat(this.packTerminesFromSQL(data));
+          } else {
+            this.calendar.eventSettings.dataSource =
+              this.packTerminesFromSQL(data);
+          }
+        }, 10);
       });
   }
 
@@ -692,6 +706,7 @@ export class DynamicScheduleComponent {
   changeLocation(event: any) {
     // get employees for this location
     // this.calendarSettings.location = event;
+    this.loader = true;
     this.calendarSettings.selectedEmployees = [];
     this.calendarSettings.selectedEmployeesFullInfo = [];
     this.calendarSettings.location_data = event;
@@ -702,6 +717,7 @@ export class DynamicScheduleComponent {
         this.calendarSettings.location_id
       )
       .subscribe((data) => {
+        this.loader = false;
         this.allEmployees = data;
       });
   }
@@ -788,9 +804,9 @@ export class DynamicScheduleComponent {
           }
         }
       }
-      if (notWorkTime) {
-        args.element.classList.add("pointer-event-none");
-      }
+      // if (notWorkTime) {
+      //   args.element.classList.add("pointer-event-none");
+      // }
     } else {
       args.element.classList.add("pointer-event-none");
     }
@@ -831,7 +847,11 @@ export class DynamicScheduleComponent {
       }
     } else {
       this.resourceDataSource.push({
-        text: token.firstname + " " + token.lastname,
+        text: token.firstname
+          ? token.firstname
+          : "" + " " + token.lastname
+          ? token.lastname
+          : "",
         id: token.id,
         groupIndex: 0,
       });

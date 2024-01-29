@@ -22,7 +22,7 @@
                     </ng-select>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" *ngIf="checkCalendarVisibility()">
                 <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : '80vh'"
                     [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
                     [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()"
@@ -34,13 +34,13 @@
                             <div class="resource-image avatar mr-1"><img height="40" width="40"
                                     src="../../../../assets/images/avatars/no-user-profile.png">
                                 <img class="external-calendar-icon"
-                                    *ngIf="calendarSettings.externalAccounts.google || checkExternalAccountForGoogle(item.resourceData.id)"
+                                    *ngIf="checkExternalAccountForGoogle(item.resourceData.id)"
                                     src="../../../../assets/images/icons/google.png"
                                     title="{{'myCalendar.connectedThisCalendarWithGoogle' | translate}}">
                             </div>
                             <div class="resource-details">
-                                <div class="resource-name">{{item.resourceData.text}} <span
-                                        *ngIf="!workTimes[item.resourceData.groupIndex]"
+                                <div *ngIf="item.resourceData.text" class="resource-name">{{item.resourceData.text}}
+                                    <span *ngIf="!workTimes || !workTimes[item.resourceData.groupIndex]"
                                         class="fa fa-exclamation not-set-worktime"
                                         title="{{'myCalendar.notSetWorkTimeForUser' | translate}}"></span>
                                 </div>
@@ -69,7 +69,7 @@
             <div class="need-to-select-container" *ngIf="!checkCalendarVisibility()&&!loader">
                 <div class="need-to-select">
                     <img src="../../../../assets/images/illustration/calendar.png">
-                    <h3 class="mt-1">Please select location and user to see calendar</h3>
+                    <h3 class="mt-1">{{'myCalendar.selectLocationAndEmployee' | translate}}</h3>
                 </div>
             </div>
 

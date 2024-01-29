@@ -141,7 +141,6 @@ router.post("/signUp", function (req, res, next) {
                   req.body,
                   "mail-server/verifyEmailAddress"
                 );
-                console.log(options);
                 makeRequest(options, res);
               }
             }
@@ -172,7 +171,9 @@ router.get("/verifiedMailAndActive/:email", async (req, res, next) => {
               res.json(err);
             } else {
               res.redirect(
-                process.env.link_client + "auth/verified-mail/req.params.email"
+                process.env.link_client +
+                  "auth/verified-mail/" +
+                  req.params.email
               );
             }
           }
@@ -219,6 +220,88 @@ router.get("/checkIfMailVerified/:email", async (req, res, next) => {
     logger.log("error", err.sql + ". " + err.sqlMessage);
     res.json(ex);
   }
+});
+
+router.get("/checkIfMailExists/:email", async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where sha1(email) = ?",
+          [req.params.email],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              if (rows.length) {
+                res.json(true);
+              } else {
+                res.json(false);
+              }
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/forgotPassword", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where email = ?",
+      [req.body.email],
+      function (err, rows, fields) {
+        conn.release();
+        if (rows.length) {
+          var options = prepareOptionsForRequest(
+            req.body,
+            "mail-server/forgotPasswordLink"
+          );
+          makeRequest(options, res);
+          res.json(true);
+        } else {
+          // mail not exists
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/resetPassword", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "update users set password = ? where sha1(email) = ?",
+      [sha1(req.body.password), req.body.email],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          res.json(true);
+        }
+
+        res.json(true);
+      }
+    );
+  });
 });
 
 // #endregion
