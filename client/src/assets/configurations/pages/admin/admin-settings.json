@@ -29,6 +29,11 @@
             "title": "adminSettings.onlinePayment",
             "link": "/dashboard/admin/admin-settings/online-payment",
             "icon": "briefcase"
+        },
+        {
+            "title": "adminSettings.bookingSettings",
+            "link": "/dashboard/admin/admin-settings/booking-settings",
+            "icon": "calendar"
         }
     ]
 }

@@ -1,0 +1,111 @@
+{
+    "config": [
+        {
+            "type": "label",
+            "width": "col-md-12 border-bottom",
+            "title": "bookingSettings.title",
+            "text": "bookingSettings.text"
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "active",
+            "title": "bookingSettings.activeOrDeactiveBookingPage",
+            "field": "active"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.bookingRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "bookingLink",
+            "title": "bookingSettings.bookingLink",
+            "field": "bookingLink"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "title": "bookingSettings.socialNetworkTitle",
+            "text": "bookingSettings.socialNetworkText"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.facebookRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "facebook",
+            "title": "bookingSettings.facebook",
+            "field": "facebook"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.instagramRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "instagram",
+            "title": "bookingSettings.instagram",
+            "field": "instagram"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.youtubeRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "youtube",
+            "title": "bookingSettings.youtube",
+            "field": "youtube"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.tiktokRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "tiktok",
+            "title": "bookingSettings.tiktok",
+            "field": "tiktok"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.websiteRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "website",
+            "title": "bookingSettings.website",
+            "field": "website"
+        },
+        {
+            "type": "button",
+            "width": "col-md-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-md-12"
+        }
+    ]
+}

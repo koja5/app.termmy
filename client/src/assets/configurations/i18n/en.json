@@ -156,13 +156,33 @@
         },
         "adminSettings": {
             "adminSettings": "Admin settings",
-            "onlinePayment": "Online payment"
+            "onlinePayment": "Online payment",
+            "bookingSettings": "Booking settings"
         },
         "onlinePayment": {
             "title": "Online payment",
             "text": "Set up payment processing and received money online!",
             "stripeTitle": "Stripe",
             "stripeText": "Set up your Stripe account for 5 minutes!"
+        },
+        "bookingSettings": {
+            "title": "Booking settings",
+            "text": "Set up your booking page and customize!",
+            "activeOrDeactiveBookingPage": "Active or deactive your booking page",
+            "bookingRootLink": "https://termmy.com/",
+            "bookingLink": "Booking link",
+            "socialNetworkTitle": "Social networks",
+            "socialNetworkText": "Enter your social network page and show on booking page",
+            "facebook": "Facebook",
+            "facebookRootLink": "https://facebook.com/",
+            "instagram": "Instagram",
+            "instagramRootLink": "https://instagram.com/",
+            "youtube": "Youtube",
+            "youtubeRootLink": "https://youtube.com/",
+            "tiktok": "Tiktok",
+            "tiktokRootLink": "https://tiktok.com/",
+            "website": "Your website link",
+            "websiteRootLink": "https://"
         },
         "authGlobal": {
             "backToLogin": "Back to login"

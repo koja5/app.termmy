@@ -1,8 +1,8 @@
-<div [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom">
-  <label *ngIf="config.title" class="custom-label {{config.class}}">{{ language[config.title] ? language[config.title] :
-    config.title
-    }}</label>
-  <p *ngIf="config.text" class="label-text">
-    {{ config.text }}
-  </p>
+<div [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom {{config.hide ? 'hide' : ''}}">
+  <h4 *ngIf="config.title" class="custom-label {{config.class}}">{{
+    config.title | translate
+    }}</h4>
+  <h6 *ngIf="config.text" class="label-text">
+    {{ config.text | translate}}
+  </h6>
 </div>
