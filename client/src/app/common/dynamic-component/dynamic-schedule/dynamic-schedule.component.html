@@ -39,8 +39,10 @@
                                     title="{{'myCalendar.connectedThisCalendarWithGoogle' | translate}}">
                             </div>
                             <div class="resource-details">
-                                <div *ngIf="item.resourceData.text" class="resource-name">{{item.resourceData.text}}
-                                    <span *ngIf="!workTimes || !workTimes[item.resourceData.groupIndex]"
+                                <div class="d-flex">
+                                    <div *ngIf="item.resourceData.text" class="resource-name">{{item.resourceData.text}}
+                                    </div>
+                                    <span *ngIf="!workTimes[item.resourceData.groupIndex]"
                                         class="fa fa-exclamation not-set-worktime"
                                         title="{{'myCalendar.notSetWorkTimeForUser' | translate}}"></span>
                                 </div>

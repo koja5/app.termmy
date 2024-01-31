@@ -182,14 +182,16 @@ export class DynamicScheduleComponent {
   //#region PERSONAL
 
   getMyWorkTime() {
-    this._service.callGetMethod("/api/getMyWorktime", "").subscribe((data) => {
-      if (data) {
-        this.workTimes[0] = {
-          color: data[0].color,
-          value: JSON.parse(data[0].value),
-        };
-      }
-    });
+    this._service
+      .callGetMethod("/api/getMyWorktime", "")
+      .subscribe((data: any) => {
+        if (data && data.length) {
+          this.workTimes[0] = {
+            color: data[0].color,
+            value: JSON.parse(data[0].value),
+          };
+        }
+      });
   }
 
   getMyLocation() {
@@ -868,13 +870,12 @@ export class DynamicScheduleComponent {
 
   checkCalendarVisibility() {
     return (
-      Object.keys(this.workTimes).length &&
-      ((this.calendarSettings.rights &&
+      (this.calendarSettings.rights &&
         this.calendarSettings.rights.multi_calendar &&
         this.calendarSettings.selectedEmployees &&
         this.calendarSettings.selectedEmployees.length) ||
-        !this.calendarSettings.rights ||
-        !this.calendarSettings.rights.multi_calendar)
+      !this.calendarSettings.rights ||
+      !this.calendarSettings.rights.multi_calendar
     );
   }
 

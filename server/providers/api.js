@@ -272,7 +272,6 @@ router.post("/forgotPassword", function (req, res, next) {
             "mail-server/forgotPasswordLink"
           );
           makeRequest(options, res);
-          res.json(true);
         } else {
           // mail not exists
           res.json(false);
