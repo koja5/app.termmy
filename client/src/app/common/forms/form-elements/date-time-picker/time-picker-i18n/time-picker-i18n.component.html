@@ -1,2 +1,2 @@
-<ngb-timepicker [(ngModel)]="value" (ngModelChange)="onDateSelected($event)" class="error" [meridian]="meridian ? meridian : false"
-    [disabled]="disabled"></ngb-timepicker>
+<ngb-timepicker #timepicker [(ngModel)]="value" (change)="changeHour($event)" (ngModelChange)="onDateSelected($event)" class="error"
+    [meridian]="meridian ? meridian : false" [disabled]="disabled" [minuteStep]="30"></ngb-timepicker>

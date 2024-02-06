@@ -74,7 +74,6 @@ export class HelpService {
     return JSON.parse(JSON.stringify(value));
   }
 
-
   setLocalStorage(key: string, value: any) {
     localStorage.setItem(
       key,
@@ -82,12 +81,16 @@ export class HelpService {
     );
   }
 
-  converToMiliseconds(hour: number, minutes: number, seconds: number) {
+  converToMiliseconds(hour: number, minutes?: number, seconds?: number) {
     return (
       hour * 3600 * 1000 +
       (minutes ? minutes : 0) * 60 * 1000 +
       (seconds ? seconds : 0) * 1000
     );
+  }
+
+  converToMinutes(hour: number, minutes?: number, seconds?: number) {
+    return hour * 60 + (minutes ? minutes : 0) + (seconds ? seconds / 60 : 0);
   }
 
   convertStringToJson(value: string) {
@@ -122,5 +125,18 @@ export class HelpService {
       }
     }
     return false;
+  }
+
+  checkIsMobileDevices() {
+    const userAgent = navigator.userAgent;
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
+        userAgent
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

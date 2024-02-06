@@ -12,6 +12,7 @@ const googleApi = require("./providers/google-api.js");
 const calendarApi = require("./providers/calendar-api.js");
 const mailServer = require("./providers/mail_server/mail-server");
 const payment = require("./providers/external_api/payment/payment.js");
+const bookingApi = require("./providers/booking-api.js");
 //END API
 
 const sqlDatabase = require("./providers/config/sql-database");
@@ -61,6 +62,7 @@ app.use("/api/calendar", calendarApi);
 app.use("/api/mail-server", mailApi);
 app.use("/api/mail-server", mailServer);
 app.use("/api/payment", payment);
+app.use("/api/booking", bookingApi);
 
 app.use(express.static(path.join(__dirname, "../client/src")));
 

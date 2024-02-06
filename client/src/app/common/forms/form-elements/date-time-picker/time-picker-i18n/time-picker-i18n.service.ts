@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, ViewChild } from "@angular/core";
 
 import { NgbTimepickerI18n } from "@ng-bootstrap/ng-bootstrap";
 
@@ -17,6 +17,7 @@ export class I18n {
 // Define custom service providing the "AM" and "PM" translations.
 @Injectable()
 export class CustomTimepickerI18n extends NgbTimepickerI18n {
+
   constructor(private _i18n: I18n) {
     super();
   }

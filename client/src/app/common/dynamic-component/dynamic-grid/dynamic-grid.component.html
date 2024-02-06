@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
                         <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-                            <label class="d-flex align-items-center ml-1 ml-md-0">{{'general.searchFilter' |
+                            <label class="d-flex align-items-center ml-1 ml-md-0 mb-0">{{'general.searchFilter' |
                                 translate}}:<input [(ngModel)]="searchValue" name="searchValue" type="search"
                                     class="form-control ml-25" (keyup)="filterUpdate($event)"
                                     (search)="filterUpdate($event)" /></label>
@@ -66,8 +66,11 @@
                         </div>
                     </div>
                 </div>
-                <ngx-datatable [rows]="rows" [rowHeight]="50" class="bootstrap core-bootstrap" [limit]="selectedOption"
-                    [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true">
+
+
+                <ngx-datatable #grid [rows]="rows" [rowHeight]="50" class="bootstrap core-bootstrap"
+                    [limit]="selectedOption" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50"
+                    [scrollbarH]="true">
                     <!-- <ngx-datatable-column name="User" prop="fullName" [width]="200">
               <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
                 <div class="d-flex align-items-center">
@@ -92,9 +95,27 @@
                 </div>
               </ng-template>
             </ngx-datatable-column> -->
+
+                    <!-- <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                            <div style="padding-left:60px; font-size:14px">
+                                <div>{{ row.gender }}, {{ row.age }}</div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-row-detail>
+                    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+                        [canAutoResize]="false">
+                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                            <a title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+                                Test
+                            </a>
+                        </ng-template>
+                    </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
                         [prop]="item.field" [width]="item.width ? item.width : auto"
-                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}">
+                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}" [className]="item.className" [headerClass]="item.className"  [cellClass]="item.className">
+
+
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                             <div *ngIf="item.template">
                                 <div *ngIf="item.template.choices" class="datatable-body-cell">

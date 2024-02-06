@@ -13,6 +13,7 @@ import {
 import { StorageService } from "app/services/storage.service";
 import { CalendarSettings } from "app/models/calendar-settings";
 import { ExecuteAction } from "app/enums/execute-action";
+import { HelpService } from "app/services/help.service";
 // https://stackblitz.com/edit/angular-schedule-different-work-hours-u4cpe8?file=app.component.ts
 // https://www.syncfusion.com/forums/169264/setting-different-work-hours-on-different-days
 @Component({
@@ -57,15 +58,18 @@ export class DynamicScheduleComponent {
   public loader = false;
   public multiCalendar = false;
   public popupOpen = false;
+  public mobileDevice: boolean = false;
 
   constructor(
     private _configurationService: ConfigurationService,
     private _service: CallApiService,
     private _toastr: ToastrComponent,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _helpService: HelpService
   ) {}
 
   ngOnInit() {
+    this.mobileDevice = this._helpService.checkIsMobileDevices();
     this.getConfigurations();
   }
 
@@ -287,7 +291,11 @@ export class DynamicScheduleComponent {
   getMyTerminesFromGoogleCalendar() {
     this.loader = true;
     this._service
-      .callGetMethod("/api/google/getMyTermines", "")
+      .callPostMethod("/api/google/getMyTermines", {
+        id: this.calendarSettings.externalAccounts[this.employeeId]
+          ? this.calendarSettings.externalAccounts[this.employeeId].google
+          : this.calendarSettings.externalAccounts.google,
+      })
       .subscribe((data: any) => {
         this.loader = false;
         setTimeout(() => {
@@ -335,23 +343,34 @@ export class DynamicScheduleComponent {
   packTerminesFromGoogleCalendar(termines) {
     let prepactedTermines = [];
     for (let i = 0; i < termines.length; i++) {
-      const data =
-        typeof termines[i].description === "object"
+      const data = termines[i].description
+        ? typeof termines[i].description === "object"
           ? termines[i].description
-          : JSON.parse(termines[i].description);
+          : JSON.parse(termines[i].description)
+        : {};
       prepactedTermines.push({
         Subject: data.Subject
           ? data.Subject
           : termines[i].summary
           ? termines[i].summary
           : "",
-        StartTime: new Date(data.StartTime),
-        EndTime: new Date(data.EndTime),
+        StartTime: new Date(
+          data.StartTime ? data.StartTime : termines[i].start.dateTime
+        ),
+        EndTime: new Date(
+          data.EndTime ? data.EndTime : termines[i].end.dateTime
+        ),
         id: termines[i].id,
-        employeeId: data.employeeId,
-        externalCalendar: data.externalCalendar,
-        service_id: data.service_id,
-        client_id: data.client_id,
+        employeeId: data.employeeId
+          ? data.employeeId
+          : this._storageService.getUserId(),
+        externalCalendar: data.externalCalendar
+          ? data.externalCalendar
+          : this.calendarSettings.externalAccounts[this.employeeId]
+          ? this.calendarSettings.externalAccounts[this.employeeId].google
+          : this.calendarSettings.externalAccounts.google,
+        service_id: data.service_id ? data.service_id : null,
+        client_id: data.client_id ? data.client_id : null,
       });
     }
 
@@ -636,9 +655,13 @@ export class DynamicScheduleComponent {
     if (event.type === "Editor") {
       this.popupOpen = true;
 
-      setTimeout(() => {
-        this.setValue(this.config.config, event.data);
-      }, 50);
+      if (this.checkIfExternalCretedTermine(event)) {
+        event.cancel = true;
+      } else {
+        setTimeout(() => {
+          this.setValue(this.config.config, event.data);
+        }, 50);
+      }
     }
   }
 
@@ -646,6 +669,12 @@ export class DynamicScheduleComponent {
     if (event.type === "Editor" && !event.data) {
       this.popupOpen = false;
     }
+  }
+
+  checkIfExternalCretedTermine(event) {
+    if (event.id && !event.data.client_id && !event.data.service_id)
+      return true;
+    return false;
   }
 
   onChangeData(event) {
@@ -781,6 +810,10 @@ export class DynamicScheduleComponent {
     const day = args.date.getDay();
     const hour = args.date.getHours();
     const minutes = args.date.getMinutes();
+    const convertWorkTimeToMinutes = this._helpService.converToMinutes(
+      hour,
+      minutes
+    );
     const workTimeForDay = this.getWorkTimeForDay(day, args.groupIndex);
     if (
       workTimeForDay &&
@@ -791,19 +824,33 @@ export class DynamicScheduleComponent {
       let notWorkTime = true;
       for (let i = 0; i < workTimeForDay.times.length; i++) {
         if (workTimeForDay.times[i].start && workTimeForDay.times[i].end) {
+          const start = this._helpService.converToMinutes(
+            workTimeForDay.times[i].start.hour,
+            workTimeForDay.times[i].start.minute
+          );
+          const end = this._helpService.converToMinutes(
+            workTimeForDay.times[i].end.hour,
+            workTimeForDay.times[i].end.minute
+          );
           if (
-            (hour >= workTimeForDay.times[i].start.hour &&
-              hour < workTimeForDay.times[i].end.hour) ||
-            (hour === workTimeForDay.times[i].start.hour &&
-              minutes > workTimeForDay.times[i].start.minutes &&
-              hour === workTimeForDay.times[i].end.hour &&
-              minutes < workTimeForDay.times[i].end.minutes)
+            convertWorkTimeToMinutes >= start &&
+            convertWorkTimeToMinutes < end
           ) {
             args.element.style.backgroundColor =
               this.workTimes[args.groupIndex].color;
             notWorkTime = false;
             break;
           }
+          // if (
+          //   (hour >= workTimeForDay.times[i].start.hour &&
+          //     minutes <= workTimeForDay.times[i].start.minutes &&
+          //     hour < workTimeForDay.times[i].end.hour) ||
+          //   (hour === workTimeForDay.times[i].start.hour &&
+          //     minutes > workTimeForDay.times[i].start.minutes &&
+          //     hour === workTimeForDay.times[i].end.hour &&
+          //     minutes < workTimeForDay.times[i].end.minutes)
+          // ) {
+          // }
         }
       }
       // if (notWorkTime) {

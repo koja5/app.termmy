@@ -31,6 +31,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class DynamicGridComponent {
   @Input() public path: string;
   @Input() public file: string;
+  @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
@@ -406,5 +407,10 @@ export class DynamicGridComponent {
       );
     }
     this._router.navigate([generateLink]);
+  }
+
+  toggleExpandRow(row) {
+    console.log("Toggled Expand Row!", row);
+    this.grid.rowDetail.toggleExpandRow(row);
   }
 }

@@ -45,4 +45,5 @@ export class FieldConfig {
   response?: string;
   body?: any;
   oneLine?: boolean;
+  minuteStep: number;
 }

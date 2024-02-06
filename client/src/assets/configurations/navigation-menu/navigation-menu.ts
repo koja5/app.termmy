@@ -6,7 +6,6 @@ export const menu = [
     type: "item",
     icon: "calendar",
     url: "dashboard/admin/my-calendar",
-    users: ["admin", "superadmin"],
   },
   {
     id: "my-clients",
@@ -15,7 +14,6 @@ export const menu = [
     type: "item",
     icon: "users",
     url: "dashboard/admin/my-clients",
-    users: ["admin", "superadmin"],
   },
   {
     id: "my-locations",
@@ -24,7 +22,7 @@ export const menu = [
     type: "item",
     icon: "map-pin",
     url: "dashboard/admin/my-locations",
-    users: ["admin", "superadmin"],
+    users: ["superadmin"],
   },
   {
     id: "my-employees",
@@ -33,7 +31,7 @@ export const menu = [
     type: "item",
     icon: "user-check",
     url: "dashboard/admin/my-employees",
-    users: ["admin", "superadmin"],
+    users: ["superadmin"],
   },
   {
     id: "my-services",
@@ -42,7 +40,6 @@ export const menu = [
     type: "item",
     icon: "life-buoy",
     url: "dashboard/admin/my-services",
-    users: ["admin", "superadmin"],
   },
   {
     id: "superadmin-all-users",
@@ -51,7 +48,7 @@ export const menu = [
     type: "item",
     icon: "user",
     url: "dashboard/superadmin/all-users",
-    users: ["admin", "superadmin"],
+    users: ["superadmin"],
   },
   {
     id: "home",
@@ -60,6 +57,7 @@ export const menu = [
     type: "item",
     icon: "home",
     url: "home",
+    users: ["superadmin"],
   },
   {
     id: "settings",
@@ -74,7 +72,7 @@ export const menu = [
     title: "Admin settings",
     translate: "navigations.adminSettings",
     type: "item",
-    icon: "settings",
+    icon: "tool",
     url: "dashboard/admin/admin-settings/online-payment",
   },
 ];

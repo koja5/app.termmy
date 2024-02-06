@@ -185,3 +185,23 @@
 .badge {
   white-space: break-spaces;
 }
+
+@media (min-width: 992px) {
+  .modal-slide-in .modal-dialog {
+    width: 42rem !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .footer {
+    display: none !important;
+  }
+}
+
+.modal-slide-in .modal-dialog {
+  width: 100%;
+}
+
+:host ::ng-deep .ngx-datatable .datatable-body .datatable-scroll {
+  display: inherit;
+}

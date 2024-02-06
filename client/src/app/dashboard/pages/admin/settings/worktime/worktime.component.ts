@@ -10,6 +10,7 @@ import { WorkTimeEmpty } from "./work-time-empty";
 import { HelpService } from "app/services/help.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { FieldConfig } from "app/common/dynamic-component/dynamic-forms/models/field-config";
 
 @Component({
   selector: "app-worktime",
@@ -24,6 +25,7 @@ export class WorktimeComponent implements OnInit {
   public notCorrectTime = [];
   public worktimeColor = "#000";
   public loader = false;
+  public config = new FieldConfig();
 
   constructor(
     private _helpService: HelpService,
@@ -46,6 +48,7 @@ export class WorktimeComponent implements OnInit {
         }
         this.loader = false;
       });
+    this.config.minuteStep = 30;
   }
 
   changeValue(event: any) {

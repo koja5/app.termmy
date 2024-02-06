@@ -105,8 +105,6 @@ router.post("/forgotPasswordLink", function (req, res, next) {
 
   var options = prepareOptionsForRequest(body);
 
-  console.log(options);
-
   request(options, function (error, response, body) {
     if (!error) {
       res.json(true);

@@ -32,14 +32,14 @@
 
                                     <time-picker-i18n [value]="time.start"
                                         (changeValue)="time.start = $event; validateEntry(i, j)"
-                                        [disabled]="!item.active"></time-picker-i18n>
+                                        [disabled]="!item.active" [minuteStep]="30"></time-picker-i18n>
                                 </div>
                                 <div class="form-group m-2">
                                     <label for="account-twitter">{{'worktime.to' | translate}}</label>
 
                                     <time-picker-i18n [value]="time.end"
                                         (changeValue)="time.end = $event;  validateEntry(i, j)"
-                                        [disabled]="!item.active"></time-picker-i18n>
+                                        [disabled]="!item.active" [minuteStep]="30"></time-picker-i18n>
                                 </div>
                                 <div class="d-md-flex align-items-center">
                                     <button type="button" class="btn btn-outline-danger h-35 ml-md-3 mt-md-2"

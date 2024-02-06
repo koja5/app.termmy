@@ -172,3 +172,7 @@
   background: #fff;
   padding: 3px;
 }
+
+.e-popup.e-popup-open.e-dialog {
+  max-height: max-content !important;
+}

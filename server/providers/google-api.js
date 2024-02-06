@@ -25,6 +25,8 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
     req.body.user_id = req.user.user.id;
     delete req.body.token;
 
+    console.log(req.body);
+
     conn.query(
       "select * from external_accounts where user_id = ?",
       [req.user.user.id],
@@ -110,24 +112,28 @@ router.post("/createTermine", auth, async (req, res) => {
 
   delete req.body.employee_id;
 
-  await calendar.events.insert({
-    calendarId: "primary",
-    auth: oauth2Client,
-    requestBody: {
-      summary: req.body.Subject,
-      description: JSON.stringify(req.body),
-      start: {
-        dateTime: req.body.StartTime,
-        timeZone: "UTC",
-      },
-      end: {
-        dateTime: req.body.EndTime,
-        timeZone: "UTC",
+  await calendar.events.insert(
+    {
+      calendarId: "primary",
+      auth: oauth2Client,
+      requestBody: {
+        summary: req.body.Subject,
+        description: JSON.stringify(req.body),
+        start: {
+          dateTime: moment(req.body.StartTime).add("hour", 1),
+          timeZone: "Africa/Asmara",
+        },
+        end: {
+          dateTime: moment(req.body.EndTime).add("hour", 1),
+          timeZone: "Africa/Asmara",
+        },
       },
     },
-  });
-
-  res.send(true);
+    (response) => {
+      console.log(response);
+      res.send(true);
+    }
+  );
 });
 
 router.post("/updateTermine", auth, async (req, res) => {
@@ -147,11 +153,11 @@ router.post("/updateTermine", auth, async (req, res) => {
       description:
         typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
       start: {
-        dateTime: req.body.StartTime,
+        dateTime: moment(req.body.StartTime).add("hour", 1),
         timeZone: "UTC",
       },
       end: {
-        dateTime: req.body.EndTime,
+        dateTime: moment(req.body.EndTime).add("hour", 1),
         timeZone: "UTC",
       },
     },
@@ -174,10 +180,10 @@ router.post("/deleteTermine", async (req, res) => {
   res.send(events);
 });
 
-router.get("/getMyTermines", async (req, res) => {
+router.post("/getMyTermines", async (req, res) => {
+  console.log(req.body.id);
   oauth2Client.setCredentials({
-    refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+    refresh_token: req.body.id,
   });
 
   const events = await calendar.events.list({
@@ -258,6 +264,7 @@ router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
+    approval_prompt: "force",
     include_granted_scopes: true,
   });
 
@@ -266,12 +273,14 @@ router.get("/login", (req, res) => {
 
 router.get("/redirect", async (req, res) => {
   const code = req.query.code;
+  console.log(code);
   const { tokens } = await oauth2Client.getToken(code);
   console.log(tokens);
-  oauth2Client.setCredentials({
-    refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
-  });
+  // oauth2Client.setCredentials({
+  //   refresh_token:
+  //     "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+  // });
+  console.log(tokens);
 
   var options = {
     url: process.env.link_api + "google/setExternalGoogleAccount",

@@ -28,7 +28,7 @@
         }
     },
     "formDialog": {
-        "type": "modal",
+        "type": "sidebar",
         "size": "lg"
     },
     "customGrouping": false,
