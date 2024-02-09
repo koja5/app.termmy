@@ -1,0 +1,5 @@
+{
+    "template": "verify_email_address.hjs",
+    "subject": "E-Mail-Bestätigung für Termmy",
+    "title": "E-Mail-Bestätigung für Termmy"
+}

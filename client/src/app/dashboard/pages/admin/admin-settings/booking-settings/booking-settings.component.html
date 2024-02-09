@@ -1,2 +1,23 @@
-<app-dynamic-forms [path]="path" [file]="file">
+<app-dynamic-forms [path]="path" [file]="file" [disableEdit]="disableEdit" (onChangeData)="onChangeData($event)">
 </app-dynamic-forms>
+<!-- <div class="card">
+    <div class="card-body">
+        <form class="validate-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="align-items-center mb-2 border-bottom">
+                        <i data-feather="link" class="font-medium-3"></i>
+                        <h4 class="ml-75">{{'bookingSettings.title' | translate}}</h4>
+                        <h6 class="ml-75">{{'bookingSettings.text' | translate}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->

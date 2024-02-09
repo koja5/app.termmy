@@ -49,8 +49,18 @@ export class ButtonComponent implements OnInit {
       this._service.callApi(this.config, this._router).subscribe(
         (data) => {
           if (data) {
-            if (this.config.response === ResponseAction.toastr) {
-              this._toastr.showSuccess();
+            if (this.config.responseMessage.type === ResponseAction.toastr) {
+              if (
+                this.config.responseMessage.title ||
+                this.config.responseMessage.text
+              ) {
+                this._toastr.showSuccessCustom(
+                  this.config.responseMessage.title,
+                  this.config.responseMessage.text
+                );
+              } else {
+                this._toastr.showSuccess();
+              }
             }
           } else {
             this._toastr.showError();

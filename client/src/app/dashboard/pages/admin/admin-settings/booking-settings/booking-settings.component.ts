@@ -8,4 +8,12 @@ import { Component } from "@angular/core";
 export class BookingSettingsComponent {
   public path = "pages/admin/admin-settings";
   public file = "booking-settings.json";
+  public disableEdit = false;
+
+  onChangeData(event: any) {
+    console.log(event);
+    if(event.active) {
+      this.disableEdit = true;
+    }
+  }
 }

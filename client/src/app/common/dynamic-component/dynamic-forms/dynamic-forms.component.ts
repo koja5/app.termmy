@@ -107,7 +107,21 @@ export class DynamicFormsComponent implements OnInit {
         if (this.config.request && !this.data) {
           this.getData(this.config);
         }
+
+        this.checkAdditionallValidation();
       });
+  }
+
+  checkAdditionallValidation() {
+    for (let i = 0; i < this.config.config.length; i++) {
+      if (this.config.config[i].validation) {
+        this.form
+          .get(this.config.config[i].field)
+          .valueChanges.subscribe((data) => {
+            this.onChangeData.emit(this.form.value);
+          });
+      }
+    }
   }
 
   getConfigurationFile() {
@@ -258,7 +272,7 @@ export class DynamicFormsComponent implements OnInit {
         //   this.form.controls[name].setValue(new Date(value).toUTCString(), {
         //     emitEvent: true,
         //   });
-        // } 
+        // }
         else {
           this.form.controls[name].setValue(value, { emitEvent: true });
         }

@@ -19,7 +19,8 @@
             "class": "e-outline",
             "name": "active",
             "title": "bookingSettings.activeOrDeactiveBookingPage",
-            "field": "active"
+            "field": "active",
+            "validation": true
         },
         {
             "type": "textbox",
@@ -32,7 +33,8 @@
             "class": "e-outline",
             "name": "booking_link",
             "title": "bookingSettings.bookingLink",
-            "field": "booking_link"
+            "field": "booking_link",
+            "validation": true
         },
         {
             "type": "label",
@@ -57,10 +59,91 @@
             "field": "company_name"
         },
         {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "company_description",
+            "title": "bookingSettings.companyDescription",
+            "field": "company_description"
+        },
+        {
             "type": "label",
             "width": "col-md-12 mt-2",
-            "title": "bookingSettings.socialNetworkTitle",
-            "text": "bookingSettings.socialNetworkText"
+            "text": "bookingSettings.brandingText"
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_primary",
+            "title": "bookingSettings.brandingColorPrimary",
+            "field": "branding_color_primary",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_secondary",
+            "title": "bookingSettings.brandingColorSecondary",
+            "field": "branding_color_secondary",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_light",
+            "title": "bookingSettings.brandingColorLight",
+            "field": "branding_color_light",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_dark",
+            "title": "bookingSettings.brandingColorDark",
+            "field": "branding_color_dark",
+            "validation": true
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "display_copyright_button",
+            "title": "bookingSettings.displayCopyrightButton",
+            "field": "display_copyright_button",
+            "validation": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 mt-2",
+            "class": "e-outline",
+            "name": "business_address",
+            "title": "bookingSettings.businessAddress",
+            "field": "business_address"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "text": "bookingSettings.contactInformation"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email"
         },
         {
             "type": "textbox",
@@ -135,6 +218,9 @@
                 "parameters": [],
                 "fields": "",
                 "root": ""
+            },
+            "responseMessage": {
+                "type": "toastr"
             },
             "width": "col-md-12",
             "class": "btn btn-primary",

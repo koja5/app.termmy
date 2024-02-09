@@ -43,6 +43,7 @@ export class FieldConfig {
   parameters?: any[];
   allowCustom?: boolean;
   response?: string;
+  responseMessage?: any;
   body?: any;
   oneLine?: boolean;
   minuteStep: number;

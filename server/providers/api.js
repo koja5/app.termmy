@@ -269,7 +269,7 @@ router.post("/forgotPassword", function (req, res, next) {
         if (rows.length) {
           var options = prepareOptionsForRequest(
             req.body,
-            "mail-server/forgotPasswordLink"
+            "mail-server/resetPasswordLink"
           );
           makeRequest(options, res);
         } else {
