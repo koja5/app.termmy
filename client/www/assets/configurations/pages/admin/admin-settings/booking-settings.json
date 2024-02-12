@@ -1,0 +1,233 @@
+{
+    "request": {
+        "type": "GET",
+        "api": "/api/booking/getBookingConfig",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "config": [
+        {
+            "type": "label",
+            "width": "col-md-12 border-bottom",
+            "title": "bookingSettings.title",
+            "text": "bookingSettings.text"
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "active",
+            "title": "bookingSettings.activeOrDeactiveBookingPage",
+            "field": "active",
+            "validation": true
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.bookingRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "booking_link",
+            "title": "bookingSettings.bookingLink",
+            "field": "booking_link",
+            "validation": true
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "title": "bookingSettings.companyInformationTitle",
+            "text": "bookingSettings.companyInformationText"
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "show_company_information",
+            "title": "bookingSettings.showCompanyInformation",
+            "field": "show_company_information"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "company_name",
+            "title": "bookingSettings.companyName",
+            "field": "company_name"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "company_description",
+            "title": "bookingSettings.companyDescription",
+            "field": "company_description"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "text": "bookingSettings.brandingText"
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_primary",
+            "title": "bookingSettings.brandingColorPrimary",
+            "field": "branding_color_primary",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_secondary",
+            "title": "bookingSettings.brandingColorSecondary",
+            "field": "branding_color_secondary",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_light",
+            "title": "bookingSettings.brandingColorLight",
+            "field": "branding_color_light",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-2",
+            "name": "branding_color_dark",
+            "title": "bookingSettings.brandingColorDark",
+            "field": "branding_color_dark",
+            "validation": true
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "display_copyright_button",
+            "title": "bookingSettings.displayCopyrightButton",
+            "field": "display_copyright_button",
+            "validation": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 mt-2",
+            "class": "e-outline",
+            "name": "business_address",
+            "title": "bookingSettings.businessAddress",
+            "field": "business_address"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "text": "bookingSettings.contactInformation"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.facebookRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "facebook",
+            "title": "bookingSettings.facebook",
+            "field": "facebook"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.instagramRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "instagram",
+            "title": "bookingSettings.instagram",
+            "field": "instagram"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.youtubeRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "youtube",
+            "title": "bookingSettings.youtube",
+            "field": "youtube"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.tiktokRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "tiktok",
+            "title": "bookingSettings.tiktok",
+            "field": "tiktok"
+        },
+        {
+            "type": "textbox",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "bookingSettings.websiteRootLink",
+                "groupPosition": "left"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "website",
+            "title": "bookingSettings.website",
+            "field": "website"
+        },
+        {
+            "type": "button",
+            "request": {
+                "type": "POST",
+                "api": "/api/booking/setBookingConfig",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "responseMessage": {
+                "type": "toastr"
+            },
+            "width": "col-md-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-md-12"
+        }
+    ]
+}

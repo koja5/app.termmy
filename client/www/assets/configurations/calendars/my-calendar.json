@@ -1,0 +1,180 @@
+{
+    "multiCalendar": true,
+    "filters": {
+        "locations": {
+            "title": "myCalendar.locations",
+            "request": {
+                "type": "GET",
+                "api": "/api/getAdminLocations",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        },
+        "employees": {
+            "title": "myCalendar.employees",
+            "request": {
+                "type": "GET",
+                "api": "/api/getAdminEmployees",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        }
+    },
+    "request": {
+        "type": "GET",
+        "api": "/api/calendar/getMyTermines",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "editSettingsRequest": {
+        "add": {
+            "request": {
+                "type": "POST",
+                "api": "/api/calendar/setTermine",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        },
+        "edit": {
+            "request": {
+                "type": "POST",
+                "api": "/api/calendar/updateTermine",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            }
+        },
+        "delete": {
+            "type": "GET",
+            "api": "/api/calendar/deleteTermine",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        }
+    },
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "employee_id",
+            "title": "employee_id",
+            "field": "employee_id"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "Subject",
+            "title": "Title",
+            "field": "Subject"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "ResourcesIndex",
+            "title": "ResourcesIndex",
+            "field": "ResourcesIndex"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "externalCalendar",
+            "title": "externalCalendar",
+            "field": "externalCalendar"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-field",
+            "name": "groupIndex",
+            "title": "groupIndex",
+            "field": "groupIndex"
+        },
+        {
+            "type": "combobox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "client_id",
+            "title": "myCalendar.client",
+            "field": {
+                "text": "firstname",
+                "value": "id"
+            },
+            "additionalField": "Subject",
+            "fieldTemplate": {
+                "fields": [
+                    {
+                        "type": "text",
+                        "values": [
+                            "firstname",
+                            "",
+                            "lastname"
+                        ]
+                    }
+                ]
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getMyClients",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
+            "required": true
+        },
+        {
+            "type": "combobox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "service_id",
+            "title": "myCalendar.service",
+            "field": {
+                "text": "name",
+                "value": "id"
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getMyServices",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
+            "required": true
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-6",
+            "class": "e-field date-none",
+            "name": "StartTime",
+            "title": "myCalendar.termineFrom",
+            "field": "StartTime",
+            "format": "dd.MM.yyyy HH:mm",
+            "timeFormat": "HH:mm"
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-6",
+            "class": "e-field date-none",
+            "name": "EndTime",
+            "title": "myCalendar.termineTo",
+            "field": "EndTime",
+            "format": "dd.MM.yyyy HH:mm",
+            "timeFormat": "HH:mm"
+        }
+    ]
+}

@@ -1,0 +1,312 @@
+{
+    "pageSize": 10,
+    "request": {
+        "type": "GET",
+        "api": "/api/getMyLocations",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "paging": {
+        "enable": true,
+        "settings": {
+            "pageSizes": true,
+            "pageSize": 20
+        }
+    },
+    "sorting": {
+        "enable": true
+    },
+    "grouping": {
+        "enable": true,
+        "group": []
+    },
+    "filtering": {
+        "enable": true,
+        "settings": {
+            "type": "Menu"
+        }
+    },
+    "formDialog": {
+        "type": "sidebar",
+        "size": "lg"
+    },
+    "customGrouping": false,
+    "allowResizing": true,
+    "reorderable": true,
+    "selectable": true,
+    "scrollable": false,
+    "hideable": true,
+    "refresh": false,
+    "reset": true,
+    "contextMenuItems": [
+        "AutoFit",
+        "AutoFitAll",
+        "SortAscending",
+        "SortDescending",
+        "Copy",
+        "Edit",
+        "Delete",
+        "Save",
+        "Cancel",
+        "FirstPage",
+        "PrevPage",
+        "LastPage",
+        "NextPage",
+        "Group",
+        "Ungroup"
+    ],
+    "toolbar": [
+        "Add",
+        "Edit",
+        "Delete",
+        "Print",
+        "Search"
+    ],
+    "editSettings": {
+        "allowEditing": true,
+        "allowAdding": true,
+        "allowDeleting": true,
+        "showDeleteConfirmDialog": true,
+        "mode": "Dialog"
+    },
+    "editSettingsRequest": {
+        "add": {
+            "type": "POST",
+            "api": "/api/setLocation",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        },
+        "edit": {
+            "type": "POST",
+            "api": "/api/updateUser",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        },
+        "delete": {
+            "type": "POST",
+            "api": "/api/deleteUser",
+            "parameters": [],
+            "fields": "",
+            "root": ""
+        }
+    },
+    "columns": [
+        {
+            "title": "myLocations.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "menu",
+                    "icon": "more-vertical",
+                    "menu": [
+                        {
+                            "type": "edit",
+                            "actionName": "Edit",
+                            "icon": "edit",
+                            "formDialog": {
+                                "type": "sidebar",
+                                "closeAfterExecute": true
+                            }
+                        },
+                        {
+                            "type": "delete",
+                            "actionName": "Delete",
+                            "icon": "trash",
+                            "executeAction": {
+                                "request": {
+                                    "type": "POST",
+                                    "api": "/api/deleteLocation",
+                                    "parameters": [],
+                                    "fields": "",
+                                    "root": ""
+                                },
+                                "response": "toastr",
+                                "showQuestionBeforeExecute": true,
+                                "modalConfig": {
+                                    "modalTitle": "",
+                                    "modalText": "",
+                                    "windowClass": "modal modal-danger"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "field": "allow_online"
+        },
+        {
+            "title": "myLocations.name",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "name",
+            "isPrimaryKey": true,
+            "allowEditing": false
+        },
+        {
+            "title": "myLocations.telephone",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "telephone",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "myLocations.allowOnline",
+            "template": {
+                "choices": [
+                    {
+                        "field": "allow_online",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "Disallow online",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "allow_online",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "Allow online",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
+            },
+            "field": "allow_online"
+        },
+        {
+            "title": "myLocations.action",
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "button",
+                    "icon": "eye",
+                    "routerLink": {
+                        "link": "/dashboard/admin/location-view/#id",
+                        "parameters": [
+                            "id"
+                        ],
+                        "saveParametersInSessionStorage": true
+                    }
+                }
+            },
+            "field": "allow_online"
+        }
+    ],
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "name": "id",
+            "title": "Id",
+            "field": "id",
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "name",
+            "title": "myLocations.name",
+            "field": "name",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "uid",
+            "title": "myLocations.uid",
+            "field": "uid",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "address",
+            "title": "myLocations.address",
+            "field": "address"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-3",
+            "class": "e-outline",
+            "name": "zip",
+            "title": "myLocations.zip",
+            "field": "zip"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-3",
+            "class": "e-outline",
+            "name": "city",
+            "title": "myLocations.city",
+            "field": "city"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "email",
+            "title": "myLocations.email",
+            "field": "email",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "myLocations.telephone",
+            "field": "telephone"
+        },
+        {
+            "type": "timepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "worktime_from",
+            "title": "myLocations.worktimeFrom",
+            "field": "worktime_from",
+            "required": true
+        },
+        {
+            "type": "timepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "worktime_to",
+            "title": "myLocations.worktimeTo",
+            "field": "worktime_to",
+            "required": true
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "allow_online",
+            "title": "myLocations.allowOnline",
+            "field": "allow_online"
+        },
+        {
+            "type": "button",
+            "width": "col-md-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-md-12"
+        }
+    ]
+}
