@@ -8,6 +8,32 @@
 @import "../../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
 @import "../../../../../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css";
 
+@media (min-width: 992px) {
+  .e-schedule
+    .e-vertical-view
+    .e-left-indent-wrap
+    table
+    tbody
+    td.e-header-cells.e-week-number {
+    height: 82px;
+  }
+}
+
+@media (max-width: 991px) {
+  .e-schedule-resource-toolbar-container {
+    display: none;
+  }
+}
+
+.e-schedule
+  .e-vertical-view
+  .e-left-indent-wrap
+  table
+  tbody
+  td.e-header-cells.e-week-number {
+  font-size: 32px;
+}
+
 .e-schedule .e-vertical-view .e-work-cells.e-disable-dates {
   pointer-events: none;
   background: rgba(0, 0, 0, 0.08) !important;
@@ -121,16 +147,6 @@
 .e-toolbar .e-toolbar-item .e-tbar-btn,
 .e-toolbar .e-toolbar-items {
   background: #fff !important;
-}
-
-.e-schedule
-  .e-vertical-view
-  .e-left-indent-wrap
-  table
-  tbody
-  td.e-header-cells.e-week-number {
-  height: 82px;
-  font-size: 32px;
 }
 
 .e-treeview .e-list-item.e-active > .e-fullrow {

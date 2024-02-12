@@ -343,11 +343,8 @@ export class DynamicScheduleComponent {
   packTerminesFromGoogleCalendar(termines) {
     let prepactedTermines = [];
     for (let i = 0; i < termines.length; i++) {
-      const data = termines[i].description
-        ? typeof termines[i].description === "object"
-          ? termines[i].description
-          : JSON.parse(termines[i].description)
-        : {};
+      const data = this.checkTermine(termines[i]);
+
       prepactedTermines.push({
         Subject: data.Subject
           ? data.Subject
@@ -355,10 +352,18 @@ export class DynamicScheduleComponent {
           ? termines[i].summary
           : "",
         StartTime: new Date(
-          data.StartTime ? data.StartTime : termines[i].start.dateTime
+          data.StartTime != termines[i].start.dateTime
+            ? new Date(termines[i].start.dateTime).toLocaleString("en-US", {
+                timeZone: "UTC",
+              })
+            : data.StartTime
         ),
         EndTime: new Date(
-          data.EndTime ? data.EndTime : termines[i].end.dateTime
+          data.EndTime != termines[i].end.dateTime
+            ? new Date(termines[i].end.dateTime).toLocaleString("en-US", {
+                timeZone: "UTC",
+              })
+            : data.EndTime
         ),
         id: termines[i].id,
         employeeId: data.employeeId
@@ -375,6 +380,20 @@ export class DynamicScheduleComponent {
     }
 
     return prepactedTermines;
+  }
+
+  checkTermine(termine: any) {
+    if (termine.description && typeof termine.description === "object") {
+      return termine.description;
+    } else if (
+      termine.description &&
+      termine.description.startsWith("{") &&
+      termine.description.endsWith("}")
+    ) {
+      return JSON.parse(termine.description);
+    } else {
+      return {};
+    }
   }
 
   createTermineForGoogleCalendar() {
@@ -814,12 +833,13 @@ export class DynamicScheduleComponent {
       hour,
       minutes
     );
-    const workTimeForDay = this.getWorkTimeForDay(day, args.groupIndex);
+    const groupIndex = args.groupIndex != undefined ? args.groupIndex : 0;
+    const workTimeForDay = this.getWorkTimeForDay(day, groupIndex);
     if (
       workTimeForDay &&
       workTimeForDay.active &&
-      this.workTimes[args.groupIndex] &&
-      this.workTimes[args.groupIndex].color
+      this.workTimes[groupIndex] &&
+      this.workTimes[groupIndex].color
     ) {
       let notWorkTime = true;
       for (let i = 0; i < workTimeForDay.times.length; i++) {
@@ -837,7 +857,7 @@ export class DynamicScheduleComponent {
             convertWorkTimeToMinutes < end
           ) {
             args.element.style.backgroundColor =
-              this.workTimes[args.groupIndex].color;
+              this.workTimes[groupIndex].color;
             notWorkTime = false;
             break;
           }
