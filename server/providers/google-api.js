@@ -121,11 +121,11 @@ router.post("/createTermine", auth, async (req, res) => {
         description: JSON.stringify(req.body),
         start: {
           dateTime: moment(req.body.StartTime).add("hour", 1),
-          timeZone: "Africa/Asmara",
+          timeZone: "UTC",
         },
         end: {
           dateTime: moment(req.body.EndTime).add("hour", 1),
-          timeZone: "Africa/Asmara",
+          timeZone: "UTC",
         },
       },
     },

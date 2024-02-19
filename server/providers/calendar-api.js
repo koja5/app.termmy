@@ -36,7 +36,7 @@ router.post("/getTermines", auth, async (req, res, next) => {
         );
 
         conn.query(
-          "select * from calendar where " + condition,
+          "select * from appointments where " + condition,
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -63,7 +63,7 @@ router.get("/getMyTermines", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from calendar where employee_id = ?",
+          "select * from appointments where employee_id = ?",
           req.user.user.id,
           function (err, rows, fields) {
             conn.release();
@@ -91,15 +91,19 @@ router.post("/setTermine", auth, function (req, res) {
     }
     req.body.admin_id = req.user.user.admin_id;
     delete req.body.employeeId;
-    conn.query("insert into calendar SET ?", [req.body], function (err, rows) {
-      conn.release();
-      if (!err) {
-        res.json(rows.insertId);
-      } else {
-        logger.log("error", err.sql + ". " + err.sqlMessage);
-        res.json(false);
+    conn.query(
+      "insert into appointments SET ?",
+      [req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(rows.insertId);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
       }
-    });
+    );
   });
 });
 
@@ -119,7 +123,7 @@ router.post("/updateTermine", auth, function (req, res) {
     delete req.body.StartTimezone;
     delete req.body.EndTimezone;
     conn.query(
-      "update calendar set ? where id = ?",
+      "update appointments set ? where id = ?",
       [req.body, req.body.id],
       function (err, rows) {
         conn.release();
@@ -142,7 +146,7 @@ router.get("/deleteTermine/:id", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "delete from calendar where id = ?",
+          "delete from appointments where id = ?",
           req.params.id,
           function (err, rows, fields) {
             conn.release();

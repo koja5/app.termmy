@@ -1139,7 +1139,7 @@ router.get("/getCalendarRights", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from user_rights where id_user = ?",
+          "select * from user_rights where user_id = ?",
           [req.user.user.id],
           function (err, rows, fields) {
             conn.release();
