@@ -117,6 +117,14 @@
             "validation": true
         },
         {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "part_of_amount",
+            "title": "bookingSettings.partOfAmount",
+            "field": "part_of_amount"
+        },
+        {
             "type": "textbox",
             "width": "col-md-12 mt-2",
             "class": "e-outline",

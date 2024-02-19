@@ -196,7 +196,8 @@
             "tiktok": "Tiktok",
             "tiktokRootLink": "https://tiktok.com/",
             "website": "Your website link",
-            "websiteRootLink": "https://"
+            "websiteRootLink": "https://",
+            "partOfAmount": "Allow to client pay part of amount"
         },
         "authGlobal": {
             "backToLogin": "Back to login"
