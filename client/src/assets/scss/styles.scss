@@ -1,6 +1,7 @@
 @import "syncfusion-calendar.scss";
 
 :root {
+  --primary: #9187f4;
   --dark: #283046;
   --light: #b4b7bd;
   --white: #fff;
@@ -9,6 +10,7 @@
 .form-custom {
   display: inline-block;
 }
+
 
 .hidden,
 .hide {

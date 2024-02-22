@@ -65,7 +65,7 @@ export class DynamicScheduleComponent {
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _storageService: StorageService,
-    private _helpService: HelpService
+    public _helpService: HelpService
   ) {}
 
   ngOnInit() {
@@ -376,6 +376,8 @@ export class DynamicScheduleComponent {
           : this.calendarSettings.externalAccounts.google,
         service_id: data.service_id ? data.service_id : null,
         client_id: data.client_id ? data.client_id : null,
+        is_online: data.is_online,
+        amount_paid: data.amount_paid,
       });
     }
 
@@ -580,6 +582,8 @@ export class DynamicScheduleComponent {
         service_id: termines[i].service_id,
         client_id: termines[i].client_id,
         admin_id: termines[i].admin_id,
+        is_online: termines[i].is_online,
+        amount_paid: termines[i].amount_paid,
       });
     }
 
@@ -696,9 +700,7 @@ export class DynamicScheduleComponent {
     return false;
   }
 
-  onChangeData(event) {
-    console.log(event);
-  }
+  onChangeData(event) {}
 
   setValue(fields: any, values: any) {
     for (let i = 0; i < fields.length; i++) {

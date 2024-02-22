@@ -140,7 +140,6 @@ export class ComboboxComponent implements OnInit {
   }
 
   submitEmitter(event: any) {
-    console.log(event);
     this.config.value = event.firstname + " " + event.lastname;
   }
 }

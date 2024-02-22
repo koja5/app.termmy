@@ -24,11 +24,12 @@
             </div>
             <div class="card" *ngIf="checkCalendarVisibility()">
                 <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : '80vh'"
-                    [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true" currentView="{{mobileDevice ? 'Day' : 'WorkWeek'}}"
-                    [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()"
-                    (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
-                    (popupClose)="onPopupClose($event)" (eventRendered)="onEventRendered($event)"
-                    (dataBound)="onDataBound($event)" (renderCell)="onRenderCell($event)">
+                    [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
+                    currentView="{{mobileDevice ? 'Day' : 'WorkWeek'}}" [startHour]="getStartHourForLocation()"
+                    [endHour]="getEndHourForLocation()" (actionBegin)="onActionBegin($event)"
+                    (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
+                    (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
+                    (renderCell)="onRenderCell($event)">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1"><img height="40" width="40"
@@ -51,12 +52,26 @@
                             </div>
                         </div>
                     </ng-template>
+                    <ng-template #eventTemplate let-data>
+                        TEST
+                    </ng-template>
                     <ng-template #editorTemplate let-data>
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <app-dynamic-forms *ngIf="config && config.config.length > 0" [config]="config"
                                     [partOfGrid]="true" [data]="data" #form="dynamicForm">
                                 </app-dynamic-forms>
+                                <div class="payment-info text-center">
+                                    <h6 class="mb-0" *ngIf="data.is_online">{{'myCalendar.scheduledByUser' |
+                                        translate}}</h6>
+                                    <h6 class="selected-payment" *ngIf="!data.amount_paid">
+                                        {{'myCalendar.selectedPayOnArrivalOption' | translate}}
+                                    </h6>
+                                    <h6 class="selected-payment" *ngIf="data.amount_paid">
+                                        {{_helpService.replaceText('myCalendar.selectedPayOnline' | translate,
+                                        '{amount}', data.amount_paid)}}
+                                    </h6>
+                                </div>
                             </tbody>
                         </table>
                     </ng-template>

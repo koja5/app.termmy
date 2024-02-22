@@ -38,7 +38,6 @@ router.get("/getBookingConfig", auth, async (req, res, next) => {
 });
 
 router.post("/setBookingConfig", auth, function (req, res) {
-  console.log("TEST!");
   connection.getConnection(function (err, conn) {
     if (err) {
       logger.log("error", err.sql + ". " + err.sqlMessage);

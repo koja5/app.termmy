@@ -25,8 +25,6 @@ router.post("/setExternalGoogleAccount", auth, function (req, res) {
     req.body.user_id = req.user.user.id;
     delete req.body.token;
 
-    console.log(req.body);
-
     conn.query(
       "select * from external_accounts where user_id = ?",
       [req.user.user.id],
@@ -130,7 +128,6 @@ router.post("/createTermine", auth, async (req, res) => {
       },
     },
     (response) => {
-      console.log(response);
       res.send(true);
     }
   );
@@ -181,7 +178,6 @@ router.post("/deleteTermine", async (req, res) => {
 });
 
 router.post("/getMyTermines", async (req, res) => {
-  console.log(req.body.id);
   oauth2Client.setCredentials({
     refresh_token: req.body.id,
   });
@@ -264,23 +260,31 @@ router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
-    approval_prompt: "force",
+    approval_prompt: "consent",
     include_granted_scopes: true,
   });
 
   res.json(url);
 });
 
+// router.get("/login", (req, res) => {
+//   const url = oauth2Client.generateAuthUrl({
+//     access_type: "offline",
+//     scope: scopes,
+//     approval_prompt: "force",
+//     include_granted_scopes: true,
+//   });
+
+//   res.json(url);
+// });
+
 router.get("/redirect", async (req, res) => {
   const code = req.query.code;
-  console.log(code);
   const { tokens } = await oauth2Client.getToken(code);
-  console.log(tokens);
   // oauth2Client.setCredentials({
   //   refresh_token:
   //     "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
   // });
-  console.log(tokens);
 
   var options = {
     url: process.env.link_api + "google/setExternalGoogleAccount",

@@ -11,7 +11,6 @@ export class BookingSettingsComponent {
   public disableEdit = false;
 
   onChangeData(event: any) {
-    console.log(event);
     if(event.active) {
       this.disableEdit = true;
     }

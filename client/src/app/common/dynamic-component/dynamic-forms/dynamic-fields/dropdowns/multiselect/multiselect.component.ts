@@ -25,7 +25,6 @@ export class MultiselectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.group);
     if (this.config.value && typeof this.config.value === "string") {
       if (this.config.value.split(",").length > 0) {
         let arrayValue = this.config.value.split(",");

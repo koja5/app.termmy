@@ -10,6 +10,7 @@ const sha1 = require("sha1");
 const jwt = require("jsonwebtoken");
 const auth = require("./config/auth");
 const sql = require("./config/sql-database");
+const uuid = require("uuid");
 
 module.exports = router;
 
@@ -127,7 +128,8 @@ router.post("/signUp", function (req, res, next) {
           delete req.body.rePassword;
           req.body.password = setSha1Password(req.body.password);
           req.body.type = 1;
-
+          req.body.id = uuid.v4();
+          req.body.admin_id = req.body.id;
           conn.query(
             "insert into users set ?",
             [req.body],
@@ -1211,7 +1213,6 @@ function prepareOptionsForRequest(body, api) {
 
 function makeRequest(options, res) {
   request(options, function (error, response, body) {
-    console.log(error);
     if (!error) {
       res.json(true);
     } else {

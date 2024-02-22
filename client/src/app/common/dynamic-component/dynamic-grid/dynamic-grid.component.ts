@@ -410,7 +410,6 @@ export class DynamicGridComponent {
   }
 
   toggleExpandRow(row) {
-    console.log("Toggled Expand Row!", row);
     this.grid.rowDetail.toggleExpandRow(row);
   }
 }

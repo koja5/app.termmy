@@ -25,7 +25,6 @@ export class TimePickerI18nComponent implements OnInit {
   ngOnInit(): void {}
 
   changeHour(event) {
-    console.log(event);
   }
 
   onDateSelected(event) {

@@ -268,7 +268,6 @@ export class DynamicFormsComponent implements OnInit {
           });
         }
         //  else if (type === "datetimepicker") {
-        //   console.log(new Date(value).toUTCString());
         //   this.form.controls[name].setValue(new Date(value).toUTCString(), {
         //     emitEvent: true,
         //   });

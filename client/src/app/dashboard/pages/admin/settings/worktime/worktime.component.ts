@@ -121,7 +121,6 @@ export class WorktimeComponent implements OnInit {
     if (this.validBeforeSave()) {
       this._service.callPostMethod("/api/setWorktime", this.data).subscribe(
         (data) => {
-          console.log(data);
           if (data) {
             this._toastr.showSuccess();
           }

@@ -119,7 +119,12 @@
             "employees": "Employees",
             "notSetWorkTimeForUser": "No working times have been set for this user",
             "connectedThisCalendarWithGoogle": "This calendar is connected with google!",
-            "selectLocationAndEmployee": "Please select location and user to see calendar"
+            "selectLocationAndEmployee": "Please select location and user to see calendar",
+            "scheduledByUser": "Scheduled by the client",
+            "selectedPayOnArrivalOption": "Client chose the option of payment on arrival.",
+            "selectedPayOnline": "Client paid amount of {amount} € for service.",
+            "selectedFullPayment": "Client paid full amount for service({amount} €)",
+            "selectedPartOfFullPayment": "Client paid part of full amount for service({amount} €). The balance in the amount of {amountRest} € must be paid upon arrival."
         },
         "settings": {
             "worktime": "Worktime",

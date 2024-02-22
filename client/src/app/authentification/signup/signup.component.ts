@@ -80,7 +80,6 @@ export class SignupComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm);
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
