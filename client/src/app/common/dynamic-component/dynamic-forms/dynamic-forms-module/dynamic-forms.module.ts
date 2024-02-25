@@ -23,6 +23,7 @@ import { PasswordBoxComponent } from "../dynamic-fields/inputs/text-box/password
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/color-picker.component";
 import { RadioComponent } from "../dynamic-fields/buttons/radio/radio.component";
+import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-mark/explanation-mark.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RadioComponent } from "../dynamic-fields/buttons/radio/radio.component"
     DatepickerComponent,
     DatetimepickerComponent,
     ColorPickerComponent,
+    ExplanationMarkComponent,
   ],
   exports: [
     DynamicFieldsDirective,
@@ -56,6 +58,7 @@ import { RadioComponent } from "../dynamic-fields/buttons/radio/radio.component"
     DatepickerComponent,
     DatetimepickerComponent,
     ColorPickerComponent,
+    ExplanationMarkComponent,
   ],
   imports: [
     CommonModule,

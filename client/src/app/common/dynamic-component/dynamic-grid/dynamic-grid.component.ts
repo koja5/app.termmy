@@ -146,6 +146,10 @@ export class DynamicGridComponent {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
 
+  toggleSidebarClose(name): void {
+    this._coreSidebarService.getSidebarRegistry(name).close();
+  }
+
   /**
    * Filter By Roles
    *
@@ -298,19 +302,28 @@ export class DynamicGridComponent {
     if (this.config.request.type === "GET") {
       this.rows = data;
     }
-    if (
-      !this.executeActionConfig ||
-      this.executeActionConfig.closeAfterExecute != false
-    ) {
-      if (
-        this.executeActionConfig &&
-        this.executeActionConfig.type === "sidebar"
-      ) {
-        this.toggleSidebar("sidebar");
-      } else {
+    if (this.config.formDialog.type === "modal") {
+      if (!this.config.formDialog.closeAfterExecute) {
         this.modalDialog.close();
       }
+    } else {
+      if (!this.config.formDialog.closeAfterExecute) {
+        this.toggleSidebarClose("sidebar");
+      }
     }
+    // if (
+    //   !this.executeActionConfig ||
+    //   this.executeActionConfig.closeAfterExecute != false
+    // ) {
+    //   if (
+    //     this.executeActionConfig &&
+    //     this.executeActionConfig.type === "sidebar"
+    //   ) {
+    //     this.toggleSidebarClose("sidebar");
+    //   } else {
+    //     this.modalDialog.close();
+    //   }
+    // }
   }
 
   // check here which is action and then check additionall configuration - l

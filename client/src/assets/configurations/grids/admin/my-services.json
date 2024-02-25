@@ -161,6 +161,18 @@
             }
         },
         {
+            "title": "myServices.timeBlocked",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "time_blocked",
+            "validation": {
+                "required": true
+            }
+        },
+        {
             "title": "myServices.price",
             "filterable": true,
             "hideable": true,
@@ -209,6 +221,21 @@
             "type": "numeric",
             "subType": "group",
             "groupSettings": {
+                "groupText": "myServices.min",
+                "groupPosition": "right"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "time_blocked",
+            "title": "myServices.timeBlocked",
+            "field": "time_blocked",
+            "required": true,
+            "explanation": "myServices.timeBlockedExplanation"
+        },
+        {
+            "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
                 "groupText": "myServices.currency",
                 "groupPosition": "right"
             },
@@ -218,6 +245,15 @@
             "title": "myServices.price",
             "field": "price",
             "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "description",
+            "title": "myServices.description",
+            "field": "description",
+            "multiline": true
         },
         {
             "type": "button",

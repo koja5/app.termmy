@@ -106,9 +106,12 @@
         "myServices": {
             "name": "Name of service",
             "timeDuration": "Time duration",
+            "timeBlocked": "Time blocked",
+            "timeBlockedExplanation": "Blocked time is the total time used when making an appointment. This time is different from the additional treatment time, as it includes the total time you need, for example. preparation for the service, cleaning up after the service and similar.",
             "price": "Price",
             "min": "minutes",
-            "currency": "€"
+            "currency": "€",
+            "description": "Description"
         },
         "myCalendar": {
             "client": "Client",
@@ -187,11 +190,16 @@
             "brandingColorSecondary": "Choose the secondary color of your booking website to match your brand",
             "brandingColorLight": "Choose the color of light elements of your booking website to match your brand",
             "brandingColorDark": "Choose the color of dark elements of your booking website to match your brand",
+            "backgroundColorPrimary": "Choose the primary color of your background",
+            "backgroundColorSecondary": "Choose the secondary color of your background",
+            "brandingColorSecondaryExplanation": "Choose another color for your background if you want to have to gradient or same color like primary if you want one color background look.",
             "displayCopyrightButton": "Display 'Termmy' branding on your booking website",
-            "businessAddress": "Business address",
+            "companyAddress": "Company address",
             "contactInformation": "Contact information",
             "socialNetworkTitle": "Social networks",
             "socialNetworkText": "Enter your social network page and show on booking page",
+            "partOfAmount": "Allow to client pay part of amount",
+            "allowPayOnArrivalForNewCustomer": "Allow pay on arrival for new customer",
             "facebook": "Facebook",
             "facebookRootLink": "https://facebook.com/",
             "instagram": "Instagram",
@@ -201,8 +209,7 @@
             "tiktok": "Tiktok",
             "tiktokRootLink": "https://tiktok.com/",
             "website": "Your website link",
-            "websiteRootLink": "https://",
-            "partOfAmount": "Allow to client pay part of amount"
+            "websiteRootLink": "https://"
         },
         "authGlobal": {
             "backToLogin": "Back to login"

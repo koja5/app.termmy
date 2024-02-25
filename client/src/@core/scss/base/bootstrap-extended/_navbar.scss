@@ -566,7 +566,8 @@
   .header-navbar {
     // floating nav width
     &.floating-nav {
-      width: calc(100vw - (100vw - 100%) - calc(#{$content-padding} * 2));
+      width: calc(100vw - (100vw - 100%));
+      margin-top: 0px !important;
     }
     &.navbar-static-top {
       left: 0;
@@ -604,10 +605,11 @@
   .header-navbar {
     &.floating-nav {
       width: calc(
-        100vw - (100vw - 100%) - calc(#{$content-padding} + 0.4rem)
+        100vw - (100vw - 100%)
       ) !important; // SM screen calc as per updated spacings
-      margin-left: calc(#{$content-padding} - 0.8rem);
-      margin-right: calc(#{$content-padding} - 0.8rem);
+      /*margin-left: calc(#{$content-padding} - 0.8rem);
+      margin-right: calc(#{$content-padding} - 0.8rem);*/
+      margin-top: 0px !important;
     }
 
     .navbar-container ul.navbar-nav li .selected-language {

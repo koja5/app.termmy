@@ -74,38 +74,80 @@
         {
             "type": "color",
             "width": "col-12",
-            "class": "e-outline ml-2",
+            "class": "e-outline ml-1",
             "name": "branding_color_primary",
             "title": "bookingSettings.brandingColorPrimary",
             "field": "branding_color_primary",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#fff",
             "validation": true
         },
         {
             "type": "color",
             "width": "col-12",
-            "class": "e-outline ml-2",
+            "class": "e-outline ml-1",
             "name": "branding_color_secondary",
             "title": "bookingSettings.brandingColorSecondary",
             "field": "branding_color_secondary",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
             "validation": true
         },
         {
             "type": "color",
             "width": "col-12",
-            "class": "e-outline ml-2",
+            "class": "e-outline ml-1",
             "name": "branding_color_light",
             "title": "bookingSettings.brandingColorLight",
             "field": "branding_color_light",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#fff",
             "validation": true
         },
         {
             "type": "color",
             "width": "col-12",
-            "class": "e-outline ml-2",
+            "class": "e-outline ml-1",
             "name": "branding_color_dark",
             "title": "bookingSettings.brandingColorDark",
             "field": "branding_color_dark",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#283046",
             "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-1",
+            "name": "background_color_primary",
+            "title": "bookingSettings.backgroundColorPrimary",
+            "field": "background_color_primary",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#fff",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-1",
+            "name": "background_color_secondary",
+            "title": "bookingSettings.backgroundColorSecondary",
+            "field": "background_color_secondary",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#fff",
+            "validation": true,
+            "explanation": "bookingSettings.brandingColorSecondaryExplanation"
         },
         {
             "type": "switch",
@@ -125,12 +167,20 @@
             "field": "part_of_amount"
         },
         {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "allow_pay_on_arrival_new_customer",
+            "title": "bookingSettings.allowPayOnArrivalForNewCustomer",
+            "field": "allow_pay_on_arrival_new_customer"
+        },
+        {
             "type": "textbox",
             "width": "col-md-12 mt-2",
             "class": "e-outline",
-            "name": "business_address",
-            "title": "bookingSettings.businessAddress",
-            "field": "business_address"
+            "name": "company_address",
+            "title": "bookingSettings.companyAddress",
+            "field": "company_address"
         },
         {
             "type": "label",

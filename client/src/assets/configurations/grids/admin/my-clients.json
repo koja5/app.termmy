@@ -29,6 +29,7 @@
     },
     "formDialog": {
         "type": "sidebar",
+        "closeAfterExecute": false,
         "size": "lg"
     },
     "customGrouping": false,
@@ -80,7 +81,7 @@
                             "executeAction": {
                                 "request": {
                                     "type": "POST",
-                                    "api": "/api/deleteEmployee",
+                                    "api": "/api/deleteClient",
                                     "parameters": [],
                                     "fields": "",
                                     "root": ""
@@ -211,7 +212,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-6",
+            "width": "col-md-12",
             "class": "e-outline",
             "name": "address",
             "title": "commonFields.address",
@@ -220,7 +221,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-3",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "zip",
             "title": "commonFields.zip",
@@ -229,7 +230,7 @@
         },
         {
             "type": "textbox",
-            "width": "col-md-3",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "city",
             "title": "commonFields.city",

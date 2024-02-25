@@ -90,7 +90,8 @@
 .dark-layout .e-schedule .e-month-view .e-work-cells,
 .dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
 .dark-layout .e-schedule .e-agenda-view,
-.dark-layout .e-schedule .e-agenda-view .e-appointment:hover {
+.dark-layout .e-schedule .e-agenda-view .e-appointment:hover,
+.dark-layout .e-toolbar .e-hor-nav {
   background-color: #283046 !important;
   color: #fff !important;
 }
@@ -130,7 +131,10 @@
   .e-left-indent-wrap
   table
   tbody
-  td.e-header-cells.e-week-number {
+  td.e-header-cells.e-week-number,
+.dark-layout .e-toolbar .e-hor-nav:hover .e-icons,
+.dark-layout .e-toolbar .e-popup-down-icon.e-icons,
+.e-toolbar .e-popup-up-icon.e-icons {
   color: #fff !important;
 }
 

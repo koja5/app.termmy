@@ -29,6 +29,7 @@
     },
     "formDialog": {
         "type": "sidebar",
+        "closeAfterExecute": false,
         "size": "lg"
     },
     "customGrouping": false,
@@ -39,6 +40,13 @@
     "hideable": true,
     "refresh": false,
     "reset": true,
+    "editSettings": {
+        "allowEditing": true,
+        "allowAdding": true,
+        "allowDeleting": true,
+        "showDeleteConfirmDialog": true,
+        "mode": "Dialog"
+    },
     "editSettingsRequest": {
         "add": {
             "type": "POST",

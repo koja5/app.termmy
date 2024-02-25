@@ -5,7 +5,9 @@
         [formControlName]="config.name">
       <label *ngIf="config.title" class="form-check-label" [for]="config.name">{{
         config.title | translate
-        }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span></label>
+        }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span>
+        <app-explanation-mark *ngIf="config.explanation" [explanation]="config.explanation"></app-explanation-mark>
+      </label>
     </div>
   </div>
 </div>

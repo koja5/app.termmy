@@ -700,7 +700,9 @@ export class DynamicScheduleComponent {
     return false;
   }
 
-  onChangeData(event) {}
+  onChangeData(event) {
+    console.log(event);
+  }
 
   setValue(fields: any, values: any) {
     for (let i = 0; i < fields.length; i++) {
