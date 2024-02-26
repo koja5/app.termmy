@@ -132,18 +132,6 @@ export class StorageService {
   // EXTERNAL ACCOUNTS
 
   setExternalAccountSettings(value: any) {
-    // let externalAccountSettings =
-    //   localStorage.getItem("external-accounts") || "";
-    // let decrypt = CryptoJS.AES.decrypt(
-    //   externalAccountSettings,
-    //   environment.ENCRIPTY_KEY
-    // ).toString(CryptoJS.enc.Utf8);
-
-    // if (decrypt) {
-    //   decrypt = JSON.parse(decrypt);
-    // }
-
-    // decrypt = value;
 
     let encrypt = CryptoJS.AES.encrypt(
       JSON.stringify(value),

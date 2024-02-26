@@ -119,10 +119,10 @@
                                 <div class="payment-info text-center">
                                     <h6 class="mb-0" *ngIf="data.is_online">{{'myCalendar.scheduledByUser' |
                                         translate}}</h6>
-                                    <h6 class="selected-payment" *ngIf="!data.amount_paid">
+                                    <h6 class="selected-payment" *ngIf="data.is_online&&!data.amount_paid">
                                         {{'myCalendar.selectedPayOnArrivalOption' | translate}}
                                     </h6>
-                                    <h6 class="selected-payment" *ngIf="data.amount_paid">
+                                    <h6 class="selected-payment" *ngIf="data.is_online&&data.amount_paid">
                                         {{_helpService.replaceText('myCalendar.selectedPayOnline' | translate,
                                         '{amount}', data.amount_paid)}}
                                     </h6>

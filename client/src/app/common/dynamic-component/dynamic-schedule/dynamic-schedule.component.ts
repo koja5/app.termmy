@@ -351,20 +351,24 @@ export class DynamicScheduleComponent {
           : termines[i].summary
           ? termines[i].summary
           : "",
-        StartTime: new Date(
-          data.StartTime != termines[i].start.dateTime
-            ? new Date(termines[i].start.dateTime).toLocaleString("en-US", {
-                timeZone: "UTC",
-              })
-            : data.StartTime
-        ),
-        EndTime: new Date(
-          data.EndTime != termines[i].end.dateTime
-            ? new Date(termines[i].end.dateTime).toLocaleString("en-US", {
-                timeZone: "UTC",
-              })
-            : data.EndTime
-        ),
+        StartTime: termines[i].start.date
+          ? termines[i].start.date
+          : new Date(
+              data.StartTime != termines[i].start.dateTime
+                ? new Date(termines[i].start.dateTime).toLocaleString("en-US", {
+                    timeZone: "UTC",
+                  })
+                : data.StartTime
+            ),
+        EndTime: termines[i].end.date
+          ? termines[i].end.date
+          : new Date(
+              data.EndTime != termines[i].end.dateTime
+                ? new Date(termines[i].end.dateTime).toLocaleString("en-US", {
+                    timeZone: "UTC",
+                  })
+                : data.EndTime
+            ),
         id: termines[i].id,
         employeeId: data.employeeId
           ? data.employeeId
