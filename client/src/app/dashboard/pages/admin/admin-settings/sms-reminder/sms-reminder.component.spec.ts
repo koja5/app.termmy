@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SmsReminderComponent } from './sms-reminder.component';
+
+describe('SmsReminderComponent', () => {
+  let component: SmsReminderComponent;
+  let fixture: ComponentFixture<SmsReminderComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SmsReminderComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(SmsReminderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

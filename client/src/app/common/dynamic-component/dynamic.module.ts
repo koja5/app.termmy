@@ -19,6 +19,7 @@ import { RouterModule } from "@angular/router";
 import { DynamicTabsComponent } from "./dynamic-tabs/dynamic-tabs.component";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { CommonCustomModule } from "../common-custom.module";
+import { ExplanationMarkComponent } from "./dynamic-forms/dynamic-fields/common/explanation-mark/explanation-mark.component";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { CommonCustomModule } from "../common-custom.module";
     CommonCustomModule,
   ],
   providers: [ToastrComponent],
-  exports: [DynamicGridComponent, DynamicFormsComponent, DynamicTabsComponent],
+  exports: [DynamicGridComponent, DynamicFormsComponent, DynamicTabsComponent, ExplanationMarkComponent],
   entryComponents: [
     DynamicFormsComponent,
     DynamicFormsComponent,

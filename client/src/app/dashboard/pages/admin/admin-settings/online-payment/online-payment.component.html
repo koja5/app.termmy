@@ -1,63 +1,58 @@
-<div class="card">
-    <div class="card-body">
-        <form class="validate-form">
-            <div class="row">
-                <div class="col-12">
-                    <div class="align-items-center mb-2 border-bottom">
-                        <i data-feather="link" class="font-medium-3"></i>
-                        <h4 class="ml-75">{{'onlinePayment.title' | translate}}</h4>
-                        <h6 class="ml-75">{{'onlinePayment.text' | translate}}</h6>
-                    </div>
-                </div>
+<form class="validate-form">
+    <div class="row">
+        <div class="col-12">
+            <div class="align-items-center mb-2 border-bottom">
+                <i data-feather="link" class="font-medium-3"></i>
+                <h4 class="ml-75">{{'onlinePayment.title' | translate}}</h4>
+                <h6 class="ml-75">{{'onlinePayment.text' | translate}}</h6>
             </div>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="pt-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="pt-2">
 
-                            <div class="d-md-flex mt-2">
-                                <div class="d-flex flex-shrink-0">
-                                    <img src="../../../../../../assets/images/icons/stripe.svg" alt="stripe"
-                                        class="me-1" height="38" width="38" />
-                                    <div class="me-1 ml-1">
-                                        <span class="fw-bolder mb-0">{{'onlinePayment.stripeTitle' | translate}}</span>
-                                        <span *ngIf="data && data.stripe" type="button"
-                                            class="badge badge-light-success ml-75">{{'general.connected'
+                    <div class="d-md-flex mt-2">
+                        <div class="d-flex flex-shrink-0">
+                            <img src="../../../../../../assets/images/icons/stripe.svg" alt="stripe" class="me-1"
+                                height="38" width="38" />
+                            <div class="me-1 ml-1">
+                                <span class="fw-bolder mb-0">{{'onlinePayment.stripeTitle' | translate}}</span>
+                                <span *ngIf="data && data.stripe" type="button"
+                                    class="badge badge-light-success ml-75">{{'general.connected'
+                                    |
+                                    translate}}</span>
+                                <p>{{'onlinePayment.stripeText' | translate}}</p>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 text-right">
+
+                            <div class="mt-50 mt-sm-0">
+                                <div class="form-check form-switch form-check-primary">
+                                    <div class="form-check form-switch form-check-primary">
+                                        <button *ngIf="!data || !data.stripe" type="button"
+                                            class="btn btn-outline-primary" (click)="connectToStripe()"><span
+                                                *ngIf="loading"
+                                                class="spinner-border spinner-border-sm mr-1"></span>{{'general.setUp'
                                             |
-                                            translate}}</span>
-                                        <p>{{'onlinePayment.stripeText' | translate}}</p>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1 text-right">
+                                            translate}}</button>
 
-                                    <div class="mt-50 mt-sm-0">
-                                        <div class="form-check form-switch form-check-primary">
-                                            <div class="form-check form-switch form-check-primary">
-                                                <button *ngIf="!data || !data.stripe" type="button"
-                                                    class="btn btn-outline-primary" (click)="connectToStripe()"><span
-                                                        *ngIf="loading"
-                                                        class="spinner-border spinner-border-sm mr-1"></span>{{'general.setUp'
-                                                    |
-                                                    translate}}</button>
-
-                                                <button *ngIf="data && data.stripe" type="button"
-                                                    class="btn btn-outline-danger" (click)="cancelStripe()"><span
-                                                        *ngIf="loading"
-                                                        class="spinner-border spinner-border-sm mr-1"></span>{{'general.cancel'
-                                                    |
-                                                    translate}}</button>
-                                            </div>
-                                        </div>
+                                        <button *ngIf="data && data.stripe" type="button" class="btn btn-outline-danger"
+                                            (click)="cancelStripe()"><span *ngIf="loading"
+                                                class="spinner-border spinner-border-sm mr-1"></span>{{'general.cancel'
+                                            |
+                                            translate}}</button>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
+
+
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>

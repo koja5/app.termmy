@@ -140,7 +140,7 @@ export class HelpService {
     }
   }
 
-  replaceText(text: string, replaceValue: string, newValue: string) {
+  replaceText(text: string, replaceValue: string, newValue: any) {
     return text.replace(replaceValue, newValue);
   }
 }

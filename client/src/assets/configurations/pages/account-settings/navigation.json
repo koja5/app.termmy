@@ -2,7 +2,7 @@
     "type": "vertical",
     "contentHeader": {
         "headerTitle": "Settings",
-        "actionButton": true,
+        "actionButton": false,
         "breadcrumb": {
             "type": "",
             "links": [

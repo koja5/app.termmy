@@ -166,7 +166,8 @@
         "adminSettings": {
             "adminSettings": "Admin settings",
             "onlinePayment": "Online payment",
-            "bookingSettings": "Booking settings"
+            "bookingSettings": "Booking settings",
+            "smsReminder": "Sms reminder"
         },
         "onlinePayment": {
             "title": "Online payment",
@@ -210,6 +211,25 @@
             "tiktokRootLink": "https://tiktok.com/",
             "website": "Your website link",
             "websiteRootLink": "https://"
+        },
+        "smsReminder": {
+            "title": "SMS Reminder",
+            "text": "Configure automated SMS reminders",
+            "explanation": "With automatic SMS reminders, communication with clients can be improved, missed appointments eliminated and clients returned. You can be sure that customers will see the reminder on time because 97% of people open and read the SMS within the first 10 minutes of receiving it.",
+            "leftMessage": "Left SMS messages",
+            "leftMessageText": "You have right now {numberOfLeftMessage} SMS. Buy more SMS today!",
+            "sms": "SMS",
+            "buyMoreSMS": "Buy more",
+            "messageConfiguration": "Message configuration",
+            "messageConfigurationExplanation": "Here you can configuration, activate or deactive your sms message for different automatization reminders",
+            "reminderClientTitle": "Remind clients about the appointment",
+            "reminderClientTitleExplanation": "",
+            "reminderEmployeeTitle": "Remind employees about the appointment",
+            "activeNotification": "Active notification",
+            "deactiveNotification": "Deactive notification",
+            "active": "Active",
+            "inactive": "Inactive",
+            "testMessage": "Test SMS message"
         },
         "authGlobal": {
             "backToLogin": "Back to login"

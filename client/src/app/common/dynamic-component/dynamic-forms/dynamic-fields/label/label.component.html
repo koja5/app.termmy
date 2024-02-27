@@ -4,7 +4,7 @@
     }}
     <app-explanation-mark *ngIf="config.explanation" [explanation]="config.explanation"></app-explanation-mark>
   </h4>
-  <h6 *ngIf="config.text" class="label-text">
+  <h6 *ngIf="config.text">
     {{ config.text | translate}}
     <app-explanation-mark *ngIf="config.explanation" [explanation]="config.explanation"></app-explanation-mark>
   </h6>
