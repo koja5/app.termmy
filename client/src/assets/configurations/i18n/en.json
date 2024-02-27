@@ -224,6 +224,7 @@
             "messageConfigurationExplanation": "Here you can configuration, activate or deactive your sms message for different automatization reminders",
             "reminderClientTitle": "Remind clients about the appointment",
             "reminderClientTitleExplanation": "",
+            "clientLoyalityTitle": "Client loyalty",
             "reminderEmployeeTitle": "Remind employees about the appointment",
             "activeNotification": "Active notification",
             "deactiveNotification": "Deactive notification",

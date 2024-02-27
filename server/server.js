@@ -16,6 +16,11 @@ const bookingApi = require("./providers/booking-api.js");
 const smsReminderApi = require("./providers/sms-reminder-api.js");
 //END API
 
+//CUSTOM FUNCTIONS
+const executeAutomateScript = require('./providers/automate-scripts/execute-automate-scripts.js');
+
+//END CUSTOM FUNCTIONS
+
 const sqlDatabase = require("./providers/config/sql-database");
 var cors = require("cors");
 sqlDatabase.connect();
@@ -65,6 +70,8 @@ app.use("/api/mail-server", mailServer);
 app.use("/api/payment", payment);
 app.use("/api/booking", bookingApi);
 app.use("/api/sms-reminder", smsReminderApi);
+
+executeAutomateScript();
 
 app.use(express.static(path.join(__dirname, "../client/src")));
 

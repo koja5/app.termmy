@@ -51,23 +51,56 @@
 
     <div class="col-12">
         <div class="card">
+
+            <!-- CUSTOMER REMINDER -->
             <h5>{{'smsReminder.reminderClientTitle' | translate}} </h5>
 
             <div *ngIf="smsReminder">
                 <div class="row mt-2">
-                    <div *ngFor="let item of smsReminder.clientReminder" class="col-lg-4 col-12">
-                        <app-sms-reminder-card [item]="item"
+                    <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.clientImmediatelyReminder"
+                            (changeValue)="changeValue($event)"></app-sms-reminder-card>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.clientDayBeforeReminder"
                             (changeValue)="changeValue($event)"></app-sms-reminder-card>
                     </div>
                 </div>
+                <!-- END CUSTOMER REMINDER -->
+
+                <!-- CLIENT LOYALITY-->
+
+                <h5>{{'smsReminder.clientLoyalityTitle' | translate}} </h5>
+
+                <div class="row mt-2">
+                    <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.clientHappyBirthday"
+                            (changeValue)="changeValue($event)"></app-sms-reminder-card>
+                    </div>
+                    <!-- <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.clientThankForCommingToUs"
+                            (changeValue)="changeValue($event)"></app-sms-reminder-card>
+                    </div> -->
+                </div>
+
+                <!-- END CLIENT LOYALITY-->
+
+                <!-- EMPLOYEE REMINDER -->
+
                 <h5>{{'smsReminder.reminderEmployeeTitle' | translate}} </h5>
 
                 <div class="row mt-2">
-                    <div *ngFor="let item of smsReminder.employeeReminder" class="col-lg-4 col-12">
-                        <app-sms-reminder-card [item]="item"
+                    <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.employeeImmediatelyReminder"
+                            (changeValue)="changeValue($event)"></app-sms-reminder-card>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <app-sms-reminder-card [item]="smsReminder.employeeDayBeforeReminder"
                             (changeValue)="changeValue($event)"></app-sms-reminder-card>
                     </div>
                 </div>
+
+                <!-- END EMPLOYEE REMINDER -->
             </div>
         </div>
     </div>
