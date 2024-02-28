@@ -279,12 +279,20 @@
             "text": "There was an error in the previous action. Please try again or contact our support for help.",
             "backToHome": "Back to Home"
         },
+        "paymentProcessing": {
+            "buttonText": "Pay {amount} €",
+            "acceptTermsAndPrivacyPolicy": "By submitting this order, you accept the General Terms and Conditions of Termmy and confirm that you have read and understood the data protection regulations of Termmy and acknowledge the right of cancellation.",
+            "needAcceptTermsAndPrivacyPolicy": "Please accept terms and privacy policy"
+        },
         "buyMoreSms": {
             "title": "Buy SMS",
             "text": "Buy more messages and achieve better communication with clients",
             "package": "Package",
             "numberOfSms": "Number of SMS",
-            "price": "Price"
+            "price": "Price",
+            "buySmsButton": "Buy SMS",
+            "previousPayments": "Previous payments",
+            "dateBuy": "Date buy"
         }
     }
 }

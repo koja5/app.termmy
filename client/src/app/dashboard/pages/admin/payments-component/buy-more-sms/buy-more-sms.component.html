@@ -61,7 +61,20 @@
         </div>
 
         <div class="col-lg-6 col-12">
-            Test
+            <app-payment-processing [amount]="selectedPackage"
+                [buttonText]="'buyMoreSms.buySmsButton' | translate"></app-payment-processing>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="align-items-center mb-2 border-bottom">
+                <h6 class="ml-75">{{'buyMoreSms.previousPayments' | translate}}</h6>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <app-dynamic-grid [path]="path" [file]="file"></app-dynamic-grid>
         </div>
     </div>
 </div>

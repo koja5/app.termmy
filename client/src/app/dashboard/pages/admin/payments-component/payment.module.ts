@@ -3,6 +3,9 @@ import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { BuyMoreSmsComponent } from "./buy-more-sms/buy-more-sms.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { CommonCustomModule } from "app/common/common-custom.module";
+import { FormsModule } from "@angular/forms";
+import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 
 const routes = [
   {
@@ -13,7 +16,13 @@ const routes = [
 
 @NgModule({
   declarations: [BuyMoreSmsComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), TranslateModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    TranslateModule,
+    CommonCustomModule,
+    DynamicModule
+  ],
   providers: [],
   exports: [RouterModule],
 })

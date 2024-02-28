@@ -7,6 +7,8 @@ import { CallApiService } from "app/services/call-api.service";
   styleUrls: ["./buy-more-sms.component.scss"],
 })
 export class BuyMoreSmsComponent {
+  public path = "grids/admin";
+  public file = "sms-payments.json";
   public smsPackages: any;
   public selectedPackage = 10;
 

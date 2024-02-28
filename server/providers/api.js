@@ -1198,7 +1198,7 @@ router.post("/setSmsPackage", auth, function (req, res) {
 
     if (req.body.id) {
       conn.query(
-        "update sms_packages set ? where id = ? and admin_id = ?",
+        "update sms_packages set ? where id = ?",
         [req.body, req.body.id],
         function (err, rows) {
           conn.release();
@@ -1249,6 +1249,34 @@ router.post("/deleteSmsPackage", auth, function (req, res) {
       }
     );
   });
+});
+
+router.get("/getMySmsPayments", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from sms_payments where admin_id = ?",
+          [req.user.user.admin_id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
 });
 
 // #endregion SMS PACKAGES
