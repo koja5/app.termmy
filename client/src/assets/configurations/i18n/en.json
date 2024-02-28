@@ -88,6 +88,11 @@
             "password": "Password",
             "rePassword": "Re-password"
         },
+        "smsPackages": {
+            "name": "Name",
+            "numberOfSms": "Number of SMS",
+            "price": "Price"
+        },
         "myLocations": {
             "name": "Name of location",
             "uid": "UID",
@@ -273,6 +278,13 @@
             "title": "Something unexpected happened! 🤔",
             "text": "There was an error in the previous action. Please try again or contact our support for help.",
             "backToHome": "Back to Home"
+        },
+        "buyMoreSms": {
+            "title": "Buy SMS",
+            "text": "Buy more messages and achieve better communication with clients",
+            "package": "Package",
+            "numberOfSms": "Number of SMS",
+            "price": "Price"
         }
     }
 }

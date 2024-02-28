@@ -16,6 +16,7 @@ import { LocationViewComponent } from "./locations/location-view/location-view.c
 import { ClientsComponent } from "./clients/clients.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { SettingsComponent } from "./settings/settings.component";
+import { BuyMoreSmsComponent } from "./payments-component/buy-more-sms/buy-more-sms.component";
 type PathMatch = "full" | "prefix" | undefined;
 
 const routes = [
@@ -23,7 +24,9 @@ const routes = [
     path: "admin-settings",
     component: AdminSettingsComponent,
     loadChildren: () =>
-      import("./admin-settings/admin-settings.module").then((m) => m.AdminSettingsModule),
+      import("./admin-settings/admin-settings.module").then(
+        (m) => m.AdminSettingsModule
+      ),
   },
   {
     path: "settings",
@@ -69,6 +72,13 @@ const routes = [
     path: "my-clients",
     canActivate: [AdminGuardService],
     component: ClientsComponent,
+  },
+  {
+    path: "payment",
+    loadChildren: () =>
+      import("./payments-component/payment.module").then(
+        (m) => m.PaymentModule
+      ),
   },
 ];
 

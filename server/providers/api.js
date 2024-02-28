@@ -642,7 +642,7 @@ router.get("/getMyServices", auth, async (req, res, next) => {
       } else {
         conn.query(
           "select * from services where admin_id = ?",
-          req.user.user.id,
+          req.user.user.admin_id,
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -1162,6 +1162,96 @@ router.get("/getCalendarRights", auth, async (req, res, next) => {
 });
 
 // #endregion CALENDARS
+
+// #region SMS PACKAGES
+router.get("/getSmsPackages", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query("select * from sms_packages", function (err, rows, fields) {
+          conn.release();
+          if (err) {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(err);
+          } else {
+            rows = convertWorkTimesToObject(rows);
+            res.json(rows);
+          }
+        });
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setSmsPackage", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    if (req.body.id) {
+      conn.query(
+        "update sms_packages set ? where id = ? and admin_id = ?",
+        [req.body, req.body.id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "insert into sms_packages SET ?",
+        [req.body],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+router.post("/deleteSmsPackage", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from services where id = ? and admin_id = ?",
+      [req.body.id, req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+// #endregion SMS PACKAGES
 
 //#region HELP FUNCTION
 
