@@ -1236,7 +1236,7 @@ router.post("/deleteSmsPackage", auth, function (req, res) {
     }
 
     conn.query(
-      "delete from services where id = ? and admin_id = ?",
+      "delete from sms_packages where id = ? and admin_id = ?",
       [req.body.id, req.user.user.admin_id],
       function (err, rows) {
         conn.release();
@@ -1277,6 +1277,107 @@ router.get("/getMySmsPayments", auth, async (req, res, next) => {
     logger.log("error", err.sql + ". " + err.sqlMessage);
     res.json(ex);
   }
+});
+
+router.post("/createSmsPayment", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    const date = {
+      admin_id: req.user.user.admin_id,
+      count: req.body.count,
+      price: req.body.price,
+      date: new Date(),
+    };
+
+    conn.query("insert into sms_payments SET ?", [date], function (err, rows) {
+      conn.release();
+      if (!err) {
+        res.json(true);
+      } else {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(false);
+      }
+    });
+  });
+});
+
+router.get("/getNumberOfSms", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from sms_count where admin_id = ?",
+      [req.user.user.admin_id],
+      function (err, rows) {
+        if (!err) {
+          res.json(rows);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/updateNumberOfSms", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    conn.query(
+      "select * from sms_count where admin_id = ?",
+      [req.body.admin_id],
+      function (err, rows) {
+        if (!err) {
+          if (rows.length) {
+            req.body.count += rows[0].count;
+            conn.query(
+              "update sms_count set ? where admin_id = ?",
+              [req.body, req.body.admin_id],
+              function (err, rows) {
+                conn.release();
+                if (!err) {
+                  res.json(true);
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          } else {
+            conn.query(
+              "insert into sms_count SET ?",
+              [req.body],
+              function (err, rows) {
+                conn.release();
+                if (!err) {
+                  res.json(true);
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          }
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
 });
 
 // #endregion SMS PACKAGES

@@ -9,9 +9,9 @@ import { CallApiService } from "app/services/call-api.service";
   styleUrls: ["./sms-reminder.component.scss"],
 })
 export class SmsReminderComponent {
-  public numberOfLeftMessage = 10;
   public loader = true;
   public smsReminder: any;
+  public numberOfSms: any;
 
   constructor(
     public _helpService: HelpService,
@@ -23,6 +23,21 @@ export class SmsReminderComponent {
   }
 
   initialize() {
+    this.getNumberOfSms();
+    this.getSmsReminderConfig();
+  }
+
+  getNumberOfSms() {
+    this._service
+      .callGetMethod("/api/getNumberOfSms", "")
+      .subscribe((data: any) => {
+        if (data.length) {
+          this.numberOfSms = data[0];
+        }
+      });
+  }
+
+  getSmsReminderConfig() {
     this.loader = true;
     this._service
       .callGetMethod("/api/sms-reminder/getSmsReminderConfig", "")
@@ -37,7 +52,7 @@ export class SmsReminderComponent {
   }
 
   generateProgressBar() {
-    return this.numberOfLeftMessage + "%";
+    return this.numberOfSms.count + "%";
   }
 
   changeValue(event) {

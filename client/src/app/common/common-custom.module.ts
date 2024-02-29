@@ -6,17 +6,19 @@ import { PaymentProcessingComponent } from "./payment-processing/payment-process
 import { NgxStripeModule } from "ngx-stripe";
 import { environment } from "environments/environment";
 import { TranslateModule } from "@ngx-translate/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoaderSmallComponent } from './loader-small/loader-small.component';
 
 const appRoutes: Routes = [];
 
 @NgModule({
-  declarations: [LoaderComponent, PaymentProcessingComponent],
+  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgxStripeModule.forRoot(environment.STRIPE_KEY),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [],

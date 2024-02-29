@@ -130,9 +130,9 @@
             "selectLocationAndEmployee": "Please select location and user to see calendar",
             "scheduledByUser": "Scheduled by the client",
             "selectedPayOnArrivalOption": "Client chose the option of payment on arrival.",
-            "selectedPayOnline": "Client paid amount of {amount} € for service.",
-            "selectedFullPayment": "Client paid full amount for service({amount} €)",
-            "selectedPartOfFullPayment": "Client paid part of full amount for service({amount} €). The balance in the amount of {amountRest} € must be paid upon arrival."
+            "selectedPayOnline": "Client paid amount of #amount € for service.",
+            "selectedFullPayment": "Client paid full amount for service(#amount €)",
+            "selectedPartOfFullPayment": "Client paid part of full amount for service(#amount €). The balance in the amount of #amountRest € must be paid upon arrival."
         },
         "settings": {
             "worktime": "Worktime",
@@ -280,9 +280,20 @@
             "backToHome": "Back to Home"
         },
         "paymentProcessing": {
-            "buttonText": "Pay {amount} €",
+            "buttonText": "Pay #amount €",
             "acceptTermsAndPrivacyPolicy": "By submitting this order, you accept the General Terms and Conditions of Termmy and confirm that you have read and understood the data protection regulations of Termmy and acknowledge the right of cancellation.",
-            "needAcceptTermsAndPrivacyPolicy": "Please accept terms and privacy policy"
+            "needAcceptTermsAndPrivacyPolicy": "Please accept terms and privacy policy",
+            "firstname": "Firstname *",
+            "firstnamePlaceholder": "",
+            "lastname": "Lastname *",
+            "lastnamePlaceholder": "",
+            "email": "Email *",
+            "emailPlaceholder": "",
+            "telephone": "Phone *",
+            "fillFirstname": "Please fill your firstname",
+            "fillLastname": "Please fill your lastname",
+            "fillEmail": "Please fill your email",
+            "fillPhone": "Please fill your phone"
         },
         "buyMoreSms": {
             "title": "Buy SMS",
@@ -292,7 +303,9 @@
             "price": "Price",
             "buySmsButton": "Buy SMS",
             "previousPayments": "Previous payments",
-            "dateBuy": "Date buy"
+            "dateBuy": "Date buy",
+            "successfullyBoughtNewSms": "Successfully bought additionally #count SMS.",
+            "backToSmsReminder": "Back to SMS reminder"
         }
     }
 }

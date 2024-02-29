@@ -16,15 +16,15 @@
                 <div class="plan-statistics pt-1">
                     <div class="d-flex justify-content-between">
                         <h5 class="fw-bolder">{{'smsReminder.leftMessage' | translate}}</h5>
-                        <h5 class="fw-bolder">{{numberOfLeftMessage}} {{'smsReminder.sms' | translate}}</h5>
+                        <h5 class="fw-bolder">{{numberOfSms.count}} {{'smsReminder.sms' | translate}}</h5>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar {{numberOfLeftMessage <= 20 ? 'progress-bar-error' : ''}}"
+                    <div class="progress" *ngIf="numberOfSms">
+                        <div class="progress-bar {{numberOfSms.count <= 20 ? 'progress-bar-error' : ''}}"
                             [ngStyle]="{'width': generateProgressBar()}" role="progressbar" aria-valuenow="12"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <p class="mt-50">{{_helpService.replaceText('smsReminder.leftMessageText' | translate,
-                        '{numberOfLeftMessage}', numberOfLeftMessage)}}</p>
+                        '{numberOfLeftMessage}', numberOfSms.count)}}</p>
                 </div>
 
             </div>

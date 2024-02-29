@@ -27,43 +27,38 @@
                             {{item.name}}
                         </td>
                         <td>
-                            {{item.number_of_sms}} SMS
+                            {{item.count}} SMS
                         </td>
                         <td>
                             {{item.price}} €
                         </td>
                         <td>
-                            <!-- <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" id="select-package" type="checkbox" tabindex="3" [value]="item.price" (click)="selectSmsPackage(item)" [(ngModel)]="selectedPackage" [checked]="selectedPackage == item.price ? true : false"/>
-                                <label class="custom-control-label" for="select-package"> </label>
-                            </div> -->
-
                             <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input" type="radio" name="amount" id="{{item.name}}"
-                                    [value]="item.price" [(ngModel)]="selectedPackage" (click)="selectSmsPackage(item)"
-                                    [checked]="selectedPackage == item.price ? true : false">
+                                    [value]="item.price" [(ngModel)]="selectedSmsPrice" (click)="selectSmsPackage(item)"
+                                    [checked]="selectedSmsPrice == item.price ? true : false">
                                 <label class="custom-control-label" for="{{item.name}}">
 
                                 </label>
                             </div>
-                            <!-- <div class="form-check">
-                                <input class="form-check-input" type="radio" name="amount" id="part-of-amount"
-                                    [value]="appointment.service.price/2" [(ngModel)]="amount"
-                                    (click)="createPaymentIntent(appointment.service.price/2)">
-                                <label class="form-check-label" for="part-of-amount">
-                                    {{replaceForPartOfAmount('payment.selectPartOfAmount' | translate)}}
-                                </label>
-                            </div> -->
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="col-lg-6 col-12">
-            <app-payment-processing [amount]="selectedPackage"
-                [buttonText]="'buyMoreSms.buySmsButton' | translate"></app-payment-processing>
+        <div class="col-lg-6 col-12 payment" *ngIf="selectedSmsPrice">
+            <app-payment-processing [amount]="selectedSmsPrice" [buttonText]="'buyMoreSms.buySmsButton' | translate"
+                (executeMethodEmitter)="executeMethod($event)"></app-payment-processing>
+
+            <div class="text-center mt-4" *ngIf="successfullyBoughtNewSms">
+                <p class="badge badge-success mb-1">{{_helpService.replaceText('buyMoreSms.successfullyBoughtNewSms' |
+                    translate, '#count', selectedSmsPackage.count)}}</p> <br>
+                <a routerLink="/dashboard/admin/admin-settings/sms-reminder">{{'buyMoreSms.backToSmsReminder' |
+                    translate}}</a>
+            </div>
         </div>
+
     </div>
 
     <div class="row mt-3">

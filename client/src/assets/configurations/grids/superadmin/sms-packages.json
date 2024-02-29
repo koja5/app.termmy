@@ -154,7 +154,7 @@
             "filter": "date",
             "type": "string",
             "class": "text-align-right",
-            "field": "number_of_sms",
+            "field": "count",
             "validation": {
                 "required": true
             }
@@ -194,9 +194,9 @@
             "type": "numeric",
             "width": "col-md-12",
             "class": "e-outline",
-            "name": "number_of_sms",
+            "name": "count",
             "title": "smsPackages.numberOfSms",
-            "field": "number_of_sms"
+            "field": "count"
         },
         {
             "type": "numeric",

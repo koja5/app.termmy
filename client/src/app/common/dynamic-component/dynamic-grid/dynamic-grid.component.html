@@ -58,7 +58,7 @@
                                 translate}}:<input [(ngModel)]="searchValue" name="searchValue" type="search"
                                     class="form-control ml-25" (keyup)="filterUpdate($event)"
                                     (search)="filterUpdate($event)" /></label>
-                            <button class="btn btn-primary ml-1" rippleEffect
+                            <button *ngIf="config.editSettingsRequest.add" class="btn btn-primary ml-1" rippleEffect
                                 (click)="config.formDialog && config.formDialog.type === 'sidebar' ? toggleSidebar('sidebar') : showModalFormDialog()">
                                 <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
                                     class="d-none d-sm-inline-block">{{'general.addNew' | translate}}</span>
@@ -113,7 +113,8 @@
                     </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
                         [prop]="item.field" [width]="item.width ? item.width : auto"
-                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}" [className]="item.className" [headerClass]="item.className"  [cellClass]="item.className">
+                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}"
+                        [className]="item.className" [headerClass]="item.className" [cellClass]="item.className">
 
 
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
@@ -202,7 +203,12 @@
                                 </div>
                             </div>
                             <div *ngIf="!item.template" class="{{item.class}}">
-                                {{value}}
+                                <div *ngIf="item.type === 'date'">
+                                    {{value | date: item.format}}
+                                </div>
+                                <div *ngIf="item.type === 'string'">
+                                    {{value}}
+                                </div>
                             </div>
                             <!-- <div>
                   <i class="feather icon-edit-2 text-info font-medium-3"></i>

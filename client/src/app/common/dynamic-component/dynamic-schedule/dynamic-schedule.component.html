@@ -124,7 +124,7 @@
                                     </h6>
                                     <h6 class="selected-payment" *ngIf="data.is_online&&data.amount_paid">
                                         {{_helpService.replaceText('myCalendar.selectedPayOnline' | translate,
-                                        '{amount}', data.amount_paid)}}
+                                        '#amount', data.amount_paid)}}
                                     </h6>
                                 </div>
                             </tbody>

@@ -3,6 +3,50 @@
 </div>
 <div *ngIf="elementsOptions.clientSecret" style="margin-bottom: 10px">
 
+    <!-- <form #f="ngForm" [formGroup]="clientData">
+        <div class="row">
+            <div class="col-md-6 col-12 mb-2">
+                <label>{{'paymentProcessing.firstname' | translate}}</label>
+                <input type="text" class="form-control"
+                    placeholder="{{'paymentProcessing.firstnamePlaceholder' | translate}}" formControlName="firstname">
+                <span *ngIf="!clientData.controls.firstname.valid" class="error">
+                    {{'paymentProcessing.fillFirstname' | translate}}
+                </span>
+            </div>
+            <div class="col-md-6 col-12 mb-2">
+                <label>{{'paymentProcessing.lastname' | translate}}</label>
+                <input type="text" class="form-control"
+                    placeholder="{{'paymentProcessing.lastnamePlaceholder' | translate}}" formControlName="lastname">
+                <div *ngIf="!clientData.controls.lastname.valid" class="error">
+                    {{'paymentProcessing.fillLastname' | translate}}
+                </div>
+            </div>
+            <div class="col-12 mb-2">
+                <label>{{'paymentProcessing.email' | translate}}</label>
+                <input type="text" class="form-control"
+                    placeholder="{{'paymentProcessing.emailPlaceholder' | translate}}" formControlName="email">
+                <div *ngIf="!clientData.controls.email.valid" class="error">
+                    {{'paymentProcessing.fillEmail' | translate}}
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <label>{{'paymentProcessing.telephone' | translate}}</label>
+                <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                    [searchCountryField]="[
+          SearchCountryField.Iso2,
+          SearchCountryField.Name
+        ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Austria" [maxLength]="15"
+                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.National">
+                </ngx-intl-tel-input>
+                <div *ngIf="!clientData.controls.telephone.valid" class="error">
+                    {{'paymentProcessing.fillPhone' | translate}}
+                </div>
+            </div>
+        </div>
+    </form> -->
+
     <div class="mb-2">
         <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
             <ngx-stripe-payment [appearance]="appearance" />
@@ -25,6 +69,6 @@
             <span class="fa fa-shopping-cart"></span>&nbsp;
             {{buttonText ? buttonText : _helpService.replaceText('paymentProcessing.buttonText'
             |
-            translate, '{amount}', amount)}}</button>
+            translate, '#amount', amount)}}</button>
     </div>
 </div>

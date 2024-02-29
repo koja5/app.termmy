@@ -49,7 +49,7 @@
             "filter": "date",
             "type": "string",
             "class": "text-align-right",
-            "field": "number_of_sms",
+            "field": "count",
             "validation": {
                 "required": true
             }
@@ -71,7 +71,8 @@
             "filterable": true,
             "hideable": true,
             "filter": "date",
-            "type": "string",
+            "type": "date",
+            "format": "dd.MM.YYYY HH:MM",
             "class": "text-align-right",
             "field": "date",
             "validation": {

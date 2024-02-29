@@ -169,13 +169,14 @@ router.post("/cancelStripeAccount", auth, function (req, res) {
 // #region PAYMENT PROCESSING
 
 router.post("/createPaymentIntent", async (req, res, next) => {
-  //   const stripe = Stripe(process.env.stripe_key, {
-  //     stripeAccount: "acct_1OhSOVPwkZNY6HKT",
-  //   });
-
-  const paymentIntent = await require("stripe")(process.env.STRIPE_KEY, {
-    stripeAccount: "acct_1OhSOVPwkZNY6HKT",
-  }).paymentIntents.create({
+  const paymentIntent = await require("stripe")(
+    req.body.stripeAccount
+      ? (process.env.STRIPE_KEY,
+        {
+          stripeAccount: req.body.stripeAccount,
+        })
+      : process.env.STRIPE_KEY
+  ).paymentIntents.create({
     amount: req.body.amount * 100,
     currency: "eur",
   });
