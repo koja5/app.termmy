@@ -1,0 +1,44 @@
+<div *ngIf="sendVia">
+    <div class="row">
+        <div class="col-12">
+            <div class="align-items-center mb-2 border-bottom">
+                <i data-feather="link" class="font-medium-3"></i>
+                <h4 class="ml-75">{{'reminders.title' | translate}} <app-explanation-mark
+                        [explanation]="'reminders.explanation' | translate"></app-explanation-mark></h4>
+                <h6 class="ml-75">{{'reminders.text' | translate}}</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" name="reminder" id="smsReminder"
+                    [checked]="sendVia.reminder_type == 0 ? true : false" (click)="selectReminder(0)">
+                <label class="custom-control-label" for="smsReminder">
+                    {{'reminders.smsReminder' | translate}} <span class="badge badge-warning">{{'reminders.recommended'
+                        | translate}} <app-explanation-mark
+                            [explanation]="'reminders.recommendedExplanation' | translate"></app-explanation-mark></span>
+                </label>
+            </div>
+            <div class="custom-control custom-radio mt-1">
+                <input class="custom-control-input" type="radio" name="reminder" id="emailReminder"
+                    [checked]="sendVia.reminder_type == 1 ? true : false" (click)="selectReminder(1)">
+                <label class="custom-control-label" for="emailReminder">
+                    {{'reminders.emailReminder' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12" *ngIf="sendVia.reminder_type === 0">
+        <div class="card">
+            <app-sms-reminder></app-sms-reminder>
+        </div>
+    </div>
+    <div class="col-12" *ngIf="sendVia.reminder_type === 1">
+        <div class="card">
+            <app-email-reminder></app-email-reminder>
+        </div>
+    </div>
+</div>

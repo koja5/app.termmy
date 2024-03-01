@@ -27,7 +27,7 @@ async function sendSMS(phoneNumber, message) {
     console.log(response);
     if (error) {
       res.send(false);
-      logger.log("error", `${req.body.email}: ${error}`);
+      logger.log("error", `${phoneNumber}: ${error}`);
     } else {
       res.send(true);
       logger.log("info", `Sent SMS to: ${phoneNumber}`);

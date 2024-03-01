@@ -43,8 +43,8 @@ router.post("/sendMail", function (req, res) {
 
   smtpTransport.sendMail(mailOptions, function (error, response) {
     if (error) {
-      logger.log("error", `${req.body.email}: ${error}`);
       res.send(false);
+      logger.log("error", `${req.body.email}: ${error}`);
     } else {
       res.send(true);
       logger.log(

@@ -36,8 +36,8 @@
             "icon": "calendar"
         },
         {
-            "title": "adminSettings.smsReminder",
-            "link": "/dashboard/admin/admin-settings/sms-reminder",
+            "title": "adminSettings.reminders",
+            "link": "/dashboard/admin/admin-settings/reminders",
             "icon": "send"
         }
     ]

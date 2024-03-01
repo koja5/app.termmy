@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div>
-                <div class="plan-statistics pt-1">
+                <div class="plan-statistics pt-1" *ngIf="numberOfSms">
                     <div class="d-flex justify-content-between">
                         <h5 class="fw-bolder">{{'smsReminder.leftMessage' | translate}}</h5>
                         <h5 class="fw-bolder">{{numberOfSms.count}} {{'smsReminder.sms' | translate}}</h5>

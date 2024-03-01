@@ -56,7 +56,6 @@ export class SmsReminderComponent {
   }
 
   changeValue(event) {
-    console.log(this.smsReminder);
     this._service
       .callPostMethod("/api/sms-reminder/setSmsReminderConfig", {
         config: JSON.stringify(this.smsReminder),

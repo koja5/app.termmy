@@ -1382,6 +1382,77 @@ router.post("/updateNumberOfSms", auth, function (req, res) {
 
 // #endregion SMS PACKAGES
 
+//#region NOTIFICATION
+router.get("/getReminderNotification", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from notifications where admin_id = ?",
+      [req.user.user.admin_id],
+      function (err, rows) {
+        if (!err) {
+          if (rows.length) {
+            res.json(rows);
+          } else {
+            res.json(false);
+          }
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/setReminderNotification", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    if (req.body.id) {
+      conn.query(
+        "update notifications set reminder_type = ? where admin_id = ?",
+        [req.body.reminder_type, req.user.user.admin_id],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            res.json(true);
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    } else {
+      conn.query(
+        "insert into notifications SET ?",
+        [req.body],
+        function (err, rows) {
+          conn.release();
+          if (!err) {
+            console.log(rows);
+            res.json({ insertId: 1 });
+          } else {
+            logger.log("error", err.sql + ". " + err.sqlMessage);
+            res.json(false);
+          }
+        }
+      );
+    }
+  });
+});
+
+//#endregion
+
 //#region HELP FUNCTION
 
 function generateRandomPassword() {

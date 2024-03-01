@@ -172,7 +172,7 @@
             "adminSettings": "Admin settings",
             "onlinePayment": "Online payment",
             "bookingSettings": "Booking settings",
-            "smsReminder": "Sms reminder"
+            "reminders": "Reminders"
         },
         "onlinePayment": {
             "title": "Online payment",
@@ -217,6 +217,15 @@
             "website": "Your website link",
             "websiteRootLink": "https://"
         },
+        "reminders": {
+            "title": "Reminders",
+            "text": "Configure automated reminders",
+            "explanation": "With automatic reminders, communication with clients can be improved, missed appointments eliminated and clients returned.",
+            "smsReminder": "Use SMS",
+            "emailReminder": "Use Email",
+            "recommended": "Recommended",
+            "recommendedExplanation": "97% of people open and read the SMS within the first 10 minutes of receiving it. People read emails much less!"
+        },
         "smsReminder": {
             "title": "SMS Reminder",
             "text": "Configure automated SMS reminders",
@@ -235,7 +244,28 @@
             "deactiveNotification": "Deactive notification",
             "active": "Active",
             "inactive": "Inactive",
-            "testMessage": "Test SMS message"
+            "testMessage": "Test SMS message",
+            "sentTestSMSTo": "Sent test sms to #telephone",
+            "needToInsertTelephoneAtSettings": "You did't set telephone number. Please add it on your settings profile!"
+        },
+        "emailReminder": {
+            "title": "Email Reminder",
+            "text": "Configure automated Email reminders",
+            "explanation": "With automatic Email reminders, communication with clients can be improved, missed appointments eliminated and clients returned. ",
+            "messageConfiguration": "Message configuration",
+            "messageConfigurationExplanation": "Here you can configuration, activate or deactive your emails for different automatization reminders",
+            "reminderClientTitle": "Remind clients about the appointment",
+            "reminderClientTitleExplanation": "",
+            "clientLoyalityTitle": "Client loyalty",
+            "reminderEmployeeTitle": "Remind employees about the appointment",
+            "activeNotification": "Active notification",
+            "deactiveNotification": "Deactive notification",
+            "active": "Active",
+            "inactive": "Inactive",
+            "testMessage": "Test Email",
+            "subject": "Subject",
+            "message": "Message",
+            "sentTestEmailTo": "Send test email to #email"
         },
         "authGlobal": {
             "backToLogin": "Back to login"

@@ -14,10 +14,11 @@ const mailServer = require("./providers/mail_server/mail-server");
 const payment = require("./providers/external_api/payment/payment.js");
 const bookingApi = require("./providers/booking-api.js");
 const smsReminderApi = require("./providers/sms-reminder-api.js");
+const emailReminderApi = require("./providers/email-reminder-api.js");
 //END API
 
 //CUSTOM FUNCTIONS
-const executeAutomateScript = require('./providers/automate-scripts/execute-automate-scripts.js');
+const executeAutomateScript = require("./providers/automate-scripts/execute-automate-scripts.js");
 
 //END CUSTOM FUNCTIONS
 
@@ -70,6 +71,7 @@ app.use("/api/mail-server", mailServer);
 app.use("/api/payment", payment);
 app.use("/api/booking", bookingApi);
 app.use("/api/sms-reminder", smsReminderApi);
+app.use("/api/email-reminder", emailReminderApi);
 
 executeAutomateScript();
 

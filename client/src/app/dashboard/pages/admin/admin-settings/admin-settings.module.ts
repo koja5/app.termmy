@@ -5,10 +5,14 @@ import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { OnlinePaymentComponent } from "./online-payment/online-payment.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { BookingSettingsComponent } from "./booking-settings/booking-settings.component";
-import { SmsReminderComponent } from "./sms-reminder/sms-reminder.component";
-import { SmsReminderCardComponent } from "./sms-reminder/sms-reminder-card/sms-reminder-card.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CommonCustomModule } from "app/common/common-custom.module";
+import { RemindersComponent } from "./reminders/reminders.component";
+import { EmailReminderComponent } from "./reminders/email-reminder/email-reminder.component";
+import { SmsReminderComponent } from "./reminders/sms-reminder/sms-reminder.component";
+import { SmsReminderCardComponent } from "./reminders/sms-reminder/sms-reminder-card/sms-reminder-card.component";
+import { FormsModule } from "@angular/forms";
+import { EmailReminderCardComponent } from './reminders/email-reminder/email-reminder-card/email-reminder-card.component';
 
 const routes = [
   {
@@ -20,8 +24,8 @@ const routes = [
     component: BookingSettingsComponent,
   },
   {
-    path: "sms-reminder",
-    component: SmsReminderComponent,
+    path: "reminders",
+    component: RemindersComponent,
   },
 ];
 
@@ -31,14 +35,18 @@ const routes = [
     BookingSettingsComponent,
     SmsReminderComponent,
     SmsReminderCardComponent,
+    RemindersComponent,
+    EmailReminderComponent,
+    EmailReminderCardComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     TranslateModule,
+    FormsModule,
     DynamicModule,
     NgbModule,
-    CommonCustomModule
+    CommonCustomModule,
   ],
   providers: [],
   exports: [RouterModule, DynamicModule],

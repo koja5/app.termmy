@@ -13,7 +13,7 @@
                         class="fa fa-{{item.active ? 'pause' : 'play'}}"></span> {{item.active ?
                     ('smsReminder.deactiveNotification' | translate) : ('smsReminder.activeNotification' |
                     translate)}}</a>
-                <a ngbDropdownItem (click)="sendTestMessage()"> <span class="fa fa-comment-o"></span>
+                <a ngbDropdownItem (click)="sendTestSmsMessage()"> <span class="fa fa-comment-o"></span>
                     {{'smsReminder.testMessage' | translate}}</a>
             </div>
         </div>
