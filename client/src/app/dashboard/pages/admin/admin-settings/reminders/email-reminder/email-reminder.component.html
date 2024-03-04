@@ -1,68 +1,81 @@
-<div>
-    <div class="row">
-        <div class="col-12">
-            <div class="align-items-center mb-2 border-bottom">
-                <i data-feather="link" class="font-medium-3"></i>
-                <h4 class="ml-75">{{'emailReminder.title' | translate}} <app-explanation-mark
-                        [explanation]="'emailReminder.explanation' | translate"></app-explanation-mark></h4>
-                <h6 class="ml-75">{{'emailReminder.text' | translate}}</h6>
+<div *ngIf="reminderConfig">
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <div class="align-items-center mb-2 border-bottom">
+                    <i data-feather="link" class="font-medium-3"></i>
+                    <h4 class="ml-75">{{'emailReminder.title' | translate}} <app-explanation-mark
+                            [explanation]="'emailReminder.explanation' | translate"></app-explanation-mark></h4>
+                    <h6 class="ml-75">{{'emailReminder.text' | translate}}</h6>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="col-12">
-    <div class="card">
+    <div class="col-12">
 
-        <!-- CUSTOMER REMINDER -->
-        <h5>{{'emailReminder.reminderClientTitle' | translate}} </h5>
-
-        <div *ngIf="emailReminder">
-            <div class="row mt-2">
-                <div class="col-lg-4 col-12">
-                    <app-email-reminder-card [item]="emailReminder.clientImmediatelyReminder"
-                        (changeValue)="changeValue($event)"></app-email-reminder-card>
-                </div>
-                <div class="col-lg-4 col-12">
-                    <app-email-reminder-card [item]="emailReminder.clientDayBeforeReminder"
-                        (changeValue)="changeValue($event)"></app-email-reminder-card>
-                </div>
+        <div class="form-check form-switch d-flex align-items-center mb-3">
+            <input type="checkbox" class="form-check-input" name="sms-reminder" [(ngModel)]="reminderConfig.active"
+                (change)="setEmailReminderConfig($event)">
+            <div>
+                <h5 class="form-check-label d-block" for="sms-reminder">{{'emailReminder.activeEmailReminder' |
+                    translate}}
+                </h5>
             </div>
-            <!-- END CUSTOMER REMINDER -->
+        </div>
 
-            <!-- CLIENT LOYALITY-->
+        <div class="card">
 
-            <h5>{{'emailReminder.clientLoyalityTitle' | translate}} </h5>
+            <!-- CUSTOMER REMINDER -->
+            <h5>{{'emailReminder.reminderClientTitle' | translate}} </h5>
 
-            <div class="row mt-2">
-                <div class="col-lg-4 col-12">
-                    <app-email-reminder-card [item]="emailReminder.clientHappyBirthday"
-                        (changeValue)="changeValue($event)"></app-email-reminder-card>
+            <div>
+                <div class="row mt-2">
+                    <div class="col-lg-4 col-12">
+                        <app-email-reminder-card [item]="reminderConfig.config.clientImmediatelyReminder"
+                            (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <app-email-reminder-card [item]="reminderConfig.config.clientDayBeforeReminder"
+                            (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
+                    </div>
                 </div>
-                <!-- <div class="col-lg-4 col-12">
+                <!-- END CUSTOMER REMINDER -->
+
+                <!-- CLIENT LOYALITY-->
+
+                <h5>{{'emailReminder.clientLoyalityTitle' | translate}} </h5>
+
+                <div class="row mt-2">
+                    <div class="col-lg-4 col-12">
+                        <app-email-reminder-card [item]="reminderConfig.config.clientHappyBirthday"
+                            (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
+                    </div>
+                    <!-- <div class="col-lg-4 col-12">
                         <app-sms-reminder-card [item]="emailReminder.clientThankForCommingToUs"
                             (changeValue)="changeValue($event)"></app-sms-reminder-card>
                     </div> -->
-            </div>
-
-            <!-- END CLIENT LOYALITY-->
-
-            <!-- EMPLOYEE REMINDER -->
-
-            <h5>{{'emailReminder.reminderEmployeeTitle' | translate}} </h5>
-
-            <div class="row mt-2">
-                <div class="col-lg-4 col-12">
-                    <app-email-reminder-card [item]="emailReminder.employeeImmediatelyReminder"
-                        (changeValue)="changeValue($event)"></app-email-reminder-card>
                 </div>
-                <div class="col-lg-4 col-12">
-                    <app-email-reminder-card [item]="emailReminder.employeeDayBeforeReminder"
-                        (changeValue)="changeValue($event)"></app-email-reminder-card>
-                </div>
-            </div>
 
-            <!-- END EMPLOYEE REMINDER -->
+                <!-- END CLIENT LOYALITY-->
+
+                <!-- EMPLOYEE REMINDER -->
+
+                <h5>{{'emailReminder.reminderEmployeeTitle' | translate}} </h5>
+
+                <div class="row mt-2">
+                    <div class="col-lg-4 col-12">
+                        <app-email-reminder-card [item]="reminderConfig.config.employeeImmediatelyReminder"
+                            (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <app-email-reminder-card [item]="reminderConfig.config.employeeDayBeforeReminder"
+                            (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
+                    </div>
+                </div>
+
+                <!-- END EMPLOYEE REMINDER -->
+            </div>
         </div>
     </div>
 </div>

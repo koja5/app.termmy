@@ -8,6 +8,7 @@ const auth = require("./config/auth");
 const request = require("request");
 const logger = require("./config/logger");
 const sql = require("./config/sql-database");
+const uuid = require("uuid");
 
 module.exports = router;
 
@@ -108,7 +109,11 @@ router.post("/createTermine", auth, async (req, res) => {
     ? req.body.employeeId
     : req.user.user.id;
 
+  req.body["uuid"] = uuid.v4();
+
   delete req.body.employee_id;
+
+  console.log(req.body);
 
   await calendar.events.insert(
     {
@@ -128,7 +133,7 @@ router.post("/createTermine", auth, async (req, res) => {
       },
     },
     (response) => {
-      res.send(true);
+      res.json(req.body.uuid);
     }
   );
 });
@@ -256,27 +261,27 @@ const oauth2Client = new google.auth.OAuth2(
 
 const scopes = ["https://www.googleapis.com/auth/calendar"];
 
-router.get("/login", (req, res) => {
-  const url = oauth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: scopes,
-    approval_prompt: "consent",
-    include_granted_scopes: true,
-  });
-
-  res.json(url);
-});
-
 // router.get("/login", (req, res) => {
 //   const url = oauth2Client.generateAuthUrl({
 //     access_type: "offline",
 //     scope: scopes,
-//     approval_prompt: "force",
+//     approval_prompt: "consent",
 //     include_granted_scopes: true,
 //   });
 
 //   res.json(url);
 // });
+
+router.get("/login", (req, res) => {
+  const url = oauth2Client.generateAuthUrl({
+    access_type: "offline",
+    scope: scopes,
+    approval_prompt: "force",
+    include_granted_scopes: true,
+  });
+
+  res.json(url);
+});
 
 router.get("/redirect", async (req, res) => {
   const code = req.query.code;

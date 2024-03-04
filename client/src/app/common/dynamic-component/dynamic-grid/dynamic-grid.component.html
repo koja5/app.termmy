@@ -70,7 +70,7 @@
 
                 <ngx-datatable #grid [rows]="rows" [rowHeight]="50" class="bootstrap core-bootstrap"
                     [limit]="selectedOption" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50"
-                    [scrollbarH]="true">
+                    [scrollbarH]="true" [sorts]="config.sorting.fields">
                     <!-- <ngx-datatable-column name="User" prop="fullName" [width]="200">
               <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
                 <div class="d-flex align-items-center">

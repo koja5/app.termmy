@@ -14,6 +14,7 @@ import { StorageService } from "app/services/storage.service";
 import { CalendarSettings } from "app/models/calendar-settings";
 import { ExecuteAction } from "app/enums/execute-action";
 import { HelpService } from "app/services/help.service";
+import { FormControl } from "@angular/forms";
 // https://stackblitz.com/edit/angular-schedule-different-work-hours-u4cpe8?file=app.component.ts
 // https://www.syncfusion.com/forums/169264/setting-different-work-hours-on-different-days
 @Component({
@@ -272,11 +273,15 @@ export class DynamicScheduleComponent {
       this.deleteTermineFromGoogleCalendar(
         event.data.length ? event.data[0].id : event.data.id
       );
+      this.deleteTermineFromSQL({
+        id: event.data.length ? event.data[0].uuid : event.data.uuid,
+      });
     } else if (event.requestType === "eventChange") {
       if (this.popupOpen && this.isValidForm()) {
         event.data = this.getValueFromForm(this.config.config, event.data);
       }
       this.updateTermineForGoogleCalendar(event.data);
+      this.updateTermineForSQL(event.data);
     } else if (event.requestType === "eventCreate") {
       if (this.isValidForm()) {
         this.createTermineForGoogleCalendar();
@@ -382,6 +387,7 @@ export class DynamicScheduleComponent {
         client_id: data.client_id ? data.client_id : null,
         is_online: data.is_online,
         amount_paid: data.amount_paid,
+        uuid: data.uuid,
       });
     }
 
@@ -410,7 +416,9 @@ export class DynamicScheduleComponent {
       .subscribe(
         (data) => {
           this._toastr.showSuccess();
-          this.refreshTermine(this.form.form.value, ExecuteAction.create);
+          this.form.form.addControl("id", new FormControl(data));
+          this.createTermineForSQL();
+          // this.refreshTermine(this.form.form.value, ExecuteAction.create);
         },
         (error) => {
           this._toastr.showError();
@@ -424,12 +432,10 @@ export class DynamicScheduleComponent {
       event = this.getValueFromForm(this.config.config, event);
     }
     this._service.callPostMethod("/api/google/updateTermine", event).subscribe(
-      (data) => {
-        this._toastr.showSuccess();
-      },
+      (data) => {},
       (error) => {
         this._toastr.showError();
-        this.getTermines();
+        // this.getTermines();
       }
     );
   }
@@ -448,7 +454,6 @@ export class DynamicScheduleComponent {
       .subscribe(
         (data) => {
           this.refreshTermine({ id: id }, ExecuteAction.delete);
-          this._toastr.showSuccess();
         },
         (error) => {
           this._toastr.showError();
@@ -520,7 +525,7 @@ export class DynamicScheduleComponent {
       })
       .subscribe(
         (data) => {
-          this.form.form.value["id"] = data;
+          this.form.form.addControl("id", new FormControl(data));
           this.refreshTermine(this.form.form.value, ExecuteAction.create);
           this._toastr.showSuccess();
         },

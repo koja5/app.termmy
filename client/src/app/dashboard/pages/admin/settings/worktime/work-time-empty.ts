@@ -1,4 +1,5 @@
 export class WorkTimeEmpty {
+  color = "#a3a0ff";
   value = [
     {
       id: 1,

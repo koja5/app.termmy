@@ -11,6 +11,7 @@ const stripe = require("stripe")(process.env.stripe_key);
 const jwt = require("jsonwebtoken");
 const auth = require("./config/auth");
 const sql = require("./config/sql-database");
+const uuid = require("uuid");
 
 module.exports = router;
 
@@ -91,6 +92,7 @@ router.post("/setTermine", auth, function (req, res) {
     }
     req.body.admin_id = req.user.user.admin_id;
     delete req.body.employeeId;
+    delete req.body.externalCalendar;
     conn.query(
       "insert into appointments SET ?",
       [req.body],
@@ -115,6 +117,10 @@ router.post("/updateTermine", auth, function (req, res) {
     }
     req.body.admin_id = req.user.user.admin_id;
     req.body.employee_id = req.body.employeeId;
+    if (req.body.uuid) {
+      req.body.id = req.body.uuid;
+    }
+    delete req.body.uuid;
     delete req.body.employeeId;
     delete req.body.Guid;
     delete req.body.Id;
@@ -154,7 +160,7 @@ router.get("/deleteTermine/:id", auth, async (req, res, next) => {
               logger.log("error", err.sql + ". " + err.sqlMessage);
               res.json(err);
             } else {
-              res.json(rows);
+              res.json(true);
             }
           }
         );

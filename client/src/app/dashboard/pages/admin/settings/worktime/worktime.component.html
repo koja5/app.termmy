@@ -63,7 +63,8 @@
                 <div class="worktime-color mt-2 ml-75">
                     <h4>{{'worktime.colorTitle' | translate}}</h4>
                     <label class="mr-4">{{'worktime.colorText' | translate}}</label>
-                    <input ejs-colorpicker type="color" id="color" name="color" [(value)]="data.color" />
+                    <input ejs-colorpicker type="color" id="color" name="color" [(value)]="data.color"
+                        [value]="data.color" />
                 </div>
                 <div class="col-12 mt-3 text-right">
                     <button type="button" class="btn btn-primary" rippleEffect (click)="saveWorkTime()"><span

@@ -67,15 +67,25 @@ router.post("/setBookingConfig", auth, function (req, res) {
             );
           } else {
             conn.query(
-              "insert into booking_config SET ?",
-              [req.body],
+              "select * from booking_config where booking_link = ?",
+              [req.body.booking_link],
               function (err, rows) {
-                conn.release();
-                if (!err) {
-                  res.json(true);
+                if (!rows.length) {
+                  conn.query(
+                    "insert into booking_config SET ?",
+                    [req.body],
+                    function (err, rows) {
+                      conn.release();
+                      if (!err) {
+                        res.json(true);
+                      } else {
+                        logger.log("error", err.sql + ". " + err.sqlMessage);
+                        res.json(false);
+                      }
+                    }
+                  );
                 } else {
-                  logger.log("error", err.sql + ". " + err.sqlMessage);
-                  res.json(false);
+                  res.json('exists')
                 }
               }
             );

@@ -45,7 +45,6 @@ export class ToastrComponent implements OnInit {
   }
 
   showSuccess() {
-    const language = JSON.parse(localStorage.getItem("language") ?? "{}");
     this.toastr.success(
       this.translate.instant("actionMessage.successExecuteActionTextDefault"),
       this.translate.instant("actionMessage.successExecuteActionTitleDefault"),
@@ -64,11 +63,14 @@ export class ToastrComponent implements OnInit {
   }
 
   showError() {
-    const language = JSON.parse(localStorage.getItem("language") ?? "{}");
-    this.toastr.error(language.generalErrorExecuteAction, "", {
-      timeOut: 7000,
-      positionClass: "toast-bottom-right",
-    });
+    this.toastr.error(
+      this.translate.instant("actionMessage.errorExecuteActionTitleDefault"),
+      this.translate.instant("actionMessage.errorExecuteActionTextDefault"),
+      {
+        timeOut: 7000,
+        positionClass: "toast-bottom-right",
+      }
+    );
   }
   showWarning() {
     const language = JSON.parse(localStorage.getItem("language") ?? "{}");

@@ -11,10 +11,10 @@
             <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
                 <a ngbDropdownItem (click)="item.active = !item.active; change()"><span
                         class="fa fa-{{item.active ? 'pause' : 'play'}}"></span> {{item.active ?
-                    ('smsReminder.deactiveNotification' | translate) : ('smsReminder.activeNotification' |
+                    ('emailReminder.deactiveNotification' | translate) : ('emailReminder.activeNotification' |
                     translate)}}</a>
                 <a ngbDropdownItem (click)="sendTestMessage()"> <span class="fa fa-comment-o"></span>
-                    {{'smsReminder.testMessage' | translate}}</a>
+                    {{'emailReminder.testMessage' | translate}}</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         <b>{{'emailReminder.message' | translate}}:</b> {{item.message}}
     </div>
     <div class="text-right status">
-        <span *ngIf="item.active" class="badge badge-light-success">{{'smsReminder.active' | translate}}</span>
-        <span *ngIf="!item.active" class="badge badge-light-danger">{{'smsReminder.inactive' | translate}}</span>
+        <span *ngIf="item.active" class="badge badge-light-success">{{'emailReminder.active' | translate}}</span>
+        <span *ngIf="!item.active" class="badge badge-light-danger">{{'emailReminder.inactive' | translate}}</span>
     </div>
 </div>

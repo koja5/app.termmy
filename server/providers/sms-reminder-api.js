@@ -6,6 +6,7 @@ const logger = require("./config/logger");
 const sql = require("./config/sql-database");
 const sendSMS = require("./mail_server/sms-server");
 const getAvailableSms = require("./common-functions/get-available-sms");
+const uuid = require("uuid");
 
 module.exports = router;
 
@@ -28,7 +29,8 @@ router.get("/getSmsReminderConfig", auth, async (req, res, next) => {
               res.json(err);
             } else {
               if (rows.length) {
-                res.json(JSON.parse(rows[0].config));
+                rows[0].config = JSON.parse(rows[0].config);
+                res.json(rows[0]);
               } else {
                 res.json(false);
               }
@@ -50,40 +52,23 @@ router.post("/setSmsReminderConfig", auth, function (req, res, next) {
       res.json(err);
     }
 
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    req.body.config = JSON.stringify(req.body.config);
+    req.body.admin_id = req.user.user.admin_id;
+
     conn.query(
-      "select * from sms_reminder_config where admin_id = ?",
-      [req.user.user.admin_id],
-      function (err, rows, fields) {
-        if (rows.length) {
-          console.log(req.body);
-          conn.query(
-            "update sms_reminder_config set config = ? where admin_id = ?",
-            [req.body.config, req.user.user.admin_id],
-            function (err, rows) {
-              conn.release();
-              if (!err) {
-                res.json(true);
-              } else {
-                logger.log("error", err.sql + ". " + err.sqlMessage);
-                res.json(false);
-              }
-            }
-          );
+      "INSERT INTO sms_reminder_config SET ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(req.body.id);
         } else {
-          req.body.admin_id = req.user.user.admin_id;
-          conn.query(
-            "insert into sms_reminder_config SET ?",
-            [req.body],
-            function (err, rows) {
-              conn.release();
-              if (!err) {
-                res.json(true);
-              } else {
-                logger.log("error", err.sql + ". " + err.sqlMessage);
-                res.json(false);
-              }
-            }
-          );
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
         }
       }
     );

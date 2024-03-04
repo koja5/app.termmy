@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { HelpService } from "app/services/help.service";
 import { SmsReminderInitial } from "./sms-reminder-initial";
 import { CallApiService } from "app/services/call-api.service";
@@ -10,8 +10,8 @@ import { CallApiService } from "app/services/call-api.service";
 })
 export class SmsReminderComponent {
   public loader = true;
-  public smsReminder: any;
-  public numberOfSms: any;
+  public reminderConfig: any;
+  public smsCount: any = { count: 0};
 
   constructor(
     public _helpService: HelpService,
@@ -32,9 +32,13 @@ export class SmsReminderComponent {
       .callGetMethod("/api/getNumberOfSms", "")
       .subscribe((data: any) => {
         if (data.length) {
-          this.numberOfSms = data[0];
+          this.smsCount = data[0];
         }
       });
+  }
+
+  generateProgressBar() {
+    return this.smsCount.count + "%";
   }
 
   getSmsReminderConfig() {
@@ -44,24 +48,21 @@ export class SmsReminderComponent {
       .subscribe((data: any) => {
         this.loader = false;
         if (data) {
-          this.smsReminder = data;
+          this.reminderConfig = data;
         } else {
-          this.smsReminder = new SmsReminderInitial();
+          this.reminderConfig = new SmsReminderInitial();
         }
       });
   }
 
-  generateProgressBar() {
-    return this.numberOfSms.count + "%";
-  }
-
-  changeValue(event) {
+  setSmsReminderConfig(event) {
     this._service
-      .callPostMethod("/api/sms-reminder/setSmsReminderConfig", {
-        config: JSON.stringify(this.smsReminder),
-      })
+      .callPostMethod(
+        "/api/sms-reminder/setSmsReminderConfig",
+        this.reminderConfig
+      )
       .subscribe((data) => {
-        console.log(data);
+        this.reminderConfig.id = data;
       });
   }
 }

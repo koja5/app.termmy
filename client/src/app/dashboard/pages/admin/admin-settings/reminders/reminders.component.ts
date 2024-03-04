@@ -9,7 +9,9 @@ import { CallApiService } from "app/services/call-api.service";
   styleUrls: ["./reminders.component.scss"],
 })
 export class RemindersComponent {
-  public sendVia: any;
+  public selectedTab = SendVia.sms;
+  public sendVia = { reminder_type: SendVia.sms };
+  public reminderNotification: any = {};
 
   constructor(
     private _service: CallApiService,
@@ -22,6 +24,7 @@ export class RemindersComponent {
       .subscribe((data: any) => {
         if (data.length) {
           this.sendVia = data[0];
+          this.reminderNotification = data[0];
         } else {
           this.sendVia = { reminder_type: SendVia.sms };
         }
@@ -36,18 +39,18 @@ export class RemindersComponent {
     return SendVia.email;
   }
 
-  selectReminder(type: any) {
-    this.sendVia.reminder_type = type;
-    this._service
-      .callPostMethod("/api/setReminderNotification", this.sendVia)
-      .subscribe((data: any) => {
-        if (data.insertid) {
-          this.sendVia.id = data.insertid;
-        } else if (data) {
-          this._toastr.showSuccess();
-        } else {
-          this._toastr.showWarning();
-        }
-      });
-  }
+  // selectReminder(type: any) {
+  //   this.sendVia.reminder_type = type;
+  //   this._service
+  //     .callPostMethod("/api/setReminderNotification", this.sendVia)
+  //     .subscribe((data: any) => {
+  //       if (data.insertid) {
+  //         this.sendVia.id = data.insertid;
+  //       } else if (data) {
+  //         this._toastr.showSuccess();
+  //       } else {
+  //         this._toastr.showWarning();
+  //       }
+  //     });
+  // }
 }

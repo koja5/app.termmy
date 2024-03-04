@@ -121,9 +121,10 @@ router.post("/signUp", function (req, res, next) {
     }
 
     conn.query(
-      "select * from users where email = ?",
-      [req.body.email],
+      "select * from users where email in (select email from clients where email = ?) or email = ?",
+      [req.body.email, req.body.email],
       function (err, rows, fields) {
+        console.log(rows);
         if (!rows.length) {
           delete req.body.rePassword;
           req.body.password = setSha1Password(req.body.password);
@@ -143,6 +144,7 @@ router.post("/signUp", function (req, res, next) {
                   req.body,
                   "mail-server/verifyEmailAddress"
                 );
+                console.log(options);
                 makeRequest(options, res);
               }
             }
@@ -1383,6 +1385,7 @@ router.post("/updateNumberOfSms", auth, function (req, res) {
 // #endregion SMS PACKAGES
 
 //#region NOTIFICATION
+
 router.get("/getReminderNotification", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {
@@ -1398,11 +1401,11 @@ router.get("/getReminderNotification", auth, function (req, res) {
           if (rows.length) {
             res.json(rows);
           } else {
-            res.json(false);
+            res.json({});
           }
         } else {
           logger.log("error", err.sql + ". " + err.sqlMessage);
-          res.json(false);
+          res.json({});
         }
       }
     );
@@ -1448,6 +1451,35 @@ router.post("/setReminderNotification", auth, function (req, res) {
         }
       );
     }
+  });
+});
+
+router.post("/setSmsReminderNotification", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    conn.query(
+      "INSERT INTO notifications set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(req.body.id);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
   });
 });
 

@@ -1,3 +1,13 @@
+@import "../../../../../../../@core/scss/base/switch-button.scss";
+
 .progress-bar-error {
   background: #ef0000 !important;
+}
+
+.progress-bar-warning {
+  background: #d3be04 !important;
+}
+
+.recommended {
+  font-size: 10px;
 }

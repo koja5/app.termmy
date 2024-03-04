@@ -11,6 +11,24 @@
     </div>
 
     <div class="col-12">
+        <ul class="nav nav-pills mb-2">
+            <!-- account -->
+            <li class="nav-item">
+                <a class="nav-link {{selectedTab === 0 ? 'active' : ''}}" (click)="selectedTab = 0">
+                    <span class="fa fa-comment"></span> &nbsp;
+                    <span class="fw-bold">Sms configuration</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{selectedTab === 1 ? 'active' : ''}}" (click)="selectedTab = 1">
+                    <span class="fa fa-envelope"></span> &nbsp;
+                    <span class="fw-bold">Email configuration</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- <div class="col-12">
         <div class="card">
             <div class="custom-control custom-radio">
                 <input class="custom-control-input" type="radio" name="reminder" id="smsReminder"
@@ -29,16 +47,16 @@
                 </label>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="col-12" *ngIf="sendVia.reminder_type === 0">
+    <div class="col-12" *ngIf="selectedTab === 0">
         <div class="card">
-            <app-sms-reminder></app-sms-reminder>
+            <app-sms-reminder [reminderNotification]="reminderNotification"></app-sms-reminder>
         </div>
     </div>
-    <div class="col-12" *ngIf="sendVia.reminder_type === 1">
+    <div class="col-12" *ngIf="selectedTab === 1">
         <div class="card">
-            <app-email-reminder></app-email-reminder>
+            <app-email-reminder [reminderNotification]="reminderNotification"></app-email-reminder>
         </div>
     </div>
 </div>
