@@ -143,4 +143,8 @@ export class HelpService {
   replaceText(text: string, replaceValue: string, newValue: any) {
     return text.replace(replaceValue, newValue);
   }
+
+  addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes * 60000);
+  }
 }

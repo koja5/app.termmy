@@ -1,8 +1,210 @@
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-calendars/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css";
+
+@media (min-width: 992px) {
+  .e-schedule
+    .e-vertical-view
+    .e-left-indent-wrap
+    table
+    tbody
+    td.e-header-cells.e-week-number {
+    height: 82px;
+  }
+}
+
+@media (max-width: 991px) {
+  .e-schedule-resource-toolbar-container {
+    display: none;
+  }
+}
+
+.e-schedule
+  .e-vertical-view
+  .e-left-indent-wrap
+  table
+  tbody
+  td.e-header-cells.e-week-number {
+  font-size: 32px;
+}
+
+.e-schedule .e-vertical-view .e-work-cells.e-disable-dates {
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.dark-layout .e-schedule .e-schedule-toolbar .e-toolbar-items.e-tbar-pos,
+.dark-layout .e-schedule .e-schedule-table {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-time-cells-wrap table td {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-date-header-wrap table tbody td {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-schedule-dialog .e-dlg-content,
+.dark-layout .e-dialog .e-dlg-header-content,
+.dark-layout .e-dlg-header,
+.dark-layout .e-dlg-header *,
+.dark-layout .e-dialog .e-footer-content,
+.dark-layout .e-popup.e-popup-open.e-dialog {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-work-cells {
+  background-color: #283046;
+}
+
+.dark-layout .e-schedule .e-vertical-view .e-left-indent-wrap table tbody td {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn {
+  background-color: #283046 !important;
+}
+
+.dark-layout .e-schedule .e-month-view .e-work-days,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-days,
+.dark-layout .dark-layout .e-schedule .e-month-view .e-work-cells,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
+.dark-layout .e-schedule .e-month-view .e-date-header-wrap table td,
+.dark-layout .e-schedule .e-month-agenda-view .e-date-header-wrap table td,
+.dark-layout .e-schedule .e-agenda-view .e-empty-event,
+.dark-layout .e-schedule .e-month-view .e-work-cells,
+.dark-layout .e-schedule .e-month-agenda-view .e-work-cells,
+.dark-layout .e-schedule .e-agenda-view,
+.dark-layout .e-schedule .e-agenda-view .e-appointment:hover,
+.dark-layout .e-toolbar .e-hor-nav {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
+.dark-layout .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons,
+.dark-layout .e-btn.e-flat,
+.dark-layout .e-css.e-btn.e-flat,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-date-time-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-location-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-time-zone-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-description-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-resource-details,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-date-time-details,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-location-details,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-time-zone-details,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-description-details,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-resource-details,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-date-time-icon,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-location-icon,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-time-zone-icon,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-description-icon,
+.dark-layout .e-quick-popup-wrapper .e-cell-popup .e-resource-icon,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-date-time-icon,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-location-icon,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-time-zone-icon,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-description-icon,
+.dark-layout .e-quick-popup-wrapper .e-event-popup .e-resource-icon,
+.dark-layout .e-schedule .e-agenda-view .e-subject,
+.dark-layout .e-schedule .e-agenda-view .e-date-time,
+.dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-date,
+.dark-layout .e-schedule .e-agenda-view .e-day-date-header .e-m-day,
+.dark-layout .e-schedule .e-agenda-view .e-resource-column,
+.dark-layout
+  .e-schedule
+  .e-vertical-view
+  .e-left-indent-wrap
+  table
+  tbody
+  td.e-header-cells.e-week-number,
+.dark-layout .e-toolbar .e-hor-nav:hover .e-icons,
+.dark-layout .e-toolbar .e-popup-down-icon.e-icons,
+.e-toolbar .e-popup-up-icon.e-icons {
+  color: #fff !important;
+}
+
+.dark-layout .e-popup.e-popup-open {
+  background-color: #283046 !important;
+  color: #fff !important;
+}
+
+.dark-layout .e-dialog .e-dlg-header-content + .e-dlg-content {
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.e-toolbar .e-toolbar-item .e-tbar-btn,
+.e-toolbar .e-toolbar-items {
+  background: #fff !important;
+}
+
+.e-treeview .e-list-item.e-active > .e-fullrow {
+  height: 60px;
+}
+
+.need-to-select-container {
+  display: flex;
+  height: 70vh;
+}
+
+.need-to-select {
+  text-align: center;
+  margin: auto;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.need-to-select img {
+  width: 260px;
+  margin: auto;
+}
+
+.not-set-worktime {
+  font-size: 15px;
+  color: red;
+  margin-left: 5px;
+}
+
+.external-calendar-icon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: -5px;
+  bottom: 0px;
+  z-index: 111;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
+}
+
+.e-popup.e-popup-open.e-dialog {
+  max-height: max-content !important;
+}
+
+.selected-payment {
+  color: var(--primary);
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  top: 10px !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 150px !important;
+}

@@ -3,6 +3,7 @@ var nodemailer = require("nodemailer");
 var fs = require("fs");
 var hogan = require("hogan.js");
 const logger = require("../config/logger");
+var fs = require("fs");
 
 var smtpTransport = nodemailer.createTransport({
   host: process.env.smtp_host,

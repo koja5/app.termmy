@@ -55,7 +55,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "src/assets/"
+                "src/assets/",
+                "src/assets/scss"
               ]
             },
             "scripts": [

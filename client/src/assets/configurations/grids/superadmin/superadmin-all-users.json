@@ -95,18 +95,6 @@
     },
     "columns": [
         {
-            "title": "ID",
-            "width": 90,
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "number",
-            "class": "text-align-right",
-            "field": "id",
-            "isPrimaryKey": true,
-            "allowEditing": false
-        },
-        {
             "title": "allUsers.number",
             "filterable": true,
             "hideable": true,

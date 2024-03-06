@@ -47,4 +47,5 @@ export class FieldConfig {
   body?: any;
   oneLine?: boolean;
   minuteStep: number;
+  dependent?: any;
 }

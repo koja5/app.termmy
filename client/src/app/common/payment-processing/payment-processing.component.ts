@@ -11,11 +11,11 @@ import { environment } from "environments/environment";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import {
-  CountryISO,
-  PhoneNumberFormat,
-  SearchCountryField,
-} from "ngx-intl-tel-input";
+// import {
+//   CountryISO,
+//   PhoneNumberFormat,
+//   SearchCountryField,
+// } from "ngx-intl-tel-input";
 
 @Component({
   selector: "app-payment-processing",
@@ -53,15 +53,15 @@ export class PaymentProcessingComponent {
     email: new FormControl("", [Validators.required, Validators.email]),
     telephone: new FormControl("", [Validators.required]),
   });
-  separateDialCode = false;
-  SearchCountryField = SearchCountryField;
-  CountryISO = CountryISO;
-  PhoneNumberFormat = PhoneNumberFormat;
-  preferredCountries: CountryISO[] = [
-    CountryISO.Austria,
-    CountryISO.UnitedStates,
-    CountryISO.UnitedKingdom,
-  ];
+  // separateDialCode = false;
+  // SearchCountryField = SearchCountryField;
+  // CountryISO = CountryISO;
+  // PhoneNumberFormat = PhoneNumberFormat;
+  // preferredCountries: CountryISO[] = [
+  //   CountryISO.Austria,
+  //   CountryISO.UnitedStates,
+  //   CountryISO.UnitedKingdom,
+  // ];
 
   constructor(
     private _service: CallApiService,

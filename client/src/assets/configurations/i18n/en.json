@@ -13,7 +13,9 @@
             "update": "Update",
             "setUp": "Set up",
             "connected": "Connected",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "active": "Active",
+            "inactive": "Inactive"
         },
         "actionMessage": {
             "successExecuteActionTitleDefault": "Successfuly changed!",
@@ -60,7 +62,9 @@
             "myServices": "My services",
             "myCalendar": "My calendar",
             "myEmployees": "My employees",
-            "myClients": "My clients"
+            "myClients": "My clients",
+            "smsPackages": "Sms packages",
+            "gatewayCountryPrefix": "Country prefix"
         },
         "generalDialog": {
             "areYouSure": "Are you sure?",
@@ -304,7 +308,11 @@
             "confirmPassword": "Confirm Password",
             "passwordNotMatch": "The passwords do not match, please enter the same password in both fields!",
             "setNewPassword": "Set New Password",
-            "changedPasswordSuccessfuly": "Changed password successfuly. Now you can login!"
+            "changedPasswordSuccessfuly": "Changed password successfuly. Now you can login!",
+            "oldPasswordIsWrong": "Old password is wrong. Please enter correct password",
+            "oldAndNewPasswordCannotBeSame": "Old and new password cannot be same",
+            "passwordsNeedToBeSame": "New and re-password need to be same!",
+            "successfulyChangedPassword": "Successfully changed your password"
         },
         "verifiedMail": {
             "title": "Mail is verified! 🙌",
@@ -343,6 +351,11 @@
             "dateBuy": "Date buy",
             "successfullyBoughtNewSms": "Successfully bought additionally #count SMS.",
             "backToSmsReminder": "Back to SMS reminder"
+        },
+        "gatewayCountryPrefix": {
+            "prefix": "Prefix",
+            "gatewayEmail": "Gateway email",
+            "active": "Active"
         }
     }
 }

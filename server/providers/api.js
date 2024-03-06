@@ -307,6 +307,44 @@ router.post("/resetPassword", function (req, res, next) {
   });
 });
 
+router.post("/changePassword", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where password = ? and email = ?",
+      [sha1(req.body.oldPassword), req.user.email],
+      function (err, rows, fields) {
+        if (err) {
+          res.json(true);
+        } else {
+          console.log(rows.length);
+          if (rows.length) {
+            conn.query(
+              "update users set password = ? where email = ?",
+              [sha1(req.body.newPassword), req.user.email],
+              function (err, rows, fields) {
+                conn.release();
+                if (err) {
+                  res.json(false);
+                } else {
+                  res.json(true);
+                }
+              }
+            );
+          } else {
+            conn.release();
+            res.json(false);
+          }
+        }
+      }
+    );
+  });
+});
+
 // #endregion
 
 // #region PROFILE INFO
@@ -1481,6 +1519,76 @@ router.post("/setSmsReminderNotification", auth, function (req, res, next) {
       }
     );
   });
+});
+
+//#endregion
+
+//#region GatewayCountryPrefix
+router.get("/getGatewayCountryPrefix", function (req, res) {
+  var gatewayCountryPrefix = fs
+    .readFileSync(
+      "./providers/mail_server/sms_config/gateway-country-prefix.json"
+    )
+    .toString();
+
+  res.json(JSON.parse(gatewayCountryPrefix));
+});
+
+router.post("/setGatewayCountryPrefix", auth, function (req, res) {
+  var gatewayCountryPrefix = JSON.parse(
+    fs
+      .readFileSync(
+        "./providers/mail_server/sms_config/gateway-country-prefix.json"
+      )
+      .toString()
+  );
+
+  let ind = 1;
+
+  // update if exists
+  for (let i = 0; i < gatewayCountryPrefix.length; i++) {
+    if (gatewayCountryPrefix[i].id == req.body.id) {
+      gatewayCountryPrefix[i] = req.body;
+      ind = 0;
+      break;
+    }
+  }
+
+  // insert if not exists
+  if (ind) {
+    req.body.id = uuid.v4();
+    gatewayCountryPrefix.push(req.body);
+  }
+
+  fs.writeFileSync(
+    "./providers/mail_server/sms_config/gateway-country-prefix.json",
+    JSON.stringify(gatewayCountryPrefix)
+  );
+  res.json(true);
+});
+
+router.post("/deleteGatewayCountryPrefix", auth, function (req, res) {
+  var gatewayCountryPrefix = JSON.parse(
+    fs
+      .readFileSync(
+        "./providers/mail_server/sms_config/gateway-country-prefix.json"
+      )
+      .toString()
+  );
+
+  for (let i = 0; i < gatewayCountryPrefix.length; i++) {
+    if (gatewayCountryPrefix[i].id == req.body.id) {
+      gatewayCountryPrefix.splice(i, 1);
+      break;
+    }
+  }
+
+  fs.writeFileSync(
+    "./providers/mail_server/sms_config/gateway-country-prefix.json",
+    JSON.stringify(gatewayCountryPrefix)
+  );
+
+  res.json(true);
 });
 
 //#endregion

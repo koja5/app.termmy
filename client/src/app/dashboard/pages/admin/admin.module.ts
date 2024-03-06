@@ -17,6 +17,27 @@ import { ClientsComponent } from "./clients/clients.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { BuyMoreSmsComponent } from "./payments-component/buy-more-sms/buy-more-sms.component";
+import {
+  DragAndDropService,
+  MonthAgendaService,
+  ResizeService,
+  ScheduleModule,
+  TimelineMonthService,
+  TimelineViewsService,
+} from "@syncfusion/ej2-angular-schedule";
+import {
+  DayService,
+  WeekService,
+  WorkWeekService,
+  MonthService,
+  AgendaService,
+} from "@syncfusion/ej2-angular-schedule";
+import { TranslateModule } from "@ngx-translate/core";
+import { CommonCustomModule } from "app/common/common-custom.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
+
 type PathMatch = "full" | "prefix" | undefined;
 
 const routes = [
@@ -98,8 +119,26 @@ const routes = [
     UserModule,
     DynamicModule,
     DynamicSchedulerModule,
+    ScheduleModule,
+    TranslateModule,
+    CommonCustomModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule,
+    DateTimePickerModule,
   ],
-  providers: [],
+  providers: [
+    DayService,
+    WeekService,
+    WorkWeekService,
+    MonthService,
+    AgendaService,
+    MonthAgendaService,
+    TimelineViewsService,
+    TimelineMonthService,
+    ResizeService,
+    DragAndDropService,
+  ],
   exports: [RouterModule, DynamicSchedulerModule],
 })
 export class AdminModule {}

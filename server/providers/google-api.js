@@ -272,12 +272,22 @@ const scopes = ["https://www.googleapis.com/auth/calendar"];
 //   res.json(url);
 // });
 
+// router.get("/login", (req, res) => {
+//   const url = oauth2Client.generateAuthUrl({
+//     access_type: "offline",
+//     scope: scopes,
+//     approval_prompt: "force",
+//     include_granted_scopes: true,
+//   });
+
+//   res.json(url);
+// });
+
 router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
-    approval_prompt: "force",
-    include_granted_scopes: true,
+    prompt: "consent",
   });
 
   res.json(url);
