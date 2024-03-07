@@ -1,0 +1,108 @@
+{
+    "pageSize": 10,
+    "request": {
+        "type": "GET",
+        "api": "/api/getRecommendedBonus",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "paging": {
+        "enable": true,
+        "settings": {
+            "pageSizes": true,
+            "pageSize": 20
+        }
+    },
+    "sorting": {
+        "enable": true
+    },
+    "grouping": {
+        "enable": true,
+        "group": []
+    },
+    "filtering": {
+        "enable": true,
+        "settings": {
+            "type": "Menu"
+        }
+    },
+    "formDialog": {
+        "type": "sidebar",
+        "size": "lg"
+    },
+    "customGrouping": false,
+    "allowResizing": true,
+    "reorderable": true,
+    "selectable": true,
+    "scrollable": false,
+    "hideable": true,
+    "refresh": false,
+    "reset": true,
+    "columns": [
+        {
+            "title": "recommended.bonus",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "bonus",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "recommended.creationDate",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "date",
+            "format": "dd.MM.yyyy HH:mm",
+            "class": "text-align-right",
+            "field": "creation_date",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "recommended.utilized",
+            "template": {
+                "choices": [
+                    {
+                        "field": "utilized",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "recommended.notUsed",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    },
+                    {
+                        "field": "utilized",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "recommended.used",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "title": "recommended.utilizedDate",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "date",
+            "format": "dd.MM.yyyy HH:mm",
+            "class": "text-align-right",
+            "field": "utilized_date",
+            "validation": {
+                "required": true
+            }
+        }
+    ],
+    "config": []
+}

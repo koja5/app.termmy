@@ -345,6 +345,120 @@ router.post("/changePassword", auth, function (req, res, next) {
   });
 });
 
+router.post("/createRecommendedBonus", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    const data = {
+      user_id: req.body.id,
+      bonus: 100,
+      creation_date: new Date(),
+    };
+
+    conn.query(
+      "insert into recommended_bonus set ?",
+      [data],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        } else {
+          res.json(true);
+        }
+      }
+    );
+  });
+});
+
+router.get("/getRecommendedBonus", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from recommended_bonus where user_id = ?",
+      [req.user.user.id],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        } else {
+          res.json(rows);
+        }
+      }
+    );
+  });
+});
+
+router.get("/validateRecommenedBonusLink/:id", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where id = ?",
+      [req.params.id],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        } else {
+          if (rows.length) {
+            res.json(true);
+          } else {
+            res.json(false);
+          }
+        }
+      }
+    );
+  });
+});
+
+router.post("/pickUpSmsBonus", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "update recommended_bonus set utilized = 1 where user_id = ? and utilized = 0",
+      [req.user.user.id],
+      function (err, rows, fields) {
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        } else {
+          const smsBonus = rows.affectedRows * 100;
+          conn.query(
+            "update sms_count set count = count + ?  where admin_id = ?",
+            [smsBonus, req.user.user.admin_id],
+            function (err, rows, fields) {
+              conn.release();
+              if (err) {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(err);
+              } else {
+                res.json(true);
+              }
+            }
+          );
+        }
+      }
+    );
+  });
+});
+
 // #endregion
 
 // #region PROFILE INFO

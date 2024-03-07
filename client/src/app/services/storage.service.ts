@@ -17,12 +17,13 @@ export class StorageService {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  getSessionStorageSimple(key: string) {
-    return sessionStorage.getItem(key);
-  }
-
-  getSessionStorageObject(key: string) {
-    return JSON.parse(JSON.stringify(sessionStorage.getItem(key)));
+  getSessionStorage(key: string) {
+    const storage = sessionStorage.getItem(key);
+    if (storage?.startsWith("{") && storage?.endsWith("}")) {
+      return JSON.parse(storage);
+    } else {
+      return storage;
+    }
   }
 
   removeAllSessionStorage() {
@@ -37,12 +38,13 @@ export class StorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getLocalStorageSimple(key: string) {
-    return localStorage.getItem(key);
-  }
-
-  getLocalStorageObject(key: string) {
-    return JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem(key))));
+  getLocalStorage(key: string) {
+    const storage = localStorage.getItem(key);
+    if (storage?.startsWith("{") && storage?.endsWith("}")) {
+      return JSON.parse(storage);
+    } else {
+      return storage;
+    }
   }
 
   removeAllLocalStorage() {
@@ -132,7 +134,6 @@ export class StorageService {
   // EXTERNAL ACCOUNTS
 
   setExternalAccountSettings(value: any) {
-
     let encrypt = CryptoJS.AES.encrypt(
       JSON.stringify(value),
       environment.ENCRIPTY_KEY
@@ -164,21 +165,28 @@ export class StorageService {
   }
 
   setCalendarConfig(value: any) {
-    let config = this.getLocalStorageObject("config")
-      ? this.getLocalStorageObject("config")
-      : {};
+    let config = this.getLocalStorage("config");
     config.calendar = value ? value : new CalendarSettings();
 
     this.setLocalStorage("config", config);
   }
 
   getCalendarConfig() {
-    let config = this.getLocalStorageObject("config")
-      ? this.getLocalStorageObject("config")
-      : {};
+    let config = this.getLocalStorage("config");
     return Object.values(config.calendar).length != 0
       ? config.calendar
       : new CalendarSettings();
+  }
+
+  getSelectedLanguage() {
+    const config = this.getLocalStorage("config");
+    if (config) {
+      if (config.app.appLanguage === "rs") {
+        return "sr-Latn";
+      }
+      return config.app.appLanguage;
+    }
+    return "en";
   }
 
   // END EXTERNAL ACCOUNTS

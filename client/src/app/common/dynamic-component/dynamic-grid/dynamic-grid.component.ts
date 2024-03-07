@@ -31,6 +31,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class DynamicGridComponent {
   @Input() public path: string;
   @Input() public file: string;
+  @Input() public data: any;
   @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
@@ -45,7 +46,6 @@ export class DynamicGridComponent {
   public previousRoleFilter = "";
   public previousPlanFilter = "";
   public previousStatusFilter = "";
-  public data: any;
   public executeActionConfig: any;
   public modalDialog: any;
   public modalFormDialog: any;
@@ -231,7 +231,7 @@ export class DynamicGridComponent {
    */
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
-    this.initializeConfig();
+    this.initialize();
   }
 
   /**
@@ -243,36 +243,44 @@ export class DynamicGridComponent {
     this._unsubscribeAll.complete();
   }
 
-  initializeConfig() {
+  initialize() {
     this.loader = true;
-    this._configurationService
-      .getConfiguration(this.path, this.file)
-      .subscribe((data) => {
-        this.config = data;
-        this._coreConfigService.config
-          .pipe(takeUntil(this._unsubscribeAll))
-          .subscribe((config) => {
-            if (config.layout.animation === "zoomIn") {
-              setTimeout(() => {
-                this._service
-                  .callApi(this.config, this._activateRouter)
-                  .subscribe((data) => {
-                    this.rows = data;
-                    this.tempData = this.rows;
-                    this.loader = false;
-                  });
-              }, 450);
-            } else {
-              this._service
-                .callApi(this.config, this._activateRouter)
-                .subscribe((data) => {
-                  this.rows = data;
-                  this.tempData = this.rows;
-                  this.loader = false;
-                });
-            }
-          });
-      });
+    if (this.path && this.file) {
+      this._configurationService
+        .getConfiguration(this.path, this.file)
+        .subscribe((data) => {
+          this.config = data;
+          if (this.config.request) {
+            this._coreConfigService.config
+              .pipe(takeUntil(this._unsubscribeAll))
+              .subscribe((config) => {
+                if (config.layout.animation === "zoomIn") {
+                  setTimeout(() => {
+                    this._service
+                      .callApi(this.config, this._activateRouter)
+                      .subscribe((data) => {
+                        this.rows = data;
+                        this.tempData = this.rows;
+                        this.loader = false;
+                      });
+                  }, 450);
+                } else {
+                  this._service
+                    .callApi(this.config, this._activateRouter)
+                    .subscribe((data) => {
+                      this.rows = data;
+                      this.tempData = this.rows;
+                      this.loader = false;
+                    });
+                }
+              });
+          }
+        });
+    } else if (this.data) {
+      this.rows = this.data;
+      this.tempData = this.rows;
+      this.loader = false;
+    }
   }
 
   submitEmitter(event: any) {

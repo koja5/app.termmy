@@ -34,6 +34,11 @@
       "title": "settings.connections",
       "link": "/dashboard/admin/settings/connections",
       "icon": "link"
+    },
+    {
+      "title": "settings.recommended",
+      "link": "/dashboard/admin/settings/recommended",
+      "icon": "gift"
     }
   ]
 }

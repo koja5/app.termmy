@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from "./reset-password/reset-password.componen
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { VerifiedMailComponent } from "./other-auth-pages/verified-mail/verified-mail.component";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
 
 // routing
 const routes: Routes = [
@@ -61,6 +62,6 @@ const routes: Routes = [
     CoreCommonModule,
     TranslateModule,
   ],
-  providers: [],
+  providers: [ToastrComponent],
 })
 export class AuthenticationModule {}

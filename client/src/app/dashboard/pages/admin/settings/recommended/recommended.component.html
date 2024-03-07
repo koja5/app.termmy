@@ -1,0 +1,44 @@
+<div class="min-vh-100" *ngIf="loader">
+    <app-loader></app-loader>
+</div>
+<form class="validate-form" *ngIf="!loader">
+    <div class="row">
+        <!-- social header -->
+        <div class="col-12">
+            <div class="align-items-center mb-2">
+                <i data-feather="link" class="font-medium-3"></i>
+                <h4 class="ml-75">{{'recommended.title' | translate}} <app-explanation-mark
+                        [explanation]="'recommended.explanation' | translate"></app-explanation-mark></h4>
+                <h6 class="ml-75">{{'recommended.text' | translate}}</h6>
+            </div>
+        </div>
+        <div class="col-12 pt-2 pb-2 border-top">
+            <div class="status text-center">
+                <span class="fa fa-gift gift-icon"></span>
+                <h4 class="mb-0 font-weight-bolder">{{smsCount}} {{'recommended.smsBonus' | translate}}</h4>
+                <p>{{'recommended.numberOfSmsBonus' | translate}}</p>
+                <div class="mb-1" *ngIf="smsCount > 0 || pickedUpSms">
+                    <div *ngIf="pickedUpSms">
+                        <p class="badge badge-light-success">{{'recommended.successfullyPickedUpSms'
+                            | translate}}</p>
+                        <a class="d-block" routerLink="/dashboard/admin/admin-settings/reminders">{{'recommended.goToCheckAvailableSms'
+                            |
+                            translate}}</a>
+                    </div>
+                    <a class="btn btn-outline-primary" *ngIf="smsCount > 0"
+                        (click)="pickUpSmsBonus()"> <app-small-loader *ngIf="loaderContent"></app-small-loader> {{'recommended.pickUpSmsBonus' | translate}}</a>
+                </div>
+                <div>
+                    <a class="btn btn-primary" (click)="copyRecommendedLinkToClipboard()"><span
+                            class="fa fa-link"></span> {{'recommended.getRecommendedLink'
+                        | translate}}</a>
+                </div>
+            </div>
+
+            <div class="archive mt-4" *ngIf="data">
+                <h6 class="border-bottom pb-1">{{'recommended.registeredThroughLink' | translate}}</h6>
+                <app-dynamic-grid [data]="data" [path]="path" [file]="file"></app-dynamic-grid>
+            </div>
+        </div>
+    </div>
+</form>

@@ -11,7 +11,9 @@ import { Subject } from "rxjs";
 import { CoreConfigService } from "@core/services/config.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ResponseModel } from "app/models/response-model";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-signup",
@@ -41,7 +43,10 @@ export class SignupComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _formBuilder: UntypedFormBuilder,
     private _service: CallApiService,
-    private _router: Router
+    private _router: Router,
+    private _activatedRouter: ActivatedRoute,
+    private _toastr: ToastrComponent,
+    private _translate: TranslateService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -107,6 +112,7 @@ export class SignupComponent implements OnInit {
       .subscribe((config) => {
         this.coreConfig = config;
       });
+    this.validateRecommenedBonusLink();
   }
 
   /**
@@ -128,6 +134,7 @@ export class SignupComponent implements OnInit {
         if (data) {
           this.response.verifyYourMail = true;
           this.loading = false;
+          this.createRecommendedBonus();
           setTimeout(() => {
             this._router.navigate(["/auth/login"]);
           }, 6000);
@@ -139,6 +146,31 @@ export class SignupComponent implements OnInit {
     } else {
       this.loading = false;
       this.response.passwordNotMatch = true;
+    }
+  }
+
+  validateRecommenedBonusLink() {
+    const id = this._activatedRouter.snapshot.queryParams.id;
+    if (id) {
+      this._service
+        .callGetMethod("/api/validateRecommenedBonusLink", id)
+        .subscribe((data) => {
+          if (!data) {
+            this._router.navigate(["/auth/signup"]);
+            this._toastr.showErrorCustom(
+              this._translate.instant("recommended.wrongRecommendedBonusLink")
+            );
+          }
+        });
+    }
+  }
+
+  createRecommendedBonus() {
+    const id = this._activatedRouter.snapshot.queryParams.id;
+    if (id) {
+      this._service
+        .callPostMethod("/api/createRecommendedBonus", { id: id })
+        .subscribe((data) => {});
     }
   }
 

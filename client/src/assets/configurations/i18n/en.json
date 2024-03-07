@@ -143,7 +143,8 @@
         "settings": {
             "worktime": "Worktime",
             "connections": "Connections",
-            "customization": "Customization"
+            "customization": "Customization",
+            "recommended": "Recommended"
         },
         "connections": {
             "title": "Connections",
@@ -173,6 +174,26 @@
             "save": "Save time",
             "colorTitle": "Color",
             "colorText": "Worktime color settings for cell in calendar"
+        },
+        "recommended": {
+            "title": "Recommended",
+            "text": "Send your recommended button to your friends to get gifts!",
+            "explanation": "You can send your recommended link to your friends. After some of them create account, you get every time 100 SMS bonus free!",
+            "smsBonus": "SMS Bonus",
+            "numberOfSmsBonus": "Number of free sms",
+            "pickUpSmsBonus": "PICK UP SMS BONUS",
+            "getRecommendedLink": "GET RECOMMENDED LINK",
+            "registeredThroughLink": "Registered through your link",
+            "wrongRecommendedBonusLink": "Recommended bonus link is not valid. Please open valid recommended link to get extra bonus!",
+            "bonus": "Number of SMS",
+            "creationDate": "Creation date",
+            "utilized": "Utilized",
+            "used": "Used",
+            "notUsed": "Not used",
+            "utilizedDate": "Utilized date",
+            "successfullyPickedUpSms": "Successfuly picked up sms",
+            "goToCheckAvailableSms": "Go to check available sms",
+            "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard."
         },
         "adminSettings": {
             "adminSettings": "Admin settings",

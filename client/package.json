@@ -59,6 +59,7 @@
     "bootstrap": "4.6.1",
     "bs-stepper": "1.7.0",
     "chart.js": "2.9.4",
+    "cldr-data": "^36.0.1",
     "core-js": "3.14.0",
     "crypto-js": "^4.2.0",
     "feather-icons": "4.28.0",

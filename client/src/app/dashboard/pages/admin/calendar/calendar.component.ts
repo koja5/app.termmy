@@ -19,7 +19,17 @@ import {
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import * as moment from "moment";
+import {
+  loadCldr,
+  L10n,
+  setCulture,
+  setCurrencyCode,
+} from "@syncfusion/ej2-base";
+import { DefaultCalendarLanguages } from "./default-calendar-languages";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+declare var require: any;
+
+new DefaultCalendarLanguages();
 
 @Component({
   selector: "app-calendar",
@@ -72,11 +82,13 @@ export class CalendarComponent {
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _storageService: StorageService,
-    public _helpService: HelpService
+    public _helpService: HelpService,
+    private _translate: TranslateService
   ) {}
 
   ngOnInit() {
     this.mobileDevice = this._helpService.checkIsMobileDevices();
+    this.setCalendarLanguage();
     this.getConfigurations();
   }
 
@@ -95,6 +107,21 @@ export class CalendarComponent {
   }
 
   //#region  INIT FUNCTION
+
+  setCalendarLanguage() {
+    // set current language
+    setCulture(this._storageService.getSelectedLanguage());
+
+    // detect change language
+
+    this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      if (event.lang === "rs") {
+        setCulture("sr-Latn");
+      } else {
+        setCulture(event.lang);
+      }
+    });
+  }
 
   initializeForm() {
     this.appointment = new UntypedFormGroup({
@@ -806,9 +833,7 @@ export class CalendarComponent {
       );
     }
     if (values.Subject) {
-      this.appointment.controls.Subject.setValue(
-        values.Subject
-      );
+      this.appointment.controls.Subject.setValue(values.Subject);
     }
   }
 

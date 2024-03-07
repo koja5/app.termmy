@@ -11,14 +11,21 @@ import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { SettingsComponent } from "./settings.component";
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { CommonCustomModule } from "app/common/common-custom.module";
+import { RecommendedComponent } from "./recommended/recommended.component";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
   { path: "connections", component: ConnectionsComponent },
+  { path: "recommended", component: RecommendedComponent },
 ];
 
 @NgModule({
-  declarations: [SettingsComponent, WorktimeComponent, ConnectionsComponent],
+  declarations: [
+    SettingsComponent,
+    WorktimeComponent,
+    ConnectionsComponent,
+    RecommendedComponent,
+  ],
   imports: [
     CommonModule,
     DatePickerI18nModule,
@@ -27,7 +34,7 @@ const routes = [
     TranslateModule,
     DynamicModule,
     ColorPickerModule,
-    CommonCustomModule,
+    CommonCustomModule
   ],
   providers: [ToastrComponent],
   exports: [
