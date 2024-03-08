@@ -362,12 +362,27 @@ router.post("/createRecommendedBonus", function (req, res, next) {
       "insert into recommended_bonus set ?",
       [data],
       function (err, rows, fields) {
-        conn.release();
         if (err) {
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(err);
         } else {
-          res.json(true);
+          conn.query(
+            "select * from users where id = ?",
+            [req.body.id],
+            function (err, rows, fields) {
+              conn.release();
+              if (err) {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(err);
+              } else {
+                var options = prepareOptionsForRequest(
+                  { email: rows[0].email },
+                  "mail-server/sendSmsBonusInfo"
+                );
+                makeRequest(options, res);
+              }
+            }
+          );
         }
       }
     );
@@ -1549,6 +1564,7 @@ router.get("/getReminderNotification", auth, function (req, res) {
       "select * from notifications where admin_id = ?",
       [req.user.user.admin_id],
       function (err, rows) {
+        conn.release();
         if (!err) {
           if (rows.length) {
             res.json(rows);
@@ -1704,6 +1720,31 @@ router.post("/deleteGatewayCountryPrefix", auth, function (req, res) {
 
   res.json(true);
 });
+
+//#endregion
+router.get("/getMyLicense", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from user_license u join licenses l on u.license_id = l.id where admin_id = ?",
+      [req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        }
+        res.json(rows);
+      }
+    );
+  });
+});
+
+//#region LICENSE
 
 //#endregion
 

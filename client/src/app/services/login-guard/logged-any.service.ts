@@ -1,24 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { HelpService } from '../help.service';
-import { StorageService } from '../storage.service';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { HelpService } from "../help.service";
+import { StorageService } from "../storage.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LoggedAnyService {
-  constructor(
-    public _router: Router,
-    public _storageService: StorageService,
-    public _helpService: HelpService
-  ) {}
+  constructor(public _router: Router, public _storageService: StorageService) {}
 
   canActivate() {
     if (this._storageService.getToken()) {
       return true;
     } else {
-      this._helpService.setLocalStorage('previousLink', window.location.hash);
-      this._router.navigate(['/']);
+      this._storageService.setLocalStorage("previousLink", window.location.href);
+      this._router.navigate(["/"]);
       return false;
     }
   }

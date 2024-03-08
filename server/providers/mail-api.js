@@ -54,6 +54,29 @@ router.post("/resetPasswordLink", function (req, res, next) {
   });
 });
 
+router.post("/sendSmsBonusInfo", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync(
+      "./providers/mail_server/mail_config/sms_bonus.json",
+      "utf-8"
+    )
+  );
+
+  body["email"] = req.body.email;
+  body["sms_reminder"] =
+    process.env.link_client + "/dashboard/admin/admin-settings/reminders";
+
+  var options = prepareOptionsForRequest(body);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
 //#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {

@@ -37,6 +37,7 @@ import { CommonCustomModule } from "app/common/common-custom.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
+import { LicenseStatusComponent } from './common/license-status/license-status.component';
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -111,7 +112,7 @@ const routes = [
     EmployeesComponent,
     LocationViewComponent,
     ClientsComponent,
-    AdminSettingsComponent,
+    AdminSettingsComponent
   ],
   imports: [
     CommonModule,

@@ -12,7 +12,9 @@ import { EmailReminderComponent } from "./reminders/email-reminder/email-reminde
 import { SmsReminderComponent } from "./reminders/sms-reminder/sms-reminder.component";
 import { SmsReminderCardComponent } from "./reminders/sms-reminder/sms-reminder-card/sms-reminder-card.component";
 import { FormsModule } from "@angular/forms";
-import { EmailReminderCardComponent } from './reminders/email-reminder/email-reminder-card/email-reminder-card.component';
+import { EmailReminderCardComponent } from "./reminders/email-reminder/email-reminder-card/email-reminder-card.component";
+import { LicenseComponent } from "./license/license.component";
+import { AdminCommonModule } from "../common/admin-common.module";
 
 const routes = [
   {
@@ -27,6 +29,10 @@ const routes = [
     path: "reminders",
     component: RemindersComponent,
   },
+  {
+    path: "license",
+    component: LicenseComponent,
+  },
 ];
 
 @NgModule({
@@ -38,6 +44,7 @@ const routes = [
     RemindersComponent,
     EmailReminderComponent,
     EmailReminderCardComponent,
+    LicenseComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +54,7 @@ const routes = [
     DynamicModule,
     NgbModule,
     CommonCustomModule,
+    AdminCommonModule,
   ],
   providers: [],
   exports: [RouterModule, DynamicModule],

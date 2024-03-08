@@ -1,0 +1,5 @@
+{
+    "template": "sms_bonus.hjs",
+    "subject": "You have received an SMS Bonus",
+    "title": "You have received an SMS Bonus"
+}

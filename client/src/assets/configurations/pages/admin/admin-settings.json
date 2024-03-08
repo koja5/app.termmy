@@ -39,6 +39,11 @@
             "title": "adminSettings.reminders",
             "link": "/dashboard/admin/admin-settings/reminders",
             "icon": "send"
+        },
+        {
+            "title": "adminSettings.license",
+            "link": "/dashboard/admin/admin-settings/license",
+            "icon": "package"
         }
     ]
 }

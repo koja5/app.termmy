@@ -148,6 +148,37 @@ export class HelpService {
     return new Date(date.getTime() + minutes * 60000);
   }
 
+  calculateDiffInDays(date) {
+    let currentDate = new Date();
+    date = new Date(date);
+
+    if (date < currentDate) {
+      return 0;
+    } else {
+      return Math.floor(
+        (Date.UTC(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate()
+        ) -
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) /
+          (1000 * 60 * 60 * 24)
+      );
+    }
+  }
+
+  daysInYear(year) {
+    return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
+  }
+
+  daysInMonth(month, year) {
+    return new Date(year, month + 1, 0).getDate();
+  }
+
+  calculatePercentage(current, full) {
+    return (current / full) * 100;
+  }
+
   copyToClipboard(value) {
     navigator.clipboard.writeText(value);
   }

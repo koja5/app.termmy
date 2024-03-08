@@ -17,7 +17,11 @@ export class LoggedGuard {
       return true;
     } else {
       const token = this._storageService.getDecodeToken();
-      if (token.type === UserTypes.superadmin) {
+      const previousLink = this._storageService.getLocalStorage("previousLink");
+      if (previousLink) {
+        this._router.navigate([previousLink]);
+        this._storageService.removeLocalStorage("previousLink");
+      } else if (token.type === UserTypes.superadmin) {
         this._router.navigate(["/dashboard/superadmin/all-users"]);
       } else if (
         token.type === UserTypes.admin ||

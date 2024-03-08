@@ -199,7 +199,8 @@
             "adminSettings": "Admin settings",
             "onlinePayment": "Online payment",
             "bookingSettings": "Booking settings",
-            "reminders": "Reminders"
+            "reminders": "Reminders",
+            "license": "License"
         },
         "onlinePayment": {
             "title": "Online payment",
@@ -299,6 +300,58 @@
             "message": "Message",
             "sentTestEmailTo": "Send test email to #email"
         },
+        "licenseStatus": {
+            "currentPlan": "Current plan",
+            "yourCurrentPlan": "Your Current Plan is",
+            "simpleStartForEveryone": "A simple start for everyone",
+            "activeUntil": "Active until",
+            "forever": "FOREVER",
+            "notifyBeforeExpired": "We will send you a notification upon Subscription expiration",
+            "perYear": "Pear Year",
+            "perMonth": "Per Month",
+            "planDescription": "Standard plan for small to medium businesses",
+            "days": "Days",
+            "of": "of",
+            "daysReminder": "days remaining until your plan requires update",
+            "updatePlan": "Upgrade Plan",
+            "cancelSubscription": "Cancel Subscription",
+            "expired": "EXPIRED",
+            "extendCurrentPlan": "Extend your current plan",
+            "monthlySubscription": "I want to extend one MONTH",
+            "annualSubscription": "I want to extend one YEAR"
+        },
+        "licensePackages": [
+            {
+                "id": "d24f35e2-dd3c-11ee-9965-960002791003",
+                "icon": "../../../../../../assets/images/illustration/Pot1.svg",
+                "name": "Basic",
+                "slogan": "A simple start for everyone",
+                "monthly_price": "0",
+                "annual_price": "0",
+                "plans": [
+                    "100 responses a month",
+                    "Unlimited forms and surveys",
+                    "Unlimited fields",
+                    "Basic form creation tools",
+                    "Up to 2 subdomains"
+                ]
+            },
+            {
+                "id": "9b152453-dd36-11ee-9965-960002791003",
+                "icon": "../../../../../../assets/images/illustration/Pot2.svg",
+                "name": "Standard",
+                "slogan": "For small to medium businesses",
+                "monthly_price": "9.99",
+                "annual_price": "95.99",
+                "plans": [
+                    "Unlimited responses",
+                    "Unlimited forms and surveys",
+                    "Instagram profile page",
+                    "Google Docs integration",
+                    "Custom “Thank you” page"
+                ]
+            }
+        ],
         "authGlobal": {
             "backToLogin": "Back to login"
         },

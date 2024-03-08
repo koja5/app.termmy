@@ -1,0 +1,86 @@
+<div *ngIf="license">
+    <div class="card" *ngIf="currentStatus">
+        <div class="card-header">
+            <h4 class="card-title full-width border-bottom">{{'licenseStatus.currentPlan' | translate}}</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-2 pb-50">
+                        <h5>{{'licenseStatus.yourCurrentPlan' | translate}} <strong>{{license.name}}</strong></h5>
+                        <span>{{'licenseStatus.simpleStartForEveryone' | translate}}</span>
+                    </div>
+                    <div class="mb-2 pb-50">
+                        <h5>{{'licenseStatus.activeUntil' | translate}} <span
+                                *ngIf="license.expiry_date">{{license.expiry_date | date: 'dd.MM.YYYY
+                                HH:mm'}}<span *ngIf="diffDays === 0"><b>({{'licenseStatus.expired' |
+                                        translate}})</b></span>
+                            </span> <span *ngIf="!license.expiry_date">{{'licenseStatus.forever' |
+                                translate}}</span></h5>
+                        <span *ngIf="license.expiry_date">{{'licenseStatus.notifyBeforeExpired' | translate}}</span>
+                    </div>
+                    <div class="mb-2 mb-md-1">
+                        <h5>{{license.annual_subscription ? license.annual_price : license.monthly_price}}
+                            {{license.annual_subscription ? ('licenseStatus.perYear' | translate) :
+                            ('licenseStatus.perMonth' | translate)}}
+                        </h5>
+                        <span>{{'licenseStatus.planDescription' | translate}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="license.expiry_date">
+                    <div class="plan-statistics pt-1">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="fw-bolder">{{'licenseStatus.days' | translate}}</h5>
+                            <h5 class="fw-bolder">{{diffDays}} {{'licenseStatus.of' | translate}} {{subscriptionPeriod}}
+                                {{'licenseStatus.days' | translate}}</h5>
+                        </div>
+                        <div class="progress" *ngIf="expiryPercentage">
+                            <div class="progress-bar" [ngStyle]="{'width': expiryPercentage}" role="progressbar"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-50">{{diffDays}} {{'licenseStatus.daysReminder' | translate}}</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <a class="btn btn-primary me-1 mt-1 mr-1 waves-effect waves-float waves-light"
+                        routerLink="/dashboard/admin/payment/license-packages">
+                        {{'licenseStatus.updatePlan' | translate}}
+                    </a>
+                    <button
+                        class="btn btn-outline-danger cancel-subscription mt-1 waves-effect">{{'licenseStatus.cancelSubscription'
+                        | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="license.monthly_price && license.annual_price">
+        <div class="card-header">
+            <h4 class="card-title full-width border-bottom">{{'licenseStatus.extendCurrentPlan' | translate}}</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="mb-2">
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="subscription" id="monthly"
+                        [checked]="!annualSubscription ? true : false" value="monthly" [(ngModel)]="annualSubscription"
+                        (click)="annualSubscription = 'monthly'">
+                    <label class="custom-control-label" for="monthly">
+                        {{'licenseStatus.monthlySubscription' | translate}} ({{license.monthly_price}} €)
+                    </label>
+                </div>
+                <div class="custom-control custom-radio mt-1">
+                    <input class="custom-control-input" type="radio" name="subscription" id="annual"
+                        [checked]="annualSubscription ? true : false" value="annual" [(ngModel)]="annualSubscription"
+                        (click)="annualSubscription = 'annual'">
+                    <label class="custom-control-label" for="annual">
+                        {{'licenseStatus.annualSubscription' | translate}} ({{license.annual_price}} €)
+                    </label>
+                </div>
+            </div>
+
+            <app-payment-processing [amount]="selectedPackage" [buttonText]="'buyMoreSms.buySmsButton' | translate"
+                (executeMethodEmitter)="executeMethod($event)"></app-payment-processing>
+        </div>
+    </div>
+</div>

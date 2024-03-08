@@ -19,7 +19,7 @@ export class SuperadminGuardService {
     if (user.type === UserTypes.superadmin) {
       return true;
     } else {
-      this._helpService.setLocalStorage("previousLink", window.location.hash);
+      this._helpService.setLocalStorage("previousLink", window.location.href);
       this._router.navigate(["./dashboard/miscellaneous/not-authorized"]);
       return false;
     }

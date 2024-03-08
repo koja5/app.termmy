@@ -9,15 +9,14 @@ import { StorageService } from "../storage.service";
 export class LoginGuardService {
   constructor(
     public _router: Router,
-    public _storageService: StorageService,
-    public _helpService: HelpService
+    public _storageService: StorageService
   ) {}
 
   canActivate() {
     if (this._storageService.getToken()) {
       return true;
     } else {
-      this._helpService.setLocalStorage("previousLink", window.location.hash);
+      this._storageService.setLocalStorage("previousLink", window.location.href);
       this._router.navigate(["/auth/login"]);
       return false;
     }
