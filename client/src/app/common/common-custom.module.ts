@@ -8,20 +8,25 @@ import { environment } from "environments/environment";
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoaderSmallComponent } from './loader-small/loader-small.component';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
+import { CoreCommonModule } from "@core/common.module";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 const appRoutes: Routes = [];
 
 @NgModule({
-  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent],
+  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgxStripeModule.forRoot(environment.STRIPE_KEY),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreCommonModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [],
-  exports: [LoaderComponent, PaymentProcessingComponent],
+  exports: [LoaderComponent, PaymentProcessingComponent, DialogConfirmComponent],
 })
 export class CommonCustomModule {}

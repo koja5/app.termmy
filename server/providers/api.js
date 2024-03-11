@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("./config/auth");
 const sql = require("./config/sql-database");
 const uuid = require("uuid");
+const cryptoJS = require("crypto-js");
 
 module.exports = router;
 
@@ -1722,6 +1723,8 @@ router.post("/deleteGatewayCountryPrefix", auth, function (req, res) {
 });
 
 //#endregion
+
+//#region LICENSES
 router.get("/getMyLicense", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {
@@ -1730,7 +1733,7 @@ router.get("/getMyLicense", auth, function (req, res) {
     }
 
     conn.query(
-      "select * from user_license u join licenses l on u.license_id = l.id where admin_id = ?",
+      "select u.*, l.monthly_price, l.annual_price, l.name from user_license u join licenses l on u.license_id = l.id where admin_id = ?",
       [req.user.user.admin_id],
       function (err, rows) {
         conn.release();
@@ -1744,9 +1747,59 @@ router.get("/getMyLicense", auth, function (req, res) {
   });
 });
 
-//#region LICENSE
+router.post("/updateLicense", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
 
-//#endregion
+    const value = JSON.parse(
+      cryptoJS.AES.decrypt(req.body.value, process.env.ENCRIPTY_KEY).toString(
+        cryptoJS.enc.Utf8
+      )
+    );
+
+    conn.query(
+      "update user_license set expiry_date = ?, license_id = ? where admin_id = ?",
+      [value.expiry_date, value.license_id, req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/cancelSubscription", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "update user_license set license_id = ?, expiry_date = null where admin_id = ?",
+      [req.body.license_id, req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//#region LICENSE
 
 //#region HELP FUNCTION
 

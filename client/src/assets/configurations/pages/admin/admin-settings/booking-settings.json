@@ -27,7 +27,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.bookingRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "additionalValue": "external-link"
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -36,36 +37,6 @@
             "field": "booking_link",
             "validation": true,
             "required": true
-        },
-        {
-            "type": "label",
-            "width": "col-md-12 mt-2",
-            "title": "bookingSettings.companyInformationTitle",
-            "text": "bookingSettings.companyInformationText"
-        },
-        {
-            "type": "switch",
-            "width": "col-12",
-            "class": "e-outline",
-            "name": "show_company_information",
-            "title": "bookingSettings.showCompanyInformation",
-            "field": "show_company_information"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "company_name",
-            "title": "bookingSettings.companyName",
-            "field": "company_name"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "company_description",
-            "title": "bookingSettings.companyDescription",
-            "field": "company_description"
         },
         {
             "type": "label",
@@ -177,8 +148,51 @@
             "field": "allow_pay_on_arrival_new_customer"
         },
         {
-            "type": "textbox",
+            "type": "label",
             "width": "col-md-12 mt-2",
+            "text": "bookingSettings.appointmentOptions"
+        },
+        {
+            "type": "numeric",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "max_available_appointment_show",
+            "title": "bookingSettings.maxAvailableAppointmentShow",
+            "field": "max_available_appointment_show",
+            "explanation": "bookingSettings.maxAvailableAppointmentsShowExplanation"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mt-2",
+            "text": "bookingSettings.companyInformationTitle"
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "show_company_information",
+            "title": "bookingSettings.showCompanyInformation",
+            "field": "show_company_information"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "company_name",
+            "title": "bookingSettings.companyName",
+            "field": "company_name"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "company_description",
+            "title": "bookingSettings.companyDescription",
+            "field": "company_description"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
             "class": "e-outline",
             "name": "company_address",
             "title": "bookingSettings.companyAddress",

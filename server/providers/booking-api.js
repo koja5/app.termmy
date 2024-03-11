@@ -53,15 +53,25 @@ router.post("/setBookingConfig", auth, function (req, res) {
         if (!err) {
           if (rows.length) {
             conn.query(
-              "update booking_config set ? where admin_id = ?",
-              [req.body, req.user.user.admin_id],
+              "select * from booking_config where booking_link = ? and admin_id != ?",
+              [req.body.booking_link, req.user.user.admin_id],
               function (err, rows) {
-                conn.release();
-                if (!err) {
-                  res.json(true);
+                if (!rows.length) {
+                  conn.query(
+                    "update booking_config set ? where admin_id = ?",
+                    [req.body, req.user.user.admin_id],
+                    function (err, rows) {
+                      conn.release();
+                      if (!err) {
+                        res.json(true);
+                      } else {
+                        logger.log("error", err.sql + ". " + err.sqlMessage);
+                        res.json(false);
+                      }
+                    }
+                  );
                 } else {
-                  logger.log("error", err.sql + ". " + err.sqlMessage);
-                  res.json(false);
+                  res.json("exists");
                 }
               }
             );
@@ -85,7 +95,7 @@ router.post("/setBookingConfig", auth, function (req, res) {
                     }
                   );
                 } else {
-                  res.json('exists')
+                  res.json("exists");
                 }
               }
             );

@@ -34,6 +34,9 @@
     <div class="input-group-append" *ngIf="config.groupSettings.groupPosition === 'right'">
       <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
     </div>
+    <a *ngIf="config.groupSettings.additionalValue === 'external-link'" class="external-link"
+      href="{{config.groupSettings.groupText | translate}}{{group.controls[config.field].value}}" target="_blank"><span
+        class="fa fa-external-link"></span></a>
   </div>
   <!-- / GROUP -->
 

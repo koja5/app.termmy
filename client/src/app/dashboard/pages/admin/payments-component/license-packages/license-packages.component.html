@@ -7,19 +7,18 @@
 
                 <!-- title text and switch button -->
                 <div class="text-center">
-                    <h1 class="mt-5">Pricing Plans</h1>
+                    <h1 class="mt-5">{{'licensePackages.pricingPlansTitle' | translate}}</h1>
                     <p class="mb-2 pb-75">
-                        All plans include 40+ advanced tools and features to boost your product. Choose the best plan to
-                        fit your needs.
+                        {{'licensePackages.pricingPlansText' | translate}}
                     </p>
                     <div class="d-flex align-items-center justify-content-center mb-5 pb-50">
-                        <h6 class="me-1 mb-0">Monthly</h6>
+                        <h6 class="me-1 mb-0">{{'licensePackages.monthly' | translate}}</h6>
                         <div class="form-check form-switch subscription-duration">
                             <input type="checkbox" class="form-check-input" id="priceSwitch"
                                 [(ngModel)]="annualSubscription" />
                             <label class="form-check-label" for="priceSwitch"></label>
                         </div>
-                        <h6 class="ms-50 mb-0">Annually</h6>
+                        <h6 class="ms-50 mb-0">{{'licensePackages.annualy' | translate}}</h6>
                     </div>
                 </div>
                 <!--/ title text and switch button -->
@@ -30,11 +29,10 @@
                         <div class="row">
                             <!-- basic plan -->
 
-                            <div class="col-12 col-md-6" *ngFor="let item of licensePackages">
+                            <div class="col-12 col-md-{{licenseNumberClass}}" *ngFor="let item of licensePackages">
                                 <div class="card basic-pricing text-center">
                                     <div class="card-body">
-                                        <img src="../../../../../../assets/images/illustration/Pot1.svg"
-                                            class="mb-2 mt-5" alt="svg img" />
+                                        <img src="{{item.icon}}" class="mb-2 mt-5 package-icon" alt="svg img" />
                                         <h3>{{item.name}}</h3>
                                         <p class="card-text">{{item.slogan}}</p>
                                         <div class="annual-plan">
@@ -52,9 +50,12 @@
                                             <li class="list-group-item" *ngFor="let plan of item.plans">{{plan}}</li>
                                         </ul>
                                         <button class="btn w-100 btn-outline-success mt-2"
-                                            *ngIf="license.id === item.id">Your current plan</button>
-                                        <button class="btn w-100 btn-primary mt-2" *ngIf="license.id !== item.id"
-                                            (click)="selectPackage(item)">Upgrade</button>
+                                            *ngIf="license.license_id === item.id">{{'licensePackages.currentPlan' |
+                                            translate}}</button>
+                                        <button class="btn w-100 btn-primary mt-2"
+                                            *ngIf="license.license_id !== item.id"
+                                            (click)="selectPackage(item)">{{'licensePackages.upgrade' |
+                                            translate}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +65,9 @@
                 <!--/ pricing plan cards -->
 
 
-                <div class="col-12 col-sm-offset-2 col-sm-10 col-md-12 col-lg-offset-2 col-lg-8 mx-auto p-0">
-                    <app-license-status [currentStatus]="false" [data]="selectedPackage"></app-license-status>
+                <div *ngIf="license && (license.monthly_price || license.annual_price)"
+                    class="col-12 col-sm-offset-2 col-sm-10 col-md-12 col-lg-offset-2 col-lg-8 mx-auto p-0">
+                    <app-license-status [currentStatus]="false" [data]="license"></app-license-status>
                 </div>
 
                 <!-- pricing free trial -->
@@ -74,10 +76,11 @@
                         <div class="col-12 col-lg-10 col-lg-offset-3 mx-auto">
                             <div class="pricing-trial-content d-flex justify-content-between">
                                 <div class="text-center text-md-start mt-3">
-                                    <h3 class="text-primary">Still not convinced? Start with a 14-day FREE trial!
+                                    <h3 class="text-primary">{{'licensePackages.additionalFunctionalities' | translate}}
                                     </h3>
-                                    <h5>You will get full access to with all the features for 14 days.</h5>
-                                    <button class="btn btn-primary mt-2 mt-lg-3">Start 14-day FREE trial</button>
+                                    <h5>{{'licensePackages.contactUsForSolvingProblem' | translate}}</h5>
+                                    <button class="btn btn-primary mt-2 mt-lg-3">{{'licensePackages.contactUsButton' |
+                                        translate}}</button>
                                 </div>
 
                                 <!-- image -->

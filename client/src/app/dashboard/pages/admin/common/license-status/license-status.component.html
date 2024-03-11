@@ -31,12 +31,12 @@
                     <div class="plan-statistics pt-1">
                         <div class="d-flex justify-content-between">
                             <h5 class="fw-bolder">{{'licenseStatus.days' | translate}}</h5>
-                            <h5 class="fw-bolder">{{diffDays}} {{'licenseStatus.of' | translate}} {{subscriptionPeriod}}
-                                {{'licenseStatus.days' | translate}}</h5>
+                            <h5 class="fw-bolder">{{diffDays}}</h5>
                         </div>
                         <div class="progress" *ngIf="expiryPercentage">
-                            <div class="progress-bar" [ngStyle]="{'width': expiryPercentage}" role="progressbar"
-                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar {{diffDays <= 10 ? 'progress-bar-error' : ''}} {{diffDays > 10 && diffDays <= 30 ? 'progress-bar-warning' : ''}}"
+                                [ngStyle]="{'width': expiryPercentage}" role="progressbar" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="mt-50">{{diffDays}} {{'licenseStatus.daysReminder' | translate}}</p>
                     </div>
@@ -46,8 +46,9 @@
                         routerLink="/dashboard/admin/payment/license-packages">
                         {{'licenseStatus.updatePlan' | translate}}
                     </a>
-                    <button
-                        class="btn btn-outline-danger cancel-subscription mt-1 waves-effect">{{'licenseStatus.cancelSubscription'
+                    <button *ngIf="license.license_id !== getBasicLicenseType()"
+                        class="btn btn-outline-danger cancel-subscription mt-1 waves-effect"
+                        (click)="dialogConfirm.showQuestionModal()">{{'licenseStatus.cancelSubscription'
                         | translate}}</button>
                 </div>
             </div>
@@ -60,27 +61,57 @@
         </div>
         <div class="card-body">
 
-            <div class="mb-2">
+            <div class="mb-3">
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" name="subscription" id="monthly"
                         [checked]="!annualSubscription ? true : false" value="monthly" [(ngModel)]="annualSubscription"
-                        (click)="annualSubscription = 'monthly'">
+                        (click)="annualSubscription = 'monthly'; selectPackage(license.monthly_price, 1)">
                     <label class="custom-control-label" for="monthly">
-                        {{'licenseStatus.monthlySubscription' | translate}} ({{license.monthly_price}} €)
+                        {{'licenseStatus.monthlySubscription' | translate}} <span class="price">
+                            ({{license.monthly_price}} €)</span>
                     </label>
+                </div>
+                <div class="custom-control custom-radio mt-1">
+                    <input class="custom-control-input" type="radio" name="subscription" id="3monthly"
+                        [checked]="!annualSubscription ? true : false" value="monthly" [(ngModel)]="annualSubscription"
+                        (click)="annualSubscription = 'monthly'; selectPackage(licensePriceFor3Months, 3)">
+                    <label class="custom-control-label" for="3monthly">
+                        {{'licenseStatus.threeMonthSubscription' | translate}} <span class="price">
+                            ({{licensePriceFor3Months}}
+                            €)</span>
+                    </label>
+                </div>
+                <div class="custom-control custom-radio mt-1">
+                    <input class="custom-control-input" type="radio" name="subscription" id="6monthly"
+                        [checked]="!annualSubscription ? true : false" value="monthly" [(ngModel)]="annualSubscription"
+                        (click)="annualSubscription = 'monthly'; selectPackage(licensePriceFor6Months, 6)">
+                    <label class="custom-control-label" for="6monthly">
+                        {{'licenseStatus.sixMonthSubscription' | translate}} <span class="price">
+                            ({{licensePriceFor6Months}}
+                            €)</span>
+                    </label> &nbsp; <span class="badge badge-light-primary">{{'licenseStatus.discount10' |
+                        translate}}</span>
                 </div>
                 <div class="custom-control custom-radio mt-1">
                     <input class="custom-control-input" type="radio" name="subscription" id="annual"
                         [checked]="annualSubscription ? true : false" value="annual" [(ngModel)]="annualSubscription"
-                        (click)="annualSubscription = 'annual'">
+                        (click)="annualSubscription = 'annual'; selectPackage(license.annual_price, 12)">
                     <label class="custom-control-label" for="annual">
-                        {{'licenseStatus.annualSubscription' | translate}} ({{license.annual_price}} €)
+                        {{'licenseStatus.annualSubscription' | translate}} <span class="price">
+                            ({{license.annual_price}} €) </span>
+                        &nbsp;
+                        <span class="badge badge-light-primary">{{'licenseStatus.discount20' |
+                            translate}}</span>
                     </label>
                 </div>
             </div>
 
-            <app-payment-processing [amount]="selectedPackage" [buttonText]="'buyMoreSms.buySmsButton' | translate"
+            <app-payment-processing *ngIf="licenseSubscription.price" [amount]="licenseSubscription.price"
+                [buttonText]="'licenseStatus.payForLicense' | translate"
                 (executeMethodEmitter)="executeMethod($event)"></app-payment-processing>
         </div>
     </div>
 </div>
+
+<app-dialog-confirm #dialogConfirm [content]="('licenseStatus.cancelSubscriptionQuestion' | translate)"
+    (confirm)="cancelSubscription()"></app-dialog-confirm>

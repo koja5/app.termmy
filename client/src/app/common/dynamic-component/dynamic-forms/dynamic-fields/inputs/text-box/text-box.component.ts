@@ -5,7 +5,7 @@ import { FieldConfig } from "../../../models/field-config";
 @Component({
   selector: "app-text-box",
   templateUrl: "./text-box.component.html",
-  styleUrls: ["./text-box.component.sass"],
+  styleUrls: ["./text-box.component.scss"],
 })
 export class TextBoxComponent implements OnInit {
   public config: FieldConfig;

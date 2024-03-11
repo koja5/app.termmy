@@ -14,6 +14,7 @@ export class LicensePackagesComponent {
   public annualSubscription = false;
   public licensePackages: any;
   public license: any;
+  public licenseNumberClass!: number;
 
   constructor(
     private _translate: TranslateService,
@@ -21,16 +22,32 @@ export class LicensePackagesComponent {
   ) {}
 
   ngOnInit() {
-    if (this._translate.instant("licensePackages")) {
-      this.licensePackages = this._translate.instant("licensePackages");
+    if (this._translate.instant("licensePackagePlans")) {
+      this.licensePackages = this._translate.instant("licensePackagePlans");
     }
 
     this._service.callGetMethod("/api/getMyLicense", "").subscribe((data) => {
       this.license = data[0];
+      this.removeFreePlan();
     });
   }
 
+  removeFreePlan() {
+    if (this.license.annual_price || this.license.monthly_price) {
+      for (let i = 0; i < this.licensePackages.length; i++) {
+        if (
+          !Number(this.licensePackages[i].monthly_price) ||
+          !Number(this.licensePackages[i].annual_price)
+        ) {
+          this.licensePackages.splice(i, 1);
+        }
+      }
+    }
+    this.licenseNumberClass = 12 / this.licensePackages.length;
+  }
+
   selectPackage(item: any) {
-    this.selectedPackage = item;
+    this.license = item;
+    this.license.license_id = item.id;
   }
 }

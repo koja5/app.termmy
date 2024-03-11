@@ -148,6 +148,10 @@ export class HelpService {
     return new Date(date.getTime() + minutes * 60000);
   }
 
+  addMonthsToCurrentDate(months: number) {
+    return new Date(new Date().setMonth(new Date().getMonth() + months));
+  }
+
   calculateDiffInDays(date) {
     let currentDate = new Date();
     date = new Date(date);
@@ -156,12 +160,12 @@ export class HelpService {
       return 0;
     } else {
       return Math.floor(
-        (Date.UTC(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate()
-        ) -
-          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) /
+        (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
+          Date.UTC(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate()
+          )) /
           (1000 * 60 * 60 * 24)
       );
     }
