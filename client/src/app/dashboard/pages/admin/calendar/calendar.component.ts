@@ -110,7 +110,7 @@ export class CalendarComponent {
 
   setCalendarLanguage() {
     // set current language
-    setCulture(this._storageService.getSelectedLanguage());
+    setCulture(this._storageService.getSelectedLanguage(true));
 
     // detect change language
 

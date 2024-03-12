@@ -274,6 +274,10 @@ export class DynamicGridComponent {
                     });
                 }
               });
+          } else if (this.data) {
+            this.rows = this.data;
+            this.tempData = this.rows;
+            this.loader = false;
           }
         });
     } else if (this.data) {

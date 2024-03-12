@@ -15,6 +15,8 @@ import { FormsModule } from "@angular/forms";
 import { EmailReminderCardComponent } from "./reminders/email-reminder/email-reminder-card/email-reminder-card.component";
 import { LicenseComponent } from "./license/license.component";
 import { AdminCommonModule } from "../common/admin-common.module";
+import { HolidaysComponent } from "./holidays/holidays.component";
+import { NgSelectModule } from "@ng-select/ng-select";
 
 const routes = [
   {
@@ -33,6 +35,10 @@ const routes = [
     path: "license",
     component: LicenseComponent,
   },
+  {
+    path: "holidays",
+    component: HolidaysComponent,
+  },
 ];
 
 @NgModule({
@@ -45,6 +51,7 @@ const routes = [
     EmailReminderComponent,
     EmailReminderCardComponent,
     LicenseComponent,
+    HolidaysComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +62,7 @@ const routes = [
     NgbModule,
     CommonCustomModule,
     AdminCommonModule,
+    NgSelectModule,
   ],
   providers: [],
   exports: [RouterModule, DynamicModule],

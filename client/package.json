@@ -62,6 +62,7 @@
     "cldr-data": "^36.0.1",
     "core-js": "3.14.0",
     "crypto-js": "^4.2.0",
+    "date-holidays": "^3.23.9",
     "feather-icons": "4.28.0",
     "flatpickr": "4.6.9",
     "google-libphonenumber": "^3.2.34",

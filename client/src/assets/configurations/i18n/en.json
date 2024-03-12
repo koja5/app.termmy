@@ -200,7 +200,8 @@
             "onlinePayment": "Online payment",
             "bookingSettings": "Booking settings",
             "reminders": "Reminders",
-            "license": "License"
+            "license": "License",
+            "holidays": "Holidays"
         },
         "onlinePayment": {
             "title": "Online payment",
@@ -374,6 +375,16 @@
                 ]
             }
         ],
+        "holidays": {
+            "title": "Holidays",
+            "text": "Configurable holidays for your company",
+            "countryHoliday": "Select default holiday for country where you are",
+            "listOfHolidays": "List of selected country holidays",
+            "holidayName": "Holiday name",
+            "holidayStart": "Start",
+            "holidayEnd": "End",
+            "holidayType": "Type"
+        },
         "authGlobal": {
             "backToLogin": "Back to login"
         },

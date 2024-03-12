@@ -1,0 +1,88 @@
+{
+    "pageSize": 10,
+    "paging": {
+        "enable": true,
+        "settings": {
+            "pageSizes": true,
+            "pageSize": 20
+        }
+    },
+    "sorting": {
+        "enable": true
+    },
+    "grouping": {
+        "enable": true,
+        "group": []
+    },
+    "filtering": {
+        "enable": true,
+        "settings": {
+            "type": "Menu"
+        }
+    },
+    "formDialog": {
+        "type": "sidebar",
+        "size": "lg"
+    },
+    "customGrouping": false,
+    "allowResizing": true,
+    "reorderable": true,
+    "selectable": true,
+    "scrollable": false,
+    "hideable": true,
+    "refresh": false,
+    "reset": true,
+    "columns": [
+        {
+            "title": "holidays.holidayName",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "name",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "holidays.holidayStart",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "date",
+            "format": "dd.MM.yyyy",
+            "class": "text-align-right",
+            "field": "start",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "holidays.holidayEnd",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "date",
+            "format": "dd.MM.yyyy",
+            "class": "text-align-right",
+            "field": "end",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "holidays.holidayType",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "type",
+            "validation": {
+                "required": true
+            }
+        }
+    ],
+    "config": []
+}

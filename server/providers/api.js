@@ -1799,7 +1799,58 @@ router.post("/cancelSubscription", auth, function (req, res, next) {
   });
 });
 
-//#region LICENSE
+//#endregion
+
+router.get("/getMyHolidays", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from holidays where admin_id = ?",
+      [req.user.user.admin_id],
+      function (err, rows) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        }
+        res.json(rows);
+      }
+    );
+  });
+});
+
+router.post("/setHoliday", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    conn.query(
+      "INSERT INTO holidays set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(req.body.id);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
 
 //#region HELP FUNCTION
 

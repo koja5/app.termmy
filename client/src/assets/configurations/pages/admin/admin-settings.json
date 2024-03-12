@@ -44,6 +44,11 @@
             "title": "adminSettings.license",
             "link": "/dashboard/admin/admin-settings/license",
             "icon": "package"
+        },
+        {
+            "title": "adminSettings.holidays",
+            "link": "/dashboard/admin/admin-settings/holidays",
+            "icon": "award"
         }
     ]
 }

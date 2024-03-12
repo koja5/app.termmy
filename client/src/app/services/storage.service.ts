@@ -178,10 +178,10 @@ export class StorageService {
       : new CalendarSettings();
   }
 
-  getSelectedLanguage() {
+  getSelectedLanguage(check?: boolean) {
     const config = this.getLocalStorage("config");
     if (config) {
-      if (config.app.appLanguage === "rs") {
+      if (config.app.appLanguage === "rs" && check) {
         return "sr-Latn";
       }
       return config.app.appLanguage;
