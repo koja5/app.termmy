@@ -29,8 +29,4 @@ export class DatepickerComponent {
   }
 
   ngOnInit(): void {}
-
-  ngModelChange(event) {
-    console.log(this.group);
-  }
 }

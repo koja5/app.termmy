@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { HelpService } from "app/services/help.service";
 import { StorageService } from "app/services/storage.service";
 import Holidays from "date-holidays";
 
@@ -14,14 +15,15 @@ export class HolidaysComponent {
   public path = "grids/admin";
   public file = "holidays.json";
   public countries: any;
-  public selectedCountry = { id: null, code: "RS" };
+  public selectedCountry = { id: null, code: null };
   public holidays: any;
 
   constructor(
     private _configurationService: ConfigurationService,
     private _storageService: StorageService,
     private _service: CallApiService,
-    private _toastr: ToastrComponent
+    private _toastr: ToastrComponent,
+    private _helpService: HelpService
   ) {}
 
   ngOnInit() {
@@ -63,8 +65,7 @@ export class HolidaysComponent {
   }
 
   getHolidaysForSelectedCountry(code) {
-    let hd = new Holidays(code);
-    this.holidays = hd.getHolidays(new Date().getFullYear());
+    this.holidays = this._helpService.getHolidaysForSelectedCountry(code);
   }
 
   onChangeCountry(event: any) {

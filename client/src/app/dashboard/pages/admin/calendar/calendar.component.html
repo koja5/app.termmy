@@ -25,17 +25,21 @@
                 </div>
             </div>
             <div class="card" *ngIf="checkCalendarVisibility()">
-                <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : '80vh'"
+                <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : schedulerHeight"
                     [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
                     currentView="{{mobileDevice ? 'Day' : 'WorkWeek'}}" [startHour]="getStartHourForLocation()"
-                    [endHour]="getEndHourForLocation()" (actionBegin)="onActionBegin($event)"
+                    [endHour]="getEndHourForLocation()" [showQuickInfo]="false" (actionBegin)="onActionBegin($event)"
                     (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
                     (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
-                    (renderCell)="onRenderCell($event)">
+                    (renderCell)="onRenderCell($event)" (cellClick)="onCellClick($event)"
+                    (eventClick)="onEventClick($event)">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
-                            <div class="resource-image avatar mr-1"><img height="40" width="40"
-                                    src="../../../../assets/images/avatars/no-user-profile.png">
+                            <div class="resource-image avatar mr-1">
+                                <!-- <img height="40" width="40"
+                                    src="../../../../assets/images/avatars/no-user-profile.png"> -->
+                                <app-letter-profile [firstname]="item.resourceData.firstname"
+                                    [lastname]="item.resourceData.lastname"></app-letter-profile>
                                 <img class="external-calendar-icon"
                                     *ngIf="checkExternalAccountForGoogle(item.resourceData.id)"
                                     src="../../../../assets/images/icons/google.png"
@@ -43,7 +47,8 @@
                             </div>
                             <div class="resource-details">
                                 <div class="d-flex">
-                                    <div *ngIf="item.resourceData.text" class="resource-name">{{item.resourceData.text}}
+                                    <div *ngIf="item.resourceData.firstname || item.resourceData.lastname" class="resource-name">
+                                        {{item.resourceData.firstname}} {{item.resourceData.lastname}}
                                     </div>
                                     <span *ngIf="!workTimes[item.resourceData.groupIndex]"
                                         class="fa fa-exclamation not-set-worktime"

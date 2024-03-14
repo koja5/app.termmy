@@ -11,11 +11,12 @@ import { LoaderSmallComponent } from './loader-small/loader-small.component';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 import { CoreCommonModule } from "@core/common.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { LetterProfileComponent } from './letter-profile/letter-profile.component';
 
 const appRoutes: Routes = [];
 
 @NgModule({
-  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent],
+  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent, LetterProfileComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -27,6 +28,6 @@ const appRoutes: Routes = [];
   ],
   providers: [],
   bootstrap: [],
-  exports: [LoaderComponent, PaymentProcessingComponent, DialogConfirmComponent],
+  exports: [LoaderComponent, PaymentProcessingComponent, DialogConfirmComponent, LetterProfileComponent],
 })
 export class CommonCustomModule {}

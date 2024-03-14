@@ -1,0 +1,44 @@
+{
+  "type": "vertical",
+  "contentHeader": {
+    "headerTitle": "Settings",
+    "actionButton": true,
+    "breadcrumb": {
+      "type": "",
+      "links": [
+        {
+          "name": "dashboard",
+          "isLink": false,
+          "link": "/"
+        },
+        {
+          "name": "settings",
+          "isLink": false,
+          "link": "/"
+        },
+        {
+          "name": "worktime",
+          "isLink": false,
+          "link": "/"
+        }
+      ]
+    }
+  },
+  "navigations": [
+    {
+      "title": "settings.worktime",
+      "link": "/dashboard/admin/settings/worktime",
+      "icon": "briefcase"
+    },
+    {
+      "title": "settings.connections",
+      "link": "/dashboard/admin/settings/connections",
+      "icon": "link"
+    },
+    {
+      "title": "settings.recommended",
+      "link": "/dashboard/admin/settings/recommended",
+      "icon": "gift"
+    }
+  ]
+}

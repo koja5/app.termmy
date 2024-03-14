@@ -3,6 +3,8 @@ import { ConfigurationService } from "app/services/configuration.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import {
+  CellClickEventArgs,
+  EventClickArgs,
   EventRenderedArgs,
   EventSettingsModel,
   GroupModel,
@@ -76,6 +78,7 @@ export class CalendarComponent {
   public appointment: any;
   public allClients: any;
   public allServices: any;
+  public schedulerHeight: string;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -88,6 +91,11 @@ export class CalendarComponent {
 
   ngOnInit() {
     this.mobileDevice = this._helpService.checkIsMobileDevices();
+    if (this.mobileDevice || window.innerWidth < 993) {
+      this.schedulerHeight = "calc(100vh - 12vh)";
+    } else {
+      this.schedulerHeight = "calc(100vh - 19vh)";
+    }
     this.setCalendarLanguage();
     this.getConfigurations();
   }
@@ -407,6 +415,7 @@ export class CalendarComponent {
             } else {
               this.calendar.eventSettings.dataSource = [];
             }
+            this.getHolidays();
           }
         }, 10);
       });
@@ -433,6 +442,7 @@ export class CalendarComponent {
             } else {
               this.calendar.eventSettings.dataSource = [];
             }
+            this.getHolidays();
           }
         },
         (error) => {
@@ -537,24 +547,26 @@ export class CalendarComponent {
   }
 
   deleteTermineFromGoogleCalendar(id) {
-    this.calendar.showSpinner();
-    this._service
-      .callPostMethod("/api/google/deleteTermine", {
-        id: id,
-        externalCalendar: this.calendarSettings.externalAccounts[
-          this.employeeId
-        ]
-          ? this.calendarSettings.externalAccounts[this.employeeId].google
-          : this.calendarSettings.externalAccounts.google,
-      })
-      .subscribe(
-        (data) => {
-          this.refreshTermine({ id: id }, ExecuteAction.delete);
-        },
-        (error) => {
-          this._toastr.showError();
-        }
-      );
+    if (id) {
+      this.calendar.showSpinner();
+      this._service
+        .callPostMethod("/api/google/deleteTermine", {
+          id: id,
+          externalCalendar: this.calendarSettings.externalAccounts[
+            this.employeeId
+          ]
+            ? this.calendarSettings.externalAccounts[this.employeeId].google
+            : this.calendarSettings.externalAccounts.google,
+        })
+        .subscribe(
+          (data) => {
+            this.refreshTermine({ id: id }, ExecuteAction.delete);
+          },
+          (error) => {
+            this._toastr.showError();
+          }
+        );
+    }
   }
 
   getEmployeeWhoHaveConnectedGoogleCalendar() {
@@ -595,6 +607,7 @@ export class CalendarComponent {
             this.calendar.eventSettings.dataSource =
               this.packTerminesFromSQL(data);
           }
+          this.getHolidays();
         }, 10);
       });
   }
@@ -652,18 +665,22 @@ export class CalendarComponent {
   }
 
   deleteTermineFromSQL(event: any) {
-    this.refreshTermine(event, ExecuteAction.delete);
-    this._service
-      .callServerMethod(this.config.editSettingsRequest.delete, event.id)
-      .subscribe(
-        (data) => {
-          this._toastr.showSuccess();
-          this.initializeForm();
-        },
-        (error) => {
-          this._toastr.showError();
-        }
-      );
+    if (event && event.id) {
+      this.refreshTermine(event, ExecuteAction.delete);
+      this._service
+        .callServerMethod(this.config.editSettingsRequest.delete, event.id)
+        .subscribe(
+          (data) => {
+            this._toastr.showSuccess();
+            this.initializeForm();
+          },
+          (error) => {
+            this._toastr.showError();
+          }
+        );
+    } else {
+      this._toastr.showError();
+    }
   }
 
   getMyTerminesFromSQL() {
@@ -674,6 +691,7 @@ export class CalendarComponent {
         setTimeout(() => {
           this.calendar.eventSettings.dataSource =
             this.packTerminesFromSQL(data);
+          this.getHolidays();
         }, 10);
       });
   }
@@ -810,6 +828,17 @@ export class CalendarComponent {
     }
   }
 
+  onCellClick(args: CellClickEventArgs): void {
+    this.calendar?.openEditor(args, "Add");
+  }
+  onEventClick(args: EventClickArgs): void {
+    if (!(args.event as any).RecurrenceRule) {
+      this.calendar?.openEditor(args.event, "Save");
+    } else {
+      this.calendar?.quickPopup.openRecurrenceAlert();
+    }
+  }
+
   onPopupClose(event: any) {
     if (event.type === "Editor" && !event.data) {
       this.popupOpen = false;
@@ -817,7 +846,7 @@ export class CalendarComponent {
   }
 
   checkIfExternalCretedTermine(event) {
-    if (event.id && !event.data.client_id && !event.data.service_id)
+    if (event.data.id && !event.data.client_id && !event.data.service_id)
       return true;
     return false;
   }
@@ -925,6 +954,37 @@ export class CalendarComponent {
     }
   }
 
+  getHolidays() {
+    this._service
+      .callGetMethod("/api/getMyHolidays", "")
+      .subscribe((data: any) => {
+        if (data.length) {
+          const holidays = this._helpService.getHolidaysForSelectedCountry(
+            data[0].code
+          );
+          let array = this.packHolidays(holidays);
+          this.calendar.eventSettings.dataSource = (
+            this.calendar.eventSettings.dataSource as []
+          ).concat(array as []);
+        }
+      });
+  }
+
+  packHolidays(holidays) {
+    let array = [];
+    console.log(holidays);
+    for (let i = 0; i < holidays.length; i++) {
+      array.push({
+        Subject: holidays[i].name,
+        StartTime: holidays[i].start,
+        employeeId: this._storageService.getUserId(),
+        EndTime: holidays[i].end,
+        IsAllDay: true,
+      });
+    }
+    return array;
+  }
+
   //#endregion
 
   //#region HELPFUL FUNCTION
@@ -1025,9 +1085,9 @@ export class CalendarComponent {
           i++
         ) {
           this.resourceDataSource.push({
-            text:
-              this.calendarSettings.selectedEmployeesFullInfo[i].firstname +
-              " " +
+            firstname:
+              this.calendarSettings.selectedEmployeesFullInfo[i].firstname,
+            lastname:
               this.calendarSettings.selectedEmployeesFullInfo[i].lastname,
             id: this.calendarSettings.selectedEmployeesFullInfo[i].id,
             position:
@@ -1038,11 +1098,8 @@ export class CalendarComponent {
       }
     } else {
       this.resourceDataSource.push({
-        text: token.firstname
-          ? token.firstname
-          : "" + " " + token.lastname
-          ? token.lastname
-          : "",
+        firstname: token.firstname,
+        lastname: token.lastname,
         id: token.id,
         groupIndex: 0,
       });

@@ -136,17 +136,29 @@ router.post("/signUp", function (req, res, next) {
             "insert into users set ?",
             [req.body],
             function (err, rows, fields) {
-              conn.release();
               if (err) {
+                conn.release();
                 logger.log("error", err.sql + ". " + err.sqlMessage);
                 res.json(false);
               } else {
-                var options = prepareOptionsForRequest(
-                  req.body,
-                  "mail-server/verifyEmailAddress"
+                conn.query(
+                  "insert into user_license set admin_id = ?, license_id = ?",
+                  [req.body.id, "d24f35e2-dd3c-11ee-9965-960002791003"],
+                  function (err, rows, fields) {
+                    conn.release();
+                    if (err) {
+                      logger.log("error", err.sql + ". " + err.sqlMessage);
+                      res.json(err);
+                    } else {
+                      var options = prepareOptionsForRequest(
+                        req.body,
+                        "mail-server/verifyEmailAddress"
+                      );
+                      
+                      makeRequest(options, res);
+                    }
+                  }
                 );
-                console.log(options);
-                makeRequest(options, res);
               }
             }
           );
@@ -448,8 +460,8 @@ router.post("/pickUpSmsBonus", auth, function (req, res, next) {
     }
 
     conn.query(
-      "update recommended_bonus set utilized = 1 where user_id = ? and utilized = 0",
-      [req.user.user.id],
+      "update recommended_bonus set utilized = 1, utilized_date = ? where user_id = ? and utilized = 0",
+      [new Date(), req.user.user.id],
       function (err, rows, fields) {
         if (err) {
           logger.log("error", err.sql + ". " + err.sqlMessage);
@@ -1801,6 +1813,7 @@ router.post("/cancelSubscription", auth, function (req, res, next) {
 
 //#endregion
 
+//#region HOLIDAYS
 router.get("/getMyHolidays", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {
@@ -1851,6 +1864,8 @@ router.post("/setHoliday", auth, function (req, res, next) {
     );
   });
 });
+
+//#endregion
 
 //#region HELP FUNCTION
 
