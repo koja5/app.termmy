@@ -21,12 +21,16 @@ export class DatepickerComponent {
     this.config = new FieldConfig();
     this.group = new FormGroup({});
 
-    this.group.valueChanges
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((value) => {
-        console.log(value);
-      });
+    // this.group.valueChanges
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe((value) => {
+    //     console.log(value);
+    //   });
   }
 
   ngOnInit(): void {}
+
+  ngModelChange(event) {
+    console.log(this.group);
+  }
 }

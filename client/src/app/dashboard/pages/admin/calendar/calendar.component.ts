@@ -520,10 +520,10 @@ export class CalendarComponent {
     this._service
       .callPostMethod("/api/google/createTermine", this.appointment.value)
       .subscribe(
-        (data) => {
+        (uuid) => {
           this._toastr.showSuccess();
           // this.appointment.addControl("id", new FormControl(data));
-          this.createTermineForSQL();
+          this.createTermineForSQL(uuid);
           // this.refreshTermine(this.form.form.value, ExecuteAction.create);
         },
         (error) => {
@@ -626,8 +626,11 @@ export class CalendarComponent {
     this.popupOpen = false;
   }
 
-  createTermineForSQL() {
+  createTermineForSQL(uuid?: any) {
     this.setAdditionalData();
+    if (uuid) {
+      this.appointment.value.id = uuid;
+    }
     this._service
       .callApi(this.config.editSettingsRequest.add, {
         body: this.appointment.value,

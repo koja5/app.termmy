@@ -93,6 +93,9 @@ router.post("/setTermine", auth, function (req, res) {
     req.body.admin_id = req.user.user.admin_id;
     delete req.body.employeeId;
     delete req.body.externalCalendar;
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
     conn.query(
       "insert into appointments SET ?",
       [req.body],

@@ -210,3 +210,24 @@
 :host ::ng-deep .ngx-datatable .datatable-body .datatable-scroll {
   display: inherit;
 }
+
+@media (max-width: 992px) {
+  .e-colorpicker-popup:not(.e-split-btn-wrapper):not(.e-dropdown-btn) {
+    position: fixed !important;
+  }
+
+  .e-popup.e-popup-open {
+    position: fixed !important;
+  }
+}
+
+.dark-layout
+  .e-colorpicker-wrapper[_ngcontent-rsg-c109]
+  .e-split-btn-wrapper[_ngcontent-rsg-c109]
+  .e-split-colorpicker.e-split-btn[_ngcontent-rsg-c109],
+.e-colorpicker-container[_ngcontent-rsg-c109]
+  .e-split-btn-wrapper[_ngcontent-rsg-c109]
+  .e-split-colorpicker.e-split-btn[_ngcontent-rsg-c109],
+.dark-layout .e-colorpicker-wrapper {
+  background-color: #283046 !important;
+}

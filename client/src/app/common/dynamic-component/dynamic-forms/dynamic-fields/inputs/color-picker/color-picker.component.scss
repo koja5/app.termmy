@@ -4,19 +4,3 @@
 @import "../../../../../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../../../../../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
 
-@media (max-width: 992px) {
-  .e-colorpicker-popup:not(.e-split-btn-wrapper):not(.e-dropdown-btn) {
-    position: fixed !important;
-  }
-}
-
-.dark-layout
-  .e-colorpicker-wrapper[_ngcontent-rsg-c109]
-  .e-split-btn-wrapper[_ngcontent-rsg-c109]
-  .e-split-colorpicker.e-split-btn[_ngcontent-rsg-c109],
-.e-colorpicker-container[_ngcontent-rsg-c109]
-  .e-split-btn-wrapper[_ngcontent-rsg-c109]
-  .e-split-colorpicker.e-split-btn[_ngcontent-rsg-c109],
-.dark-layout .e-colorpicker-wrapper {
-  background-color: #283046 !important;
-}

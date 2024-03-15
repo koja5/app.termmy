@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -19,6 +19,7 @@ import { CalendarModule } from "@syncfusion/ej2-angular-calendars";
   encapsulation: ViewEncapsulation.None,
 })
 export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
+  @Input() showCloseButton = false;
   navbarColorValue: string;
   coreConfig: any;
   form: UntypedFormGroup;

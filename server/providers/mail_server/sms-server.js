@@ -16,15 +16,17 @@ var smtpTransport = nodemailer.createTransport({
   },
 });
 
-var gatewayCountryPrefix = fs
-  .readFileSync(
-    "./providers/mail_server/sms_config/gateway-country-prefix.json"
-  )
-  .toString();
+var gatewayCountryPrefix = JSON.parse(
+  fs
+    .readFileSync(
+      "./providers/mail_server/sms_config/gateway-country-prefix.json"
+    )
+    .toString()
+);
 
 async function sendSMS(telephone, message) {
   const to = checkCountryPrefix(telephone);
-
+  console.log(to);
   if (to) {
     var mailOptions = {
       from: '"Termmy"' + process.env.smtp_user,

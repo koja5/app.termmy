@@ -73,14 +73,36 @@
         },
         {
             "title": "holidays.holidayType",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "type",
-            "validation": {
-                "required": true
+            "template": {
+                "choices": [
+                    {
+                        "field": "type",
+                        "value": "public",
+                        "operator": "==",
+                        "apart": {
+                            "title": "holidays.public",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "type",
+                        "value": "observance",
+                        "operator": "==",
+                        "apart": {
+                            "title": "holidays.observance",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    },
+                    {
+                        "field": "type",
+                        "value": "optional",
+                        "operator": "==",
+                        "apart": {
+                            "title": "holidays.optional",
+                            "badge": "badge badge-pill badge-light-warning"
+                        }
+                    }
+                ]
             }
         }
     ],

@@ -1,8 +1,8 @@
 var schedule = require("node-schedule");
 
 // SCRIPTS
-var happyBirthdayClient = require("./scripts/sms/happy-birthday-client");
-var clientAppointmentReminderDayBefore = require("./scripts/sms/client-appointment-reminder-day-before");
+var happyBirthdayClient = require("./scripts/happy-birthday-client");
+var clientAppointmentReminderDayBefore = require("./scripts/client-appointment-reminder-day-before");
 
 //END SCRIPTS
 
@@ -11,7 +11,7 @@ function executeAutomateScript() {
     happyBirthdayClient();
   });
 
-  schedule.scheduleJob("10 26 15 * * *", function () {
+  schedule.scheduleJob("00 00 17 * * *", function () {
     clientAppointmentReminderDayBefore();
   });
 }

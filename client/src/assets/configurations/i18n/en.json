@@ -148,7 +148,8 @@
             "worktime": "Worktime",
             "connections": "Connections",
             "customization": "Customization",
-            "recommended": "Recommended"
+            "recommended": "Recommended",
+            "personalize": "Personalize"
         },
         "connections": {
             "title": "Connections",
@@ -387,7 +388,10 @@
             "holidayName": "Holiday name",
             "holidayStart": "Start",
             "holidayEnd": "End",
-            "holidayType": "Type"
+            "holidayType": "Type",
+            "public": "Public",
+            "observance": "Observance",
+            "optional": "Optional"
         },
         "authGlobal": {
             "backToLogin": "Back to login"

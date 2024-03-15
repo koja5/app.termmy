@@ -12,11 +12,14 @@ import { SettingsComponent } from "./settings.component";
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { CommonCustomModule } from "app/common/common-custom.module";
 import { RecommendedComponent } from "./recommended/recommended.component";
+import { PersonalizeComponent } from './personalize/personalize.component';
+import { CoreThemeCustomizerModule } from "@core/components/theme-customizer/theme-customizer.module";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
   { path: "connections", component: ConnectionsComponent },
   { path: "recommended", component: RecommendedComponent },
+  { path: "personalize", component: PersonalizeComponent}
 ];
 
 @NgModule({
@@ -25,6 +28,7 @@ const routes = [
     WorktimeComponent,
     ConnectionsComponent,
     RecommendedComponent,
+    PersonalizeComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,8 @@ const routes = [
     TranslateModule,
     DynamicModule,
     ColorPickerModule,
-    CommonCustomModule
+    CommonCustomModule,
+    CoreThemeCustomizerModule
   ],
   providers: [ToastrComponent],
   exports: [
