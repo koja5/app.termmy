@@ -110,7 +110,7 @@ function sendAppointmentRemindersLikeEmail() {
       logger.log("error", err.sql + ". " + err.sqlMessage);
     } else {
       conn.query(
-        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email',a.StartTime, a.EndTime, a.admin_id from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 0 DAY) as DATE) and e.active = 1",
+        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email',a.StartTime, a.EndTime, a.admin_id from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and e.active = 1",
         function (err, rows, fields) {
           if (err) {
             logger.log("error", err.sql + ". " + err.sqlMessage);

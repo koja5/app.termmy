@@ -1,6 +1,37 @@
-@import '@core/scss/angular/libs/datatables.component.scss';
-@import '@core/scss/base/pages/app-user.scss';
+@import "@core/scss/angular/libs/datatables.component.scss";
+@import "@core/scss/base/pages/app-user.scss";
 
 .title-left {
-    padding-left: 5px;
+  padding-left: 5px;
+}
+
+@media (min-width: 992px) {
+  .search {
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    .search {
+        width: 86%;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+}
+
+@media (max-width: 768px) {
+  .search {
+    width: 69%;
+  }
+}
+
+.google-contacts {
+    width: 32px;
+    height: 32px;
+}
+
+.options {
+    font-size: 20px;
 }

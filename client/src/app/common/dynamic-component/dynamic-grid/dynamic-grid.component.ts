@@ -32,9 +32,12 @@ export class DynamicGridComponent {
   @Input() public path: string;
   @Input() public file: string;
   @Input() public data: any;
+  @Input() externalAccounts: any;
   @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
+  @ViewChild("modalOptions") modalOptions: TemplateRef<any>;
+  @ViewChild("modalGoogleContacts") modalGoogleContacts: TemplateRef<any>;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
 
   // Public
@@ -49,8 +52,11 @@ export class DynamicGridComponent {
   public executeActionConfig: any;
   public modalDialog: any;
   public modalFormDialog: any;
+  public modalOptionsDialog: any;
+  public modalGoogleContactsDialog: any;
   public innerWidth: any;
   public loader = false;
+  public googleContacts: any;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -404,6 +410,25 @@ export class DynamicGridComponent {
     });
   }
 
+  showModalOptionsDialog() {
+    this.modalOptionsDialog = this._modalService.open(this.modalOptions, {
+      centered: true,
+      windowClass: "modal modal-default",
+      size: "md",
+    });
+  }
+
+  showModalGoogleContacts() {
+    this.modalGoogleContactsDialog = this._modalService.open(
+      this.modalGoogleContacts,
+      {
+        centered: true,
+        windowClass: "modal modal-default",
+        size: "lg",
+      }
+    );
+  }
+
   allowExecuteActionFromModal() {
     this.callServerMethod(
       this.executeActionConfig.request,
@@ -436,5 +461,47 @@ export class DynamicGridComponent {
 
   toggleExpandRow(row) {
     this.grid.rowDetail.toggleExpandRow(row);
+  }
+
+  getGoogleContacts() {
+    this.modalOptionsDialog.close();
+    this._service
+      .callPostMethod("api/google/getContacts", {
+        token: this.externalAccounts.google,
+      })
+      .subscribe((data) => {
+        this.googleContacts = data;
+        this.showModalGoogleContacts();
+      });
+  }
+
+  syncGoogleContacts() {
+    console.log(this.packGoogleContacts());
+  }
+
+  packGoogleContacts() {
+    let contacts = [];
+    for (let i = 0; i < this.googleContacts.length; i++) {
+      const contact = this.googleContacts[i];
+      contacts.push({
+        id: contact.metadata
+          ? contact.metadata.sources
+            ? contact.metadata.sources[0].id
+            : null
+          : null,
+        firstname: contact.names ? contact.names[0].givenName : "",
+        lastname: contact.names ? contact.names[0].familyName : "",
+        gender: contact.genders ? contact.genders[0].value : null,
+        birthday: contact.birthday ? contact.birthday[0].value : null,
+        email: contact.emailAddresses ? contact.emailAddresses[0].value : null,
+        telephone: contact.phoneNumbers
+          ? contact.phoneNumbers[0].canonicalForm
+          : null,
+        address: contact.addresses ? contact.addresses[0].streetAddress : null,
+        zip: contact.addresses ? contact.addresses[0].postalCode : null,
+        city: contact.addresses ? contact.addresses[0].city : null,
+      });
+    }
+    return contacts;
   }
 }

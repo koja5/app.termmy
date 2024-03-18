@@ -27,6 +27,10 @@
   .e-toolbar-item.e-add {
     display: none !important;
   }
+
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-subject {
+    font-size: 9px !important;
+  }
 }
 
 .e-schedule
@@ -214,7 +218,7 @@
 }
 
 .e-schedule .e-vertical-view .e-work-cells:hover {
-  background: url('../../assets/images/icons/plus.png') no-repeat;
+  background: url("../../assets/images/icons/plus.png") no-repeat;
   background-size: 17px !important;
   margin: auto;
   text-align: center;

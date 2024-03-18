@@ -39,31 +39,23 @@
             <!-- users filter end -->
 
             <div class="card">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="d-flex justify-content-between align-items-center m-1">
-                            <label class="d-flex align-items-center">{{'general.show' | translate}}
-                                <select class="form-control mx-25" [(ngModel)]="selectedOption">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                {{'general.entries' | translate}}</label>
-                        </div>
+                <div class="p-1 d-flex align-items-center justify-content-between">
+                    <div class="flex-grow-0">
+                        <button *ngIf="config.editSettingsRequest && config.editSettingsRequest.add"
+                            class="btn btn-primary" rippleEffect
+                            (click)="config.formDialog && config.formDialog.type === 'sidebar' ? toggleSidebar('sidebar') : showModalFormDialog()">
+                            <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                                class="d-none d-sm-inline-block">{{'general.addNew' | translate}}</span>
+                        </button>
                     </div>
-                    <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
-                        <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-                            <label class="d-flex align-items-center ml-1 ml-md-0 mb-0">{{'general.searchFilter' |
-                                translate}}:<input [(ngModel)]="searchValue" name="searchValue" type="search"
-                                    class="form-control ml-25" (keyup)="filterUpdate($event)"
-                                    (search)="filterUpdate($event)" /></label>
-                            <button *ngIf="config.editSettingsRequest && config.editSettingsRequest.add" class="btn btn-primary ml-1" rippleEffect
-                                (click)="config.formDialog && config.formDialog.type === 'sidebar' ? toggleSidebar('sidebar') : showModalFormDialog()">
-                                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
-                                    class="d-none d-sm-inline-block">{{'general.addNew' | translate}}</span>
-                            </button>
-                        </div>
+                    <div class="flex-grow-1 pl-1 pr-1"><input [(ngModel)]="searchValue" name="searchValue" type="search"
+                            class="form-control ml-25" (keyup)="filterUpdate($event)" (search)="filterUpdate($event)"
+                            placeholder="{{'general.searchFilter' |
+                                translate}}" />
+                    </div>
+                    <div class="flex-grow-0">
+                        <span *ngIf="config.options" class="fa fa-cog cursor-pointer options"
+                            (click)="showModalOptionsDialog()"></span>
                     </div>
                 </div>
 
@@ -260,6 +252,26 @@
                 </div>
               </ng-template>
             </ngx-datatable-column> -->
+                    <ngx-datatable-footer>
+                        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+                            let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                            <div class="d-flex align-items-center justify-content-between full-width p-2">
+                                <div>
+                                    {{rowCount}} {{'general.total' | translate}}
+                                </div>
+                                <div>
+                                    <label class="d-flex align-items-center">{{'general.show' | translate}}
+                                        <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        {{'general.entries' | translate}}</label>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-footer>
                 </ngx-datatable>
             </div>
         </section>
@@ -309,6 +321,76 @@
     </ng-template>
 
     <!--/ Dialog -->
+
+    <!-- DIALOG OPTIONS -->
+    <ng-template #modalOptions let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
+        <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel160">{{'general.options' | translate}}</h5>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+            <div *ngFor="let item of config.options">
+                <div *ngIf="item === 'syncGoogleContacts'" class="cursor-pointer" (click)="getGoogleContacts()">
+                    <img class="google-contacts" src="../../../../assets/images/icons/google-contacts.png"> &nbsp;
+                    <span>{{'general.syncGoogleContacts' | translate}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <!-- DIALOG OPTIONS -->
+
+    <!-- IMPORT GOOGLE CONTACTS -->
+    <ng-template #modalGoogleContacts let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
+        <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel160">{{'general.syncGoogleContacts' | translate}}</h5>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{'commonFields.displayName' | translate}}</th>
+                        <th scope="col" class="hidden-xs">{{'commonFields.email' | translate}}</th>
+                        <th scope="col" class="hidden-xs">{{'commonFields.telephone' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of googleContacts">
+                        <td *ngIf="item.names">
+                            <span *ngFor="let name of item.names">{{name.displayName}}</span>
+                        </td>
+                        <td class="hidden-xs">
+                            <div *ngIf="item.emailAddresses">
+                                <span *ngFor="let email of item.emailAddresses">{{email.value}}</span>
+                            </div>
+                            <div *ngIf="!item.emailAddresses" class="font-italic">
+                                <span>{{'general.noInformation' | translate}}</span>
+                            </div>
+                        </td>
+                        <td class="hidden-xs">
+                            <div *ngIf="item.phoneNumbers">
+                                <span *ngFor="let phone of item.phoneNumbers">
+                                    {{phone.canonicalForm}}
+                                </span>
+                            </div>
+                            <div *ngIf="!item.phoneNumbers">
+                                <span class="font-italic">{{'general.noInformation' | translate}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn btn-outline-primary" (click)="syncGoogleContacts()"><span class="fa fa-refresh"></span> {{'general.syncContacts' |
+                translate}}</button>
+        </div>
+    </ng-template>
+    <!-- IMPORT GOOGLE CONTACTS -->
 
     <!--DELETE QUESTION MODULE-->
 

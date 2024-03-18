@@ -12,9 +12,117 @@ const uuid = require("uuid");
 
 module.exports = router;
 
-var connection = sql.connect();
+//#region SET UP
+var connection = sql.connect(); //SQL SET UP
 
-// GENERAL
+const calendar = google.calendar({
+  version: "v3",
+  auth: process.env.API_KEY,
+});
+
+const people = google.people({
+  version: "v1",
+});
+
+let oauth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URL
+);
+
+const scopes = [
+  "https://www.googleapis.com/auth/calendar",
+  "https://www.googleapis.com/auth/contacts",
+];
+
+// router.get("/login", (req, res) => {
+//   const url = oauth2Client.generateAuthUrl({
+//     access_type: "offline",
+//     scope: scopes,
+//     approval_prompt: "consent",
+//     include_granted_scopes: true,
+//   });
+
+//   res.json(url);
+// });
+
+// router.get("/login", (req, res) => {
+//   const url = oauth2Client.generateAuthUrl({
+//     access_type: "offline",
+//     scope: scopes,
+//     approval_prompt: "force",
+//     include_granted_scopes: true,
+//   });
+
+//   res.json(url);
+// });
+
+//#endregion
+
+//#region AUTH
+
+// oauth2Client.on("tokens", (tokens) => {
+//   console.log(tokens);
+//   if (tokens.refresh_token) {
+//     this.myTokens.refreshToken = tokens.refresh_token;
+//   }
+//   this.myTokens.accessToken = tokens.access_token;
+
+//   oauth2Client.setCredentials({
+//     access_token: this.myTokens.accessToken,
+//     refresh_token: this.myTokens.refreshToken,
+//   });
+// });
+
+// oauth2Client.on("tokens", (tokens) => {
+//   if (tokens.refresh_token) {
+//     console.log("USAO SAM U TOKEN!");
+//     console.log(tokens.access_token);
+//     var options = prepareOptionsForRequest(
+//       { token: tokens.refresh_token },
+//       "google/setExternalGoogleAccount"
+//     );
+
+//     makeRequest(options, res);
+//     console.log(tokens.refresh_token);
+//   }
+// });
+
+router.get("/login", (req, res) => {
+  const url = oauth2Client.generateAuthUrl({
+    access_type: "offline",
+    scope: scopes,
+    prompt: "consent",
+  });
+
+  res.json(url);
+});
+
+router.get("/redirect", async (req, res) => {
+  const code = req.query.code;
+  const { tokens } = await oauth2Client.getToken(code);
+
+  var options = {
+    url: process.env.link_api + "google/setExternalGoogleAccount",
+    method: "POST",
+    body: { google: tokens.refresh_token, token: req.cookies["token"] },
+    json: true,
+  };
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.redirect(
+        process.env.link_client + "dashboard/admin/settings/connections"
+      );
+    } else {
+      res.json(false);
+    }
+  });
+});
+
+//#endregion GOOGLE
+
+//#region SET UP TOKEN IN TERMMY DATABASE
 
 router.post("/setExternalGoogleAccount", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
@@ -94,9 +202,9 @@ router.post("/deleteExternalGoogleAccount", auth, function (req, res) {
   });
 });
 
-// GENERAL
+//#endregion GENERAL
 
-// TERMINES
+//#region TERMINES
 router.post("/createTermine", auth, async (req, res) => {
   oauth2Client.setCredentials({
     refresh_token: req.body.externalCalendar,
@@ -244,112 +352,41 @@ router.post("/getTerminesForMultiCalendar", async (req, res) => {
   });
 });
 
-//END TERMINE
+//#endregion END TERMINE
 
-// GOOGLE
+//#region CONTACTS
 
-const calendar = google.calendar({
-  version: "v3",
-  auth: process.env.API_KEY,
-});
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.CLIENT_ID,
-  process.env.CLIENT_SECRET,
-  process.env.REDIRECT_URL
-);
-
-const scopes = ["https://www.googleapis.com/auth/calendar"];
-
-// router.get("/login", (req, res) => {
-//   const url = oauth2Client.generateAuthUrl({
-//     access_type: "offline",
-//     scope: scopes,
-//     approval_prompt: "consent",
-//     include_granted_scopes: true,
-//   });
-
-//   res.json(url);
-// });
-
-// router.get("/login", (req, res) => {
-//   const url = oauth2Client.generateAuthUrl({
-//     access_type: "offline",
-//     scope: scopes,
-//     approval_prompt: "force",
-//     include_granted_scopes: true,
-//   });
-
-//   res.json(url);
-// });
-
-router.get("/login", (req, res) => {
-  const url = oauth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: scopes,
-    prompt: "consent",
-  });
-
-  res.json(url);
-});
-
-router.get("/redirect", async (req, res) => {
-  const code = req.query.code;
-  const { tokens } = await oauth2Client.getToken(code);
-  // oauth2Client.setCredentials({
-  //   refresh_token:
-  //     "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
-  // });
-
-  var options = {
-    url: process.env.link_api + "google/setExternalGoogleAccount",
-    method: "POST",
-    body: { google: tokens.refresh_token, token: req.cookies["token"] },
-    json: true,
-  };
-
-  request(options, function (error, response, body) {
-    if (!error) {
-      res.redirect(
-        process.env.link_client + "dashboard/admin/settings/connections"
-      );
-    } else {
-      res.json(false);
-    }
-  });
-
-  // res.send({
-  //   msg: "You have successfully logged in app!",
-  // });
-});
-
-router.get("/schedule_event", async (req, res) => {
+router.post("/getContacts", async (req, res, next) => {
   oauth2Client.setCredentials({
-    refresh_token:
-      "1//094tvlVNdU93NCgYIARAAGAkSNwF-L9Iroonq5CG7jQeLk9JIbcdr9kFWE32YiWDXC_d-G0UMCNvsegRb2EheUOnuyX550-n2r_Y",
+    refresh_token: req.body.token,
   });
 
-  await calendar.events.insert({
-    calendarId: "primary",
-    auth: oauth2Client,
-    requestBody: {
-      summary: "Event for OfficeNode from NodeJs 2",
-      description: "This is description for test event from NodeJS",
-      start: {
-        dateTime: moment(new Date()).add(1, "day").toISOString(),
-        timeZone: "Europe/Belgrade",
-      },
-      end: {
-        dateTime: moment(new Date()).add(1, "day").add(1, "day").toISOString(),
-        timeZone: "Europe/Belgrade",
-      },
+  people.people.connections.list(
+    {
+      resourceName: "people/me",
+      personFields: [
+        "metadata",
+        "names",
+        "genders",
+        "birthdays",
+        "emailAddresses",
+        "phoneNumbers",
+        "addresses",
+      ],
+      auth: oauth2Client,
     },
-  });
-
-  res.send("DONE");
+    function (err, response) {
+      if (response && response.data) {
+        res.json(response.data.connections);
+      } else {
+        res.json([]);
+      }
+    }
+  );
+  // res.json(contacts);
 });
 
-// END GOOGLE
+//#endregion
 
 //#region HELP FUNCTIOn
 function packStringFromArrayForWhereCondition(
@@ -369,4 +406,22 @@ function packStringFromArrayForWhereCondition(
   return condition;
 }
 
+function prepareOptionsForRequest(body, api) {
+  return {
+    url: process.env.link_api + api,
+    method: "POST",
+    body: body,
+    json: true,
+  };
+}
+
+function makeRequest(options, res) {
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+}
 //#endregion

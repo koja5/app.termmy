@@ -32,6 +32,9 @@
         "closeAfterExecute": false,
         "size": "lg"
     },
+    "options": [
+        "syncGoogleContacts"
+    ],
     "customGrouping": false,
     "allowResizing": true,
     "reorderable": true,

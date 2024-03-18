@@ -231,3 +231,9 @@
 .dark-layout .e-colorpicker-wrapper {
   background-color: #283046 !important;
 }
+
+@media (max-width: 992px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}

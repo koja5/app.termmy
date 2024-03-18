@@ -5,6 +5,7 @@ const auth = require("./config/auth");
 const logger = require("./config/logger");
 const sql = require("./config/sql-database");
 const sendMail = require("./mail_server/send-mail");
+const uuid = require("uuid");
 
 module.exports = router;
 

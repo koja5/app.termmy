@@ -91,7 +91,7 @@
                       style="font-family: &#39;Montserrat&#39;,Arial,sans-serif;"
                     >
                       <table
-                        style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%;"
+                        style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%; padding: 30px;"
                         width="100%"
                         cellpadding="0"
                         cellspacing="0"
