@@ -19,6 +19,10 @@
             "total": "total",
             "options": "Options",
             "syncGoogleContacts": "Sync google contacts",
+            "syncGoogleContactQuestionTitle": "Sync google contacts",
+            "syncGoogleContactsQuestionText": "Do you want to sync your google contact with Termmy? This can take maximum 1-2 minutes and import new contacts from google and sync current google contacts.",
+            "successfullySyncGoogleContacts": "Successfully sync Google contacts with Termmy",
+            "unsuccessfullySyncGoogleContacts": "Unsuccessfuly sunc Google contacts with Termmy. Please try later or contacts support,",
             "syncContacts": "Sync contacts",
             "noInformation": "No information"
         },

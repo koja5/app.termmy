@@ -1,5 +1,5 @@
 <app-loader *ngIf="loader"></app-loader>
-<div class="content-wrapper p-0" *ngIf="config&&!loader">
+<div class="content-wrapper p-0" *ngIf="config">
     <div class="content-body">
         <!-- User List -->
         <section class="users-list-wrapper">
@@ -252,7 +252,7 @@
                 </div>
               </ng-template>
             </ngx-datatable-column> -->
-                    <ngx-datatable-footer>
+                    <!-- <ngx-datatable-footer>
                         <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
                             let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
                             <div class="d-flex align-items-center justify-content-between full-width p-2">
@@ -271,7 +271,7 @@
                                 </div>
                             </div>
                         </ng-template>
-                    </ngx-datatable-footer>
+                    </ngx-datatable-footer> -->
                 </ngx-datatable>
             </div>
         </section>
@@ -332,7 +332,8 @@
         </div>
         <div class="modal-body" tabindex="0" ngbAutofocus>
             <div *ngFor="let item of config.options">
-                <div *ngIf="item === 'syncGoogleContacts'" class="cursor-pointer" (click)="getGoogleContacts()">
+                <div *ngIf="item === 'syncGoogleContacts'" class="cursor-pointer"
+                    (click)="dialogSyncGoogleContactConfirm.showQuestionModal(); modalOptionsDialog.close()">
                     <img class="google-contacts" src="../../../../assets/images/icons/google-contacts.png"> &nbsp;
                     <span>{{'general.syncGoogleContacts' | translate}}</span>
                 </div>
@@ -386,8 +387,9 @@
             </table>
         </div>
         <div class="modal-footer text-right">
-            <button class="btn btn-outline-primary" (click)="syncGoogleContacts()"><span class="fa fa-refresh"></span> {{'general.syncContacts' |
-                translate}}</button>
+            <a class="btn btn-outline-primary" (click)="syncGoogleContacts()"><span class="fa fa-refresh"></span>
+                {{'general.syncContacts' |
+                translate}}</a>
         </div>
     </ng-template>
     <!-- IMPORT GOOGLE CONTACTS -->
@@ -415,5 +417,15 @@
     </ng-template>
 
     <!--/ DELETE QUESTION MODULE-->
+
+    <!-- CONFIRM DIALOG -->
+
+    <!-- IMPORT GOOGLE CONTACT -->
+    <app-dialog-confirm #dialogSyncGoogleContactConfirm
+        [content]="('general.syncGoogleContactsQuestionText' | translate)"
+        (confirm)="syncGoogleContacts()"></app-dialog-confirm>
+    <!-- IMPORT GOOGLE CONTACT -->
+
+    <!-- CONFIRM DIALOG -->
 
 </div>

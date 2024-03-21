@@ -21,6 +21,9 @@ import { HelpService } from "app/services/help.service";
 import { DynamicFormsComponent } from "../dynamic-forms/dynamic-forms.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
+import { TranslateService } from "@ngx-translate/core";
+import { MethodRequest } from "app/enums/method-request";
 
 @Component({
   selector: "app-dynamic-grid",
@@ -38,6 +41,8 @@ export class DynamicGridComponent {
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
   @ViewChild("modalOptions") modalOptions: TemplateRef<any>;
   @ViewChild("modalGoogleContacts") modalGoogleContacts: TemplateRef<any>;
+  @ViewChild("dialogSyncGoogleContactConfirm")
+  dialogSyncGoogleContactConfirm: DialogConfirmComponent;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
 
   // Public
@@ -56,6 +61,7 @@ export class DynamicGridComponent {
   public modalGoogleContactsDialog: any;
   public innerWidth: any;
   public loader = false;
+  public loaderContent = false;
   public googleContacts: any;
 
   public selectRole: any = [
@@ -110,7 +116,8 @@ export class DynamicGridComponent {
     private _router: Router,
     private _helpService: HelpService,
     private _toastr: ToastrComponent,
-    private _modalService: NgbModal
+    private _modalService: NgbModal,
+    private _translate: TranslateService
   ) {
     this._unsubscribeAll = new Subject();
     this._modalService.dismissAll();
@@ -294,32 +301,121 @@ export class DynamicGridComponent {
   }
 
   submitEmitter(event: any) {
-    if (this._helpService.checkUndefinedProperty(event)) {
-      this.callServerMethod(this.config.editSettingsRequest.add, event);
+    if (this._helpService.checkUndefinedProperty(event) && event.type != 'submit') {
+      if (this.config.editSettingsRequest.add.method) {
+        this.callSpecificMethod(this.config.editSettingsRequest.add, event);
+      } else if (this.config.editSettingsRequest.add.type) {
+        this.callServerMethod(this.config.editSettingsRequest.add, event);
+      }
     }
   }
 
-  callServerMethod(request: any, event: any) {
+  packAdditionalFields(event, additionalFields) {
+    for (let i = 0; i < additionalFields.length; i++) {
+      if (additionalFields[i].type === "google-token") {
+        event["token"] = this.externalAccounts.google;
+      }
+    }
+    return event;
+  }
+
+  callServerMethod(request: any, event: any, noResponseMessage?: boolean) {
+    this.loader = true;
     this._service
       .callServerMethod(request, event, this._activateRouter)
       .subscribe((data: any) => {
         if (data) {
-          this._toastr.showSuccess();
-          this._service
-            .callApi(this.config, this._activateRouter)
-            .subscribe((data) => {
-              this.setResponseData(data);
-            });
+          if (!noResponseMessage) {
+            this._toastr.showSuccess();
+            this.closeEditForm();
+            if (request.additionalRequest) {
+              this.makeAdditionalRequest(request, data, event);
+            } else {
+              this.refreshDataFromServer();
+            }
+          }
         } else {
           this._toastr.showError();
+          this.closeEditForm();
+          this.loader = false;
         }
       });
+  }
+
+  callSpecificMethod(request: any, event) {
+    if (request.method === MethodRequest.setClientToGoogle) {
+      if (this.externalAccounts.google) {
+        this.setClientToGoogle(event);
+      } else {
+        this.callServerMethod(this.config.editSettingsRequest.add, event);
+      }
+    }
+  }
+
+  refreshDataFromServer() {
+    this._service
+      .callApi(this.config, this._activateRouter)
+      .subscribe((data) => {
+        this.loader = false;
+        this.setResponseData(data);
+      });
+  }
+
+  makeAdditionalRequest(request: any, data: any, body) {
+    if (request.additionalRequest) {
+      for (let i = 0; i < request.additionalRequest.length; i++) {
+        if (request.additionalRequest[i].method === "setClientToGoogle") {
+          this.setClientToGoogle(data);
+        } else if (
+          request.additionalRequest[i].method === "deleteClientFromGoogle"
+        ) {
+          this.deleteClientFromGoogle(body);
+        }
+      }
+    }
+  }
+
+  setClientToGoogle(data: any) {
+    this.loader = true;
+    this.closeEditForm();
+    data.token = this.externalAccounts.google;
+    this._service
+      .callPostMethod("/api/google/setClient", data)
+      .subscribe((response: any) => {
+        if (response) {
+          // remove token from google - need to use token for Termmy to push changes in Termmy database
+          delete data.token;
+          data.resourceName = response.resourceName;
+          data.guuid = response.guuid;
+          this._service
+            .callPostMethod("api/setClient", data)
+            .subscribe((data) => {
+              this.refreshDataFromServer();
+            });
+        }
+      });
+  }
+
+  deleteClientFromGoogle(body: any) {
+    body.token = this.externalAccounts.google;
+    if (body.resourceName) {
+      this._service
+        .callPostMethod("api/google/deleteClient", body)
+        .subscribe((data) => {
+          this.refreshDataFromServer();
+        });
+    } else {
+      this.refreshDataFromServer();
+    }
   }
 
   setResponseData(data: any) {
     if (this.config.request.type === "GET") {
       this.rows = data;
     }
+  }
+
+  closeEditForm() {
     if (this.config.formDialog.type === "modal") {
       if (!this.config.formDialog.closeAfterExecute) {
         this.modalDialog.close();
@@ -329,19 +425,6 @@ export class DynamicGridComponent {
         this.toggleSidebarClose("sidebar");
       }
     }
-    // if (
-    //   !this.executeActionConfig ||
-    //   this.executeActionConfig.closeAfterExecute != false
-    // ) {
-    //   if (
-    //     this.executeActionConfig &&
-    //     this.executeActionConfig.type === "sidebar"
-    //   ) {
-    //     this.toggleSidebarClose("sidebar");
-    //   } else {
-    //     this.modalDialog.close();
-    //   }
-    // }
   }
 
   // check here which is action and then check additionall configuration - l
@@ -465,42 +548,72 @@ export class DynamicGridComponent {
 
   getGoogleContacts() {
     this.modalOptionsDialog.close();
+  }
+
+  syncGoogleContacts() {
+    this.loader = true;
     this._service
       .callPostMethod("api/google/getContacts", {
         token: this.externalAccounts.google,
       })
       .subscribe((data) => {
         this.googleContacts = data;
-        this.showModalGoogleContacts();
-      });
-  }
 
-  syncGoogleContacts() {
-    console.log(this.packGoogleContacts());
+        const contacts = this.packGoogleContacts();
+        if (contacts && contacts.length) {
+          this._service
+            .callPostMethod("/api/google/syncContacts", contacts)
+            .subscribe((data) => {
+              if (data) {
+                this._toastr.showSuccessCustom(
+                  this._translate.instant(
+                    "general.successfullySyncGoogleContacts"
+                  )
+                );
+                this.initialize();
+              } else {
+                this._toastr.showErrorCustom(
+                  this._translate.instant(
+                    "general.unsuccessfullySyncGoogleContacts"
+                  )
+                );
+              }
+            });
+        } else {
+          this.loader = false;
+        }
+      });
   }
 
   packGoogleContacts() {
     let contacts = [];
-    for (let i = 0; i < this.googleContacts.length; i++) {
-      const contact = this.googleContacts[i];
-      contacts.push({
-        id: contact.metadata
-          ? contact.metadata.sources
-            ? contact.metadata.sources[0].id
-            : null
-          : null,
-        firstname: contact.names ? contact.names[0].givenName : "",
-        lastname: contact.names ? contact.names[0].familyName : "",
-        gender: contact.genders ? contact.genders[0].value : null,
-        birthday: contact.birthday ? contact.birthday[0].value : null,
-        email: contact.emailAddresses ? contact.emailAddresses[0].value : null,
-        telephone: contact.phoneNumbers
-          ? contact.phoneNumbers[0].canonicalForm
-          : null,
-        address: contact.addresses ? contact.addresses[0].streetAddress : null,
-        zip: contact.addresses ? contact.addresses[0].postalCode : null,
-        city: contact.addresses ? contact.addresses[0].city : null,
-      });
+    if (this.googleContacts) {
+      for (let i = 0; i < this.googleContacts.length; i++) {
+        const contact = this.googleContacts[i];
+        contacts.push({
+          id: contact.metadata
+            ? contact.metadata.sources
+              ? contact.metadata.sources[0].id
+              : null
+            : null,
+          resourceName: contact.resourceName,
+          firstname: contact.names ? contact.names[0].givenName : "",
+          lastname: contact.names ? contact.names[0].familyName : "",
+          gender: contact.genders ? contact.genders[0].value : null,
+          birthday: contact.birthday ? contact.birthday[0].value : null,
+          email: contact.emailAddresses
+            ? contact.emailAddresses[0].value
+            : null,
+          telephone: contact.phoneNumbers
+            ? contact.phoneNumbers[0].value
+            : null,
+          address: contact.addresses
+            ? contact.addresses[0].streetAddress
+            : null,
+          zip: contact.addresses ? contact.addresses[0].postalCode : null,
+          city: contact.addresses ? contact.addresses[0].city : null,
+        });
+      }
     }
     return contacts;
   }

@@ -28,6 +28,6 @@ const appRoutes: Routes = [];
   ],
   providers: [],
   bootstrap: [],
-  exports: [LoaderComponent, PaymentProcessingComponent, DialogConfirmComponent, LetterProfileComponent],
+  exports: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent, LetterProfileComponent],
 })
 export class CommonCustomModule {}

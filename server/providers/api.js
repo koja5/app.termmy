@@ -154,7 +154,7 @@ router.post("/signUp", function (req, res, next) {
                         req.body,
                         "mail-server/verifyEmailAddress"
                       );
-                      
+
                       makeRequest(options, res);
                     }
                   }
@@ -1102,7 +1102,7 @@ router.post("/setClient", auth, function (req, res) {
         function (err, rows) {
           conn.release();
           if (!err) {
-            res.json(true);
+            res.json(req.body);
           } else {
             logger.log("error", err.sql + ". " + err.sqlMessage);
             res.json(false);
@@ -1111,8 +1111,8 @@ router.post("/setClient", auth, function (req, res) {
       );
     } else {
       conn.query(
-        "select * from clients where email = ?",
-        [req.body.email],
+        "select * from clients where email = ? or telephone = ?",
+        [req.body.email, req.body.telephone],
         function (err, rows) {
           if (!err) {
             if (rows.length) {
@@ -1120,15 +1120,32 @@ router.post("/setClient", auth, function (req, res) {
               res.json(false);
             } else {
               conn.query(
-                "insert into clients SET ?",
-                [req.body],
+                "select * from users where email = ? or telephone = ?",
+                [req.body.email, req.body.telephone],
                 function (err, rows) {
-                  conn.release();
-                  if (!err) {
-                    res.json(true);
-                  } else {
-                    logger.log("error", err.sql + ". " + err.sqlMessage);
+                  if (rows.length) {
+                    conn.release();
                     res.json(false);
+                  } else {
+                    if (req.body.guuid) {
+                      req.body.id = req.body.guuid;
+                      delete req.body.guuid;
+                    } else {
+                      req.body.id = uuid.v4();
+                    }
+                    conn.query(
+                      "insert into clients SET ?",
+                      [req.body],
+                      function (err, rows) {
+                        conn.release();
+                        if (!err) {
+                          res.json(req.body);
+                        } else {
+                          logger.log("error", err.sql + ". " + err.sqlMessage);
+                          res.json(false);
+                        }
+                      }
+                    );
                   }
                 }
               );
@@ -1156,7 +1173,7 @@ router.post("/deleteClient", auth, function (req, res) {
       function (err, rows) {
         conn.release();
         if (!err) {
-          res.json(true);
+          res.json(req.body);
         } else {
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(false);

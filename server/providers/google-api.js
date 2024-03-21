@@ -202,6 +202,36 @@ router.post("/deleteExternalGoogleAccount", auth, function (req, res) {
   });
 });
 
+router.post("/syncContacts", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    const values = packValuesForMultiRows(req.body, req.user.user.admin_id);
+
+    conn.query(
+      "INSERT INTO clients(id, admin_id, resourceName, firstname, lastname, gender, birthday, email, telephone, address, zip, city) values " +
+        values +
+        " ON DUPLICATE KEY UPDATE resourceName = VALUES(resourceName), firstname = VALUES(firstname), lastname = VALUES(lastname), gender = VALUES(gender), birthday = VALUES(birthday), email = VALUES(email), telephone = VALUES(telephone), address = VALUES(address), zip = VALUES(zip), city = VALUES(city)",
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 //#endregion GENERAL
 
 //#region TERMINES
@@ -379,11 +409,148 @@ router.post("/getContacts", async (req, res, next) => {
       if (response && response.data) {
         res.json(response.data.connections);
       } else {
-        res.json([]);
+        res.json(null);
       }
     }
   );
   // res.json(contacts);
+});
+
+router.post("/setClient", async (req, res, next) => {
+  oauth2Client.setCredentials({
+    refresh_token: req.body.token,
+  });
+
+  const body = {
+    names: [
+      {
+        givenName: req.body.firstname,
+        familyName: req.body.lastname,
+      },
+    ],
+    genders: [
+      {
+        value: req.body.gender,
+      },
+    ],
+    birthdays: [
+      {
+        date: {
+          day: new Date(req.body.birthday).getDate(),
+          month: new Date(req.body.birthday).getMonth() + 1,
+          year: new Date(req.body.birthday).getFullYear(),
+        },
+      },
+    ],
+    emailAddresses: [
+      {
+        value: req.body.email,
+      },
+    ],
+    phoneNumbers: [
+      {
+        value: req.body.telephone,
+        canonicalForm: req.body.telephone,
+      },
+    ],
+    addresses: [
+      {
+        city: req.body.city,
+        postalCode: req.body.zip,
+        streetAddress: req.body.address,
+      },
+    ],
+  };
+  if (req.body.resourceName) {
+    people.people.get(
+      {
+        resourceName: req.body.resourceName,
+        personFields: ["names"],
+        auth: oauth2Client,
+      },
+      function (err, response) {
+        if (response && response.data) {
+          if (response && response.data) {
+            const data = {
+              id: generateCustomUUID(response.data.resourceName.split("/")[1]),
+              resourceName: response.data.resourceName,
+            };
+            res.json(data);
+          } else {
+            res.json(false);
+          }
+          body["etag"] = response.data.etag;
+          people.people.updateContact(
+            {
+              updatePersonFields: [
+                "names",
+                "genders",
+                "birthdays",
+                "emailAddresses",
+                "phoneNumbers",
+                "addresses",
+              ],
+              resourceName: req.body.resourceName,
+              requestBody: body,
+              auth: oauth2Client,
+            },
+            function (err, response) {}
+          );
+        }
+      }
+    );
+  } else {
+    people.people.createContact(
+      {
+        personFields: [
+          "metadata",
+          "names",
+          "genders",
+          "birthdays",
+          "emailAddresses",
+          "phoneNumbers",
+          "addresses",
+        ],
+        requestBody: body,
+        auth: oauth2Client,
+      },
+      function (err, response) {
+        console.log(err);
+        console.log(response);
+        if (response && response.data) {
+          const data = {
+            guuid: generateCustomUUID(response.data.resourceName.split("/")[1]),
+            resourceName: response.data.resourceName,
+          };
+          res.json(data);
+        } else {
+          res.json(false);
+        }
+      }
+    );
+  }
+});
+
+router.post("/deleteClient", async (req, res, next) => {
+  oauth2Client.setCredentials({
+    refresh_token: req.body.token,
+  });
+
+  people.people.deleteContact(
+    {
+      resourceName: req.body.resourceName,
+      auth: oauth2Client,
+    },
+    function (err, response) {
+      console.log(err);
+      console.log(response);
+      if (response && response.status === 200) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    }
+  );
 });
 
 //#endregion
@@ -424,4 +591,84 @@ function makeRequest(options, res) {
     }
   });
 }
+
+function packValuesForMultiRows(values, admin_id) {
+  let query = "";
+  for (let i = 0; i < values.length; i++) {
+    query += "(";
+    query +=
+      "'" +
+      generateCustomUUID(
+        values[i].resourceName
+          ? values[i].resourceName.split("/")[1]
+          : values[i].id
+      ) +
+      "'" +
+      ",";
+    query +=
+      "'" + (values[i].admin_id ? values[i].admin_id : admin_id) + "'" + ",";
+    query +=
+      "'" +
+      (values[i].resourceName ? values[i].resourceName : null) +
+      "'" +
+      ",";
+    query +=
+      (values[i].firstname
+        ? "'" + values[i].firstname + "'"
+        : values[i].firstname) + ",";
+    query +=
+      (values[i].lastname
+        ? "'" + values[i].lastname + "'"
+        : values[i].lastname) + ",";
+    query +=
+      (values[i].gender ? "'" + values[i].gender + "'" : values[i].gender) +
+      ",";
+    query +=
+      (values[i].birthday
+        ? "'" + values[i].birthday + "'"
+        : values[i].birthday) + ",";
+    query +=
+      (values[i].email ? "'" + values[i].email + "'" : values[i].email) + ",";
+    query +=
+      (values[i].telephone
+        ? "'" + values[i].telephone + "'"
+        : values[i].telephone) + ",";
+    query +=
+      (values[i].address ? "'" + values[i].address + "'" : values[i].address) +
+      ",";
+    query += (values[i].zip ? "'" + values[i].zip + "'" : values[i].zip) + ",";
+    query +=
+      (values[i].city ? "'" + values[i].city + "'" : values[i].city) + ")";
+    if (i < values.length - 1) {
+      query += ",";
+    }
+  }
+  return query;
+}
+
+function generateCustomUUID(id) {
+  const first =
+    id.slice(0, 8).length === 8
+      ? id.slice(0, 8)
+      : id.slice(0, 8) + "0".repeat(8 - id.slice(0, 8).length);
+  const second =
+    id.slice(9, 12).length == 4
+      ? id.slice(9, 12)
+      : id.slice(9, 12) + "0".repeat(4 - id.slice(9, 12).length);
+  const third =
+    id.slice(13, 16).length == 4
+      ? id.slice(13, 16)
+      : id.slice(13, 16) + "0".repeat(4 - id.slice(13, 16).length);
+  const forth =
+    id.slice(17, 20).length == 4
+      ? id.slice(17, 20)
+      : id.slice(17, 20) + "0".repeat(4 - id.slice(17, 20).length);
+  const fifth =
+    id.slice(21, 30).length === 12
+      ? id.slice(21, 30)
+      : id.slice(21, 30) + "0".repeat(12 - id.slice(21, 30).length);
+  let uuid = first + "-" + second + "-" + third + "-" + forth + "-" + fifth;
+  return uuid;
+}
+
 //#endregion
