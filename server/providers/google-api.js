@@ -515,8 +515,6 @@ router.post("/setClient", async (req, res, next) => {
         auth: oauth2Client,
       },
       function (err, response) {
-        console.log(err);
-        console.log(response);
         if (response && response.data) {
           const data = {
             guuid: generateCustomUUID(response.data.resourceName.split("/")[1]),
