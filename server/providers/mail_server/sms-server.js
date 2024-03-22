@@ -26,7 +26,6 @@ var gatewayCountryPrefix = JSON.parse(
 
 async function sendSMS(telephone, message) {
   const to = checkCountryPrefix(telephone);
-  console.log(to);
   if (to) {
     var mailOptions = {
       from: '"Termmy"' + process.env.smtp_user,
@@ -35,7 +34,6 @@ async function sendSMS(telephone, message) {
       text: message,
     };
     smtpTransport.sendMail(mailOptions, function (error, response) {
-      console.log(response);
       if (error) {
         logger.log("error", `${telephone}: ${error}`);
       } else {
@@ -49,7 +47,7 @@ async function sendSMS(telephone, message) {
 
 function checkCountryPrefix(telephone) {
   for (let i = 0; i < gatewayCountryPrefix.length; i++) {
-    if (telephone.startsWith(gatewayCountryPrefix[i].prefix)) {
+    if (telephone.startsWith(gatewayCountryPrefix[i].prefix) && gatewayCountryPrefix[i].active) {
       return gatewayCountryPrefix[i].email;
     }
   }

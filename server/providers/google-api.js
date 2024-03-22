@@ -215,11 +215,15 @@ router.post("/syncContacts", auth, function (req, res, next) {
 
     const values = packValuesForMultiRows(req.body, req.user.user.admin_id);
 
+    console.log(values);
+
     conn.query(
       "INSERT INTO clients(id, admin_id, resourceName, firstname, lastname, gender, birthday, email, telephone, address, zip, city) values " +
         values +
         " ON DUPLICATE KEY UPDATE resourceName = VALUES(resourceName), firstname = VALUES(firstname), lastname = VALUES(lastname), gender = VALUES(gender), birthday = VALUES(birthday), email = VALUES(email), telephone = VALUES(telephone), address = VALUES(address), zip = VALUES(zip), city = VALUES(city)",
       function (err, rows) {
+        console.log(err);
+        console.log(rows);
         conn.release();
         if (!err) {
           res.json(true);
@@ -329,6 +333,8 @@ router.post("/getMyTermines", async (req, res) => {
     calendarId: "primary",
     auth: oauth2Client,
   });
+
+  console.log(events);
 
   if (events && events.data) {
     res.send(events.data.items);

@@ -6,27 +6,18 @@ var hogan = require("hogan.js");
 var fs = require("fs");
 const logger = require("../config/logger");
 
-// var smtpTransport = nodemailer.createTransport({
-//   host: process.env.smtp_host,
-//   port: process.env.smtp_port,
-//   secure: false,
-//   tls: {
-//     rejectUnauthorized: false,
-//   },
-//   auth: {
-//     user: process.env.smtp_user,
-//     pass: process.env.smtp_pass,
-//   },
-// });
-
 var smtpTransport = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.smtp_host,
+  port: process.env.smtp_port,
+  secure: false,
+  tls: {
+    rejectUnauthorized: false,
+  },
   auth: {
-    user: "kidsnodeoffice@gmail.com",
-    pass: "rvciekpadttcvbwt",
+    user: process.env.smtp_user,
+    pass: process.env.smtp_pass,
   },
 });
-
 
 router.post("/sendMail", function (req, res) {
   var confirmTemplate = fs.readFileSync(

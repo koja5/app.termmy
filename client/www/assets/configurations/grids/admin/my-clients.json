@@ -32,6 +32,9 @@
         "closeAfterExecute": false,
         "size": "lg"
     },
+    "options": [
+        "syncGoogleContacts"
+    ],
     "customGrouping": false,
     "allowResizing": true,
     "reorderable": true,
@@ -42,6 +45,7 @@
     "reset": true,
     "editSettingsRequest": {
         "add": {
+            "method": "setClientToGoogle",
             "type": "POST",
             "api": "/api/setClient",
             "parameters": [],
@@ -53,7 +57,19 @@
             "api": "/api/deleteClient",
             "parameters": [],
             "fields": "",
-            "root": ""
+            "root": "",
+            "additionalRequest": [
+                {
+                    "method": "deleteClientFromGoogle",
+                    "request": {
+                        "type": "POST",
+                        "api": "/api/google/deleteClient",
+                        "parameters": [],
+                        "fields": "",
+                        "root": ""
+                    }
+                }
+            ]
         }
     },
     "columns": [
@@ -84,7 +100,19 @@
                                     "api": "/api/deleteClient",
                                     "parameters": [],
                                     "fields": "",
-                                    "root": ""
+                                    "root": "",
+                                    "additionalRequest": [
+                                        {
+                                            "method": "deleteClientFromGoogle",
+                                            "request": {
+                                                "type": "POST",
+                                                "api": "/api/google/deleteClient",
+                                                "parameters": [],
+                                                "fields": "",
+                                                "root": ""
+                                            }
+                                        }
+                                    ]
                                 },
                                 "response": "toastr",
                                 "showQuestionBeforeExecute": true,
@@ -144,6 +172,16 @@
             "name": "id",
             "title": "ID",
             "field": "id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "resourceName",
+            "title": "resourceName",
+            "field": "resourceName",
             "readonly": true,
             "hidden": true
         },

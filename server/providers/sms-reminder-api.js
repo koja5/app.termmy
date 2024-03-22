@@ -76,37 +76,6 @@ router.post("/setSmsReminderConfig", auth, function (req, res, next) {
 });
 
 router.post("/sendTestSmsMessage", auth, async function (req, res, next) {
-  // const availableSms = await getAvailableSms(req.user.user.admin_id);
-  // console.log(availableSms);
-  // if (availableSms.length) {
-  //   connection.getConnection(function (err, conn) {
-  //     if (err) {
-  //       logger.log("error", err.sql + ". " + err.sqlMessage);
-  //       res.json(err);
-  //     }
-  //     conn.query(
-  //       "select * from users where id = ?",
-  //       [req.user.user.id],
-  //       function (err, rows) {
-  //         conn.release();
-  //         if (!err) {
-  //           if (rows.length && rows[0].telephone) {
-  //             sendSMS(rows[0].telephone, req.body.message);
-  //             res.json(rows[0].telephone);
-  //             decreaseSmsForOne();
-  //           } else {
-  //             res.json(false);
-  //           }
-  //         } else {
-  //           logger.log("error", err.sql + ". " + err.sqlMessage);
-  //           res.json(false);
-  //         }
-  //       }
-  //     );
-  //   });
-  // } else {
-  // }
-
   connection.getConnection(function (err, conn) {
     if (err) {
       logger.log("error", err.sql + ". " + err.sqlMessage);

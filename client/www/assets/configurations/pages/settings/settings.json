@@ -39,6 +39,11 @@
       "title": "settings.recommended",
       "link": "/dashboard/admin/settings/recommended",
       "icon": "gift"
+    },
+    {
+      "title": "settings.personalize",
+      "link": "/dashboard/admin/settings/personalize",
+      "icon": "aperture"
     }
   ]
 }
