@@ -77,6 +77,32 @@ router.post("/sendSmsBonusInfo", function (req, res, next) {
   });
 });
 
+router.post(
+  "/sendInfoEmailForCreatedAccountFromSuperadmin",
+  function (req, res, next) {
+    var body = JSON.parse(
+      fs.readFileSync(
+        "./providers/mail_server/mail_config/info_email_for_created_account_from_superadmin.json",
+        "utf-8"
+      )
+    );
+
+    body["email"] = req.body.email;
+    body["password"] = req.body.password;
+    body["login_link"] = process.env.link_client + "auth/login/";
+
+    var options = prepareOptionsForRequest(body);
+
+    request(options, function (error, response, body) {
+      if (!error) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    });
+  }
+);
+
 //#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {

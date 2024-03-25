@@ -574,6 +574,134 @@ router.get("/getUsers", auth, async (req, res, next) => {
   }
 });
 
+router.post("/setUser", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        if (!err) {
+          if (rows.length) {
+            conn.query(
+              "update users set  ? where id = ?",
+              [req.body, req.body.id],
+              function (err, rows) {
+                conn.release();
+                if (!err) {
+                  res.json(true);
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          } else {
+            conn.query(
+              "select * from users where email = ? or telephone = ?",
+              [req.body.email, req.body.telephone],
+              function (err, rows) {
+                if (!err) {
+                  if (!rows.length) {
+                    req.body.id = uuid.v4();
+                    req.body.admin_id = req.body.id;
+                    let randomPassword = generateRandomPassword();
+                    req.body.password = setSha1Password(randomPassword);
+
+                    conn.query(
+                      "insert into users set ?",
+                      [req.body],
+                      function (err, rows) {
+                        conn.release();
+                        if (!err) {
+                          var options = prepareOptionsForRequest(
+                            {
+                              email: req.body.email,
+                              password: randomPassword,
+                            },
+                            "mail-server/sendInfoEmailForCreatedAccountFromSuperadmin"
+                          );
+                          makeRequest(options, res);
+                        } else {
+                          logger.log("error", err.sql + ". " + err.sqlMessage);
+                          res.json(false);
+                        }
+                      }
+                    );
+                  } else {
+                    res.json(false);
+                  }
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          }
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/deleteUser", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from users where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.get("/getAccountTypes", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from account_types",
+          req.params.category,
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
 //#endregion
 
 // #region WORKTIME
@@ -1435,8 +1563,8 @@ router.post("/deleteSmsPackage", auth, function (req, res) {
     }
 
     conn.query(
-      "delete from sms_packages where id = ? and admin_id = ?",
-      [req.body.id, req.user.user.admin_id],
+      "delete from sms_packages where id = ?",
+      [req.body.id],
       function (err, rows) {
         conn.release();
         if (!err) {
@@ -1754,6 +1882,47 @@ router.post("/deleteGatewayCountryPrefix", auth, function (req, res) {
 //#endregion
 
 //#region LICENSES
+router.get("/getLicenses", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query("select * from licenses", function (err, rows) {
+      conn.release();
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      }
+      res.json(rows);
+    });
+  });
+});
+
+router.post("/setLicense", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "INSERT INTO licenses set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 router.get("/getMyLicense", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
     if (err) {

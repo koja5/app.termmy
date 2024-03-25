@@ -47,6 +47,7 @@
             "city": "City",
             "active": "Active",
             "action": "Action",
+            "type": "Type",
             "verified": "Verified",
             "man": "Man",
             "woman": "Woman",
@@ -57,6 +58,12 @@
             "oldPassword": "Old password",
             "newPassword": "New password",
             "confirmNewPassword": "Confirm new password"
+        },
+        "userTypes": {
+            "superadmin": "Superadmin",
+            "admin": "Admin",
+            "partner": "Partner",
+            "employee": "Employee"
         },
         "login": {
             "verifiedError": "You need to verified your email address!",
@@ -73,8 +80,10 @@
             "myCalendar": "My calendar",
             "myEmployees": "My employees",
             "myClients": "My clients",
+            "recommended": "Recommended",
             "smsPackages": "Sms packages",
-            "gatewayCountryPrefix": "Country prefix"
+            "gatewayCountryPrefix": "Country prefix",
+            "licenses": "Licenses"
         },
         "navBar": {
             "profile": "Profile",
@@ -96,14 +105,12 @@
         "allUsers": {
             "number": "Number",
             "type": "Type",
-            "superadmin": "Superadmin",
-            "admin": "Admin",
-            "partner": "Partner",
             "vat": "VAT",
             "newsletter": "Newsletter",
             "verified": "Verified",
             "notVerified": "Not verified",
             "active": "Active",
+            "inactive": "Inactive",
             "signUpTime": "Signup time",
             "password": "Password",
             "rePassword": "Re-password"
@@ -273,7 +280,9 @@
             "smsReminder": "Use SMS",
             "emailReminder": "Use Email",
             "recommended": "Recommended",
-            "recommendedExplanation": "97% of people open and read the SMS within the first 10 minutes of receiving it. People read emails much less!"
+            "recommendedExplanation": "97% of people open and read the SMS within the first 10 minutes of receiving it. People read emails much less!",
+            "smsConfiguration": "SMS Configuration",
+            "emailConfiguration": "Email Configuration"
         },
         "smsReminder": {
             "title": "SMS Reminder",
@@ -319,6 +328,11 @@
             "subject": "Subject",
             "message": "Message",
             "sentTestEmailTo": "Send test email to #email"
+        },
+        "licenses": {
+            "name": "Name",
+            "monthlyPrice": "Monthly price",
+            "annualPrice": "Annual price"
         },
         "licenseStatus": {
             "currentPlan": "Current plan",

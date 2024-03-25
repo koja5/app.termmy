@@ -2,6 +2,7 @@
 
 
 <app-loader *ngIf="loader"></app-loader>
+<app-loader *ngIf="loaderContent"></app-loader>
 <div class="content-wrapper p-0" *ngIf="config&&!loader">
     <div class="content-body">
         <section class="users-list-wrapper">
@@ -47,7 +48,8 @@
                             </div>
                             <div class="resource-details">
                                 <div class="d-flex">
-                                    <div *ngIf="item.resourceData.firstname || item.resourceData.lastname" class="resource-name">
+                                    <div *ngIf="item.resourceData.firstname || item.resourceData.lastname"
+                                        class="resource-name">
                                         {{item.resourceData.firstname}} {{item.resourceData.lastname}}
                                     </div>
                                     <span *ngIf="!workTimes[item.resourceData.groupIndex]"
@@ -102,8 +104,7 @@
                                                     {{'clientData.fillFirstname' | translate}}
                                                 </span>
                                                 <ejs-datetimepicker cssClass="e-outline" class="date-none"
-                                                    ng-model-options="{timezone: 'utc'}" id="StartTime"
-                                                    formControlName="StartTime" format="dd.MM.yyyy HH:mm"
+                                                    id="StartTime" formControlName="StartTime" format="dd.MM.yyyy HH:mm"
                                                     timeFormat="HH:mm"></ejs-datetimepicker>
                                             </div>
 
@@ -115,8 +116,7 @@
                                                     {{'clientData.fillFirstname' | translate}}
                                                 </span>
                                                 <ejs-datetimepicker cssClass="e-outline" class="date-none"
-                                                    ng-model-options="{timezone: 'utc'}" id="StartTime"
-                                                    formControlName="EndTime" format="dd.MM.yyyy HH:mm"
+                                                    id="StartTime" formControlName="EndTime" format="dd.MM.yyyy HH:mm"
                                                     timeFormat="HH:mm"></ejs-datetimepicker>
                                             </div>
                                         </div>

@@ -1,0 +1,5 @@
+{
+    "template": "info_email_for_created_account_from_superadmin.hjs",
+    "subject": "Created account for you from Terrmy",
+    "title": "Created account for you from Terrmy"
+}

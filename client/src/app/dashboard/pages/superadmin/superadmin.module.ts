@@ -7,6 +7,7 @@ import { SuperadminGuardService } from "app/services/guards/superadmin-guard.ser
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { SmsPackagesComponent } from "./sms-packages/sms-packages.component";
 import { GatewayCountryPrefixComponent } from "./gateway-country-prefix/gateway-country-prefix.component";
+import { LicensesComponent } from "./licenses/licenses.component";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     canActivate: [SuperadminGuardService],
     component: GatewayCountryPrefixComponent,
   },
+  {
+    path: "licenses",
+    canActivate: [SuperadminGuardService],
+    component: LicensesComponent,
+  },
 ];
 
 @NgModule({
@@ -31,6 +37,7 @@ const routes = [
     AllUsersComponent,
     SmsPackagesComponent,
     GatewayCountryPrefixComponent,
+    LicensesComponent,
   ],
   imports: [
     CommonModule,

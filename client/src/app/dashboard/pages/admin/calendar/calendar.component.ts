@@ -72,6 +72,7 @@ export class CalendarComponent {
   public calendarSettings = new CalendarSettings();
   public employeeId: number;
   public loader = false;
+  public loaderContent = false;
   public multiCalendar = false;
   public popupOpen = false;
   public mobileDevice: boolean = false;
@@ -466,18 +467,14 @@ export class CalendarComponent {
           ? termines[i].start.date
           : new Date(
               data.StartTime != termines[i].start.dateTime
-                ? new Date(termines[i].start.dateTime).toLocaleString("en-US", {
-                    timeZone: "UTC",
-                  })
+                ? new Date(termines[i].start.dateTime).toLocaleString("en-US")
                 : data.StartTime
             ),
         EndTime: termines[i].end.date
           ? termines[i].end.date
           : new Date(
               data.EndTime != termines[i].end.dateTime
-                ? new Date(termines[i].end.dateTime).toLocaleString("en-US", {
-                    timeZone: "UTC",
-                  })
+                ? new Date(termines[i].end.dateTime).toLocaleString("en-US")
                 : data.EndTime
             ),
         id: termines[i].id,
@@ -494,6 +491,7 @@ export class CalendarComponent {
         is_online: data.is_online,
         amount_paid: data.amount_paid,
         uuid: data.uuid,
+        color: "#12c91b",
       });
     }
 
@@ -517,14 +515,23 @@ export class CalendarComponent {
   createTermineForGoogleCalendar() {
     this.setAdditionalData();
     this.setAdditionalDataForGoogleCalendar();
+    this.loaderContent = true;
+    this.appointment.value.StartTime =
+      this.appointment.value.StartTime.toISOString();
+    this.appointment.value.EndTime =
+      this.appointment.value.EndTime.toISOString();
     this._service
       .callPostMethod("/api/google/createTermine", this.appointment.value)
       .subscribe(
-        (uuid) => {
-          this._toastr.showSuccess();
-          // this.appointment.addControl("id", new FormControl(data));
-          this.createTermineForSQL(uuid);
-          // this.refreshTermine(this.form.form.value, ExecuteAction.create);
+        (data: any) => {
+          if (data) {
+            // this._toastr.showSuccess();
+            // this.appointment.addControl("id", new FormControl(data.id));
+            // this.refreshTermine(this.appointment.value, ExecuteAction.create);
+            this.createTermineForSQL(data.uuid);
+          } else {
+            this._toastr.showError();
+          }
         },
         (error) => {
           this._toastr.showError();
@@ -548,6 +555,7 @@ export class CalendarComponent {
 
   deleteTermineFromGoogleCalendar(id) {
     if (id) {
+      this.loaderContent = true;
       this.calendar.showSpinner();
       this._service
         .callPostMethod("/api/google/deleteTermine", {
@@ -560,6 +568,7 @@ export class CalendarComponent {
         })
         .subscribe(
           (data) => {
+            this.loaderContent = false;
             this.refreshTermine({ id: id }, ExecuteAction.delete);
           },
           (error) => {
@@ -627,6 +636,7 @@ export class CalendarComponent {
   }
 
   createTermineForSQL(uuid?: any) {
+    this.loaderContent = true;
     this.setAdditionalData();
     if (uuid) {
       this.appointment.value.id = uuid;
@@ -641,6 +651,7 @@ export class CalendarComponent {
           this.refreshTermine(this.appointment.value, ExecuteAction.create);
           this.initializeForm();
           this._toastr.showSuccess();
+          this.loaderContent = false;
         },
         (error) => {
           this._toastr.showError();
@@ -713,6 +724,7 @@ export class CalendarComponent {
         admin_id: termines[i].admin_id,
         is_online: termines[i].is_online,
         amount_paid: termines[i].amount_paid,
+        color: "#12c91b",
       });
     }
 
@@ -768,10 +780,10 @@ export class CalendarComponent {
   }
 
   refreshTerminesAfterCreate(event: any) {
-    // event.employeeId = event.employee_id;
-    // (this.calendar.eventSettings.dataSource as any[]).push(event);
-    // this.calendar.refreshEvents();
-    this.getTermines();
+    event.employeeId = event.employee_id;
+    (this.calendar.eventSettings.dataSource as any[]).push(event);
+    this.calendar.refreshEvents();
+    // this.getTermines();
   }
 
   refreshTermine(event: any, type: ExecuteAction) {
@@ -975,7 +987,6 @@ export class CalendarComponent {
 
   packHolidays(holidays) {
     let array = [];
-    console.log(holidays);
     for (let i = 0; i < holidays.length; i++) {
       array.push({
         Subject: holidays[i].name,

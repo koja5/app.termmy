@@ -16,13 +16,13 @@
             <li class="nav-item">
                 <a class="nav-link {{selectedTab === 0 ? 'active' : ''}}" (click)="selectedTab = 0">
                     <span class="fa fa-comment"></span> &nbsp;
-                    <span class="fw-bold">Sms configuration</span>
+                    <span class="fw-bold">{{'reminders.smsConfiguration' | translate}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{selectedTab === 1 ? 'active' : ''}}" (click)="selectedTab = 1">
                     <span class="fa fa-envelope"></span> &nbsp;
-                    <span class="fw-bold">Email configuration</span>
+                    <span class="fw-bold">{{'reminders.emailConfiguration' | translate}}</span>
                 </a>
             </li>
         </ul>

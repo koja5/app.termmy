@@ -255,7 +255,10 @@ router.post("/createTermine", auth, async (req, res) => {
 
   delete req.body.employee_id;
 
-  console.log(req.body);
+  const timeZone = await calendar.calendars.get({
+    calendarId: "primary",
+    auth: oauth2Client,
+  });
 
   await calendar.events.insert(
     {
@@ -265,17 +268,20 @@ router.post("/createTermine", auth, async (req, res) => {
         summary: req.body.Subject,
         description: JSON.stringify(req.body),
         start: {
-          dateTime: moment(req.body.StartTime).add("hour", 1),
-          timeZone: "UTC",
+          dateTime: moment(req.body.StartTime)
         },
         end: {
-          dateTime: moment(req.body.EndTime).add("hour", 1),
-          timeZone: "UTC",
+          dateTime: moment(req.body.EndTime)
         },
       },
     },
-    (response) => {
-      res.json(req.body.uuid);
+    (err, response) => {
+      console.log(response);
+      if (response && response.data) {
+        res.json({ id: response.data.id, uuid: req.body.uuid });
+      } else {
+        res.json(false);
+      }
     }
   );
 });
@@ -297,12 +303,10 @@ router.post("/updateTermine", auth, async (req, res) => {
       description:
         typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
       start: {
-        dateTime: moment(req.body.StartTime).add("hour", 1),
-        timeZone: "UTC",
+        dateTime: moment(req.body.StartTime)
       },
       end: {
-        dateTime: moment(req.body.EndTime).add("hour", 1),
-        timeZone: "UTC",
+        dateTime: moment(req.body.EndTime)
       },
     },
   });
@@ -333,8 +337,6 @@ router.post("/getMyTermines", async (req, res) => {
     calendarId: "primary",
     auth: oauth2Client,
   });
-
-  console.log(events);
 
   if (events && events.data) {
     res.send(events.data.items);

@@ -2,7 +2,10 @@
   lang="en"
   xmlns:v="urn:schemas-microsoft-com:vml"
   xmlns:o="urn:schemas-microsoft-com:office:office"
-><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <meta name="x-apple-disable-message-reformatting" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -18,24 +21,23 @@
       opacity: .5; } } @keyframes bounce { 0%, 100% { transform:
       translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
       50% { transform: none; animation-timing-function: cubic-bezier(0, 0, 0.2,
-      1); } } @media (max-width: 600px) { .sm-leading-32 { line-height: 32px
-      !important; } .sm-px-24 { padding-left: 24px !important; padding-right:
-      24px !important; } .sm-py-32 { padding-top: 32px !important;
-      padding-bottom: 32px !important; } .sm-w-full { width: 100% !important; }
-      }
+      1); } } @media (max-width: 600px) { .sm-px-24 { padding-left: 24px
+      !important; padding-right: 24px !important; } .sm-py-32 { padding-top:
+      32px !important; padding-bottom: 32px !important; } .sm-w-full { width:
+      100% !important; } }
     </style>
   </head>
 
   <body
     style="margin: 0; padding: 0; width: 100%; word-break: break-word; -webkit-font-smoothing: antialiased; --bg-opacity: 1; background-color: #eceff1; background-color: rgba(236, 239, 241, var(--bg-opacity));"
+    cz-shortcut-listen="true"
     data-new-gr-c-s-check-loaded="14.1146.0"
     data-gr-ext-installed=""
-    cz-shortcut-listen="true"
   >
     <div
       role="article"
       aria-roledescription="email"
-      aria-label="Welcome to Termmy 👋"
+      aria-label="Reset your Password"
       lang="en"
     >
       <table
@@ -45,7 +47,8 @@
         cellspacing="0"
         role="presentation"
       >
-        <tbody><tr>
+        <tbody>
+          <tr>
             <td
               align="center"
               style="--bg-opacity: 1; background-color: #eceff1; background-color: rgba(236, 239, 241, var(--bg-opacity)); font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif;"
@@ -53,19 +56,20 @@
             >
               <table
                 class="sm-w-full"
-                style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 600px;"
+                style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 600px; background: #f9f9f9; border-radius: 8px;"
                 width="600"
                 cellpadding="0"
                 cellspacing="0"
                 role="presentation"
               >
-                <tbody><tr>
+                <tbody>
+                  <tr>
                     <td
                       class="sm-py-32"
                       style="font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif; padding: 48px; text-align: center;"
                       align="center"
                     >
-                       <a href="https://termmy.com">
+                      <a href="https://termmy.com">
                         <img
                           src="https://app.termmy.com/assets/images/logo/logo.png"
                           width="80"
@@ -81,66 +85,67 @@
                       style="font-family: &#39;Montserrat&#39;,Arial,sans-serif;"
                     >
                       <table
-                        style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%;"
+                        style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%; padding: 0 30px;"
                         width="100%"
                         cellpadding="0"
                         cellspacing="0"
                         role="presentation"
                       >
-                        <tbody><tr>
+                        <tbody>
+                          <tr>
                             <td
-                              style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif; font-size: 14px; line-height: 24px; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));"
+                              style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif; font-size: 14px; line-height: 24px; ; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));"
                               bgcolor="rgba(255, 255, 255, var(--bg-opacity))"
                               align="left"
                             >
                               <p
                                 style="font-weight: 600; font-size: 18px; margin-bottom: 0;"
-                              >Hey</p>
-                              <br />
-                              <p
-                                class="sm-leading-32"
-                                style="font-weight: 600; font-size: 20px; margin: 0 0 24px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));"
-                              >
-                                🏆 You received a bonus of 100 SMS messages.
+                              >Hey!</p>
+                              <p style="margin: 0 0 24px;">
+                                For you is created account on
+                                <span style="font-weight: 600;">Termmy </span>
+                                .
                               </p>
-                              <p style="margin: 24px 0;">
-                                <span style="font-weight: 600;">You can use SMS functionality to stay in touch with your clients, improve your business and make it more professional. 🤩
-                              </p>
-                              <p
-                                style="font-weight: 500; font-size: 16px; margin-bottom: 0;"
-                              >How can you use SMS messages?</p>
-                              <ul style="margin-bottom: 24px;">
-                                <li>
-                                    Automatically send a confirmation message to your clients after they make an appointment via your online link. 🚀
-                                </li>
-                                <li>
-                                  Automatically send a reminder to your clients the day before they need to come to you. 🤟🏻
-                                </li>
-                                <li>
-                                  Automatically send birthday cards to your customers. They will be surprised and you will stay in touch with them.
-                                </li>
-                                <li>
-                                  Automatically send information to your employees when someone books an appointment to them. System can send a message immediately after the scheduled appointment or the day before. They will be grateful to you.
-                                </li>
-                              </ul>
+                              <p>Account: {{email}}</p>
+                              <p>Password: {{password}}</p>
+                              <p style="margin: 0 0 24px;">Use this link and
+                                data from mail to login.</p>
                               <table
                                 style="font-family: &#39;Montserrat&#39;,Arial,sans-serif;"
                                 cellpadding="0"
                                 cellspacing="0"
                                 role="presentation"
                               >
-                                <tbody><tr>
+                                <tbody>
+                                  <tr>
                                     <td
-                                      style="mso-padding-alt: 16px 24px; --bg-opacity: 1; background-color: #7367f0 !important; background-color: rgba(115, 103, 240, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif;"
+                                      style="mso-padding-alt: 16px 24px; --bg-opacity: 1; background-color: #7367f0 !important; color: #fff; background-color: rgba(115, 103, 240, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif;"
                                       bgcolor="rgba(115, 103, 240, var(--bg-opacity))"
                                     >
                                       <a
-                                        href="{{sms_reminder}}"
-                                        style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff !important; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;"
-                                      >Check SMS settings →</a>
+                                        href="{{login_link}}"
+                                        style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;"
+                                      >Login →</a>
                                     </td>
                                   </tr>
-                                </tbody></table>
+                                </tbody>
+                              </table>
+                              <p style="margin: 24px 0;">
+                                <span style="font-weight: 600;">Note:</span>
+                                This password is automatically generate from
+                                Termmy. When first time login, you can change it
+                                in personal settings!
+                              </p>
+                              <p style="margin: 0;">
+                                If you did not intend to deactivate your account
+                                or need our help keeping the account, please
+                                contact us at
+                                <a
+                                  href="mailto:support@termmy.com"
+                                  class="hover-underline"
+                                  style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
+                                >support@termmy.com</a>
+                              </p>
                               <table
                                 style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%;"
                                 width="100%"
@@ -148,16 +153,19 @@
                                 cellspacing="0"
                                 role="presentation"
                               >
-                                <tbody><tr>
+                                <tbody>
+                                  <tr>
                                     <td
                                       style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; padding-top: 32px; padding-bottom: 32px;"
                                     >
                                       <div
                                         style="--bg-opacity: 1; background-color: #eceff1; background-color: rgba(236, 239, 241, var(--bg-opacity)); height: 1px; line-height: 1px;"
-                                      >‌</div>
+                                      >
+                                        ‌</div>
                                     </td>
                                   </tr>
-                                </tbody></table>
+                                </tbody>
+                              </table>
                               <p style="margin: 0 0 16px;">
                                 Not sure why you received this email? Please
                                 <a
@@ -167,19 +175,54 @@
                                 >let us know</a>.
                               </p>
                               <p style="margin: 0 0 16px;">Thanks,
-                                <br />Termmy team</p>
+                                <br />The Termmy Team</p>
                             </td>
                           </tr>
                           <tr>
                             <td
                               style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; height: 20px;"
                               height="20"
-                            ></td>
+                            >
+                            </td>
                           </tr>
                           <tr>
                             <td
                               style="font-family: Montserrat, -apple-system, &#39;Segoe UI&#39;, sans-serif; font-size: 12px; padding-left: 48px; padding-right: 48px; --text-opacity: 1; color: #eceff1; color: rgba(236, 239, 241, var(--text-opacity));"
-                            >                              
+                            >
+                              {{! <p
+                                align="center"
+                                style="cursor: default; margin-bottom: 16px;"
+                              >
+                                <a
+                                  href="https://www.facebook.com/Termmy s"
+                                  style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"
+                                ><img
+                                    src="./Reset your Password_files/facebook.png"
+                                    width="17"
+                                    alt="Facebook"
+                                    style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"
+                                  /></a>
+                                •
+                                <a
+                                  href="https://twitter.com/Termmy s"
+                                  style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"
+                                ><img
+                                    src="./Reset your Password_files/twitter.png"
+                                    width="17"
+                                    alt="Twitter"
+                                    style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"
+                                  /></a>
+                                •
+                                <a
+                                  href="https://www.instagram.com/Termmy s"
+                                  style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"
+                                ><img
+                                    src="./Reset your Password_files/instagram.png"
+                                    width="17"
+                                    alt="Instagram"
+                                    style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"
+                                  /></a>
+                              </p> }}
                               <p
                                 style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));"
                               >
@@ -202,30 +245,40 @@
                             <td
                               style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; height: 16px;"
                               height="16"
-                            ></td>
+                            >
+                            </td>
                           </tr>
-                        </tbody></table>
+                        </tbody>
+                      </table>
                     </td>
                   </tr>
-                </tbody></table>
+                </tbody>
+              </table>
             </td>
           </tr>
-        </tbody></table>
+        </tbody>
+      </table>
     </div>
 
   </body><grammarly-desktop-integration
     data-grammarly-shadow-root="true"
-  ><template shadowrootmode="open"><style>
+  ><template shadowrootmode="open">
+      <style>
         div.grammarly-desktop-integration { position: absolute; width: 1px;
         height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,
         0, 0, 0); white-space: nowrap; border: 0; -moz-user-select: none;
-        -webkit-user-select: none; -ms-user-select:none; user-select:none; }
+        -webkit-user-select: none; -ms-user-select: none; user-select: none; }
         div.grammarly-desktop-integration:before { content: attr(data-content);
         }
-      </style><div
+      </style>
+      <div
         aria-label="grammarly-integration"
         role="group"
         tabindex="-1"
         class="grammarly-desktop-integration"
         data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"
-      ></div></template></grammarly-desktop-integration></html>
+      >
+      </div>
+    </template></grammarly-desktop-integration>
+
+</html>

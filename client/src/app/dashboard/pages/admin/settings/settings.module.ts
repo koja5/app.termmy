@@ -12,14 +12,24 @@ import { SettingsComponent } from "./settings.component";
 import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { CommonCustomModule } from "app/common/common-custom.module";
 import { RecommendedComponent } from "./recommended/recommended.component";
-import { PersonalizeComponent } from './personalize/personalize.component';
+import { PersonalizeComponent } from "./personalize/personalize.component";
 import { CoreThemeCustomizerModule } from "@core/components/theme-customizer/theme-customizer.module";
+import { OnlinePaymentComponent } from "../admin-settings/online-payment/online-payment.component";
+import { BookingSettingsComponent } from "../admin-settings/booking-settings/booking-settings.component";
+import { RemindersComponent } from "../admin-settings/reminders/reminders.component";
+import { LicenseComponent } from "../admin-settings/license/license.component";
+import { HolidaysComponent } from "../admin-settings/holidays/holidays.component";
 
 const routes = [
   { path: "worktime", component: WorktimeComponent },
   { path: "connections", component: ConnectionsComponent },
   { path: "recommended", component: RecommendedComponent },
-  { path: "personalize", component: PersonalizeComponent}
+  { path: "personalize", component: PersonalizeComponent },
+  { path: "online-payment", component: OnlinePaymentComponent },
+  { path: "booking-settings", component: BookingSettingsComponent },
+  { path: "reminders", component: RemindersComponent },
+  { path: "license", component: LicenseComponent },
+  { path: "holidays", component: HolidaysComponent },
 ];
 
 @NgModule({
@@ -39,7 +49,7 @@ const routes = [
     DynamicModule,
     ColorPickerModule,
     CommonCustomModule,
-    CoreThemeCustomizerModule
+    CoreThemeCustomizerModule,
   ],
   providers: [ToastrComponent],
   exports: [

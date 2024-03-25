@@ -4,11 +4,13 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
       <div class="row breadcrumbs-top">
         <div class="col-12 d-flex">
-          <h2 class="content-header-title float-left mb-0">
+          <h2
+            class="content-header-title float-left mb-0 {{!contentHeader.breadcrumb || !contentHeader.breadcrumb.active ? 'border-right-0' : ''}}">
             {{ contentHeader.headerTitle | translate }}
           </h2>
           <!-- app-breadcrumb component -->
-          <app-breadcrumb [breadcrumb]="contentHeader.breadcrumb | translate"></app-breadcrumb>
+          <app-breadcrumb *ngIf="contentHeader.breadcrumb"
+            [breadcrumb]="contentHeader.breadcrumb | translate"></app-breadcrumb>
         </div>
       </div>
     </div>

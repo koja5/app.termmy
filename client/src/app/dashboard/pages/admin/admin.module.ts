@@ -38,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { LicenseStatusComponent } from './common/license-status/license-status.component';
+import { RecommendedComponent } from "./settings/recommended/recommended.component";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -94,6 +95,11 @@ const routes = [
     path: "my-clients",
     canActivate: [AdminGuardService],
     component: ClientsComponent,
+  },
+  {
+    path: "recommended",
+    canActivate: [AdminGuardService],
+    component: RecommendedComponent,
   },
   {
     path: "payment",
