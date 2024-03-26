@@ -256,6 +256,19 @@
             "multiline": true
         },
         {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-1",
+            "name": "color",
+            "title": "bookingSettings.brandingColorPrimary",
+            "field": "color",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#9187f4",
+            "validation": true
+        },
+        {
             "type": "button",
             "width": "col-md-12",
             "class": "btn btn-primary",

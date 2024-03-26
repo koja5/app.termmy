@@ -2,29 +2,14 @@
   "type": "vertical",
   "contentHeader": {
     "headerTitle": "Settings",
-    "actionButton": true,
-    "breadcrumb": {
-      "type": "",
-      "links": [
-        {
-          "name": "dashboard",
-          "isLink": false,
-          "link": "/"
-        },
-        {
-          "name": "settings",
-          "isLink": false,
-          "link": "/"
-        },
-        {
-          "name": "worktime",
-          "isLink": false,
-          "link": "/"
-        }
-      ]
-    }
+    "actionButton": false
   },
   "navigations": [
+    {
+      "title": "adminSettings.bookingSettings",
+      "link": "/dashboard/admin/settings/booking-settings",
+      "icon": "calendar"
+    },
     {
       "title": "settings.worktime",
       "link": "/dashboard/admin/settings/worktime",
@@ -36,9 +21,24 @@
       "icon": "link"
     },
     {
-      "title": "settings.recommended",
-      "link": "/dashboard/admin/settings/recommended",
-      "icon": "gift"
+      "title": "adminSettings.onlinePayment",
+      "link": "/dashboard/admin/settings/online-payment",
+      "icon": "briefcase"
+    },
+    {
+      "title": "adminSettings.reminders",
+      "link": "/dashboard/admin/settings/reminders",
+      "icon": "send"
+    },
+    {
+      "title": "adminSettings.license",
+      "link": "/dashboard/admin/settings/license",
+      "icon": "package"
+    },
+    {
+      "title": "adminSettings.holidays",
+      "link": "/dashboard/admin/settings/holidays",
+      "icon": "award"
     },
     {
       "title": "settings.personalize",

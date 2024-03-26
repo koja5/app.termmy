@@ -79,6 +79,7 @@ export class CalendarComponent {
   public appointment: any;
   public allClients: any;
   public allServices: any;
+  public servicesColor: any = {};
   public schedulerHeight: string;
 
   constructor(
@@ -122,7 +123,6 @@ export class CalendarComponent {
     setCulture(this._storageService.getSelectedLanguage(true));
 
     // detect change language
-
     this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
       if (event.lang === "rs") {
         setCulture("sr-Latn");
@@ -238,7 +238,14 @@ export class CalendarComponent {
       .callGetMethod("/api/getMyServices", "")
       .subscribe((data: any) => {
         this.allServices = data;
+        this.packServices();
       });
+  }
+
+  packServices() {
+    for (let i = 0; i < this.allServices.length; i++) {
+      this.servicesColor[this.allServices[i].id] = this.allServices[i].color;
+    }
   }
 
   //#endregion
@@ -491,7 +498,6 @@ export class CalendarComponent {
         is_online: data.is_online,
         amount_paid: data.amount_paid,
         uuid: data.uuid,
-        color: "#12c91b",
       });
     }
 
@@ -724,7 +730,6 @@ export class CalendarComponent {
         admin_id: termines[i].admin_id,
         is_online: termines[i].is_online,
         amount_paid: termines[i].amount_paid,
-        color: "#12c91b",
       });
     }
 
@@ -895,7 +900,8 @@ export class CalendarComponent {
     //   return;
     // }
     //SET COLOR FOR EVENT
-    // args.element.style.backgroundColor = "#000";
+    args.element.style.backgroundColor =
+      this.servicesColor[args.data.service_id];
   }
 
   onDataBound(args): void {

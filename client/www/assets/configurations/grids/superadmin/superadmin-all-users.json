@@ -39,55 +39,10 @@
     "hideable": true,
     "refresh": false,
     "reset": true,
-    "contextMenuItems": [
-        "AutoFit",
-        "AutoFitAll",
-        "SortAscending",
-        "SortDescending",
-        "Copy",
-        "Edit",
-        "Delete",
-        "Save",
-        "Cancel",
-        "FirstPage",
-        "PrevPage",
-        "LastPage",
-        "NextPage",
-        "Group",
-        "Ungroup"
-    ],
-    "toolbar": [
-        "Add",
-        "Edit",
-        "Delete",
-        "Print",
-        "Search"
-    ],
-    "editSettings": {
-        "allowEditing": true,
-        "allowAdding": true,
-        "allowDeleting": true,
-        "showDeleteConfirmDialog": true,
-        "mode": "Dialog"
-    },
     "editSettingsRequest": {
         "add": {
             "type": "POST",
-            "api": "/api/createUser",
-            "parameters": [],
-            "fields": "",
-            "root": ""
-        },
-        "edit": {
-            "type": "POST",
-            "api": "/api/updateUser",
-            "parameters": [],
-            "fields": "",
-            "root": ""
-        },
-        "delete": {
-            "type": "POST",
-            "api": "/api/deleteUser",
+            "api": "/api/setUser",
             "parameters": [],
             "fields": "",
             "root": ""
@@ -95,15 +50,71 @@
     },
     "columns": [
         {
-            "title": "allUsers.number",
+            "title": "commonFields.action",
+            "width": 100,
+            "template": {
+                "type": "action",
+                "actionMode": {
+                    "type": "menu",
+                    "icon": "more-vertical",
+                    "menu": [
+                        {
+                            "type": "edit",
+                            "actionName": "general.edit",
+                            "icon": "edit",
+                            "formDialog": {
+                                "type": "sidebar",
+                                "closeAfterExecute": true
+                            }
+                        },
+                        {
+                            "type": "delete",
+                            "actionName": "general.delete",
+                            "icon": "trash",
+                            "executeAction": {
+                                "request": {
+                                    "type": "POST",
+                                    "api": "/api/deleteUser",
+                                    "parameters": [],
+                                    "fields": "",
+                                    "root": ""
+                                },
+                                "response": "toastr",
+                                "showQuestionBeforeExecute": true,
+                                "modalConfig": {
+                                    "modalTitle": "",
+                                    "modalText": "",
+                                    "windowClass": "modal modal-danger"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "title": "commonFields.email",
             "filterable": true,
             "hideable": true,
             "filter": "date",
             "type": "string",
             "class": "text-align-right",
-            "field": "user_number",
-            "isPrimaryKey": true,
-            "allowEditing": false
+            "field": "email",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.telephone",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "telephone",
+            "validation": {
+                "required": true
+            }
         },
         {
             "title": "commonFields.firstname",
@@ -130,7 +141,8 @@
             }
         },
         {
-            "title": "allUsers.type",
+            "title": "commonFields.type",
+            "width": 150,
             "template": {
                 "choices": [
                     {
@@ -138,7 +150,7 @@
                         "value": 0,
                         "operator": "==",
                         "apart": {
-                            "title": "allUsers.superadmin",
+                            "title": "userTypes.superadmin",
                             "icon": "feather icon-edit-2 text-info"
                         }
                     },
@@ -147,7 +159,7 @@
                         "value": 1,
                         "operator": "==",
                         "apart": {
-                            "title": "allUsers.admin",
+                            "title": "userTypes.admin",
                             "icon": "feather icon-user-check text-success"
                         }
                     },
@@ -156,7 +168,16 @@
                         "value": 2,
                         "operator": "==",
                         "apart": {
-                            "title": "allUsers.partner",
+                            "title": "userTypes.partner",
+                            "icon": "feather icon-user-plus text-warning"
+                        }
+                    },
+                    {
+                        "field": "type",
+                        "value": 3,
+                        "operator": "==",
+                        "apart": {
+                            "title": "userTypes.employee",
                             "icon": "feather icon-user-plus text-warning"
                         }
                     }
@@ -168,52 +189,62 @@
             }
         },
         {
-            "title": "commonFields.company",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "company",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "commonFields.email",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "email",
-            "validation": {
-                "required": true
+            "title": "commonFields.verified",
+            "width": 150,
+            "template": {
+                "choices": [
+                    {
+                        "field": "verified",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.notVerified",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "verified",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.verified",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
             },
-            "template": "test"
+            "field": "verified",
+            "filterable": false,
+            "filter": "date"
         },
         {
-            "title": "commonFields.telephone",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "telephone",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "commonFields.country",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "name",
-            "validation": {
-                "required": true
+            "title": "commonFields.active",
+            "width": 150,
+            "template": {
+                "choices": [
+                    {
+                        "field": "active",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.inactive",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "active",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "allUsers.active",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
+            },
+            "field": "active",
+            "filter": {
+                "type": "CheckBox"
             }
         },
         {
@@ -230,6 +261,7 @@
         },
         {
             "title": "commonFields.zip",
+            "width": 150,
             "filterable": true,
             "hideable": true,
             "filter": "date",
@@ -251,105 +283,6 @@
             "validation": {
                 "required": true
             }
-        },
-        {
-            "title": "allUsers.vat",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "vat",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "allUsers.newsletter",
-            "template": {
-                "choices": [
-                    {
-                        "field": "newsletter",
-                        "value": 0,
-                        "operator": "==",
-                        "html": "<span class='e-badge e-badge-danger'>Nicht zulassen</span>"
-                    },
-                    {
-                        "field": "newsletter",
-                        "value": 1,
-                        "operator": "==",
-                        "html": "<span class='e-badge e-badge-success'>Erlauben</span>"
-                    }
-                ]
-            },
-            "field": "newsletter_name",
-            "filter": {
-                "type": "CheckBox"
-            }
-        },
-        {
-            "title": "allUsers.verified",
-            "template": {
-                "choices": [
-                    {
-                        "field": "verified",
-                        "value": 0,
-                        "operator": "==",
-                        "html": "<span class='e-badge e-badge-danger'>Nicht bestätigte E-Mail</span>"
-                    },
-                    {
-                        "field": "verified",
-                        "value": 1,
-                        "operator": "==",
-                        "html": "<span class='e-badge e-badge-success'>Verifizierte E-Mail</span>"
-                    }
-                ]
-            },
-            "field": "verified",
-            "filterable": false,
-            "filter": "date"
-        },
-        {
-            "title": "allUsers.active",
-            "template": {
-                "choices": [
-                    {
-                        "field": "active",
-                        "value": 0,
-                        "operator": "==",
-                        "apart": {
-                            "title": "inactive",
-                            "badge": "badge badge-pill badge-light-danger"
-                        }
-                    },
-                    {
-                        "field": "active",
-                        "value": 1,
-                        "operator": "==",
-                        "apart": {
-                            "title": "active",
-                            "badge": "badge badge-pill badge-light-success"
-                        }
-                    }
-                ]
-            },
-            "field": "active",
-            "filter": {
-                "type": "CheckBox"
-            }
-        },
-        {
-            "title": "allUsers.signUpTime",
-            "filterable": false,
-            "hideable": true,
-            "filter": "date",
-            "type": "date",
-            "format": "dd.MM.yyyy. HH:mm:ss",
-            "class": "text-align-right",
-            "field": "signup_time",
-            "validation": {
-                "required": true
-            }
         }
     ],
     "config": [
@@ -364,87 +297,63 @@
         },
         {
             "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "password",
+            "title": "commonFields.password",
+            "field": "password",
+            "readonly": true
+        },
+        {
+            "type": "textbox",
             "width": "col-md-12",
             "class": "e-outline",
-            "name": "user_number",
-            "title": "allUsers.number",
-            "field": "user_number"
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone",
+            "required": true
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
             "name": "firstname",
-            "title": "allUsers.firstname",
-            "field": "firstname"
+            "title": "commonFields.firstname",
+            "field": "firstname",
+            "required": true
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
             "name": "lastname",
-            "title": "allUsers.lastname",
-            "field": "lastname"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "company",
-            "title": "allUsers.company",
-            "field": "company"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "email",
-            "title": "allUsers.email",
-            "field": "email",
-            "readonly": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "telephone",
-            "title": "allUsers.telephone",
-            "field": "telephone"
-        },
-        {
-            "type": "combobox",
-            "addTag": {
-                "text": "general.newEntrie",
-                "clickTagPath": "forms",
-                "clickTagFile": "employee.json"
-            },
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "country_id",
-            "title": "allUsers.name",
-            "field": {
-                "text": "firstname",
-                "value": "id"
-            },
-            "request": {
-                "type": "GET",
-                "api": "/api/getUsers",
-                "parameters": [],
-                "fields": "",
-                "root": ""
-            },
-            "fieldConfig": {
-                "ignoreAccent": false,
-                "filter": true
-            },
+            "title": "commonFields.lastname",
+            "field": "lastname",
             "required": true
         },
         {
             "type": "textbox",
             "width": "col-md-12",
             "class": "e-outline",
+            "name": "company",
+            "title": "commonFields.company",
+            "field": "company"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
             "name": "address",
-            "title": "allUsers.address",
+            "title": "commonFields.address",
             "field": "address"
         },
         {
@@ -452,7 +361,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "zip",
-            "title": "allUsers.zip",
+            "title": "commonFields.zip",
             "field": "zip"
         },
         {
@@ -460,7 +369,7 @@
             "width": "col-md-6",
             "class": "e-outline",
             "name": "city",
-            "title": "allUsers.city",
+            "title": "commonFields.city",
             "field": "city"
         },
         {
@@ -468,7 +377,7 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "vat",
-            "title": "allUsers.vat",
+            "title": "commonFields.vat",
             "field": "vat"
         },
         {
@@ -476,10 +385,20 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "type",
-            "title": "allUsers.type",
+            "title": "commonFields.type",
             "field": {
                 "text": "name",
                 "value": "id"
+            },
+            "fieldTemplate": {
+                "fields": [
+                    {
+                        "type": "text",
+                        "values": [
+                            "name"
+                        ]
+                    }
+                ]
             },
             "request": {
                 "type": "GET",
@@ -498,16 +417,8 @@
             "type": "switch",
             "width": "col-6",
             "class": "e-outline",
-            "name": "newsletter",
-            "title": "allUsers.newsletter",
-            "field": "newsletter"
-        },
-        {
-            "type": "switch",
-            "width": "col-6",
-            "class": "e-outline",
             "name": "verified",
-            "title": "allUsers.verified",
+            "title": "commonFields.verified",
             "field": "verified"
         },
         {
@@ -515,18 +426,8 @@
             "width": "col-md-12",
             "class": "e-outline",
             "name": "active",
-            "title": "allUsers.active",
+            "title": "commonFields.active",
             "field": "active"
-        },
-        {
-            "type": "datetimepicker",
-            "width": "col-md-12 pt-2",
-            "class": "e-outline",
-            "readonly": true,
-            "format": "dd.MM.yyyy. HH:mm:ss",
-            "name": "signup_time",
-            "title": "userSignUpTime",
-            "field": "signup_time"
         },
         {
             "type": "button",

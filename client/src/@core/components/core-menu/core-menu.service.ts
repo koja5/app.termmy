@@ -7,6 +7,7 @@ import { AuthenticationService } from "app/authentification/common/service";
 import { User } from "app/authentification/common/models";
 import { UserTypes } from "app/enums/user-types";
 import { StorageService } from "app/services/storage.service";
+import { HelpService } from "app/services/help.service";
 
 @Injectable({
   providedIn: "root",
@@ -22,6 +23,7 @@ export class CoreMenuService {
   private _onMenuChanged: BehaviorSubject<any>;
   private _currentMenuKey: string;
   private _registry: { [key: string]: any } = {};
+  private _registryLocal: { [key: string]: any } = {};
 
   /**
    * Constructor
@@ -32,7 +34,8 @@ export class CoreMenuService {
   constructor(
     private _router: Router,
     private _authenticationService: AuthenticationService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _helpService: HelpService
   ) {
     this._authenticationService.currentUser.subscribe(
       (x) => (this.currentUser = x)
@@ -100,6 +103,7 @@ export class CoreMenuService {
 
     // Add to registry
     this._registry[key] = menu;
+    this._registryLocal[key] = menu;
 
     // Notify subject
     this._onMenuRegistered.next([key, menu]);
@@ -137,10 +141,14 @@ export class CoreMenuService {
       return;
     }
 
+    this._registryLocal[key] = this._helpService.copyObject(
+      this._registry[key]
+    );
+
     this.checkMenuForDifferentUser(key);
 
     // Return sidebar
-    return this._registry[key];
+    return this._registryLocal[key];
   }
 
   /**
@@ -179,12 +187,13 @@ export class CoreMenuService {
 
   checkMenuForDifferentUser(key) {
     const user = this._storageService.getDecodeToken();
-    for (let i = 0; i < this._registry[key].length; i++) {
+    for (let i = 0; i < this._registryLocal[key].length; i++) {
       if (
-        this._registry[key][i].users &&
-        this.checkUserType(this._registry[key][i].users, user.type)
+        this._registryLocal[key][i].users &&
+        this.checkUserType(this._registryLocal[key][i].users, user.type)
       ) {
-        this._registry[key].splice(i, 1);
+        this._registryLocal[key].splice(i, 1);
+        i--;
       }
     }
   }
