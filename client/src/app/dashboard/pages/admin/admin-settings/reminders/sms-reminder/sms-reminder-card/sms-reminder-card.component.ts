@@ -24,10 +24,6 @@ export class SmsReminderCardComponent {
     console.log(this.item);
   }
 
-  ngOnChanges() {
-    console.log(this.item);
-  }
-
   change() {
     this.changeValue.emit(this.item);
   }
@@ -46,7 +42,9 @@ export class SmsReminderCardComponent {
           );
         } else {
           this._toastr.showErrorCustom(
-            this._translate.instant("smsReminder.needToInsertTelephoneAtSettings")
+            this._translate.instant(
+              "smsReminder.needToInsertTelephoneAtSettings"
+            )
           );
         }
       });

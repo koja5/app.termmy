@@ -4,14 +4,15 @@ export class SmsReminderInitial {
     clientImmediatelyReminder: {
       title: "Confirmation of booking",
       text: "Immediately upon appointment",
-      message: "Your appointment #date at #time has been confirmed. #company",
+      message:
+        "Your appointment #date at #time has been confirmed. Our address is #address. #company",
       active: true,
     },
     clientDayBeforeReminder: {
       title: "Day before",
       text: "Day before at 8 p.m",
       message:
-        "Reminder: You have an appointment with us at #company tomorrow at #time. Greeting",
+        "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting",
       active: false,
     },
     clientHappyBirthday: {
@@ -30,14 +31,14 @@ export class SmsReminderInitial {
     employeeImmediatelyReminder: {
       title: "Confirmation of booking",
       text: "Immediately upon appointment",
-      message: "Your appointment #date at #time has been confirmed. #company",
+      message: "New appointment #date at #time has been confirmed. #company",
       active: true,
     },
     employeeDayBeforeReminder: {
       title: "Day before",
       text: "Day before at 8 p.m",
       message:
-        "Reminder: You have an appointment with us at #company tomorrow at #time. Greeting",
+        "Reminder: You have an appointment tomorrow at #time. Greeting",
       active: false,
     },
   };

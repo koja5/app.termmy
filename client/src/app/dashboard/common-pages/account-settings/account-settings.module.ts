@@ -32,6 +32,7 @@ const routes = [
   ],
   providers: [ToastrComponent],
   exports: [
+    GeneralComponent,
     RouterModule,
     DatePickerI18nModule,
     TimePickerI18nModule,

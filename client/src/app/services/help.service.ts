@@ -149,8 +149,16 @@ export class HelpService {
     return new Date(date.getTime() + minutes * 60000);
   }
 
-  addMonthsToCurrentDate(months: number) {
-    return new Date(new Date().setMonth(new Date().getMonth() + months));
+  addMonthsToCurrentDate(currentDate: any, months: number) {
+    if (currentDate) {
+      return new Date(
+        new Date(currentDate).setMonth(
+          new Date(currentDate).getMonth() + months
+        )
+      );
+    } else {
+      return new Date(new Date().setMonth(new Date().getMonth() + months));
+    }
   }
 
   calculateDiffInDays(date) {

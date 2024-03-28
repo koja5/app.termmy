@@ -5,10 +5,16 @@ import { CommonModule } from "@angular/common";
 import { TimePickerI18nModule } from "app/common/forms/form-elements/date-time-picker/time-picker-i18n/time-picker-i18n.module";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
+import { AccountSettingsModule } from "./account-settings/account-settings.module";
 
 @NgModule({
-  declarations: [AccountSettingsComponent],
-  imports: [CommonModule, DatePickerI18nModule, TimePickerI18nModule],
+  declarations: [],
+  imports: [
+    CommonModule,
+    DatePickerI18nModule,
+    TimePickerI18nModule,
+    AccountSettingsModule,
+  ],
   providers: [ToastrComponent],
   exports: [RouterModule, DatePickerI18nModule, TimePickerI18nModule],
 })

@@ -11,6 +11,8 @@ import { environment } from "environments/environment";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { StorageService } from "app/services/storage.service";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 // import {
 //   CountryISO,
 //   PhoneNumberFormat,
@@ -53,24 +55,41 @@ export class PaymentProcessingComponent {
     email: new FormControl("", [Validators.required, Validators.email]),
     telephone: new FormControl("", [Validators.required]),
   });
-  // separateDialCode = false;
-  // SearchCountryField = SearchCountryField;
-  // CountryISO = CountryISO;
-  // PhoneNumberFormat = PhoneNumberFormat;
-  // preferredCountries: CountryISO[] = [
-  //   CountryISO.Austria,
-  //   CountryISO.UnitedStates,
-  //   CountryISO.UnitedKingdom,
-  // ];
 
   constructor(
     private _service: CallApiService,
-    public _helpService: HelpService
+    public _helpService: HelpService,
+    private _storageService: StorageService,
+    private _translate: TranslateService
   ) {}
+
+  ngOnInit() {
+    this.setPaymentProcessingLanguage();
+  }
 
   ngOnChanges(event: Event) {
     this.getProfileInfo();
     this.createPaymentIntent();
+  }
+
+  setPaymentProcessingLanguage() {
+    // set current language
+    if (this._storageService.getSelectedLanguage(true) === "sr-Latn") {
+      this.elementsOptions.locale = "hr";
+    } else {
+      this.elementsOptions.locale =
+        this._storageService.getSelectedLanguage(true);
+    }
+
+    // detect change language
+    this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      if (event.lang === "sr-Latn") {
+        this.elementsOptions.locale = "hr";
+      } else {
+        this.elementsOptions.locale =
+          this._storageService.getSelectedLanguage(true);
+      }
+    });
   }
 
   getProfileInfo() {

@@ -1224,6 +1224,7 @@ router.post("/setClient", auth, function (req, res) {
     req.body.admin_id = req.user.user.admin_id;
 
     if (req.body.id) {
+      delete req.body.guuid;
       conn.query(
         "update clients set ? where id = ? and admin_id = ?",
         [req.body, req.body.id, req.user.user.admin_id],
@@ -1910,6 +1911,29 @@ router.post("/setLicense", auth, function (req, res, next) {
     conn.query(
       "INSERT INTO licenses set ? ON DUPLICATE KEY UPDATE ?",
       [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/deleteLicense", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from licenses where id = ?",
+      [req.body.id],
       function (err, rows) {
         conn.release();
         if (!err) {

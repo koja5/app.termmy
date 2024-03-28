@@ -65,6 +65,18 @@ const routes = [
     NgSelectModule,
   ],
   providers: [],
-  exports: [RouterModule, DynamicModule],
+  exports: [
+    RouterModule,
+    DynamicModule,
+    OnlinePaymentComponent,
+    BookingSettingsComponent,
+    SmsReminderComponent,
+    SmsReminderCardComponent,
+    RemindersComponent,
+    EmailReminderComponent,
+    EmailReminderCardComponent,
+    LicenseComponent,
+    HolidaysComponent,
+  ],
 })
 export class AdminSettingsModule {}

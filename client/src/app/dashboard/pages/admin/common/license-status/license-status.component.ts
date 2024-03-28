@@ -127,6 +127,7 @@ export class LicenseStatusComponent {
 
   executeMethod(event) {
     this.license.expiry_date = this._helpService.addMonthsToCurrentDate(
+      this.license.expiry_date,
       this.licenseSubscription.duration
     );
     const data = {
@@ -140,6 +141,7 @@ export class LicenseStatusComponent {
       })
       .subscribe((data) => {
         if (data) {
+          this.calculateDiffDays();
           this._toastr.showSuccessCustom(
             this._translate.instant("licenseStatus.successfullyPaidLicense")
           );

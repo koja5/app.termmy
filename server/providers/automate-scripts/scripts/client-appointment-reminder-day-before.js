@@ -29,7 +29,7 @@ function sendAppointmentRemindersLikeSms() {
       logger.log("error", err.sql + ". " + err.sqlMessage);
     } else {
       conn.query(
-        "SELECT c.telephone, s.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email',a.StartTime, a.EndTime, a.admin_id, sc.count from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join sms_reminder_config s on a.admin_id = s.admin_id join sms_count sc on a.admin_id = sc.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and sc.count > 0 and s.active = 1",
+        "SELECT c.telephone, s.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTime, a.admin_id, sc.count from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join sms_reminder_config s on a.admin_id = s.admin_id join sms_count sc on a.admin_id = sc.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and sc.count > 0 and s.active = 1",
         function (err, rows, fields) {
           if (err) {
             logger.log("error", err.sql + ". " + err.sqlMessage);
@@ -70,6 +70,7 @@ function sendViaSms(config, item, conn) {
             "-" +
             moment(item.EndTime).format("HH:mm")
         )
+        .replace("#address", generateAddress(item))
     );
     conn.query(
       "update sms_count set count = count - 1 where admin_id = ?",
@@ -89,6 +90,7 @@ function sendViaSms(config, item, conn) {
               "-" +
               moment(item.EndTime).format("HH:mm")
           )
+          .replace("#address", generateAddress(item))
       );
       conn.query(
         "update sms_count set count = count - 1 where admin_id = ?",
@@ -110,7 +112,7 @@ function sendAppointmentRemindersLikeEmail() {
       logger.log("error", err.sql + ". " + err.sqlMessage);
     } else {
       conn.query(
-        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email',a.StartTime, a.EndTime, a.admin_id from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and e.active = 1",
+        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTime, a.admin_id from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and e.active = 1",
         function (err, rows, fields) {
           if (err) {
             logger.log("error", err.sql + ". " + err.sqlMessage);
@@ -153,6 +155,7 @@ function sendViaEmail(config, item) {
             "-" +
             moment(item.EndTime).format("HH:mm")
         )
+        .replace("#address", generateAddress(item))
     );
   }
   setTimeout(() => {
@@ -168,6 +171,7 @@ function sendViaEmail(config, item) {
               "-" +
               moment(item.EndTime).format("HH:mm")
           )
+          .replace("#address", generateAddress(item))
       );
     }
   }, 1000);
@@ -175,4 +179,18 @@ function sendViaEmail(config, item) {
 
 //#endregion
 
+//#region HELPFUL FUNCTIONS
+
+function generateAddress(item) {
+  return (
+    item.address +
+    (item.address || item.zip || item.city ? "," : "") +
+    " " +
+    item.zip +
+    " " +
+    item.city
+  );
+}
+
+//#endregion
 module.exports = clientAppointmentReminderDayBefore;

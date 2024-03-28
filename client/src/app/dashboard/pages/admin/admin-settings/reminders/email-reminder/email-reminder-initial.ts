@@ -5,7 +5,8 @@ export class EmailReminderInitial {
       title: "Confirmation of booking",
       text: "Immediately upon appointment",
       subject: "Your appointment is confirmed",
-      message: "Your appointment #date at #time has been confirmed. #company",
+      message:
+        "Your appointment #date at #time has been confirmed. Our address is #address. #company",
       active: true,
     },
     clientDayBeforeReminder: {
@@ -13,7 +14,7 @@ export class EmailReminderInitial {
       text: "Day before at 8 p.m",
       subject: "Reminder for tomorrow appointment",
       message:
-        "Reminder: You have an appointment with us at #company tomorrow at #time. Greeting",
+        "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting",
       active: false,
     },
     clientHappyBirthday: {
@@ -35,15 +36,14 @@ export class EmailReminderInitial {
       title: "Confirmation of booking",
       text: "Immediately upon appointment",
       subject: "Your have new appointment",
-      message: "Your appointment #date at #time has been confirmed. #company",
+      message: "New appointment #date at #time has been confirmed. #company",
       active: true,
     },
     employeeDayBeforeReminder: {
       title: "Day before",
       text: "Day before at 8 p.m",
       subject: "Reminder for tomorrow appointment",
-      message:
-        "Reminder: You have an appointment with us at #company tomorrow at #time. Greeting",
+      message: "Reminder: You have an appointment tomorrow at #time. Greeting",
       active: false,
     },
   };

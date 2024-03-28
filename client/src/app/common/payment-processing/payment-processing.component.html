@@ -20,7 +20,7 @@
     </div>
 
     <div class="pt-2 text-center">
-        <button (click)="pay()" class="btn btn-primary w-50 payment" [disabled]="!accept ? true : false">
+        <button (click)="pay()" class="btn btn-primary w-50 payment" [disabled]="!accept||paying ? true : false">
             <app-loader-small *ngIf="paying"></app-loader-small>
             <span class="fa fa-shopping-cart"></span>&nbsp;
             {{buttonText ? buttonText : _helpService.replaceText('paymentProcessing.buttonText'
