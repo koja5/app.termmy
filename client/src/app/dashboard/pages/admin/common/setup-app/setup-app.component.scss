@@ -1,0 +1,125 @@
+@media (min-width: 993px) {
+  .setup-items {
+    margin-left: 35px;
+    margin-right: 35px;
+  }
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.single-chart {
+  justify-content: space-around;
+}
+
+.circular-chart {
+  display: block;
+  width: 42px;
+  max-height: 250px;
+}
+
+.circular-chart-popup {
+  width: 65px !important;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.orange .circle {
+  stroke: #ff9f00;
+}
+
+.circular-chart.green .circle {
+  stroke: #4cc790;
+}
+
+.circular-chart.red .circle {
+  stroke: #ee3507;
+}
+
+.circular-chart.blue .circle {
+  stroke: #3c9ee5;
+}
+
+.percentage {
+  fill: #666;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+.vertical-layout.vertical-menu-modern.menu-collapsed .main-menu .setup-text {
+  display: none;
+}
+
+.vertical-layout.vertical-menu-modern.menu-expanded .main-menu .setup-text {
+  display: block;
+}
+
+.setup-text {
+  font-size: 12px;
+}
+
+.setup-items {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--light);
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.finished {
+  background: #00fb8b;
+  pointer-events: none !important;
+}
+
+.finished:hover {
+  background: #00fb8b !important;
+}
+
+.setup-items:hover {
+  background: #f7f7f7;
+}
+
+.item-icon {
+  width: 15%;
+}
+
+.item-icon.service {
+  font-size: 25px;
+}
+
+.item-explanation {
+  width: 70%;
+  text-align: left;
+}
+
+.item-text {
+  font-size: 12px;
+}
+
+.open span {
+  font-size: 23px;
+}

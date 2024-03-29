@@ -13,3 +13,17 @@
     outline: none;
   }
 }
+
+.setup-app-vertical {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.setup-app-horizontal {
+  position: absolute;
+  right: 5px;
+  margin-top: 3px;
+}

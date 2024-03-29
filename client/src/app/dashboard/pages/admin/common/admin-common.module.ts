@@ -4,11 +4,12 @@ import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonCustomModule } from "app/common/common-custom.module";
 import { RouterModule } from "@angular/router";
+import { SetupAppComponent } from './setup-app/setup-app.component';
 
 @NgModule({
-  declarations: [LicenseStatusComponent],
+  declarations: [LicenseStatusComponent, SetupAppComponent],
   imports: [CommonModule, TranslateModule, CommonCustomModule, RouterModule],
   providers: [],
-  exports: [LicenseStatusComponent],
+  exports: [LicenseStatusComponent, SetupAppComponent],
 })
 export class AdminCommonModule {}

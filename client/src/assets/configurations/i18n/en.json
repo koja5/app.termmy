@@ -495,6 +495,23 @@
             "prefix": "Prefix",
             "gatewayEmail": "Gateway email",
             "active": "Active"
+        },
+        "setupApp": {
+            "setup": "Setup Termmy",
+            "title": "Set up Termmy for success",
+            "text": "Complete the steps bellow so you can unlock the full potential of your business.",
+            "serviceTitle": "Customize your services",
+            "serviceText": "Set the price, duration, color or service and block extra time if needed.",
+            "clientTitle": "Add clients",
+            "clientText": "Organize your clients, keep detailed notes and see their entire appointment history.",
+            "reminderTitle": "Personalize your reminder",
+            "reminderText": "Ensure clients show up to appointments by sending them pre-made text reminders.",
+            "calendarTitle": "Sync your calendars",
+            "calendarText": "Termmy simplifies your life by connecting to all of your other calendars.",
+            "bookingTitle": "Activate your booking website",
+            "bookingText": "Allow clients to book themselves based on your schedule on your personalised booking website",
+            "paymentTitle": "Allow money online",
+            "paymentText": "Set up your card and receive money directly online to your account"
         }
     }
 }

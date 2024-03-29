@@ -51,7 +51,7 @@ export const menu = [
     translate: "navigations.settings",
     type: "item",
     icon: "settings",
-    url: "dashboard/admin/settings/worktime",
+    url: "dashboard/admin/settings/booking-settings",
     users: ["admin"],
   },
   {

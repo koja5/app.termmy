@@ -1,0 +1,62 @@
+<div (click)="openSetup()">
+    <div class="flex-wrapper">
+        <div class="single-chart">
+            <svg viewBox="0 0 36 36" class="circular-chart red">
+                <path class="circle-bg" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="circle" attr.stroke-dasharray="{{processFinished}}, 100" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <text x="19" y="22" class="percentage">{{processFinished}}%</text>
+            </svg>
+        </div>
+    </div>
+    <p class="setup-text">{{'setupApp.setup' | translate}}</p>
+</div>
+
+<ng-template #modalForm let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
+    <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel160">{{'setupApp.setup' | translate}}</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div class="text-center">
+            <div class="flex-wrapper mb-2">
+                <div class="single-chart">
+                    <svg viewBox="0 0 36 36" class="circular-chart red circular-chart-popup">
+                        <path class="circle-bg" d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" attr.stroke-dasharray="{{processFinished}}, 100" d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <text x="19" y="22" class="percentage">{{processFinished}}%</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="mb-3">
+                <h3 class="font-weight-bolder">{{'setupApp.title' | translate}}</h3>
+                <h5>{{'setupApp.text' | translate}}</h5>
+            </div>
+            <div class="setup-container">
+                <div *ngFor="let item of setupItems.items" class="setup-items {{finished[item.id] ? 'finished' : ''}}"
+                    [routerLink]="item.link" (click)="hideSetup()">
+                    <div class="item-icon service">
+                        <span class="{{item.icon}}"></span>
+                    </div>
+                    <div class="item-explanation">
+                        <h6 class="mb-0 font-weight-bolder">{{item.title | translate}}</h6>
+                        <p class="mb-0 item-text">{{item.text | translate}}</p>
+                    </div>
+                    <div class="item-icon open">
+                        <span *ngIf="!finished[item.id]" class="fa fa-caret-right"></span>
+                        <span *ngIf="finished[item.id]" class="fa fa-check"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
