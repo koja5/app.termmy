@@ -1,7 +1,9 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { HelpService } from "app/services/help.service";
 import { SmsReminderInitial } from "./sms-reminder-initial";
 import { CallApiService } from "app/services/call-api.service";
+import { StorageService } from "app/services/storage.service";
+import { MessageService } from "app/services/message.service";
 
 @Component({
   selector: "app-sms-reminder",
@@ -11,11 +13,11 @@ import { CallApiService } from "app/services/call-api.service";
 export class SmsReminderComponent {
   public loader = true;
   public reminderConfig: any;
-  public smsCount: any = { count: 0};
 
   constructor(
-    public _helpService: HelpService,
-    private _service: CallApiService
+    private _service: CallApiService,
+    private _storageService: StorageService,
+    private _messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -23,22 +25,7 @@ export class SmsReminderComponent {
   }
 
   initialize() {
-    this.getNumberOfSms();
     this.getSmsReminderConfig();
-  }
-
-  getNumberOfSms() {
-    this._service
-      .callGetMethod("/api/getNumberOfSms", "")
-      .subscribe((data: any) => {
-        if (data.length) {
-          this.smsCount = data[0];
-        }
-      });
-  }
-
-  generateProgressBar() {
-    return this.smsCount.count + "%";
   }
 
   getSmsReminderConfig() {
@@ -56,6 +43,7 @@ export class SmsReminderComponent {
   }
 
   setSmsReminderConfig(event) {
+    this.sendInfoForSetupApp();
     this._service
       .callPostMethod(
         "/api/sms-reminder/setSmsReminderConfig",
@@ -64,5 +52,17 @@ export class SmsReminderComponent {
       .subscribe((data) => {
         this.reminderConfig.id = data;
       });
+  }
+
+  sendInfoForSetupApp() {
+    if (this._storageService.getSessionStorage("setup")) {
+      let setup = this._storageService.getSessionStorage("setup");
+      if (this.reminderConfig && this.reminderConfig.active) {
+        setup.sms_reminder = true;
+      } else {
+        setup.sms_reminder = false;
+      }
+      this._messageService.sendSetupApp(setup);
+    }
   }
 }

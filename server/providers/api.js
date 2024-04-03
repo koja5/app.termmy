@@ -142,6 +142,11 @@ router.post("/signUp", function (req, res, next) {
                 res.json(false);
               } else {
                 conn.query(
+                  "insert into sms_count set admin_id = ?, count = ?",
+                  [req.body.id, 100],
+                  function (err, rows, fields) {}
+                );
+                conn.query(
                   "insert into user_license set admin_id = ?, license_id = ?",
                   [req.body.id, "d24f35e2-dd3c-11ee-9965-960002791003"],
                   function (err, rows, fields) {
@@ -488,6 +493,67 @@ router.post("/pickUpSmsBonus", auth, function (req, res, next) {
 });
 
 // #endregion
+
+//#region SETUP APP
+
+router.get("/getSetupApp", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from setup_app where admin_id = ?",
+          [req.user.user.admin_id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setSetupApp", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    conn.query(
+      "INSERT INTO setup_app set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(req.body.id);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//#endregion
 
 // #region PROFILE INFO
 router.get("/getProfileInfo", auth, async (req, res, next) => {
@@ -1240,17 +1306,18 @@ router.post("/setClient", auth, function (req, res) {
       );
     } else {
       conn.query(
-        "select * from clients where email = ? or telephone = ?",
-        [req.body.email, req.body.telephone],
+        "select * from clients where (email = ? or telephone = ?) and admin_id = ?",
+        [req.body.email, req.body.telephone, req.user.user.admin_id],
         function (err, rows) {
+          console.log(err);
           if (!err) {
             if (rows.length) {
               conn.release();
               res.json(false);
             } else {
               conn.query(
-                "select * from users where email = ? or telephone = ?",
-                [req.body.email, req.body.telephone],
+                "select * from users where (email = ? or telephone = ?) and admin_id = ?",
+                [req.body.email, req.body.telephone, req.user.user.admin_id],
                 function (err, rows) {
                   if (rows.length) {
                     conn.release();

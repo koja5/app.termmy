@@ -91,8 +91,14 @@ export class LoginComponent implements OnInit {
       .callPostMethod("/api/login", this.loginForm.value)
       .subscribe((data: any) => {
         if (data && data.token) {
+
           this._storageService.setToken(data.token);
-          this._router.navigate(["dashboard/admin"]);
+          const user = this._storageService.getDecodeToken();
+          if (!user.firstname || !user.lastname) {
+            this._router.navigate(["wizard"]);
+          } else {
+            this._router.navigate(["dashboard/admin"]);
+          }
           this.loading = false;
         } else {
           this.error = data.type;

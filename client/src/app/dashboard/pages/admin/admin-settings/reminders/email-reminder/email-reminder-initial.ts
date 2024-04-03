@@ -15,7 +15,7 @@ export class EmailReminderInitial {
       subject: "Reminder for tomorrow appointment",
       message:
         "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting",
-      active: false,
+      active: true,
     },
     clientHappyBirthday: {
       title: "Birthday card",
@@ -44,7 +44,7 @@ export class EmailReminderInitial {
       text: "Day before at 8 p.m",
       subject: "Reminder for tomorrow appointment",
       message: "Reminder: You have an appointment tomorrow at #time. Greeting",
-      active: false,
+      active: true,
     },
   };
 }

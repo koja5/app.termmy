@@ -17,6 +17,7 @@ import { LicenseComponent } from "./license/license.component";
 import { AdminCommonModule } from "../common/admin-common.module";
 import { HolidaysComponent } from "./holidays/holidays.component";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { SmsCounterComponent } from "../common/sms-counter/sms-counter.component";
 
 const routes = [
   {

@@ -67,7 +67,7 @@ export class DynamicFormsComponent implements OnInit {
     private router: ActivatedRoute,
     private _coreTranslationService: CoreTranslationService
   ) {
-    this._coreTranslationService.setAllTranslations();
+    // this._coreTranslationService.setAllTranslations();
   }
 
   ngOnInit() {

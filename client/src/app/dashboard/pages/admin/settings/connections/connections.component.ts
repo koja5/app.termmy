@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { CallApiService } from "app/services/call-api.service";
+import { HelpService } from "app/services/help.service";
+import { MessageService } from "app/services/message.service";
+import { StorageService } from "app/services/storage.service";
 
 @Component({
   selector: "app-connections",
@@ -9,7 +12,12 @@ import { CallApiService } from "app/services/call-api.service";
 export class ConnectionsComponent {
   public data: any;
 
-  constructor(private _service: CallApiService) {}
+  constructor(
+    private _service: CallApiService,
+    private _storageService: StorageService,
+    private _messageService: MessageService,
+    private _helpService: HelpService
+  ) {}
 
   ngOnInit() {
     this._service
@@ -17,6 +25,7 @@ export class ConnectionsComponent {
       .subscribe((data: any) => {
         if (data.length) {
           this.data = data[0];
+          this.sendInfoForSetupApp();
         }
       });
   }
@@ -36,7 +45,23 @@ export class ConnectionsComponent {
       .subscribe((data) => {
         if (data) {
           this.data = null;
+          this.sendInfoForSetupApp();
         }
       });
+  }
+
+  sendInfoForSetupApp() {
+    if (this._storageService.getSessionStorage("setup")) {
+      let setup = this._storageService.getSessionStorage("setup");
+      let setupOld = this._helpService.copyObject(setup);
+      if (this.data && this.data.google) {
+        setup.sync_calendar = true;
+      } else {
+        setup.sync_calendar = false;
+      }
+      if (setup.sync_calendar != setupOld.sync_calendar) {
+        this._messageService.sendSetupApp(setup);
+      }
+    }
   }
 }

@@ -1,7 +1,9 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
@@ -36,6 +38,7 @@ export class DynamicGridComponent {
   @Input() public file: string;
   @Input() public data: any;
   @Input() externalAccounts: any;
+  @Output() submit = new EventEmitter();
   @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
@@ -301,7 +304,10 @@ export class DynamicGridComponent {
   }
 
   submitEmitter(event: any) {
-    if (this._helpService.checkUndefinedProperty(event) && event.type != 'submit') {
+    if (
+      this._helpService.checkUndefinedProperty(event) &&
+      event.type != "submit"
+    ) {
       if (this.config.editSettingsRequest.add.method) {
         this.callSpecificMethod(this.config.editSettingsRequest.add, event);
       } else if (this.config.editSettingsRequest.add.type) {
@@ -344,7 +350,7 @@ export class DynamicGridComponent {
 
   callSpecificMethod(request: any, event) {
     if (request.method === MethodRequest.setClientToGoogle) {
-      if (this.externalAccounts.google) {
+      if (this.externalAccounts && this.externalAccounts.google) {
         this.setClientToGoogle(event);
       } else {
         this.callServerMethod(this.config.editSettingsRequest.add, event);
@@ -376,34 +382,38 @@ export class DynamicGridComponent {
   }
 
   setClientToGoogle(data: any) {
-    this.loader = true;
-    this.closeEditForm();
-    data.token = this.externalAccounts.google;
-    this._service
-      .callPostMethod("/api/google/setClient", data)
-      .subscribe((response: any) => {
-        if (response) {
-          // remove token from google - need to use token for Termmy to push changes in Termmy database
-          delete data.token;
-          data.resourceName = response.resourceName;
-          data.guuid = response.guuid;
-          this._service
-            .callPostMethod("api/setClient", data)
-            .subscribe((data) => {
-              this.refreshDataFromServer();
-            });
-        }
-      });
+    if (this.externalAccounts && this.externalAccounts.google) {
+      this.loader = true;
+      this.closeEditForm();
+      data.token = this.externalAccounts.google;
+      this._service
+        .callPostMethod("/api/google/setClient", data)
+        .subscribe((response: any) => {
+          if (response) {
+            // remove token from google - need to use token for Termmy to push changes in Termmy database
+            delete data.token;
+            data.resourceName = response.resourceName;
+            data.guuid = response.guuid;
+            this._service
+              .callPostMethod("api/setClient", data)
+              .subscribe((data) => {
+                this.refreshDataFromServer();
+              });
+          }
+        });
+    }
   }
 
   deleteClientFromGoogle(body: any) {
-    body.token = this.externalAccounts.google;
-    if (body.resourceName) {
-      this._service
-        .callPostMethod("api/google/deleteClient", body)
-        .subscribe((data) => {
-          this.refreshDataFromServer();
-        });
+    if (this.externalAccounts && this.externalAccounts.google) {
+      body.token = this.externalAccounts.google;
+      if (body.resourceName) {
+        this._service
+          .callPostMethod("api/google/deleteClient", body)
+          .subscribe((data) => {
+            this.refreshDataFromServer();
+          });
+      }
     } else {
       this.refreshDataFromServer();
     }
@@ -412,6 +422,9 @@ export class DynamicGridComponent {
   setResponseData(data: any) {
     if (this.config.request.type === "GET") {
       this.rows = data;
+      this.submit.emit({
+        total: this.rows.length,
+      });
     }
   }
 

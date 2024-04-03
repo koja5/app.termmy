@@ -220,7 +220,8 @@
                 }
             ],
             "oneLine": true,
-            "field": "gender"
+            "field": "gender",
+            "required": true
         },
         {
             "type": "datepicker",
@@ -228,7 +229,8 @@
             "name": "birthday",
             "title": "commonFields.birthday",
             "field": "birthday",
-            "format": "dd.MM.yyyy"
+            "format": "dd.MM.yyyy",
+            "required": true
         },
         {
             "type": "textbox",

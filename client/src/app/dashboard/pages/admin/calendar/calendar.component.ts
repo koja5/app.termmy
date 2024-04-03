@@ -80,6 +80,7 @@ export class CalendarComponent {
   public allClients: any;
   public allServices: any;
   public servicesColor: any = {};
+  public servicesColorText: any = {};
   public schedulerHeight: string;
 
   constructor(
@@ -139,6 +140,7 @@ export class CalendarComponent {
       service_id: new FormControl("", [Validators.required]),
       StartTime: new FormControl("", [Validators.required]),
       EndTime: new FormControl("", [Validators.required]),
+      description: new FormControl(""),
       Subject: new FormControl(""),
       employee_id: new FormControl(""),
       ResourcesIndex: new FormControl(),
@@ -245,6 +247,8 @@ export class CalendarComponent {
   packServices() {
     for (let i = 0; i < this.allServices.length; i++) {
       this.servicesColor[this.allServices[i].id] = this.allServices[i].color;
+      this.servicesColorText[this.allServices[i].id] =
+        this.allServices[i].color_text;
     }
   }
 
@@ -484,6 +488,7 @@ export class CalendarComponent {
                 ? new Date(termines[i].end.dateTime).toLocaleString("en-US")
                 : data.EndTime
             ),
+        description: data.description,
         id: termines[i].id,
         employeeId: data.employeeId
           ? data.employeeId
@@ -723,6 +728,7 @@ export class CalendarComponent {
         Subject: termines[i].Subject,
         StartTime: new Date(termines[i].StartTime),
         EndTime: new Date(termines[i].EndTime),
+        description: termines[i].description,
         id: termines[i].id,
         employeeId: termines[i].employee_id,
         service_id: termines[i].service_id,
@@ -766,16 +772,18 @@ export class CalendarComponent {
     this.calendar.eventSettings.dataSource[index].EndTime = appointment.EndTime
       ? event.EndTime
       : event.EndTime;
+    this.calendar.eventSettings.dataSource[index].description =
+      appointment.description ? event.description : event.description;
     this.calendar.eventSettings.dataSource[index].employeeId =
       appointment.employeeId
         ? appointment.employeeId
         : event.employeeId
         ? event.employeeId
         : event.employee_id;
-    if (this.calendar.eventSettings.dataSource[index].description) {
-      this.calendar.eventSettings.dataSource[index].description =
-        this.appointment.value;
-    }
+    // if (this.calendar.eventSettings.dataSource[index].description) {
+    //   this.calendar.eventSettings.dataSource[index].description =
+    //     this.appointment.value;
+    // }
     this.calendar.refreshEvents();
   }
 
@@ -902,6 +910,7 @@ export class CalendarComponent {
     //SET COLOR FOR EVENT
     args.element.style.backgroundColor =
       this.servicesColor[args.data.service_id];
+    args.element.style.color = this.servicesColorText[args.data.service_id];
   }
 
   onDataBound(args): void {

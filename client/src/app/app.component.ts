@@ -76,10 +76,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this._coreMenuService.setCurrentMenu("main");
 
     // Add languages to the translation service
-    this._translateService.addLangs(["en", "fr", "de", "pt"]);
+    this._translateService.addLangs(["en", "fr", "de", "pt", "rs"]);
 
     // This language will be used as a fallback when a translation isn't found in the current language
     this._translateService.setDefaultLang("en");
+    // this._translateService.use("en");
 
     // Set the translations for the menu
     // this._coreTranslationService.translate(
@@ -88,7 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
     //   menuGerman,
     //   menuPortuguese
     // );
-    this._coreTranslationService.setAllTranslations();
+    // this._coreTranslationService.setAllTranslations();
 
     // Set the private defaults
     this._unsubscribeAll = new Subject();
@@ -121,7 +122,9 @@ export class AppComponent implements OnInit, OnDestroy {
         // ? OR
         // ? User the current browser lang if available, if undefined use 'en'
         // const browserLang = this._translateService.getBrowserLang();
-        // this._translateService.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en');
+        // this._translateService.use(
+        //   browserLang.match(/en|fr|de|pt/) ? browserLang : "en"
+        // );
 
         /**
          * ! Fix : ngxTranslate
@@ -141,8 +144,8 @@ export class AppComponent implements OnInit, OnDestroy {
         // Set the default language to 'en' and then back to 'fr'.
 
         setTimeout(() => {
-          this._translateService.setDefaultLang("en");
-          this._translateService.setDefaultLang(appLanguage);
+          const appLanguage = this.coreConfig.app.appLanguage || "en";
+          this._translateService.use(appLanguage);
         });
 
         /**

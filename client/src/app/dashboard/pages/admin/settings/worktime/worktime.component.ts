@@ -11,6 +11,8 @@ import { HelpService } from "app/services/help.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { FieldConfig } from "app/common/dynamic-component/dynamic-forms/models/field-config";
+import { StorageService } from "app/services/storage.service";
+import { MessageService } from "app/services/message.service";
 
 @Component({
   selector: "app-worktime",
@@ -30,7 +32,9 @@ export class WorktimeComponent implements OnInit {
   constructor(
     private _helpService: HelpService,
     private _service: CallApiService,
-    private _toastr: ToastrComponent
+    private _toastr: ToastrComponent,
+    private _storageService: StorageService,
+    private _messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -123,6 +127,7 @@ export class WorktimeComponent implements OnInit {
         (data) => {
           if (data) {
             this._toastr.showSuccess();
+            this.sendInfoForSetupApp();
           }
         },
         (error) => {
@@ -131,6 +136,17 @@ export class WorktimeComponent implements OnInit {
       );
     } else {
       this._toastr.showWarning();
+    }
+  }
+
+  sendInfoForSetupApp() {
+    if (this._storageService.getSessionStorage("setup")) {
+      let setup = this._storageService.getSessionStorage("setup");
+      let setupOld = this._helpService.copyObject(setup);
+      setup.worktime = true;
+      if (JSON.stringify(this.data) !== JSON.stringify(new WorkTimeEmpty())) {
+        this._messageService.sendSetupApp(setup);
+      }
     }
   }
 }

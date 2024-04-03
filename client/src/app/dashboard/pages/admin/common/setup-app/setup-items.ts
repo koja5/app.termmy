@@ -1,28 +1,35 @@
 export class SetupItems {
   items = [
     {
-      id: "client",
+      id: "clients",
       title: "setupApp.clientTitle",
       text: "setupApp.clientText",
       icon: "fa fa-user-o",
       link: "/dashboard/admin/my-clients",
     },
     {
-      id: "service",
+      id: "services",
       title: "setupApp.serviceTitle",
       text: "setupApp.serviceText",
       icon: "fa fa-bookmark-o",
       link: "/dashboard/admin/my-services",
     },
     {
-      id: "reminder",
-      title: "setupApp.reminderTitle",
-      text: "setupApp.reminderText",
+      id: "worktime",
+      title: "setupApp.worktimeTitle",
+      text: "setupApp.worktimeText",
+      icon: "fa fa-clock-o",
+      link: "/dashboard/admin/settings/worktime",
+    },
+    {
+      id: "sms_reminder",
+      title: "setupApp.smsReminderTitle",
+      text: "setupApp.smsReminderText",
       icon: "fa fa-bell-o",
       link: "/dashboard/admin/settings/reminders",
     },
     {
-      id: "calendar",
+      id: "sync_calendar",
       title: "setupApp.calendarTitle",
       text: "setupApp.calendarText",
       icon: "fa fa-calendar-o",

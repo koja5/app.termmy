@@ -27,8 +27,8 @@
                         <span>{{'licenseStatus.planDescription' | translate}}</span>
                     </div>
                 </div>
-                <div class="col-md-6" *ngIf="license.expiry_date">
-                    <div class="plan-statistics pt-1">
+                <div class="col-md-6">
+                    <div class="plan-statistics pt-1" *ngIf="license.expiry_date">
                         <div class="d-flex justify-content-between">
                             <h5 class="fw-bolder">{{'licenseStatus.days' | translate}}</h5>
                             <h5 class="fw-bolder">{{diffDays}}</h5>
@@ -40,6 +40,7 @@
                         </div>
                         <p class="mt-50">{{diffDays}} {{'licenseStatus.daysReminder' | translate}}</p>
                     </div>
+                    <app-sms-counter></app-sms-counter>
                 </div>
                 <div class="col-12">
                     <a class="btn btn-primary me-1 mt-1 mr-1 waves-effect waves-float waves-light"

@@ -8,56 +8,6 @@
     },
     "config": [
         {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "bio",
-            "title": "commonFields.biography",
-            "field": "bio",
-            "multiline": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "telephone",
-            "title": "commonFields.telephone",
-            "field": "telephone"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "email",
-            "title": "commonFields.email",
-            "field": "email",
-            "readonly": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "address",
-            "title": "commonFields.address",
-            "field": "address"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "zip",
-            "title": "commonFields.zip",
-            "field": "zip"
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "city",
-            "title": "commonFields.city",
-            "field": "city"
-        },
-        {
             "type": "button",
             "request": {
                 "type": "POST",

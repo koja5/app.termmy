@@ -12,6 +12,8 @@ import { takeUntil } from "rxjs/operators";
 
 import { CoreMenuService } from "@core/components/core-menu/core-menu.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { MessageService } from "app/services/message.service";
+import { StorageService } from "app/services/storage.service";
 
 @Component({
   selector: "[core-menu]",
@@ -32,6 +34,7 @@ export class CoreMenuComponent implements OnInit {
   private _unsubscribeAll: Subject<any>;
   private path = "navigation-menu";
   private file = "navigation-menu.json";
+  public token: any;
 
   /**
    *
@@ -41,7 +44,7 @@ export class CoreMenuComponent implements OnInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _coreMenuService: CoreMenuService,
-    private _configurationService: ConfigurationService
+    private _storageService: StorageService
   ) {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
@@ -68,5 +71,6 @@ export class CoreMenuComponent implements OnInit {
 
         this._changeDetectorRef.markForCheck();
       });
+    this.token = this._storageService.getToken();
   }
 }

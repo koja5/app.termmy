@@ -109,7 +109,7 @@
                                             </div>
 
 
-                                            <div class="col-lg-6 col-md-12">
+                                            <div class="col-lg-6 col-md-12 mb-1">
                                                 <label>{{'myCalendar.termineTo' | translate}}</label>
                                                 <span *ngIf="submited&&!appointment.controls.EndTime.valid"
                                                     class="error">
@@ -118,6 +118,12 @@
                                                 <ejs-datetimepicker cssClass="e-outline" class="date-none"
                                                     id="StartTime" formControlName="EndTime" format="dd.MM.yyyy HH:mm"
                                                     timeFormat="HH:mm"></ejs-datetimepicker>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label>{{'myCalendar.description' | translate}}</label>
+                                                <textarea type="text" class="form-control" formControlName="description"
+                                                    rows="3"></textarea>
                                             </div>
                                         </div>
                                     </form>

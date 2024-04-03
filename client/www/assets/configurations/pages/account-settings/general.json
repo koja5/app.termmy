@@ -13,7 +13,8 @@
             "class": "e-outline",
             "name": "firstname",
             "title": "commonFields.firstname",
-            "field": "firstname"
+            "field": "firstname",
+            "required": true
         },
         {
             "type": "textbox",
@@ -21,16 +22,27 @@
             "class": "e-outline",
             "name": "lastname",
             "title": "commonFields.lastname",
-            "field": "lastname"
+            "field": "lastname",
+            "required": true
         },
         {
             "type": "textbox",
-            "width": "col-md-12",
+            "width": "col-md-6",
             "class": "e-outline",
             "name": "email",
             "title": "commonFields.email",
             "field": "email",
-            "readonly": true
+            "readonly": true,
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone",
+            "required": true
         },
         {
             "type": "textbox",
@@ -46,22 +58,52 @@
             "class": "e-outline",
             "name": "company",
             "title": "commonFields.company",
-            "field": "company"
+            "field": "company",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "address",
+            "title": "commonFields.address",
+            "field": "address",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "zip",
+            "title": "commonFields.zip",
+            "field": "zip",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "city",
+            "title": "commonFields.city",
+            "field": "city",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "bio",
+            "title": "commonFields.biography",
+            "field": "bio",
+            "multiline": true
         },
         {
             "type": "button",
-            "request": {
-                "type": "POST",
-                "api": "/api/saveProfileInfo",
-                "parameters": [],
-                "fields": "",
-                "root": ""
-            },
             "response": "toastr",
             "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
-            "title": "Save changes",
+            "title": "general.save",
             "field": "submitAndPay",
             "positionClass": "text-right mt-3 col-md-12"
         }

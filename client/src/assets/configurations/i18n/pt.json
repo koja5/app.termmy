@@ -1,16 +1,13 @@
 {
-    "lang": "pt",
-    "data": {
-        "navigations": {
-            "home": "Lar",
-            "settings": "Configurações",
-            "allUsers": "Todos os usuários",
-            "myLocations": "Meus locais",
-            "myServices": "Meus serviços"
-        },
-        "SAMPLE": {
-            "CONGRATULATIONS": "Parabéns",
-            "BADGE": "Você ganhou medalha de ouro"
-        }
+    "navigations": {
+        "home": "Lar",
+        "settings": "Configurações",
+        "allUsers": "Todos os usuários",
+        "myLocations": "Meus locais",
+        "myServices": "Meus serviços"
+    },
+    "SAMPLE": {
+        "CONGRATULATIONS": "Parabéns",
+        "BADGE": "Você ganhou medalha de ouro"
     }
 }

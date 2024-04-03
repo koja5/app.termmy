@@ -143,6 +143,14 @@
             "field": "EndTime",
             "format": "dd.MM.yyyy HH:mm",
             "timeFormat": "HH:mm"
+        },
+        {
+            "type": "textarea",
+            "width": "col-md-12",
+            "class": "e-field date-none",
+            "name": "description",
+            "title": "myCalendar.description",
+            "field": "description"
         }
     ]
 }

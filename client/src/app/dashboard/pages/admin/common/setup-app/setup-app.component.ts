@@ -1,6 +1,18 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SetupItems } from "./setup-items";
+import { MessageService } from "app/services/message.service";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { StorageService } from "app/services/storage.service";
+import { CallApiService } from "app/services/call-api.service";
+import { SetupApp } from "app/models/setup-app";
 
 @Component({
   selector: "app-setup-app",
@@ -9,15 +21,81 @@ import { SetupItems } from "./setup-items";
 })
 export class SetupAppComponent {
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
-  public processFinished = 20;
+  private _unsubscribeAll: Subject<any>;
+  public complitedPercentage = 0;
   public modalDialog: any;
   public setupItems = new SetupItems();
-  public finished = {
-    service: true,
-    client: true,
-  };
+  public complited = new SetupApp();
 
-  constructor(private _modalService: NgbModal) {}
+  constructor(
+    private _service: CallApiService,
+    private _modalService: NgbModal,
+    private _messageService: MessageService,
+    private _storageService: StorageService,
+    private _changeDetector: ChangeDetectorRef
+  ) {
+    this._unsubscribeAll = new Subject();
+  }
+
+  ngOnInit() {
+    this.initialize();
+
+    this._messageService
+      .getSetupApp()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
+        this.complited = data;
+        this.calculateComplitedPercentage();
+        this._changeDetector.markForCheck();
+        this._service
+          .callPostMethod("api/setSetupApp", this.complited)
+          .subscribe((id: string) => {
+            this.complited.id = id;
+            this._storageService.setSessionStorage("setup", this.complited);
+          });
+      });
+  }
+
+  initialize() {
+    this._service
+      .callGetMethod("api/getSetupApp", "")
+      .subscribe((data: any) => {
+        if (data.length) {
+          this.complited = data[0];
+          this.calculateComplitedPercentage();
+          this._storageService.setSessionStorage("setup", this.complited);
+          this._changeDetector.markForCheck();
+        }
+      });
+  }
+
+  calculateComplitedPercentage() {
+    this.complitedPercentage = 0;
+    if (this.complited.clients) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complited.services) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complited.worktime) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complited.sms_reminder) {
+      this.complitedPercentage += 20;
+    }
+    if (this.complited.sync_calendar) {
+      this.complitedPercentage += 20;
+    }
+    if (this.complited.booking) {
+      this.complitedPercentage += 20;
+    }
+    if (this.complited.payment) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complitedPercentage < 100) {
+      this._storageService.setSessionStorage("setup", this.complited);
+    }
+  }
 
   openSetup() {
     this.modalDialog = this._modalService.open(this.modalForm, {
@@ -27,7 +105,8 @@ export class SetupAppComponent {
     });
   }
 
-  hideSetup() {
+  startSetup() {
+    this._storageService.setSessionStorage("setup", this.complited);
     this.modalDialog.close();
   }
 }

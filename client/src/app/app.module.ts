@@ -2,11 +2,15 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { Router, RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from "@angular/common/http";
 
 import "hammerjs";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { ToastrModule } from "ngx-toastr"; // For auth after login toast
 
 import { CoreModule } from "@core/core.module";
@@ -23,6 +27,7 @@ import { CommonModule } from "@angular/common";
 import { LoginGuardService } from "./services/login-guard/login-guard.service";
 import { LoggedGuard } from "./services/login-guard/logged-guard.service";
 import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service";
+import { HttpLoaderFactory } from "./services/httpLoaderFactory";
 
 const appRoutes: Routes = [
   {
@@ -75,7 +80,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled",
     }),
-    TranslateModule.forRoot(),
+    // TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
 
     //NgBootstrap
     NgbModule,

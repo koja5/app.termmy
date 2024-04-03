@@ -13,7 +13,7 @@ export class SmsReminderInitial {
       text: "Day before at 8 p.m",
       message:
         "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting",
-      active: false,
+      active: true,
     },
     clientHappyBirthday: {
       title: "Birthday card",
@@ -39,7 +39,7 @@ export class SmsReminderInitial {
       text: "Day before at 8 p.m",
       message:
         "Reminder: You have an appointment tomorrow at #time. Greeting",
-      active: false,
+      active: true,
     },
   };
 }
