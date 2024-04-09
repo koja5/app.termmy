@@ -25,6 +25,7 @@ import { locale as menuEnglish } from "app/menu/i18n/en";
 import { locale as menuFrench } from "app/menu/i18n/fr";
 import { locale as menuGerman } from "app/menu/i18n/de";
 import { locale as menuPortuguese } from "app/menu/i18n/pt";
+import { StorageService } from "./services/storage.service";
 
 @Component({
   selector: "app-root",
@@ -64,7 +65,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreLoadingScreenService: CoreLoadingScreenService,
     private _coreMenuService: CoreMenuService,
     private _coreTranslationService: CoreTranslationService,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _storageService: StorageService
   ) {
     // Get the application main menu
 
@@ -116,8 +118,13 @@ export class AppComponent implements OnInit, OnDestroy {
         // Change application language? Read the ngxTranslate Fix
 
         // ? Use app-config.ts file to set default language
-        const appLanguage = this.coreConfig.app.appLanguage || "en";
-        this._translateService.use(appLanguage);
+        const language = this._storageService.getSelectedLanguage();
+        if (language) {
+          this._translateService.use(language);
+        } else {
+          const appLanguage = this.coreConfig.app.appLanguage || "en";
+          this._translateService.use(appLanguage);
+        }
 
         // ? OR
         // ? User the current browser lang if available, if undefined use 'en'
@@ -144,8 +151,13 @@ export class AppComponent implements OnInit, OnDestroy {
         // Set the default language to 'en' and then back to 'fr'.
 
         setTimeout(() => {
-          const appLanguage = this.coreConfig.app.appLanguage || "en";
-          this._translateService.use(appLanguage);
+          const language = this._storageService.getSelectedLanguage();
+          if (language) {
+            this._translateService.use(language);
+          } else {
+            const appLanguage = this.coreConfig.app.appLanguage || "en";
+            this._translateService.use(appLanguage);
+          }
         });
 
         /**

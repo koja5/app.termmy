@@ -214,6 +214,7 @@
     &.vertical-menu-modern {
       .main-menu {
         width: $menu-expanded-width;
+        z-index: 100;
       }
     }
   }

@@ -5,4 +5,5 @@ export class CalendarSettings {
   selectedEmployeesFullInfo: any;
   location_id: any;
   location_data: any;
+  currentView?: string;
 }

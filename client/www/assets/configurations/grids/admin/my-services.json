@@ -104,7 +104,7 @@
                     "menu": [
                         {
                             "type": "edit",
-                            "actionName": "Edit",
+                            "actionName": "general.edit",
                             "icon": "edit",
                             "formDialog": {
                                 "type": "sidebar",
@@ -113,7 +113,7 @@
                         },
                         {
                             "type": "delete",
-                            "actionName": "Delete",
+                            "actionName": "general.delete",
                             "icon": "trash",
                             "executeAction": {
                                 "request": {

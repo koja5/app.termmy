@@ -1,32 +1,17 @@
 {
     "type": "vertical",
     "contentHeader": {
-        "headerTitle": "Settings",
-        "actionButton": false,
-        "breadcrumb": {
-            "type": "",
-            "links": [
-                {
-                    "name": "dashboard",
-                    "isLink": false,
-                    "link": "/"
-                },
-                {
-                    "name": "settings",
-                    "isLink": false,
-                    "link": "/"
-                }
-            ]
-        }
+        "headerTitle": "accountSettings.title",
+        "actionButton": false
     },
     "navigations": [
         {
-            "title": "General",
+            "title": "accountSettings.general",
             "link": "/dashboard/account-settings/general",
             "icon": "briefcase"
         },
         {
-            "title": "Change password",
+            "title": "accountSettings.changePassword",
             "link": "/dashboard/account-settings/change-password",
             "icon": "briefcase"
         }

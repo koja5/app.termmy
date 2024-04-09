@@ -82,6 +82,7 @@ export class CalendarComponent {
   public servicesColor: any = {};
   public servicesColorText: any = {};
   public schedulerHeight: string;
+  public currentView = "WorkWeek";
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -106,8 +107,8 @@ export class CalendarComponent {
   initialize() {
     this.executeFunctionForPopup();
     this.initializeForm();
+    this.checkStorage();
     if (this.multiCalendar) {
-      this.checkStorage();
       this.getWorktimeForEmployees();
       this.getExternalAccountsForMultiCalendar();
     } else {
@@ -915,6 +916,7 @@ export class CalendarComponent {
 
   onDataBound(args): void {
     var renderedDates = this.calendar.activeView.getRenderDates();
+    this.setCurrentView(this.calendar.activeView.viewClass);
     this.calendar.resetWorkHours();
     var days: Date[] = [];
     for (var i = 0; i < renderedDates.length; i++) {
@@ -928,6 +930,10 @@ export class CalendarComponent {
         // );
       }
     }
+  }
+
+  onNavigation(args): void {
+    console.log(args);
   }
 
   onRenderCell(args: any): void {
@@ -1012,6 +1018,23 @@ export class CalendarComponent {
       });
     }
     return array;
+  }
+
+  setCurrentView(view: string) {
+    let currentView = "";
+    if (view === "e-day-view") {
+      currentView = "Day";
+    } else if (view === "e-week-view") {
+      currentView = "Week";
+    } else if (view === "e-work-week-view") {
+      currentView = "WorkWeek";
+    } else if (view === "e-month-view") {
+      currentView = "Month";
+    } else if (view === "e-agenda-view") {
+      currentView = "Agenda";
+    }
+    this.calendarSettings.currentView = currentView;
+    this._storageService.setCalendarConfig(this.calendarSettings);
   }
 
   //#endregion
