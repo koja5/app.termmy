@@ -286,7 +286,7 @@
         "title": "Booking settings",
         "text": "Set up your booking page and customize!",
         "activeOrDeactiveBookingPage": "Active or deactive your booking page",
-        "bookingRootLink": "https://termmy.com/",
+        "bookingRootLink": "https://termmy.com/booking/",
         "bookingLinkExists": "This booking link exists. Link must to be unique. Please choose some else name",
         "bookingLink": "Booking link",
         "brandingText": "Booking website branding",

@@ -10,9 +10,12 @@ import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { VerifiedMailComponent } from "./other-auth-pages/verified-mail/verified-mail.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
+import { HttpClient } from "@angular/common/http";
+import { SelectLanguageComponent } from './common/select-language/select-language.component';
 
 // routing
 const routes: Routes = [
@@ -52,6 +55,7 @@ const routes: Routes = [
     ResetPasswordComponent,
     ForgotPasswordComponent,
     VerifiedMailComponent,
+    SelectLanguageComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +64,13 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CoreCommonModule,
-    TranslateModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [ToastrComponent],
 })

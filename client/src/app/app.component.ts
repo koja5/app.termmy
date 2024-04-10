@@ -81,8 +81,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this._translateService.addLangs(["en", "fr", "de", "pt", "rs"]);
 
     // This language will be used as a fallback when a translation isn't found in the current language
-    this._translateService.setDefaultLang("en");
-    // this._translateService.use("en");
+    // this._translateService.setDefaultLang("de");
+    //this._translateService.use("de");
 
     // Set the translations for the menu
     // this._coreTranslationService.translate(
@@ -115,14 +115,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
         // Set application default language.
 
-        // Change application language? Read the ngxTranslate Fix
-
         // ? Use app-config.ts file to set default language
         const language = this._storageService.getSelectedLanguage();
         if (language) {
+          this._translateService.setDefaultLang(language);
           this._translateService.use(language);
+        } else if (this._translateService.currentLang) {
+          this._translateService.setDefaultLang(
+            this._translateService.currentLang
+          );
+          this._translateService.use(this._translateService.currentLang);
         } else {
-          const appLanguage = this.coreConfig.app.appLanguage || "en";
+          const appLanguage = this.coreConfig.app.appLanguage || "de";
+          this._translateService.setDefaultLang(appLanguage);
           this._translateService.use(appLanguage);
         }
 
@@ -151,14 +156,20 @@ export class AppComponent implements OnInit, OnDestroy {
         // Set the default language to 'en' and then back to 'fr'.
 
         setTimeout(() => {
-          const language = this._storageService.getSelectedLanguage();
           if (language) {
+            this._translateService.setDefaultLang(language);
             this._translateService.use(language);
+          } else if (this._translateService.currentLang) {
+            this._translateService.setDefaultLang(
+              this._translateService.currentLang
+            );
+            this._translateService.use(this._translateService.currentLang);
           } else {
-            const appLanguage = this.coreConfig.app.appLanguage || "en";
+            const appLanguage = this.coreConfig.app.appLanguage || "de";
+            this._translateService.setDefaultLang(appLanguage);
             this._translateService.use(appLanguage);
           }
-        });
+        }, 10);
 
         /**
          * !Fix: ngxTranslate

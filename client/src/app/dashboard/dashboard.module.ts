@@ -13,7 +13,9 @@ import { MiscellaneousModule } from "./pages/miscellaneous/miscellaneous.module"
 import { RouterModule } from "@angular/router";
 import { SuperadminModule } from "./pages/superadmin/superadmin.module";
 import { AccountSettingsComponent } from "./common-pages/account-settings/account-settings.component";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
+import { HttpClient } from "@angular/common/http";
 
 const routes = [
   {
@@ -35,7 +37,7 @@ const routes = [
     path: "admin",
     loadChildren: () =>
       import("./pages/admin/admin.module").then((m) => m.AdminModule),
-  }
+  },
 ];
 
 @NgModule({
@@ -51,7 +53,15 @@ const routes = [
     MiscellaneousModule,
     RouterModule.forChild(routes),
     SuperadminModule,
-    TranslateModule,
+    TranslateModule.forChild({
+      defaultLanguage: "de",
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      extend: true,
+    }),
   ],
 
   providers: [],

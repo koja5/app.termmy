@@ -32,13 +32,15 @@ import {
   MonthService,
   AgendaService,
 } from "@syncfusion/ej2-angular-schedule";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { CommonCustomModule } from "app/common/common-custom.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
-import { LicenseStatusComponent } from './common/license-status/license-status.component';
+import { LicenseStatusComponent } from "./common/license-status/license-status.component";
 import { RecommendedComponent } from "./settings/recommended/recommended.component";
+import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
+import { HttpClient } from "@angular/common/http";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -118,7 +120,7 @@ const routes = [
     EmployeesComponent,
     LocationViewComponent,
     ClientsComponent,
-    AdminSettingsComponent
+    AdminSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -127,7 +129,15 @@ const routes = [
     DynamicModule,
     DynamicSchedulerModule,
     ScheduleModule,
-    TranslateModule,
+    TranslateModule.forChild({
+      defaultLanguage: "de",
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      extend: true,
+    }),
     CommonCustomModule,
     ReactiveFormsModule,
     FormsModule,

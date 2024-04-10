@@ -80,13 +80,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled",
     }),
-    // TranslateModule.forRoot(),
     TranslateModule.forRoot({
+      defaultLanguage: "de",
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+      isolate: false
     }),
 
     //NgBootstrap

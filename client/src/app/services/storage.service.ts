@@ -166,15 +166,21 @@ export class StorageService {
 
   setCalendarConfig(value: any) {
     let config = this.getLocalStorage("config");
-    config.calendar = value ? value : new CalendarSettings();
+    if (config) {
+      config.calendar = value ? value : new CalendarSettings();
+    } else {
+      config["calendar"] = new CalendarSettings();
+    }
 
     this.setLocalStorage("config", config);
   }
 
   getCalendarConfig() {
     let config = this.getLocalStorage("config");
-    return Object.values(config.calendar).length != 0
-      ? config.calendar
+    return config
+      ? Object.values(config.calendar).length != 0
+        ? config.calendar
+        : new CalendarSettings()
       : new CalendarSettings();
   }
 
@@ -186,7 +192,7 @@ export class StorageService {
       }
       return config.app.appLanguage;
     }
-    return "en";
+    return null;
   }
 
   // END EXTERNAL ACCOUNTS

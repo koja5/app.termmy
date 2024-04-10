@@ -91,13 +91,14 @@ export class LoginComponent implements OnInit {
       .callPostMethod("/api/login", this.loginForm.value)
       .subscribe((data: any) => {
         if (data && data.token) {
-
           this._storageService.setToken(data.token);
           const user = this._storageService.getDecodeToken();
           if (!user.firstname || !user.lastname) {
-            this._router.navigate(["wizard"]);
+            // this._router.navigate(["wizard"]);
+            window.open("wizard", "_self");
           } else {
-            this._router.navigate(["dashboard/admin"]);
+            // this._router.navigate(["dashboard/admin"]);
+            window.open("dashboard/admin", "_self");
           }
           this.loading = false;
         } else {
@@ -138,4 +139,5 @@ export class LoginComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
 }
