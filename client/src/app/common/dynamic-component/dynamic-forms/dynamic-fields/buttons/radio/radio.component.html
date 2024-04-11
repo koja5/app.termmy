@@ -12,6 +12,9 @@
             ''}}</span>
         <app-explanation-mark *ngIf="config.explanation" [explanation]="config.explanation"></app-explanation-mark>
     </label>
+    <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
+        class="error must-label m-0">{{'form.mustFillThisField' |
+        translate}}</p>
     <div class="{{config.oneLine ? 'd-flex' : ''}} mt-75">
         <div *ngFor="let item of config.dataArray" class="form-check form-check-inline {{item.class}}">
             <input class="form-check-input" type="radio" [name]="config.name" [value]="item.id" [id]="item.id"

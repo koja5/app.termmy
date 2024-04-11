@@ -11,7 +11,7 @@
                     <p class="mb-2 pb-75">
                         {{'licensePackages.pricingPlansText' | translate}}
                     </p>
-                    <div class="d-flex align-items-center justify-content-center mb-5 pb-50">
+                    <!-- <div class="d-flex align-items-center justify-content-center mb-5 pb-50">
                         <h6 class="me-1 mb-0">{{'licensePackages.monthly' | translate}}</h6>
                         <div class="form-check form-switch subscription-duration">
                             <input type="checkbox" class="form-check-input" id="priceSwitch"
@@ -19,7 +19,7 @@
                             <label class="form-check-label" for="priceSwitch"></label>
                         </div>
                         <h6 class="ms-50 mb-0">{{'licensePackages.annualy' | translate}}</h6>
-                    </div>
+                    </div> -->
                 </div>
                 <!--/ title text and switch button -->
 
@@ -39,10 +39,9 @@
                                             <div class="plan-price mt-2">
                                                 <sup class="font-medium-1 fw-bold text-primary">$</sup>
                                                 <span
-                                                    class="pricing-basic-value fw-bolder text-primary">{{annualSubscription
-                                                    ? item.annual_price : item.monthly_price}}</span>
-                                                <sub class="pricing-duration text-body font-medium-1 fw-bold">{{annualSubscription
-                                                    ? '/year' : '/month'}}</sub>
+                                                    class="pricing-basic-value fw-bolder text-primary">{{item.monthly_price}}</span>
+                                                <sub
+                                                    class="pricing-duration text-body font-medium-1 fw-bold">/month</sub>
                                             </div>
                                             <small class="annual-pricing d-none text-muted"></small>
                                         </div>
@@ -65,7 +64,7 @@
                 <!--/ pricing plan cards -->
 
 
-                <div *ngIf="license && (license.monthly_price || license.annual_price)"
+                <div *ngIf="license && license.monthly_price"
                     class="col-12 col-sm-offset-2 col-sm-10 col-md-12 col-lg-offset-2 col-lg-8 mx-auto p-0">
                     <app-license-status [currentStatus]="false" [data]="license"></app-license-status>
                 </div>

@@ -1,4 +1,6 @@
-<div *ngIf="reminderConfig">
+<app-loader *ngIf="loader"></app-loader>
+
+<div *ngIf="reminderConfig && !loader">
     <div>
         <div class="row">
             <div class="col-12">

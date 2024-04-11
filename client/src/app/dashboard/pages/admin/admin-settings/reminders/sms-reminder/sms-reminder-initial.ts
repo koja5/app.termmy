@@ -2,43 +2,39 @@ export class SmsReminderInitial {
   active = false;
   config = {
     clientImmediatelyReminder: {
-      title: "Confirmation of booking",
-      text: "Immediately upon appointment",
-      message:
-        "Your appointment #date at #time has been confirmed. Our address is #address. #company",
+      title: "smsReminder.contents.clientImmediatelyReminder.title",
+      text: "smsReminder.contents.clientImmediatelyReminder.text",
+      message: "smsReminder.contents.clientImmediatelyReminder.message",
       active: true,
     },
     clientDayBeforeReminder: {
-      title: "Day before",
-      text: "Day before at 8 p.m",
-      message:
-        "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting",
+      title: "smsReminder.contents.clientDayBeforeReminder.title",
+      text: "smsReminder.contents.clientDayBeforeReminder.text",
+      message: "smsReminder.contents.clientDayBeforeReminder.message",
       active: true,
     },
     clientHappyBirthday: {
-      title: "Birthday card",
-      text: "It is sent on a birthday",
-      message: "Lots of happiness and laughter. Greetings from #company",
+      title: "smsReminder.contents.clientHappyBirthday.title",
+      text: "smsReminder.contents.clientHappyBirthday.text",
+      message: "smsReminder.contents.clientHappyBirthday.message",
       active: false,
     },
     clientThankForCommingToUs: {
-      title: "Thanks for comming",
-      text: "It is sent 1 hour after the appointment",
-      message:
-        "Thank you for your visit, we hope you enjoyed the service. Thank you for your trust! #company",
+      title: "smsReminder.contents.clientThankForCommingToUs.title",
+      text: "smsReminder.contents.clientThankForCommingToUs.text",
+      message: "smsReminder.contents.clientThankForCommingToUs.message",
       active: false,
     },
     employeeImmediatelyReminder: {
-      title: "Confirmation of booking",
-      text: "Immediately upon appointment",
-      message: "New appointment #date at #time has been confirmed. #company",
+      title: "smsReminder.contents.employeeImmediatelyReminder.title",
+      text: "smsReminder.contents.employeeImmediatelyReminder.text",
+      message: "smsReminder.contents.employeeImmediatelyReminder.message",
       active: true,
     },
     employeeDayBeforeReminder: {
-      title: "Day before",
-      text: "Day before at 8 p.m",
-      message:
-        "Reminder: You have an appointment tomorrow at #time. Greeting",
+      title: "smsReminder.contents.employeeDayBeforeReminder.title",
+      text: "smsReminder.contents.employeeDayBeforeReminder.text",
+      message: "smsReminder.contents.employeeDayBeforeReminder.message",
       active: true,
     },
   };

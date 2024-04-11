@@ -3,6 +3,7 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
 import { HelpService } from "app/services/help.service";
+import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
 import Holidays from "date-holidays";
 
@@ -23,7 +24,8 @@ export class HolidaysComponent {
     private _storageService: StorageService,
     private _service: CallApiService,
     private _toastr: ToastrComponent,
-    private _helpService: HelpService
+    private _helpService: HelpService,
+    private _messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -80,6 +82,7 @@ export class HolidaysComponent {
   }
 
   saveHoliday() {
+    this.sendSetupApp();
     this._service
       .callPostMethod("/api/setHoliday", this.selectedCountry)
       .subscribe((data) => {
@@ -88,5 +91,17 @@ export class HolidaysComponent {
           this._toastr.showSuccess();
         }
       });
+  }
+
+  sendSetupApp() {
+    if (this._storageService.getSessionStorage("setup")) {
+      let setup = this._storageService.getSessionStorage("setup");
+      if (this.selectedCountry.code) {
+        setup.holiday = true;
+      } else {
+        setup.holiday = false;
+      }
+      this._messageService.sendSetupApp(setup);
+    }
   }
 }

@@ -169,6 +169,7 @@ router.post("/cancelStripeAccount", auth, function (req, res) {
 // #region PAYMENT PROCESSING
 
 router.post("/createPaymentIntent", async (req, res, next) => {
+  console.log(req.body.amount);
   const paymentIntent = await require("stripe")(
     req.body.stripeAccount
       ? (process.env.STRIPE_KEY,
@@ -177,7 +178,7 @@ router.post("/createPaymentIntent", async (req, res, next) => {
         })
       : process.env.STRIPE_KEY
   ).paymentIntents.create({
-    amount: req.body.amount * 100,
+    amount: (req.body.amount * 100.0).toFixed(0),
     currency: "eur",
   });
 

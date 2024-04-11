@@ -8,4 +8,5 @@ export class SetupApp {
   sync_calendar?: boolean;
   booking?: boolean;
   payment?: boolean;
+  holiday?: boolean;
 }

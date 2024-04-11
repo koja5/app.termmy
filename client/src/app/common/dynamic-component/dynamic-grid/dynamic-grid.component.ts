@@ -26,6 +26,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 import { TranslateService } from "@ngx-translate/core";
 import { MethodRequest } from "app/enums/method-request";
+import { ExecuteAction } from "app/enums/execute-action";
 
 @Component({
   selector: "app-dynamic-grid",
@@ -66,6 +67,7 @@ export class DynamicGridComponent {
   public loader = false;
   public loaderContent = false;
   public googleContacts: any;
+  public createNewRecords = true;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -462,6 +464,7 @@ export class DynamicGridComponent {
 
   checkConfigurationFunctionsForEditOption(item, row) {
     this.executeActionConfig = item.formDialog;
+    this.createNewRecords = false;
     setTimeout(() => {
       this.setValue(this.config.config, row);
     }, 50);
@@ -470,6 +473,16 @@ export class DynamicGridComponent {
       this.toggleSidebar("sidebar");
     } else {
       this.showModalFormDialog();
+    }
+  }
+
+  resetFormValue() {
+    for (let i = 0; i < this.config.config.length; i++) {
+      this.form.setValue(
+        this.config.config[i]["name"],
+        null,
+        this.config.config[i]["type"]
+      );
     }
   }
 

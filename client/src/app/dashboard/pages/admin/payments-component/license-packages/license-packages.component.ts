@@ -33,11 +33,10 @@ export class LicensePackagesComponent {
   }
 
   removeFreePlan() {
-    if (this.license.annual_price || this.license.monthly_price) {
+    if (this.license.monthly_price) {
       for (let i = 0; i < this.licensePackages.length; i++) {
         if (
-          !Number(this.licensePackages[i].monthly_price) ||
-          !Number(this.licensePackages[i].annual_price)
+          !Number(this.licensePackages[i].monthly_price)
         ) {
           this.licensePackages.splice(i, 1);
         }

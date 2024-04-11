@@ -102,8 +102,8 @@
    "generalDialog": {
       "areYouSure": "Bist du sicher?",
       "deleteQuestion": "Mit der Bestätigung gehen Daten verloren, die nicht mehr wiederhergestellt werden können!",
-      "Ja": "Ja, bitte durchführen",
-      "Nein": "Nein"
+      "yes": "Ja, bitte durchführen",
+      "no": "Nein"
    },
    "form": {
       "mustFillThisField": "Bitte dieses Feld ausfüllen!",
@@ -153,7 +153,9 @@
       "price": "Preis",
       "min": "Minuten",
       "currency": "€",
-      "description": "Beschreibung"
+      "description": "Beschreibung",
+      "color": "Farbe der Zelle festlegen",
+      "colorText": "Legen Sie die Textfarbe in der Zelle fest"
    },
    "myCalendar": {
       "client": "Kunde",
@@ -162,6 +164,7 @@
       "service": "Dienstleistung",
       "locations": "Stnadort",
       "employees": "Mitarbeiter",
+      "description": "Beschreibung",
       "notSetWorkTimeForUser": "Für diesen Benutzer wurden keine Arbeitszeiten festgelegt",
       "connectedThisCalendarWithGoogle": "Dieser Kalender ist mit Google verbunden!",
       "selectLocationAndEmployee": "Bitte wählen Sie Standort und Benutzer, um den Kalender zu sehen",
@@ -250,7 +253,7 @@
       "title": "Online Buchung",
       "text": "Richten Sie Ihre Buchungsseite ein und passen Sie sie an!",
       "activeOrDeactiveBookingPage": "Buchungsseite aktivieren oder deaktivieren",
-      "bookingRootLink": "https://termmy.com/",
+      "bookingRootLink": "https://termmy.com/booking/",
       "bookingLinkExists": "Dieser Buchungslink existiert bereits. Der Link muss einzigartig sein. Bitte wählen Sie einen anderen Namen",
       "bookingLink": "Buchungslink",
       "brandingText": "Branding der Buchungswebsite",
@@ -322,8 +325,40 @@
       "sentTestSMSTo": "Test-SMS an #telephone gesendet",
       "needToInsertTelephoneAtSettings": "Sie haben keine Telefonnummer angegeben. Bitte fügen Sie diese hinzu!",
       "activeSmsReminder": "Aktiviere SMS-Erinnerung",
-      "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen."
-   },
+      "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen.",
+      "contents": {
+         "clientImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+         },
+         "clientDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+         },
+         "clientHappyBirthday": {
+            "title": "Geburtstagskarte",
+            "text": "Es wird an einem Geburtstag verschickt",
+            "message": "Viel Freude und Lachen. Grüße von #company"
+         },
+         "clientThankForCommingToUs": {
+            "title": "Danke fürs Kommen",
+            "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+         },
+         "employeeImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+         },
+         "employeeDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+         }
+      }
+  },
    "emailReminder": {
       "title": "E-Mail-Erinnerung",
       "text": "Automatisierte E-Mail-Erinnerungen einrichten",
@@ -342,8 +377,46 @@
       "testMessage": "Test Email",
       "subject": "Betreff",
       "message": "Nachricht",
-      "sentTestEmailTo": "Test-E-Mail an #email senden"
-   },
+      "sentTestEmailTo": "Test-E-Mail an #email senden",
+      "contents": {
+         "clientImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "subject": "Ihr Termin ist bestätigt",
+            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+         },
+         "clientDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "subject": "Erinnerung an Termin morgen",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+         },
+         "clientHappyBirthday": {
+            "title": "Geburtstagskarte",
+            "text": "Es wird an einem Geburtstag verschickt",
+            "subject": "Alles Gute zum Geburtstag!",
+            "message": "Viel Freude und Lachen. Grüße von #company"
+         },
+         "clientThankForCommingToUs": {
+            "title": "Danke fürs Kommen",
+            "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
+            "subject": "Danke!",
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+         },
+         "employeeImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "subject": "Sie haben einen neuen Termin",
+            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+         },
+         "employeeDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "subject": "Erinnerung an Termin morgen",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+         }
+      }
+  },
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
@@ -371,8 +444,8 @@
       "threeMonthSubscription": "Ich möchte 3 MONATE verlängern",
       "sixMonthSubscription": "Ich möchte 6 MONATE verlängern",
       "annualSubscription": "Ich möchte ein JAHR verlängern",
+      "discount5": "-5 % Rabatt",
       "discount10": "-10 % Rabatt",
-      "discount20": "-20 % Rabatt",
       "payForLicense": "Lizenz bezahlen",
       "successfullyPaidLicense": "Lizenz erfolgreich bezahlt"
    },
@@ -511,5 +584,26 @@
       "prefix": "Prefix",
       "gatewayEmail": "Gateway E-Mail",
       "active": "Aktiv"
-   }
+   },
+   "setupApp": {
+      "setup": "Termmy einrichten",
+      "title": "Richten Sie Termmy für den Erfolg ein",
+      "text": "Führen Sie die folgenden Schritte aus, damit Sie das volle Potenzial Ihres Unternehmens ausschöpfen können.",
+      "clientTitle": "Kunden hinzufügen",
+      "clientText": "Organisieren Sie Ihre Kunden, führen Sie detaillierte Notizen und sehen Sie deren gesamten Terminverlauf.",
+      "serviceTitle": "Passen Sie Ihre Dienste an",
+      "serviceText": "Legen Sie Preis, Dauer, Farbe oder Service fest und blockieren Sie bei Bedarf zusätzliche Zeit.",
+      "worktimeTitle": "Arbeitszeit",
+      "worktimeText": "Legen Sie Ihre Arbeitszeiten fest, wenn Sie verfügbar sind, um Ihre Dienste anzubieten.",
+      "smsReminderTitle": "Aktivieren Sie SMS-Erinnerungen",
+      "smsReminderText": "Stellen Sie sicher, dass Kunden zu Terminen erscheinen, indem Sie ihnen vorgefertigte SMS-Erinnerungen senden.",
+      "calendarTitle": "Synchronisieren Sie Ihre Kalender",
+      "calendarText": "Termmy vereinfacht Ihr Leben, indem es eine Verbindung zu all Ihren anderen Kalendern herstellt.",
+      "bookingTitle": "Aktivieren Sie Ihre Buchungswebsite",
+      "bookingText": "Ermöglichen Sie Ihren Kunden, auf Ihrer personalisierten Buchungswebsite basierend auf Ihrem Zeitplan selbst zu buchen",
+      "paymentTitle": "Geld online zulassen",
+      "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
+      "holidayTitle": "Urlaub",
+      "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
+  }
 }

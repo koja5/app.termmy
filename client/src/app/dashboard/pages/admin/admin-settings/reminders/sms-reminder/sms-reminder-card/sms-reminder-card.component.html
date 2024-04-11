@@ -1,7 +1,7 @@
 <div class="card border {{!item.active ? 'inactive' : ''}}">
     <div class="card-header d-flex justify-content-between align-items-center pb-1 border-bottom">
         <div>
-            <h5 class="card-title">{{item.title}} <app-explanation-mark
+            <h5 class="card-title">{{item.title | translate}} <app-explanation-mark
                     [explanation]="item.text | translate"></app-explanation-mark></h5>
 
         </div>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="card-body mt-2 font-italic">
-        {{item.message}}
+        {{item.message | translate}}
     </div>
     <div class="text-right status">
         <span *ngIf="item.active" class="badge badge-light-success">{{'smsReminder.active' | translate}}</span>

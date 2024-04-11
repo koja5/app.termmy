@@ -111,7 +111,7 @@ export class PaymentProcessingComponent {
   createPaymentIntent() {
     this._service
       .callPostMethod("api/payment/stripe/createPaymentIntent", {
-        amount: this.amount,
+        amount: Number(this.amount),
         stripeAccount: this.stripeAccount,
       })
       .subscribe((data) => {

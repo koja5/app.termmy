@@ -4189,15 +4189,16 @@ class AppComponent {
     this._coreConfigService.config.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.takeUntil)(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
       // Set application default language.
-      // Change application language? Read the ngxTranslate Fix
-      this._translateService.currentLang = "";
       // ? Use app-config.ts file to set default language
       const language = this._storageService.getSelectedLanguage();
       if (language) {
         this._translateService.setDefaultLang(language);
         this._translateService.use(language);
+      } else if (this._translateService.currentLang) {
+        this._translateService.setDefaultLang(this._translateService.currentLang);
+        this._translateService.use(this._translateService.currentLang);
       } else {
-        const appLanguage = this.coreConfig.app.appLanguage || "en";
+        const appLanguage = this.coreConfig.app.appLanguage || "de";
         this._translateService.setDefaultLang(appLanguage);
         this._translateService.use(appLanguage);
       }
@@ -4222,16 +4223,18 @@ class AppComponent {
        **/
       // Set the default language to 'en' and then back to 'fr'.
       setTimeout(() => {
-        const language = this._storageService.getSelectedLanguage();
         if (language) {
           this._translateService.setDefaultLang(language);
           this._translateService.use(language);
+        } else if (this._translateService.currentLang) {
+          this._translateService.setDefaultLang(this._translateService.currentLang);
+          this._translateService.use(this._translateService.currentLang);
         } else {
-          const appLanguage = this.coreConfig.app.appLanguage || "en";
+          const appLanguage = this.coreConfig.app.appLanguage || "de";
           this._translateService.setDefaultLang(appLanguage);
           this._translateService.use(appLanguage);
         }
-      }, 100);
+      }, 10);
       /**
        * !Fix: ngxTranslate
        * ----------------------------------------------------------------------------------------------------
@@ -5254,7 +5257,7 @@ class PaymentProcessingComponent {
   }
   createPaymentIntent() {
     this._service.callPostMethod("api/payment/stripe/createPaymentIntent", {
-      amount: this.amount,
+      amount: Number(this.amount),
       stripeAccount: this.stripeAccount
     }).subscribe(data => {
       this.elementsOptions.clientSecret = data;
@@ -5570,7 +5573,7 @@ const _c1 = function (a0) {
     "width": a0
   };
 };
-function LicenseStatusComponent_div_0_div_1_div_33_div_7_Template(rf, ctx) {
+function LicenseStatusComponent_div_0_div_1_div_32_div_7_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 20);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](1, "div", 21);
@@ -5583,7 +5586,7 @@ function LicenseStatusComponent_div_0_div_1_div_33_div_7_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpureFunction1"](5, _c1, ctx_r10.expiryPercentage));
   }
 }
-function LicenseStatusComponent_div_0_div_1_div_33_Template(rf, ctx) {
+function LicenseStatusComponent_div_0_div_1_div_32_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 15)(1, "div", 16)(2, "h5", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](3);
@@ -5592,7 +5595,7 @@ function LicenseStatusComponent_div_0_div_1_div_33_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](5, "h5", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](6);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](7, LicenseStatusComponent_div_0_div_1_div_33_div_7_Template, 2, 7, "div", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](7, LicenseStatusComponent_div_0_div_1_div_32_div_7_Template, 2, 7, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](8, "p", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](9);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](10, "translate");
@@ -5610,11 +5613,11 @@ function LicenseStatusComponent_div_0_div_1_div_33_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate2"]("", ctx_r7.diffDays, " ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](10, 7, "licenseStatus.daysReminder"), "");
   }
 }
-function LicenseStatusComponent_div_0_div_1_button_39_Template(rf, ctx) {
+function LicenseStatusComponent_div_0_div_1_button_38_Template(rf, ctx) {
   if (rf & 1) {
     const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function LicenseStatusComponent_div_0_div_1_button_39_Template_button_click_0_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function LicenseStatusComponent_div_0_div_1_button_38_Template_button_click_0_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r12);
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](3);
       const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵreference"](2);
@@ -5656,21 +5659,20 @@ function LicenseStatusComponent_div_0_div_1_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](24, "div", 11)(25, "h5");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](26);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](27, "translate");
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](28, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](29, "span");
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](30);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](31, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](28, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](30, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](32, "div", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](33, LicenseStatusComponent_div_0_div_1_div_33_Template, 11, 9, "div", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](34, "app-sms-counter");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](31, "div", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](32, LicenseStatusComponent_div_0_div_1_div_32_Template, 11, 9, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](33, "app-sms-counter");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](35, "div", 6)(36, "a", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](38, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](34, "div", 6)(35, "a", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](36);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](37, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](39, LicenseStatusComponent_div_0_div_1_button_39_Template, 3, 3, "button", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](38, LicenseStatusComponent_div_0_div_1_button_38_Template, 3, 3, "button", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()()()();
   }
   if (rf & 2) {
@@ -5692,13 +5694,13 @@ function LicenseStatusComponent_div_0_div_1_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r2.license.expiry_date);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate2"]("", ctx_r2.license.annual_subscription ? ctx_r2.license.annual_price : ctx_r2.license.monthly_price, " ", ctx_r2.license.annual_subscription ? _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](27, 22, "licenseStatus.perYear") : _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](28, 24, "licenseStatus.perMonth"), " ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](31, 26, "licenseStatus.planDescription"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate2"]("", ctx_r2.license.monthly_price, " ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](27, 22, "licenseStatus.perMonth"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](30, 24, "licenseStatus.planDescription"));
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r2.license.expiry_date);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](38, 28, "licenseStatus.updatePlan"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](37, 26, "licenseStatus.updatePlan"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r2.license.license_id !== ctx_r2.getBasicLicenseType());
   }
@@ -5795,7 +5797,7 @@ function LicenseStatusComponent_div_0_div_2_Template(rf, ctx) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r17);
       const ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](2);
       ctx_r24.annualSubscription = "annual";
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r24.selectPackage(ctx_r24.license.annual_price, 12));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r24.selectPackage(ctx_r24.licensePriceFor12Months, 12));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](34, "label", 38);
@@ -5835,15 +5837,15 @@ function LicenseStatusComponent_div_0_div_2_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" (", ctx_r3.licensePriceFor6Months, " \u20AC)");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](31, 28, "licenseStatus.discount10"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](31, 28, "licenseStatus.discount5"));
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("checked", ctx_r3.annualSubscription ? true : false)("ngModel", ctx_r3.annualSubscription);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](36, 30, "licenseStatus.annualSubscription"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" (", ctx_r3.license.annual_price, " \u20AC) ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" (", ctx_r3.licensePriceFor12Months, " \u20AC) ");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](42, 32, "licenseStatus.discount20"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](42, 32, "licenseStatus.discount10"));
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r3.licenseSubscription.price);
   }
@@ -5851,7 +5853,7 @@ function LicenseStatusComponent_div_0_div_2_Template(rf, ctx) {
 function LicenseStatusComponent_div_0_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](1, LicenseStatusComponent_div_0_div_1_Template, 40, 30, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](1, LicenseStatusComponent_div_0_div_1_Template, 39, 28, "div", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](2, LicenseStatusComponent_div_0_div_2_Template, 44, 34, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
   }
@@ -5860,7 +5862,7 @@ function LicenseStatusComponent_div_0_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r0.currentStatus);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r0.license.monthly_price && ctx_r0.license.annual_price);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx_r0.license.monthly_price);
   }
 }
 class LicenseStatusComponent {
@@ -5897,10 +5899,11 @@ class LicenseStatusComponent {
     this.setInitializePrice();
   }
   setInitializePrice() {
-    this.licenseSubscription.price = this.license.annual_price;
     this.licenseSubscription.duration = 12;
     this.licensePriceFor3Months = (3 * this.license.monthly_price).toFixed(2);
-    this.licensePriceFor6Months = (6 * this.license.monthly_price * 0.9).toFixed(2);
+    this.licensePriceFor6Months = (6 * this.license.monthly_price * 0.95).toFixed(2);
+    this.licensePriceFor12Months = (12 * this.license.monthly_price * 0.9).toFixed(2);
+    this.licenseSubscription.price = this.licensePriceFor12Months;
   }
   additionalCalculate() {
     this.calculateDiffDays();
@@ -5924,7 +5927,7 @@ class LicenseStatusComponent {
     this.licenseSubscription.price = null;
     this.licenseSubscription.duration = duration;
     setTimeout(() => {
-      this.licenseSubscription.price = price;
+      this.licenseSubscription.price = price.toString();
     }, 20);
   }
   cancelSubscription() {
@@ -6225,7 +6228,7 @@ class SetupAppComponent {
       this.complitedPercentage += 10;
     }
     if (this.complited.sms_reminder) {
-      this.complitedPercentage += 20;
+      this.complitedPercentage += 10;
     }
     if (this.complited.sync_calendar) {
       this.complitedPercentage += 20;
@@ -6234,6 +6237,9 @@ class SetupAppComponent {
       this.complitedPercentage += 20;
     }
     if (this.complited.payment) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complited.holiday) {
       this.complitedPercentage += 10;
     }
     if (this.complitedPercentage < 100) {
@@ -6339,6 +6345,12 @@ class SetupItems {
       text: "setupApp.paymentText",
       icon: "fa fa-credit-card",
       link: "/dashboard/admin/settings/online-payment"
+    }, {
+      id: "holiday",
+      title: "setupApp.holidayTitle",
+      text: "setupApp.holidayText",
+      icon: "fa fa-calendar-times-o",
+      link: "/dashboard/admin/settings/holidays"
     }];
   }
 }
@@ -10912,7 +10924,7 @@ class StorageService {
       }
       return config.app.appLanguage;
     }
-    return "en";
+    return null;
   }
   static #_ = this.ɵfac = function StorageService_Factory(t) {
     return new (t || StorageService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](ngx_cookie__WEBPACK_IMPORTED_MODULE_5__.CookieService));

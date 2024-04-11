@@ -81,7 +81,7 @@ export class SetupAppComponent {
       this.complitedPercentage += 10;
     }
     if (this.complited.sms_reminder) {
-      this.complitedPercentage += 20;
+      this.complitedPercentage += 10;
     }
     if (this.complited.sync_calendar) {
       this.complitedPercentage += 20;
@@ -90,6 +90,9 @@ export class SetupAppComponent {
       this.complitedPercentage += 20;
     }
     if (this.complited.payment) {
+      this.complitedPercentage += 10;
+    }
+    if (this.complited.holiday) {
       this.complitedPercentage += 10;
     }
     if (this.complitedPercentage < 100) {

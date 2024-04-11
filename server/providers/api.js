@@ -2022,7 +2022,7 @@ router.get("/getMyLicense", auth, function (req, res) {
     }
 
     conn.query(
-      "select u.*, l.monthly_price, l.annual_price, l.name from user_license u join licenses l on u.license_id = l.id where admin_id = ?",
+      "select u.*, l.monthly_price, l.name from user_license u join licenses l on u.license_id = l.id where admin_id = ?",
       [req.user.user.admin_id],
       function (err, rows) {
         conn.release();

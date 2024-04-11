@@ -20,9 +20,8 @@
                         <span *ngIf="license.expiry_date">{{'licenseStatus.notifyBeforeExpired' | translate}}</span>
                     </div>
                     <div class="mb-2 mb-md-1">
-                        <h5>{{license.annual_subscription ? license.annual_price : license.monthly_price}}
-                            {{license.annual_subscription ? ('licenseStatus.perYear' | translate) :
-                            ('licenseStatus.perMonth' | translate)}}
+                        <h5>{{license.monthly_price}}
+                            {{'licenseStatus.perMonth' | translate}}
                         </h5>
                         <span>{{'licenseStatus.planDescription' | translate}}</span>
                     </div>
@@ -56,7 +55,7 @@
         </div>
     </div>
 
-    <div class="card" *ngIf="license.monthly_price && license.annual_price">
+    <div class="card" *ngIf="license.monthly_price">
         <div class="card-header">
             <h4 class="card-title full-width border-bottom">{{'licenseStatus.extendCurrentPlan' | translate}}</h4>
         </div>
@@ -90,18 +89,18 @@
                         {{'licenseStatus.sixMonthSubscription' | translate}} <span class="price">
                             ({{licensePriceFor6Months}}
                             €)</span>
-                    </label> &nbsp; <span class="badge badge-light-primary">{{'licenseStatus.discount10' |
+                    </label> &nbsp; <span class="badge badge-light-primary">{{'licenseStatus.discount5' |
                         translate}}</span>
                 </div>
                 <div class="custom-control custom-radio mt-1">
                     <input class="custom-control-input" type="radio" name="subscription" id="annual"
                         [checked]="annualSubscription ? true : false" value="annual" [(ngModel)]="annualSubscription"
-                        (click)="annualSubscription = 'annual'; selectPackage(license.annual_price, 12)">
+                        (click)="annualSubscription = 'annual'; selectPackage(licensePriceFor12Months, 12)">
                     <label class="custom-control-label" for="annual">
                         {{'licenseStatus.annualSubscription' | translate}} <span class="price">
-                            ({{license.annual_price}} €) </span>
+                            ({{licensePriceFor12Months}} €) </span>
                         &nbsp;
-                        <span class="badge badge-light-primary">{{'licenseStatus.discount20' |
+                        <span class="badge badge-light-primary">{{'licenseStatus.discount10' |
                             translate}}</span>
                     </label>
                 </div>

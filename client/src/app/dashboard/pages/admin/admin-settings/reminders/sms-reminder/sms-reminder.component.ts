@@ -4,6 +4,7 @@ import { SmsReminderInitial } from "./sms-reminder-initial";
 import { CallApiService } from "app/services/call-api.service";
 import { StorageService } from "app/services/storage.service";
 import { MessageService } from "app/services/message.service";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-sms-reminder",
@@ -17,11 +18,20 @@ export class SmsReminderComponent {
   constructor(
     private _service: CallApiService,
     private _storageService: StorageService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _translate: TranslateService
   ) {}
 
   ngOnInit() {
     this.initialize();
+
+    this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this._translate.use(event.lang);
+      this.loader = true;
+      this.initializeReminderConfig();
+      this.setSmsReminderConfig();
+      this.loader = false;
+    });
   }
 
   initialize() {
@@ -37,12 +47,12 @@ export class SmsReminderComponent {
         if (data) {
           this.reminderConfig = data;
         } else {
-          this.reminderConfig = new SmsReminderInitial();
+          this.initializeReminderConfig();
         }
       });
   }
 
-  setSmsReminderConfig(event) {
+  setSmsReminderConfig() {
     this.sendInfoForSetupApp();
     this._service
       .callPostMethod(
@@ -63,6 +73,30 @@ export class SmsReminderComponent {
         setup.sms_reminder = false;
       }
       this._messageService.sendSetupApp(setup);
+    }
+  }
+
+  initializeReminderConfig() {
+    if (this.reminderConfig) {
+      this.translateReminderConfig();
+    } else {
+      this.reminderConfig = new SmsReminderInitial();
+      this.translateReminderConfig();
+    }
+  }
+
+  translateReminderConfig() {
+    const smsReminderInitial = new SmsReminderInitial();
+    for (const [key, value] of Object.entries(this.reminderConfig.config)) {
+      this.reminderConfig.config[key].title = this._translate.instant(
+        smsReminderInitial.config[key]["title"]
+      );
+      this.reminderConfig.config[key].text = this._translate.instant(
+        smsReminderInitial.config[key]["text"]
+      );
+      this.reminderConfig.config[key].message = this._translate.instant(
+        smsReminderInitial.config[key]["message"]
+      );
     }
   }
 }

@@ -27,6 +27,7 @@ export class LicenseStatusComponent {
   };
   public licensePriceFor3Months!: string;
   public licensePriceFor6Months!: string;
+  public licensePriceFor12Months!: string;
   public annualSubscription = "annual";
 
   constructor(
@@ -59,14 +60,19 @@ export class LicenseStatusComponent {
   }
 
   setInitializePrice() {
-    this.licenseSubscription.price = this.license.annual_price;
     this.licenseSubscription.duration = 12;
     this.licensePriceFor3Months = (3 * this.license.monthly_price).toFixed(2);
     this.licensePriceFor6Months = (
       6 *
       this.license.monthly_price *
+      0.95
+    ).toFixed(2);
+    this.licensePriceFor12Months = (
+      12 *
+      this.license.monthly_price *
       0.9
     ).toFixed(2);
+    this.licenseSubscription.price = this.licensePriceFor12Months;
   }
 
   additionalCalculate() {
@@ -102,7 +108,7 @@ export class LicenseStatusComponent {
     this.licenseSubscription.price = null;
     this.licenseSubscription.duration = duration;
     setTimeout(() => {
-      this.licenseSubscription.price = price;
+      this.licenseSubscription.price = price.toString();
     }, 20);
   }
 

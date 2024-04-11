@@ -325,8 +325,40 @@
       "sentTestSMSTo": "Test-SMS an #telephone gesendet",
       "needToInsertTelephoneAtSettings": "Sie haben keine Telefonnummer angegeben. Bitte fügen Sie diese hinzu!",
       "activeSmsReminder": "Aktiviere SMS-Erinnerung",
-      "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen."
-   },
+      "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen.",
+      "contents": {
+         "clientImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+         },
+         "clientDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+         },
+         "clientHappyBirthday": {
+            "title": "Geburtstagskarte",
+            "text": "Es wird an einem Geburtstag verschickt",
+            "message": "Viel Freude und Lachen. Grüße von #company"
+         },
+         "clientThankForCommingToUs": {
+            "title": "Danke fürs Kommen",
+            "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+         },
+         "employeeImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+         },
+         "employeeDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+         }
+      }
+  },
    "emailReminder": {
       "title": "E-Mail-Erinnerung",
       "text": "Automatisierte E-Mail-Erinnerungen einrichten",
@@ -345,8 +377,46 @@
       "testMessage": "Test Email",
       "subject": "Betreff",
       "message": "Nachricht",
-      "sentTestEmailTo": "Test-E-Mail an #email senden"
-   },
+      "sentTestEmailTo": "Test-E-Mail an #email senden",
+      "contents": {
+         "clientImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "subject": "Ihr Termin ist bestätigt",
+            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+         },
+         "clientDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "subject": "Erinnerung an Termin morgen",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+         },
+         "clientHappyBirthday": {
+            "title": "Geburtstagskarte",
+            "text": "Es wird an einem Geburtstag verschickt",
+            "subject": "Alles Gute zum Geburtstag!",
+            "message": "Viel Freude und Lachen. Grüße von #company"
+         },
+         "clientThankForCommingToUs": {
+            "title": "Danke fürs Kommen",
+            "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
+            "subject": "Danke!",
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+         },
+         "employeeImmediatelyReminder": {
+            "title": "Buchungsbestätigung",
+            "text": "Sofort nach Terminvereinbarung",
+            "subject": "Sie haben einen neuen Termin",
+            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+         },
+         "employeeDayBeforeReminder": {
+            "title": "Tag zuvor",
+            "text": "Vortag um 20 Uhr",
+            "subject": "Erinnerung an Termin morgen",
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+         }
+      }
+  },
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
@@ -374,8 +444,8 @@
       "threeMonthSubscription": "Ich möchte 3 MONATE verlängern",
       "sixMonthSubscription": "Ich möchte 6 MONATE verlängern",
       "annualSubscription": "Ich möchte ein JAHR verlängern",
+      "discount5": "-5 % Rabatt",
       "discount10": "-10 % Rabatt",
-      "discount20": "-20 % Rabatt",
       "payForLicense": "Lizenz bezahlen",
       "successfullyPaidLicense": "Lizenz erfolgreich bezahlt"
    },
@@ -532,6 +602,8 @@
       "bookingTitle": "Aktivieren Sie Ihre Buchungswebsite",
       "bookingText": "Ermöglichen Sie Ihren Kunden, auf Ihrer personalisierten Buchungswebsite basierend auf Ihrem Zeitplan selbst zu buchen",
       "paymentTitle": "Geld online zulassen",
-      "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto"
-   }
+      "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
+      "holidayTitle": "Urlaub",
+      "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
+  }
 }

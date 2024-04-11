@@ -49,5 +49,12 @@ export class SetupItems {
       icon: "fa fa-credit-card",
       link: "/dashboard/admin/settings/online-payment",
     },
+    {
+      id: "holiday",
+      title: "setupApp.holidayTitle",
+      text: "setupApp.holidayText",
+      icon: "fa fa-calendar-times-o",
+      link: "/dashboard/admin/settings/holidays",
+    },
   ];
 }

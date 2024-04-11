@@ -6,6 +6,7 @@
         "show": "Show",
         "entries": "entries",
         "newEntrie": "New entrie",
+        "editEntrie": "Edit entrie",
         "edit": "Edit",
         "delete": "Delete",
         "update": "Update",
@@ -286,7 +287,7 @@
         "title": "Booking settings",
         "text": "Set up your booking page and customize!",
         "activeOrDeactiveBookingPage": "Active or deactive your booking page",
-        "bookingRootLink": "https://termmy.com/",
+        "bookingRootLink": "https://termmy.com/booking/",
         "bookingLinkExists": "This booking link exists. Link must to be unique. Please choose some else name",
         "bookingLink": "Booking link",
         "brandingText": "Booking website branding",
@@ -358,7 +359,39 @@
         "sentTestSMSTo": "Sent test sms to #telephone",
         "needToInsertTelephoneAtSettings": "You did't set telephone number. Please add it on your settings profile!",
         "activeSmsReminder": "Active SMS reminder",
-        "warning": "Our suggestion is to activate an SMS reminder, because 97% of people open SMS messages within 10 minutes of their arrival."
+        "warning": "Our suggestion is to activate an SMS reminder, because 97% of people open SMS messages within 10 minutes of their arrival.",
+        "contents": {
+            "clientImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "message": "Your appointment #date at #time has been confirmed. Our address is #address. #company"
+            },
+            "clientDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "message": "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting"
+            },
+            "clientHappyBirthday": {
+                "title": "Birthday card",
+                "text": "It is sent on a birthday",
+                "message": "Lots of happiness and laughter. Greetings from #company"
+            },
+            "clientThankForCommingToUs": {
+                "title": "Thanks for comming",
+                "text": "It is sent 1 hour after the appointment",
+                "message": "Thank you for your visit, we hope you enjoyed the service. Thank you for your trust! #company"
+            },
+            "employeeImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "message": "New appointment #date at #time has been confirmed. #company"
+            },
+            "employeeDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "message": "Reminder: You have an appointment tomorrow at #time. Greeting"
+            }
+        }
     },
     "emailReminder": {
         "title": "Email Reminder",
@@ -378,7 +411,45 @@
         "testMessage": "Test Email",
         "subject": "Subject",
         "message": "Message",
-        "sentTestEmailTo": "Send test email to #email"
+        "sentTestEmailTo": "Send test email to #email",
+        "contents": {
+            "clientImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "subject": "Your appointment is confirmed",
+                "message": "Your appointment #date at #time has been confirmed. Our address is #address. #company"
+            },
+            "clientDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "subject": "Reminder for tomorrow appointment",
+                "message": "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting"
+            },
+            "clientHappyBirthday": {
+                "title": "Birthday card",
+                "text": "It is sent on a birthday",
+                "subject": "Happy birthday!",
+                "message": "Lots of happiness and laughter. Greetings from #company"
+            },
+            "clientThankForCommingToUs": {
+                "title": "Thanks for comming",
+                "text": "It is sent 1 hour after the appointment",
+                "subject": "Thank you!",
+                "message": "Thank you for your visit, we hope you enjoyed the service. Thank you for your trust! #company"
+            },
+            "employeeImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "subject": "Your have new appointment",
+                "message": "New appointment #date at #time has been confirmed. #company"
+            },
+            "employeeDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "subject": "Reminder for tomorrow appointment",
+                "message": "Reminder: You have an appointment tomorrow at #time. Greeting"
+            }
+        }
     },
     "licenses": {
         "name": "Name",
@@ -407,8 +478,8 @@
         "threeMonthSubscription": "I want to extend 3 MONTH",
         "sixMonthSubscription": "I want to extend 6 MONTH",
         "annualSubscription": "I want to extend one YEAR",
+        "discount5": "-5 % discount",
         "discount10": "-10 % discount",
-        "discount20": "-20 % discount",
         "payForLicense": "Pay for license",
         "successfullyPaidLicense": "Successfully paid license"
     },
@@ -531,6 +602,8 @@
         "bookingTitle": "Activate your booking website",
         "bookingText": "Allow clients to book themselves based on your schedule on your personalised booking website",
         "paymentTitle": "Allow money online",
-        "paymentText": "Set up your card and receive money directly online to your account"
+        "paymentText": "Set up your card and receive money directly online to your account",
+        "holidayTitle": "Holiday",
+        "holidayText": "Set up holiday, so then your client can't booking this date"
     }
 }
