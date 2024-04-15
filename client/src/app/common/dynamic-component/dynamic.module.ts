@@ -45,7 +45,12 @@ import { ExplanationMarkComponent } from "./dynamic-forms/dynamic-fields/common/
     CommonCustomModule,
   ],
   providers: [ToastrComponent],
-  exports: [DynamicGridComponent, DynamicFormsComponent, DynamicTabsComponent, ExplanationMarkComponent],
+  exports: [
+    DynamicGridComponent,
+    DynamicFormsComponent,
+    DynamicTabsComponent,
+    ExplanationMarkComponent,
+  ],
   entryComponents: [
     DynamicFormsComponent,
     DynamicFormsComponent,

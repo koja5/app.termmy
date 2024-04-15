@@ -557,7 +557,15 @@ export class CalendarComponent {
       event = this.getValueFromForm(this.config.config, event);
     }
     this._service.callPostMethod("/api/google/updateTermine", event).subscribe(
-      (data) => {},
+      (data) => {
+        if (!data) {
+          this._toastr.showErrorCustom(
+            this._translate.instant(
+              "actionMessage.errorUpdateTermineOnGoogleCalendarRights"
+            )
+          );
+        }
+      },
       (error) => {
         this._toastr.showError();
         // this.getTermines();

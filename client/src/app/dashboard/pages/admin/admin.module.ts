@@ -142,7 +142,7 @@ const routes = [
     ReactiveFormsModule,
     FormsModule,
     NgSelectModule,
-    DateTimePickerModule,
+    DateTimePickerModule
   ],
   providers: [
     DayService,

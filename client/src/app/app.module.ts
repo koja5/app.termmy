@@ -87,7 +87,7 @@ const appRoutes: Routes = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      isolate: false
+      isolate: false,
     }),
 
     //NgBootstrap

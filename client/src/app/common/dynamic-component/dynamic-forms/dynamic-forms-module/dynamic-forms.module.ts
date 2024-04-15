@@ -24,6 +24,9 @@ import { ColorPickerModule } from "@syncfusion/ej2-angular-inputs";
 import { ColorPickerComponent } from "../dynamic-fields/inputs/color-picker/color-picker.component";
 import { RadioComponent } from "../dynamic-fields/buttons/radio/radio.component";
 import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-mark/explanation-mark.component";
+import { PhonePrefixComponent } from "../dynamic-fields/inputs/phone-prefix/phone-prefix.component";
+import { InternationalPhoneModule } from "ng4-intl-phone";
+import { Ng2TelInputModule } from "ng2-tel-input";
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-m
     DatetimepickerComponent,
     ColorPickerComponent,
     ExplanationMarkComponent,
+    PhonePrefixComponent,
   ],
   exports: [
     DynamicFieldsDirective,
@@ -59,6 +63,7 @@ import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-m
     DatetimepickerComponent,
     ColorPickerComponent,
     ExplanationMarkComponent,
+    PhonePrefixComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +75,8 @@ import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-m
     DatePickerModule,
     DateTimePickerModule,
     ColorPickerModule,
+    InternationalPhoneModule,
+    Ng2TelInputModule,
   ],
   entryComponents: [
     DynamicFieldsDirective,
@@ -86,6 +93,7 @@ import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-m
     DatepickerComponent,
     DatetimepickerComponent,
     ColorPickerComponent,
+    PhonePrefixComponent,
   ],
 })
 export class DynamicFormsModule {}

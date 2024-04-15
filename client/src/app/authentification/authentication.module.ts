@@ -35,6 +35,16 @@ const routes: Routes = [
     data: { animation: "auth" },
   },
   {
+    path: "login/:lang",
+    component: LoginComponent,
+    data: { animation: "auth" },
+  },
+  {
+    path: "signup/:lang",
+    component: SignupComponent,
+    data: { animation: "auth" },
+  },
+  {
     path: "forgot-password",
     component: ForgotPasswordComponent,
   },

@@ -237,3 +237,11 @@
     display: none !important;
   }
 }
+
+.dropbtn {
+  cursor: pointer;
+  border: 1px solid lightgray !important;
+  border-radius: 3px 0px 0px 3px !important;
+  padding: 11px 18px !important;
+  border-right: 0px !important;
+}

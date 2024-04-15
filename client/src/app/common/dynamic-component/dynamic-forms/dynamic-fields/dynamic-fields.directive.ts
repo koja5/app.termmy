@@ -24,6 +24,7 @@ import { DatepickerComponent } from "./inputs/datepicker/datepicker.component";
 import { PasswordBoxComponent } from "./inputs/text-box/password-box/password-box.component";
 import { ColorPickerComponent } from "./inputs/color-picker/color-picker.component";
 import { RadioComponent } from "./buttons/radio/radio.component";
+import { PhonePrefixComponent } from "./inputs/phone-prefix/phone-prefix.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
@@ -39,6 +40,7 @@ const components: { [type: string]: Type<Field> } = {
   datetimepicker: DatetimepickerComponent,
   timepicker: TimepickerComponent,
   color: ColorPickerComponent,
+  phoneprefix: PhonePrefixComponent,
 };
 
 @Directive({

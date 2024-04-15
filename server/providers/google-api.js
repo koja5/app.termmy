@@ -296,24 +296,31 @@ router.post("/updateTermine", auth, async (req, res) => {
         : JSON.parse(req.body).externalCalendar,
   });
 
-  await calendar.events.update({
-    calendarId: "primary",
-    auth: oauth2Client,
-    eventId: req.body.id,
-    requestBody: {
-      summary: req.body.Subject,
-      description:
-        typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
-      start: {
-        dateTime: moment(req.body.StartTime),
-      },
-      end: {
-        dateTime: moment(req.body.EndTime),
+  await calendar.events.update(
+    {
+      calendarId: "primary",
+      auth: oauth2Client,
+      eventId: req.body.id,
+      requestBody: {
+        summary: req.body.Subject,
+        description:
+          typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
+        start: {
+          dateTime: moment(req.body.StartTime),
+        },
+        end: {
+          dateTime: moment(req.body.EndTime),
+        },
       },
     },
-  });
-
-  res.send(true);
+    (error) => {
+      if (!error) {
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    }
+  );
 });
 
 router.post("/deleteTermine", async (req, res) => {

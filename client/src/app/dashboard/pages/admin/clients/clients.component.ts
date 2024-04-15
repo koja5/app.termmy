@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { CallApiService } from "app/services/call-api.service";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
@@ -12,11 +13,13 @@ export class ClientsComponent {
   public path = "grids/admin";
   public file = "my-clients.json";
   public externalAccounts: any;
+  public phoneNumber: string;
 
   constructor(
     private _service: CallApiService,
     private _messageService: MessageService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _activatedRouter: ActivatedRoute
   ) {}
 
   ngOnInit() {
