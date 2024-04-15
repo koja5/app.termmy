@@ -480,7 +480,7 @@ export class DynamicGridComponent {
     for (let i = 0; i < this.config.config.length; i++) {
       this.form.setValue(
         this.config.config[i]["name"],
-        null,
+        this.config.config[i].value ? this.config.config[i].value : null,
         this.config.config[i]["type"]
       );
     }

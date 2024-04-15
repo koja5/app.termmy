@@ -29,7 +29,8 @@
         "successExecuteActionTitleDefault": "Successfuly changed!",
         "successExecuteActionTextDefault": "Action is successfully executed!",
         "errorExecuteActionTitleDefault": "Something is happened",
-        "errorExecuteActionTextDefault": "Please check again or try later"
+        "errorExecuteActionTextDefault": "Please check again or try later",
+        "errorUpdateTermineOnGoogleCalendarRights": "Problem with rights when updating an appointment on the google calendar."
     },
     "commonFields": {
         "firstname": "Firstname",

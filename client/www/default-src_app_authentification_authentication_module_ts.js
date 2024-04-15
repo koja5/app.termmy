@@ -63,6 +63,18 @@ const routes = [{
     animation: "auth"
   }
 }, {
+  path: "login/:lang",
+  component: _login_login_component__WEBPACK_IMPORTED_MODULE_1__.LoginComponent,
+  data: {
+    animation: "auth"
+  }
+}, {
+  path: "signup/:lang",
+  component: _signup_signup_component__WEBPACK_IMPORTED_MODULE_2__.SignupComponent,
+  data: {
+    animation: "auth"
+  }
+}, {
   path: "forgot-password",
   component: _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_4__.ForgotPasswordComponent
 }, {
@@ -115,8 +127,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ 33935);
 /* harmony import */ var _core_services_config_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @core/services/config.service */ 52553);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ 34534);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ 34534);
+
 
 
 
@@ -148,45 +162,52 @@ function SelectLanguageComponent_a_6_Template(rf, ctx) {
   }
 }
 class SelectLanguageComponent {
-  constructor(_translateService, _coreConfigService) {
+  constructor(_translateService, _coreConfigService, _activatedRouter) {
     this._translateService = _translateService;
     this._coreConfigService = _coreConfigService;
+    this._activatedRouter = _activatedRouter;
   }
   ngOnInit() {
     this.languageOptions = _assets_configurations_i18n_languages_json__WEBPACK_IMPORTED_MODULE_0__;
     // Set the selected language from default languageOptions
-    this.selectedLanguage = lodash__WEBPACK_IMPORTED_MODULE_1__.find(this.languageOptions, {
-      id: this._translateService.currentLang
-    });
+    if (this._activatedRouter.snapshot.params.lang) {
+      this.setLanguage(this._activatedRouter.snapshot.params.lang);
+    } else {
+      this.selectedLanguage = lodash__WEBPACK_IMPORTED_MODULE_1__.find(this.languageOptions, {
+        id: this._translateService.currentLang
+      });
+    }
   }
   setLanguage(language) {
     // Set the selected language for the navbar on change
     this.selectedLanguage = language;
     // Use the selected language id for translations
-    this._translateService.use(language);
-    this._translateService.setDefaultLang(language);
-    this._coreConfigService.setConfig({
-      app: {
-        appLanguage: language
-      },
-      layout: {
-        enableLocalStorage: true,
-        footer: {
-          hidden: false
+    setTimeout(() => {
+      this._translateService.use(language);
+      this._translateService.setDefaultLang(language);
+      this._coreConfigService.setConfig({
+        app: {
+          appLanguage: language
         },
-        menu: {
-          hidden: false
-        },
-        navbar: {
-          hidden: false
+        layout: {
+          enableLocalStorage: true,
+          footer: {
+            hidden: false
+          },
+          menu: {
+            hidden: false
+          },
+          navbar: {
+            hidden: false
+          }
         }
-      }
-    }, {
-      emitEvent: false
-    });
+      }, {
+        emitEvent: false
+      });
+    }, 20);
   }
   static #_ = this.ɵfac = function SelectLanguageComponent_Factory(t) {
-    return new (t || SelectLanguageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__.TranslateService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_services_config_service__WEBPACK_IMPORTED_MODULE_2__.CoreConfigService));
+    return new (t || SelectLanguageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__.TranslateService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_services_config_service__WEBPACK_IMPORTED_MODULE_2__.CoreConfigService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute));
   };
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
     type: SelectLanguageComponent,
@@ -214,7 +235,7 @@ class SelectLanguageComponent {
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngForOf", ctx._translateService.getLangs());
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__.NgbDropdown, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__.NgbDropdownToggle, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__.NgbDropdownMenu, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__.NgbDropdownItem],
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgForOf, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbDropdown, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbDropdownToggle, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbDropdownMenu, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbDropdownItem],
     styles: [".flag-icon[_ngcontent-%COMP%] {\n  margin-right: 5px;\n}\n\n@media (max-width: 993px) {\n  .dropdown-language[_ngcontent-%COMP%] {\n    top: 28px !important;\n  }\n}\n.dropdown-language[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvYXV0aGVudGlmaWNhdGlvbi9jb21tb24vc2VsZWN0LWxhbmd1YWdlL3NlbGVjdC1sYW5ndWFnZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFBO0FBQ0Y7O0FBRUE7RUFDRTtJQUNFLG9CQUFBO0VBQ0Y7QUFDRjtBQUVBO0VBQ0Usa0JBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtBQUFGIiwic291cmNlc0NvbnRlbnQiOlsiLmZsYWctaWNvbiB7XHJcbiAgbWFyZ2luLXJpZ2h0OiA1cHg7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA5OTNweCkge1xyXG4gIC5kcm9wZG93bi1sYW5ndWFnZSB7XHJcbiAgICB0b3A6IDI4cHggIWltcG9ydGFudDtcclxuICB9XHJcbn1cclxuXHJcbi5kcm9wZG93bi1sYW5ndWFnZSB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogNXB4O1xyXG4gIHJpZ2h0OiA1cHg7XHJcbn1cclxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"]
   });
 }

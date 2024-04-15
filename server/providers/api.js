@@ -1062,6 +1062,7 @@ router.post("/setService", auth, function (req, res) {
         }
       );
     } else {
+      req.body.id = uuid.v4();
       conn.query(
         "insert into services SET ?",
         [req.body],

@@ -77439,6 +77439,7 @@ ngb-progressbar[type=danger] .progress {
   border-radius: 3px 0px 0px 3px !important;
   padding: 11px 18px !important;
   border-right: 0px !important;
+  height: 2.714rem !important;
 }
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].rules[1].use[1]!./node_modules/highlight.js/scss/atom-one-dark.scss?ngGlobalStyle ***!
