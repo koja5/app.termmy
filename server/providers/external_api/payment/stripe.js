@@ -74,6 +74,7 @@ router.get("/checkAccount/:stripe/:admin_id", (req, res, next) => {
           method: "POST",
           body: body,
           json: true,
+          rejectUnauthorized: false,
         };
         request(options, function (error, response, body) {
           res.redirect(

@@ -358,7 +358,7 @@
             "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
          }
       }
-  },
+   },
    "emailReminder": {
       "title": "E-Mail-Erinnerung",
       "text": "Automatisierte E-Mail-Erinnerungen einrichten",
@@ -416,7 +416,7 @@
             "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
          }
       }
-  },
+   },
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
@@ -554,7 +554,11 @@
    },
    "paymentProcessing": {
       "buttonText": "Zahlen Sie € #amount",
-      "acceptTermsAndPrivacyPolicy": "Mit dieser Bestellung akzeptieren Sie die Allgemeinen Geschäftsbedingungen von Termmy und bestätigen, dass Sie die Datenschutzbestimmungen von Termmy gelesen und verstanden haben und das Widerrufsrecht anerkennen.",
+      "acceptTermsAndPrivacyPolicyOne": "Mit dem Absenden dieser Bestellung akzeptieren Sie die",
+      "acceptTermsAndPrivacyPolicyTerms": "Allgemeine Geschäftsbedingungen",
+      "acceptTermsAndPrivacyPolicyTermsAnd": "und",
+      "acceptTermsAndPrivacyPolicyPrivacyPolicy": "Datenschutzerklärung",
+      "acceptTermsAndPrivacyPolicyTwo": "und bestätigen Sie, dass Sie die Datenschutzbestimmungen von Termmy gelesen und verstanden haben und das Widerrufsrecht anerkennen.",
       "needAcceptTermsAndPrivacyPolicy": "Bitte akzeptieren Sie die Bedingungen und die Datenschutzrichtlinie",
       "firstname": "Vorname  *",
       "firstnamePlaceholder": "",
@@ -605,5 +609,5 @@
       "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
       "holidayTitle": "Urlaub",
       "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
-  }
+   }
 }

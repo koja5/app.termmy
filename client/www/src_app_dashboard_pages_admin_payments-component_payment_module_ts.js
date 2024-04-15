@@ -298,7 +298,7 @@ function LicensePackagesComponent_div_12_div_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](7);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](8, "div", 24)(9, "div", 25)(10, "sup", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, "$");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, "\u20AC");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](12, "span", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](13);

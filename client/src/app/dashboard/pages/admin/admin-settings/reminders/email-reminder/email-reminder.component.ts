@@ -78,7 +78,7 @@ export class EmailReminderComponent {
       this.reminderConfig.config[key].text = this._translate.instant(
         emailReminderInitial.config[key]["text"]
       );
-      this.reminderConfig.config[key].subject = this._translate.instant(
+      this.reminderConfig.config[key]["subject"] = this._translate.instant(
         emailReminderInitial.config[key]["subject"]
       );
       this.reminderConfig.config[key].message = this._translate.instant(

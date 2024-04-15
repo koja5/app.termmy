@@ -6,6 +6,7 @@
       "show": "Anzeigen",
       "entries": "Einträge",
       "newEntrie": "Neu",
+      "editEntrie": "Bearbeiten",
       "edit": "Bearbeiten",
       "delete": "Löschen",
       "update": "Aktualisieren",
@@ -65,7 +66,7 @@
    },
    "login": {
       "title": "Willkommen bei Termmy! 👋",
-      "subtitle": "Bitte melden Sie sich bei Ihrem Konto an und starten Sie das Abenteuer",
+      "subtitle": "Melden Sie sich bei Ihrem Termmy-Konto an und erweitern Sie Ihren Kalender um viele Funktionen.",
       "email": "Email",
       "emailIsRequired": "E-Mail ist erforderlich",
       "emailMustBeValid": "E-Mail muss eine gültige E-Mail-Adresse sein",
@@ -305,7 +306,7 @@
    "smsReminder": {
       "title": "SMS-Erinnerung",
       "text": "Automatisierte SMS-Erinnerungen einrichten",
-      "explanation": "Mit automatischen SMS-Erinnerungen kann die Kommunikation mit Kunden verbessert, verpasste Termine vermieden und Kunden zurückgewonnen werden. Sie können sicher sein, dass Kunden die Erinnerung rechtzeitig sehen, da 97% der Menschen SMS innerhalb der ersten 10 Minuten nach Erhalt öffnen und lesen.",
+      "explanation": "Die automatische SMS-Erinnerunge verbessert die Kommunikation mit Ihren Kunden. Termine werden seltener vergessen. Statistisch gesehen, öffnen und lesen 97% Ihrer Kunden SMS innerhalb der ersten 10 Minuten nach Erhalt.",
       "leftMessage": "Verbleibende SMS",
       "leftMessageText": "Sie haben derzeit {numberOfLeftMessage} SMS.",
       "pleaseBuySmsOnTime": "Bitte kaufen Sie rechtzeitig zusätzliche SMS",
@@ -329,18 +330,18 @@
       "contents": {
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
-            "text": "Sofort nach Terminvereinbarung",
+            "text": "Die Buchungsbestätigung wird sofort nach der Buchung gesendet",
             "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
          },
          "clientDayBeforeReminder": {
-            "title": "Tag zuvor",
-            "text": "Vortag um 20 Uhr",
-            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+            "title": "Termin-Erinnerung",
+            "text": "Vortag um 8.00 Uhr",
+            "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          },
          "clientHappyBirthday": {
-            "title": "Geburtstagskarte",
-            "text": "Es wird an einem Geburtstag verschickt",
-            "message": "Viel Freude und Lachen. Grüße von #company"
+            "title": "Geburtstags-SMS",
+            "text": "Die Geburtstags-SMS wird am Geburtstag gesendet",
+            "message": "Alles Gute zum Geburtstag, wünscht das Team von #company."
          },
          "clientThankForCommingToUs": {
             "title": "Danke fürs Kommen",
@@ -353,12 +354,12 @@
             "message": "Neuer Termin #date um #time wurde bestätigt. #company"
          },
          "employeeDayBeforeReminder": {
-            "title": "Tag zuvor",
-            "text": "Vortag um 20 Uhr",
-            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+            "title": "Termin-Erinnerung",
+            "text": "Termin-Erinnerung am Vortag um 8.00 Uhr",
+            "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          }
       }
-  },
+   },
    "emailReminder": {
       "title": "E-Mail-Erinnerung",
       "text": "Automatisierte E-Mail-Erinnerungen einrichten",
@@ -381,21 +382,21 @@
       "contents": {
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
-            "text": "Sofort nach Terminvereinbarung",
-            "subject": "Ihr Termin ist bestätigt",
+            "text": "Die Buchungsbestätigung wird sofort nach der Buchung gesendet",
+            "subject": "Buchungsbestätigung",
             "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
          },
          "clientDayBeforeReminder": {
-            "title": "Tag zuvor",
-            "text": "Vortag um 20 Uhr",
-            "subject": "Erinnerung an Termin morgen",
-            "message": "Erinnerung: Sie haben morgen um #time einen Termin bei uns in der #company. Unsere Adresse ist #address. Begrüßung"
+            "title": "Termin-Erinnerung",
+            "text": "Termin-Erinnerung am Vortag um 8.00 Uhr",
+            "subject": "Termin-Erinnerung an Ihren Termin bei uns morgen",
+            "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          },
          "clientHappyBirthday": {
-            "title": "Geburtstagskarte",
-            "text": "Es wird an einem Geburtstag verschickt",
+            "title": "Geburtstags-EMail",
+            "text": "Die Geburtstags-EMail wird am Geburtstag verschickt",
             "subject": "Alles Gute zum Geburtstag!",
-            "message": "Viel Freude und Lachen. Grüße von #company"
+            "message": "Alles Gute zum Geburtstag, wünscht das Team von #company."
          },
          "clientThankForCommingToUs": {
             "title": "Danke fürs Kommen",
@@ -413,10 +414,10 @@
             "title": "Tag zuvor",
             "text": "Vortag um 20 Uhr",
             "subject": "Erinnerung an Termin morgen",
-            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
+            "message": "Erinnerung: Sie haben morgen um #Zeit einen Termin. Begrüßung"
          }
       }
-  },
+   },
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
@@ -554,7 +555,11 @@
    },
    "paymentProcessing": {
       "buttonText": "Zahlen Sie € #amount",
-      "acceptTermsAndPrivacyPolicy": "Mit dieser Bestellung akzeptieren Sie die Allgemeinen Geschäftsbedingungen von Termmy und bestätigen, dass Sie die Datenschutzbestimmungen von Termmy gelesen und verstanden haben und das Widerrufsrecht anerkennen.",
+      "acceptTermsAndPrivacyPolicyOne": "Mit dem Absenden dieser Bestellung akzeptieren Sie die",
+      "acceptTermsAndPrivacyPolicyTerms": "Allgemeine Geschäftsbedingungen",
+      "acceptTermsAndPrivacyPolicyTermsAnd": "und",
+      "acceptTermsAndPrivacyPolicyPrivacyPolicy": "Datenschutzerklärung",
+      "acceptTermsAndPrivacyPolicyTwo": "und bestätigen Sie, dass Sie die Datenschutzbestimmungen von Termmy gelesen und verstanden haben und das Widerrufsrecht anerkennen.",
       "needAcceptTermsAndPrivacyPolicy": "Bitte akzeptieren Sie die Bedingungen und die Datenschutzrichtlinie",
       "firstname": "Vorname  *",
       "firstnamePlaceholder": "",
@@ -605,5 +610,5 @@
       "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
       "holidayTitle": "Urlaub",
       "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
-  }
+   }
 }

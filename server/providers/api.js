@@ -2189,6 +2189,7 @@ function prepareOptionsForRequest(body, api) {
     method: "POST",
     body: body,
     json: true,
+    rejectUnauthorized: false,
   };
 }
 

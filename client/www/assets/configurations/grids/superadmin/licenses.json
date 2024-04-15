@@ -155,17 +155,6 @@
             "field": "monthly_price",
             "isPrimaryKey": true,
             "allowEditing": false
-        },
-        {
-            "title": "licenses.annualPrice",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "annual_price",
-            "isPrimaryKey": true,
-            "allowEditing": false
         }
     ],
     "config": [
@@ -194,15 +183,6 @@
             "name": "monthly_price",
             "title": "licenses.monthlyPrice",
             "field": "monthly_price",
-            "required": true
-        },
-        {
-            "type": "numeric",
-            "width": "col-md-12",
-            "class": "e-outline",
-            "name": "annual_price",
-            "title": "licenses.annualPrice",
-            "field": "annual_price",
             "required": true
         },
         {

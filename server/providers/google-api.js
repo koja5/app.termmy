@@ -107,9 +107,11 @@ router.get("/redirect", async (req, res) => {
     method: "POST",
     body: { google: tokens.refresh_token, token: req.cookies["token"] },
     json: true,
+    rejectUnauthorized: false,
   };
 
   request(options, function (error, response, body) {
+    console.log(error);
     if (!error) {
       res.redirect(
         process.env.link_client + "dashboard/admin/settings/connections"
@@ -268,10 +270,10 @@ router.post("/createTermine", auth, async (req, res) => {
         summary: req.body.Subject,
         description: JSON.stringify(req.body),
         start: {
-          dateTime: moment(req.body.StartTime)
+          dateTime: moment(req.body.StartTime),
         },
         end: {
-          dateTime: moment(req.body.EndTime)
+          dateTime: moment(req.body.EndTime),
         },
       },
     },
@@ -303,10 +305,10 @@ router.post("/updateTermine", auth, async (req, res) => {
       description:
         typeof req.body === "object" ? JSON.stringify(req.body) : req.body,
       start: {
-        dateTime: moment(req.body.StartTime)
+        dateTime: moment(req.body.StartTime),
       },
       end: {
-        dateTime: moment(req.body.EndTime)
+        dateTime: moment(req.body.EndTime),
       },
     },
   });
@@ -585,6 +587,7 @@ function prepareOptionsForRequest(body, api) {
     method: "POST",
     body: body,
     json: true,
+    rejectUnauthorized: false,
   };
 }
 

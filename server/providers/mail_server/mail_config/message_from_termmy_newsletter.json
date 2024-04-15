@@ -1,0 +1,6 @@
+{
+    "template": "message_from_termmy_newsletter.hjs",
+    "subject": "You have new newsletter",
+    "text": "You have new email sign up for newsletter",
+    "email": "webaj.info@gmail.com"
+}

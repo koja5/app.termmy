@@ -103,6 +103,50 @@ router.post(
   }
 );
 
+router.post("/sendMessage", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync(
+      "./providers/mail_server/mail_config/message_from_termmy_contact.json",
+      "utf-8"
+    )
+  );
+
+  body["name"] = req.body.name;
+  body["client_email"] = req.body.email;
+  body["message"] = req.body.message;
+
+  var options = prepareOptionsForRequest(body);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
+router.post("/sendEmailForNewsletter", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync(
+      "./providers/mail_server/mail_config/message_from_termmy_newsletter.json",
+      "utf-8"
+    )
+  );
+
+  body["client_email"] = req.body.email;
+
+  var options = prepareOptionsForRequest(body);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
 //#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {
@@ -111,6 +155,7 @@ function prepareOptionsForRequest(body) {
     method: "POST",
     body: body,
     json: true,
+    rejectUnauthorized: false,
   };
 }
 

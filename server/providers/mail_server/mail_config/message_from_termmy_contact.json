@@ -1,0 +1,6 @@
+{
+    "template": "message_from_termmy_contact.hjs",
+    "subject": "You have new message",
+    "text": "You have new contacts from Termmy.com",
+    "email": "webaj.info@gmail.com"
+}

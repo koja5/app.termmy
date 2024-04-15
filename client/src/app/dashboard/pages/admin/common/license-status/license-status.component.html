@@ -68,7 +68,7 @@
                         (click)="annualSubscription = 'monthly'; selectPackage(license.monthly_price, 1)">
                     <label class="custom-control-label" for="monthly">
                         {{'licenseStatus.monthlySubscription' | translate}} <span class="price">
-                            ({{license.monthly_price}} €)</span>
+                            (€{{license.monthly_price}})</span>
                     </label>
                 </div>
                 <div class="custom-control custom-radio mt-1">
@@ -77,8 +77,8 @@
                         (click)="annualSubscription = 'monthly'; selectPackage(licensePriceFor3Months, 3)">
                     <label class="custom-control-label" for="3monthly">
                         {{'licenseStatus.threeMonthSubscription' | translate}} <span class="price">
-                            ({{licensePriceFor3Months}}
-                            €)</span>
+                            (€{{licensePriceFor3Months}}
+                            )</span>
                     </label>
                 </div>
                 <div class="custom-control custom-radio mt-1">
@@ -87,8 +87,8 @@
                         (click)="annualSubscription = 'monthly'; selectPackage(licensePriceFor6Months, 6)">
                     <label class="custom-control-label" for="6monthly">
                         {{'licenseStatus.sixMonthSubscription' | translate}} <span class="price">
-                            ({{licensePriceFor6Months}}
-                            €)</span>
+                            (€{{licensePriceFor6Months}}
+                            )</span>
                     </label> &nbsp; <span class="badge badge-light-primary">{{'licenseStatus.discount5' |
                         translate}}</span>
                 </div>
@@ -98,7 +98,7 @@
                         (click)="annualSubscription = 'annual'; selectPackage(licensePriceFor12Months, 12)">
                     <label class="custom-control-label" for="annual">
                         {{'licenseStatus.annualSubscription' | translate}} <span class="price">
-                            ({{licensePriceFor12Months}} €) </span>
+                            (€{{licensePriceFor12Months}}) </span>
                         &nbsp;
                         <span class="badge badge-light-primary">{{'licenseStatus.discount10' |
                             translate}}</span>

@@ -11,7 +11,13 @@
     <div class="custom-control custom-checkbox">
         <input class="custom-control-input" type="checkbox" id="accept" [(ngModel)]="accept">
         <label class="custom-control-label" for="accept">
-            {{'paymentProcessing.acceptTermsAndPrivacyPolicy' | translate}}
+            {{'paymentProcessing.acceptTermsAndPrivacyPolicyOne' | translate}}
+            <a href="https://termmy.com/terms" target="_blank">{{'paymentProcessing.acceptTermsAndPrivacyPolicyTerms' |
+                translate}}</a>
+            {{'paymentProcessing.acceptTermsAndPrivacyPolicyTermsAnd' | translate}}
+            <a href="https://termmy.com/privacy-policy"
+                target="_blank">{{'paymentProcessing.acceptTermsAndPrivacyPolicyPrivacyPolicy' | translate}}</a>
+            {{'paymentProcessing.acceptTermsAndPrivacyPolicyTwo' | translate}}
         </label>
 
         <div *ngIf="submitted&&!accept" class="error">
