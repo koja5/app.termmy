@@ -1,30 +1,615 @@
 {
-    "form": {
-        "mustFillThisField": "Molimo Vas popunite polje"
+    "general": {
+        "save": "Sačuvaj",
+        "searchFilter": "Pretraži",
+        "addNew": "Dodaj novi",
+        "show": "Prikaži",
+        "entries": "unosa",
+        "newEntrie": "Novi podatak",
+        "editEntrie": "Upredi podatak",
+        "edit": "Uredi",
+        "delete": "Obriši",
+        "update": "Ažuriraj",
+        "setUp": "Podesi",
+        "connected": "Povezano",
+        "cancel": "Otkaži",
+        "active": "Aktiviraj",
+        "inactive": "Deaktiviraj",
+        "total": "ukupno",
+        "options": "Opcije",
+        "syncGoogleContacts": "Sinhronizuj Google kontakte",
+        "syncGoogleContactQuestionTitle": "Sinhronizuj Google kontakte",
+        "syncGoogleContactsQuestionText": "Da li želite da sinhronizujete Vaše Google kontakte sa Termmy-em? Ovo može potrajati maksimum 1-2 minuta, u zavisnosti od broja Vaših Google kontakta.",
+        "successfullySyncGoogleContacts": "Uspešno ste sinhronizovali Vaše Google kontakte sa Termmy-em.",
+        "unsuccessfullySyncGoogleContacts": "Greška prilikom sinhronizacije Google kontakta sa Termmy-em. Molimo vas pokušajte ponovo malo kasnije ili kontaktirajte našu podršku.",
+        "syncContacts": "Sinhronizuj kontakte",
+        "noInformation": "Nema informacija"
     },
-    "allUsers": {
-        "name": "Ime"
+    "actionMessage": {
+        "successExecuteActionTitleDefault": "Upešno izvršeno.",
+        "successExecuteActionTextDefault": "Akcija je uspešno izvršena.",
+        "errorExecuteActionTitleDefault": "Nešto se dogodilo",
+        "errorExecuteActionTextDefault": "Molimo pokušajte ponovo kasnije.",
+        "errorUpdateTermineOnGoogleCalendarRights": "Nemate prava da ažurirate ovaj termin u Google kalendaru. Molimo proverite sa vlasnikom ovog termina."
     },
-    "myLocations": {
-        "name": "Ime lokacije"
+    "commonFields": {
+        "firstname": "Ime",
+        "lastname": "Prezime",
+        "displayName": "Ime",
+        "gender": "Pol",
+        "birthday": "Rođendan",
+        "email": "Email",
+        "password": "Lozinka",
+        "rePassword": "Ponovi lozinku",
+        "telephone": "Telefon",
+        "address": "Adresa",
+        "zip": "Poštanski broj",
+        "city": "Grad",
+        "active": "Aktivan",
+        "action": "Akcija",
+        "type": "Tip",
+        "verified": "Verifikovan",
+        "man": "Muškarac",
+        "woman": "Žena",
+        "position": "Pozicija u firmi",
+        "company": "Firma",
+        "location": "Lokacija",
+        "biography": "Biografija",
+        "oldPassword": "Stara lozinka",
+        "newPassword": "Nova lozinka",
+        "confirmNewPassword": "Ponovi novu lozinku"
     },
-    "myServices": {
-        "name": "Ime usluge",
-        "timeDuration": "Vreme trajanja terapije",
-        "price": "Cena",
-        "min": "minuta",
-        "currency": "RSD"
+    "userTypes": {
+        "superadmin": "Superadmin",
+        "admin": "Admin",
+        "partner": "Partner",
+        "employee": "Zaposleni"
+    },
+    "login": {
+        "title": "Dobrodošli na Termmy! 👋",
+        "subtitle": "Prijavite se na Vaš nalog i započnite avanturu zakazivanja",
+        "email": "Email",
+        "emailIsRequired": "Email je obavezan",
+        "emailMustBeValid": "Email adresa mora da bude validna",
+        "password": "Lozinka",
+        "forgotPassword": "Zaboravili ste lozinku?",
+        "passwordIsRequired": "Lozinka je obavezna",
+        "rememberMe": "Zapamti me",
+        "signIn": "Prijavi se",
+        "newOnPlatform": "Nemate jos uvek nalog?",
+        "createAnAccount": "Kreirajte nalog besplatno",
+        "verifiedError": "Potrebno je da verifikujete Vašu email adresu. Poslali smo Vam mail za verifikaciju.",
+        "activeError": "Vaš nalog nije aktivan!",
+        "notExistsError": "Nalog ne postoji! Kreirajte novi nalog ili obnovite Vašu lozinku ukoliko ste zaboravili."
+    },
+    "signUp": {
+        "title": "Avantura zakazivanje kreće ovde 🚀",
+        "text": "Učinite organzaciju termina lakim i jednostavnim. Kreirajte nalog potpuno besplatno!",
+        "IAgreeTo": "Pristajem na ",
+        "privacyPolicy": "politiku privatnosti",
+        "and": "i",
+        "terms": "opšte uslove.",
+        "signUp": "Kreiraj nalog",
+        "alreadyHaveAnAccount": "Već imate nalog?",
+        "signInInstead": "Prijavite se",
+        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
+        "mailExists": "Ova mail adresa već postoji. Molimo vas unesite drugu email adresu ili obnovite lozinku.",
+        "verifyYouMail": "Molimo proverite Vašu email poštu kako bi ste verifikovali email adresu.",
+        "passwordNotMatch": "Lozinka i ponovljena lozinka se ne poklapaju. Neophodno je da budu iste!"
+    },
+    "forgot": {
+        "title": "Zaboravili ste lozinku? 🔒",
+        "text": "Unesite Vašu email adresu sa kojom ste kreirali nalog i poslaćemo Vam instrukcije za obnavljanje lozinke.",
+        "sendResetLink": "Pošalji mi link",
+        "sendLinkForResetOnMail": "Link za obnavljanje lozinke Vam je poslat na email adresu.",
+        "mailNotExists": "EMail adresa ne postoji u našem sistemu. Molimo pokušajte sa nekom drugom email adresom"
+    },
+    "resetPassword": {
+        "title": "Obnovite lozinku 🔒",
+        "text": "Možete da promenite vašu staru lozinku pomoću sledeće forme.",
+        "newPassword": "Nova lozinka",
+        "confirmPassword": "Ponovi novu lozinku",
+        "passwordNotMatch": "Nova lozinka i ponovljena nova lozinka se ne poklapaju. Neophodno je da budu identicne.",
+        "setNewPassword": "Postavi novu lozinku",
+        "changedPasswordSuccessfuly": "Nova lozinka je uspešno postavljena. Možete da se prijavite sa novom lozinkom.",
+        "oldPasswordIsWrong": "Pogrešno ste uneli staru lozinku. Molimo Vas unesite tačnu staru lozinku.",
+        "oldAndNewPasswordCannotBeSame": "Stara i nova lozinka ne smeju da budu iste.",
+        "passwordsNeedToBeSame": "Nova i ponovlja nova lozinka moraju da budu identične",
+        "successfulyChangedPassword": "Uspešno ste promenili Vašu lozinku."
     },
     "navigations": {
         "home": "Početna",
         "settings": "Podešavanja",
+        "adminSettings": "Administratorska podešavanja",
         "allUsers": "Svi korisnici",
         "myLocations": "Moje lokacije",
         "myServices": "Moje usluge",
-        "myCalendar": "Moj kalendar"
+        "myCalendar": "Moj kalendar",
+        "myEmployees": "Moji zaposleni",
+        "myClients": "Moji klijenti",
+        "recommended": "Preporuči",
+        "smsPackages": "SMS paketi",
+        "gatewayCountryPrefix": "SMS kontrolnik",
+        "licenses": "Licence"
     },
-    "SAMPLE": {
-        "CONGRATULATIONS": "Congratulations",
-        "BADGE": "You have won gold medal"
+    "navBar": {
+        "profile": "Profil",
+        "logout": "Odjavi se"
+    },
+    "generalDialog": {
+        "areYouSure": "Da li ste sigurni?",
+        "deleteQuestion": "Ukoliko izvršite ovu akciju, izgubljeni podaci se ne mogu povratiti!",
+        "yes": "Da, želim",
+        "no": "Ne"
+    },
+    "form": {
+        "mustFillThisField": "Molimo vas popunite ovo polje!",
+        "fieldIsRequired": "Podatak je neophodan",
+        "emailIsRequired": "Email adresa je neophodna",
+        "emailMustBeValid": "Email adresa mora da bude validna.",
+        "passwordIsRequired": "Lozinka je neophodna"
+    },
+    "allUsers": {
+        "number": "Broj",
+        "type": "Tip",
+        "vat": "PIB",
+        "newsletter": "Bilten",
+        "verified": "Verifikovan",
+        "notVerified": "Nije verifikovan",
+        "active": "Aktivan",
+        "inactive": "Nije aktivan",
+        "signUpTime": "Vreme kreiranja naloga",
+        "password": "Lozinka",
+        "rePassword": "Ponovljena lozinka"
+    },
+    "smsPackages": {
+        "name": "Ime",
+        "numberOfSms": "Broj SMS poruka",
+        "price": "Cena"
+    },
+    "myLocations": {
+        "name": "Ime lokacije",
+        "uid": "UID",
+        "address": "Adresa",
+        "zip": "Poštanski broj",
+        "city": "Grad",
+        "email": "Email",
+        "telephone": "Telefon",
+        "allowOnline": "Dozvoli online rezervaciju",
+        "worktimeFrom": "Radno vreme od",
+        "worktimeTo": "Radno vreme do",
+        "action": "Akcije",
+        "locations": "Lokacije",
+        "employees": "Zaposleni"
+    },
+    "myServices": {
+        "name": "Ime usluge",
+        "timeDuration": "Vreme trajanja",
+        "timeBlocked": "Vreme zauzetosti",
+        "timeBlockedExplanation": "Vreme zauzetosti predstavlja ukupno vreme za jednu uslugu. Ovo vreme se razlikuje od vremena trajanja usluge, jer uključuje i vreme za sporedne aktivnosti, a ne samo vreme trajanja usluge(na primer: priprema za uslugu, čišćenje posle prižene usluge itd). Ovo vam može pomoći kako bi ostavili sebi dovoljno vremena i kako naredni klijent ne bi čekao.",
+        "price": "Cena",
+        "min": "minuta",
+        "currency": "€",
+        "description": "Opis usluge",
+        "color": "Podesite boju usluge u kalendaru",
+        "colorText": "Podesite boju teksta usluge u kalendaru"
+    },
+    "myCalendar": {
+        "client": "Kliejt",
+        "termineFrom": "Vreme od",
+        "termineTo": "Vreme do",
+        "service": "Usluga",
+        "locations": "Lokacija",
+        "employees": "Zaposleni",
+        "description": "Opis",
+        "notSetWorkTimeForUser": "Radno vreme nije podešeno za ovog korisnika!",
+        "connectedThisCalendarWithGoogle": "Ovaj kalendar je povazan/sinhronizovan sa Google kalendarom!",
+        "selectLocationAndEmployee": "Molimo odaberite lokaciju i zaposlenog kako bi pregledali njegov kalendar!",
+        "scheduledByUser": "Zakazano od strane klijenta",
+        "selectedPayOnArrivalOption": "Klijent je prilikom zakazivanja odabrao opciju plaćanja po dolasku!",
+        "selectedPayOnline": "Klijent je platio deo iznosa(#amount €) za zakazanu uslugu.",
+        "selectedFullPayment": "Klijent je platio pun iznos za zakazanu uslugu(#amount €)",
+        "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska."
+    },
+    "accountSettings": {
+        "title": "Podešavanja naloga",
+        "general": "Opšta",
+        "changePassword": "Promeni lozinku"
+    },
+    "settings": {
+        "worktime": "Radno vreme",
+        "connections": "Poveži spoljne naloge",
+        "customization": "Customization",
+        "recommended": "Preporuči",
+        "personalize": "Personalizuj"
+    },
+    "connections": {
+        "title": "Povezivanje",
+        "text": "Povežite vaše spoljne naloge sa Termmy-em",
+        "googleTitle": "Google",
+        "googleText": "Povežite Vaš Google nalog i na taj način sinhronizujete Vaš Google kalendar i Google kontakte.",
+        "outlookTitle": "Outlook",
+        "outlookText": "Povežite Vaš Outlook nalog i na taj način sinhronizujete Vaš Outlook kalendar i Outlook kontakte.",
+        "connect": "Poveži",
+        "disconnect": "Otkaži",
+        "successfullyConnected": "Povezano!"
+    },
+    "worktime": {
+        "monday": "Ponedeljak",
+        "tuesday": "Utorak",
+        "wednesday": "Sreda",
+        "thursday": "Četvrtak",
+        "friday": "Petak",
+        "saturday": "Subota",
+        "sunday": "Nedelja",
+        "title": "Radno vreme",
+        "text": "Molimo unesite informacije o Vašem radnom vremenu",
+        "from": "Od",
+        "to": "Do",
+        "remove": "Obriši",
+        "save": "Sačuvaj",
+        "colorTitle": "Boja",
+        "colorText": "Podesite boju radnog vremena u kalendaru za bolju preglednost"
+    },
+    "recommended": {
+        "title": "Preporuči Termmy",
+        "text": "Pošaljite link preporuke i dobićete poklone!",
+        "explanation": "Možete poslati link preporuke Vašim prijateljima i nakon što neki od njih kreira nalog, svaki put dobijate 100 SMS bonusa besplatno!",
+        "smsBonus": "SMS bonus",
+        "numberOfSmsBonus": "Broj besplatnih SMS poruka koje imate",
+        "pickUpSmsBonus": "UZMITE BESPLATNE SMS PORUKE",
+        "getRecommendedLink": "KOPIRAJ LINK PREPORUKE",
+        "registeredThroughLink": "Nalozi registrovani preko vašeg linka",
+        "wrongRecommendedBonusLink": "Link preporuke nije validan. Molimo vas da otvorite validan link preporuke.",
+        "bonus": "Broj SMS-a",
+        "creationDate": "Datum kreiranja naloga",
+        "utilized": "Iskorišćeno/Neiskorišćeno",
+        "used": "Iskorišćeno",
+        "notUsed": "Neiskorišćeno",
+        "utilizedDate": "Datum iskorišćenja bonusa",
+        "successfullyPickedUpSms": "Uspešno ste dodali besplatne SMS poruke na Vaš nalog",
+        "goToCheckAvailableSms": "Proveri trenutni broj mojih SMS poruka",
+        "successfullyCopiedRecommendedLinkToClipboard": "Uspešno ste kopirali link preporuke. Sada ga možete poslati Vašim prijateljima i čekati da dobijete besplatne SMS poruke."
+    },
+    "adminSettings": {
+        "adminSettings": "Administratorksa podešavanja",
+        "onlinePayment": "Online plaćanje",
+        "bookingSettings": "Online rezervacija termina",
+        "reminders": "Podsetnici",
+        "license": "Licenca",
+        "holidays": "Odmori"
+    },
+    "onlinePayment": {
+        "title": "Online plaćanje",
+        "text": "Podesite online plaćanje i primajte novac direktno na Vaš račun u banci!",
+        "stripeTitle": "Stripe",
+        "stripeText": "Podesite Stripe nalog vrlo jednostano."
+    },
+    "bookingSettings": {
+        "title": "Podesite online rezervaciju",
+        "text": "Podesite stranu za online rezervaciju termina.",
+        "activeOrDeactiveBookingPage": "Aktivirajte ili deaktivirajte online rezervaciju",
+        "bookingRootLink": "https://termmy.com/booking/",
+        "bookingLinkExists": "Ova strana za online rezervaciju već postoji. Svaka strana mora da bude jedinstvena. Molimo Vas izaberite neko drugo ime za kreiranje strane za online rezervaciju.",
+        "bookingLink": "Link za rezervaciju",
+        "brandingText": "Brendirajte stranu za rezervaciju",
+        "brandingColorPrimary": "Izaberite primarnu boju Vašeg brenda koji će se prikazivati na strani za rezeraciju",
+        "brandingColorSecondary": "Izaberite sekundarnu boju Vašeg brenda koji će se prikazivati na strani za rezeraciju",
+        "brandingColorLight": "Izaberite boju svetlih elemenata koji će se prikazivati na strani za rezeraciju",
+        "brandingColorDark": "Izaberite boju tamnih elemenata koji će se prikazivati na strani za rezeraciju",
+        "backgroundColorPrimary": "Izaberite primarnu boju za pozadinu",
+        "backgroundColorSecondary": "Izaberite sekundarnu boju za pozadinu",
+        "brandingColorSecondaryExplanation": "Izaberite drugu boju za pozadinu ako želite da imate gradijent ili istu boju kao primarna ako želite izgled pozadine u jednoj boji.",
+        "displayCopyrightButton": "Display 'Termmy' branding on your booking website",
+        "appointmentOptions": "Opcije zakazivanja",
+        "displayMaxAvailableAppointment": "Prikaži maksimalan broj dostupnih termina",
+        "displayMaxAvailableAppointmentsExplanation": "Unesite maksimalan broj slobodnih termina koji će biti prikazani u kalendaru na strani za zakazivanje. Ako vrednost ne postoji ili je vrednost 0, podrazumevano prikazujemo dostupne termine za naredne 4 nedelje.",
+        "displayDayWithoutFreeAppointments": "Prikaži i dane bez slobodnih termina",
+        "companyInformationTitle": "Informacije o firmi",
+        "companyInformationText": "Podesite informaije o firmi - prikazaće se na početnoj strani za razervaciju.",
+        "showCompanyInformation": "Prikaži informacije o firmi",
+        "companyName": "Ime firme",
+        "companyDescription": "Opis",
+        "companyAddress": "Adresa",
+        "contactInformation": "Kontakt informacije",
+        "socialNetworkTitle": "Društvene mreže",
+        "socialNetworkText": "Unesite informaiju o vašim društvenim mrežama",
+        "partOfAmount": "Dozvolite klijentu da plati deo iznosa za odabranu uslugu",
+        "allowPayOnArrivalForNewCustomer": "Dozvoli plaćanje po dolasku i za nove klijente",
+        "facebook": "Facebook",
+        "facebookRootLink": "https://facebook.com/",
+        "instagram": "Instagram",
+        "instagramRootLink": "https://instagram.com/",
+        "youtube": "Youtube",
+        "youtubeRootLink": "https://youtube.com/",
+        "tiktok": "Tiktok",
+        "tiktokRootLink": "https://tiktok.com/",
+        "website": "Link do Vašeg websajta",
+        "websiteRootLink": "https://"
+    },
+    "reminders": {
+        "title": "Reminders",
+        "text": "Configure automated reminders",
+        "explanation": "With automatic reminders, communication with clients can be improved, missed appointments eliminated and clients returned.",
+        "smsReminder": "Use SMS",
+        "emailReminder": "Use Email",
+        "recommended": "Recommended",
+        "recommendedExplanation": "97% of people open and read the SMS within the first 10 minutes of receiving it. People read emails much less!",
+        "smsConfiguration": "SMS Configuration",
+        "emailConfiguration": "Email Configuration"
+    },
+    "smsReminder": {
+        "title": "SMS Reminder",
+        "text": "Configure automated SMS reminders",
+        "explanation": "With automatic SMS reminders, communication with clients can be improved, missed appointments eliminated and clients returned. You can be sure that customers will see the reminder on time because 97% of people open and read the SMS within the first 10 minutes of receiving it.",
+        "leftMessage": "Left SMS messages",
+        "leftMessageText": "You have right now {numberOfLeftMessage} SMS.",
+        "pleaseBuySmsOnTime": "Please buy the additional sms messages on time.",
+        "sms": "SMS",
+        "buyMoreSMS": "Buy more",
+        "messageConfiguration": "Message configuration",
+        "messageConfigurationExplanation": "Here you can configuration, activate or deactive your sms message for different automatization reminders",
+        "reminderClientTitle": "Remind clients about the appointment",
+        "reminderClientTitleExplanation": "",
+        "clientLoyalityTitle": "Client loyalty",
+        "reminderEmployeeTitle": "Remind employees about the appointment",
+        "activeNotification": "Active notification",
+        "deactiveNotification": "Deactive notification",
+        "active": "Active",
+        "inactive": "Inactive",
+        "testMessage": "Test SMS message",
+        "sentTestSMSTo": "Sent test sms to #telephone",
+        "needToInsertTelephoneAtSettings": "You did't set telephone number. Please add it on your settings profile!",
+        "activeSmsReminder": "Active SMS reminder",
+        "warning": "Our suggestion is to activate an SMS reminder, because 97% of people open SMS messages within 10 minutes of their arrival.",
+        "contents": {
+            "clientImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "message": "Your appointment #date at #time has been confirmed. Our address is #address. #company"
+            },
+            "clientDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "message": "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting"
+            },
+            "clientHappyBirthday": {
+                "title": "Birthday card",
+                "text": "It is sent on a birthday",
+                "message": "Lots of happiness and laughter. Greetings from #company"
+            },
+            "clientThankForCommingToUs": {
+                "title": "Thanks for comming",
+                "text": "It is sent 1 hour after the appointment",
+                "message": "Thank you for your visit, we hope you enjoyed the service. Thank you for your trust! #company"
+            },
+            "employeeImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "message": "New appointment #date at #time has been confirmed. #company"
+            },
+            "employeeDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "message": "Reminder: You have an appointment tomorrow at #time. Greeting"
+            }
+        }
+    },
+    "emailReminder": {
+        "title": "Email Reminder",
+        "text": "Configure automated Email reminders",
+        "activeEmailReminder": "Active Email reminder",
+        "explanation": "With automatic Email reminders, communication with clients can be improved, missed appointments eliminated and clients returned. ",
+        "messageConfiguration": "Message configuration",
+        "messageConfigurationExplanation": "Here you can configuration, activate or deactive your emails for different automatization reminders",
+        "reminderClientTitle": "Remind clients about the appointment",
+        "reminderClientTitleExplanation": "",
+        "clientLoyalityTitle": "Client loyalty",
+        "reminderEmployeeTitle": "Remind employees about the appointment",
+        "activeNotification": "Active notification",
+        "deactiveNotification": "Deactive notification",
+        "active": "Active",
+        "inactive": "Inactive",
+        "testMessage": "Test Email",
+        "subject": "Subject",
+        "message": "Message",
+        "sentTestEmailTo": "Send test email to #email",
+        "contents": {
+            "clientImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "subject": "Your appointment is confirmed",
+                "message": "Your appointment #date at #time has been confirmed. Our address is #address. #company"
+            },
+            "clientDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "subject": "Reminder for tomorrow appointment",
+                "message": "Reminder: You have an appointment with us at #company tomorrow at #time. Our address is #address. Greeting"
+            },
+            "clientHappyBirthday": {
+                "title": "Birthday card",
+                "text": "It is sent on a birthday",
+                "subject": "Happy birthday!",
+                "message": "Lots of happiness and laughter. Greetings from #company"
+            },
+            "clientThankForCommingToUs": {
+                "title": "Thanks for comming",
+                "text": "It is sent 1 hour after the appointment",
+                "subject": "Thank you!",
+                "message": "Thank you for your visit, we hope you enjoyed the service. Thank you for your trust! #company"
+            },
+            "employeeImmediatelyReminder": {
+                "title": "Confirmation of booking",
+                "text": "Immediately upon appointment",
+                "subject": "Your have new appointment",
+                "message": "New appointment #date at #time has been confirmed. #company"
+            },
+            "employeeDayBeforeReminder": {
+                "title": "Day before",
+                "text": "Day before at 8 p.m",
+                "subject": "Reminder for tomorrow appointment",
+                "message": "Reminder: You have an appointment tomorrow at #time. Greeting"
+            }
+        }
+    },
+    "licenses": {
+        "name": "Name",
+        "monthlyPrice": "Monthly price",
+        "annualPrice": "Annual price"
+    },
+    "licenseStatus": {
+        "currentPlan": "Current plan",
+        "yourCurrentPlan": "Your Current Plan is",
+        "simpleStartForEveryone": "A simple start for everyone",
+        "activeUntil": "Active until",
+        "forever": "FOREVER",
+        "notifyBeforeExpired": "We will send you a notification upon Subscription expiration",
+        "perYear": "Pear Year",
+        "perMonth": "Per Month",
+        "planDescription": "Standard plan for small to medium businesses",
+        "days": "Days",
+        "of": "of",
+        "daysReminder": "days remaining until your plan requires update",
+        "updatePlan": "Upgrade Plan",
+        "cancelSubscription": "Cancel Subscription",
+        "cancelSubscriptionQuestion": "Are you sure you want to cancel your subscription?",
+        "expired": "EXPIRED",
+        "extendCurrentPlan": "Extend your current plan",
+        "monthlySubscription": "I want to extend 1 MONTH",
+        "threeMonthSubscription": "I want to extend 3 MONTH",
+        "sixMonthSubscription": "I want to extend 6 MONTH",
+        "annualSubscription": "I want to extend one YEAR",
+        "discount5": "-5 % discount",
+        "discount10": "-10 % discount",
+        "payForLicense": "Pay for license",
+        "successfullyPaidLicense": "Successfully paid license"
+    },
+    "licensePackages": {
+        "pricingPlansTitle": "Pricing Plans",
+        "pricingPlansText": "All plans include 40+ advanced tools and features to help you for better organize your business and time. Choose the best plan to, fit your needs.",
+        "monthly": "Monthly",
+        "annualy": "Annualy",
+        "currentPlan": "Your current plan",
+        "upgrade": "Upgrade",
+        "additionalFunctionalities": "Additional functionalities? You are not satisfied with the current number or you need specific functionality?",
+        "contactUsForSolvingProblem": "Contact us so that together we can try to solve the problem and develop the function you need.",
+        "contactUsButton": "Contact us"
+    },
+    "licensePackagePlans": [
+        {
+            "id": "d24f35e2-dd3c-11ee-9965-960002791003",
+            "icon": "../../../../../../assets/images/illustration/Pot1.svg",
+            "name": "Basic",
+            "slogan": "A simple start for everyone",
+            "monthly_price": "0",
+            "annual_price": "0",
+            "plans": [
+                "100 responses a month",
+                "Unlimited forms and surveys",
+                "Unlimited fields",
+                "Basic form creation tools",
+                "Up to 2 subdomains"
+            ]
+        },
+        {
+            "id": "9b152453-dd36-11ee-9965-960002791003",
+            "icon": "../../../../../../assets/images/illustration/Pot2.svg",
+            "name": "Standard",
+            "slogan": "For small to medium businesses",
+            "monthly_price": "9.99",
+            "annual_price": "95.99",
+            "plans": [
+                "Unlimited responses",
+                "Unlimited forms and surveys",
+                "Instagram profile page",
+                "Google Docs integration",
+                "Custom “Thank you” page"
+            ]
+        }
+    ],
+    "holidays": {
+        "title": "Holidays",
+        "text": "Configurable holidays for your company",
+        "countryHoliday": "Select default holiday for country where you are",
+        "listOfHolidays": "List of selected country holidays",
+        "holidayName": "Holiday name",
+        "holidayStart": "Start",
+        "holidayEnd": "End",
+        "holidayType": "Type",
+        "public": "Public",
+        "observance": "Observance",
+        "optional": "Optional"
+    },
+    "authGlobal": {
+        "backToLogin": "Back to login"
+    },
+    "verifiedMail": {
+        "title": "Mail is verified! 🙌",
+        "text": "Thank you for your signup and verified your mail. Now you can login and configurable your account!",
+        "goToLogin": "Login now"
+    },
+    "somethingHappenedPage": {
+        "title": "Something unexpected happened! 🤔",
+        "text": "There was an error in the previous action. Please try again or contact our support for help.",
+        "backToHome": "Back to Home"
+    },
+    "paymentProcessing": {
+        "buttonText": "Pay #amount €",
+        "acceptTermsAndPrivacyPolicyOne": "By submitting this order, you accept the ",
+        "acceptTermsAndPrivacyPolicyTerms": "General Terms",
+        "acceptTermsAndPrivacyPolicyTermsAnd": "and",
+        "acceptTermsAndPrivacyPolicyPrivacyPolicy": "Privacy Policy",
+        "acceptTermsAndPrivacyPolicyTwo": " and confirm that you have read and understood the data protection regulations of Termmy and acknowledge the right of cancellation.",
+        "needAcceptTermsAndPrivacyPolicy": "Please accept terms and privacy policy",
+        "firstname": "Firstname *",
+        "firstnamePlaceholder": "",
+        "lastname": "Lastname *",
+        "lastnamePlaceholder": "",
+        "email": "Email *",
+        "emailPlaceholder": "",
+        "telephone": "Phone *",
+        "fillFirstname": "Please fill your firstname",
+        "fillLastname": "Please fill your lastname",
+        "fillEmail": "Please fill your email",
+        "fillPhone": "Please fill your phone"
+    },
+    "buyMoreSms": {
+        "title": "Buy SMS",
+        "text": "Buy more messages and achieve better communication with clients",
+        "package": "Package",
+        "numberOfSms": "Number of SMS",
+        "price": "Price",
+        "buySmsButton": "Buy SMS",
+        "previousPayments": "Previous payments",
+        "dateBuy": "Date buy",
+        "successfullyBoughtNewSms": "Successfully bought additionally #count SMS.",
+        "backToSmsReminder": "Back to SMS reminder"
+    },
+    "gatewayCountryPrefix": {
+        "prefix": "Prefix",
+        "gatewayEmail": "Gateway email",
+        "active": "Active"
+    },
+    "setupApp": {
+        "setup": "Setup Termmy",
+        "title": "Set up Termmy for success",
+        "text": "Complete the steps bellow so you can unlock the full potential of your business.",
+        "clientTitle": "Add clients",
+        "clientText": "Organize your clients, keep detailed notes and see their entire appointment history.",
+        "serviceTitle": "Customize your services",
+        "serviceText": "Set the price, duration, color or service and block extra time if needed.",
+        "worktimeTitle": "Working hours",
+        "worktimeText": "Set your working hours when you available to offer your services.",
+        "smsReminderTitle": "Turn on SMS reminders",
+        "smsReminderText": "Ensure clients show up to appointments by sending them pre-made text reminders.",
+        "calendarTitle": "Sync your calendars",
+        "calendarText": "Termmy simplifies your life by connecting to all of your other calendars.",
+        "bookingTitle": "Activate your booking website",
+        "bookingText": "Allow clients to book themselves based on your schedule on your personalised booking website",
+        "paymentTitle": "Allow money online",
+        "paymentText": "Set up your card and receive money directly online to your account",
+        "holidayTitle": "Holiday",
+        "holidayText": "Set up holiday, so then your client can't booking this date"
     }
 }
