@@ -212,7 +212,7 @@
             "text": "bookingSettings.contactInformation"
         },
         {
-            "type": "textbox",
+            "type": "phoneprefix",
             "width": "col-md-12",
             "class": "e-outline",
             "name": "telephone",

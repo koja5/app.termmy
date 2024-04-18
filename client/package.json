@@ -9,7 +9,7 @@
     "start-hmr-sourcemaps": "ng serve --configuration hmr --source-map=true --hmr-warning=false",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --output-hashing=all",
     "build-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --stats-json",
-    "build:prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --output-hashing=all",
+    "build:prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --output-hashing=all --aot",
     "build:prod-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --stats-json",
     "bundle-analyzer": "webpack-bundle-analyzer dist/termmy/stats.json",
     "test": "ng test",

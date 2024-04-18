@@ -611,5 +611,32 @@
       "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
       "holidayTitle": "Urlaub",
       "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
+   },
+   "customizeTermmy": {
+      "title": "Personalisieren Sie Ihren Termmy",
+      "text": "Personalisieren und Vorschau in Echtzeit",
+      "skin": "Haut",
+      "light": "Licht",
+      "bordered": "Umrandet",
+      "dark": "Dunkel",
+      "semiDark": "Halbdunkel",
+      "routeTransition": "Routenübergang",
+      "fadeInLeft": "Links einblenden",
+      "zoomIn": "Hineinzoomen",
+      "fadeIn": "Einblenden",
+      "none": "Keiner",
+      "menuLayout": "Menülayout",
+      "vertical": "Vertikal",
+      "horizontal": "Horizontal",
+      "menuCollapsed": "Menü minimiert",
+      "menuHidden": "Menü ausgeblendet",
+      "navbarColor": "Farbe der Navigationsleiste",
+      "navbarType": "Navbar-Typ",
+      "menuType": "Menütyp",
+      "floating": "Schwebend",
+      "sticky": "Klebrig",
+      "static": "Statisch",
+      "hidden": "Versteckt",
+      "footerType": "Fußzeilentyp"
    }
 }

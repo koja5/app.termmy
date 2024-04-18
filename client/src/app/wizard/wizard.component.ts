@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { CoreConfigService } from "@core/services/config.service";
+import { TranslateService } from "@ngx-translate/core";
 import { CallApiService } from "app/services/call-api.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -16,11 +17,14 @@ export class WizardComponent {
   public coreConfig: any;
   public welcomeText = -1;
   private _unsubscribeAll: Subject<any>;
+  public welcomeTranslation!: string;
+  public toTranslation!: string;
 
   constructor(
     private _coreConfigService: CoreConfigService,
     private _service: CallApiService,
-    private _router: Router
+    private _router: Router,
+    private _translate: TranslateService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -39,6 +43,11 @@ export class WizardComponent {
         enableLocalStorage: false,
       },
     };
+
+    this.welcomeTranslation = this._translate
+      .instant("wizard.welcome")
+      .split("");
+    this.toTranslation = this._translate.instant("wizard.to").split("");
   }
 
   ngOnInit() {

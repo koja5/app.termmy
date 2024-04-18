@@ -186,6 +186,7 @@
         "timeBlocked": "Time blocked",
         "timeBlockedExplanation": "Blocked time is the total time used when making an appointment. This time is different from the additional treatment time, as it includes the total time you need, for example. preparation for the service, cleaning up after the service and similar.",
         "price": "Price",
+        "hidePriceOnBookingSide": "Hide service price on booking side",
         "min": "minutes",
         "currency": "€",
         "description": "Description",
@@ -610,5 +611,38 @@
         "paymentText": "Set up your card and receive money directly online to your account",
         "holidayTitle": "Holiday",
         "holidayText": "Set up holiday, so then your client can't booking this date"
+    },
+    "customizeTermmy": {
+        "title": "Personalize your Termmy",
+        "text": "Personalize & Preview in Real Time",
+        "skin": "Skin",
+        "light": "Light",
+        "bordered": "Bordered",
+        "dark": "Dark",
+        "semiDark": "Semi dark",
+        "routeTransition": "Route Transition",
+        "fadeInLeft": "Fade In Left",
+        "zoomIn": "Zoom In",
+        "fadeIn": "Fade In",
+        "none": "None",
+        "menuLayout": "Menu Layout",
+        "vertical": "Vertical",
+        "horizontal": "Horizontal",
+        "menuCollapsed": "Menu Collapsed",
+        "menuHidden": "Menu Hidden",
+        "navbarColor": "Navbar Color",
+        "navbarType": "Navbar Type",
+        "menuType": "Menu Type",
+        "floating": "Floating",
+        "sticky": "Sticky",
+        "static": "Static",
+        "hidden": "Hidden",
+        "footerType": "Footer type"
+    },
+    "wizard": {
+        "title": "Welcome to Termmy!",
+        "text": "Please fill required data to complete your account information!",
+        "welcome": "Welcome",
+        "to": "to"
     }
 }

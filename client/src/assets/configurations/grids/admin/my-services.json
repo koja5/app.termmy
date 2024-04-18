@@ -247,6 +247,14 @@
             "required": true
         },
         {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "hide_price",
+            "title": "myServices.hidePriceOnBookingSide",
+            "field": "hide_price"
+        },
+        {
             "type": "textbox",
             "width": "col-md-12",
             "class": "e-outline",

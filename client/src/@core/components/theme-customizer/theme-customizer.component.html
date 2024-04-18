@@ -1,8 +1,8 @@
 <div class="customizer-content" [perfectScrollbar]>
   <!-- Customizer header -->
   <div class="customizer-header px-2 pt-1 pb-0 position-relative">
-    <h4 class="mb-0">Customize your Termmy</h4>
-    <p class="m-0">Customize & Preview in Real Time</p>
+    <h4 class="mb-0">{{'customizeTermmy.title' | translate}}</h4>
+    <p class="m-0">{{'customizeTermmy.text' | translate}}</p>
 
     <a *ngIf="showCloseButton" class="customizer-close" (click)="toggleSidebar('themeCustomizer')"><span
         [data-feather]="'x'"></span></a>
@@ -15,37 +15,38 @@
       <div id="customizer-styling" class="px-2">
         <!-- Skin -->
         <div id="customizer-styling-skin">
-          <p class="font-weight-bold">Skin</p>
+          <p class="font-weight-bold">{{'customizeTermmy.skin' | translate}}</p>
           <div class="d-flex">
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="skinlight" formControlName="skin" class="custom-control-input layout-name"
                 value="default" />
-              <label class="custom-control-label" for="skinlight">Light</label>
+              <label class="custom-control-label" for="skinlight">{{'customizeTermmy.light' | translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="skinbordered" formControlName="skin" class="custom-control-input layout-name"
                 value="bordered" />
-              <label class="custom-control-label" for="skinbordered">Bordered</label>
+              <label class="custom-control-label" for="skinbordered">{{'customizeTermmy.bordered' | translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="skindark" formControlName="skin" class="custom-control-input layout-name"
                 value="dark" />
-              <label class="custom-control-label" for="skindark">Dark</label>
+              <label class="custom-control-label" for="skindark">{{'customizeTermmy.dark' | translate}}</label>
             </div>
             <div class="custom-control custom-radio" *ngIf="coreConfig.layout.type == 'vertical'">
               <input type="radio" id="skinsemidark" formControlName="skin" class="custom-control-input layout-name"
                 value="semi-dark" />
-              <label class="custom-control-label" for="skinsemidark">Semi Dark</label>
+              <label class="custom-control-label" for="skinsemidark">{{'customizeTermmy.semiDark' | translate}}</label>
             </div>
           </div>
           <!-- Router animation -->
           <div class="d-flex justify-content-between align-items-center mt-2">
-            <p class="font-weight-bold mr-auto m-0" for="routeSelect">Route Transition</p>
+            <p class="font-weight-bold mr-auto m-0" for="routeSelect">{{'customizeTermmy.routeTransition' | translate}}
+            </p>
             <select formControlName="animation" class="form-control w-50" id="routeSelect">
-              <option value="fadeInLeft">Fade In Left</option>
-              <option value="zoomIn">Zoom In</option>
-              <option value="fadeIn">Fade In</option>
-              <option value="none">None</option>
+              <option value="fadeInLeft">{{'customizeTermmy.fadeInLeft' | translate}}</option>
+              <option value="zoomIn">{{'customizeTermmy.zoomIn' | translate}}</option>
+              <option value="fadeIn">{{'customizeTermmy.fadeIn' | translate}}</option>
+              <option value="none">{{'customizeTermmy.none' | translate}}</option>
             </select>
           </div>
         </div>
@@ -57,17 +58,19 @@
       <div class="customizer-menu px-2">
         <!-- Menu Layout -->
         <div id="customizer-menu-type">
-          <p class="font-weight-bold">Menu Layout</p>
+          <p class="font-weight-bold">{{'customizeTermmy.menuLayout' | translate}}</p>
           <div class="d-flex">
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="menu-type-vertical" value="vertical" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="menu-type-vertical">Vertical</label>
+              <label class="custom-control-label" for="menu-type-vertical">{{'customizeTermmy.vertical' |
+                translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="menu-type-horizontal" value="horizontal" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="menu-type-horizontal">Horizontal</label>
+              <label class="custom-control-label" for="menu-type-horizontal">{{'customizeTermmy.horizontal' |
+                translate}}</label>
             </div>
           </div>
         </div>
@@ -75,7 +78,7 @@
         <!-- Menu Collapsed -->
         <div id="customizer-menu-collapsible" class="d-flex mt-2" formGroupName="menu"
           *ngIf="coreConfig.layout.type == 'vertical'">
-          <p class="font-weight-bold mr-auto m-0">Menu Collapsed</p>
+          <p class="font-weight-bold mr-auto m-0">{{'customizeTermmy.menuCollapsed' | translate}}</p>
           <div class="custom-control custom-control-primary custom-switch">
             <input type="checkbox" class="custom-control-input" id="collapse-sidebar-switch"
               formControlName="collapsed" />
@@ -85,7 +88,7 @@
 
         <!-- Menu Hidden -->
         <div id="customizer-menu-hidden" class="d-flex mt-2" formGroupName="menu">
-          <p class="font-weight-bold mr-auto m-0">Menu Hidden</p>
+          <p class="font-weight-bold mr-auto m-0">{{'customizeTermmy.menuHidden' | translate}}</p>
           <div class="custom-control custom-control-primary custom-switch">
             <input type="checkbox" class="custom-control-input" id="collapse-sidebar-hidden" formControlName="hidden" />
             <label class="custom-control-label" for="collapse-sidebar-hidden"></label>
@@ -98,7 +101,7 @@
       <div id="customizer-navbar" class="px-2" formGroupName="navbar">
         <!-- Navbar Color -->
         <div id="customizer-navbar-colors" *ngIf="coreConfig.layout.type == 'vertical'">
-          <p class="font-weight-bold">Navbar Color</p>
+          <p class="font-weight-bold">{{'customizeTermmy.navbarColor' | translate}}</p>
           <ul class="list-inline unstyled-list">
             <li class="color-box bg-white border" [ngClass]="{ selected: navbarColorValue === '' }"
               (click)="navbarColor('')"></li>
@@ -122,31 +125,32 @@
         <div id="customizer-navbar-type">
           <p class="navbar-type-text font-weight-bold"
             *ngIf="coreConfig.layout.type == 'vertical'; else navbarTypeHorizontal">
-            Navbar Type
+            {{'customizeTermmy.navbarType' | translate}}
           </p>
           <ng-template #navbarTypeHorizontal>
-            <p class="navbar-type-text font-weight-bold">Menu Type</p>
+            <p class="navbar-type-text font-weight-bold">{{'customizeTermmy.menuType' | translate}}</p>
           </ng-template>
           <div class="d-flex">
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="nav-type-floating" value="floating-nav" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="nav-type-floating">Floating</label>
+              <label class="custom-control-label" for="nav-type-floating">{{'customizeTermmy.floating' |
+                translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="nav-type-sticky" value="fixed-top" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="nav-type-sticky">Sticky</label>
+              <label class="custom-control-label" for="nav-type-sticky">{{'customizeTermmy.sticky' | translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="nav-type-static" value="navbar-static-top" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="nav-type-static">Static</label>
+              <label class="custom-control-label" for="nav-type-static">{{'customizeTermmy.static' | translate}}</label>
             </div>
             <div class="custom-control custom-radio" *ngIf="coreConfig.layout.type == 'vertical'">
               <input type="radio" id="nav-type-hidden" value="d-none" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="nav-type-hidden">Hidden</label>
+              <label class="custom-control-label" for="nav-type-hidden">{{'customizeTermmy.hidden' | translate}}</label>
             </div>
           </div>
         </div>
@@ -156,22 +160,25 @@
       <!-- Footer -->
       <div id="customizer-footer" class="px-2 mb-2" formGroupName="footer">
         <div id="customizer-footer-type">
-          <p class="font-weight-bold">Footer Type</p>
+          <p class="font-weight-bold">{{'customizeTermmy.footerType' | translate}}</p>
           <div class="d-flex">
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="footer-type-sticky" value="footer-sticky" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="footer-type-sticky">Sticky</label>
+              <label class="custom-control-label" for="footer-type-sticky">{{'customizeTermmy.sticky' |
+                translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="footer-type-static" value="footer-static" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="footer-type-static">Static</label>
+              <label class="custom-control-label" for="footer-type-static">{{'customizeTermmy.static' |
+                translate}}</label>
             </div>
             <div class="custom-control custom-radio mr-1">
               <input type="radio" id="footer-type-hidden" value="d-none" formControlName="type"
                 class="custom-control-input" />
-              <label class="custom-control-label" for="footer-type-hidden">Hidden</label>
+              <label class="custom-control-label" for="footer-type-hidden">{{'customizeTermmy.hidden' |
+                translate}}</label>
             </div>
           </div>
         </div>
