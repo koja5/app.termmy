@@ -141,10 +141,10 @@
                                 or need our help keeping the account, please
                                 contact us at
                                 <a
-                                  href="mailto:support@termmy.com"
+                                  href="mailto:info@termmy.com"
                                   class="hover-underline"
                                   style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
-                                >support@termmy.com</a>
+                                >info@termmy.com</a>
                               </p>
                               <table
                                 style="font-family: &#39;Montserrat&#39;,Arial,sans-serif; width: 100%;"
@@ -169,7 +169,7 @@
                               <p style="margin: 0 0 16px;">
                                 Not sure why you received this email? Please
                                 <a
-                                  href="mailto:support@termmy.com"
+                                  href="mailto:info@termmy.com"
                                   class="hover-underline"
                                   style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
                                 >let us know</a>.

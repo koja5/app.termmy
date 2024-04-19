@@ -31,7 +31,7 @@
       "errorExecuteActionTitleDefault": "Etwas ist passiert",
       "errorExecuteActionTextDefault": "Bitte überprüfen Sie es noch einmal oder versuchen Sie es später",
       "errorUpdateTermineOnGoogleCalendarRights": "Ein Problem mit den Rechten beim Aktualisieren eines Termins im Google-Kalender."
-   },
+  },
    "commonFields": {
       "firstname": "Vorname",
       "lastname": "Nachname",
@@ -333,17 +333,17 @@
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
             "text": "Die Buchungsbestätigung wird sofort nach der Buchung gesendet",
-            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+            "message": "Sie haben einen verbindlichen Termin am #date um #time gebucht. Unsere Adresse ist #Adresse. Beste Grüße #company"
          },
          "clientDayBeforeReminder": {
             "title": "Termin-Erinnerung",
-            "text": "Vortag um 8.00 Uhr",
+            "text": "Die Termin-Erinnerung wird am Vortag um 8.00 Uhr gesendet",
             "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          },
          "clientHappyBirthday": {
             "title": "Geburtstags-SMS",
             "text": "Die Geburtstags-SMS wird am Geburtstag gesendet",
-            "message": "Alles Gute zum Geburtstag, wünscht das Team von #company."
+            "message": "Alles Gute zum Geburtstag, wünscht unser Team. #company."
          },
          "clientThankForCommingToUs": {
             "title": "Danke fürs Kommen",
@@ -353,11 +353,11 @@
          "employeeImmediatelyReminder": {
             "title": "Buchungsbestätigung",
             "text": "Sofort nach Terminvereinbarung",
-            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+            "message": "Es wurde eine neuer Termin am #date um #time wurde. #company"
          },
          "employeeDayBeforeReminder": {
             "title": "Termin-Erinnerung",
-            "text": "Termin-Erinnerung am Vortag um 8.00 Uhr",
+            "text": "Die Termin-Erinnerung wird am Vortag um 8.00 Uhr gesendet",
             "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          }
       }
@@ -390,7 +390,7 @@
          },
          "clientDayBeforeReminder": {
             "title": "Termin-Erinnerung",
-            "text": "Termin-Erinnerung am Vortag um 8.00 Uhr",
+            "text": "Die Termin-Erinnerung wird am Vortag um 8.00 Uhr gesendet",
             "subject": "Termin-Erinnerung an Ihren Termin bei uns morgen",
             "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          },
@@ -459,9 +459,9 @@
       "annualy": "Jährlich",
       "currentPlan": "Ihr aktuelles Abo",
       "upgrade": "Upgrade",
-      "additionalFunctionalities": "Zusätzliche Funktionen? Sind Sie mit der aktuellen Anzahl nicht zufrieden oder benötigen Sie eine spezifische Funktionalität?",
-      "contactUsForSolvingProblem": "Kontaktieren Sie uns, damit wir gemeinsam versuchen können, das Problem zu lösen und die Funktion zu entwickeln, die Sie benötigen.",
-      "contactUsButton": "Contact us"
+      "additionalFunctionalities": "Zusätzliche Funktionen? Sie wünschen sich zusätzliche Funktionen oder benötigen eine individuelle Lösung?",
+      "contactUsForSolvingProblem": "Kontaktieren Sie uns, damit wir die best möglichen Funktionen für Sie bereit stellen, oder Ihre individuelle Lösung umsetzen.",
+      "contactUsButton": "Kontaktieren Sie uns"
    },
    "licensePackagePlans": [
       {
@@ -596,20 +596,20 @@
       "setup": "Termmy einrichten",
       "title": "Richten Sie Termmy für den Erfolg ein",
       "text": "Führen Sie die folgenden Schritte aus, damit Sie das volle Potenzial Ihres Unternehmens ausschöpfen können.",
-      "clientTitle": "Kunden hinzufügen",
-      "clientText": "Organisieren Sie Ihre Kunden, führen Sie detaillierte Notizen und sehen Sie deren gesamten Terminverlauf.",
+      "clientTitle": "Kunden anlegen",
+      "clientText": "Legen Sie ihre Kunden an, mit allen wichtigen Informationen.",
       "serviceTitle": "Passen Sie Ihre Dienste an",
-      "serviceText": "Legen Sie Preis, Dauer, Farbe oder Service fest und blockieren Sie bei Bedarf zusätzliche Zeit.",
+      "serviceText": "Legen Sie ihre Dienstleistungen an, mit Preis, Dauer, Farbe und reservieren Sie sich bei Bedarf zusätzliche Zeit zur Nachbereitung.",
       "worktimeTitle": "Arbeitszeit",
-      "worktimeText": "Legen Sie Ihre Arbeitszeiten fest, wenn Sie verfügbar sind, um Ihre Dienste anzubieten.",
+      "worktimeText": "Legen Sie Ihre Arbeitszeiten fest, wann Sie online buchbar sind.",
       "smsReminderTitle": "Aktivieren Sie SMS-Erinnerungen",
-      "smsReminderText": "Stellen Sie sicher, dass Kunden zu Terminen erscheinen, indem Sie ihnen vorgefertigte SMS-Erinnerungen senden.",
-      "calendarTitle": "Synchronisieren Sie Ihre Kalender",
+      "smsReminderText": "Stellen Sie sicher, dass Kunden zu Terminen erscheinen, indem Sie ihnen automatisiert vorgefertigte SMS-Erinnerungen senden.",
+      "calendarTitle": "Synchronisieren Sie Ihren Kalender",
       "calendarText": "Termmy vereinfacht Ihr Leben, indem es eine Verbindung zu all Ihren anderen Kalendern herstellt.",
       "bookingTitle": "Aktivieren Sie Ihre Buchungswebsite",
-      "bookingText": "Ermöglichen Sie Ihren Kunden, auf Ihrer personalisierten Buchungswebsite basierend auf Ihrem Zeitplan selbst zu buchen",
-      "paymentTitle": "Geld online zulassen",
-      "paymentText": "Richten Sie Ihre Karte ein und erhalten Sie Geld direkt online auf Ihr Konto",
+      "bookingText": "Ermöglichen Sie Ihren Kunden selbst termine zu buchen. Über Ihre individuelle Buchungs-Website. In der von Ihnen definierten Arbeitszeit.",
+      "paymentTitle": "Online-Zahlung zulassen",
+      "paymentText": "Lassen Sie Ihre Kunden für die online gebuchten Termine im Voraus bezahlen. Dazu richten Sie Ihre eigene Kredit-Karten Zahlung ein und erhalten Ihr Geld direkt auf Ihr Konto",
       "holidayTitle": "Urlaub",
       "holidayText": "Stellen Sie einen Feiertag ein, damit Ihr Kunde dieses Datum nicht buchen kann."
    },

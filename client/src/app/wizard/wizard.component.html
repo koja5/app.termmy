@@ -1,5 +1,5 @@
 <div class="logo-container text-center">
-    <a class="navbar-brand" [routerLink]="['/']">
+    <a class="navbar-brand">
         <span class="brand-logo">
             <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
         </span>
@@ -9,8 +9,8 @@
 <div class="wizard-container" *ngIf="welcomeText === -1">
     <div class="card p-2">
         <div class="text-center mb-2">
-            <h1 class="font-weight-bolder">Welcome to Termmy!</h1>
-            <h5>Please fill required data to complete your account information!</h5>
+            <h1 class="font-weight-bolder">{{'wizard.title' | translate}}</h1>
+            <h5>{{'wizard.text' | translate}}</h5>
         </div>
         <!-- <app-general></app-general> -->
         <app-dynamic-forms [path]="path" [file]="file" (submit)="submit($event)"></app-dynamic-forms>

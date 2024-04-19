@@ -6,7 +6,7 @@
         "show": "Prikaži",
         "entries": "unosa",
         "newEntrie": "Novi podatak",
-        "editEntrie": "Upredi podatak",
+        "editEntrie": "Uredi podatak",
         "edit": "Uredi",
         "delete": "Obriši",
         "update": "Ažuriraj",
@@ -188,6 +188,7 @@
         "timeBlocked": "Vreme zauzetosti",
         "timeBlockedExplanation": "Vreme zauzetosti predstavlja ukupno vreme za jednu uslugu. Ovo vreme se razlikuje od vremena trajanja usluge, jer uključuje i vreme za sporedne aktivnosti, a ne samo vreme trajanja usluge(na primer: priprema za uslugu, čišćenje posle prižene usluge itd). Ovo vam može pomoći kako bi ostavili sebi dovoljno vremena i kako naredni klijent ne bi čekao.",
         "price": "Cena",
+        "hidePriceOnBookingSide": "Sakrij cenu usluge na stranici za rezervaciju",
         "min": "minuta",
         "currency": "€",
         "description": "Opis usluge",
@@ -627,9 +628,9 @@
         "dark": "Tamna",
         "semiDark": "Polu tamna",
         "routeTransition": "Efekti otvaranja",
-        "fadeInLeft": "Bledo levo",
+        "fadeInLeft": "Sa leva na desno",
         "zoomIn": "Zumiranje",
-        "fadeIn": "Bledo",
+        "fadeIn": "Kraći zum",
         "none": "Bez efekta",
         "menuLayout": "Raspored menija",
         "vertical": "Vertikalni",
@@ -644,5 +645,11 @@
         "static": "Statični",
         "hidden": "Skriven",
         "footerType": "Tip futera"
+    },
+    "wizard": {
+        "title": "Dobrodošli na Termmy",
+        "text": "Molimo Vas da popunite osnovne informacije u nastavku.",
+        "welcome": "Dobrodošli",
+        "to": "na"
     }
 }

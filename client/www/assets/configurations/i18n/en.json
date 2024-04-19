@@ -186,6 +186,7 @@
         "timeBlocked": "Time blocked",
         "timeBlockedExplanation": "Blocked time is the total time used when making an appointment. This time is different from the additional treatment time, as it includes the total time you need, for example. preparation for the service, cleaning up after the service and similar.",
         "price": "Price",
+        "hidePriceOnBookingSide": "Hide service price on booking side",
         "min": "minutes",
         "currency": "€",
         "description": "Description",
@@ -637,5 +638,11 @@
         "static": "Static",
         "hidden": "Hidden",
         "footerType": "Footer type"
+    },
+    "wizard": {
+        "title": "Welcome to Termmy!",
+        "text": "Please fill required data to complete your account information!",
+        "welcome": "Welcome",
+        "to": "to"
     }
 }

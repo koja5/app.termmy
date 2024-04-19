@@ -161,7 +161,7 @@
                               <p style="margin: 0 0 16px;">
                                 Not sure why you received this email? Please
                                 <a
-                                  href="mailto:support@termmy.com"
+                                  href="mailto:info@termmy.com"
                                   class="hover-underline"
                                   style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
                                 >let us know</a>.
@@ -187,13 +187,13 @@
                                 <a
                                   href="https://termmy.com/"
                                   class="hover-underline"
-                                  style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
+                                  style="--text-opacity: 1; color: #7367f0 !important; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
                                 >Terms of Use</a>
                                 and
                                 <a
                                   href="https://termmy.com/"
                                   class="hover-underline"
-                                  style="--text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
+                                  style="--text-opacity: 1; color: #7367f0 !important; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;"
                                 >Privacy Policy</a>.
                               </p>
                             </td>

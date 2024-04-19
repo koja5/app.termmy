@@ -8,7 +8,7 @@
   <input *ngIf="!config.subType" type="number" #default
     class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
     [id]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''" [formControlName]="config.name"
-    [readonly]="config.readonly" [disabled]="config.disabled!">
+    [readonly]="config.readonly" [disabled]="config.disabled!" [min]="config.min" [max]="config.max">
   <div class="input-group" *ngIf="config.subType === 'group'">
     <div class="input-group-prepend" *ngIf="config.groupSettings.groupPosition === 'left'">
       <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
@@ -17,7 +17,7 @@
       class="form-control {{ config.class }} {{group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched) ? 'is-invalid' : ''}}"
       [id]="config.name" [name]="config.name" [placeholder]="config.placeholder ? config.placeholder : ''"
       [formControlName]="config.name" [readonly]="config.readonly" [disabled]="config.disabled!"
-      [multiline]="config.multiline" />
+      [multiline]="config.multiline" [min]="config.min" [max]="config.max" />
     <div class="input-group-append" *ngIf="config.groupSettings.groupPosition === 'right'">
       <span class="input-group-text" id="basic-addon2">{{config.groupSettings.groupText | translate}}</span>
     </div>
@@ -36,9 +36,10 @@
       <input *ngIf="!config?.multiline" class="{{
         config?.class
       }} e-field e-input e-control e-textbox e-lib e-input " value="" name="{{ config?.name }}"
-        type="{{ config?.type }}" />
+        type="{{ config?.type }}" [min]="config.min" [max]="config.max" />
       <textarea *ngIf="config?.multiline" class="{{
         config?.class
-      }} e-field e-input e-control e-textbox e-lib e-input  border-none" value="" name="{{ config?.name }}"></textarea>
+      }} e-field e-input e-control e-textbox e-lib e-input  border-none" value="" name="{{ config?.name }}"
+        [min]="config.min" [max]="config.max"></textarea>
     </div>
   </div>
