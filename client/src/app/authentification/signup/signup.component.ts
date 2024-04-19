@@ -14,6 +14,7 @@ import { ResponseModel } from "app/models/response-model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { TranslateService } from "@ngx-translate/core";
+import { StorageService } from "app/services/storage.service";
 
 @Component({
   selector: "app-signup",
@@ -46,7 +47,8 @@ export class SignupComponent implements OnInit {
     private _router: Router,
     private _activatedRouter: ActivatedRoute,
     private _toastr: ToastrComponent,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _storageService: StorageService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -130,19 +132,24 @@ export class SignupComponent implements OnInit {
     this.response = new ResponseModel();
     this.loading = true;
     if (data.password === data.rePassword) {
-      this._service.callPostMethod("/api/signUp", data).subscribe((data) => {
-        if (data) {
-          this.response.verifyYourMail = true;
-          this.loading = false;
-          this.createRecommendedBonus();
-          setTimeout(() => {
-            this._router.navigate(["/auth/login"]);
-          }, 6000);
-        } else {
-          this.loading = false;
-          this.response.mailExists = true;
-        }
-      });
+      this._service
+        .callPostMethod("/api/signUp", {
+          data: data,
+          lang: this._storageService.getSelectedLanguage(),
+        })
+        .subscribe((data) => {
+          if (data) {
+            this.response.verifyYourMail = true;
+            this.loading = false;
+            this.createRecommendedBonus();
+            setTimeout(() => {
+              this._router.navigate(["/auth/login"]);
+            }, 6000);
+          } else {
+            this.loading = false;
+            this.response.mailExists = true;
+          }
+        });
     } else {
       this.loading = false;
       this.response.passwordNotMatch = true;

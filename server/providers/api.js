@@ -123,18 +123,19 @@ router.post("/signUp", function (req, res, next) {
 
     conn.query(
       "select * from users where email in (select email from clients where email = ?) or email = ?",
-      [req.body.email, req.body.email],
+      [req.body.data.email, req.body.data.email],
       function (err, rows, fields) {
         console.log(rows);
         if (!rows.length) {
-          delete req.body.rePassword;
-          req.body.password = setSha1Password(req.body.password);
-          req.body.type = 1;
-          req.body.id = uuid.v4();
-          req.body.admin_id = req.body.id;
+          delete req.body.data.rePassword;
+          req.body.data.password = setSha1Password(req.body.data.password);
+          req.body.data.type = 1;
+          req.body.data.id = uuid.v4();
+          req.body.data.admin_id = req.body.data.id;
+
           conn.query(
             "insert into users set ?",
-            [req.body],
+            [req.body.data],
             function (err, rows, fields) {
               if (err) {
                 conn.release();
@@ -143,20 +144,21 @@ router.post("/signUp", function (req, res, next) {
               } else {
                 conn.query(
                   "insert into sms_count set admin_id = ?, count = ?",
-                  [req.body.id, 100],
+                  [req.body.data.id, 100],
                   function (err, rows, fields) {}
                 );
                 conn.query(
                   "insert into user_license set admin_id = ?, license_id = ?",
-                  [req.body.id, "d24f35e2-dd3c-11ee-9965-960002791003"],
+                  [req.body.data.id, "d24f35e2-dd3c-11ee-9965-960002791003"],
                   function (err, rows, fields) {
                     conn.release();
                     if (err) {
                       logger.log("error", err.sql + ". " + err.sqlMessage);
                       res.json(err);
                     } else {
+                      req.body.data["lang"] = req.body.lang;
                       var options = prepareOptionsForRequest(
-                        req.body,
+                        req.body.data,
                         "mail-server/verifyEmailAddress"
                       );
 
@@ -285,12 +287,13 @@ router.post("/forgotPassword", function (req, res, next) {
 
     conn.query(
       "select * from users where email = ?",
-      [req.body.email],
+      [req.body.data.email],
       function (err, rows, fields) {
         conn.release();
         if (rows.length) {
+          req.body.data["lang"] = req.body.lang;
           var options = prepareOptionsForRequest(
-            req.body,
+            req.body.data,
             "mail-server/resetPasswordLink"
           );
           makeRequest(options, res);

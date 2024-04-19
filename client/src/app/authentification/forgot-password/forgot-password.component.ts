@@ -11,6 +11,7 @@ import { Subject } from "rxjs";
 import { CoreConfigService } from "@core/services/config.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ResponseModel } from "app/models/response-model";
+import { StorageService } from "app/services/storage.service";
 
 @Component({
   selector: "app-forgot-password",
@@ -39,7 +40,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private _formBuilder: UntypedFormBuilder,
-    private _service: CallApiService
+    private _service: CallApiService,
+    private _storageService: StorageService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -111,7 +113,10 @@ export class ForgotPasswordComponent implements OnInit {
   sendResetLink() {
     this.response = new ResponseModel();
     this._service
-      .callPostMethod("/api/forgotPassword", this.forgotPasswordForm.value)
+      .callPostMethod("/api/forgotPassword", {
+        data: this.forgotPasswordForm.value,
+        lang: this._storageService.getSelectedLanguage(),
+      })
       .subscribe((data) => {
         if (data) {
           this.response.sendLinkForResetOnMail = true;

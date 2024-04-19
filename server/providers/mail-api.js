@@ -16,6 +16,10 @@ router.post("/verifyEmailAddress", function (req, res, next) {
     )
   );
 
+  console.log(req.body);
+
+  body = body[req.body.lang];
+
   body["email"] = req.body.email;
   body["verified_mail_link"] =
     process.env.link_api + "verifiedMailAndActive/" + sha1(req.body.email);
@@ -38,6 +42,8 @@ router.post("/resetPasswordLink", function (req, res, next) {
       "utf-8"
     )
   );
+
+  body = body[req.body.lang];
 
   body["email"] = req.body.email;
   body["reset_password_link"] =

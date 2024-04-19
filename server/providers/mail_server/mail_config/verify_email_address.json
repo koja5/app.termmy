@@ -1,5 +1,47 @@
 {
-    "template": "verify_email_address.hjs",
-    "subject": "E-Mail-Bestätigung für Termmy",
-    "title": "E-Mail-Bestätigung für Termmy"
+    "en": {
+        "template": "verify_email_address.hjs",
+        "subject": "Confirm your email address",
+        "greetings": "Hey,",
+        "thanksForSignup": "Thanks for signing up! 👋",
+        "message": "Please verify your email address by clicking the below button and start with using Termmy!",
+        "ifYouNotSignUp": "If you did not sign up to Termmy, please ignore this email or contact us at",
+        "verifyNow": "Verify Email Now →",
+        "greetingsEnd": "Thanks,",
+        "termmyTeam": "The Termmy team",
+        "acceptOurTerms": "Use of our service and website is subject to our",
+        "terms": "Terms of Use",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy"
+    },
+    "de": {
+        "template": "verify_email_address.hjs",
+        "subject": "E-Mail-Bestätigung für Termmy",
+        "greetings": "Hey,",
+        "thanksForSignup": "Danke für's Registrieren! 👋",
+        "message": "Bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf die Schaltfläche unten klicken und beginnen Sie mit der Nutzung von Termmy!",
+        "ifYouNotSignUp": "Wenn Sie sich nicht bei Termmy angemeldet haben, ignorieren Sie bitte diese E-Mail oder kontaktieren Sie uns unter",
+        "verifyNow": "E-Mail jetzt bestätigen →",
+        "greetingsEnd": "Danke,",
+        "termmyTeam": "Das Termmy-Team",
+        "acceptOurTerms": "Die Nutzung unseres Dienstes und unserer Website unterliegt unseren",
+        "terms": "Nutzungsbedingungen",
+        "and": "und",
+        "privacyPolicy": "Datenschutzrichtlinie"
+    },
+    "rs": {
+        "template": "verify_email_address.hjs",
+        "subject": "Potvrdite Vašu email adresu",
+        "greetings": "Hey,",
+        "thanksForSignup": "Hvala vam što ste kreirali nalog na Termmy-u! 👋",
+        "message": "Molimo vas da potvrdite vašu email adresu, klikom na link u nastavku i nakon toga krenite da koristite sve funkcionalnosti Termmy-a",
+        "ifYouNotSignUp": "Ukoliko niste kreirali nalog na termmy.com, molimo vas da ignorišete ovaj email.",
+        "verifyNow": "Potvrdite email adresu →",
+        "greetingsEnd": "Hvala,",
+        "termmyTeam": "Termmy tim",
+        "acceptOurTerms": "Korišćenjem aplikacije Termmy, slažete se sa",
+        "terms": "opštim uslovima",
+        "and": "i",
+        "privacyPolicy": "pravilima privatnosti"
+    }
 }

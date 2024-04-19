@@ -192,7 +192,7 @@ export class StorageService {
       }
       return config.app.appLanguage;
     }
-    return null;
+    return "en";
   }
 
   // END EXTERNAL ACCOUNTS

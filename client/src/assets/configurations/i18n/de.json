@@ -639,5 +639,11 @@
       "static": "Statisch",
       "hidden": "Versteckt",
       "footerType": "Fußzeilentyp"
+   },
+   "wizard": {
+      "title": "Willkommen bei Termmy!",
+      "text": "Bitte geben Sie die erforderlichen Daten ein, um Ihre Kontoinformationen zu vervollständigen!",
+      "welcome": "Willkommen",
+      "to": "bei"
    }
 }
