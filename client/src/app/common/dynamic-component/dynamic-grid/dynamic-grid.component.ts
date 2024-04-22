@@ -145,12 +145,19 @@ export class DynamicGridComponent {
     const val = event.target.value.toLowerCase();
 
     // Filter Our Data
+    let tempFilter = [];
     const temp = this.tempData.filter(function (d) {
-      return d.fullName.toLowerCase().indexOf(val) !== -1 || !val;
+      if (
+        Object.entries(d).filter(([k]) => {
+          return d[k] && d[k].toString().toLowerCase().indexOf(val) !== -1;
+        }).length
+      ) {
+        tempFilter.push(d);
+      }
     });
 
     // Update The Rows
-    this.rows = temp;
+    this.rows = tempFilter;
     // Whenever The Filter Changes, Always Go Back To The First Page
     this.table.offset = 0;
   }

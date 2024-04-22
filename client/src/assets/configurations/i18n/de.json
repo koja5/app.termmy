@@ -31,7 +31,7 @@
       "errorExecuteActionTitleDefault": "Etwas ist passiert",
       "errorExecuteActionTextDefault": "Bitte überprüfen Sie es noch einmal oder versuchen Sie es später",
       "errorUpdateTermineOnGoogleCalendarRights": "Ein Problem mit den Rechten beim Aktualisieren eines Termins im Google-Kalender."
-  },
+   },
    "commonFields": {
       "firstname": "Vorname",
       "lastname": "Nachname",
@@ -516,7 +516,9 @@
       "title": "Das Abenteuer beginnt hier 🚀",
       "text": "Machen Sie Ihr App-Management einfach und unterhaltsam!",
       "IAgreeTo": "Ich stimme zu",
-      "privacy": "Datenschutzrichtlinie & Geschäftsbedingungen",
+      "privacyPolicy": "Datenschutzrichtlinie",
+      "and": "und",
+      "terms": "Bedingungen.",
       "signUp": "Anmelden",
       "alreadyHaveAnAccount": "Haben Sie bereits ein Konto?",
       "signInInstead": "Stattdessen einloggen",
