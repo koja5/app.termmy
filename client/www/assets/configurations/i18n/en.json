@@ -85,8 +85,10 @@
     "signUp": {
         "title": "Adventure starts here 🚀",
         "text": "Make your app management easy and fun!",
-        "IAgreeTo": "I agree to",
-        "privacy": "privacy policy & terms",
+        "IAgreeTo": "I agree to ",
+        "privacyPolicy": "Privacy Policy",
+        "and": "and",
+        "terms": "Terms.",
         "signUp": "Sign up",
         "alreadyHaveAnAccount": "Already have an account?",
         "signInInstead": "Sign in instead",

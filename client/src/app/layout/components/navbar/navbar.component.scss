@@ -1,6 +1,12 @@
 @import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
 @import '@core/scss/base/components/include'; // Components includes
 
+@media(min-width: 993px) {
+  // .setup-app-mobile {
+  //   display: none !important;
+  // }
+} 
+
 // To open dd on right
 .dropdown-menu-right {
   right: 0 !important;

@@ -5,6 +5,16 @@
   }
 }
 
+@media (max-width: 992px) {
+  .setup-text {
+    display: none !important;
+  }
+}
+
+.setup-app {
+  cursor: pointer;
+}
+
 .flex-wrapper {
   display: flex;
   flex-flow: row nowrap;

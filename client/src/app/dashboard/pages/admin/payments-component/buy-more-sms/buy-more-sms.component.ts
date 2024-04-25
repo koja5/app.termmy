@@ -15,7 +15,10 @@ export class BuyMoreSmsComponent {
   public selectedSmsPrice: number;
   public successfullyBoughtNewSms = false;
 
-  constructor(private _service: CallApiService, public _helpService: HelpService) {}
+  constructor(
+    private _service: CallApiService,
+    public _helpService: HelpService
+  ) {}
 
   ngOnInit() {
     this._service
@@ -31,7 +34,10 @@ export class BuyMoreSmsComponent {
 
   selectSmsPackage(item: any) {
     this.selectedSmsPackage = item;
-    this.selectedSmsPrice = item.price;
+    this.selectedSmsPrice = null;
+    setTimeout(() => {
+      this.selectedSmsPrice = item.price;
+    }, 100);
   }
 
   executeMethod(event: any) {

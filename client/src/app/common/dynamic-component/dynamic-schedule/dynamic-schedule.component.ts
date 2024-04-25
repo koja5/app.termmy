@@ -757,9 +757,11 @@ export class DynamicScheduleComponent {
   }
 
   onRenderCell(args: any): void {
-    if (args.date! < new Date()) {
-      args.element.classList.add("e-disable-dates");
-    } else if (args.elementType === "workCells") {
+    // disabled past tense date
+    // if (args.date! < new Date()) {
+    //   args.element.classList.add("e-disable-dates");
+    // } else
+    if (args.elementType === "workCells") {
       this.setWorkTimeInCalendar(args);
     }
 

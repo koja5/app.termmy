@@ -11,8 +11,6 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 import { CoreMenuService } from "@core/components/core-menu/core-menu.service";
-import { ConfigurationService } from "app/services/configuration.service";
-import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
 
 @Component({

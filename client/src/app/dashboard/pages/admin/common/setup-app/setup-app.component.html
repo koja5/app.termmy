@@ -1,4 +1,4 @@
-<div *ngIf="complitedPercentage < 100">
+<div class="setup-app" *ngIf="complitedPercentage < 100">
     <div>
         <div class="flex-wrapper" (click)="openSetup()">
             <div class="single-chart">
@@ -14,7 +14,7 @@
                 </svg>
             </div>
         </div>
-        <p class="setup-text">{{'setupApp.setup' | translate}}</p>
+        <!-- <p class="setup-text">{{'setupApp.setup' | translate}}</p> -->
     </div>
 
     <ng-template #modalForm let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">

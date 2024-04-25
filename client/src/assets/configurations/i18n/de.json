@@ -416,7 +416,7 @@
             "title": "Tag zuvor",
             "text": "Vortag um 20 Uhr",
             "subject": "Erinnerung an Termin morgen",
-            "message": "Erinnerung: Sie haben morgen um #Zeit einen Termin. Begrüßung"
+            "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
          }
       }
    },
@@ -575,7 +575,8 @@
       "fillFirstname": "Bitte füllen Sie Ihren Vornamen aus",
       "fillLastname": "Bitte füllen Sie Ihren Nachnamen aus",
       "fillEmail": "Bitte füllen Sie Ihre E-Mail aus",
-      "fillPhone": "Bitte füllen Sie Ihr Telefon aus"
+      "fillPhone": "Bitte füllen Sie Ihr Telefon aus",
+      "errorPayment": "Bei der Zahlung ist ein Fehler aufgetreten! Bitte überprüfen Sie die Richtigkeit der eingegebenen Daten und überprüfen Sie das Guthaben auf Ihrer Karte."
    },
    "buyMoreSms": {
       "title": "SMS kaufen",

@@ -71,7 +71,7 @@ export class CallApiService {
     if (data === undefined) {
       data = "";
     }
-    const url = api.endsWith("/") ? api + data : api + "/" + data;
+    const url = api.endsWith("/") ? api + data : data ? api + "/" + data : api;
     return this.http.get(url, { headers: this.headers });
   }
 

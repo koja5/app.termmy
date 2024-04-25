@@ -13,6 +13,7 @@ import { HelpService } from "app/services/help.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { StorageService } from "app/services/storage.service";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { ToastrComponent } from "../toastr/toastr.component";
 // import {
 //   CountryISO,
 //   PhoneNumberFormat,
@@ -60,7 +61,8 @@ export class PaymentProcessingComponent {
     private _service: CallApiService,
     public _helpService: HelpService,
     private _storageService: StorageService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _toastr: ToastrComponent
   ) {}
 
   ngOnInit() {
@@ -141,7 +143,11 @@ export class PaymentProcessingComponent {
       })
       .subscribe({
         next: (result) => {
+          console.log(result);
           if (result.error || !this.accept) {
+            this._toastr.showErrorCustom(
+              this._translate.instant("paymentProcessing.errorPayment")
+            );
             this.paying = false;
           } else if (result.paymentIntent.status === "succeeded") {
             this.paying = false;
@@ -150,6 +156,7 @@ export class PaymentProcessingComponent {
           }
         },
         error: (err) => {
+          console.log(err);
           this.paying = false;
           // this.submitted = false;
         },

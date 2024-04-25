@@ -215,6 +215,7 @@
             "name": "time_duration",
             "title": "myServices.timeDuration",
             "field": "time_duration",
+            "min": 0,
             "required": true
         },
         {
@@ -230,6 +231,7 @@
             "title": "myServices.timeBlocked",
             "field": "time_blocked",
             "required": true,
+            "min": 0,
             "explanation": "myServices.timeBlockedExplanation"
         },
         {
@@ -244,6 +246,7 @@
             "name": "price",
             "title": "myServices.price",
             "field": "price",
+            "min": 0,
             "required": true
         },
         {

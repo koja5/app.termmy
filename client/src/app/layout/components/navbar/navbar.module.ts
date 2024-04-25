@@ -18,6 +18,7 @@ import { NavbarSearchComponent } from "app/layout/components/navbar/navbar-searc
 import { NavbarNotificationComponent } from "app/layout/components/navbar/navbar-notification/navbar-notification.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonCustomModule } from "app/common/common-custom.module";
+import { AdminCommonModule } from "app/dashboard/pages/admin/common/admin-common.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -38,7 +39,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     CoreTouchspinModule,
     TranslateModule,
-    CommonCustomModule
+    CommonCustomModule,
+    AdminCommonModule,
   ],
   providers: [
     {

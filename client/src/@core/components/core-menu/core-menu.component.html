@@ -28,9 +28,9 @@
     <!-- collapsible -->
     <li core-menu-vertical-collapsible *ngIf="item.type == 'collapsible'" [item]="item" class="nav-item has-sub"></li>
   </ng-container>
-  <div class="setup-app-vertical" *ngIf="token">
+  <!-- <div class="setup-app setup-app-vertical" *ngIf="token">
     <app-setup-app></app-setup-app>
-  </div>
+  </div> -->
 </ng-container>
 <!--/ Vertical Menu -->
 
@@ -51,8 +51,8 @@
     <li core-menu-horizontal-collapsible *ngIf="item.type == 'collapsible'" [item]="item"
       class="dropdown dropdown-submenu"></li>
   </ng-container>
-  <div class="setup-app-horizontal" *ngIf="token">
+  <!-- <div class="setup-app setup-app-horizontal" *ngIf="token">
     <app-setup-app></app-setup-app>
-  </div>
+  </div> -->
 </ng-container>
 <!--/ Horizontal Menu -->
