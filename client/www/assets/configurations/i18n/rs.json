@@ -579,7 +579,8 @@
         "fillFirstname": "Molimo vas unesite vaše ime",
         "fillLastname": "Molimo vas unesite vaše prezime",
         "fillEmail": "Molimo vas unesite vaš email",
-        "fillPhone": "Molimo vas unesite vaš telefon"
+        "fillPhone": "Molimo vas unesite vaš telefon",
+        "errorPayment": "Desila se greška prilikom plaćanja! Molimo vas proverite ispravnost unetih podataka i proverite stanje na Vašoj kartici."
     },
     "buyMoreSms": {
         "title": "Kupi SMS",

@@ -574,7 +574,8 @@
         "fillFirstname": "Please fill your firstname",
         "fillLastname": "Please fill your lastname",
         "fillEmail": "Please fill your email",
-        "fillPhone": "Please fill your phone"
+        "fillPhone": "Please fill your phone",
+        "errorPayment": "An error occurred during payment! Please check the correctness of the entered data and check the balance on your card."
     },
     "buyMoreSms": {
         "title": "Buy SMS",

@@ -45,6 +45,11 @@ app.use(function (req, res, next) {
     "POST, PUT, OPTIONS, DELETE, GET"
   );
   res.header("Access-Control-Allow-Origin", "https://app.termmy.com");
+  res.header("SameSite", "None");
+  res.header(
+    "set-cookie",
+    "Expires=Fri, 24-Apr-2026 21:24:11 GMT;Secure;HttpOnly; SameSite=None"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
