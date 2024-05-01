@@ -22,6 +22,7 @@ import { Router } from "@angular/router";
 import { StorageService } from "app/services/storage.service";
 
 import languages from "../../../../assets/configurations/i18n/languages.json";
+import { MessageService } from "app/services/message.service";
 
 @Component({
   selector: "app-navbar",
@@ -92,7 +93,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _coreSidebarService: CoreSidebarService,
     private _mediaObserver: MediaObserver,
     public _translateService: TranslateService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _messageService: MessageService
   ) {
     this._authenticationService.currentUser.subscribe(
       (x) => (this.currentUser = x)
@@ -218,6 +220,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // Set the selected language from default languageOptions
     this.selectedLanguage = _.find(this.languageOptions, {
       id: this._translateService.currentLang,
+    });
+
+    this._messageService.getAvatarProfile().subscribe((data) => {
+      this.currentUser.avatar = data;
     });
   }
 

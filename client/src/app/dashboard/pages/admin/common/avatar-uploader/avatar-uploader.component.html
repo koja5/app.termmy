@@ -1,0 +1,34 @@
+<div class="avatar-container m-auto">
+    <div class="image-container" *ngIf="loader">
+        <app-loader-small></app-loader-small>
+    </div>
+    <div *ngIf="!loader">
+        <div class="image-container" *ngIf="imageCrop; else placeholder" [ngClass]="{'box-shadow-avatar': !!file}"
+            [ngStyle]="{backgroundImage: 'url(' + imageCrop + ')'}">
+        </div>
+
+        <ng-template #placeholder>
+            <div class="image-container avatar-placeholder">
+            </div>
+        </ng-template>
+    </div>
+    <label for="avatar-input-file" *ngIf="editable">
+        <div class="icon-wrapper">
+            <input type="file" id="avatar-input-file" accept="image/*" (change)="onFileChange($event)" />
+            <span class="fa fa-edit"></span>
+        </div>
+    </label>
+
+</div>
+
+<ng-template #cropModal let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
+    <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel160">{{'general.options' | translate}}</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <app-image-cropper [image]="image" (croppedImage)="croppedImage($event)"></app-image-cropper>
+    </div>
+</ng-template>

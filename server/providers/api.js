@@ -12,6 +12,10 @@ const auth = require("./config/auth");
 const sql = require("./config/sql-database");
 const uuid = require("uuid");
 const cryptoJS = require("crypto-js");
+const multipart = require("connect-multiparty");
+const multipartMiddleware = multipart({
+  uploadDir: process.env.AVATAR_UPLOAD_FOLDER,
+});
 
 module.exports = router;
 
@@ -43,22 +47,7 @@ router.post("/login", function (req, res, next) {
 
         if (rows.length > 0) {
           if (req.body.verified) {
-            const token = jwt.sign(
-              {
-                user: {
-                  id: rows[0].id,
-                  admin_id: rows[0].admin_id ? rows[0].admin_id : rows[0].id,
-                  firstname: rows[0].firstname,
-                  lastname: rows[0].lastname,
-                  type: rows[0].type,
-                },
-                email: rows[0].email,
-              },
-              process.env.TOKEN_KEY,
-              {
-                expiresIn: expiresToken,
-              }
-            );
+            const token = generateToken(rows[0]);
             logger.log(
               "info",
               `USER: ${
@@ -69,22 +58,7 @@ router.post("/login", function (req, res, next) {
               token: token,
             });
           } else if (rows[0].active && rows[0].verified) {
-            const token = jwt.sign(
-              {
-                user: {
-                  id: rows[0].id,
-                  admin_id: rows[0].admin_id ? rows[0].admin_id : rows[0].id,
-                  firstname: rows[0].firstname,
-                  lastname: rows[0].lastname,
-                  type: rows[0].type,
-                },
-                email: rows[0].email,
-              },
-              process.env.TOKEN_KEY,
-              {
-                expiresIn: expiresToken,
-              }
-            );
+            const token = generateToken(rows[0]);
             logger.log(
               "info",
               `USER: ${req.body.email} is LOGIN at ${new Date()}.`
@@ -2148,7 +2122,134 @@ router.post("/setHoliday", auth, function (req, res, next) {
 
 //#endregion
 
+//#region UPLOAD AVATAR IMAGES
+
+router.post("/upload", multipartMiddleware, auth, (req, res) => {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    if (!req.body.id) {
+      req.body.id = uuid.v4();
+    }
+
+    req.body.avatar = req.files.uploads[0].path.split("\\avatars\\")[1];
+    conn.query(
+      "select avatar from booking_config where admin_id = ?",
+      [req.user.user.admin_id],
+      function (err, rows) {
+        if (!err) {
+          if (rows[0].avatar) {
+            rows[0].avatar =
+              process.env.AVATAR_UPLOAD_FOLDER + "/" + rows[0].avatar;
+            fs.rmSync(rows[0].avatar, { force: true });
+          }
+
+          conn.query(
+            "INSERT INTO booking_config set ? ON DUPLICATE KEY UPDATE ?",
+            [req.body, req.body],
+            function (err, rows) {
+              conn.release();
+              if (!err) {
+                res.json(req.body.id);
+              } else {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              }
+            }
+          );
+        } else {
+          conn.release();
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/uploadUserProfile", multipartMiddleware, auth, (req, res) => {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.admin_id = req.user.user.admin_id;
+
+    console.log(req.files);
+
+    req.body.avatar = req.files.uploads[0].path.split("\\avatars\\")[1];
+    conn.query(
+      "select avatar from users where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        if (!err) {
+          if (rows[0].avatar) {
+            rows[0].avatar =
+              process.env.AVATAR_UPLOAD_FOLDER + "/" + rows[0].avatar;
+            fs.rmSync(rows[0].avatar, { force: true });
+          }
+
+          conn.query(
+            "INSERT INTO users set ? ON DUPLICATE KEY UPDATE ?",
+            [req.body, req.body],
+            function (err, rows) {
+              conn.release();
+              if (!err) {
+                req.user.user.avatar = req.body.avatar;
+                console.log(req.user);
+                const newToken = jwt.sign(
+                  { user: req.user.user, email: req.user.email },
+                  process.env.TOKEN_KEY,
+                  {
+                    expiresIn: expiresToken,
+                  }
+                );
+                res.json({ avatar: req.body.avatar, token: newToken });
+              } else {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              }
+            }
+          );
+        } else {
+          conn.release();
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//#endregion
+
 //#region HELP FUNCTION
+
+function generateToken(data) {
+  return jwt.sign(
+    {
+      user: {
+        id: data.id,
+        admin_id: data.admin_id ? data.admin_id : data.id,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        type: data.type,
+        avatar: data.avatar,
+      },
+      email: data.email,
+    },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: expiresToken,
+    }
+  );
+}
 
 function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);

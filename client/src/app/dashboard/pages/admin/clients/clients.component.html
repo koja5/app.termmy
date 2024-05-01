@@ -1,1 +1,7 @@
-<app-dynamic-grid [path]="path" [file]="file" [externalAccounts]="externalAccounts" (submit)="submit($event)"></app-dynamic-grid>
+<div class="large-device">
+    <app-dynamic-grid [path]="path" [file]="file" [externalAccounts]="externalAccounts"
+        (submit)="submit($event)"></app-dynamic-grid>
+</div>
+<div class="small-device">
+    <app-clients-mobile-view></app-clients-mobile-view>
+</div>

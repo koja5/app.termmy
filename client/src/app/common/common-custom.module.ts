@@ -7,16 +7,24 @@ import { NgxStripeModule } from "ngx-stripe";
 import { environment } from "environments/environment";
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LoaderSmallComponent } from './loader-small/loader-small.component';
-import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
+import { LoaderSmallComponent } from "./loader-small/loader-small.component";
+import { DialogConfirmComponent } from "./dialog-confirm/dialog-confirm.component";
 import { CoreCommonModule } from "@core/common.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { LetterProfileComponent } from './letter-profile/letter-profile.component';
+import { LetterProfileComponent } from "./letter-profile/letter-profile.component";
+import { CardTemplateComponent } from "./card-template/card-template.component";
 
 const appRoutes: Routes = [];
 
 @NgModule({
-  declarations: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent, LetterProfileComponent],
+  declarations: [
+    LoaderComponent,
+    PaymentProcessingComponent,
+    LoaderSmallComponent,
+    DialogConfirmComponent,
+    LetterProfileComponent,
+    CardTemplateComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule,
@@ -24,10 +32,17 @@ const appRoutes: Routes = [];
     FormsModule,
     ReactiveFormsModule,
     CoreCommonModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [],
-  exports: [LoaderComponent, PaymentProcessingComponent, LoaderSmallComponent, DialogConfirmComponent, LetterProfileComponent],
+  exports: [
+    LoaderComponent,
+    PaymentProcessingComponent,
+    LoaderSmallComponent,
+    DialogConfirmComponent,
+    LetterProfileComponent,
+    CardTemplateComponent,
+  ],
 })
 export class CommonCustomModule {}

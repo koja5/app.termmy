@@ -41,6 +41,7 @@ import { LicenseStatusComponent } from "./common/license-status/license-status.c
 import { RecommendedComponent } from "./settings/recommended/recommended.component";
 import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
 import { HttpClient } from "@angular/common/http";
+import { ClientsMobileViewComponent } from './clients/clients-mobile-view/clients-mobile-view.component';
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -121,6 +122,7 @@ const routes = [
     LocationViewComponent,
     ClientsComponent,
     AdminSettingsComponent,
+    ClientsMobileViewComponent,
   ],
   imports: [
     CommonModule,

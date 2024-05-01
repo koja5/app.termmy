@@ -1,0 +1,86 @@
+<ng-template #myTemplate let-item="item">
+    <div class="row">
+        <div *ngFor="let item of data" class="col-md-6 mb-2">
+            <div class="profile-card js-profile-card">
+                <div class="profile-card__img">
+                    <app-letter-profile [firstname]="item.firstname" [lastname]="item.lastname"></app-letter-profile>
+                </div>
+
+                <div class="profile-card__cnt js-profile-cnt">
+                    <div class="profile-card__name">{{item.firstname}} {{item.lastname}}</div>
+                    <div class="profile-card__txt">
+                        <span class="profile-card-loc__icon gender">
+                            <span *ngIf="item.gender === 'woman'" class="fa fa-venus woman"></span>
+                            <span *ngIf="item.gender === 'man'" class="fa fa-mars man"></span>
+                            <span *ngIf="!item.gender" class="no-information">{{'general.noInformation' |
+                                translate}}</span>
+                        </span>
+                    </div>
+                    <div class="profile-card__txt">
+                        <span class="profile-card-loc__icon">
+                            <span class="fa fa-birthday-cake"></span>
+                        </span>
+
+                        <span class="profile-card-loc__txt">
+                            <strong>{{item.birthday | date: 'dd.MM.yyyy'}}</strong>
+                            <span *ngIf="!item.birthday" class="no-information">{{'general.noInformation' |
+                                translate}}</span>
+                        </span>
+                    </div>
+                    <div class="profile-card-loc">
+                        <span class="profile-card-loc__icon">
+                            <span class="fa fa-map-marker"></span>
+                        </span>
+
+                        <span class="profile-card-loc__txt">
+                            <strong *ngIf="item.address && item.zip && item.city">{{item.address}} {{item.zip}},
+                                {{item.city}}</strong>
+                            <span *ngIf="!item.address && !item.zip && !item.city"
+                                class="no-information">{{'general.noInformation' |
+                                translate}}</span>
+                        </span>
+                    </div>
+
+                    <!-- <div class="profile-card-inf">
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">267</div>
+                            <div class="profile-card-inf__txt">Followers</div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">351</div>
+                            <div class="profile-card-inf__txt">Following</div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">11</div>
+                            <div class="profile-card-inf__txt">Articles</div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">2</div>
+                            <div class="profile-card-inf__txt">Works</div>
+                        </div>
+                    </div> -->
+
+                    <div class="profile-card-social">
+                        <a href="tel:{{item.telephone}}" class="profile-card-social__item facebook" target="_blank">
+                            <span class="fa fa-phone"></span>
+                        </a>
+
+                        <a href="mailto: {{item.email}}" class="profile-card-social__item twitter" target="_blank">
+                            <span class="fa fa-envelope-o"></span>
+                        </a>
+                    </div>
+
+                    <div class="profile-card-ctr">
+                        <button class="btn btn-outline-primary w-75">Profile</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<app-card-template [template]="myTemplate"></app-card-template>

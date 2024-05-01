@@ -1,4 +1,9 @@
-<app-dynamic-forms [path]="path" [file]="file" [disableEdit]="disableEdit" (onChangeData)="onChangeData($event)" (submit)="handleSubmit($event)">
+<div *ngIf="data">
+    <app-avatar-uploader [data]="data" (uploadEmitter)="uploadEmitter($event)"></app-avatar-uploader>
+</div>
+
+<app-dynamic-forms [path]="path" [file]="file" [disableEdit]="disableEdit" (onChangeData)="onChangeData($event)"
+    (submit)="handleSubmit($event)">
 </app-dynamic-forms>
 <!-- <div class="card">
     <div class="card-body">

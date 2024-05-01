@@ -9,6 +9,8 @@ import { ChangePasswordComponent } from "./change-password/change-password.compo
 import { InformationComponent } from "./information/information.component";
 import { AccountSettingsComponent } from "./account-settings.component";
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
+import { AdminCommonModule } from "app/dashboard/pages/admin/common/admin-common.module";
+import { CommonCustomModule } from "app/common/common-custom.module";
 
 const routes = [
   { path: "general", component: GeneralComponent },
@@ -29,6 +31,8 @@ const routes = [
     TimePickerI18nModule,
     RouterModule.forChild(routes),
     DynamicModule,
+    AdminCommonModule,
+    CommonCustomModule,
   ],
   providers: [ToastrComponent],
   exports: [

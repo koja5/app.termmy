@@ -14,6 +14,7 @@ export class BookingSettingsComponent {
   public path = "pages/admin/admin-settings";
   public file = "booking-settings.json";
   public disableEdit = false;
+  public data: any;
 
   constructor(
     private _service: CallApiService,
@@ -22,6 +23,16 @@ export class BookingSettingsComponent {
     private _storageService: StorageService,
     private _messageService: MessageService
   ) {}
+
+  ngOnInit() {
+    this._service
+      .callGetMethod("/api/booking/getBookingConfig", "")
+      .subscribe((data: any) => {
+        if (data && data.length) {
+          this.data = data[0];
+        }
+      });
+  }
 
   onChangeData(event: any) {
     if (event.active) {
@@ -57,5 +68,11 @@ export class BookingSettingsComponent {
       }
       this._messageService.sendSetupApp(setup);
     }
+  }
+
+  uploadEmitter(event: any) {
+    this._service.callPostMethod("/api/upload", event).subscribe((response) => {
+      console.log("response received is ", response);
+    });
   }
 }

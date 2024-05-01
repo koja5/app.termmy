@@ -63,7 +63,7 @@ const routes = [
     NgbModule,
     CommonCustomModule,
     AdminCommonModule,
-    NgSelectModule,
+    NgSelectModule
   ],
   providers: [],
   exports: [

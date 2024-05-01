@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
+import { MessageService } from "app/services/message.service";
+import { StorageService } from "app/services/storage.service";
 
 @Component({
   selector: "app-general",
@@ -10,26 +12,27 @@ import { CallApiService } from "app/services/call-api.service";
 export class GeneralComponent {
   public path = "pages/account-settings";
   public file = "general.json";
+  public data: any;
 
   public avatarImage: any =
     "../../../../../assets/images/portrait/small/avatar-s-11.jpg";
 
   constructor(
     private _service: CallApiService,
-    private _toastr: ToastrComponent
+    private _toastr: ToastrComponent,
+    private _messageService: MessageService,
+    private _storageService: StorageService
   ) {}
 
-  // uploadImage(event: any) {
-  //   if (event.target.files && event.target.files[0]) {
-  //     let reader = new FileReader();
-
-  //     reader.onload = (event: any) => {
-  //       this.avatarImage = event.target.result;
-  //     };
-
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // }
+  ngOnInit() {
+    this._service
+      .callGetMethod("/api/getProfileInfo", "")
+      .subscribe((data: any) => {
+        if (data && data.length) {
+          this.data = data[0];
+        }
+      });
+  }
 
   submit(event: any) {
     console.log(event);
@@ -44,5 +47,20 @@ export class GeneralComponent {
           }
         });
     }
+  }
+
+  uploadEmitter(event: any) {
+    this._service
+      .callPostMethod("api/uploadUserProfile", event)
+      .subscribe((data: any) => {
+        if (data) {
+          // this._storageService.setAvatarProfileInToken(data);
+          this._messageService.sendAvatarProfile(data.avatar);
+          this._storageService.setToken(data.token);
+          this._toastr.showSuccess();
+        } else {
+          this._toastr.showError();
+        }
+      });
   }
 }

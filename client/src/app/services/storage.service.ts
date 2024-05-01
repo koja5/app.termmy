@@ -195,5 +195,12 @@ export class StorageService {
     return "en";
   }
 
+  setAvatarProfileInToken(avatar: any) {
+    let user = this.getDecodeToken();
+    user.avatar = avatar;
+
+    this.setToken(this.encrypt(user));
+  }
+
   // END EXTERNAL ACCOUNTS
 }

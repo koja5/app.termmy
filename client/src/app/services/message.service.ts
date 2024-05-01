@@ -7,6 +7,7 @@ import { Observable, Subject } from "rxjs";
 export class MessageService {
   public orientation = new Subject<string>();
   public setupApp = new Subject<any>();
+  public avatarProfile = new Subject<string>();
 
   constructor() {}
 
@@ -24,5 +25,13 @@ export class MessageService {
 
   getSetupApp(): Observable<any> {
     return this.setupApp.asObservable();
+  }
+
+  sendAvatarProfile(value: any) {
+    this.avatarProfile.next(value);
+  }
+
+  getAvatarProfile(): Observable<any> {
+    return this.avatarProfile.asObservable();
   }
 }

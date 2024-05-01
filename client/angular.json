@@ -51,7 +51,8 @@
               "src/assets/fonts/flag-icon-css/css/flag-icon.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
-              "node_modules/shepherd.js/dist/css/shepherd.css"
+              "node_modules/shepherd.js/dist/css/shepherd.css",
+              "node_modules/cropperjs/dist/cropper.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -63,7 +64,8 @@
             "scripts": [
               "./node_modules/katex/dist/katex.min.js",
               "./node_modules/quill/dist/quill.min.js",
-              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "node_modules/cropperjs/dist/cropper.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
