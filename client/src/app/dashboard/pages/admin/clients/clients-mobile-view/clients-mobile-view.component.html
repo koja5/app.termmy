@@ -1,10 +1,36 @@
 <ng-template #myTemplate let-item="item">
-    <div class="row">
+
+
+    <div class="options">
+        <div class="p-1 mb-1 d-flex align-items-center justify-content-between">
+            <div class="flex-grow-0">
+                <button class="btn btn-primary waves-effect waves-float waves-light"
+                    (click)="toggleSidebar('sidebar'); createNewRecords = true; resetFormValue()"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-plus d-sm-none d-inline-block mr-0 mr-sm-1">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg></button>
+            </div>
+            <div class="flex-grow-1 pl-1 pr-1"><input [(ngModel)]="searchValue" name="searchValue" type="search"
+                    class="form-control ml-25" (keyup)="filterUpdate($event)" (search)="filterUpdate($event)"
+                    placeholder="{{'general.searchFilter' | translate}}"></div>
+            <div class="flex-grow-0"></div>
+        </div>
+    </div>
+
+
+    <div *ngIf="!data || !data.length">
+        Nema podataka
+    </div>
+
+    <div class="row" *ngIf="data && data.length">
         <div *ngFor="let item of data" class="col-md-6 mb-2">
             <div class="profile-card js-profile-card">
-                <div class="profile-card__img">
+                <!-- <div class="profile-card__img">
                     <app-letter-profile [firstname]="item.firstname" [lastname]="item.lastname"></app-letter-profile>
-                </div>
+                </div> -->
 
                 <div class="profile-card__cnt js-profile-cnt">
                     <div class="profile-card__name">{{item.firstname}} {{item.lastname}}</div>
@@ -74,13 +100,41 @@
                     </div>
 
                     <div class="profile-card-ctr">
-                        <button class="btn btn-outline-primary w-75">Profile</button>
+                        <button class="btn btn-outline-primary w-75" (click)="showClientProfile(item)">Profile</button>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
+
+
+    <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="sidebar" overlayClass="modal-backdrop">
+        <div class="slideout-content">
+            <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+                <div class="modal-dialog">
+                    <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
+                        #newUserForm="ngForm">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="toggleSidebar('sidebar')">
+                            ×
+                        </button>
+                        <div class="modal-header mb-1">
+                            <h5 class="modal-title" id="exampleModalLabel">{{createNewRecords ? ('general.newEntrie' |
+                                translate) : ('general.editEntrie' | translate)}}</h5>
+                        </div>
+                        <div class="modal-body flex-grow-1">
+                            <app-dynamic-forms *ngIf="config && config.config && config.config.length > 0"
+                                [config]="config" [partOfGrid]="true" [data]="data" (submit)="submitEmitter($event)"
+                                #form="dynamicForm">
+                            </app-dynamic-forms>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </core-sidebar>
 </ng-template>
 
 <app-card-template [template]="myTemplate"></app-card-template>

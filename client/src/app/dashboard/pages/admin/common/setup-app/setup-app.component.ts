@@ -69,13 +69,13 @@ export class SetupAppComponent {
           this.calculateComplitedPercentage();
           this._storageService.setSessionStorage("setup", this.complited);
           this._changeDetector.markForCheck();
-
-          setTimeout(() => {
-            if (this.complitedPercentage === 0) {
-              this.startTour();
-            }
-          }, 2000);
         }
+
+        setTimeout(() => {
+          if (this.complitedPercentage === 0) {
+            this.startTour();
+          }
+        }, 3000);
       });
   }
 
