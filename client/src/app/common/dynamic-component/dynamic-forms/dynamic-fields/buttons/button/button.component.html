@@ -6,10 +6,17 @@
   <button *ngIf="!config.request" [class]="config.class" [disabled]="config.disabled" type="submit">
     {{ config.title | translate }}
   </button>
-  <button *ngIf="config.request" [class]="config.class" [disabled]="config.disabled" (click)="clickRequest()">
+  <a *ngIf="!config.subtype && config.request" [class]="config.class" [disabled]="config.disabled"
+    (click)="config.confirmRequired ? dialogConfirm.showQuestionModal() : clickRequest()">
     {{ config.title | translate }}
-  </button>
+  </a>
+  <a *ngIf="config.subtype === 'delete'&&group.controls[config.field].value" [class]="config.class"
+    [disabled]="config.disabled" (click)="config.confirmRequired ? dialogConfirm.showQuestionModal() : clickRequest()">
+    {{ config.title | translate }}
+  </a>
 </div>
+
+<app-dialog-confirm (confirm)="clickRequest()"></app-dialog-confirm>
 
 <div *ngIf="title || icon">
   <button class="e-btn {{ class }}" (click)="clickButton()">

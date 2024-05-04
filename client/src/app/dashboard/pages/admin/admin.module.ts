@@ -43,7 +43,7 @@ import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
 import { HttpClient } from "@angular/common/http";
 import { ClientsMobileViewComponent } from "./clients/clients-mobile-view/clients-mobile-view.component";
 import { CoreSidebarModule } from "@core/components";
-import { ServicesMobileViewComponent } from './services/services-mobile-view/services-mobile-view.component';
+import { ServicesMobileViewComponent } from "./services/services-mobile-view/services-mobile-view.component";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -148,7 +148,6 @@ const routes = [
     FormsModule,
     NgSelectModule,
     DateTimePickerModule,
-
     CoreSidebarModule,
   ],
   providers: [

@@ -59,7 +59,8 @@
         "biography": "Biografija",
         "oldPassword": "Stara lozinka",
         "newPassword": "Nova lozinka",
-        "confirmNewPassword": "Ponovi novu lozinku"
+        "confirmNewPassword": "Ponovi novu lozinku",
+        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!"
     },
     "userTypes": {
         "superadmin": "Superadmin",

@@ -120,6 +120,7 @@ export class ClientsMobileViewComponent {
   }
 
   submitEmitter(event: any) {
+    this.toggleSidebarClose("sidebar-mobile");
     this.dynamicGrid.submitEmitter(event);
     this.dynamicGrid.submit.subscribe((data) => {
       this.data = data.rows;

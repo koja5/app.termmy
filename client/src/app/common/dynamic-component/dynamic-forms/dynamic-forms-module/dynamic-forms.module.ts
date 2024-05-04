@@ -27,6 +27,7 @@ import { ExplanationMarkComponent } from "../dynamic-fields/common/explanation-m
 import { PhonePrefixComponent } from "../dynamic-fields/inputs/phone-prefix/phone-prefix.component";
 import { InternationalPhoneModule } from "ng4-intl-phone";
 import { Ng2TelInputModule } from "ng2-tel-input";
+import { CommonCustomModule } from "app/common/common-custom.module";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { Ng2TelInputModule } from "ng2-tel-input";
     ColorPickerModule,
     InternationalPhoneModule,
     Ng2TelInputModule,
+    CommonCustomModule,
   ],
   entryComponents: [
     DynamicFieldsDirective,

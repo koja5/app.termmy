@@ -53,7 +53,10 @@ export class BookingSettingsComponent {
           this.sendInfoForSetupApp(event);
           this._toastr.showSuccess();
         } else {
-          this._toastr.showError();
+          this._toastr.showErrorCustom(
+            this._translate.instant("commonFields.fillRequredFields"),
+            ""
+          );
         }
       });
   }

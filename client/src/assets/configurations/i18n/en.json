@@ -59,7 +59,8 @@
         "biography": "Biography",
         "oldPassword": "Old password",
         "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password"
+        "confirmNewPassword": "Confirm new password",
+        "fillRequredFields": "Please fill required fields"
     },
     "userTypes": {
         "superadmin": "Superadmin",

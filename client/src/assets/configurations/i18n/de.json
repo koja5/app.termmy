@@ -59,7 +59,8 @@
       "biography": "Beschreibung",
       "oldPassword": "Altes Passwort",
       "newPassword": "Neues Passwort",
-      "confirmNewPassword": "Neues Passwort wiederholen"
+      "confirmNewPassword": "Neues Passwort wiederholen",
+      "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus"
    },
    "userTypes": {
       "superadmin": "Superadmin",

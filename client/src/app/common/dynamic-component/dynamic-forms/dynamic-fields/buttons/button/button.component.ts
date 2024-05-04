@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../models/field-config";
 import { HelpService } from "app/services/help.service";
@@ -6,6 +13,7 @@ import { CallApiService } from "app/services/call-api.service";
 import { Router } from "@angular/router";
 import { ResponseAction } from "app/enums/response-action";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 
 @Component({
   selector: "app-button",
@@ -17,6 +25,7 @@ export class ButtonComponent implements OnInit {
   @Input() title!: string;
   @Input() icon!: string;
   @Output() clickEmitter: EventEmitter<any> = new EventEmitter();
+  @ViewChild(DialogConfirmComponent) dialogConfirm;
   public config: FieldConfig;
   public group: FormGroup;
   public language: any;
