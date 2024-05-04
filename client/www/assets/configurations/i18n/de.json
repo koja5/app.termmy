@@ -23,7 +23,9 @@
       "successfullySyncGoogleContacts": "Erfolgreiche Synchronisierung der Google Kontakte mit Termmy",
       "unsuccessfullySyncGoogleContacts": "Synchronisierung der Google Kontakte mit Termmy war nicht erfolgreich. Versuchen Sie es später oder kontaktieren Sie den Support,",
       "syncContacts": "Sync-Kontakte",
-      "noInformation": "Keine Information"
+      "noInformation": "Keine Information",
+      "ok": "OK",
+      "noData": "Es sind keine Informationen zum Anzeigen vorhanden"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",

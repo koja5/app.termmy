@@ -13,6 +13,7 @@ import { CoreCommonModule } from "@core/common.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LetterProfileComponent } from "./letter-profile/letter-profile.component";
 import { CardTemplateComponent } from "./card-template/card-template.component";
+import { NoDataComponent } from "./no-data/no-data.component";
 
 const appRoutes: Routes = [];
 
@@ -24,6 +25,7 @@ const appRoutes: Routes = [];
     DialogConfirmComponent,
     LetterProfileComponent,
     CardTemplateComponent,
+    NoDataComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ const appRoutes: Routes = [];
     DialogConfirmComponent,
     LetterProfileComponent,
     CardTemplateComponent,
+    NoDataComponent,
   ],
 })
 export class CommonCustomModule {}

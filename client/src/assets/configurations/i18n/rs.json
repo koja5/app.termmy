@@ -24,7 +24,8 @@
         "unsuccessfullySyncGoogleContacts": "Greška prilikom sinhronizacije Google kontakta sa Termmy-em. Molimo vas pokušajte ponovo malo kasnije ili kontaktirajte našu podršku.",
         "syncContacts": "Sinhronizuj kontakte",
         "noInformation": "Nema informacija",
-        "ok": "U redu"
+        "ok": "U redu",
+        "noData": "Nema informacija za prikaz"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",

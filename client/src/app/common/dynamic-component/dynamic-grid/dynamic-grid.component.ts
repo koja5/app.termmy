@@ -432,6 +432,7 @@ export class DynamicGridComponent {
     if (this.config.request.type === "GET") {
       this.rows = data;
       this.submit.emit({
+        rows: this.rows,
         total: this.rows.length,
       });
     }

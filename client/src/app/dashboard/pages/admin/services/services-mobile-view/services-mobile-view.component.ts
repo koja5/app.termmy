@@ -1,25 +1,16 @@
-import {
-  Component,
-  Input,
-  TemplateRef,
-  ViewChild,
-  ViewEncapsulation,
-} from "@angular/core";
+import { Component, Input, TemplateRef, ViewChild } from "@angular/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
-import { MethodRequest } from "app/enums/method-request";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
-import { HelpService } from "app/services/help.service";
 
 @Component({
-  selector: "app-clients-mobile-view",
-  templateUrl: "./clients-mobile-view.component.html",
-  styleUrls: ["./clients-mobile-view.component.scss"],
+  selector: "app-services-mobile-view",
+  templateUrl: "./services-mobile-view.component.html",
+  styleUrls: ["./services-mobile-view.component.scss"],
 })
-export class ClientsMobileViewComponent {
+export class ServicesMobileViewComponent {
   @Input() path: string;
   @Input() file: string;
   @Input() externalAccounts: any;
@@ -34,13 +25,6 @@ export class ClientsMobileViewComponent {
   public createNewRecords = false;
   public loader = true;
 
-  /**
-   * Constructor
-   *
-   * @param {CoreConfigService} _coreConfigService
-   * @param {CoreSidebarService} _coreSidebarService
-   */
-
   constructor(
     private _coreSidebarService: CoreSidebarService,
     private _service: CallApiService,
@@ -49,7 +33,7 @@ export class ClientsMobileViewComponent {
 
   ngOnInit() {
     this.loader = true;
-    this._service.callGetMethod("api/getMyClients", "").subscribe((data) => {
+    this._service.callGetMethod("api/getMyServices", "").subscribe((data) => {
       this.data = data;
       this.tempData = this.data;
       this.loader = false;

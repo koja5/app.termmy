@@ -27,57 +27,30 @@
 
         <div class="row" *ngIf="data && data.length">
             <div *ngFor="let item of data" class="col-md-12 mb-1 ml-1 mr-1">
-                <div class="profile-card js-profile-card">
-                    <!-- <div class="profile-card__img">
-                    <app-letter-profile [firstname]="item.firstname" [lastname]="item.lastname"></app-letter-profile>
-                </div> -->
-
+                <div class="profile-card js-profile-card"
+                    [ngStyle]="{'border-left': '2px solid', 'border-color': item.color}">
                     <div class="profile-card__cnt js-profile-cnt row">
-                        <div class="full-width col-9 text-left">
-                            <div class="profile-card__name ml-1">{{item.firstname}} {{item.lastname}}</div>
-                            <!-- <div class="profile-card__txt">
-                            <span class="profile-card-loc__icon gender">
-                                <span *ngIf="item.gender === 'woman'" class="fa fa-venus woman"></span>
-                                <span *ngIf="item.gender === 'man'" class="fa fa-mars man"></span>
-                                <span *ngIf="!item.gender" class="no-information">{{'general.noInformation' |
-                                    translate}}</span>
-                            </span>
-                        </div>
-                        <div class="profile-card__txt">
-                            <span class="profile-card-loc__icon">
-                                <span class="fa fa-birthday-cake"></span>
-                            </span>
+                        <div class="full-width col-9">
+                            <div class="profile-card__name">{{item.name}}</div>
 
-                            <span class="profile-card-loc__txt">
-                                <strong>{{item.birthday | date: 'dd.MM.yyyy.'}}</strong>
-                                <span *ngIf="!item.birthday" class="no-information">{{'general.noInformation' |
-                                    translate}}</span>
-                            </span>
-                        </div>
-                        <div class="profile-card-loc">
-                            <span class="profile-card-loc__icon">
-                                <span class="fa fa-map-marker"></span>
-                            </span>
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <p class="service-text">{{'myServices.timeDuration' | translate}}</p>
+                                    <h4 class="font-weight-bolder">{{item.time_duration}} <br> {{'myServices.min' |
+                                        translate}}</h4>
+                                </div>
 
-                            <span class="profile-card-loc__txt">
-                                <strong *ngIf="item.address && item.zip && item.city">{{item.address}} {{item.zip}},
-                                    {{item.city}}</strong>
-                                <span *ngIf="!item.address && !item.zip && !item.city"
-                                    class="no-information">{{'general.noInformation' |
-                                    translate}}</span>
-                            </span>
-                        </div> -->
+                                <div>
+                                    <p class="service-text">{{'myServices.timeBlocked' | translate}}</p>
+                                    <h4 class="font-weight-bolder">{{item.time_blocked}} <br> {{'myServices.min' |
+                                        translate}}</h4>
+                                </div>
 
-                            <div class="profile-card-social">
-                                <a href="tel:{{item.telephone}}" class="profile-card-social__item facebook"
-                                    target="_blank">
-                                    <span class="fa fa-phone"></span>
-                                </a>
-
-                                <a href="mailto: {{item.email}}" class="profile-card-social__item twitter"
-                                    target="_blank">
-                                    <span class="fa fa-envelope-o"></span>
-                                </a>
+                                <div>
+                                    <p class="service-text">{{'myServices.price' | translate}}</p>
+                                    <h4 class="font-weight-bolder">{{'myServices.currency' | translate}}{{item.price}}
+                                    </h4>
+                                </div>
                             </div>
 
                         </div>

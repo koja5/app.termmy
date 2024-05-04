@@ -23,7 +23,9 @@
         "successfullySyncGoogleContacts": "Successfully sync Google contacts with Termmy",
         "unsuccessfullySyncGoogleContacts": "Unsuccessfuly sunc Google contacts with Termmy. Please try later or contacts support,",
         "syncContacts": "Sync contacts",
-        "noInformation": "No information"
+        "noInformation": "No information",
+        "ok": "OK",
+        "noData": "There is no information to display"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
