@@ -1,6 +1,2 @@
 @import "@core/scss/core.scss";
 @import "./assets/scss/styles";
-
-:host ::ng-deep .ngx-datatable .datatable-body .datatable-scroll {
-  display: inherit;
-}

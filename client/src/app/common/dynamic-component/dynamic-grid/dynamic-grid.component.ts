@@ -172,7 +172,9 @@ export class DynamicGridComponent {
   }
 
   toggleSidebarClose(name): void {
-    this._coreSidebarService.getSidebarRegistry(name).close();
+    if (this._coreSidebarService.getSidebarRegistry(name)) {
+      this._coreSidebarService.getSidebarRegistry(name).close();
+    }
   }
 
   /**

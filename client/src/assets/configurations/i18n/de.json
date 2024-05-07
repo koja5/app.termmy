@@ -201,7 +201,8 @@
       "outlookText": "Verbinden Sie Ihren Outlook-Kalender und synchronisieren Sie ihn mit Termmy",
       "connect": "Verbinden",
       "disconnect": "Trennen",
-      "successfullyConnected": "Verbunden!"
+      "successfullyConnected": "Verbunden!",
+      "includeAnotherCalendar": "Fügen Sie zusätzliche Kalender hinzu"
    },
    "worktime": {
       "monday": "Montag",

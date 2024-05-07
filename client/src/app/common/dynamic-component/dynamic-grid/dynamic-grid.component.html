@@ -1,5 +1,5 @@
 <app-loader *ngIf="loader"></app-loader>
-<div class="content-wrapper p-0" *ngIf="config">
+<div class="content-wrapper p-0" *ngIf="!loader&&config">
     <div class="content-body">
         <!-- User List -->
         <section class="users-list-wrapper">
@@ -60,9 +60,12 @@
                 </div>
 
 
-                <ngx-datatable #grid [rows]="rows" [rowHeight]="50" class="bootstrap core-bootstrap"
-                    [limit]="selectedOption" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50"
-                    [scrollbarH]="true" [sorts]="config.sorting.fields">
+                <app-no-data *ngIf="!rows || !rows.length"></app-no-data>
+
+
+                <ngx-datatable *ngIf="rows && rows.length" #grid [rows]=" rows" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [limit]="selectedOption" [columnMode]="ColumnMode.force"
+                    [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true" [sorts]="config.sorting.fields">
                     <!-- <ngx-datatable-column name="User" prop="fullName" [width]="200">
               <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
                 <div class="d-flex align-items-center">
@@ -105,8 +108,10 @@
                     </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
                         [prop]="item.field" [width]="item.width ? item.width : auto"
-                        [columnMode]="innerWidth > 1250 ? 'flex' : 'flex'" class="{{item.class}}"
-                        [className]="item.className" [headerClass]="item.className" [cellClass]="item.className">
+                        [height]="innerWidth > 992 ? '75vh' : '80vh'"
+                        [columnMode]="innerWidth > 1250 ? 'flex' : 'force'" class="{{item.class}}"
+                        [className]="item.className" [headerClass]="item.className" [cellClass]="item.className"
+                        [rowHeight]="'auto'">
 
 
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>

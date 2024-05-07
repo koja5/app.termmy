@@ -11,6 +11,7 @@ import { StorageService } from "app/services/storage.service";
 })
 export class ConnectionsComponent {
   public data: any;
+  public calendarsList: any;
 
   constructor(
     private _service: CallApiService,
@@ -25,10 +26,16 @@ export class ConnectionsComponent {
       .subscribe((data: any) => {
         if (data.length) {
           this.data = data[0];
+          this.data.google_additional_calendars = JSON.parse(
+            this.data.google_additional_calendars
+          );
+          this.getGoogleCalendarList(this.data.google);
           this.sendInfoForSetupApp();
         }
       });
   }
+
+  //#region GOOGLE
 
   connectToGoogle() {
     this._service
@@ -49,6 +56,30 @@ export class ConnectionsComponent {
         }
       });
   }
+
+  getGoogleCalendarList(google) {
+    this._service
+      .callPostMethod("/api/google/getCalendarList", {
+        externalCalendar: google,
+      })
+      .subscribe((data) => {
+        this.calendarsList = data;
+      });
+  }
+
+  setGoogleCalendarList(item) {
+    if (this.data.google_additional_calendars[item]) {
+      this.data.google_additional_calendars[item] = false;
+    } else {
+      this.data.google_additional_calendars[item] = true;
+    }
+
+    this._service
+      .callPostMethod("/api/google/setAdditionalCalendar", this.data)
+      .subscribe((data) => {});
+  }
+
+  //#endregion
 
   sendInfoForSetupApp() {
     if (this._storageService.getSessionStorage("setup")) {

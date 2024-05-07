@@ -236,7 +236,8 @@
         "outlookText": "Povežite Vaš Outlook nalog i na taj način sinhronizujete Vaš Outlook kalendar i Outlook kontakte.",
         "connect": "Poveži",
         "disconnect": "Otkaži",
-        "successfullyConnected": "Povezano!"
+        "successfullyConnected": "Povezano!",
+        "includeAnotherCalendar": "Uključite dodatne kalendare"
     },
     "worktime": {
         "monday": "Ponedeljak",

@@ -47,6 +47,17 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="calendarsList">
+                        <h5 class="border-bottom mt-1">{{'connections.includeAnotherCalendar' | translate}}</h5>
+                        <div class="custom-control custom-checkbox mt-1" *ngFor="let item of calendarsList.items">
+                            <input type="checkbox" class="custom-control-input" id="{{item.id}}"
+                                [checked]="item.primary ? true : data.google_additional_calendars[item.id]"
+                                [readOnly]="item.primary ? true :  false"
+                                [(ngModel)]="data.google_additional_calendars[item.id]"
+                                (change)="setGoogleCalendarList(item.id)" />
+                            <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
+                        </div>
+                    </div>
                     <!-- <div class="d-md-flex mt-2">
                         <div class="d-flex flex-shrink-0">
                             <img src="../../../../../../assets/images/icons/outlook.png" alt="outlook" class="me-1"

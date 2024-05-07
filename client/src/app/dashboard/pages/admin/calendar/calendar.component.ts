@@ -417,6 +417,12 @@ export class CalendarComponent {
         id: this.calendarSettings.externalAccounts[this.employeeId]
           ? this.calendarSettings.externalAccounts[this.employeeId].google
           : this.calendarSettings.externalAccounts.google,
+        google_additional_calendars: this.calendarSettings.externalAccounts[
+          this.employeeId
+        ]
+          ? this.calendarSettings.externalAccounts[this.employeeId]
+              .google_additional_calendars
+          : this.calendarSettings.externalAccounts.google_additional_calendars,
       })
       .subscribe((data: any) => {
         this.loader = false;

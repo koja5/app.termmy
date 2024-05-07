@@ -238,6 +238,47 @@ router.post("/syncContacts", auth, function (req, res, next) {
   });
 });
 
+router.post("/getCalendarList", auth, async (req, res) => {
+  oauth2Client.setCredentials({
+    refresh_token: req.body.externalCalendar,
+  });
+  await calendar.calendarList.list(
+    {
+      auth: oauth2Client,
+    },
+    (err, response) => {
+      res.json(response.data);
+    }
+  );
+});
+
+router.post("/setAdditionalCalendar", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.google_additional_calendars = JSON.stringify(
+      req.body.google_additional_calendars
+    );
+
+    conn.query(
+      "INSERT INTO external_accounts set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(req.body.id);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
 //#endregion GENERAL
 
 //#region TERMINES
@@ -342,10 +383,29 @@ router.post("/getMyTermines", async (req, res) => {
     refresh_token: req.body.id,
   });
 
-  const events = await calendar.events.list({
+  if (req.body.google_additional_calendars) {
+    req.body.google_additional_calendars = JSON.parse(
+      req.body.google_additional_calendars
+    );
+  }
+
+  let events = await calendar.events.list({
     calendarId: "primary",
     auth: oauth2Client,
   });
+
+  for (let key in req.body.google_additional_calendars) {
+    console.log(key);
+    if (req.body.google_additional_calendars[key]) {
+      let eventsFromAdditionalCalendar = await calendar.events.list({
+        calendarId: key,
+        auth: oauth2Client,
+      });
+      events.data.items = events.data.items.concat(
+        eventsFromAdditionalCalendar.data.items
+      );
+    }
+  }
 
   if (events && events.data) {
     res.send(events.data.items);

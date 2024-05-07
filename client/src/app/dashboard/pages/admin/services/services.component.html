@@ -2,7 +2,7 @@
     <app-dynamic-grid [path]="path" [file]="file" (submit)="submit($event)"></app-dynamic-grid>
 </div>
 
-<div *ngIf="isMobile" class="small-device">
+<div *ngIf="isMobile" class="small-device card">
     <app-services-mobile-view [path]="path" [file]="file" [externalAccounts]="externalAccounts"
         [dynamicGrid]="dynamicGrid"></app-services-mobile-view>
 </div>

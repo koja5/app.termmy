@@ -236,7 +236,8 @@
         "outlookText": "Connect your Outlook calendar and synchronize with Termmy",
         "connect": "Connect",
         "disconnect": "Disconnect",
-        "successfullyConnected": "Connected!"
+        "successfullyConnected": "Connected!",
+        "includeAnotherCalendar": "Include additional calendars"
     },
     "worktime": {
         "monday": "Monday",
