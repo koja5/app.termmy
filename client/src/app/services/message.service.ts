@@ -8,6 +8,7 @@ export class MessageService {
   public orientation = new Subject<string>();
   public setupApp = new Subject<any>();
   public avatarProfile = new Subject<string>();
+  public configValue = new Subject<any>();
 
   constructor() {}
 
@@ -33,5 +34,13 @@ export class MessageService {
 
   getAvatarProfile(): Observable<any> {
     return this.avatarProfile.asObservable();
+  }
+
+  sendConfigValueEmit(value: any) {
+    this.configValue.next(value);
+  }
+
+  getConfigValueEmit(): Observable<any> {
+    return this.configValue.asObservable();
   }
 }

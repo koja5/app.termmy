@@ -6,13 +6,10 @@ import {
   ViewEncapsulation,
 } from "@angular/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
-import { MethodRequest } from "app/enums/method-request";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
-import { HelpService } from "app/services/help.service";
 
 @Component({
   selector: "app-clients-mobile-view",

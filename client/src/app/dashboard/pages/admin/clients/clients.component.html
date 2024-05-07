@@ -1,8 +1,8 @@
-<div class="large-device">
-    <app-dynamic-grid [path]="path" [file]="file" [externalAccounts]="externalAccounts"
-        (submit)="submit($event)"></app-dynamic-grid>
-</div>
-<div *ngIf="isMobile" class="small-device">
+<!-- <div class="large-device"> -->
+<app-dynamic-grid [path]="path" [file]="file" [externalAccounts]="externalAccounts"
+    (submit)="submit($event)"></app-dynamic-grid>
+<!-- </div> -->
+<!-- <div *ngIf="isMobile" class="small-device">
     <app-clients-mobile-view [path]="path" [file]="file" [externalAccounts]="externalAccounts"
         [dynamicGrid]="dynamicGrid"></app-clients-mobile-view>
-</div>
+</div> -->

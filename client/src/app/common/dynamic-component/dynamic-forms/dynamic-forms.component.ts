@@ -20,6 +20,8 @@ import { CallApiService } from "app/services/call-api.service";
 import { MessageService } from "app/services/message.service";
 import { FieldType } from "app/enums/field-type";
 import { CoreTranslationService } from "@core/services/translation.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 @Component({
   exportAs: "dynamicForm",
@@ -46,6 +48,7 @@ export class DynamicFormsComponent implements OnInit {
   form!: FormGroup;
   public loader: boolean = true;
   public modalShow: boolean = false;
+  private _unsubscribeAll: Subject<any>;
 
   get controls() {
     return this.config.config!.filter(({ type }) => type !== "button");
@@ -65,9 +68,16 @@ export class DynamicFormsComponent implements OnInit {
     private configurationService: ConfigurationService,
     private apiService: CallApiService,
     private router: ActivatedRoute,
-    private _coreTranslationService: CoreTranslationService
+    private _messageService: MessageService
   ) {
-    // this._coreTranslationService.setAllTranslations();
+    this._unsubscribeAll = new Subject();
+
+    this._messageService
+      .getConfigValueEmit()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   ngOnInit() {
@@ -91,6 +101,10 @@ export class DynamicFormsComponent implements OnInit {
         }
       }
     }
+  }
+
+  ngOnDestroy() {
+    this._unsubscribeAll.unsubscribe();
   }
 
   initializeConfig() {

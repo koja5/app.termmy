@@ -294,26 +294,6 @@
         },
         {
             "type": "button",
-            "subtype": "delete",
-            "field": "id",
-            "width": "col-6",
-            "class": "btn btn-outline-danger",
-            "title": "general.delete",
-            "confirmRequired": true,
-            "request": {
-                "type": "POST",
-                "api": "/api/deleteService",
-                "parameters": [],
-                "fields": "",
-                "root": ""
-            },
-            "responseMessage": {
-                "type": "toastr"
-            },
-            "positionClass": "text-left mt-3 col-6"
-        },
-        {
-            "type": "button",
             "width": "col-6",
             "class": "btn btn-primary",
             "name": "submit",

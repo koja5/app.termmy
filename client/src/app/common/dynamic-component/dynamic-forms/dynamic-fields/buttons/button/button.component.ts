@@ -14,6 +14,7 @@ import { Router } from "@angular/router";
 import { ResponseAction } from "app/enums/response-action";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
+import { MessageService } from "app/services/message.service";
 
 @Component({
   selector: "app-button",
@@ -34,7 +35,8 @@ export class ButtonComponent implements OnInit {
     private _helpService: HelpService,
     private _service: CallApiService,
     private _router: Router,
-    private _toastr: ToastrComponent
+    private _toastr: ToastrComponent,
+    private _messageService: MessageService
   ) {
     this.config = new FieldConfig();
     this.group = new FormGroup({});
@@ -54,31 +56,38 @@ export class ButtonComponent implements OnInit {
 
   clickRequest() {
     if (this._helpService.checkUndefinedProperty(this.group.value)) {
-      this.config.body = this.group.value;
-      this._service.callApi(this.config, this._router).subscribe(
-        (data) => {
-          if (data) {
-            if (this.config.responseMessage.type === ResponseAction.toastr) {
-              if (
-                this.config.responseMessage.title ||
-                this.config.responseMessage.text
-              ) {
-                this._toastr.showSuccessCustom(
-                  this.config.responseMessage.title,
+      if (this.config.emitRequest) {
+        this._messageService.sendConfigValueEmit({
+          config: this.config,
+          value: this.group.value,
+        });
+      } else {
+        this.config.body = this.group.value;
+        this._service.callApi(this.config, this._router).subscribe(
+          (data) => {
+            if (data) {
+              if (this.config.responseMessage.type === ResponseAction.toastr) {
+                if (
+                  this.config.responseMessage.title ||
                   this.config.responseMessage.text
-                );
-              } else {
-                this._toastr.showSuccess();
+                ) {
+                  this._toastr.showSuccessCustom(
+                    this.config.responseMessage.title,
+                    this.config.responseMessage.text
+                  );
+                } else {
+                  this._toastr.showSuccess();
+                }
               }
+            } else {
+              this._toastr.showError();
             }
-          } else {
+          },
+          (error) => {
             this._toastr.showError();
           }
-        },
-        (error) => {
-          this._toastr.showError();
-        }
-      );
+        );
+      }
     } else {
       this._toastr.showError();
     }

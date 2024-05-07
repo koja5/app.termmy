@@ -1,9 +1,12 @@
 import { Component, Input, TemplateRef, ViewChild } from "@angular/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { error } from "console";
 
 @Component({
   selector: "app-services-mobile-view",
@@ -17,6 +20,7 @@ export class ServicesMobileViewComponent {
   @Input() dynamicGrid: DynamicGridComponent;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
+  @ViewChild(DialogConfirmComponent) dialogConfirm;
   public config: any;
   public data: any;
   public tempData = [];
@@ -24,11 +28,13 @@ export class ServicesMobileViewComponent {
   public modalDialog: any;
   public createNewRecords = false;
   public loader = true;
+  public selectedItem: any;
 
   constructor(
     private _coreSidebarService: CoreSidebarService,
     private _service: CallApiService,
-    private _configurationService: ConfigurationService
+    private _configurationService: ConfigurationService,
+    private _toastr: ToastrComponent
   ) {}
 
   ngOnInit() {
@@ -109,5 +115,23 @@ export class ServicesMobileViewComponent {
     this.dynamicGrid.submit.subscribe((data) => {
       this.data = data.rows;
     });
+  }
+
+  deleteItem() {
+    this._service
+      .callPostMethod("api/deleteService", this.selectedItem)
+      .subscribe(
+        (data) => {
+          if (data) {
+            this._toastr.showSuccess();
+            this.data.splice(this.selectedItem, 1);
+          } else {
+            this._toastr.showError();
+          }
+        },
+        (error) => {
+          this._toastr.showError();
+        }
+      );
   }
 }

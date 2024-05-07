@@ -222,9 +222,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       id: this._translateService.currentLang,
     });
 
-    this._messageService.getAvatarProfile().subscribe((data) => {
-      this.currentUser.avatar = data;
-    });
+    this._messageService
+      .getAvatarProfile()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
+        this.currentUser.avatar = data;
+      });
   }
 
   /**

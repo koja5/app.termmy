@@ -48,4 +48,5 @@ export class FieldConfig {
   oneLine?: boolean;
   minuteStep: number;
   dependent?: any;
+  emitRequest?: boolean;
 }
