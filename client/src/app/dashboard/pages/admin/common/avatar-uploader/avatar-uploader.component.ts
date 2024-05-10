@@ -34,7 +34,7 @@ export class AvatarUploaderComponent {
   ) {}
 
   ngOnInit() {
-    if (this.data.avatar) {
+    if (this.data && this.data.avatar) {
       this.imageCrop = "assets/images/avatars/" + this.data.avatar;
     } else if (this.defaultImage) {
       this.imageCrop = "assets/images/avatars/" + this.defaultImage;

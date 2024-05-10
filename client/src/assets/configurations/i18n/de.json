@@ -26,7 +26,7 @@
       "noInformation": "Keine Information",
       "ok": "OK",
       "noData": "Es sind keine Informationen zum Anzeigen vorhanden"
-   },
+  },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
       "successExecuteActionTextDefault": "Aktion erfolgreich ausgeführt!",
@@ -61,7 +61,7 @@
       "newPassword": "Neues Passwort",
       "confirmNewPassword": "Neues Passwort wiederholen",
       "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus"
-   },
+  },
    "userTypes": {
       "superadmin": "Superadmin",
       "admin": "Admin",
@@ -175,10 +175,11 @@
       "connectedThisCalendarWithGoogle": "Dieser Kalender ist mit Google verbunden!",
       "selectLocationAndEmployee": "Bitte wählen Sie Standort und Benutzer, um den Kalender zu sehen",
       "scheduledByUser": "Vom Kunden geplant",
-      "selectedPayOnArrivalOption": "Der Kunde hat die Option der Zahlung bei Ankunft gewählt.",
+      "selectedPayOnArrivalOption": "Der Kunde hat die Option Zahlung vor Ort gewählt.",
       "selectedPayOnline": "Der Kunde hat € #amount für die Dienstleistung bezahlt.",
       "selectedFullPayment": "Der Kunde hat den vollen Betrag für die Dienstleistung bezahlt (€ #amount)",
-      "selectedPartOfFullPayment": "Kunde hat einen Teil des vollen Betrags für die Dienstleistung bezahlt (#amount €). Der Restbetrag in Höhe von € #amountRest muss bei Ankunft bezahlt werden."
+      "selectedPartOfFullPayment": "Kunde hat einen Teil des vollen Betrags für die Dienstleistung bezahlt (#amount €). Der Restbetrag in Höhe von € #amountRest muss vor Ort bezahlt werden.",
+      "googleAdditionalCalendars": "Meine anderen Kalender"
    },
    "accountSettings": {
       "title": "Account Einstellungen",
@@ -202,8 +203,13 @@
       "connect": "Verbinden",
       "disconnect": "Trennen",
       "successfullyConnected": "Verbunden!",
-      "includeAnotherCalendar": "Fügen Sie zusätzliche Kalender hinzu"
-   },
+      "includeAnotherCalendar": "Fügen Sie zusätzliche Kalender hinzu",
+      "includeAnotherCalendarExplanation": "Zusätzlich zum Hauptkalender ist es möglich, andere Kalender, die Sie in Ihrem Google-Konto erstellt haben, zu Termmy hinzuzufügen.",
+      "ownersCalendars": "Eigene Kalender",
+      "ownersCalendarsExplanation": "Sie haben volle Rechte für diese Kalender. Das bedeutet, dass Sie damit verbundene Ereignisse anzeigen, hinzufügen, ändern oder löschen können.",
+      "readonlyCalendars": "Schreibgeschützte Kalender",
+      "readonlyCalendarsExplanation": "Für diese Kalender haben Sie nur die Möglichkeit, Ereignisse in Ihrem Kalender in der Termmy-App anzuzeigen. Das bedeutet, dass es keine Möglichkeit gibt, Ereignisse in diesen Kalendern hinzuzufügen oder zu ändern."
+  },
    "worktime": {
       "monday": "Montag",
       "tuesday": "Dienstag",
@@ -286,7 +292,7 @@
       "socialNetworkTitle": "Soziale Netzwerke",
       "socialNetworkText": "Geben Sie Ihre Seite in sozialen Netzwerken ein und zeigen Sie sie auf der Buchungsseite an",
       "partOfAmount": "Erlaube dem Kunden, einen Teilbetrag zu zahlen",
-      "allowPayOnArrivalForNewCustomer": "Zahlung bei Ankunft für neue Kunden erlauben",
+      "allowPayOnArrivalForNewCustomer": "Zahlung vor Ort für neue Kunden erlauben",
       "facebook": "Facebook",
       "facebookRootLink": "https://facebook.com/",
       "instagram": "Instagram",
@@ -414,7 +420,7 @@
             "title": "Buchungsbestätigung",
             "text": "Sofort nach Terminvereinbarung",
             "subject": "Sie haben einen neuen Termin",
-            "message": "Neuer Termin #date um #time wurde bestätigt. #company"
+            "message": "Es wurde am #date um #time ein neuer Termin gebucht. #company."
          },
          "employeeDayBeforeReminder": {
             "title": "Tag zuvor",

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { MessageService } from "app/services/message.service";
@@ -11,13 +12,17 @@ import { StorageService } from "app/services/storage.service";
 })
 export class ConnectionsComponent {
   public data: any;
-  public calendarsList: any;
+  public calendarsList: any = {
+    owner: [],
+    reader: [],
+  };
 
   constructor(
     private _service: CallApiService,
     private _storageService: StorageService,
     private _messageService: MessageService,
-    private _helpService: HelpService
+    private _helpService: HelpService,
+    private _toastr: ToastrComponent
   ) {}
 
   ngOnInit() {
@@ -62,21 +67,38 @@ export class ConnectionsComponent {
       .callPostMethod("/api/google/getCalendarList", {
         externalCalendar: google,
       })
-      .subscribe((data) => {
-        this.calendarsList = data;
+      .subscribe((data: any) => {
+        // this.calendarsList = data;
+        for (let i = 0; i < data.items.length; i++) {
+          if (data.items[i].accessRole === "owner") {
+            this.calendarsList.owner.push(data.items[i]);
+          } else if (data.items[i].accessRole === "reader") {
+            this.calendarsList.reader.push(data.items[i]);
+          }
+        }
       });
   }
 
   setGoogleCalendarList(item) {
-    if (this.data.google_additional_calendars[item]) {
-      this.data.google_additional_calendars[item] = false;
+    if (this.data.google_additional_calendars[item.id]) {
+      this.data.google_additional_calendars[item.id].active =
+        !this.data.google_additional_calendars[item.id].active;
     } else {
-      this.data.google_additional_calendars[item] = true;
+      this.data.google_additional_calendars[item.id] = {
+        id: item.id,
+        summary: item.summary,
+        accessRole: item.accessRole,
+        active: true,
+      };
     }
 
     this._service
       .callPostMethod("/api/google/setAdditionalCalendar", this.data)
-      .subscribe((data) => {});
+      .subscribe((data) => {
+        if (data) {
+          this._toastr.showSuccess();
+        }
+      });
   }
 
   //#endregion

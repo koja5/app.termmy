@@ -47,15 +47,43 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="calendarsList">
-                        <h5 class="border-bottom mt-1">{{'connections.includeAnotherCalendar' | translate}}</h5>
-                        <div class="custom-control custom-checkbox mt-1" *ngFor="let item of calendarsList.items">
-                            <input type="checkbox" class="custom-control-input" id="{{item.id}}"
-                                [checked]="item.primary ? true : data.google_additional_calendars[item.id]"
-                                [readOnly]="item.primary ? true :  false"
-                                [(ngModel)]="data.google_additional_calendars[item.id]"
-                                (change)="setGoogleCalendarList(item.id)" />
-                            <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
+                    <div *ngIf="calendarsList.owner.length || calendarsList.reader.length">
+                        <h4 class="border-bottom mt-1">{{'connections.includeAnotherCalendar' | translate}}
+                            <app-explanation-mark
+                                [explanation]="('connections.includeAnotherCalendarExplanation' | translate)"></app-explanation-mark>
+                        </h4>
+                        <div class="mt-2" *ngIf="calendarsList.owner.length">
+                            <div class="mt-1">
+                                <h5>{{'connections.ownersCalendars' | translate}}
+                                    <app-explanation-mark
+                                        [explanation]="('connections.ownersCalendarsExplanation' | translate)"></app-explanation-mark>
+                                </h5>
+                                <div class="custom-control custom-checkbox mt-1 ml-1"
+                                    *ngFor="let item of calendarsList.owner">
+                                    <input type="checkbox" class="custom-control-input" id="{{item.id}}"
+                                        [checked]="item.primary ? true : data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
+                                        [readOnly]="item.primary ? true :  false"
+                                        [(ngModel)]="data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
+                                        (change)="setGoogleCalendarList(item)" />
+                                    <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
+                                </div>
+                            </div>
+
+                            <div class="mt-2" *ngIf="calendarsList.reader.length">
+                                <h5>{{'connections.readonlyCalendars' | translate}}
+                                    <app-explanation-mark
+                                        [explanation]="('connections.readonlyCalendarsExplanation' | translate)"></app-explanation-mark>
+                                </h5>
+                                <div class="custom-control custom-checkbox mt-1 ml-1"
+                                    *ngFor="let item of calendarsList.reader">
+                                    <input type="checkbox" class="custom-control-input" id="{{item.id}}"
+                                        [checked]="item.primary ? true : data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
+                                        [readOnly]="item.primary ? true :  false"
+                                        [(ngModel)]="data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
+                                        (change)="setGoogleCalendarList(item)" />
+                                    <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="d-md-flex mt-2">

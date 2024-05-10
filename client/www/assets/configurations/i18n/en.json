@@ -59,7 +59,8 @@
         "biography": "Biography",
         "oldPassword": "Old password",
         "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password"
+        "confirmNewPassword": "Confirm new password",
+        "fillRequredFields": "Please fill required fields"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -212,7 +213,8 @@
         "selectedPayOnArrivalOption": "Client chose the option of payment on arrival.",
         "selectedPayOnline": "Client paid amount of #amount € for service.",
         "selectedFullPayment": "Client paid full amount for service(#amount €)",
-        "selectedPartOfFullPayment": "Client paid part of full amount for service(#amount €). The balance in the amount of #amountRest € must be paid upon arrival."
+        "selectedPartOfFullPayment": "Client paid part of full amount for service(#amount €). The balance in the amount of #amountRest € must be paid upon arrival.",
+        "googleAdditionalCalendars": "My other calendars"
     },
     "accountSettings": {
         "title": "Account settings",
@@ -235,7 +237,13 @@
         "outlookText": "Connect your Outlook calendar and synchronize with Termmy",
         "connect": "Connect",
         "disconnect": "Disconnect",
-        "successfullyConnected": "Connected!"
+        "successfullyConnected": "Connected!",
+        "includeAnotherCalendar": "Include additional calendars",
+        "includeAnotherCalendarExplanation": "In addition to the main calendar, it is possible to add other calendars that you have created on your Google account to Termmy.",
+        "ownersCalendars": "Own Calendars",
+        "ownersCalendarsExplanation": "You have full rights to these calendars. This means you can view, add, change, or delete events associated with them.",
+        "readonlyCalendars": "Readonly calendars",
+        "readonlyCalendarsExplanation": "For these calendars, you only have the ability to view events on your calendar in the Termmy app. This means that there is no ability to add or change events that are in these calendars."
     },
     "worktime": {
         "monday": "Monday",

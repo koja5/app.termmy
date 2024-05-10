@@ -9,6 +9,7 @@ const request = require("request");
 const logger = require("./config/logger");
 const sql = require("./config/sql-database");
 const uuid = require("uuid");
+const e = require("express");
 
 module.exports = router;
 
@@ -247,7 +248,11 @@ router.post("/getCalendarList", auth, async (req, res) => {
       auth: oauth2Client,
     },
     (err, response) => {
-      res.json(response.data);
+      if (response && response.data) {
+        res.json(response.data);
+      } else {
+        res.json([]);
+      }
     }
   );
 });
@@ -299,13 +304,17 @@ router.post("/createTermine", auth, async (req, res) => {
   delete req.body.employee_id;
 
   const timeZone = await calendar.calendars.get({
-    calendarId: "primary",
+    calendarId: req.body.externalCalendarId
+      ? req.body.externalCalendarId
+      : "primary",
     auth: oauth2Client,
   });
 
   await calendar.events.insert(
     {
-      calendarId: "primary",
+      calendarId: req.body.externalCalendarId
+        ? req.body.externalCalendarId
+        : "primary",
       auth: oauth2Client,
       requestBody: {
         summary: req.body.Subject,
@@ -339,7 +348,9 @@ router.post("/updateTermine", auth, async (req, res) => {
 
   await calendar.events.update(
     {
-      calendarId: "primary",
+      calendarId: req.body.externalCalendarId
+        ? req.body.externalCalendarId
+        : "primary",
       auth: oauth2Client,
       eventId: req.body.id,
       requestBody: {
@@ -370,7 +381,9 @@ router.post("/deleteTermine", async (req, res) => {
   });
 
   const events = await calendar.events.delete({
-    calendarId: "primary",
+    calendarId: req.body.externalCalendarId
+      ? req.body.externalCalendarId
+      : "primary",
     auth: oauth2Client,
     eventId: req.body.id,
   });
@@ -395,10 +408,9 @@ router.post("/getMyTermines", async (req, res) => {
   });
 
   for (let key in req.body.google_additional_calendars) {
-    console.log(key);
-    if (req.body.google_additional_calendars[key]) {
+    if (req.body.google_additional_calendars[key].active) {
       let eventsFromAdditionalCalendar = await calendar.events.list({
-        calendarId: key,
+        calendarId: req.body.google_additional_calendars[key].id,
         auth: oauth2Client,
       });
       events.data.items = events.data.items.concat(

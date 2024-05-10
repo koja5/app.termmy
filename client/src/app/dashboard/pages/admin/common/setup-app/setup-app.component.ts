@@ -71,11 +71,11 @@ export class SetupAppComponent {
           this._changeDetector.markForCheck();
         }
 
-        setTimeout(() => {
-          if (this.complitedPercentage === 0) {
-            this.startTour();
-          }
-        }, 3000);
+        // setTimeout(() => {
+        //   if (this.complitedPercentage === 0) {
+        //     this.startTour();
+        //   }
+        // }, 3000);
       });
   }
 

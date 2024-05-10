@@ -17,6 +17,15 @@
     td.e-header-cells.e-week-number {
     height: 82px;
   }
+
+  .e-schedule
+    .e-vertical-view
+    .e-left-indent-wrap
+    table
+    tbody
+    td.e-header-cells.e-week-number {
+    font-size: 32px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -31,15 +40,19 @@
   .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-subject {
     font-size: 9px !important;
   }
+
+  .e-schedule
+    .e-vertical-view
+    .e-left-indent-wrap
+    table
+    tbody
+    td.e-header-cells.e-week-number {
+    font-size: 16px;
+  }
 }
 
-.e-schedule
-  .e-vertical-view
-  .e-left-indent-wrap
-  table
-  tbody
-  td.e-header-cells.e-week-number {
-  font-size: 32px;
+.e-schedule.e-device .e-vertical-view .e-time-cells-wrap table td {
+  white-space: break-spaces;
 }
 
 .e-schedule .e-vertical-view .e-work-cells.e-disable-dates {

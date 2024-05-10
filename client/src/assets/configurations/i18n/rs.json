@@ -213,7 +213,8 @@
         "selectedPayOnArrivalOption": "Klijent je prilikom zakazivanja odabrao opciju plaćanja po dolasku!",
         "selectedPayOnline": "Klijent je platio deo iznosa(#amount €) za zakazanu uslugu.",
         "selectedFullPayment": "Klijent je platio pun iznos za zakazanu uslugu(#amount €)",
-        "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska."
+        "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska.",
+        "googleAdditionalCalendars": "Moji ostali kalendari"
     },
     "accountSettings": {
         "title": "Podešavanja naloga",
@@ -237,7 +238,12 @@
         "connect": "Poveži",
         "disconnect": "Otkaži",
         "successfullyConnected": "Povezano!",
-        "includeAnotherCalendar": "Uključite dodatne kalendare"
+        "includeAnotherCalendar": "Uključite dodatne kalendare",
+        "includeAnotherCalendarExplanation": "Pored glavnom kalendara, moguće je dodati i ostale kalendare koje ste kreirali na vašem Google nalogu.",
+        "ownersCalendars": "Vlastiti kalendari",
+        "ownersCalendarsExplanation": "Za ove kalendare imate potpuna prava. To znači da možete da vidite, dodajete, menjate ili brišete događaje koji su vezani za njih.",
+        "readonlyCalendars": "Kalendari samo sa dozvolom čitanja",
+        "readonlyCalendarsExplanation": "Za ove kalendare imate samo mogućnost prikaza događaja na vašem kalendaru u Termmy aplikaciji. To znači da ne postoji mogućnost dodavanja ili menjanja događaja koji se nalaze u ovim kalendarima."
     },
     "worktime": {
         "monday": "Ponedeljak",

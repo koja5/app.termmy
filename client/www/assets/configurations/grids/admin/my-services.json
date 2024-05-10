@@ -294,12 +294,12 @@
         },
         {
             "type": "button",
-            "width": "col-md-12",
+            "width": "col-6",
             "class": "btn btn-primary",
             "name": "submit",
             "title": "general.save",
             "field": "submit",
-            "positionClass": "text-right mt-3 col-md-12"
+            "positionClass": "text-right mt-3 col-6"
         }
     ]
 }

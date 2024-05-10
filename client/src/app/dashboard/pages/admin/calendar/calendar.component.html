@@ -33,7 +33,7 @@
                     (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
                     (popupClose)="onPopupClose($event)" (eventRendered)="onEventRendered($event)"
                     (dataBound)="onDataBound($event)" (renderCell)="onRenderCell($event)"
-                    (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)">
+                    (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" [loading]="loader">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1">
@@ -64,7 +64,7 @@
                     <ng-template #eventTemplate let-data>
 
                     </ng-template>
-                    <ng-template #editorTemplate let-data>
+                    <ng-template #editorTemplate let-data *ngIf="!loader">
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <div>
@@ -125,10 +125,22 @@
                                                     timeFormat="HH:mm"></ejs-datetimepicker>
                                             </div>
 
-                                            <div class="col-12">
+                                            <div class="col-12 mb-1">
                                                 <label>{{'myCalendar.description' | translate}}</label>
                                                 <textarea type="text" class="form-control" formControlName="description"
                                                     rows="3"></textarea>
+                                            </div>
+
+                                            <div class="col-12 mb-1" *ngIf="googleAdditionalCalendarsList.length">
+                                                <label>{{'myCalendar.googleAdditionalCalendars' | translate}}</label>
+                                                <span *ngIf="submited&&!appointment.controls.service_id.valid"
+                                                    class="error">
+                                                    {{'clientData.fillFirstname' | translate}}
+                                                </span>
+                                                <ng-select [items]="googleAdditionalCalendarsList"
+                                                    [bindLabel]="'summary'" [bindValue]="'id'" [closeOnSelect]="true"
+                                                    [searchable]="true" id="externalCalendarId"
+                                                    formControlName="externalCalendarId"></ng-select>
                                             </div>
                                         </div>
                                     </form>

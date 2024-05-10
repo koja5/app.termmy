@@ -151,6 +151,17 @@
             "name": "description",
             "title": "myCalendar.description",
             "field": "description"
+        },
+        {
+            "type": "combobox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "externalCalendarId",
+            "title": "myCalendar.googleAdditionalCalendars",
+            "field": {
+                "text": "summary",
+                "value": "id"
+            }
         }
     ]
 }

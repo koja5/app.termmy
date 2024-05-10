@@ -83,6 +83,7 @@ export class CalendarComponent {
   public servicesColorText: any = {};
   public schedulerHeight: string;
   public currentView = "WorkWeek";
+  public googleAdditionalCalendarsList = [];
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -146,6 +147,7 @@ export class CalendarComponent {
       employee_id: new FormControl(""),
       ResourcesIndex: new FormControl(),
       externalCalendar: new FormControl(),
+      externalCalendarId: new FormControl(),
     });
   }
 
@@ -330,9 +332,29 @@ export class CalendarComponent {
     this._service
       .callGetMethod("/api/getExternalAccounts", "")
       .subscribe((data: any) => {
-        this.calendarSettings.externalAccounts = data[0];
+        if (data.length) {
+          this.calendarSettings.externalAccounts = data[0];
+          this.packGoogleAdditionalCalendarsForUser(
+            JSON.parse(
+              this.calendarSettings.externalAccounts.google_additional_calendars
+            )
+          );
+        } else {
+          this.calendarSettings.externalAccounts = [];
+        }
+        this._storageService.setCalendarConfig(this.calendarSettings);
         this.getTermines();
       });
+  }
+
+  packGoogleAdditionalCalendarsForUser(googleAdditionalCalendars: any) {
+    this.googleAdditionalCalendarsList = [];
+    for (const [key, value] of Object.entries(googleAdditionalCalendars)) {
+      if ((value as any).active && (value as any).accessRole === "owner") {
+        this.googleAdditionalCalendarsList.push(value);
+      }
+    }
+    console.log(this.googleAdditionalCalendarsList);
   }
 
   getMyTermines() {
@@ -388,7 +410,15 @@ export class CalendarComponent {
   executeActionForGoogleCalendar(event: any) {
     if (event.requestType === "eventRemove") {
       this.deleteTermineFromGoogleCalendar(
-        event.data.length ? event.data[0].id : event.data.id
+        event.data.length
+          ? {
+              id: event.data[0].id,
+              externalCalendarId: event.data[0].externalCalendarId,
+            }
+          : {
+              id: event.data.id,
+              externalCalendarId: event.data.externalCalendarId,
+            }
       );
       this.deleteTermineFromSQL({
         id: event.data.length ? event.data[0].uuid : event.data.uuid,
@@ -412,6 +442,8 @@ export class CalendarComponent {
 
   getMyTerminesFromGoogleCalendar() {
     this.loader = true;
+    // const selectedWeek = this.getMinAndMaxDateForSelectedWeek();
+
     this._service
       .callPostMethod("/api/google/getMyTermines", {
         id: this.calendarSettings.externalAccounts[this.employeeId]
@@ -423,6 +455,8 @@ export class CalendarComponent {
           ? this.calendarSettings.externalAccounts[this.employeeId]
               .google_additional_calendars
           : this.calendarSettings.externalAccounts.google_additional_calendars,
+        // min: selectedWeek.min,
+        // max: selectedWeek.max,
       })
       .subscribe((data: any) => {
         this.loader = false;
@@ -505,6 +539,9 @@ export class CalendarComponent {
           : this.calendarSettings.externalAccounts[this.employeeId]
           ? this.calendarSettings.externalAccounts[this.employeeId].google
           : this.calendarSettings.externalAccounts.google,
+        externalCalendarId: data.externalCalendarId
+          ? data.externalCalendarId
+          : null,
         service_id: data.service_id ? data.service_id : null,
         client_id: data.client_id ? data.client_id : null,
         is_online: data.is_online,
@@ -548,6 +585,7 @@ export class CalendarComponent {
             // this.refreshTermine(this.appointment.value, ExecuteAction.create);
             this.createTermineForSQL(data.uuid);
           } else {
+            this.loaderContent = false;
             this._toastr.showError();
           }
         },
@@ -570,6 +608,8 @@ export class CalendarComponent {
               "actionMessage.errorUpdateTermineOnGoogleCalendarRights"
             )
           );
+
+          this.getTermines();
         }
       },
       (error) => {
@@ -579,23 +619,24 @@ export class CalendarComponent {
     );
   }
 
-  deleteTermineFromGoogleCalendar(id) {
-    if (id) {
+  deleteTermineFromGoogleCalendar(data: any) {
+    if (data.id) {
       this.loaderContent = true;
       this.calendar.showSpinner();
       this._service
         .callPostMethod("/api/google/deleteTermine", {
-          id: id,
+          id: data.id,
           externalCalendar: this.calendarSettings.externalAccounts[
             this.employeeId
           ]
             ? this.calendarSettings.externalAccounts[this.employeeId].google
             : this.calendarSettings.externalAccounts.google,
+          externalCalendarId: data.externalCalendarId,
         })
         .subscribe(
-          (data) => {
+          (response) => {
             this.loaderContent = false;
-            this.refreshTermine({ id: id }, ExecuteAction.delete);
+            this.refreshTermine({ id: data.id }, ExecuteAction.delete);
           },
           (error) => {
             this._toastr.showError();
@@ -694,7 +735,7 @@ export class CalendarComponent {
       })
       .subscribe(
         (data) => {
-          this._toastr.showSuccess();
+          // this._toastr.showSuccess();
           this.initializeForm();
         },
         (error) => {
@@ -1230,6 +1271,17 @@ export class CalendarComponent {
         return false;
       }
     }
+  }
+
+  getMinAndMaxDateForSelectedWeek() {
+    let currentViewDates: Date[] =
+      this.calendar.getCurrentViewDates() as Date[];
+    let min: Date = currentViewDates[0] as Date;
+    let max: Date = currentViewDates[currentViewDates.length - 1] as Date;
+    return {
+      min: min,
+      max: max,
+    };
   }
 
   //#endregion

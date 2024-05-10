@@ -93,6 +93,7 @@ router.post("/setTermine", auth, function (req, res) {
     req.body.admin_id = req.user.user.admin_id;
     delete req.body.employeeId;
     delete req.body.externalCalendar;
+    delete req.body.externalCalendarId;
     if (!req.body.id) {
       req.body.id = uuid.v4();
     }
@@ -128,6 +129,7 @@ router.post("/updateTermine", auth, function (req, res) {
     delete req.body.Guid;
     delete req.body.Id;
     delete req.body.externalCalendar;
+    delete req.body.externalCalendarId;
     delete req.body.groupIndex;
     delete req.body.StartTimezone;
     delete req.body.EndTimezone;

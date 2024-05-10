@@ -30,6 +30,8 @@ export class BookingSettingsComponent {
       .subscribe((data: any) => {
         if (data && data.length) {
           this.data = data[0];
+        } else {
+          this.data.avatar = null;
         }
       });
   }
@@ -74,8 +76,8 @@ export class BookingSettingsComponent {
   }
 
   uploadEmitter(event: any) {
-    this._service.callPostMethod("/api/upload", event).subscribe((response) => {
-      console.log("response received is ", response);
-    });
+    this._service
+      .callPostMethod("/api/upload", event)
+      .subscribe((response) => {});
   }
 }
