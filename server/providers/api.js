@@ -2202,7 +2202,6 @@ router.post("/uploadUserProfile", multipartMiddleware, auth, (req, res) => {
               conn.release();
               if (!err) {
                 req.user.user.avatar = req.body.avatar;
-                console.log(req.user);
                 const newToken = jwt.sign(
                   { user: req.user.user, email: req.user.email },
                   process.env.TOKEN_KEY,

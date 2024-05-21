@@ -44,6 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public navigation: any;
   public selectedLanguage: any;
   public userInfo: any;
+  public token: any;
 
   @HostBinding("class.fixed-top")
   public isFixed = false;
@@ -182,6 +183,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // get the currentUser details from localStorage
     this.currentUser = this._storageService.getDecodeToken();
+    this.token = this._storageService.getToken();
 
     // Subscribe to the config changes
     this._coreConfigService.config

@@ -349,12 +349,13 @@ export class CalendarComponent {
 
   packGoogleAdditionalCalendarsForUser(googleAdditionalCalendars: any) {
     this.googleAdditionalCalendarsList = [];
-    for (const [key, value] of Object.entries(googleAdditionalCalendars)) {
-      if ((value as any).active && (value as any).accessRole === "owner") {
-        this.googleAdditionalCalendarsList.push(value);
+    if (googleAdditionalCalendars) {
+      for (const [key, value] of Object.entries(googleAdditionalCalendars)) {
+        if ((value as any).active && (value as any).accessRole === "owner") {
+          this.googleAdditionalCalendarsList.push(value);
+        }
       }
     }
-    console.log(this.googleAdditionalCalendarsList);
   }
 
   getMyTermines() {
