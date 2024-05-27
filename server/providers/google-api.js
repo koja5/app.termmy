@@ -10,6 +10,9 @@ const logger = require("./config/logger");
 const sql = require("./config/sql-database");
 const uuid = require("uuid");
 const e = require("express");
+const jwt = require("jsonwebtoken");
+const expiresToken = "12h";
+const { OAuth2Client } = require("google-auth-library");
 
 module.exports = router;
 
@@ -30,6 +33,8 @@ let oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_SECRET,
   process.env.REDIRECT_URL
 );
+
+const client = new OAuth2Client();
 
 const scopes = [
   "https://www.googleapis.com/auth/calendar",
@@ -89,6 +94,21 @@ const scopes = [
 //   }
 // });
 
+router.post("/auth", async (req, res) => {
+  console.log(req);
+  const ticket = await client.verifyIdToken({
+    idToken: req.body.idToken,
+    audience: process.env.CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  console.log(payload);
+  var options = prepareOptionsForRequest(
+    payload,
+    "google/findOrCreateUserViaGoogle"
+  );
+  makeRequest(options, res);
+});
+
 router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
@@ -126,6 +146,66 @@ router.get("/redirect", async (req, res) => {
 //#endregion GOOGLE
 
 //#region SET UP TOKEN IN TERMMY DATABASE
+
+router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from users where email = ?",
+      [req.body.email],
+      function (err, rows, fields) {
+        if (rows.length) {
+          conn.release();
+          const token = generateToken(rows[0]);
+          logger.log(
+            "info",
+            `USER: ${req.body.email} is LOGIN at ${new Date()}.`
+          );
+
+          console.log;
+          res.json("auth/user-auth/" + token);
+        } else {
+          const generateUuid = uuid.v4();
+          const data = {
+            id: generateUuid,
+            admin_id: generateUuid,
+            firstname: req.body.given_name,
+            lastname: req.body.family_name,
+            email: req.body.email,
+            password: req.body.jti,
+            avatar: req.body.picture,
+            type: 1,
+            active: 1,
+            verified: 1,
+          };
+
+          conn.query(
+            "insert into users set ?",
+            [data],
+            function (err, rows, fields) {
+              if (err) {
+                conn.release();
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              } else {
+                logger.log(
+                  "info",
+                  `USER: ${req.body.email} CREATE ACCOUNT at ${new Date()}.`
+                );
+                const token = generateToken(data);
+                res.json("wizard/" + token);
+              }
+            }
+          );
+        }
+      }
+    );
+  });
+});
 
 router.post("/setExternalGoogleAccount", auth, function (req, res) {
   connection.getConnection(function (err, conn) {
@@ -190,7 +270,7 @@ router.post("/deleteExternalGoogleAccount", auth, function (req, res) {
     req.body.user_id = req.user.user.id;
 
     conn.query(
-      "update external_accounts set google = null where user_id = ?",
+      "update external_accounts set google = null, google_additional_calendars = '{}' where user_id = ?",
       [req.user.user.id],
       function (err, rows) {
         conn.release();
@@ -673,7 +753,11 @@ function prepareOptionsForRequest(body, api) {
 function makeRequest(options, res) {
   request(options, function (error, response, body) {
     if (!error) {
-      res.json(true);
+      if (response.body.redirect) {
+        res.redirect(response.body.redirect);
+      } else {
+        res.json(response.body);
+      }
     } else {
       res.json(false);
     }
@@ -757,6 +841,26 @@ function generateCustomUUID(id) {
       : id.slice(21, 30) + "0".repeat(12 - id.slice(21, 30).length);
   let uuid = first + "-" + second + "-" + third + "-" + forth + "-" + fifth;
   return uuid;
+}
+
+function generateToken(data) {
+  return jwt.sign(
+    {
+      user: {
+        id: data.id,
+        admin_id: data.admin_id ? data.admin_id : data.id,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        type: data.type,
+        avatar: data.avatar,
+      },
+      email: data.email,
+    },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: expiresToken,
+    }
+  );
 }
 
 //#endregion

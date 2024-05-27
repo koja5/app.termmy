@@ -1,0 +1,16 @@
+.google-signin-img {
+  width: 26px;
+}
+
+.google-auth {
+  transition: all 0.2s linear 0s, background-position 1ms ease 0s,
+    background-size 1ms ease 0s;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 107, 255);
+  background-color: rgb(0, 107, 255);
+}
+
+.google-auth:hover {
+  background-color: rgb(0, 78, 186);
+  border-color: rgb(0, 78, 186);
+}

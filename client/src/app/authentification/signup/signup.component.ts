@@ -6,15 +6,18 @@ import {
 } from "@angular/forms";
 
 import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ResponseModel } from "app/models/response-model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
-import { TranslateService } from "@ngx-translate/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { StorageService } from "app/services/storage.service";
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+import { MsalService } from "@azure/msal-angular";
+import { AuthenticationResult } from "@azure/msal-browser";
 
 @Component({
   selector: "app-signup",
@@ -30,6 +33,8 @@ export class SignupComponent implements OnInit {
   public submitted = false;
   public response = new ResponseModel();
   public loading = false;
+  public lang: string;
+  public authSubscription!: Subscription;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -48,7 +53,9 @@ export class SignupComponent implements OnInit {
     private _activatedRouter: ActivatedRoute,
     private _toastr: ToastrComponent,
     private _translate: TranslateService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private authService: SocialAuthService,
+    private msalService: MsalService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -101,7 +108,7 @@ export class SignupComponent implements OnInit {
   /**
    * On init
    */
-  ngOnInit(): void {
+  async ngOnInit() {
     this.registerForm = this._formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
@@ -115,6 +122,22 @@ export class SignupComponent implements OnInit {
         this.coreConfig = config;
       });
     this.validateRecommenedBonusLink();
+
+    this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    });
+
+    this.authSubscription = this.authService.authState.subscribe((user) => {
+      this._service
+        .callPostMethod("api/google/auth", { idToken: user.idToken })
+        .subscribe((data) => {
+          this._router.navigate([data]);
+        });
+    });
+
+    this.lang = this._storageService.getSelectedLanguage();
+
+    await this.msalService.instance.initialize();
   }
 
   /**
@@ -179,6 +202,27 @@ export class SignupComponent implements OnInit {
         .callPostMethod("/api/createRecommendedBonus", { id: id })
         .subscribe((data) => {});
     }
+  }
+
+  loginWithMicrosoft() {
+    this.msalService
+      .loginPopup()
+      .subscribe((response: AuthenticationResult) => {
+        console.log(response);
+        if (response && response.account) {
+          this._service
+            .callPostMethod("api/microsoft/findOrCreateUserViaMicrosoft", {
+              email: response.account.username,
+            })
+            .subscribe((route) => {
+              this._router.navigate([route]);
+            });
+        }
+      });
+  }
+
+  googleSignin(googleWrapper: any) {
+    googleWrapper.click();
   }
 
   //#endregion

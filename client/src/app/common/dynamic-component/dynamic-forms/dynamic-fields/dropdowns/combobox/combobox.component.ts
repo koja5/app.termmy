@@ -120,6 +120,10 @@ export class ComboboxComponent implements OnInit {
       });
   }
 
+  CreateNew(city) {
+    alert("Create New Clicked : " + city);
+  }
+
   customSearchFn(term: string, item: any) {
     term = term.toLocaleLowerCase();
     return (

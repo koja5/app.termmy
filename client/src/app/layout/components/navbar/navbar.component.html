@@ -69,8 +69,11 @@
           <!-- <span class="user-status">Admin</span> -->
         </div>
         <span class="avatar">
-          <img *ngIf="currentUser.avatar" class="round" src="../../../../assets/images/avatars/{{currentUser.avatar}}"
-            alt="avatar" height="40" width="40" />
+
+          <img *ngIf="currentUser.avatar && currentUser.avatar.startsWith('http')" class="round" src="{{currentUser.avatar}}" alt="avatar"
+            height="40" width="40" />
+          <img *ngIf="currentUser.avatar && !currentUser.avatar.startsWith('http')" class="round"
+            src="../../../../assets/images/avatars/{{currentUser.avatar}}" alt="avatar" height="40" width="40" />
           <app-letter-profile *ngIf="!currentUser.avatar" [firstname]="currentUser.firstname"
             [lastname]="currentUser.lastname"></app-letter-profile>
           <span class="avatar-status-online"></span></span>

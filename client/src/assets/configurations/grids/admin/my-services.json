@@ -294,7 +294,7 @@
         },
         {
             "type": "button",
-            "width": "col-6",
+            "width": "col-12",
             "class": "btn btn-primary",
             "name": "submit",
             "title": "general.save",

@@ -6,11 +6,20 @@ import {
   Validators,
 } from "@angular/forms";
 import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { CoreConfigService } from "@core/services/config.service";
 import { CallApiService } from "app/services/call-api.service";
 import { StorageService } from "app/services/storage.service";
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+import { GoogleLoginProvider } from "@abacritt/angularx-social-login";
+import { MsalService } from "@azure/msal-angular";
+import {
+  AuthenticationResult,
+  PublicClientApplication,
+} from "@azure/msal-browser";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "login",
@@ -20,6 +29,7 @@ import { StorageService } from "app/services/storage.service";
 })
 export class LoginComponent implements OnInit {
   //  Public
+  public GOOGLE_AUTH_URL = environment.GOOGLE_AUTH_URL;
   public coreConfig: any;
   public loginForm: UntypedFormGroup;
   public loading = false;
@@ -27,6 +37,8 @@ export class LoginComponent implements OnInit {
   public returnUrl: string;
   public error = "";
   public passwordTextType: boolean;
+  public lang: string;
+  public authSubscription!: Subscription;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -42,7 +54,10 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _service: CallApiService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private authService: SocialAuthService,
+    private msalService: MsalService,
+    private _translate: TranslateService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -114,7 +129,7 @@ export class LoginComponent implements OnInit {
   /**
    * On init
    */
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loginForm = this._formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
@@ -129,6 +144,22 @@ export class LoginComponent implements OnInit {
       .subscribe((config) => {
         this.coreConfig = config;
       });
+
+    this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    });
+
+    this.authSubscription = this.authService.authState.subscribe((user) => {
+      this._service
+        .callPostMethod("api/google/auth", { idToken: user.idToken })
+        .subscribe((data) => {
+          this._router.navigate([data]);
+        });
+    });
+
+    this.lang = this._storageService.getSelectedLanguage();
+
+    await this.msalService.instance.initialize();
   }
 
   /**
@@ -138,6 +169,31 @@ export class LoginComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+    this.authSubscription.unsubscribe();
   }
 
+  isLoggedIn(): boolean {
+    return this.msalService.instance.getActiveAccount() != null;
+  }
+
+  loginWithMicrosoft() {
+    this.msalService
+      .loginPopup()
+      .subscribe((response: AuthenticationResult) => {
+        console.log(response);
+        if (response && response.account) {
+          this._service
+            .callPostMethod("api/microsoft/findOrCreateUserViaMicrosoft", {
+              email: response.account.username,
+            })
+            .subscribe((route) => {
+              this._router.navigate([route]);
+            });
+        }
+      });
+  }
+
+  googleSignin(googleWrapper: any) {
+    googleWrapper.click();
+  }
 }

@@ -57,6 +57,10 @@ export class ConnectionsComponent {
       .subscribe((data) => {
         if (data) {
           this.data = null;
+          this.calendarsList = {
+            owner: [],
+            reader: [],
+          };
           this.sendInfoForSetupApp();
         }
       });
@@ -69,11 +73,13 @@ export class ConnectionsComponent {
       })
       .subscribe((data: any) => {
         // this.calendarsList = data;
-        for (let i = 0; i < data.items.length; i++) {
-          if (data.items[i].accessRole === "owner") {
-            this.calendarsList.owner.push(data.items[i]);
-          } else if (data.items[i].accessRole === "reader") {
-            this.calendarsList.reader.push(data.items[i]);
+        if (data && data.items) {
+          for (let i = 0; i < data.items.length; i++) {
+            if (data.items[i].accessRole === "owner") {
+              this.calendarsList.owner.push(data.items[i]);
+            } else if (data.items[i].accessRole === "reader") {
+              this.calendarsList.reader.push(data.items[i]);
+            }
           }
         }
       });

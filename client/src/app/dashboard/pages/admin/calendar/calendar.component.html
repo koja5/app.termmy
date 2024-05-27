@@ -71,14 +71,15 @@
                                     <form #f="ngForm" [formGroup]="appointment">
                                         <div class="row">
                                             <div class="col-12 mb-1">
-                                                <label>{{'myCalendar.client' | translate}}</label>
+                                                <label>{{'myCalendar.client' | translate}} <span class="error"
+                                                        title="{{'form.fieldIsRequired' | translate}}">*</span></label>
                                                 <span *ngIf="submited&&!appointment.controls.client_id.valid"
                                                     class="error">
                                                     {{'clientData.fillFirstname' | translate}}
                                                 </span>
-                                                <ng-select [items]="allClients" [bindLabel]="'firstname'"
-                                                    [bindValue]="'id'" [closeOnSelect]="true" [searchable]="true"
-                                                    id="client_id" formControlName="client_id"
+                                                <ng-select *ngIf="allClients" [items]="allClients"
+                                                    [bindLabel]="'firstname'" [bindValue]="'id'" [closeOnSelect]="true"
+                                                    [searchable]="true" id="client_id" formControlName="client_id"
                                                     (change)="onChangeClient($event)">
                                                     <ng-template ng-option-tmp let-item="item" let-clear="clear"
                                                         let-index="index">
@@ -88,22 +89,42 @@
                                                         {{item.firstname}}
                                                         {{item.lastname}}
                                                     </ng-template>
+
+                                                    <ng-template ng-footer-tmp>
+                                                        <p class="m-0 font-weight-bold cursor-pointer"
+                                                            (click)="openSidebarForCreteClient()"><span
+                                                                class="fa fa-plus-circle"></span> {{
+                                                            'commonFields.createNew' | translate
+                                                            }} </p>
+                                                    </ng-template>
                                                 </ng-select>
                                             </div>
                                             <div class="col-12 mb-1">
-                                                <label>{{'myCalendar.service' | translate}}</label>
+                                                <label>{{'myCalendar.service' | translate}} <span class="error"
+                                                        title="{{'form.fieldIsRequired' | translate}}">*</span></label>
                                                 <span *ngIf="submited&&!appointment.controls.service_id.valid"
                                                     class="error">
                                                     {{'clientData.fillFirstname' | translate}}
                                                 </span>
                                                 <ng-select [items]="allServices" [bindLabel]="'name'" [bindValue]="'id'"
                                                     [closeOnSelect]="true" [searchable]="true" id="service_id"
-                                                    formControlName="service_id"
-                                                    (change)="onChangeService($event)"></ng-select>
+                                                    formControlName="service_id" (change)="onChangeService($event)">
+
+                                                    <ng-template ng-footer-tmp>
+                                                        <p class="m-0 font-weight-bold cursor-pointer"
+                                                            (click)="openSidebarForCreteService()"><span
+                                                                class="fa fa-plus-circle"></span> {{
+                                                            'commonFields.createNew' | translate
+                                                            }} </p>
+                                                    </ng-template>
+                                                </ng-select>
+
+
                                             </div>
 
                                             <div class="col-lg-6 col-md-12 termine-from">
-                                                <label>{{'myCalendar.termineFrom' | translate}}</label>
+                                                <label>{{'myCalendar.termineFrom' | translate}} <span class="error"
+                                                        title="{{'form.fieldIsRequired' | translate}}">*</span></label>
                                                 <span *ngIf="submited&&!appointment.controls.StartTime.valid"
                                                     class="error">
                                                     {{'clientData.fillFirstname' | translate}}
@@ -115,7 +136,8 @@
 
 
                                             <div class="col-lg-6 col-md-12 mb-1">
-                                                <label>{{'myCalendar.termineTo' | translate}}</label>
+                                                <label>{{'myCalendar.termineTo' | translate}} <span class="error"
+                                                        title="{{'form.fieldIsRequired' | translate}}">*</span></label>
                                                 <span *ngIf="submited&&!appointment.controls.EndTime.valid"
                                                     class="error">
                                                     {{'clientData.fillFirstname' | translate}}
@@ -177,3 +199,58 @@
         </section>
     </div>
 </div>
+
+<!-- SIDEBAR -->
+<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="new-client" overlayClass="modal-backdrop">
+    <div class="slideout-content">
+        <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+            <div class="modal-dialog">
+                <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
+                    #newUserForm="ngForm">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="toggleSidebar('new-client')">
+                        ×
+                    </button>
+                    <div class="modal-header mb-1">
+                        <h5 class="modal-title" id="exampleModalLabel">{{('general.editEntrie' | translate)}}</h5>
+                    </div>
+                    <div class="modal-body flex-grow-1">
+                        <app-dynamic-forms [path]="'forms'" [file]="'my-client.json'" (submit)="createNewClient($event)"
+                            #form="dynamicForm">
+                        </app-dynamic-forms>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</core-sidebar>
+
+<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="new-service" overlayClass="modal-backdrop">
+    <div class="slideout-content">
+        <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+            <div class="modal-dialog">
+                <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
+                    #newUserForm="ngForm">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="toggleSidebar('new-service')">
+                        ×
+                    </button>
+                    <div class="modal-header mb-1">
+                        <h5 class="modal-title" id="exampleModalLabel">{{('general.editEntrie' | translate)}}</h5>
+                    </div>
+                    <div class="modal-body flex-grow-1">
+                        <app-dynamic-forms [path]="'forms'" [file]="'my-service.json'"
+                            (submit)="createNewService($event)" #form="dynamicForm">
+                        </app-dynamic-forms>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</core-sidebar>
+<!--/ Sidebar -->
+
+
+<!-- END SIDEBAR -->

@@ -29,6 +29,7 @@ import {
 } from "@syncfusion/ej2-base";
 import { DefaultCalendarLanguages } from "./default-calendar-languages";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 declare var require: any;
 
 new DefaultCalendarLanguages();
@@ -91,7 +92,8 @@ export class CalendarComponent {
     private _toastr: ToastrComponent,
     private _storageService: StorageService,
     public _helpService: HelpService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _coreSidebarService: CoreSidebarService
   ) {}
 
   ngOnInit() {
@@ -882,7 +884,13 @@ export class CalendarComponent {
       event.requestType === "eventChange" ||
       event.requestType === "eventRemove"
     ) {
-      this.executeActionForCalendar(event);
+      if (this.appointment.valid || event.data.id) {
+        this.executeActionForCalendar(event);
+      } else {
+        this._toastr.showWarningCustom(
+          this._translate.instant("commonFields.fillRequredFields")
+        );
+      }
     }
   }
 
@@ -1168,9 +1176,10 @@ export class CalendarComponent {
       // if (notWorkTime) {
       //   args.element.classList.add("pointer-event-none");
       // }
-    } else {
-      args.element.classList.add("pointer-event-none");
     }
+    // else {
+    //   args.element.classList.add("pointer-event-none");
+    // }
   }
 
   getWorkTimeForDay(day, groupIndex) {
@@ -1285,5 +1294,38 @@ export class CalendarComponent {
     };
   }
 
+  openSidebarForCreteClient(client?: any) {
+    this.toggleSidebar("new-client");
+  }
+
+  createNewClient(event: any) {
+    console.log(event);
+    this._service.callPostMethod("/api/setClient", event).subscribe((data) => {
+      this.allClients = null;
+      setTimeout(() => {
+        this.getMyClients();
+        this.openSidebarForCreteClient();
+      }, 100);
+    });
+  }
+
+  openSidebarForCreteService() {
+    this.toggleSidebar("new-service");
+  }
+
+  createNewService(event: any) {
+    console.log(event);
+    this._service.callPostMethod("/api/setService", event).subscribe((data) => {
+      this.allServices = null;
+      setTimeout(() => {
+        this.getMyServices();
+        this.openSidebarForCreteService();
+      }, 100);
+    });
+  }
+
+  toggleSidebar(name): void {
+    this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
+  }
   //#endregion
 }

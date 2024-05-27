@@ -60,7 +60,8 @@
         "oldPassword": "Stara lozinka",
         "newPassword": "Nova lozinka",
         "confirmNewPassword": "Ponovi novu lozinku",
-        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!"
+        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
+        "createNew": "Kreiraj novi"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -83,7 +84,10 @@
         "createAnAccount": "Kreirajte nalog besplatno",
         "verifiedError": "Potrebno je da verifikujete Vašu email adresu. Poslali smo Vam mail za verifikaciju.",
         "activeError": "Vaš nalog nije aktivan!",
-        "notExistsError": "Nalog ne postoji! Kreirajte novi nalog ili obnovite Vašu lozinku ukoliko ste zaboravili."
+        "notExistsError": "Nalog ne postoji! Kreirajte novi nalog ili obnovite Vašu lozinku ukoliko ste zaboravili.",
+        "or": "ili",
+        "signInWithGoogle": "Prijavite se pomoću Google-a",
+        "signInWithMicrosoft": "Prijavite se pomoću Microsoft-а"
     },
     "signUp": {
         "title": "Avantura zakazivanje kreće ovde 🚀",

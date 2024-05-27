@@ -60,7 +60,8 @@
         "oldPassword": "Old password",
         "newPassword": "New password",
         "confirmNewPassword": "Confirm new password",
-        "fillRequredFields": "Please fill required fields"
+        "fillRequredFields": "Please fill required fields",
+        "createNew": "Create new"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -83,7 +84,10 @@
         "createAnAccount": "Create an account",
         "verifiedError": "You need to verified your email address!",
         "activeError": "Your account is not active!",
-        "notExistsError": "Account does not exist!"
+        "notExistsError": "Account does not exist!",
+        "or": "or",
+        "signInWithGoogle": "Sign in with Google",
+        "signInWithMicrosoft": "Sign in with Microsoft"
     },
     "signUp": {
         "title": "Adventure starts here 🚀",

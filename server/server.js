@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const api = require("./providers/api");
 const mailApi = require("./providers/mail-api.js");
 const googleApi = require("./providers/google-api.js");
+const microsoftApi = require("./providers/microsoft-api.js");
 const calendarApi = require("./providers/calendar-api.js");
 const mailServer = require("./providers/mail_server/mail-server");
 const payment = require("./providers/external_api/payment/payment.js");
@@ -70,6 +71,7 @@ app.use(cookieParser());
 //providers
 app.use("/api", api);
 app.use("/api/google", googleApi);
+app.use("/api/microsoft", microsoftApi);
 app.use("/api/calendar", calendarApi);
 app.use("/api/mail-server", mailApi);
 app.use("/api/mail-server", mailServer);

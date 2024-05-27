@@ -36,11 +36,7 @@
   font-size: 20px;
 }
 
-:host {
-  display: block;
-  width: 100%;
-  height: 100%;
-  .ngx-datatable {
-    height: 100vh;
-  }
+.content-body {
+  position: relative;
+  z-index: 11;
 }

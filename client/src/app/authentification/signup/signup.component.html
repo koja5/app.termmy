@@ -133,6 +133,16 @@
                     <span>{{'signUp.alreadyHaveAnAccount' | translate}}</span><a
                         routerLink="/auth/login"><span>&nbsp;{{'signUp.signInInstead' | translate}}</span></a>
                 </p>
+                <div class="divider my-2">
+                    <div class="divider-text">{{'login.or' | translate}}</div>
+                </div>
+                <div class="auth-footer-btn d-flex justify-content-center row">
+                    <app-google-signin (loginWithGoogle)="googleSignin($event)"></app-google-signin>
+                    <button class="bsk-btn bsk-btn-default social-signup microsoft-auth" (click)="loginWithMicrosoft()">
+                        <img src="../../../assets/images/icons/microsoft.svg">
+                        {{'login.signInWithMicrosoft' | translate}}</button>
+
+                </div>
                 <!-- <div class="divider my-2">
                     <div class="divider-text">or</div>
                 </div>

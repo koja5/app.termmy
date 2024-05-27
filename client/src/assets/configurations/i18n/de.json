@@ -26,7 +26,7 @@
       "noInformation": "Keine Information",
       "ok": "OK",
       "noData": "Es sind keine Informationen zum Anzeigen vorhanden"
-  },
+   },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
       "successExecuteActionTextDefault": "Aktion erfolgreich ausgeführt!",
@@ -60,8 +60,9 @@
       "oldPassword": "Altes Passwort",
       "newPassword": "Neues Passwort",
       "confirmNewPassword": "Neues Passwort wiederholen",
-      "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus"
-  },
+      "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus",
+      "createNew": "Erstelle neu"
+   },
    "userTypes": {
       "superadmin": "Superadmin",
       "admin": "Admin",
@@ -83,7 +84,10 @@
       "createAnAccount": "Ein Konto erstellen",
       "verifiedError": "Sie müssen Ihre E-Mail-Adresse verifizieren!",
       "activeError": "Ihr Konto ist nicht aktiv!",
-      "notExistsError": "Das Konto existiert nicht!"
+      "notExistsError": "Das Konto existiert nicht!",
+      "or": "oder",
+      "signInWithGoogle": "Über Google anmelden",
+      "signInWithMicrosoft": "Über Microsoft anmelden"
    },
    "navigations": {
       "home": "Startseite",
@@ -209,7 +213,7 @@
       "ownersCalendarsExplanation": "Sie haben volle Rechte für diese Kalender. Das bedeutet, dass Sie damit verbundene Ereignisse anzeigen, hinzufügen, ändern oder löschen können.",
       "readonlyCalendars": "Schreibgeschützte Kalender",
       "readonlyCalendarsExplanation": "Für diese Kalender haben Sie nur die Möglichkeit, Ereignisse in Ihrem Kalender in der Termmy-App anzuzeigen. Das bedeutet, dass es keine Möglichkeit gibt, Ereignisse in diesen Kalendern hinzuzufügen oder zu ändern."
-  },
+   },
    "worktime": {
       "monday": "Montag",
       "tuesday": "Dienstag",

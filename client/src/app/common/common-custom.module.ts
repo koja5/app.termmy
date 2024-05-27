@@ -14,6 +14,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LetterProfileComponent } from "./letter-profile/letter-profile.component";
 import { CardTemplateComponent } from "./card-template/card-template.component";
 import { NoDataComponent } from "./no-data/no-data.component";
+import { GoogleSigninComponent } from './google-signin/google-signin.component';
 
 const appRoutes: Routes = [];
 
@@ -26,6 +27,7 @@ const appRoutes: Routes = [];
     LetterProfileComponent,
     CardTemplateComponent,
     NoDataComponent,
+    GoogleSigninComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ const appRoutes: Routes = [];
     LetterProfileComponent,
     CardTemplateComponent,
     NoDataComponent,
+    GoogleSigninComponent
   ],
 })
 export class CommonCustomModule {}

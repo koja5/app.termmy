@@ -103,7 +103,7 @@ router.post("/setTermine", auth, function (req, res) {
       function (err, rows) {
         conn.release();
         if (!err) {
-          res.json(rows.insertId);
+          res.json(req.body.id);
         } else {
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(false);

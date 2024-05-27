@@ -152,6 +152,7 @@ router.post("/signUp", function (req, res, next) {
   });
 });
 
+
 router.get("/verifiedMailAndActive/:email", async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {

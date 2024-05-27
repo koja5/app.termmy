@@ -168,11 +168,8 @@ export class StorageService {
     let config = this.getLocalStorage("config");
     if (config) {
       config.calendar = value ? value : new CalendarSettings();
-    } else {
-      config["calendar"] = new CalendarSettings();
+      this.setLocalStorage("config", config);
     }
-
-    this.setLocalStorage("config", config);
   }
 
   getCalendarConfig() {

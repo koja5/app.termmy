@@ -28,6 +28,7 @@ import { LoginGuardService } from "./services/login-guard/login-guard.service";
 import { LoggedGuard } from "./services/login-guard/logged-guard.service";
 import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service";
 import { HttpLoaderFactory } from "./services/httpLoaderFactory";
+import { BrowserUtils } from "@azure/msal-browser";
 
 const appRoutes: Routes = [
   {
@@ -42,12 +43,16 @@ const appRoutes: Routes = [
       import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
+    path: "wizard/:token",
+    loadChildren: () =>
+      import("./wizard/wizard.module").then((m) => m.WizardModule),
+  },
+  {
     path: "wizard",
     canActivate: [LoginGuardService],
     loadChildren: () =>
       import("./wizard/wizard.module").then((m) => m.WizardModule),
   },
-
   {
     path: "auth",
     canActivate: [LoggedGuard],
@@ -77,7 +82,15 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    // RouterModule.forRoot(appRoutes, {
+    //   scrollPositionRestoration: "enabled",
+    // }),
     RouterModule.forRoot(appRoutes, {
+      // Don't perform initial navigation in iframes or popups
+      initialNavigation:
+        !BrowserUtils.isInIframe() && !BrowserUtils.isInPopup()
+          ? "enabledNonBlocking"
+          : "disabled", // Set to enabledBlocking to use Angular Universal
       scrollPositionRestoration: "enabled",
     }),
     TranslateModule.forRoot({

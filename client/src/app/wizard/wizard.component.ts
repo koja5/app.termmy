@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CoreConfigService } from "@core/services/config.service";
 import { TranslateService } from "@ngx-translate/core";
 import { CallApiService } from "app/services/call-api.service";
+import { StorageService } from "app/services/storage.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
@@ -24,7 +25,9 @@ export class WizardComponent {
     private _coreConfigService: CoreConfigService,
     private _service: CallApiService,
     private _router: Router,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _storageService: StorageService,
+    private _activatedRouter: ActivatedRoute
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -56,6 +59,11 @@ export class WizardComponent {
       .subscribe((config) => {
         this.coreConfig = config;
       });
+
+    const token = this._activatedRouter.snapshot.params.token;
+    if (token) {
+      this._storageService.setToken(token);
+    }
   }
 
   submit(event: any) {

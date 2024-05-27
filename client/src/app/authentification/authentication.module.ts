@@ -15,7 +15,33 @@ import { VerifiedMailComponent } from "./other-auth-pages/verified-mail/verified
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { HttpLoaderFactory } from "app/services/httpLoaderFactory";
 import { HttpClient } from "@angular/common/http";
-import { SelectLanguageComponent } from './common/select-language/select-language.component';
+import { SelectLanguageComponent } from "./common/select-language/select-language.component";
+import { environment } from "../../environments/environment";
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from "@abacritt/angularx-social-login";
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "@abacritt/angularx-social-login";
+import {
+  MSAL_INSTANCE,
+  MsalModule,
+  MsalRedirectComponent,
+  MsalService,
+} from "@azure/msal-angular";
+import {
+  IPublicClientApplication,
+  PublicClientApplication,
+} from "@azure/msal-browser";
+
+import { AuthUserComponent } from "./auth-user/auth-user.component";
+import { CommonCustomModule } from "app/common/common-custom.module";
+
+const isIE =
+  window.navigator.userAgent.indexOf("MSIE ") > -1 ||
+  window.navigator.userAgent.indexOf("Trident/") > -1;
 
 // routing
 const routes: Routes = [
@@ -56,7 +82,20 @@ const routes: Routes = [
     path: "verified-mail/:email",
     component: VerifiedMailComponent,
   },
+  {
+    path: "user-auth/:token",
+    component: AuthUserComponent,
+  },
 ];
+
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication({
+    auth: {
+      clientId: environment.MICROSOFT_CLIENT_ID,
+      redirectUri: environment.MICROSOFT_AUTH_URL,
+    },
+  });
+}
 
 @NgModule({
   declarations: [
@@ -66,6 +105,7 @@ const routes: Routes = [
     ForgotPasswordComponent,
     VerifiedMailComponent,
     SelectLanguageComponent,
+    AuthUserComponent,
   ],
   imports: [
     CommonModule,
@@ -81,7 +121,33 @@ const routes: Routes = [
         deps: [HttpClient],
       },
     }),
+    SocialLoginModule,
+    CommonCustomModule,
+    MsalModule,
   ],
-  providers: [ToastrComponent],
+  providers: [
+    ToastrComponent,
+    {
+      provide: "SocialAuthServiceConfig",
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.GOOGLE_CLIENT_ID),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory,
+    },
+    MsalService,
+  ],
+  bootstrap: [MsalRedirectComponent],
 })
 export class AuthenticationModule {}

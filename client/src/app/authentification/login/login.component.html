@@ -74,21 +74,34 @@
           <button [disabled]="loading" class="btn btn-primary btn-block" tabindex="4" rippleEffect>
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>{{'login.signIn' | translate}}
           </button>
+
         </form>
         <p class="text-center mt-2">
           <span>{{'login.newOnPlatform' | translate}}</span><a
             routerLink="/auth/signup"><span>&nbsp;{{'login.createAnAccount' |
               translate}}</span></a>
         </p>
-        <!-- <div class="divider my-2">
-          <div class="divider-text">or</div>
+        <div class="divider my-2">
+          <div class="divider-text">{{'login.or' | translate}}</div>
         </div>
-        <div class="auth-footer-btn d-flex justify-content-center">
-          <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a
-            class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a
-            class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github"
-            href="javascript:void(0)"><i data-feather="github"></i></a>
-        </div> -->
+        <div class="auth-footer-btn d-flex justify-content-center row">
+          <!-- <div class="col-md-6 col-sm-12 d-contents mb-1" *ngIf="lang">
+            <div id="g_id_onload"
+              data-client_id="886729047823-77u02t3bvpk8ec98or5r5hpetdlocn6e.apps.googleusercontent.com"
+              data-context="signin" data-ux_mode="popup" attr.data-login_uri="{{GOOGLE_AUTH_URL}}"
+              data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline"
+              attr.data-locale="{{lang}}" data-size="large" data-logo_alignment="left">
+            </div>
+          </div> -->
+
+          <app-google-signin (loginWithGoogle)="googleSignin($event)"></app-google-signin>
+          <button class="bsk-btn bsk-btn-default social-signup microsoft-auth" (click)="loginWithMicrosoft()">
+            <img src="../../../assets/images/icons/microsoft.svg">
+            {{'login.signInWithMicrosoft' | translate}}</button>
+
+        </div>
       </div>
     </div>
     <!-- /Login-->
