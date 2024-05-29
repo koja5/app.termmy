@@ -60,7 +60,12 @@
         "oldPassword": "Stara lozinka",
         "newPassword": "Nova lozinka",
         "confirmNewPassword": "Ponovi novu lozinku",
-        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!"
+        "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
+        "createNew": "Kreiraj novi",
+        "createNewClient": "Kreiraj novog klijenta",
+        "createNewService": "Kreiraj novu uslugu",
+        "noDataFoundFor": "Nije pronađen podatak za",
+        "doYouWantToCreateNew": "Da li želite da kreirate novi?"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -202,7 +207,7 @@
         "colorText": "Podesite boju teksta usluge u kalendaru"
     },
     "myCalendar": {
-        "client": "Kliejt",
+        "client": "Klijent",
         "termineFrom": "Vreme od",
         "termineTo": "Vreme do",
         "service": "Usluga",

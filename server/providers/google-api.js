@@ -460,15 +460,23 @@ router.post("/deleteTermine", async (req, res) => {
     refresh_token: req.body.externalCalendar,
   });
 
-  const events = await calendar.events.delete({
-    calendarId: req.body.externalCalendarId
-      ? req.body.externalCalendarId
-      : "primary",
-    auth: oauth2Client,
-    eventId: req.body.id,
-  });
-
-  res.send(events);
+  const events = await calendar.events.delete(
+    {
+      calendarId: req.body.externalCalendarId
+        ? req.body.externalCalendarId
+        : "primary",
+      auth: oauth2Client,
+      eventId: req.body.id,
+    },
+    (err, response) => {
+      console.log(response);
+      if (response && response.status === 204) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    }
+  );
 });
 
 router.post("/getMyTermines", async (req, res) => {

@@ -70,7 +70,7 @@
                                 <div>
                                     <form #f="ngForm" [formGroup]="appointment">
                                         <div class="row">
-                                            <div class="col-12 mb-1">
+                                            <div class="col-12 mb-1 mt-1">
                                                 <label>{{'myCalendar.client' | translate}} <span class="error"
                                                         title="{{'form.fieldIsRequired' | translate}}">*</span></label>
                                                 <span *ngIf="submited&&!appointment.controls.client_id.valid"
@@ -90,11 +90,19 @@
                                                         {{item.lastname}}
                                                     </ng-template>
 
+                                                    <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+                                                        <div class="ng-option disabled">
+                                                            {{'commonFields.noDataFoundFor' | translate}}
+                                                            "{{searchTerm}}". {{'commonFields.doYouWantToCreateNew' |
+                                                            translate}}
+                                                        </div>
+                                                    </ng-template>
+
                                                     <ng-template ng-footer-tmp>
                                                         <p class="m-0 font-weight-bold cursor-pointer"
                                                             (click)="openSidebarForCreteClient()"><span
                                                                 class="fa fa-plus-circle"></span> {{
-                                                            'commonFields.createNew' | translate
+                                                            'commonFields.createNewClient' | translate
                                                             }} </p>
                                                     </ng-template>
                                                 </ng-select>
@@ -114,7 +122,7 @@
                                                         <p class="m-0 font-weight-bold cursor-pointer"
                                                             (click)="openSidebarForCreteService()"><span
                                                                 class="fa fa-plus-circle"></span> {{
-                                                            'commonFields.createNew' | translate
+                                                            'commonFields.createNewService' | translate
                                                             }} </p>
                                                     </ng-template>
                                                 </ng-select>
@@ -208,7 +216,7 @@
                 <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
                     #newUserForm="ngForm">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        (click)="toggleSidebar('new-client')">
+                        (click)="toggleSidebar('new-client'); calendar.openEditor(null, 'Add')">
                         ×
                     </button>
                     <div class="modal-header mb-1">

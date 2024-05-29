@@ -1,0 +1,119 @@
+{
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "name": "id",
+            "title": "Id",
+            "field": "id",
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "name",
+            "title": "myServices.name",
+            "field": "name",
+            "required": true
+        },
+        {
+            "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "myServices.min",
+                "groupPosition": "right"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "time_duration",
+            "title": "myServices.timeDuration",
+            "field": "time_duration",
+            "min": 0,
+            "required": true
+        },
+        {
+            "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "myServices.min",
+                "groupPosition": "right"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "time_blocked",
+            "title": "myServices.timeBlocked",
+            "field": "time_blocked",
+            "required": true,
+            "min": 0,
+            "explanation": "myServices.timeBlockedExplanation"
+        },
+        {
+            "type": "numeric",
+            "subType": "group",
+            "groupSettings": {
+                "groupText": "myServices.currency",
+                "groupPosition": "right"
+            },
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "price",
+            "title": "myServices.price",
+            "field": "price",
+            "min": 0,
+            "required": true
+        },
+        {
+            "type": "switch",
+            "width": "col-12",
+            "class": "e-outline",
+            "name": "hide_price",
+            "title": "myServices.hidePriceOnBookingSide",
+            "field": "hide_price"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "description",
+            "title": "myServices.description",
+            "field": "description",
+            "multiline": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-1",
+            "name": "color",
+            "title": "myServices.color",
+            "field": "color",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#9187f4",
+            "validation": true
+        },
+        {
+            "type": "color",
+            "width": "col-12",
+            "class": "e-outline ml-1",
+            "name": "color_text",
+            "title": "myServices.colorText",
+            "field": "color_text",
+            "mode": "Palette",
+            "modeSwitcher": false,
+            "showButtons": false,
+            "value": "#fff",
+            "validation": true
+        },
+        {
+            "type": "button",
+            "width": "col-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-12"
+        }
+    ]
+}

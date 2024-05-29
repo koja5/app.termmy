@@ -92,6 +92,7 @@ router.post("/setTermine", auth, function (req, res) {
     }
     req.body.admin_id = req.user.user.admin_id;
     delete req.body.employeeId;
+    delete req.body.uuid;
     delete req.body.externalCalendar;
     delete req.body.externalCalendarId;
     if (!req.body.id) {

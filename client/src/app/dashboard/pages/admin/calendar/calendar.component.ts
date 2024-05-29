@@ -584,9 +584,9 @@ export class CalendarComponent {
         (data: any) => {
           if (data) {
             // this._toastr.showSuccess();
-            // this.appointment.addControl("id", new FormControl(data.id));
+            // this.appointment.controls.id.setValue(data.id);
             // this.refreshTermine(this.appointment.value, ExecuteAction.create);
-            this.createTermineForSQL(data.uuid);
+            this.createTermineForSQL(data.uuid, data.id);
           } else {
             this.loaderContent = false;
             this._toastr.showError();
@@ -705,11 +705,12 @@ export class CalendarComponent {
     this.popupOpen = false;
   }
 
-  createTermineForSQL(uuid?: any) {
+  createTermineForSQL(uuid?: any, googleId?: string) {
     this.loaderContent = true;
     this.setAdditionalData();
     if (uuid) {
       this.appointment.value.id = uuid;
+      this.appointment.value.uuid = uuid;
     }
     this._service
       .callApi(this.config.editSettingsRequest.add, {
@@ -717,7 +718,11 @@ export class CalendarComponent {
       })
       .subscribe(
         (data) => {
-          this.appointment.controls.id.setValue(data);
+          if (googleId) {
+            this.appointment.controls.id.setValue(googleId);
+          } else if (!this.appointment.value.id) {
+            this.appointment.controls.id.setValue(data);
+          }
           this.refreshTermine(this.appointment.value, ExecuteAction.create);
           this.initializeForm();
           this._toastr.showSuccess();
@@ -762,8 +767,6 @@ export class CalendarComponent {
             this._toastr.showError();
           }
         );
-    } else {
-      this._toastr.showError();
     }
   }
 
@@ -884,7 +887,11 @@ export class CalendarComponent {
       event.requestType === "eventChange" ||
       event.requestType === "eventRemove"
     ) {
-      if (this.appointment.valid || event.data.id) {
+      if (
+        this.appointment.valid ||
+        event.data.id ||
+        (event.data.length && event.data[0].id)
+      ) {
         this.executeActionForCalendar(event);
       } else {
         this._toastr.showWarningCustom(

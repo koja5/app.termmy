@@ -61,7 +61,11 @@
       "newPassword": "Neues Passwort",
       "confirmNewPassword": "Neues Passwort wiederholen",
       "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus",
-      "createNew": "Erstelle neu"
+      "createNew": "Erstelle neu",
+      "createNewClient": "Neuen Client erstellen",
+      "createNewService": "Neuen Dienst erstellen",
+      "noDataFoundFor": "Keine Daten gefunden für",
+      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -271,6 +275,7 @@
       "text": "Richten Sie Ihre Buchungsseite ein und passen Sie sie an!",
       "activeOrDeactiveBookingPage": "Buchungsseite aktivieren oder deaktivieren",
       "bookingRootLink": "https://termmy.com/booking/",
+      "bookingRootLinkName": "Geben Sie den Namen Ihres Buchungslinks ein",
       "bookingLinkExists": "Dieser Buchungslink existiert bereits. Der Link muss einzigartig sein. Bitte wählen Sie einen anderen Namen",
       "bookingLink": "Buchungslink",
       "brandingText": "Branding der Buchungswebsite",

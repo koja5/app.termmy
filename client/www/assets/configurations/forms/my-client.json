@@ -1,0 +1,125 @@
+{
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "id",
+            "title": "ID",
+            "field": "id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "resourceName",
+            "title": "resourceName",
+            "field": "resourceName",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "firstname",
+            "title": "commonFields.firstname",
+            "field": "firstname",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "lastname",
+            "title": "commonFields.lastname",
+            "field": "lastname",
+            "required": true
+        },
+        {
+            "type": "radio",
+            "width": "col-md-6",
+            "name": "gender",
+            "title": "commonFields.gender",
+            "dataArray": [
+                {
+                    "title": "commonFields.man",
+                    "id": "man",
+                    "class": "mb-75"
+                },
+                {
+                    "title": "commonFields.woman",
+                    "id": "woman"
+                }
+            ],
+            "oneLine": true,
+            "field": "gender",
+            "required": true
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "birthday",
+            "title": "commonFields.birthday",
+            "field": "birthday",
+            "format": "dd.MM.yyyy",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email",
+            "required": true
+        },
+        {
+            "type": "phoneprefix",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "address",
+            "title": "commonFields.address",
+            "field": "address",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "zip",
+            "title": "commonFields.zip",
+            "field": "zip",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "city",
+            "title": "commonFields.city",
+            "field": "city",
+            "required": true
+        },
+        {
+            "type": "button",
+            "width": "col-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "general.save",
+            "field": "submit",
+            "positionClass": "text-right mt-3 col-12"
+        }
+    ]
+}

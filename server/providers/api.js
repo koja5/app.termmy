@@ -152,7 +152,6 @@ router.post("/signUp", function (req, res, next) {
   });
 });
 
-
 router.get("/verifiedMailAndActive/:email", async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
@@ -1267,6 +1266,7 @@ router.post("/setClient", auth, function (req, res) {
     }
 
     req.body.admin_id = req.user.user.admin_id;
+    req.body.birthday = new Date(req.body.birthday);
 
     if (req.body.id) {
       delete req.body.guuid;

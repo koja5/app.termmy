@@ -13,3 +13,6 @@
   }
 }
 
+.modal-slide-in.show .modal-dialog, .modal-slide-in .modal.show .modal-dialog {
+  z-index: 999;
+}

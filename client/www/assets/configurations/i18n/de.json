@@ -60,7 +60,12 @@
       "oldPassword": "Altes Passwort",
       "newPassword": "Neues Passwort",
       "confirmNewPassword": "Neues Passwort wiederholen",
-      "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus"
+      "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus",
+      "createNew": "Erstelle neu",
+      "createNewClient": "Neuen Client erstellen",
+      "createNewService": "Neuen Dienst erstellen",
+      "noDataFoundFor": "Keine Daten gefunden für",
+      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?"
    },
    "userTypes": {
       "superadmin": "Superadmin",

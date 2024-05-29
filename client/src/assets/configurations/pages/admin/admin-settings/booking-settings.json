@@ -35,6 +35,7 @@
             "name": "booking_link",
             "title": "bookingSettings.bookingLink",
             "field": "booking_link",
+            "placeholder": "bookingSettings.bookingRootLinkName",
             "validation": true,
             "required": true
         },

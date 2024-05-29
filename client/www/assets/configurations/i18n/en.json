@@ -60,7 +60,12 @@
         "oldPassword": "Old password",
         "newPassword": "New password",
         "confirmNewPassword": "Confirm new password",
-        "fillRequredFields": "Please fill required fields"
+        "fillRequredFields": "Please fill required fields",
+        "createNew": "Create new",
+        "createNewClient": "Create new client",
+        "createNewService": "Create new service",
+        "noDataFoundFor": "No data found for",
+        "doYouWantToCreateNew": "Do you want to create new?"
     },
     "userTypes": {
         "superadmin": "Superadmin",

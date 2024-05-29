@@ -7,7 +7,7 @@ var clientAppointmentReminderDayBefore = require("./scripts/client-appointment-r
 //END SCRIPTS
 
 function executeAutomateScript() {
-  schedule.scheduleJob("40 42 11 * * *", function () {
+  schedule.scheduleJob("30 50 13 * * *", function () {
     happyBirthdayClient();
   });
 

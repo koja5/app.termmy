@@ -61,7 +61,11 @@
         "newPassword": "New password",
         "confirmNewPassword": "Confirm new password",
         "fillRequredFields": "Please fill required fields",
-        "createNew": "Create new"
+        "createNew": "Create new",
+        "createNewClient": "Create new client",
+        "createNewService": "Create new service",
+        "noDataFoundFor": "No data found for",
+        "doYouWantToCreateNew": "Do you want to create new?"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -306,6 +310,7 @@
         "text": "Set up your booking page and customize!",
         "activeOrDeactiveBookingPage": "Active or deactive your booking page",
         "bookingRootLink": "https://termmy.com/booking/",
+        "bookingRootLinkName": "Type name of your booking link",
         "bookingLinkExists": "This booking link exists. Link must to be unique. Please choose some else name",
         "bookingLink": "Booking link",
         "brandingText": "Booking website branding",

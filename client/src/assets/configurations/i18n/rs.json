@@ -61,7 +61,11 @@
         "newPassword": "Nova lozinka",
         "confirmNewPassword": "Ponovi novu lozinku",
         "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
-        "createNew": "Kreiraj novi"
+        "createNew": "Kreiraj novi",
+        "createNewClient": "Kreiraj novog klijenta",
+        "createNewService": "Kreiraj novu uslugu",
+        "noDataFoundFor": "Nije pronađen podatak za",
+        "doYouWantToCreateNew": "Da li želite da kreirate novi?"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -203,7 +207,7 @@
         "colorText": "Podesite boju teksta usluge u kalendaru"
     },
     "myCalendar": {
-        "client": "Kliejt",
+        "client": "Klijent",
         "termineFrom": "Vreme od",
         "termineTo": "Vreme do",
         "service": "Usluga",
@@ -305,6 +309,7 @@
         "text": "Podesite stranu za online rezervaciju termina.",
         "activeOrDeactiveBookingPage": "Aktivirajte ili deaktivirajte online rezervaciju",
         "bookingRootLink": "https://termmy.com/booking/",
+        "bookingRootLinkName": "Unesite naziv linka za rezervaciju",
         "bookingLinkExists": "Ova strana za online rezervaciju već postoji. Svaka strana mora da bude jedinstvena. Molimo Vas izaberite neko drugo ime za kreiranje strane za online rezervaciju.",
         "bookingLink": "Link za rezervaciju",
         "brandingText": "Brendirajte stranu za rezervaciju",

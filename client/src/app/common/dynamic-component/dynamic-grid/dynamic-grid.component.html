@@ -106,13 +106,24 @@
                             </a>
                         </ng-template>
                     </ngx-datatable-column> -->
+                    <!-- <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+                        [canAutoResize]="false">
+                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                            <a href="#" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                                title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="desktop-hidden">
+                            </a>
+                        </ng-template>
+                    </ngx-datatable-column> -->
                     <ngx-datatable-column *ngFor="let item of config.columns" [name]="item.title | translate"
                         [prop]="item.field" [width]="item.width ? item.width : auto"
                         [height]="innerWidth > 992 ? '75vh' : '80vh'"
                         [columnMode]="innerWidth > 1250 ? 'flex' : 'force'" class="{{item.class}}"
                         [className]="item.className" [headerClass]="item.className" [cellClass]="item.className"
-                        [rowHeight]="'auto'">
+                        [rowHeight]="'auto'" [minWidth]="200">
 
+                        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <span class="{{item.class}}">{{column.name}}</span>
+                        </ng-template>
 
                         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                             <div *ngIf="item.template">
