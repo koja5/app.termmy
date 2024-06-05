@@ -5,6 +5,7 @@ import { CallApiService } from "app/services/call-api.service";
 import { StorageService } from "app/services/storage.service";
 import { MessageService } from "app/services/message.service";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
 
 @Component({
   selector: "app-sms-reminder",
@@ -14,12 +15,14 @@ import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 export class SmsReminderComponent {
   public loader = true;
   public reminderConfig: any;
+  public notFillPersonalData = false;
 
   constructor(
     private _service: CallApiService,
     private _storageService: StorageService,
     private _messageService: MessageService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _toastr: ToastrComponent
   ) {}
 
   ngOnInit() {
@@ -53,14 +56,25 @@ export class SmsReminderComponent {
   }
 
   setSmsReminderConfig() {
-    this.sendInfoForSetupApp();
+    this.notFillPersonalData = false;
     this._service
-      .callPostMethod(
-        "/api/sms-reminder/setSmsReminderConfig",
-        this.reminderConfig
-      )
-      .subscribe((data) => {
-        this.reminderConfig.id = data;
+      .callGetMethod("api/getProfileInfo", "")
+      .subscribe((profile: any) => {
+        if (profile && profile[0].company && profile[0].address) {
+          this.sendInfoForSetupApp();
+          this._service
+            .callPostMethod(
+              "/api/sms-reminder/setSmsReminderConfig",
+              this.reminderConfig
+            )
+            .subscribe((data) => {
+              this.reminderConfig.id = data;
+              this.notFillPersonalData = false;
+            });
+        } else {
+          this.reminderConfig.active = false;
+          this.notFillPersonalData = true;
+        }
       });
   }
 

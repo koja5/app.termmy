@@ -95,13 +95,11 @@ const scopes = [
 // });
 
 router.post("/auth", async (req, res) => {
-  console.log(req);
   const ticket = await client.verifyIdToken({
     idToken: req.body.idToken,
     audience: process.env.CLIENT_ID,
   });
   const payload = ticket.getPayload();
-  console.log(payload);
   var options = prepareOptionsForRequest(
     payload,
     "google/findOrCreateUserViaGoogle"
@@ -166,7 +164,6 @@ router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
             `USER: ${req.body.email} is LOGIN at ${new Date()}.`
           );
 
-          console.log;
           res.json("auth/user-auth/" + token);
         } else {
           const generateUuid = uuid.v4();
@@ -196,8 +193,15 @@ router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
                   "info",
                   `USER: ${req.body.email} CREATE ACCOUNT at ${new Date()}.`
                 );
+                var options = prepareOptionsForRequest(
+                  data,
+                  "/setUpSettingsAfterUserSignUp"
+                );
+                makeRequest(options);
+
                 const token = generateToken(data);
-                res.json("wizard/" + token);
+                // res.json("wizard/" + token);
+                res.json("auth/user-auth/" + token);
               }
             }
           );
@@ -758,13 +762,16 @@ function prepareOptionsForRequest(body, api) {
   };
 }
 
-function makeRequest(options, res) {
+function makeRequest(options, res = false) {
+  console.log(options);
   request(options, function (error, response, body) {
     if (!error) {
-      if (response.body.redirect) {
-        res.redirect(response.body.redirect);
-      } else {
-        res.json(response.body);
+      if (res) {
+        if (response.body.redirect) {
+          res.redirect(response.body.redirect);
+        } else {
+          res.json(response.body);
+        }
       }
     } else {
       res.json(false);

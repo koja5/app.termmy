@@ -1,6 +1,13 @@
 export class SetupItems {
   items = [
     {
+      id: "account_data",
+      title: "setupApp.accountDataText",
+      text: "setupApp.accountDataTitle",
+      icon: "fa fa-address-book-o",
+      link: "/dashboard/account-settings/general",
+    },
+    {
       id: "clients",
       title: "setupApp.clientTitle",
       text: "setupApp.clientText",

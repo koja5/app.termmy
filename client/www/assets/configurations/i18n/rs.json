@@ -25,9 +25,10 @@
         "syncContacts": "Sinhronizuj kontakte",
         "noInformation": "Nema informacija",
         "ok": "U redu",
-        "noData": "Nema informacija za prikaz"
+        "noData": "Nema informacija za prikaz",
+        "here": "ovde"
     },
-    "actionMessage": {
+   "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
         "successExecuteActionTextDefault": "Akcija je uspešno izvršena.",
         "errorExecuteActionTitleDefault": "Nešto se dogodilo",
@@ -66,7 +67,7 @@
         "createNewService": "Kreiraj novu uslugu",
         "noDataFoundFor": "Nije pronađen podatak za",
         "doYouWantToCreateNew": "Da li želite da kreirate novi?"
-    },
+   },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -223,7 +224,7 @@
         "selectedFullPayment": "Klijent je platio pun iznos za zakazanu uslugu(#amount €)",
         "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska.",
         "googleAdditionalCalendars": "Moji ostali kalendari"
-    },
+   },
     "accountSettings": {
         "title": "Podešavanja naloga",
         "general": "Opšta",
@@ -252,7 +253,7 @@
         "ownersCalendarsExplanation": "Za ove kalendare imate potpuna prava. To znači da možete da vidite, dodajete, menjate ili brišete događaje koji su vezani za njih.",
         "readonlyCalendars": "Kalendari samo sa dozvolom čitanja",
         "readonlyCalendarsExplanation": "Za ove kalendare imate samo mogućnost prikaza događaja na vašem kalendaru u Termmy aplikaciji. To znači da ne postoji mogućnost dodavanja ili menjanja događaja koji se nalaze u ovim kalendarima."
-    },
+   },
     "worktime": {
         "monday": "Ponedeljak",
         "tuesday": "Utorak",
@@ -309,6 +310,7 @@
         "text": "Podesite stranu za online rezervaciju termina.",
         "activeOrDeactiveBookingPage": "Aktivirajte ili deaktivirajte online rezervaciju",
         "bookingRootLink": "https://termmy.com/booking/",
+        "bookingRootLinkName": "Unesite naziv linka za rezervaciju",
         "bookingLinkExists": "Ova strana za online rezervaciju već postoji. Svaka strana mora da bude jedinstvena. Molimo Vas izaberite neko drugo ime za kreiranje strane za online rezervaciju.",
         "bookingLink": "Link za rezervaciju",
         "brandingText": "Brendirajte stranu za rezervaciju",
@@ -412,8 +414,9 @@
                 "text": "Šalje se dan ranije, kako bi zaposlenog podsetio da sutra ima zakazan termin.",
                 "message": "Sutra imate zakazan termin u #time. Pozdrav, #company"
             }
-        }
-    },
+        },
+        "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja SMS poruka vašim klijentima umesto vas! Podatke možete popuniti "
+   },
     "emailReminder": {
         "title": "Email podsetnik",
         "text": "Podesi automatizovani Email podsetnik",
@@ -470,8 +473,9 @@
                 "subject": "Podsetnik za sutrašnji termin",
                 "message": "Sutra imate zakazan termin u #time. Pozdrav, #company"
             }
-        }
-    },
+        },
+        "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja email-a vašim klijentima umesto vas! Podatke možete popuniti"
+   },
     "licenses": {
         "name": "Ime",
         "monthlyPrice": "Mesečna cena",
@@ -621,6 +625,8 @@
         "setup": "Podesite Termmy",
         "title": "Podesite Termmy za veći uspeh",
         "text": "Podesite sve korake u nastavku kako bi otkrili pun potencijal Termmy aplikacije i unapredili svoje poslovanje.",
+        "accountDataText": "Popunite lične podatke",
+        "accountDataTitle": "Dodajte informacije o Vama/Vašoj firmi, poput imena, broja telefona, email adrese itd.",
         "clientTitle": "Dodaj klijente",
         "clientText": "Organizujte svoje klijente, vodite detaljnije beleške i pogledajte njihovu celokupnu istoriju zakazivanja.",
         "serviceTitle": "Dodaj usluge",

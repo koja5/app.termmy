@@ -30,7 +30,9 @@ async function sendSMS(telephone, message) {
     var mailOptions = {
       from: '"Termmy"' + process.env.smtp_user,
       to: to,
-      subject: telephone,
+      subject: telephone.startsWith("+381")
+        ? telephone.replace("+381", "0")
+        : telephone,
       text: message,
     };
     smtpTransport.sendMail(mailOptions, function (error, response) {
@@ -47,7 +49,10 @@ async function sendSMS(telephone, message) {
 
 function checkCountryPrefix(telephone) {
   for (let i = 0; i < gatewayCountryPrefix.length; i++) {
-    if (telephone.startsWith(gatewayCountryPrefix[i].prefix) && gatewayCountryPrefix[i].active) {
+    if (
+      telephone.startsWith(gatewayCountryPrefix[i].prefix) &&
+      gatewayCountryPrefix[i].active
+    ) {
       return gatewayCountryPrefix[i].email;
     }
   }

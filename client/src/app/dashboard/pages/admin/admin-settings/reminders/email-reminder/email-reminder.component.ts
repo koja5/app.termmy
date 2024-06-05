@@ -13,6 +13,7 @@ export class EmailReminderComponent {
   public loader = true;
   public reminderConfig: any;
   public emailReminder: any;
+  public notFillPersonalData = false;
 
   constructor(
     private _service: CallApiService,
@@ -50,13 +51,24 @@ export class EmailReminderComponent {
   }
 
   setEmailReminderConfig() {
+    this.notFillPersonalData = false;
     this._service
-      .callPostMethod(
-        "/api/email-reminder/setEmailReminderConfig",
-        this.reminderConfig
-      )
-      .subscribe((data) => {
-        this.reminderConfig.id = data;
+      .callGetMethod("api/getProfileInfo", "")
+      .subscribe((profile: any) => {
+        if (profile && profile[0].company && profile[0].address) {
+          this._service
+            .callPostMethod(
+              "/api/email-reminder/setEmailReminderConfig",
+              this.reminderConfig
+            )
+            .subscribe((data) => {
+              this.reminderConfig.id = data;
+              this.notFillPersonalData = true;
+            });
+        } else {
+          this.reminderConfig.active = false;
+          this.notFillPersonalData = true;
+        }
       });
   }
 

@@ -1,6 +1,7 @@
 export class SetupApp {
   id?: string;
   admin_id?: string;
+  account_data?: boolean;
   clients?: boolean;
   services?: boolean;
   worktime?: boolean;

@@ -71,16 +71,23 @@ export class SetupAppComponent {
           this._changeDetector.markForCheck();
         }
 
-        // setTimeout(() => {
-        //   if (this.complitedPercentage === 0) {
-        //     this.startTour();
-        //   }
-        // }, 3000);
+        setTimeout(() => {
+          if (
+            this.complitedPercentage === 0 &&
+            !this._storageService.getLocalStorage("start-tour")
+          ) {
+            this.startTour();
+            this._storageService.setLocalStorage("start-tour", true);
+          }
+        }, 3000);
       });
   }
 
   calculateComplitedPercentage() {
     this.complitedPercentage = 0;
+    if (this.complited.account_data) {
+      this.complitedPercentage += 10;
+    }
     if (this.complited.clients) {
       this.complitedPercentage += 10;
     }
@@ -94,7 +101,7 @@ export class SetupAppComponent {
       this.complitedPercentage += 10;
     }
     if (this.complited.sync_calendar) {
-      this.complitedPercentage += 20;
+      this.complitedPercentage += 10;
     }
     if (this.complited.booking) {
       this.complitedPercentage += 20;

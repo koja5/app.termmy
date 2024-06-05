@@ -13,14 +13,22 @@
     </div>
 
     <div class="col-12">
+        <div class="mb-3">
+            <div class="form-check form-switch d-flex align-items-center">
+                <input type="checkbox" class="form-check-input" name="sms-reminder" [(ngModel)]="reminderConfig.active"
+                    (change)="setEmailReminderConfig($event)">
+                <div>
+                    <h5 class="form-check-label d-block" for="sms-reminder">{{'emailReminder.activeEmailReminder' |
+                        translate}}
+                    </h5>
+                </div>
+            </div>
 
-        <div class="form-check form-switch d-flex align-items-center mb-3">
-            <input type="checkbox" class="form-check-input" name="sms-reminder" [(ngModel)]="reminderConfig.active"
-                (change)="setEmailReminderConfig($event)">
-            <div>
-                <h5 class="form-check-label d-block" for="sms-reminder">{{'emailReminder.activeEmailReminder' |
-                    translate}}
-                </h5>
+            <div class="col-12 mt-2" *ngIf="notFillPersonalData">
+                <h4 class="badge badge-warning pt-1 pb-1 text-left"><span class="fa fa-exclamation-triangle"></span>
+                    {{'emailReminder.pleaseFillPersonalData' |
+                    translate}} <a class="here-link" routerLink="/dashboard/account-settings/general">{{'general.here' |
+                        translate}}</a></h4>
             </div>
         </div>
 

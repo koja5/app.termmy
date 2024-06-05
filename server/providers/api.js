@@ -16,6 +16,7 @@ const multipart = require("connect-multiparty");
 const multipartMiddleware = multipart({
   uploadDir: process.env.AVATAR_UPLOAD_FOLDER,
 });
+const NUMBER_OF_FREE_SMS = 100;
 
 module.exports = router;
 
@@ -118,12 +119,12 @@ router.post("/signUp", function (req, res, next) {
               } else {
                 conn.query(
                   "insert into sms_count set admin_id = ?, count = ?",
-                  [req.body.data.id, 100],
+                  [req.body.data.id, process.env.NUMBER_OF_FREE_SMS],
                   function (err, rows, fields) {}
                 );
                 conn.query(
                   "insert into user_license set admin_id = ?, license_id = ?",
-                  [req.body.data.id, "d24f35e2-dd3c-11ee-9965-960002791003"],
+                  [req.body.data.id, process.env.BASIC_LICENCE_ID],
                   function (err, rows, fields) {
                     conn.release();
                     if (err) {
@@ -147,6 +148,31 @@ router.post("/signUp", function (req, res, next) {
           conn.release();
           res.json(false);
         }
+      }
+    );
+  });
+});
+
+router.post("/setUpSettingsAfterUserSignUp", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+    
+    // set 100 SMS free by default
+    conn.query(
+      "insert into sms_count set admin_id = ?, count = ?",
+      [req.body.id, process.env.NUMBER_OF_FREE_SMS],
+      function (err, rows, fields) {}
+    );
+
+    //set BASIC licence
+    conn.query(
+      "insert into user_license set admin_id = ?, license_id = ?",
+      [req.body.id, process.env.BASIC_LICENCE_ID],
+      function (err, rows, fields) {
+        conn.release();
       }
     );
   });

@@ -107,14 +107,15 @@ export class LoginComponent implements OnInit {
       .subscribe((data: any) => {
         if (data && data.token) {
           this._storageService.setToken(data.token);
-          const user = this._storageService.getDecodeToken();
-          if (!user.firstname || !user.lastname) {
-            // this._router.navigate(["wizard"]);
-            window.open("wizard", "_self");
-          } else {
-            // this._router.navigate(["dashboard/admin"]);
-            window.open("dashboard/admin", "_self");
-          }
+          window.open("dashboard/admin", "_self");
+          // const user = this._storageService.getDecodeToken();
+          // if (!user.firstname || !user.lastname) {
+          //   // this._router.navigate(["wizard"]);
+          //   window.open("wizard", "_self");
+          // } else {
+          //   // this._router.navigate(["dashboard/admin"]);
+          //   window.open("dashboard/admin", "_self");
+          // }
           this.loading = false;
         } else {
           this.error = data.type;

@@ -25,7 +25,8 @@
       "syncContacts": "Sync-Kontakte",
       "noInformation": "Keine Information",
       "ok": "OK",
-      "noData": "Es sind keine Informationen zum Anzeigen vorhanden"
+      "noData": "Es sind keine Informationen zum Anzeigen vorhanden",
+      "here": "hier"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
@@ -75,7 +76,7 @@
    },
    "login": {
       "title": "Willkommen bei Termmy! 👋",
-      "subtitle": "Melden Sie sich bei Ihrem Termmy-Konto an und erweitern Sie Ihren Kalender um viele Funktionen.",
+      "subtitle": "Melden Sie sich bei Ihrem Termmy-Konto an und erweitern Sie Ihren bestehenden Kalender um viele Funktionen.",
       "email": "Email",
       "emailIsRequired": "E-Mail ist erforderlich",
       "emailMustBeValid": "E-Mail muss eine gültige E-Mail-Adresse sein",
@@ -379,7 +380,8 @@
             "text": "Die Termin-Erinnerung wird am Vortag um 8.00 Uhr gesendet",
             "message": "Termin Erinnerung: Sie haben morgen um #time einen Termin bei uns: #company. Unsere Adresse ist #address. Wir freuen uns auf Ihr Kommen. Powered by www.termmy.com."
          }
-      }
+      },
+      "pleaseFillPersonalData": "Bitte geben Sie Ihre persönlichen Daten ein, da wir Informationen wie Adresse, Ihren Namen/Firmennamen usw. verwenden, wenn wir für Sie SMS an Ihre Kunden versenden! Sie können die Informationen ausfüllen"
    },
    "emailReminder": {
       "title": "E-Mail-Erinnerung",
@@ -437,7 +439,8 @@
             "subject": "Erinnerung an Termin morgen",
             "message": "Erinnerung: Sie haben morgen um #time einen Termin. Begrüßung"
          }
-      }
+      },
+      "pleaseFillPersonalData": "Bitte geben Sie Ihre persönlichen Daten ein, da wir Informationen wie Adresse, Ihren Namen/Firmennamen usw. verwenden, wenn wir für Sie E-Mails an Ihre Kunden senden! Sie können die Informationen ausfüllen"
    },
    "licenses": {
       "name": "Name",
@@ -529,11 +532,11 @@
       "optional": "Optional"
    },
    "authGlobal": {
-      "backToLogin": "Zurück zum Logi"
+      "backToLogin": "Zurück zum Login"
    },
    "signUp": {
-      "title": "Das Abenteuer beginnt hier 🚀",
-      "text": "Machen Sie Ihr App-Management einfach und unterhaltsam!",
+      "title": "Zeit sparen und Termintreue erhöhen 🚀",
+      "text": "Erweitern Sie Ihren bestehenden Kalender um Funktionen wie Online-Buchung und vieles mehr.",
       "IAgreeTo": "Ich stimme zu",
       "privacyPolicy": "Datenschutzrichtlinie",
       "and": "und",
@@ -618,6 +621,8 @@
       "setup": "Termmy einrichten",
       "title": "Richten Sie Termmy für den Erfolg ein",
       "text": "Führen Sie die folgenden Schritte aus, damit Sie das volle Potenzial Ihres Unternehmens ausschöpfen können.",
+      "accountDataText": "Fill in personal data",
+      "accountDataTitle": "Fügen Sie Informationen über Sie/Ihr Unternehmen hinzu, wie z. B. Name, Telefonnummer, E-Mail-Adresse usw.",
       "clientTitle": "Kunden anlegen",
       "clientText": "Legen Sie ihre Kunden an, mit allen wichtigen Informationen.",
       "serviceTitle": "Passen Sie Ihre Dienste an",

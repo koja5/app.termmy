@@ -65,7 +65,8 @@ router.post("/findOrCreateUserViaMicrosoft", function (req, res, next) {
                   `USER: ${req.body.email} CREATE ACCOUNT at ${new Date()}.`
                 );
                 const token = generateToken(data);
-                res.json("wizard/" + token);
+                // res.json("wizard/" + token);
+                res.json("auth/user-auth/" + token);
               }
             }
           );

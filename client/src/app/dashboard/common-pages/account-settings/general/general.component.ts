@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
+import { HelpService } from "app/services/help.service";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
 
@@ -21,7 +22,8 @@ export class GeneralComponent {
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _messageService: MessageService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _helpService: HelpService
   ) {}
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class GeneralComponent {
         .subscribe((data) => {
           if (data) {
             this._toastr.showSuccess();
+            this.sendInfoForSetupApp();
           } else {
             this._toastr.showError();
           }
@@ -62,5 +65,13 @@ export class GeneralComponent {
           this._toastr.showError();
         }
       });
+  }
+
+  sendInfoForSetupApp() {
+    if (this._storageService.getSessionStorage("setup")) {
+      let setup = this._storageService.getSessionStorage("setup");
+      setup.account_data = true;
+      this._messageService.sendSetupApp(setup);
+    }
   }
 }
