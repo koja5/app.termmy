@@ -48,18 +48,6 @@ export class CalendarComponent {
   //CALENDAR VARIABLES
   public resourceDataSource: Object[] = [];
 
-  public group: GroupModel = { byDate: false, resources: ["Doctors"] };
-
-  public workHours1: any = [
-    { startHour: "07:00", endHour: "16:00" }, // for Sunday
-    { startHour: "06:00", endHour: "17:00", groupIndex: 12 }, // for Monday
-    { startHour: "05:00", endHour: "18:00", groupIndex: 1 }, // for Tuesday
-    { startHour: "06:30", endHour: "19:00", groupIndex: 2 }, // for Wednesday
-    { startHour: "05:30", endHour: "20:00", groupIndex: 0 }, // for Thursday
-    { startHour: "10:00", endHour: "21:00", groupIndex: 1 }, // for Friday
-    { startHour: "13:00", endHour: "22:00" }, // for Saturday
-  ];
-
   //END CALENDAR VARIABLES
 
   public config: any;
