@@ -27,7 +27,7 @@
             </div>
             <div class="card" *ngIf="checkCalendarVisibility()">
                 <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : schedulerHeight"
-                    [eventSettings]="eventSettings" [group]="group" [showWeekNumber]="true"
+                    [eventSettings]="eventSettings" [showWeekNumber]="true"
                     currentView="{{calendarSettings && calendarSettings.currentView ? calendarSettings.currentView : 'WorkWeek'}}"
                     [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()" [showQuickInfo]="false"
                     (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"

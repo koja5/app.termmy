@@ -583,9 +583,6 @@ export class CalendarComponent {
       .subscribe(
         (data: any) => {
           if (data) {
-            // this._toastr.showSuccess();
-            // this.appointment.controls.id.setValue(data.id);
-            // this.refreshTermine(this.appointment.value, ExecuteAction.create);
             this.createTermineForSQL(data.uuid, data.id);
           } else {
             this.loaderContent = false;
@@ -743,7 +740,6 @@ export class CalendarComponent {
       })
       .subscribe(
         (data) => {
-          // this._toastr.showSuccess();
           this.initializeForm();
         },
         (error) => {
@@ -842,10 +838,6 @@ export class CalendarComponent {
         : event.employeeId
         ? event.employeeId
         : event.employee_id;
-    // if (this.calendar.eventSettings.dataSource[index].description) {
-    //   this.calendar.eventSettings.dataSource[index].description =
-    //     this.appointment.value;
-    // }
     this.calendar.refreshEvents();
   }
 
@@ -879,9 +871,6 @@ export class CalendarComponent {
   submitEmitter(event: any) {}
 
   onActionBegin(event: any) {
-    // if (this.appointment.invalid) {
-    //   return;
-    // }
     if (
       event.requestType === "eventCreate" ||
       event.requestType === "eventChange" ||
@@ -975,10 +964,6 @@ export class CalendarComponent {
   }
 
   public onEventRendered(args: EventRenderedArgs): void {
-    // const categoryColor: string = args.data.CategoryColor as string;
-    // if (!args.element || !categoryColor) {
-    //   return;
-    // }
     //SET COLOR FOR EVENT
     args.element.style.backgroundColor =
       this.servicesColor[args.data.service_id];
@@ -994,11 +979,6 @@ export class CalendarComponent {
       var dayIndex = renderedDates[i].getDay();
       if (dayIndex !== 0 && dayIndex !== 6) {
         days.push(renderedDates[i]);
-        // this.calendar.setWorkHours(
-        //   days,
-        //   this.workHours1[dayIndex].startHour,
-        //   this.workHours1[dayIndex].endHour
-        // );
       }
     }
   }
@@ -1015,13 +995,9 @@ export class CalendarComponent {
     if (args.elementType === "workCells") {
       this.setWorkTimeInCalendar(args);
     }
-
-    // args.date
   }
 
   changeLocation(event: any) {
-    // get employees for this location
-    // this.calendarSettings.location = event;
     this.loader = true;
     this.calendarSettings.selectedEmployees = [];
     this.calendarSettings.selectedEmployeesFullInfo = [];
@@ -1168,25 +1144,9 @@ export class CalendarComponent {
             notWorkTime = false;
             break;
           }
-          // if (
-          //   (hour >= workTimeForDay.times[i].start.hour &&
-          //     minutes <= workTimeForDay.times[i].start.minutes &&
-          //     hour < workTimeForDay.times[i].end.hour) ||
-          //   (hour === workTimeForDay.times[i].start.hour &&
-          //     minutes > workTimeForDay.times[i].start.minutes &&
-          //     hour === workTimeForDay.times[i].end.hour &&
-          //     minutes < workTimeForDay.times[i].end.minutes)
-          // ) {
-          // }
         }
       }
-      // if (notWorkTime) {
-      //   args.element.classList.add("pointer-event-none");
-      // }
     }
-    // else {
-    //   args.element.classList.add("pointer-event-none");
-    // }
   }
 
   getWorkTimeForDay(day, groupIndex) {
