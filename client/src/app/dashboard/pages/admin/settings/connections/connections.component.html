@@ -47,7 +47,35 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="calendarsList.owner.length || calendarsList.reader.length">
+                    <div class="d-md-flex mt-2">
+                        <div class="d-flex flex-shrink-0">
+                            <img src="../../../../../../assets/images/icons/outlook.png" alt="outlook" class="me-1"
+                                height="38" width="38" />
+                            <div class="me-1 ml-1">
+                                <span class="fw-bolder mb-0">{{'connections.outlookTitle' | translate}}</span>
+                                <span *ngIf="data && data.microsoft" type="button"
+                                    class="badge badge-light-success ml-75">{{'connections.successfullyConnected'
+                                    |
+                                    translate}}</span>
+                                <p>{{'connections.outlookText' | translate}}</p>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 text-right">
+                            <div class="mt-50 mt-sm-0">
+                                <div class="form-check form-switch form-check-primary">
+                                    <button *ngIf="!data || !data.microsoft" type="button"
+                                        class="btn btn-outline-primary"
+                                        (click)="connectToMicrosoft()">{{'connections.connect' |
+                                        translate}}</button>
+                                    <button *ngIf="data && data.microsoft" type="button" class="btn btn-outline-danger"
+                                        (click)="disconnectFromMicrosoft()">{{'connections.disconnect' |
+                                        translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="calendarsList.owner.length || calendarsList.reader.length" class="mt-3">
                         <h4 class="border-bottom mt-1">{{'connections.includeAnotherCalendar' | translate}}
                             <app-explanation-mark
                                 [explanation]="('connections.includeAnotherCalendarExplanation' | translate)"></app-explanation-mark>
@@ -86,24 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="d-md-flex mt-2">
-                        <div class="d-flex flex-shrink-0">
-                            <img src="../../../../../../assets/images/icons/outlook.png" alt="outlook" class="me-1"
-                                height="38" width="38" />
-                            <div class="me-1 ml-1">
-                                <p class="fw-bolder mb-0">{{'connections.outlookTitle' | translate}}</p>
-                                <span>{{'connections.outlookText' | translate}}</span>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 text-right">
-                            <div class="mt-50 mt-sm-0">
-                                <div class="form-check form-switch form-check-primary">
-                                    <button type="button" class="btn btn-outline-primary">{{'connections.connect' |
-                                        translate}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+
 
                     <!-- /Connections -->
                 </div>

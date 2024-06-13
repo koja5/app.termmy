@@ -4,16 +4,123 @@ const router = express.Router();
 const logger = require("./config/logger");
 const sql = require("./config/sql-database");
 const uuid = require("uuid");
-const e = require("express");
 const jwt = require("jsonwebtoken");
 const sha1 = require("sha1");
 const expiresToken = "12h";
-const { OAuth2Client } = require("google-auth-library");
+const axios = require("axios");
+const request = require("request");
+const auth = require("./config/auth");
 
 module.exports = router;
 
 //#region SET UP
 var connection = sql.connect(); //SQL SET UP
+
+//#region GET TOKEN
+
+// router.get("/getMicrosoftClient", function (req, res, next) {
+//   // console.log(req.body);
+//   const tokenEndpoint =
+//     "https://login.microsoftonline.com/f8cdef31-a31e-4b4a-93e4-5f571e91255a/oauth2/v2.0/token"; // Replace {tenant} with your Azure AD tenant ID or domain name
+//   const clientId = "f8d10920-2603-45a7-9c7a-d474a32f4758"; // Replace with your Azure AD application client ID
+//   const clientSecret = "1508c7ab-b38b-4f4d-94bf-1a32d86e2d19"; // Replace with your Azure AD application client secret
+
+//   try {
+//     const response = axios.post(tokenEndpoint, {
+//       grant_type: "authorization_code",
+//       client_id: clientId,
+//       client_secret: clientSecret,
+//       scope: "https://graph.microsoft.com/.default",
+//     });
+
+//     const accessToken = response.data.access_token;
+//     console.log("Access Token:", accessToken);
+//     res.json(accessToken);
+//   } catch (error) {
+//     res.json(error);
+//     // console.error(
+//     //   "Error obtaining access token:",
+//     //   error.response.data.error_description
+//     // );
+//   }
+// });
+
+// https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758&response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default&state=12345&sso_reload=true
+
+// https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758&response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default offline_access&state=086d5c41-207f-4489-859e-b9145e442c57&sso_reload=true&user_id=96e28189-cd75-11ee-978f-960002791003
+// https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default%20offline_access&state=96e28189-cd75-11ee-978f-960002791003&sso_reload=true
+
+router.get("/generateLinkForToken", auth, function (req, res, next) {
+  const generateLink =
+    "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=" +
+    process.env.MICROSOFT_CLIENT_ID +
+    "&response_type=code&redirect_uri=" +
+    process.env.link_api +
+    process.env.MICROSOFT_REDIRECT_URL +
+    "&scope=https://graph.microsoft.com/.default offline_access&state=" +
+    req.user.user.id +
+    "&sso_reload=true";
+  res.json(generateLink);
+});
+
+router.get("/getMicrosoftToken", function (req, res, next) {
+  var config = {
+    method: "post",
+    url: process.env.MICROSOFT_API_KEY,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: {
+      grant_type: "authorization_code",
+      code: req.query.code,
+      client_id: process.env.MICROSOFT_CLIENT_ID,
+      client_secret: process.env.MICROSOFT_CLIENT_SECRET,
+      scope: ["offline_access", "https://graph.microsoft.com/.default"],
+      redirect_uri: process.env.link_api + process.env.MICROSOFT_REDIRECT_URL,
+    },
+  };
+
+  axios(config)
+    .then(function (response) {
+      if (response && response.data) {
+        var options = prepareOptionsForRequest(
+          {
+            microsoft: response.data.refresh_token,
+            userId: req.query.state,
+          },
+          "microsoft/setRefreshToken"
+        );
+        makeRequest(options, res);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+router.get("/disconnectFromMicrosoft", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from external_accounts where user_id = ?",
+      [req.user.user.id],
+      function (err, rows, fields) {
+        conn.release();
+        if (err) {
+          res.json(false);
+        } else {
+          res.json(true);
+        }
+      }
+    );
+  });
+});
+
+//#endregion
 
 //#region SET UP TOKEN IN TERMMY DATABASE
 
@@ -76,6 +183,51 @@ router.post("/findOrCreateUserViaMicrosoft", function (req, res, next) {
   });
 });
 
+router.post("/setRefreshToken", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from external_accounts ea where ea.user_id = ?",
+      [req.body.userId],
+      function (err, rows, fields) {
+        if (rows.length && rows[0].google != null) {
+          conn.release();
+          res.json(false);
+        } else {
+          const body = {
+            user_id: req.body.userId,
+            microsoft: req.body.microsoft,
+          };
+          if (rows.length) {
+            body["id"] = rows[0].id;
+          }
+          conn.query(
+            "INSERT INTO external_accounts set ? ON DUPLICATE KEY UPDATE ?",
+            [body, body],
+            function (err, rows) {
+              conn.release();
+              if (!err) {
+                res.json({
+                  redirect_url:
+                    process.env.link_client +
+                    "/dashboard/admin/settings/connections",
+                });
+              } else {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              }
+            }
+          );
+        }
+      }
+    );
+  });
+});
+
 //#endregion GENERAL
 
 //#endregion
@@ -104,6 +256,31 @@ function generateToken(data) {
 
 function setSha1Password(password) {
   return sha1(password);
+}
+
+function prepareOptionsForRequest(body, api) {
+  return {
+    url: process.env.link_api + api,
+    method: "POST",
+    body: body,
+    json: true,
+    rejectUnauthorized: false,
+  };
+}
+
+function makeRequest(options, res) {
+  request(options, function (error, response, body) {
+    if (!error) {
+      console.log(response);
+      if (response.body.redirect_url) {
+        res.redirect(response.body.redirect_url);
+      } else {
+        res.json(response);
+      }
+    } else {
+      res.json(response);
+    }
+  });
 }
 
 //#endregion

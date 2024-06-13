@@ -123,4 +123,22 @@ export class ConnectionsComponent {
       }
     }
   }
+
+  connectToMicrosoft() {
+    this._service
+      .callGetMethod("/api/microsoft/generateLinkForToken", "")
+      .subscribe((link: string) => {
+        window.open(link);
+      });
+  }
+
+  disconnectFromMicrosoft() {
+    this._service
+      .callGetMethod("api/microsoft/disconnectFromMicrosoft", "")
+      .subscribe((data) => {
+        if (data) {
+          this.data = null;
+        }
+      });
+  }
 }
