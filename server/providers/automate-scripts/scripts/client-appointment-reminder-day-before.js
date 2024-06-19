@@ -63,14 +63,14 @@ function sendViaSms(config, item, conn) {
     sendSMS(
       item.telephone,
       config.clientDayBeforeReminder.message
-        .replace("#company", item.company)
-        .replace(
+        .replaceAll("#company", item.company)
+        .replaceAll(
           "#time",
           moment(item.StartTime).format("HH:mm") +
             "-" +
             moment(item.EndTimeTherapy).format("HH:mm")
         )
-        .replace("#address", generateAddress(item))
+        .replaceAll("#address", generateAddress(item))
     );
     conn.query(
       "update sms_count set count = count - 1 where admin_id = ?",
@@ -83,14 +83,14 @@ function sendViaSms(config, item, conn) {
       sendSMS(
         item.employee_telephone,
         config.employeeDayBeforeReminder.message
-          .replace("#company", item.company)
-          .replace(
+          .replaceAll("#company", item.company)
+          .replaceAll(
             "#time",
             moment(item.StartTime).format("HH:mm") +
               "-" +
               moment(item.EndTimeTherapy).format("HH:mm")
           )
-          .replace("#address", generateAddress(item))
+          .replaceAll("#address", generateAddress(item))
       );
       conn.query(
         "update sms_count set count = count - 1 where admin_id = ?",
@@ -148,14 +148,14 @@ function sendViaEmail(config, item) {
       item.email,
       config.clientDayBeforeReminder.subject,
       config.clientDayBeforeReminder.message
-        .replace("#company", item.company)
-        .replace(
+        .replaceAll("#company", item.company)
+        .replaceAll(
           "#time",
           moment(item.StartTime).format("HH:mm") +
             "-" +
             moment(item.EndTimeTherapy).format("HH:mm")
         )
-        .replace("#address", generateAddress(item))
+        .replaceAll("#address", generateAddress(item))
     );
   }
   setTimeout(() => {
@@ -164,14 +164,14 @@ function sendViaEmail(config, item) {
         item.employee_email,
         config.employeeDayBeforeReminder.subject,
         config.employeeDayBeforeReminder.message
-          .replace("#company", item.company)
-          .replace(
+          .replaceAll("#company", item.company)
+          .replaceAll(
             "#time",
             moment(item.StartTime).format("HH:mm") +
               "-" +
               moment(item.EndTimeTherapy).format("HH:mm")
           )
-          .replace("#address", generateAddress(item))
+          .replaceAll("#address", generateAddress(item))
       );
     }
   }, 1000);

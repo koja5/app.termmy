@@ -404,10 +404,10 @@ router.post("/createTermine", auth, async (req, res) => {
         summary: req.body.Subject,
         description: JSON.stringify(req.body),
         start: {
-          dateTime: moment(req.body.StartTime),
+          dateTime: moment(req.body.StartTime)
         },
         end: {
-          dateTime: moment(req.body.EndTime),
+          dateTime: moment(req.body.EndTime)
         },
       },
     },

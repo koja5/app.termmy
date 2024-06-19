@@ -50,7 +50,7 @@ function sendViaSms(config, item, conn) {
   if (config.clientHappyBirthday.active && item.count) {
     sendSMS(
       item.telephone,
-      config.clientHappyBirthday.message.replace("#company", item.company)
+      config.clientHappyBirthday.message.replaceAll("#company", item.company)
     );
     conn.query(
       "update sms_count set count = count - 1 where admin_id = ?",
@@ -104,7 +104,7 @@ function sendViaEmail(config, item) {
     sendMail(
       item.email,
       config.clientHappyBirthday.subject,
-      config.clientHappyBirthday.message.replace("#company", item.company)
+      config.clientHappyBirthday.message.replaceAll("#company", item.company)
     );
   }
 }

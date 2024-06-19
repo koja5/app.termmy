@@ -115,6 +115,8 @@ export class ConnectionsComponent {
       let setupOld = this._helpService.copyObject(setup);
       if (this.data && this.data.google) {
         setup.sync_calendar = true;
+      } else if (this.data && this.data.microsoft) {
+        setup.sync_calendar = true;
       } else {
         setup.sync_calendar = false;
       }
@@ -138,6 +140,7 @@ export class ConnectionsComponent {
       .subscribe((data) => {
         if (data) {
           this.data = null;
+          this.sendInfoForSetupApp();
         }
       });
   }

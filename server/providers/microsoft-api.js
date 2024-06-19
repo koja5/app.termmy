@@ -10,6 +10,7 @@ const expiresToken = "12h";
 const axios = require("axios");
 const request = require("request");
 const auth = require("./config/auth");
+const moment = require("moment");
 
 module.exports = router;
 
@@ -48,8 +49,9 @@ var connection = sql.connect(); //SQL SET UP
 // https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758&response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default&state=12345&sso_reload=true
 
 // https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758&response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default offline_access&state=086d5c41-207f-4489-859e-b9145e442c57&sso_reload=true&user_id=96e28189-cd75-11ee-978f-960002791003
-// https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=https://graph.microsoft.com/.default%20offline_access&state=96e28189-cd75-11ee-978f-960002791003&sso_reload=true
+// https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=f8d10920-2603-45a7-9c7a-d474a32f4758response_type=code&redirect_uri=http://localhost:3001/api/microsoft/getMicrosoftToken&scope=Calendars.ReadWrite%20offline_access&state=96e28189-cd75-11ee-978f-960002791003&sso_reload=true
 
+//#region AUTH
 router.get("/generateLinkForToken", auth, function (req, res, next) {
   const generateLink =
     "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=" +
@@ -57,7 +59,7 @@ router.get("/generateLinkForToken", auth, function (req, res, next) {
     "&response_type=code&redirect_uri=" +
     process.env.link_api +
     process.env.MICROSOFT_REDIRECT_URL +
-    "&scope=https://graph.microsoft.com/.default offline_access&state=" +
+    "&scope=https://graph.microsoft.com/Calendars.ReadWrite offline_access&state=" +
     req.user.user.id +
     "&sso_reload=true";
   res.json(generateLink);
@@ -75,7 +77,7 @@ router.get("/getMicrosoftToken", function (req, res, next) {
       code: req.query.code,
       client_id: process.env.MICROSOFT_CLIENT_ID,
       client_secret: process.env.MICROSOFT_CLIENT_SECRET,
-      scope: ["offline_access", "https://graph.microsoft.com/.default"],
+      scope: ["https://graph.microsoft.com/Calendars.ReadWrite"],
       redirect_uri: process.env.link_api + process.env.MICROSOFT_REDIRECT_URL,
     },
   };
@@ -83,6 +85,7 @@ router.get("/getMicrosoftToken", function (req, res, next) {
   axios(config)
     .then(function (response) {
       if (response && response.data) {
+        console.log(response.data);
         var options = prepareOptionsForRequest(
           {
             microsoft: response.data.refresh_token,
@@ -97,6 +100,37 @@ router.get("/getMicrosoftToken", function (req, res, next) {
       console.log(error);
     });
 });
+
+async function renewAccessTokenAsync(refresh_token) {
+  try {
+    const response = await axios.post(
+      process.env.MICROSOFT_API_KEY,
+      {
+        grant_type: "refresh_token",
+        client_id: process.env.MICROSOFT_CLIENT_ID,
+        client_secret: process.env.MICROSOFT_CLIENT_SECRET,
+        refresh_token: refresh_token,
+        scope: ["https://graph.microsoft.com/Calendars.ReadWrite"],
+        redirect_uri: process.env.link_api + process.env.MICROSOFT_REDIRECT_URL,
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    if (response.data.access_token) {
+      return {
+        access_token: response.data.access_token,
+        expired: moment().add("seconds", response.data.expired),
+      };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 router.get("/disconnectFromMicrosoft", auth, function (req, res, next) {
   connection.getConnection(function (err, conn) {
@@ -118,6 +152,131 @@ router.get("/disconnectFromMicrosoft", auth, function (req, res, next) {
       }
     );
   });
+});
+
+//#endregion
+
+//#region EVENTS
+
+router.get("/getTermines/:id", async function (req, res, next) {
+  const url = `https://graph.microsoft.com/v1.0/me/calendar/events`;
+
+  let token = null;
+  refresh_token =
+    "M.C515_BL2.0.U.-CqVWQ19s055ed8QdTDBVKvnI5jCQRMC*VND5UkzJaBLwS80Qtx5A6JxSNbNklJCn*dXu3bq8HSXlTH3tyX7*g5468O9uvileqMN6LEA*QStqHCjysdOco2ipXUijxmdhgoH3XluRVcqR!qs7hJjw2*YlKOvzvVZ0yJl62Cg012M4px1MMj5Hin9OeC6MguuCM*wRdHYWGhkaGuSx!fejtBdsGxaL19jD4pRs*3ude2ADmA0YRVqBF0gYKPWwUT*Aq8oi3WZJkNy6Fcnu5wLKWWZgktRGSLJcbsO66Y8iH4luTTFgwmsK*BahFcC6ngF4nDl1cd6!!r1pkiP0rC4hJP0LhvPq397hQQPRWEoECiR2O4xAvmZGK3deUCBAj!teJO3hSZYK7oWfZKQZCt*kRIAPYiLRwiGN8tu9eCFwI8Ca";
+
+  token = await renewAccessTokenAsync(refresh_token);
+  //   if (
+  //   new Date(req.body.externalCalendar.expired) < new Date() ||
+  //   !req.body.externalCalendar.expired
+  // ) {
+  //   token = await renewAccessTokenAsync(refresh_token);
+  // } else {
+  //   token = req.body.externalCalendar;
+  // }
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ` + token.access_token,
+        "Content-Type": "application/json",
+        Prefer: "outlook.body-content-type='text'",
+      },
+    });
+
+    console.log(response);
+    for (let item of response.data.value) {
+      console.log(Object(item));
+    }
+
+    if (response.data && response.data.value) {
+      res.json(response.data.value);
+    }
+  } catch (error) {
+    // console.error(error);
+  }
+});
+
+router.post("/createTermine", async function (req, res, next) {
+  const url = `https://graph.microsoft.com/v1.0/me/calendar/events`;
+  console.log(req.body.StartTime);
+  const eventData = {
+    subject: req.body.Subject,
+    body: {
+      contentType: "text",
+      content: JSON.stringify(req.body),
+    },
+    start: {
+      dateTime: moment(req.body.StartTime).format("YYYY-MM-DDTHH:mm:ss"),
+      timeZone: "W. Europe Standard Time",
+    },
+    end: {
+      dateTime: moment(req.body.EndTime).format("YYYY-MM-DDTHH:mm:ss"),
+      timeZone: "W. Europe Standard Time",
+    },
+  };
+
+  let token = null;
+
+  token = await renewAccessTokenAsync(req.body.externalCalendar);
+
+  console.log(eventData);
+
+  try {
+    const response = await axios.post(url, eventData, {
+      headers: {
+        Authorization: `Bearer ` + token.access_token,
+        "Content-Type": "application/json",
+      },
+    });
+
+    res.json({
+      status: response.status,
+      token: token,
+    });
+  } catch (error) {
+    // console.error(error);
+  }
+});
+
+router.post("/updateTermine", async function (req, res, next) {
+  const url =
+    `https://graph.microsoft.com/v1.0/me/calendar/events/` + req.body.id;
+  const eventData = {
+    subject: req.body.Subject,
+    body: {
+      contentType: "text",
+      content: JSON.stringify(req.body),
+    },
+    start: {
+      dateTime: moment(req.body.StartTime).format("YYYY-MM-DDTHH:mm:ss"),
+      timeZone: "W. Europe Standard Time",
+    },
+    end: {
+      dateTime: moment(req.body.EndTime).format("YYYY-MM-DDTHH:mm:ss"),
+      timeZone: "W. Europe Standard Time",
+    },
+  };
+
+  let token = null;
+
+  token = await renewAccessTokenAsync(req.body.externalCalendar);
+
+  try {
+    const response = await axios.patch(url, eventData, {
+      headers: {
+        Authorization: `Bearer ` + token.access_token,
+        "Content-Type": "application/json",
+      },
+    });
+
+    res.json({
+      status: response.status,
+      token: token,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 //#endregion
@@ -229,8 +388,6 @@ router.post("/setRefreshToken", function (req, res, next) {
 });
 
 //#endregion GENERAL
-
-//#endregion
 
 //#region HELP FUNCTIOn
 

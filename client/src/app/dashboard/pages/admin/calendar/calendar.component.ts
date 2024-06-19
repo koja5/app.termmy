@@ -30,6 +30,8 @@ import {
 import { DefaultCalendarLanguages } from "./default-calendar-languages";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { CalendarService } from "app/services/calendar.service";
+import { CalendarType } from "app/enums/calendar-type";
 declare var require: any;
 
 new DefaultCalendarLanguages();
@@ -73,6 +75,7 @@ export class CalendarComponent {
   public schedulerHeight: string;
   public currentView = "WorkWeek";
   public googleAdditionalCalendarsList = [];
+  public calendarType: CalendarType;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -81,7 +84,8 @@ export class CalendarComponent {
     private _storageService: StorageService,
     public _helpService: HelpService,
     private _translate: TranslateService,
-    private _coreSidebarService: CoreSidebarService
+    private _coreSidebarService: CoreSidebarService,
+    private _calendarService: CalendarService
   ) {}
 
   ngOnInit() {
@@ -349,8 +353,12 @@ export class CalendarComponent {
   }
 
   getMyTermines() {
-    if (this.checkExternalAccountForGoogle()) {
-      this.getMyTerminesFromGoogleCalendar();
+    if (this.getTokenForExternalCalendar()) {
+      if (this.calendarType === CalendarType.google) {
+        this.getMyTerminesFromGoogleCalendar();
+      } else if (this.calendarType === CalendarType.microsoft) {
+        this.getMyTerminesFromMicrosoftCalendar();
+      }
     } else {
       this.getMyTerminesFromSQL();
     }
@@ -498,7 +506,9 @@ export class CalendarComponent {
   packTerminesFromGoogleCalendar(termines) {
     let prepactedTermines = [];
     for (let i = 0; i < termines.length; i++) {
-      const data = this.checkTermine(termines[i]);
+      const data = this._calendarService.getMoreDetails(
+        termines[i].description
+      );
 
       prepactedTermines.push({
         Subject: data.Subject
@@ -541,26 +551,14 @@ export class CalendarComponent {
       });
     }
 
-    return prepactedTermines;
-  }
+    console.log(prepactedTermines);
 
-  checkTermine(termine: any) {
-    if (termine.description && typeof termine.description === "object") {
-      return termine.description;
-    } else if (
-      termine.description &&
-      termine.description.startsWith("{") &&
-      termine.description.endsWith("}")
-    ) {
-      return JSON.parse(termine.description);
-    } else {
-      return {};
-    }
+    return prepactedTermines;
   }
 
   createTermineForGoogleCalendar() {
     this.setAdditionalData();
-    this.setAdditionalDataForGoogleCalendar();
+    this.setAdditionalDataForExternalCalendar();
     this.loaderContent = true;
     this.appointment.value.StartTime =
       this.appointment.value.StartTime.toISOString();
@@ -585,24 +583,22 @@ export class CalendarComponent {
 
   updateTermineForGoogleCalendar(event: any) {
     this.refreshTermine(event, ExecuteAction.update);
+
     if (this.popupOpen && this.isValidForm()) {
       event = this.getValueFromForm(this.config.config, event);
     }
-    this._service.callPostMethod("/api/google/updateTermine", event).subscribe(
-      (data) => {
-        if (!data) {
-          this._toastr.showErrorCustom(
-            this._translate.instant(
-              "actionMessage.errorUpdateTermineOnGoogleCalendarRights"
-            )
-          );
 
-          this.getTermines();
-        }
+    this._calendarService.updateTermineForGoogleCalendar(event).subscribe(
+      (data) => {
+        // this._toastr.showErrorCustom(
+        //   this._translate.instant(
+        //     "actionMessage.errorUpdateTermineOnGoogleCalendarRights"
+        //   )
+        // );
+        // this.getTermines();
       },
       (error) => {
-        this._toastr.showError();
-        // this.getTermines();
+        this.getTermines();
       }
     );
   }
@@ -638,7 +634,7 @@ export class CalendarComponent {
     if (this.calendarSettings.selectedEmployees) {
       for (let i = 0; i < this.calendarSettings.selectedEmployees.length; i++) {
         if (
-          this.checkExternalAccountForGoogle(
+          this.getTokenForExternalCalendar(
             this.calendarSettings.selectedEmployees[i]
           )
         ) {
@@ -648,6 +644,126 @@ export class CalendarComponent {
     }
 
     return array;
+  }
+
+  //#endregion
+
+  //#region MICROSOFT CALENDAR
+
+  executeActionForMicrosoftCalendar(event: any) {
+    if (event.requestType === "eventRemove") {
+      this.deleteTermineFromGoogleCalendar(
+        event.data.length
+          ? {
+              id: event.data[0].id,
+              externalCalendarId: event.data[0].externalCalendarId,
+            }
+          : {
+              id: event.data.id,
+              externalCalendarId: event.data.externalCalendarId,
+            }
+      );
+      this.deleteTermineFromSQL({
+        id: event.data.length ? event.data[0].uuid : event.data.uuid,
+      });
+    } else if (event.requestType === "eventChange") {
+      if (this.popupOpen && this.isValidForm()) {
+        event.data = this.getValueFromForm(this.config.config, event.data);
+      }
+      this.updateTermineForMicrosoftCalendar(event.data);
+      this.updateTermineForSQL(event.data);
+    } else if (event.requestType === "eventCreate") {
+      if (this.isValidForm()) {
+        this.createTermineForMicrosoftCalendar();
+      } else {
+        this._toastr.showError();
+      }
+    }
+
+    this.popupOpen = false;
+  }
+
+  createTermineForMicrosoftCalendar() {
+    this.setAdditionalData();
+    this.setAdditionalDataForExternalCalendar();
+    this.loaderContent = true;
+
+    this.appointment.value.StartTime =
+      this.appointment.value.StartTime.toString();
+    this.appointment.value.EndTime = this.appointment.value.EndTime.toString();
+
+    this._calendarService
+      .createTermineForMicrosoftCalendar(this.appointment.value)
+      .subscribe(
+        (data: any) => {
+          if (data) {
+            this.createTermineForSQL(data.uuid, data.id);
+          } else {
+            this.loaderContent = false;
+            this._toastr.showError();
+          }
+        },
+        (error) => {
+          this._toastr.showError();
+        }
+      );
+  }
+
+  updateTermineForMicrosoftCalendar(event: any) {
+    this.refreshTermine(event, ExecuteAction.update);
+
+    if (this.popupOpen && this.isValidForm()) {
+      event = this.getValueFromForm(this.config.config, event);
+    }
+
+    event.StartTime = event.StartTime.toString();
+    event.EndTime = event.EndTime.toString();
+
+    this._calendarService.updateTermineForMicrosoftCalendar(event).subscribe(
+      (data) => {
+        // this.getTermines();
+      },
+      (error) => {
+        this.getTermines();
+      }
+    );
+  }
+
+  getMyTerminesFromMicrosoftCalendar() {
+    this._calendarService
+      .getMyTerminesFromMicrosoftCalendar(
+        this.calendarSettings.externalAccounts.microsoft
+      )
+      .subscribe((data) => {
+        this.loader = false;
+        setTimeout(() => {
+          if (this.calendar) {
+            if (data) {
+              if ((this.calendar.eventSettings.dataSource as []).length) {
+                this.calendar.eventSettings.dataSource = (
+                  this.calendar.eventSettings.dataSource as any[]
+                ).concat(
+                  this._calendarService.packTerminesFromMicrosoftCalendar(
+                    data,
+                    this.calendarSettings,
+                    this.employeeId
+                  )
+                );
+              } else {
+                this.calendar.eventSettings.dataSource =
+                  this._calendarService.packTerminesFromMicrosoftCalendar(
+                    data,
+                    this.calendarSettings,
+                    this.employeeId
+                  );
+              }
+            } else {
+              this.calendar.eventSettings.dataSource = [];
+            }
+            this.getHolidays();
+          }
+        }, 100);
+      });
   }
 
   //#endregion
@@ -856,8 +972,6 @@ export class CalendarComponent {
 
   //#region EVENTS
 
-  submitEmitter(event: any) {}
-
   onActionBegin(event: any) {
     if (
       event.requestType === "eventCreate" ||
@@ -880,11 +994,15 @@ export class CalendarComponent {
 
   executeActionForCalendar(event) {
     if (
-      this.checkExternalAccountForGoogle(
+      this.getTokenForExternalCalendar(
         event.data.length ? event.data[0].employeeId : event.data.employeeId
       )
     ) {
-      this.executeActionForGoogleCalendar(event);
+      if (this.calendarType === CalendarType.google) {
+        this.executeActionForGoogleCalendar(event);
+      } else if (this.calendarType === CalendarType.microsoft) {
+        this.executeActionForMicrosoftCalendar(event);
+      }
     } else {
       this.executeActionForSQL(event);
     }
@@ -1090,9 +1208,9 @@ export class CalendarComponent {
     );
   }
 
-  setAdditionalDataForGoogleCalendar() {
+  setAdditionalDataForExternalCalendar() {
     this.appointment.controls.externalCalendar.setValue(
-      this.checkExternalAccountForGoogle()
+      this.getTokenForExternalCalendar()
     );
   }
 
@@ -1224,17 +1342,37 @@ export class CalendarComponent {
     }
   }
 
-  checkExternalAccountForGoogle(id?) {
+  getTokenForExternalCalendar(id?) {
     if (this.calendarSettings.externalAccounts) {
       if (this.calendarSettings.externalAccounts[id]) {
-        return this.calendarSettings.externalAccounts[id].google;
+        if (this.calendarSettings.externalAccounts[id].google) {
+          this.calendarType = CalendarType.google;
+          return this.calendarSettings.externalAccounts[id].google;
+        } else if (this.calendarSettings.externalAccounts[id].microsoft) {
+          this.calendarType = CalendarType.microsoft;
+          return this.calendarSettings.externalAccounts[id].microsoft;
+        }
       } else if (this.calendarSettings.externalAccounts[this.employeeId]) {
-        return this.calendarSettings.externalAccounts[this.employeeId].google;
+        if (this.calendarSettings.externalAccounts[this.employeeId].google) {
+          this.calendarType = CalendarType.google;
+          return this.calendarSettings.externalAccounts[this.employeeId].google;
+        } else if (
+          this.calendarSettings.externalAccounts[this.employeeId].microsoft
+        ) {
+          this.calendarType = CalendarType.microsoft;
+          return this.calendarSettings.externalAccounts[this.employeeId]
+            .microsoft;
+        }
       } else if (this.calendarSettings.externalAccounts.google) {
+        this.calendarType = CalendarType.google;
         return this.calendarSettings.externalAccounts.google;
-      } else {
-        return false;
+      } else if (this.calendarSettings.externalAccounts.microsoft) {
+        this.calendarType = CalendarType.microsoft;
+        return this.calendarSettings.externalAccounts.microsoft;
       }
+    } else {
+      this.calendarType = CalendarType.termmy;
+      return CalendarType.termmy;
     }
   }
 
