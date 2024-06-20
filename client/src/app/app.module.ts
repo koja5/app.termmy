@@ -29,6 +29,7 @@ import { LoggedGuard } from "./services/login-guard/logged-guard.service";
 import { AuthInterceptor } from "./services/interceptor/auth-interceptor.service";
 import { HttpLoaderFactory } from "./services/httpLoaderFactory";
 import { BrowserUtils } from "@azure/msal-browser";
+import { DirtycheckGuard } from "./services/guards/dirtycheck.guard";
 
 const appRoutes: Routes = [
   {
@@ -126,7 +127,7 @@ const appRoutes: Routes = [
       },
       multi: true,
       deps: [Router],
-    },
+    }
   ],
   bootstrap: [AppComponent],
 })

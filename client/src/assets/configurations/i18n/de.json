@@ -26,7 +26,11 @@
       "noInformation": "Keine Information",
       "ok": "OK",
       "noData": "Es sind keine Informationen zum Anzeigen vorhanden",
-      "here": "hier"
+      "here": "hier",
+      "discardChangesTitle": "Änderungen verwerfen?",
+      "discardChangesText": "Sie haben nicht gespeicherte Änderungen. Sind Sie sicher, dass Sie sie verwerfen möchten?",
+      "discardChangesConfirm": "Änderungen verwerfen",
+      "discardChangesCancel": "Abbrechen"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",

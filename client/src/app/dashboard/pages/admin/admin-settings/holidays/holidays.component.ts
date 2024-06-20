@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { HelpService } from "app/services/help.service";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
@@ -12,12 +13,13 @@ import Holidays from "date-holidays";
   templateUrl: "./holidays.component.html",
   styleUrls: ["./holidays.component.scss"],
 })
-export class HolidaysComponent {
+export class HolidaysComponent implements CanComponentDeactivate {
   public path = "grids/admin";
   public file = "holidays.json";
   public countries: any;
   public selectedCountry = { id: null, code: null };
   public holidays: any;
+  public isDirty = false;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -27,6 +29,10 @@ export class HolidaysComponent {
     private _helpService: HelpService,
     private _messageService: MessageService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.isDirty;
+  }
 
   ngOnInit() {
     this.getMyHolidays();
@@ -71,6 +77,7 @@ export class HolidaysComponent {
   }
 
   onChangeCountry(event: any) {
+    this.isDirty = true;
     this.holidays = null;
     setTimeout(() => {
       if (event) {
@@ -82,6 +89,7 @@ export class HolidaysComponent {
   }
 
   saveHoliday() {
+    this.isDirty = false;
     this.sendSetupApp();
     this._service
       .callPostMethod("/api/setHoliday", this.selectedCountry)

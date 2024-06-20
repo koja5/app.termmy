@@ -19,17 +19,30 @@ import { BookingSettingsComponent } from "../admin-settings/booking-settings/boo
 import { RemindersComponent } from "../admin-settings/reminders/reminders.component";
 import { LicenseComponent } from "../admin-settings/license/license.component";
 import { HolidaysComponent } from "../admin-settings/holidays/holidays.component";
+import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 
 const routes = [
-  { path: "worktime", component: WorktimeComponent },
+  {
+    path: "worktime",
+    component: WorktimeComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
   { path: "connections", component: ConnectionsComponent },
   { path: "recommended", component: RecommendedComponent },
   { path: "personalize", component: PersonalizeComponent },
   { path: "online-payment", component: OnlinePaymentComponent },
-  { path: "booking-settings", component: BookingSettingsComponent },
+  {
+    path: "booking-settings",
+    component: BookingSettingsComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
   { path: "reminders", component: RemindersComponent },
   { path: "license", component: LicenseComponent },
-  { path: "holidays", component: HolidaysComponent },
+  {
+    path: "holidays",
+    component: HolidaysComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
 ];
 
 @NgModule({

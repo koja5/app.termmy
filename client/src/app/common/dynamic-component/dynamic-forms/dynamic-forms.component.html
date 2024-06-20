@@ -28,7 +28,7 @@
       </div>
     </div>
     <div *ngIf="config && config.additionalInfo === undefined" class="{{ !hideActionButtons ? config.class : '' }}">
-      <form [formGroup]="form" (submit)="handleSubmit($event)">
+      <form [formGroup]="form" (submit)="handleSubmit($event)" (change)="onValueChange($event)">
         <ng-container *ngFor="let field of config.config" dynamicField [config]="field" [group]="form">
         </ng-container>
       </form>

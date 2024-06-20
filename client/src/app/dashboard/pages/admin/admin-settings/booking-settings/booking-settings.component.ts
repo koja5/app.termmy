@@ -1,7 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
 
@@ -10,7 +12,8 @@ import { StorageService } from "app/services/storage.service";
   templateUrl: "./booking-settings.component.html",
   styleUrls: ["./booking-settings.component.scss"],
 })
-export class BookingSettingsComponent {
+export class BookingSettingsComponent implements CanComponentDeactivate {
+  @ViewChild("form") form: DynamicFormsComponent;
   public path = "pages/admin/admin-settings";
   public file = "booking-settings.json";
   public disableEdit = false;
@@ -23,6 +26,10 @@ export class BookingSettingsComponent {
     private _storageService: StorageService,
     private _messageService: MessageService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.form.unsavedChanges();
+  }
 
   ngOnInit() {
     this._service

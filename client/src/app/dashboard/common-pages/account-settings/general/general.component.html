@@ -3,5 +3,5 @@
         (uploadEmitter)="uploadEmitter($event)"></app-avatar-uploader>
 </div>
 
-<app-dynamic-forms [path]="path" [file]="file" (submit)="submit($event)">
+<app-dynamic-forms #form [path]="path" [file]="file" (submit)="submit($event)">
 </app-dynamic-forms>

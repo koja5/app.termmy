@@ -19,7 +19,7 @@
                 <div class="form-check form-check-inline col-12 col-sm-12 mb-2 mt-2">
                     <div class="custom-control custom-switch custom-control-inline">
                         <input type="checkbox" class="custom-control-input" id="{{item.id}}" name="{{item.id}}"
-                            (change)="item.active = !item.active" [checked]="item.active" />
+                            (change)="item.active = !item.active; setIsDirty()" [checked]="item.active" />
                         <label class="custom-control-label" for="{{item.id}}">{{item.name | translate}}
                             {{model}}</label>
                     </div>

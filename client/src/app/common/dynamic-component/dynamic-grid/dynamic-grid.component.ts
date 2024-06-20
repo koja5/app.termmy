@@ -27,6 +27,7 @@ import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm
 import { TranslateService } from "@ngx-translate/core";
 import { MethodRequest } from "app/enums/method-request";
 import { ExecuteAction } from "app/enums/execute-action";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 
 @Component({
   selector: "app-dynamic-grid",
@@ -34,7 +35,7 @@ import { ExecuteAction } from "app/enums/execute-action";
   styleUrls: ["./dynamic-grid.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class DynamicGridComponent {
+export class DynamicGridComponent implements CanComponentDeactivate {
   @Input() public path: string;
   @Input() public file: string;
   @Input() public data: any;
@@ -47,7 +48,10 @@ export class DynamicGridComponent {
   @ViewChild("modalGoogleContacts") modalGoogleContacts: TemplateRef<any>;
   @ViewChild("dialogSyncGoogleContactConfirm")
   dialogSyncGoogleContactConfirm: DialogConfirmComponent;
+  @ViewChild("dialogUnsavedContentConfirm")
+  dialogUnsavedContentConfirm: DialogConfirmComponent;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
+  @ViewChild("form") form1: DynamicFormsComponent;
 
   // Public
   public sidebarToggleRef = false;
@@ -68,6 +72,7 @@ export class DynamicGridComponent {
   public loaderContent = false;
   public googleContacts: any;
   public createNewRecords = true;
+  public stayOpened = false;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -175,6 +180,23 @@ export class DynamicGridComponent {
     if (this._coreSidebarService.getSidebarRegistry(name)) {
       this._coreSidebarService.getSidebarRegistry(name).close();
     }
+  }
+
+  handlerCloseSidebar(event) {
+    if (this.form.unsavedChanges() && event) {
+      this.stayOpened = true;
+      this.dialogUnsavedContentConfirm.showQuestionModal();
+    }
+  }
+
+  confirmUnsavedContent() {
+    this.stayOpened = false;
+    this.form.resetDirty();
+    this._coreSidebarService.getSidebarRegistry("sidebar").close();
+  }
+
+  cancelUnsavedContent() {
+    this.stayOpened = false;
   }
 
   /**
@@ -652,5 +674,9 @@ export class DynamicGridComponent {
       }
     }
     return contacts;
+  }
+
+  unsavedChanges(): boolean {
+    return this.form.unsavedChanges();
   }
 }

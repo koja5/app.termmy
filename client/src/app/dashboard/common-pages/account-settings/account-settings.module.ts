@@ -1,5 +1,11 @@
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { Injectable, NgModule, inject } from "@angular/core";
+import {
+  ActivatedRouteSnapshot,
+  CanDeactivate,
+  CanDeactivateFn,
+  RouterModule,
+  RouterStateSnapshot,
+} from "@angular/router";
 import { DatePickerI18nModule } from "app/common/forms/form-elements/date-time-picker/date-picker-i18n/date-picker-i18n.module";
 import { CommonModule } from "@angular/common";
 import { TimePickerI18nModule } from "app/common/forms/form-elements/date-time-picker/time-picker-i18n/time-picker-i18n.module";
@@ -11,11 +17,24 @@ import { AccountSettingsComponent } from "./account-settings.component";
 import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { AdminCommonModule } from "app/dashboard/pages/admin/common/admin-common.module";
 import { CommonCustomModule } from "app/common/common-custom.module";
+import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 
 const routes = [
-  { path: "general", component: GeneralComponent },
-  { path: "change-password", component: ChangePasswordComponent },
-  { path: "information", component: InformationComponent },
+  {
+    path: "general",
+    component: GeneralComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
+  {
+    path: "change-password",
+    component: ChangePasswordComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
+  {
+    path: "information",
+    component: InformationComponent,
+    canDeactivate: [DirtycheckGuard],
+  },
 ];
 
 @NgModule({

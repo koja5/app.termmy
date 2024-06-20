@@ -295,7 +295,9 @@
     </div>
 
     <!-- Sidebar -->
-    <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="sidebar" overlayClass="modal-backdrop">
+    <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade"
+        (collapsedChangedEvent)="handlerCloseSidebar($event)" [stayOpened]="stayOpened" name="sidebar"
+        overlayClass="modal-backdrop">
         <div class="slideout-content">
             <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
                 <div class="modal-dialog">
@@ -442,6 +444,13 @@
         [content]="('general.syncGoogleContactsQuestionText' | translate)"
         (confirm)="syncGoogleContacts()"></app-dialog-confirm>
     <!-- IMPORT GOOGLE CONTACT -->
+
+
+    <app-dialog-confirm #dialogUnsavedContentConfirm [title]="('general.discardChangesTitle' | translate)"
+        [content]="('general.discardChangesText' | translate)"
+        [confirmButtonText]="('general.discardChangesConfirm' | translate)"
+        [cancelButtonText]="('general.discardChangesCancel' | translate)" (confirm)="confirmUnsavedContent()"
+        (cancel)="cancelUnsavedContent()"></app-dialog-confirm>
 
     <!-- CONFIRM DIALOG -->
 

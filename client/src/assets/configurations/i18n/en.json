@@ -26,8 +26,12 @@
         "noInformation": "No information",
         "ok": "OK",
         "noData": "There is no information to display",
-        "here": "here"
-   },
+        "here": "here",
+        "discardChangesTitle": "Discard changes?",
+        "discardChangesText": "You have unsaved changes. Are you sure you want to discard them?",
+        "discardChangesConfirm": "Discard changes",
+        "discardChangesCancel": "Cancel"
+    },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
         "successExecuteActionTextDefault": "Action is successfully executed!",
@@ -417,7 +421,7 @@
             }
         },
         "pleaseFillPersonalData": "Please enter your personal information, as we use information such as address, your name/company name, etc. when we send SMS to your clients for you! You can fill in the information"
-   },
+    },
     "emailReminder": {
         "title": "Email Reminder",
         "text": "Configure automated Email reminders",
@@ -476,7 +480,7 @@
             }
         },
         "pleaseFillPersonalData": "Please enter your personal information, as we use information such as address, your name/company name, etc. when we email your customers for you! You can fill in the information"
-   },
+    },
     "licenses": {
         "name": "Name",
         "monthlyPrice": "Monthly price",

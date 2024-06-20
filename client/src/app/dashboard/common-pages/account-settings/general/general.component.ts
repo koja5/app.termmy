@@ -1,16 +1,21 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
+import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { ComponentCanDeactivate } from "app/interfaces/component-can-deactivate";
 import { CallApiService } from "app/services/call-api.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { HelpService } from "app/services/help.service";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-general",
   templateUrl: "./general.component.html",
   styleUrls: ["./general.component.scss"],
 })
-export class GeneralComponent {
+export class GeneralComponent implements CanComponentDeactivate {
+  @ViewChild("form") form: DynamicFormsComponent;
   public path = "pages/account-settings";
   public file = "general.json";
   public data: any;
@@ -22,8 +27,7 @@ export class GeneralComponent {
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _messageService: MessageService,
-    private _storageService: StorageService,
-    private _helpService: HelpService
+    private _storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -36,8 +40,11 @@ export class GeneralComponent {
       });
   }
 
+  unsavedChanges(): boolean {
+    return this.form.unsavedChanges();
+  }
+
   submit(event: any) {
-    console.log(event);
     if (event.type != "submit") {
       this._service
         .callPostMethod("api/saveProfileInfo", event)

@@ -13,6 +13,7 @@ import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { FieldConfig } from "app/common/dynamic-component/dynamic-forms/models/field-config";
 import { StorageService } from "app/services/storage.service";
 import { MessageService } from "app/services/message.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 
 @Component({
   selector: "app-worktime",
@@ -20,7 +21,7 @@ import { MessageService } from "app/services/message.service";
   styleUrls: ["./worktime.component.scss"],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
-export class WorktimeComponent implements OnInit {
+export class WorktimeComponent implements OnInit, CanComponentDeactivate {
   public value: any;
   public data: any = {};
   public model: any;
@@ -28,6 +29,7 @@ export class WorktimeComponent implements OnInit {
   public worktimeColor = "#000";
   public loader = false;
   public config = new FieldConfig();
+  public isDirty = false;
 
   constructor(
     private _helpService: HelpService,
@@ -36,6 +38,14 @@ export class WorktimeComponent implements OnInit {
     private _storageService: StorageService,
     private _messageService: MessageService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.isDirty;
+  }
+
+  setIsDirty() {
+    this.isDirty = true;
+  }
 
   ngOnInit(): void {
     this.loader = true;
@@ -60,16 +70,19 @@ export class WorktimeComponent implements OnInit {
   }
 
   addNewWorkTimeForDay(index: number) {
+    this.setIsDirty();
     this.data.value[index].times.push({ start: null, end: null });
   }
 
   removeWorkTimeForDay(i: number, j: number) {
+    this.setIsDirty();
     if (this.data.value[i].times.length > 1) {
       this.data.value[i].times.splice(j, 1);
     }
   }
 
   validateEntry(i: number, j: number) {
+    this.setIsDirty();
     if (
       this.data.value[i].times[j].start.hour &&
       this.data.value[i].times[j].end
@@ -122,6 +135,7 @@ export class WorktimeComponent implements OnInit {
   }
 
   saveWorkTime() {
+    this.isDirty = false;
     if (this.validBeforeSave()) {
       this._service.callPostMethod("/api/setWorktime", this.data).subscribe(
         (data) => {

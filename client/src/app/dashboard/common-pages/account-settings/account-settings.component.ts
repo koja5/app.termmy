@@ -9,6 +9,7 @@ import {
 import { Subject } from "rxjs";
 import { FlatpickrOptions } from "ng2-flatpickr";
 import { ConfigurationService } from "app/services/configuration.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 
 @Component({
   selector: "app-account-settings",
@@ -32,6 +33,9 @@ export class AccountSettingsComponent implements OnInit {
   constructor() {
     this._unsubscribeAll = new Subject();
   }
+  confirm(): boolean {
+    return true;
+  }
 
   /**
    * On init
@@ -45,5 +49,9 @@ export class AccountSettingsComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+
+  isDirty() {
+    return true;
   }
 }

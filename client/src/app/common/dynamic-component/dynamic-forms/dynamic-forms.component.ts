@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { formatDate } from "@angular/common";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { FieldConfig } from "./models/field-config";
 import { FieldsWithAdditionalInfo } from "./models/fields-with-additional-info";
@@ -19,8 +19,8 @@ import { ConfigurationService } from "app/services/configuration.service";
 import { CallApiService } from "app/services/call-api.service";
 import { MessageService } from "app/services/message.service";
 import { FieldType } from "app/enums/field-type";
-import { CoreTranslationService } from "@core/services/translation.service";
-import { takeUntil } from "rxjs/operators";
+import { pairwise, takeUntil } from "rxjs/operators";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { Subject } from "rxjs";
 
 @Component({
@@ -29,7 +29,7 @@ import { Subject } from "rxjs";
   templateUrl: "./dynamic-forms.component.html",
   styleUrls: ["./dynamic-forms.component.scss"],
 })
-export class DynamicFormsComponent implements OnInit {
+export class DynamicFormsComponent implements OnInit, CanComponentDeactivate {
   @Input()
   config!: FormConfig;
   @Input()
@@ -50,10 +50,13 @@ export class DynamicFormsComponent implements OnInit {
   public modalShow: boolean = false;
   private _unsubscribeAll: Subject<any>;
 
+  isDirty = false;
+
   get controls() {
     return this.config.config!.filter(({ type }) => type !== "button");
   }
   get changes() {
+    this.isDirty = true;
     return this.form.valueChanges;
   }
   get valid() {
@@ -67,7 +70,7 @@ export class DynamicFormsComponent implements OnInit {
     private fb: FormBuilder,
     private configurationService: ConfigurationService,
     private apiService: CallApiService,
-    private router: ActivatedRoute,
+    private _activatedRouter: ActivatedRoute,
     private _messageService: MessageService
   ) {
     this._unsubscribeAll = new Subject();
@@ -103,6 +106,14 @@ export class DynamicFormsComponent implements OnInit {
     }
   }
 
+  public unsavedChanges() {
+    return this.isDirty;
+  }
+
+  public resetDirty() {
+    this.isDirty = false;
+  }
+
   ngOnDestroy() {
     this._unsubscribeAll.unsubscribe();
   }
@@ -122,7 +133,6 @@ export class DynamicFormsComponent implements OnInit {
         if (this.config.request && !this.data) {
           this.getData(this.config);
         }
-
         this.checkAdditionallValidation();
       });
   }
@@ -139,6 +149,10 @@ export class DynamicFormsComponent implements OnInit {
     }
   }
 
+  onValueChange(event: any) {
+    this.isDirty = true;
+  }
+
   getConfigurationFile() {
     this.configurationService
       .getConfiguration(this.path, this.file)
@@ -150,7 +164,7 @@ export class DynamicFormsComponent implements OnInit {
   }
 
   getData(data: any) {
-    this.apiService.callApi(data, this.router).subscribe((data) => {
+    this.apiService.callApi(data, this._activatedRouter).subscribe((data) => {
       this.data = data;
       this.setValueToForm(this.config.config, data);
     });
@@ -223,6 +237,7 @@ export class DynamicFormsComponent implements OnInit {
   }
 
   handleSubmit(event: Event) {
+    this.isDirty = false;
     if (this.form.valid) {
       event.preventDefault();
       event.stopPropagation();

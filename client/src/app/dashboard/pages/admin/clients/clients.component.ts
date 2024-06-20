@@ -2,6 +2,7 @@ import { Component, HostListener, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
 import { CallApiService } from "app/services/call-api.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { HelpService } from "app/services/help.service";
 import { MessageService } from "app/services/message.service";
 import { StorageService } from "app/services/storage.service";
@@ -11,7 +12,8 @@ import { StorageService } from "app/services/storage.service";
   templateUrl: "./clients.component.html",
   styleUrls: ["./clients.component.scss"],
 })
-export class ClientsComponent {
+export class ClientsComponent implements CanComponentDeactivate {
+  @ViewChild("grid") grid: DynamicGridComponent;
   @ViewChild(DynamicGridComponent) dynamicGrid;
 
   public path = "grids/admin";
@@ -27,6 +29,10 @@ export class ClientsComponent {
     private _activatedRouter: ActivatedRoute,
     private _helpService: HelpService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.grid.unsavedChanges();
+  }
 
   @HostListener("window:resize", ["$event"])
   onResize(event) {

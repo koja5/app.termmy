@@ -1,14 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 
 @Component({
   selector: "app-change-password",
   templateUrl: "./change-password.component.html",
   styleUrls: ["./change-password.component.scss"],
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements CanComponentDeactivate {
+  @ViewChild("form") form: DynamicFormsComponent;
   public path = "pages/account-settings";
   public file = "change-password.json";
 
@@ -17,6 +20,10 @@ export class ChangePasswordComponent {
     private _toastr: ToastrComponent,
     private _translate: TranslateService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.form.unsavedChanges();
+  }
 
   resetPassword(event) {
     console.log(event);

@@ -21,6 +21,7 @@ export class DialogConfirmComponent {
   @Input() confirmButtonText: string;
   @Input() cancelButtonText: string;
   @Output() confirm = new EventEmitter();
+  @Output() cancel = new EventEmitter();
 
   @ViewChild("modal") modal: TemplateRef<any>;
   public modalDialog: any;
@@ -48,6 +49,7 @@ export class DialogConfirmComponent {
   }
 
   cancelAction() {
+    this.cancel.emit();
     this.modalDialog.close();
   }
 }

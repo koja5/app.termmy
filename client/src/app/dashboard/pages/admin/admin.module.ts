@@ -44,6 +44,7 @@ import { HttpClient } from "@angular/common/http";
 import { ClientsMobileViewComponent } from "./clients/clients-mobile-view/clients-mobile-view.component";
 import { CoreSidebarModule } from "@core/components";
 import { ServicesMobileViewComponent } from "./services/services-mobile-view/services-mobile-view.component";
+import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -99,6 +100,7 @@ const routes = [
   {
     path: "my-clients",
     canActivate: [AdminGuardService],
+    canDeactivate: [DirtycheckGuard],
     component: ClientsComponent,
   },
   {

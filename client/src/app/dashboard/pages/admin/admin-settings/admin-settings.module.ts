@@ -18,6 +18,7 @@ import { AdminCommonModule } from "../common/admin-common.module";
 import { HolidaysComponent } from "./holidays/holidays.component";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SmsCounterComponent } from "../common/sms-counter/sms-counter.component";
+import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 
 const routes = [
   {
@@ -27,6 +28,7 @@ const routes = [
   {
     path: "booking-settings",
     component: BookingSettingsComponent,
+    canDeactivate: [DirtycheckGuard],
   },
   {
     path: "reminders",
@@ -39,6 +41,7 @@ const routes = [
   {
     path: "holidays",
     component: HolidaysComponent,
+    canDeactivate: [DirtycheckGuard],
   },
 ];
 
@@ -63,7 +66,7 @@ const routes = [
     NgbModule,
     CommonCustomModule,
     AdminCommonModule,
-    NgSelectModule
+    NgSelectModule,
   ],
   providers: [],
   exports: [

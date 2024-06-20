@@ -26,9 +26,13 @@
         "noInformation": "Nema informacija",
         "ok": "U redu",
         "noData": "Nema informacija za prikaz",
-        "here": "ovde"
+        "here": "ovde",
+        "discardChangesTitle": "Odbacite promene?",
+        "discardChangesText": "Vaše promene nisu sačuvane. Da li želite da napustite formu pre nego što sačuvate?",
+        "discardChangesConfirm": "Odbaci promene",
+        "discardChangesCancel": "Otkaži"
     },
-   "actionMessage": {
+    "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
         "successExecuteActionTextDefault": "Akcija je uspešno izvršena.",
         "errorExecuteActionTitleDefault": "Nešto se dogodilo",
@@ -67,7 +71,7 @@
         "createNewService": "Kreiraj novu uslugu",
         "noDataFoundFor": "Nije pronađen podatak za",
         "doYouWantToCreateNew": "Da li želite da kreirate novi?"
-   },
+    },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -224,7 +228,7 @@
         "selectedFullPayment": "Klijent je platio pun iznos za zakazanu uslugu(#amount €)",
         "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska.",
         "googleAdditionalCalendars": "Moji ostali kalendari"
-   },
+    },
     "accountSettings": {
         "title": "Podešavanja naloga",
         "general": "Opšta",
@@ -253,7 +257,7 @@
         "ownersCalendarsExplanation": "Za ove kalendare imate potpuna prava. To znači da možete da vidite, dodajete, menjate ili brišete događaje koji su vezani za njih.",
         "readonlyCalendars": "Kalendari samo sa dozvolom čitanja",
         "readonlyCalendarsExplanation": "Za ove kalendare imate samo mogućnost prikaza događaja na vašem kalendaru u Termmy aplikaciji. To znači da ne postoji mogućnost dodavanja ili menjanja događaja koji se nalaze u ovim kalendarima."
-   },
+    },
     "worktime": {
         "monday": "Ponedeljak",
         "tuesday": "Utorak",
@@ -416,7 +420,7 @@
             }
         },
         "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja SMS poruka vašim klijentima umesto vas! Podatke možete popuniti "
-   },
+    },
     "emailReminder": {
         "title": "Email podsetnik",
         "text": "Podesi automatizovani Email podsetnik",
@@ -475,7 +479,7 @@
             }
         },
         "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja email-a vašim klijentima umesto vas! Podatke možete popuniti"
-   },
+    },
     "licenses": {
         "name": "Ime",
         "monthlyPrice": "Mesečna cena",
