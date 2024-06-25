@@ -9,10 +9,8 @@
         class="error must-label m-0">{{'form.mustFillThisField' |
         translate}}</p>
     <div class="input-group form-password-toggle">
-        <int-phone-prefix class="phone-prefix" *ngIf="group.controls[config.field].value"
-            [formControlName]="config.name" [disabled]="config.disabled!"></int-phone-prefix>
-        <int-phone-prefix class="phone-prefix" *ngIf="!group.controls[config.field].value" defaultCountry="{{country}}"
-            [formControlName]="config.name" [disabled]="config.disabled!"></int-phone-prefix>
+        <int-phone-prefix class="phone-prefix" defaultCountry="{{country}}" [formControlName]="config.name"
+            [disabled]="config.disabled!"></int-phone-prefix>
 
 
     </div>

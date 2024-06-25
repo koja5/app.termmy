@@ -32,6 +32,7 @@ import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 import { CalendarService } from "app/services/calendar.service";
 import { CalendarType } from "app/enums/calendar-type";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 declare var require: any;
 
 new DefaultCalendarLanguages();
@@ -46,6 +47,8 @@ export class CalendarComponent {
   public file = "my-calendar.json";
 
   @ViewChild("calendar") calendar: ScheduleComponent;
+  @ViewChild("dialogUnsavedContentConfirm")
+  dialogUnsavedContentConfirm: DialogConfirmComponent;
 
   //CALENDAR VARIABLES
   public resourceDataSource: Object[] = [];
@@ -76,6 +79,8 @@ export class CalendarComponent {
   public currentView = "WorkWeek";
   public googleAdditionalCalendarsList = [];
   public calendarType: CalendarType;
+  public isDirty = false;
+  public calendarEditor: any;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -208,6 +213,7 @@ export class CalendarComponent {
   }
 
   onChangeClient(event: any) {
+    this.isDirty = true;
     this.appointment.controls.client_id.setValue(event.id);
     this.appointment.controls.Subject.setValue(
       event.firstname + " " + event.lastname
@@ -215,6 +221,7 @@ export class CalendarComponent {
   }
 
   onChangeService(event: any) {
+    this.isDirty = true;
     this.appointment.controls.service_id.setValue(event.id);
     this.appointment.controls.EndTime.setValue(
       this._helpService.addMinutes(
@@ -993,6 +1000,7 @@ export class CalendarComponent {
   }
 
   executeActionForCalendar(event) {
+    this.isDirty = false;
     if (
       this.getTokenForExternalCalendar(
         event.data.length ? event.data[0].employeeId : event.data.employeeId
@@ -1035,9 +1043,18 @@ export class CalendarComponent {
   }
 
   onPopupClose(event: any) {
+    if (this.isDirty) {
+      event.cancel = true;
+      this.dialogUnsavedContentConfirm.showQuestionModal();
+    }
     if (event.type === "Editor" && !event.data) {
       this.popupOpen = false;
     }
+  }
+
+  confirmUnsavedContent() {
+    this.isDirty = false;
+    this.calendar.closeEditor();
   }
 
   checkIfExternalCretedTermine(event) {
@@ -1421,4 +1438,8 @@ export class CalendarComponent {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
   //#endregion
+
+  onValueChange(event) {
+    this.isDirty = true;
+  }
 }

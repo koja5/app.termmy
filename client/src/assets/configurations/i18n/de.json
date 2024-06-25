@@ -449,7 +449,10 @@
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
-      "annualPrice": "Jährlicher Preis"
+      "annualPrice": "Jährlicher Preis",
+      "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+      "licenseLimitForClients": "Sie haben die maximal zulässige Anzahl an Clients in der kostenlosen Lizenz erreicht. Bitte verlängern Sie Ihre Lizenz. Sie können das Angebot einsehen",
+      "here": "hier."
    },
    "licenseStatus": {
       "currentPlan": "Aktuelles Abo",

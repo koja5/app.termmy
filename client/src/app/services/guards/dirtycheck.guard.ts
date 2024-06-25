@@ -6,9 +6,11 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
-import { ComponentCanDeactivate } from "app/interfaces/component-can-deactivate";
-import { Observable } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { DialogConfirmTemplateComponent } from "app/common/discard-changes-template/discard-changes-template.component";
+import { Observable, Subject, of } from "rxjs";
+import { map } from "rxjs/operators";
 
 export interface CanComponentDeactivate {
   unsavedChanges(): boolean;
@@ -18,6 +20,29 @@ export interface CanComponentDeactivate {
   providedIn: "root",
 })
 export class DirtycheckGuard implements CanDeactivate<CanComponentDeactivate> {
+  constructor(
+    private _modalService: NgbModal,
+    private _translate: TranslateService
+  ) {}
+
+  async checkConfirmation(): Promise<boolean> {
+    const dialogRef = this._modalService.open(DialogConfirmTemplateComponent, {
+      size: "lg",
+    });
+    dialogRef.componentInstance.confirmMessage =
+      "You have unsaved changes. Are you sure to lose changes?";
+
+    dialogRef.result.then((res) => {
+      console.log(res);
+    });
+
+    let res: boolean = await dialogRef.dismissed.toPromise();
+
+    console.log(dialogRef.componentInstance.confirmed);
+
+    return dialogRef.componentInstance.confirmed;
+  }
+
   canDeactivate(
     component: CanComponentDeactivate,
     currentRoute: ActivatedRouteSnapshot,
@@ -29,8 +54,21 @@ export class DirtycheckGuard implements CanDeactivate<CanComponentDeactivate> {
     | boolean
     | UrlTree {
     if (component.unsavedChanges()) {
-      return confirm("You have unsaved changes?");
+      return confirm(this._translate.instant("general.discardChangesText"));
+      // let subject = new Subject<boolean>();
+      // const modal = this._modalService.open(DialogConfirmTemplateComponent, {
+      //   size: "lg",
+      // });
+
+      // // modal.componentInstance.subject = subject;
+      // // return modal.closed.pipe(map((_) => modal.componentInstance.confirmed));
+      // // return subject.asObservable();
+
+      // this.checkConfirmation();
+      // // subject = modal.componentInstance.confirmed;
+      // // return subject;
     }
+
     // return component.canDeactivate();
   }
 }

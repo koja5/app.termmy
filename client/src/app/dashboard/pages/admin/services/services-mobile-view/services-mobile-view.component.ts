@@ -21,6 +21,8 @@ export class ServicesMobileViewComponent {
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
   @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
   @ViewChild(DialogConfirmComponent) dialogConfirm;
+  @ViewChild("dialogUnsavedContentConfirm")
+  dialogUnsavedContentConfirm: DialogConfirmComponent;
   public config: any;
   public data: any;
   public tempData = [];
@@ -29,6 +31,7 @@ export class ServicesMobileViewComponent {
   public createNewRecords = false;
   public loader = true;
   public selectedItem: any;
+  public stayOpened = false;
 
   constructor(
     private _coreSidebarService: CoreSidebarService,
@@ -79,6 +82,23 @@ export class ServicesMobileViewComponent {
 
   toggleSidebarClose(name): void {
     this._coreSidebarService.getSidebarRegistry(name).close();
+  }
+
+  handlerCloseSidebar(event) {
+    if (this.form.unsavedChanges() && event) {
+      this.stayOpened = true;
+      this.dialogUnsavedContentConfirm.showQuestionModal();
+    }
+  }
+
+  confirmUnsavedContent() {
+    this.stayOpened = false;
+    this.form.resetDirty();
+    this._coreSidebarService.getSidebarRegistry("sidebar-mobile").close();
+  }
+
+  cancelUnsavedContent() {
+    this.stayOpened = false;
   }
 
   resetFormValue() {

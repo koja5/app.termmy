@@ -37,6 +37,7 @@ router.post("/login", function (req, res, next) {
       return res.json(err);
     }
     conn.query(
+      // "select u.*, ul.license_id from users u join user_license ul on u.admin_id = ul.admin_id WHERE u.email=? AND u.password=?",
       "select * from users WHERE email=? AND password=?",
       [req.body.email, sha1(req.body.password)],
       function (err, rows, fields) {
@@ -159,7 +160,7 @@ router.post("/setUpSettingsAfterUserSignUp", function (req, res, next) {
       logger.log("error", err.sql + ". " + err.sqlMessage);
       res.json(err);
     }
-    
+
     // set 100 SMS free by default
     conn.query(
       "insert into sms_count set admin_id = ?, count = ?",
@@ -2267,6 +2268,7 @@ function generateToken(data) {
         lastname: data.lastname,
         type: data.type,
         avatar: data.avatar,
+        license_id: data.license_id,
       },
       email: data.email,
     },

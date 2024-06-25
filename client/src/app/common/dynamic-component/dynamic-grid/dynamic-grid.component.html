@@ -43,7 +43,8 @@
                     <div class="flex-grow-0">
                         <button *ngIf="config.editSettingsRequest && config.editSettingsRequest.add"
                             class="btn btn-primary" rippleEffect
-                            (click)="config.formDialog && config.formDialog.type === 'sidebar' ? toggleSidebar('sidebar') : showModalFormDialog(); createNewRecords = true; resetFormValue()">
+                            (click)="config.formDialog && config.formDialog.type === 'sidebar' ? toggleSidebar('sidebar') : showModalFormDialog(); createNewRecords = true; resetFormValue()"
+                            [disabled]="disabledCreateNew">
                             <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
                                 class="d-none d-sm-inline-block">{{'general.addNew' | translate}}</span>
                         </button>

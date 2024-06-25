@@ -6,23 +6,28 @@ import {
   ViewEncapsulation,
 } from "@angular/core";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 import { DynamicFormsComponent } from "app/common/dynamic-component/dynamic-forms/dynamic-forms.component";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
 import { CallApiService } from "app/services/call-api.service";
 import { ConfigurationService } from "app/services/configuration.service";
+import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 
 @Component({
   selector: "app-clients-mobile-view",
   templateUrl: "./clients-mobile-view.component.html",
   styleUrls: ["./clients-mobile-view.component.scss"],
 })
-export class ClientsMobileViewComponent {
+export class ClientsMobileViewComponent implements CanComponentDeactivate {
   @Input() path: string;
   @Input() file: string;
   @Input() externalAccounts: any;
   @Input() dynamicGrid: DynamicGridComponent;
   @ViewChild("modalForm") modalForm: TemplateRef<any>;
-  @ViewChild(DynamicFormsComponent) form!: DynamicFormsComponent;
+  @ViewChild(DynamicFormsComponent) dynamicForm!: DynamicFormsComponent;
+  @ViewChild("form") form: DynamicFormsComponent;
+  @ViewChild("dialogUnsavedContentConfirm")
+  dialogUnsavedContentConfirm: DialogConfirmComponent;
   public config: any;
   public data: any;
   public tempData = [];
@@ -30,6 +35,7 @@ export class ClientsMobileViewComponent {
   public modalDialog: any;
   public createNewRecords = false;
   public loader = true;
+  public stayOpened = false;
 
   /**
    * Constructor
@@ -43,6 +49,10 @@ export class ClientsMobileViewComponent {
     private _service: CallApiService,
     private _configurationService: ConfigurationService
   ) {}
+
+  unsavedChanges(): boolean {
+    return this.form.unsavedChanges();
+  }
 
   ngOnInit() {
     this.loader = true;
@@ -88,9 +98,26 @@ export class ClientsMobileViewComponent {
     this._coreSidebarService.getSidebarRegistry(name).close();
   }
 
+  handlerCloseSidebar(event) {
+    if (this.form.unsavedChanges() && event) {
+      this.stayOpened = true;
+      this.dialogUnsavedContentConfirm.showQuestionModal();
+    }
+  }
+
+  confirmUnsavedContent() {
+    this.stayOpened = false;
+    this.form.resetDirty();
+    this._coreSidebarService.getSidebarRegistry("sidebar-mobile").close();
+  }
+
+  cancelUnsavedContent() {
+    this.stayOpened = false;
+  }
+
   resetFormValue() {
     for (let i = 0; i < this.config.config.length; i++) {
-      this.form.setValue(
+      this.dynamicForm.setValue(
         this.config.config[i]["name"],
         this.config.config[i].value ? this.config.config[i].value : null,
         this.config.config[i]["type"]
@@ -100,7 +127,7 @@ export class ClientsMobileViewComponent {
 
   setValue(fields: any, values: any) {
     for (let i = 0; i < fields.length; i++) {
-      this.form.setValue(
+      this.dynamicForm.setValue(
         fields[i]["name"],
         values[fields[i]["name"]],
         fields[i]["type"]

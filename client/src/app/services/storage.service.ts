@@ -124,6 +124,12 @@ export class StorageService {
     return false;
   }
 
+  getLicenseId() {
+    if (this.getToken()) {
+      return this.helper.decodeToken(this.getToken()).user.license_id;
+    }
+  }
+
   getAdminIdSha1() {
     if (this.getToken()) {
       return this.helper.decodeToken(this.getToken()).user.admin_id;

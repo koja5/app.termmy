@@ -1,6 +1,7 @@
 import { Component, HostListener, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DynamicGridComponent } from "app/common/dynamic-component/dynamic-grid/dynamic-grid.component";
+import { LicensesType } from "app/enums/licenses-type";
 import { CallApiService } from "app/services/call-api.service";
 import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { HelpService } from "app/services/help.service";
@@ -21,6 +22,10 @@ export class ClientsComponent implements CanComponentDeactivate {
   public externalAccounts: any;
   public phoneNumber: string;
   public isMobile = false;
+  public data: any;
+  public licenseId!: string;
+  public limitClientsNotificationsForFreeLicenses = 25;
+  public limitClientsForFreeLicenses = 30;
 
   constructor(
     private _service: CallApiService,
@@ -43,6 +48,7 @@ export class ClientsComponent implements CanComponentDeactivate {
   ngOnInit() {
     this.isMobile =
       this._helpService.checkIsMobileDevices() || window.innerWidth < 993;
+    this.licenseId = this._storageService.getLicenseId();
     this._service
       .callGetMethod("/api/getExternalAccounts", "")
       .subscribe((data: any) => {
@@ -50,6 +56,10 @@ export class ClientsComponent implements CanComponentDeactivate {
           this.externalAccounts = data[0];
         }
       });
+
+    this._service.callGetMethod("/api/getMyClients", "").subscribe((data) => {
+      this.data = data;
+    });
   }
 
   submit(data) {
@@ -63,5 +73,9 @@ export class ClientsComponent implements CanComponentDeactivate {
         this._messageService.sendSetupApp(setup);
       }
     }
+  }
+
+  getBasicLicense() {
+    return this.licenseId === LicensesType.Standard;
   }
 }

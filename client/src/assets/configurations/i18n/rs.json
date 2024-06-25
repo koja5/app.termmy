@@ -483,7 +483,10 @@
     "licenses": {
         "name": "Ime",
         "monthlyPrice": "Mesečna cena",
-        "annualPrice": "Godišnja cena"
+        "annualPrice": "Godišnja cena",
+        "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+        "licenseLimitForClients": "Popunili ste maksimalni broj klijenata dozvoljenih u besplatnoj licenci. Molimo Vas proširite Vašu licencu. Ponudu možete pogledati",
+        "here": "ovde."
     },
     "licenseStatus": {
         "currentPlan": "Trenutni paket",

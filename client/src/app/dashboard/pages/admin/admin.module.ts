@@ -45,6 +45,7 @@ import { ClientsMobileViewComponent } from "./clients/clients-mobile-view/client
 import { CoreSidebarModule } from "@core/components";
 import { ServicesMobileViewComponent } from "./services/services-mobile-view/services-mobile-view.component";
 import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -151,6 +152,7 @@ const routes = [
     NgSelectModule,
     DateTimePickerModule,
     CoreSidebarModule,
+    NgbModule,
   ],
   providers: [
     DayService,

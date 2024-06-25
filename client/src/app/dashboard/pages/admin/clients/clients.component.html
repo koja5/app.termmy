@@ -1,5 +1,24 @@
+<div *ngIf="getBasicLicense()">
+    <ngb-alert *ngIf="data.length > limitClientsNotificationsForFreeLicenses" [type]="'warning'" [dismissible]="false">
+        <div class="alert-body">
+            {{'licenses.licenseLimitForClientsNotification' | translate}}
+            <a routerLink="/dashboard/admin/payment/license-packages" class="alert-link">{{'licenses.here' |
+                translate}}</a>
+        </div>
+    </ngb-alert>
+
+    <ngb-alert *ngIf="data.length === limitClientsForFreeLicenses" [type]="'danger'" [dismissible]="false">
+        <div class="alert-body">
+            {{'licenses.licenseLimitForClients' | translate}}
+            <a routerLink="/dashboard/admin/payment/license-packages" class="alert-link">{{'licenses.here' |
+                translate}}</a>
+        </div>
+    </ngb-alert>
+</div>
+
 <div class="large-device">
-    <app-dynamic-grid #grid [path]="path" [file]="file" [externalAccounts]="externalAccounts"
+    <app-dynamic-grid *ngIf="data" #grid [path]="path" [file]="file" [data]="data" [externalAccounts]="externalAccounts"
+        [disabledCreateNew]="getBasicLicense() && data.length === limitClientsForFreeLicenses"
         (submit)="submit($event)"></app-dynamic-grid>
 </div>
 <div *ngIf="isMobile" class="small-device">

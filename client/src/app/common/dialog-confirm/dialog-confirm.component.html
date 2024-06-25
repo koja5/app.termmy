@@ -9,12 +9,10 @@
         {{content ? content : 'generalDialog.deleteQuestion' | translate}}
     </div>
     <div class="modal-footer">
-        <button *ngIf="confirmButton" type="button" class="btn btn-danger" (click)="confirmAction()"
-            rippleEffect>
+        <button *ngIf="confirmButton" type="button" class="btn btn-danger" (click)="confirmAction()" rippleEffect>
             {{confirmButtonText ? confirmButtonText : 'generalDialog.yes' | translate}}
         </button>
-        <button *ngIf="cancelButton" type="button" class="btn btn-default" (click)="cancelAction()"
-            rippleEffect>
+        <button *ngIf="cancelButton" type="button" class="btn btn-default" (click)="cancelAction()" rippleEffect>
             {{cancelButtonText ? cancelButtonText : 'generalDialog.no' | translate}}
         </button>
     </div>

@@ -26,14 +26,14 @@
                 </div>
                 <div class="row" *ngFor="let time of item.times; let j = index">
                     <div class="d-flex m-auto text-center">
-                        <div class="form-group m-2">
+                        <div class="form-group m-1">
                             <label for="account-twitter">{{'worktime.from' | translate}}</label>
 
                             <time-picker-i18n [value]="time.start"
                                 (changeValue)="time.start = $event; validateEntry(i, j)" [disabled]="!item.active"
                                 [minuteStep]="30"></time-picker-i18n>
                         </div>
-                        <div class="form-group m-2">
+                        <div class="form-group m-1">
                             <label for="account-twitter">{{'worktime.to' | translate}}</label>
 
                             <time-picker-i18n [value]="time.end" (changeValue)="time.end = $event;  validateEntry(i, j)"

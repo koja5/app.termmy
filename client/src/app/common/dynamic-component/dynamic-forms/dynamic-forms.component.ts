@@ -237,10 +237,10 @@ export class DynamicFormsComponent implements OnInit, CanComponentDeactivate {
   }
 
   handleSubmit(event: Event) {
-    this.isDirty = false;
     if (this.form.valid) {
       event.preventDefault();
       event.stopPropagation();
+      this.isDirty = false;
       this.submit.emit(this.value);
     } else {
       this.form.markAsPending();

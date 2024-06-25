@@ -40,6 +40,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
   @Input() public file: string;
   @Input() public data: any;
   @Input() externalAccounts: any;
+  @Input() disabledCreateNew: boolean = false;
   @Output() submit = new EventEmitter();
   @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;

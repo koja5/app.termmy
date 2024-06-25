@@ -484,7 +484,10 @@
     "licenses": {
         "name": "Name",
         "monthlyPrice": "Monthly price",
-        "annualPrice": "Annual price"
+        "annualPrice": "Annual price",
+        "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+        "licenseLimitForClients": "You have reached the maximum number of clients allowed in the free license. Please extend your license. You can view the offer",
+        "here": "here."
     },
     "licenseStatus": {
         "currentPlan": "Current plan",

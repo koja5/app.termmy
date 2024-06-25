@@ -68,7 +68,7 @@
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <div>
-                                    <form #f="ngForm" [formGroup]="appointment">
+                                    <form #f="ngForm" [formGroup]="appointment" (change)="onValueChange($event)">
                                         <div class="row">
                                             <div class="col-12 mb-1 mt-1">
                                                 <label>{{'myCalendar.client' | translate}} <span class="error"
@@ -262,3 +262,14 @@
 
 
 <!-- END SIDEBAR -->
+
+
+<!-- CONFIRM DIALOG -->
+
+<app-dialog-confirm #dialogUnsavedContentConfirm [title]="('general.discardChangesTitle' | translate)"
+    [content]="('general.discardChangesText' | translate)"
+    [confirmButtonText]="('general.discardChangesConfirm' | translate)"
+    [cancelButtonText]="('general.discardChangesCancel' | translate)"
+    (confirm)="confirmUnsavedContent()"></app-dialog-confirm>
+
+<!-- END CONFIRM DIALOG -->
