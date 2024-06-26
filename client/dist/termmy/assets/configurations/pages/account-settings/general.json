@@ -1,0 +1,69 @@
+{
+    "request": {
+        "type": "GET",
+        "api": "/api/getProfileInfo",
+        "parameters": [],
+        "fields": "",
+        "root": ""
+    },
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "firstname",
+            "title": "commonFields.firstname",
+            "field": "firstname"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "lastname",
+            "title": "commonFields.lastname",
+            "field": "lastname"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email",
+            "readonly": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "position",
+            "title": "commonFields.position",
+            "field": "position"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "company",
+            "title": "commonFields.company",
+            "field": "company"
+        },
+        {
+            "type": "button",
+            "request": {
+                "type": "POST",
+                "api": "/api/saveProfileInfo",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "response": "toastr",
+            "width": "col-md-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "Save changes",
+            "field": "submitAndPay",
+            "positionClass": "text-right mt-3 col-md-12"
+        }
+    ]
+}

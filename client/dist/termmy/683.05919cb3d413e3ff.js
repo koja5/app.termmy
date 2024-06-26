@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktermmy=self.webpackChunktermmy||[]).push([[683],{2683:(l,n,t)=>{t.r(n),t.d(n,{LocationViewModule:()=>r});var s=t(7615),u=t(6895),a=t(5062);const c=[];let r=(()=>{class o{static#t=this.\u0275fac=function(i){return new(i||o)};static#o=this.\u0275mod=a.oAB({type:o});static#n=this.\u0275inj=a.cJS({imports:[u.ez,s.Bz.forChild(c),s.Bz]})}return o})()}}]);
