@@ -153,6 +153,30 @@ router.post("/sendEmailForNewsletter", function (req, res, next) {
   });
 });
 
+router.post("/sendRequestToBeAPartner", function (req, res, next) {
+  var body = JSON.parse(
+    fs.readFileSync(
+      "./providers/mail_server/mail_config/request_to_be_a_partner.json",
+      "utf-8"
+    )
+  );
+
+  body["client_name"] = req.body.firstname + " " + req.body.lastname;
+  body["client_email"] = "info@termmy.com";
+
+  console.log(body);
+
+  var options = prepareOptionsForRequest(body);
+
+  request(options, function (error, response, body) {
+    if (!error) {
+      res.json(true);
+    } else {
+      res.json(false);
+    }
+  });
+});
+
 //#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {

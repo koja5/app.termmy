@@ -1,0 +1,6 @@
+<ngb-alert [type]="type" [dismissible]="dismissible">
+    <h4 class="alert-heading" *ngIf="title">{{title}}</h4>
+    <div class="alert-body" *ngIf="text">
+        {{text}}
+    </div>
+</ngb-alert>

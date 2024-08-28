@@ -8,6 +8,7 @@ import { DynamicModule } from "app/common/dynamic-component/dynamic.module";
 import { SmsPackagesComponent } from "./sms-packages/sms-packages.component";
 import { GatewayCountryPrefixComponent } from "./gateway-country-prefix/gateway-country-prefix.component";
 import { LicensesComponent } from "./licenses/licenses.component";
+import { AllVoucherPartnersComponent } from "./all-voucher-partners/all-voucher-partners.component";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     canActivate: [SuperadminGuardService],
     component: LicensesComponent,
   },
+  {
+    path: "all-voucher-partners",
+    canActivate: [SuperadminGuardService],
+    component: AllVoucherPartnersComponent,
+  },
 ];
 
 @NgModule({
@@ -38,6 +44,7 @@ const routes = [
     SmsPackagesComponent,
     GatewayCountryPrefixComponent,
     LicensesComponent,
+    AllVoucherPartnersComponent,
   ],
   imports: [
     CommonModule,

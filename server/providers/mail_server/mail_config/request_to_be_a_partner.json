@@ -1,0 +1,15 @@
+{
+    "template": "request_to_be_a_partner.hjs",
+    "subject": "Neue Anfrage für Termmy-Partner",
+    "greetings": "Hey,",
+    "thanksForSignup": "Danke für's Registrieren! 👋",
+    "message": "Sie haben eine neue Anfrage für einen Termmy-Partner erhalten.",
+    "ifYouNotSignUp": "Wenn Sie sich nicht bei Termmy angemeldet haben, ignorieren Sie bitte diese E-Mail oder kontaktieren Sie uns unter",
+    "verifyNow": "E-Mail jetzt bestätigen →",
+    "greetingsEnd": "Danke,",
+    "termmyTeam": "Das Termmy-Team",
+    "acceptOurTerms": "Die Nutzung unseres Dienstes und unserer Website unterliegt unseren",
+    "terms": "Nutzungsbedingungen",
+    "and": "und",
+    "privacyPolicy": "Datenschutzrichtlinie"
+}

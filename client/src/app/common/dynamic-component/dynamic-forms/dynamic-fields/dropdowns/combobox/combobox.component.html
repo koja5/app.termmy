@@ -10,7 +10,7 @@
         |
         translate}}</p>
     <ng-select [items]="data" [bindLabel]="config.field.text" [bindValue]="config.field.value" [closeOnSelect]="true"
-        [searchable]="config.searchable" [loading]="loading"
+        [searchable]="!config.searchable ? true : config.searchable" [loading]="loading"
         class="{{ config.class }} {{group.controls[config.name].status === 'INVALID' && (group.pending || group.controls[config.name].touched) ? 'error' : ''}}"
         [id]="config.name" [placeholder]="config.placeholder ? (config.placeholder) : ''"
         [ignoreAccent]="config.fieldConfig?.ignoreAccent" [filterBarPlaceholder]="config.fieldConfig?.filterPlaceholder"

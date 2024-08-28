@@ -1,4 +1,5 @@
-<span class="fa fa-question-circle-o explanation-mark {{fontSize}}" ngbTooltip="{{explanation | translate}}"
-    triggers="click:blur">
-
+<span *ngIf="!text" class="fa fa-question-circle-o explanation-mark {{fontSize}}"
+    ngbTooltip="{{explanation | translate}}" triggers="click:blur">
 </span>
+
+<span class="cursor-pointer" *ngIf="text" ngbTooltip="{{explanation | translate}}" triggers="click:blur">{{text}}</span>

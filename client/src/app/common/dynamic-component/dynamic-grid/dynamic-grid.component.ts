@@ -300,7 +300,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
         .getConfiguration(this.path, this.file)
         .subscribe((data) => {
           this.config = data;
-          if (this.config.request) {
+          if (this.config.request && !this.data) {
             this._coreConfigService.config
               .pipe(takeUntil(this._unsubscribeAll))
               .subscribe((config) => {

@@ -4,7 +4,7 @@
 <form class="validate-form" *ngIf="!loader">
     <div class="row">
         <!-- social header -->
-        <div class="col-12">
+        <div class="col-6">
             <div class="align-items-center mb-2">
                 <i data-feather="link" class="font-medium-3"></i>
                 <h4 class="ml-75">{{'recommended.title' | translate}} <app-explanation-mark
@@ -13,28 +13,57 @@
             </div>
         </div>
         <div class="col-12 pt-2 pb-2 border-top">
-            <div class="status text-center">
-                <span class="fa fa-gift gift-icon"></span>
-                <h4 class="mb-0 font-weight-bolder">{{smsCount}} {{'recommended.smsBonus' | translate}}</h4>
-                <p>{{'recommended.numberOfSmsBonus' | translate}}</p>
-                <div class="mb-1" *ngIf="smsCount > 0 || pickedUpSms">
-                    <div *ngIf="pickedUpSms">
-                        <p class="badge badge-light-success">{{'recommended.successfullyPickedUpSms'
-                            | translate}}</p>
-                        <a class="d-block" routerLink="/dashboard/admin/admin-settings/reminders">{{'recommended.goToCheckAvailableSms'
-                            |
-                            translate}}</a>
+            <div class="row">
+                <div class="col-6">
+                    <div class="status text-center">
+                        <span class="fa fa-gift gift-icon"></span>
+                        <h4 class="mb-0 font-weight-bolder">{{smsCount}} {{'recommended.smsBonus' | translate}}</h4>
+                        <p>{{'recommended.numberOfSmsBonus' | translate}}</p>
+                        <div class="mb-1" *ngIf="smsCount > 0 || pickedUpSms">
+                            <div *ngIf="pickedUpSms">
+                                <p class="badge badge-light-success">{{'recommended.successfullyPickedUpSms'
+                                    | translate}}</p>
+                                <a class="d-block"
+                                    routerLink="/dashboard/admin/admin-settings/reminders">{{'recommended.goToCheckAvailableSms'
+                                    |
+                                    translate}}</a>
+                            </div>
+                            <a class="btn btn-outline-primary" *ngIf="smsCount > 0" (click)="pickUpSmsBonus()">
+                                <app-small-loader *ngIf="loaderContent"></app-small-loader>
+                                {{'recommended.pickUpSmsBonus' |
+                                translate}}</a>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" (click)="copyRecommendedLinkToClipboard()"><span
+                                    class="fa fa-link"></span> {{'recommended.getRecommendedLink'
+                                | translate}}</a>
+                        </div>
                     </div>
-                    <a class="btn btn-outline-primary" *ngIf="smsCount > 0"
-                        (click)="pickUpSmsBonus()"> <app-small-loader *ngIf="loaderContent"></app-small-loader> {{'recommended.pickUpSmsBonus' | translate}}</a>
                 </div>
-                <div>
-                    <a class="btn btn-primary" (click)="copyRecommendedLinkToClipboard()"><span
-                            class="fa fa-link"></span> {{'recommended.getRecommendedLink'
-                        | translate}}</a>
+                <div class="col-6">
+                    <div class="status text-center">
+                        <span class="fa fa-credit-card gift-icon"></span>
+                        <div *ngIf="voucher">
+                            <h4 class="mb-0 font-weight-bolder">{{voucher.voucher_code}}</h4>
+                            <p>{{'recommended.voucherCode' | translate}}</p>
+                            <a class="btn btn-outline-primary" (click)="copyRecommendedVoucherCodeToClipboard()"><span
+                                    class="fa fa-link"></span> {{'recommended.copyVoucherCode'
+                                | translate}}</a>
+                        </div>
+                        <div *ngIf="!voucher">
+                            <p class="m-0 font-weight-bold">{{'recommended.termmyPartnerTitle' | translate}}</p>
+                            <!-- <a class="btn btn-default full-width pt-0 pb-1 read-more">Read more</a> -->
+                            <div class="full-width pb-1">
+                                <app-explanation-mark [text]="'general.readMore' | translate"
+                                    [explanation]="'recommended.explanationForTermmyPartner' | translate"></app-explanation-mark>
+                            </div>
+                            <a class="btn btn-outline-primary" (click)="sendRequestToBePartner()"><span
+                                    class="fa fa-link"></span> {{'recommended.becomeATermmyPartner'
+                                | translate}}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="archive mt-4" *ngIf="data">
                 <h6 class="border-bottom pb-1">{{'recommended.registeredThroughLink' | translate}}</h6>
                 <app-dynamic-grid [data]="data" [path]="path" [file]="file"></app-dynamic-grid>
@@ -42,3 +71,7 @@
         </div>
     </div>
 </form>
+
+<app-dialog-confirm [title]="('general.executeActionQuestionTitle' | translate)"
+    [content]="('recommended.becomeATermmyPartnerQuestion' | translate)"
+    (confirm)="confirmSendRequestToBePartner()"></app-dialog-confirm>

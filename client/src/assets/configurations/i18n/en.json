@@ -30,7 +30,10 @@
         "discardChangesTitle": "Discard changes?",
         "discardChangesText": "You have unsaved changes. Are you sure you want to discard them?",
         "discardChangesConfirm": "Discard changes",
-        "discardChangesCancel": "Cancel"
+        "discardChangesCancel": "Cancel",
+        "readMore": "Read more",
+        "executeActionQuestionTitle": "Are you sure?",
+        "executeActionQuestionText": "Do you want to execute this action?"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
@@ -70,7 +73,9 @@
         "createNewClient": "Create new client",
         "createNewService": "Create new service",
         "noDataFoundFor": "No data found for",
-        "doYouWantToCreateNew": "Do you want to create new?"
+        "doYouWantToCreateNew": "Do you want to create new?",
+        "voucherCode": "Voucher code",
+        "discount": "Discount"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -146,7 +151,8 @@
         "recommended": "Recommended",
         "smsPackages": "Sms packages",
         "gatewayCountryPrefix": "Country prefix",
-        "licenses": "Licenses"
+        "licenses": "Licenses",
+        "allVoucherPartners": "All voucher partners"
     },
     "navBar": {
         "profile": "Profile",
@@ -294,7 +300,15 @@
         "utilizedDate": "Utilized date",
         "successfullyPickedUpSms": "Successfuly picked up sms",
         "goToCheckAvailableSms": "Go to check available sms",
-        "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard."
+        "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard.",
+        "voucherCode": "Your voucher code",
+        "termmyPartnerTitle": "Do you want to be a Termmy partner?",
+        "copyVoucherCode": "COPY VOUCHER CODE",
+        "successfullyCopiedVoucherCodeToClipboard": "Successfully copied voucher code to clipboard.",
+        "becomeATermmyPartner": "BECOME A TERMMY PARTNER",
+        "becomeATermmyPartnerQuestion": "Do you want to become a Termmy partner?",
+        "explanationForTermmyPartner": "If you want to be Termmy partner, we will give you voucher code. That voucher code you can send to your friends, they will get discount price for licenses and you also will received on your account percentage of the payment.",
+        "successfullySendRequestToBePartner": "Successfuly send request to become a Termmy partner. You will received voucher code after Termmy team check your account and approve this offer for you."
     },
     "adminSettings": {
         "adminSettings": "Admin settings",
@@ -513,7 +527,7 @@
         "annualSubscription": "I want to extend one YEAR",
         "discount5": "-5 % discount",
         "discount10": "-10 % discount",
-        "payForLicense": "Pay for license",
+        "payForLicense": "Pay #amount for license",
         "successfullyPaidLicense": "Successfully paid license"
     },
     "licensePackages": {
@@ -586,7 +600,7 @@
         "backToHome": "Back to Home"
     },
     "paymentProcessing": {
-        "buttonText": "Pay #amount €",
+        "buttonText": "Pay €#amount",
         "acceptTermsAndPrivacyPolicyOne": "By submitting this order, you accept the ",
         "acceptTermsAndPrivacyPolicyTerms": "General Terms",
         "acceptTermsAndPrivacyPolicyTermsAnd": "and",
@@ -604,7 +618,12 @@
         "fillLastname": "Please fill your lastname",
         "fillEmail": "Please fill your email",
         "fillPhone": "Please fill your phone",
-        "errorPayment": "An error occurred during payment! Please check the correctness of the entered data and check the balance on your card."
+        "errorPayment": "An error occurred during payment! Please check the correctness of the entered data and check the balance on your card.",
+        "voucherTitle": "Voucher code",
+        "voucherPlaceholder": "Enter the voucher code to get a discount on this price",
+        "voucherApplyButton": "APPLY",
+        "voucherAppliedCode": "You have successfully entered the discount code from #discount. Payment amount is discounted #discountAmount.",
+        "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!"
     },
     "buyMoreSms": {
         "title": "Buy SMS",

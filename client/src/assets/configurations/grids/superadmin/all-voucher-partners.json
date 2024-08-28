@@ -2,7 +2,7 @@
     "pageSize": 10,
     "request": {
         "type": "GET",
-        "api": "/api/getMyClients",
+        "api": "/api/getVoucherPartners",
         "parameters": [],
         "fields": "",
         "root": ""
@@ -29,12 +29,8 @@
     },
     "formDialog": {
         "type": "sidebar",
-        "closeAfterExecute": false,
         "size": "lg"
     },
-    "options": [
-        "syncGoogleContacts"
-    ],
     "customGrouping": false,
     "allowResizing": true,
     "reorderable": true,
@@ -45,36 +41,17 @@
     "reset": true,
     "editSettingsRequest": {
         "add": {
-            "method": "setClientToGoogle",
             "type": "POST",
-            "api": "/api/setClient",
+            "api": "/api/setVoucherPartner",
             "parameters": [],
             "fields": "",
             "root": ""
-        },
-        "delete": {
-            "type": "POST",
-            "api": "/api/deleteClient",
-            "parameters": [],
-            "fields": "",
-            "root": "",
-            "additionalRequest": [
-                {
-                    "method": "deleteClientFromGoogle",
-                    "request": {
-                        "type": "POST",
-                        "api": "/api/google/deleteClient",
-                        "parameters": [],
-                        "fields": "",
-                        "root": ""
-                    }
-                }
-            ]
         }
     },
     "columns": [
         {
             "title": "commonFields.action",
+            "width": 100,
             "template": {
                 "type": "action",
                 "actionMode": {
@@ -97,22 +74,10 @@
                             "executeAction": {
                                 "request": {
                                     "type": "POST",
-                                    "api": "/api/deleteClient",
+                                    "api": "/api/deleteVoucherPartner",
                                     "parameters": [],
                                     "fields": "",
-                                    "root": "",
-                                    "additionalRequest": [
-                                        {
-                                            "method": "deleteClientFromGoogle",
-                                            "request": {
-                                                "type": "POST",
-                                                "api": "/api/google/deleteClient",
-                                                "parameters": [],
-                                                "fields": "",
-                                                "root": ""
-                                            }
-                                        }
-                                    ]
+                                    "root": ""
                                 },
                                 "response": "toastr",
                                 "showQuestionBeforeExecute": true,
@@ -128,6 +93,60 @@
             }
         },
         {
+            "title": "commonFields.active",
+            "width": 150,
+            "template": {
+                "choices": [
+                    {
+                        "field": "active",
+                        "value": 0,
+                        "operator": "==",
+                        "apart": {
+                            "title": "general.inactive",
+                            "badge": "badge badge-pill badge-light-danger"
+                        }
+                    },
+                    {
+                        "field": "active",
+                        "value": 1,
+                        "operator": "==",
+                        "apart": {
+                            "title": "general.active",
+                            "badge": "badge badge-pill badge-light-success"
+                        }
+                    }
+                ]
+            },
+            "field": "active",
+            "filter": {
+                "type": "CheckBox"
+            }
+        },
+        {
+            "title": "commonFields.voucherCode",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "voucher_code",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.discount",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "discount",
+            "validation": {
+                "required": true
+            }
+        },
+        {
             "title": "commonFields.firstname",
             "filterable": true,
             "hideable": true,
@@ -147,18 +166,6 @@
             "type": "string",
             "class": "text-align-right",
             "field": "lastname",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "title": "commonFields.telephone",
-            "filterable": true,
-            "hideable": true,
-            "filter": "date",
-            "type": "string",
-            "class": "text-align-right",
-            "field": "telephone",
             "validation": {
                 "required": true
             }
@@ -174,123 +181,99 @@
             "validation": {
                 "required": true
             }
+        },
+        {
+            "title": "commonFields.telephone",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "telephone",
+            "validation": {
+                "required": true
+            }
         }
     ],
     "config": [
         {
             "type": "textbox",
-            "width": "col-md-12 hidden",
+            "width": "col-md-12 hide",
             "class": "e-outline",
             "name": "id",
             "title": "ID",
             "field": "id",
-            "readonly": true,
-            "hidden": true
+            "readonly": true
         },
         {
-            "type": "textbox",
-            "width": "col-md-12 hidden",
-            "class": "e-outline",
-            "name": "resourceName",
-            "title": "resourceName",
-            "field": "resourceName",
-            "readonly": true,
-            "hidden": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "firstname",
-            "title": "commonFields.firstname",
-            "field": "firstname",
-            "required": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "lastname",
-            "title": "commonFields.lastname",
-            "field": "lastname",
-            "required": true
-        },
-        {
-            "type": "phoneprefix",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "telephone",
-            "title": "commonFields.telephone",
-            "field": "telephone",
-            "required": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "email",
-            "title": "commonFields.email",
-            "field": "email"
-        },
-        {
-            "type": "radio",
-            "width": "col-md-6",
-            "name": "gender",
-            "title": "commonFields.gender",
-            "dataArray": [
-                {
-                    "title": "commonFields.man",
-                    "id": "man",
-                    "class": "mb-75"
-                },
-                {
-                    "title": "commonFields.woman",
-                    "id": "woman"
-                }
-            ],
-            "oneLine": true,
-            "field": "gender"
-        },
-        {
-            "type": "datepicker",
-            "width": "col-md-6",
-            "name": "birthday",
-            "title": "commonFields.birthday",
-            "field": "birthday",
-            "format": "dd.MM.yyyy"
-        },
-        {
-            "type": "textbox",
+            "type": "combobox",
             "width": "col-md-12",
             "class": "e-outline",
-            "name": "address",
-            "title": "commonFields.address",
-            "field": "address"
+            "name": "id_user",
+            "title": "commonFields.name",
+            "field": {
+                "text": "name",
+                "value": "id"
+            },
+            "fieldTemplate": {
+                "fields": [
+                    {
+                        "type": "text",
+                        "values": [
+                            "firstname",
+                            "",
+                            "lastname"
+                        ]
+                    }
+                ]
+            },
+            "request": {
+                "type": "GET",
+                "api": "/api/getUsers",
+                "parameters": [],
+                "fields": "",
+                "root": ""
+            },
+            "fieldConfig": {
+                "ignoreAccent": false,
+                "filter": true
+            },
+            "required": true
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
-            "name": "zip",
-            "title": "commonFields.zip",
-            "field": "zip"
+            "name": "voucher_code",
+            "title": "commonFields.voucherCode",
+            "field": "voucher_code",
+            "required": true
         },
         {
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
-            "name": "city",
-            "title": "commonFields.city",
-            "field": "city"
+            "name": "discount",
+            "title": "commonFields.discount",
+            "field": "discount",
+            "required": true
+        },
+        {
+            "type": "switch",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "active",
+            "title": "commonFields.active",
+            "field": "active"
         },
         {
             "type": "button",
-            "width": "col-12",
+            "width": "col-md-12",
             "class": "btn btn-primary",
             "name": "submit",
             "title": "general.save",
             "field": "submit",
-            "positionClass": "text-right mt-3 col-12"
+            "positionClass": "text-right mt-3 col-md-12"
         }
     ]
 }

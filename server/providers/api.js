@@ -1058,7 +1058,7 @@ router.post("/setService", auth, function (req, res) {
         function (err, rows) {
           conn.release();
           if (!err) {
-            res.json(true);
+            res.json(req.body);
           } else {
             logger.log("error", err.sql + ". " + err.sqlMessage);
             res.json(false);
@@ -1073,7 +1073,7 @@ router.post("/setService", auth, function (req, res) {
         function (err, rows) {
           conn.release();
           if (!err) {
-            res.json(true);
+            res.json(req.body);
           } else {
             logger.log("error", err.sql + ". " + err.sqlMessage);
             res.json(false);
@@ -1293,7 +1293,9 @@ router.post("/setClient", auth, function (req, res) {
     }
 
     req.body.admin_id = req.user.user.admin_id;
-    req.body.birthday = new Date(req.body.birthday);
+    if (req.body.birthday) {
+      req.body.birthday = new Date(req.body.birthday);
+    }
 
     if (req.body.id) {
       delete req.body.guuid;
@@ -2094,7 +2096,165 @@ router.post("/cancelSubscription", auth, function (req, res, next) {
   });
 });
 
+router.get("/checkVoucherCode/:voucherCode", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from voucher_partner where voucher_code like ?",
+          [req.params.voucherCode],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows.length ? rows[0] : false);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setVoucherUsed", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.id_user_used_voucher = req.user.user.id;
+
+    conn.query(
+      "INSERT INTO vouchers_used set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.get("/getVoucherCode", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from voucher_partner where id_user = ?",
+          [req.user.user.id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows.length ? rows[0] : false);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
 //#endregion
+
+//#region VOUCHER PARTNERS
+
+router.get("/getVoucherPartners", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select vp.*, CONCAT(vp.discount, '%') as 'discount',u.firstname, u.lastname, u.email, u.telephone from voucher_partner vp join users u on vp.id_user = u.id",
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+router.post("/setVoucherPartner", auth, function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "INSERT INTO voucher_partner set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/deleteVoucherPartner", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "delete from voucher_partner where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+//#region
 
 //#region HOLIDAYS
 router.get("/getMyHolidays", auth, function (req, res) {

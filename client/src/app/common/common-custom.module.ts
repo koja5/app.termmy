@@ -16,6 +16,7 @@ import { CardTemplateComponent } from "./card-template/card-template.component";
 import { NoDataComponent } from "./no-data/no-data.component";
 import { GoogleSigninComponent } from './google-signin/google-signin.component';
 import { DialogConfirmTemplateComponent } from './discard-changes-template/discard-changes-template.component';
+import { AlertComponent } from './alert/alert.component';
 
 const appRoutes: Routes = [];
 
@@ -30,6 +31,7 @@ const appRoutes: Routes = [];
     NoDataComponent,
     GoogleSigninComponent,
     DialogConfirmTemplateComponent,
+    AlertComponent,
   ],
   imports: [
     CommonModule,

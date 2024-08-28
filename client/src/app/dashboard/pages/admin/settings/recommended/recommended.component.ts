@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
+import { VoucherPartnerModel } from "app/models/voucher-partner.model";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 import { StorageService } from "app/services/storage.service";
@@ -11,6 +13,7 @@ import { StorageService } from "app/services/storage.service";
   styleUrls: ["./recommended.component.scss"],
 })
 export class RecommendedComponent {
+  @ViewChild(DialogConfirmComponent) dialogConfirm;
   public loader = false;
   public loaderContent = false;
   public path = "grids/admin";
@@ -18,6 +21,7 @@ export class RecommendedComponent {
   public data: any;
   public smsCount: number = 0;
   public pickedUpSms = false;
+  public voucher = new VoucherPartnerModel();
 
   constructor(
     private _helpService: HelpService,
@@ -34,6 +38,8 @@ export class RecommendedComponent {
         this.data = data;
         this.getNumberOfNotUtilizedSms();
       });
+
+    this.getVoucherCode();
   }
 
   copyRecommendedLinkToClipboard() {
@@ -45,6 +51,15 @@ export class RecommendedComponent {
     this._toastr.showSuccessCustom(
       this._translate.instant(
         "recommended.successfullyCopiedRecommendedLinkToClipboard"
+      )
+    );
+  }
+
+  copyRecommendedVoucherCodeToClipboard() {
+    this._helpService.copyToClipboard(this.voucher.voucher_code);
+    this._toastr.showSuccessCustom(
+      this._translate.instant(
+        "recommended.successfullyCopiedVoucherCodeToClipboard"
       )
     );
   }
@@ -64,5 +79,33 @@ export class RecommendedComponent {
         this.pickedUpSms = true;
       }
     });
+  }
+
+  getVoucherCode() {
+    this._service
+      .callGetMethod("api/getVoucherCode")
+      .subscribe((data: VoucherPartnerModel) => {
+        this.voucher = data;
+      });
+  }
+
+  sendRequestToBePartner() {
+    this.dialogConfirm.showQuestionModal();
+  }
+
+  confirmSendRequestToBePartner() {
+    console.log("TEST");
+    this._service
+      .callPostMethod(
+        "/api/mail-server/sendRequestToBeAPartner",
+        this._storageService.getDecodeToken()
+      )
+      .subscribe((data) => {
+        this._toastr.showInfoCustom(
+          this._translate.instant(
+            "recommended.successfullySendRequestToBePartner"
+          )
+        );
+      });
   }
 }

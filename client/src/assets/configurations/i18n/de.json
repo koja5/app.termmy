@@ -30,7 +30,10 @@
       "discardChangesTitle": "Änderungen verwerfen?",
       "discardChangesText": "Sie haben nicht gespeicherte Änderungen. Sind Sie sicher, dass Sie sie verwerfen möchten?",
       "discardChangesConfirm": "Änderungen verwerfen",
-      "discardChangesCancel": "Abbrechen"
+      "discardChangesCancel": "Abbrechen",
+      "readMore": "Mehr lesen",
+      "executeActionQuestionTitle": "Bist du sicher?",
+      "executeActionQuestionText": "Möchten Sie diese Aktion ausführen?"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
@@ -70,7 +73,9 @@
       "createNewClient": "Neuen Client erstellen",
       "createNewService": "Neuen Dienst erstellen",
       "noDataFoundFor": "Keine Daten gefunden für",
-      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?"
+      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?",
+      "voucherCode": "Gutscheincode",
+      "discount": "Rabatt"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -111,7 +116,8 @@
       "recommended": "Empfehlung",
       "smsPackages": "SMS Paket",
       "gatewayCountryPrefix": "Länder-Vorwahl",
-      "licenses": "Lizenzen"
+      "licenses": "Lizenzen",
+      "allVoucherPartners": "Alle Gutscheinpartner"
    },
    "navBar": {
       "profile": "Profil",
@@ -259,7 +265,15 @@
       "utilizedDate": "Nutzungsdatum",
       "successfullyPickedUpSms": "SMS erfolgreich abgeholt",
       "goToCheckAvailableSms": "Verfügbare SMS überprüfen",
-      "successfullyCopiedRecommendedLinkToClipboard": "Empfehlungs-Link erfolgreich in die Zwischenablage kopiert."
+      "successfullyCopiedRecommendedLinkToClipboard": "Empfehlungs-Link erfolgreich in die Zwischenablage kopiert.",
+      "voucherCode": "Ihr Gutscheincode",
+      "termmyPartnerTitle": "Möchten Sie Termmy-Partner werden?",
+      "copyVoucherCode": "GUTSCHEINCODE KOPIEREN",
+      "successfullyCopiedVoucherCodeToClipboard": "Gutscheincode erfolgreich in die Zwischenablage kopiert.",
+      "becomeATermmyPartner": "WERDEN SIE TERMMY-PARTNER",
+      "becomeATermmyPartnerQuestion": "Möchten Sie Termmy-Partner werden?",
+      "explanationForTermmyPartner": "Wenn Sie Termmy-Partner werden möchten, erhalten Sie von uns einen Gutscheincode. Diesen Gutscheincode können Sie an Ihre Freunde senden. Diese erhalten einen Rabatt auf die Lizenzen und Sie erhalten außerdem einen Prozentsatz der Zahlung auf Ihr Konto.",
+      "successfullySendRequestToBePartner": "Die Anfrage, Termmy-Partner zu werden, wurde erfolgreich gesendet. Sie erhalten den Gutscheincode, nachdem das Termmy-Team Ihr Konto überprüft und dieses Angebot für Sie genehmigt hat."
    },
    "adminSettings": {
       "adminSettings": "Admin-Einstellungen",
@@ -587,7 +601,7 @@
       "backToHome": "Zurück zur Startseite"
    },
    "paymentProcessing": {
-      "buttonText": "Zahlen Sie € #amount",
+      "buttonText": "Zahlen Sie €#amount",
       "acceptTermsAndPrivacyPolicyOne": "Mit dem Absenden dieser Bestellung akzeptieren Sie die",
       "acceptTermsAndPrivacyPolicyTerms": "Allgemeine Geschäftsbedingungen",
       "acceptTermsAndPrivacyPolicyTermsAnd": "und",
@@ -605,7 +619,12 @@
       "fillLastname": "Bitte füllen Sie Ihren Nachnamen aus",
       "fillEmail": "Bitte füllen Sie Ihre E-Mail aus",
       "fillPhone": "Bitte füllen Sie Ihr Telefon aus",
-      "errorPayment": "Bei der Zahlung ist ein Fehler aufgetreten! Bitte überprüfen Sie die Richtigkeit der eingegebenen Daten und überprüfen Sie das Guthaben auf Ihrer Karte."
+      "errorPayment": "Bei der Zahlung ist ein Fehler aufgetreten! Bitte überprüfen Sie die Richtigkeit der eingegebenen Daten und überprüfen Sie das Guthaben auf Ihrer Karte.",
+      "voucherTitle": "Gutscheincode",
+      "voucherPlaceholder": "Geben Sie den Gutscheincode ein, um einen Rabatt auf diesen Preis zu erhalten",
+      "voucherApplyButton": "ANWENDEN",
+      "voucherAppliedCode": "Sie haben den Rabattcode von #discount erfolgreich eingegeben. Der Zahlungsbetrag wird um #discountAmount rabattiert.",
+      "voucherNotValid": "Gutscheincode ist ungültig! Bitte geben Sie einen gültigen Gutscheincode für den Rabattpreis ein!"
    },
    "buyMoreSms": {
       "title": "SMS kaufen",

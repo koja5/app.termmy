@@ -14,7 +14,7 @@ export class CallApiService {
   }
 
   callApi(data: any, router?: any) {
-    if (data && data.request.type === "POST") {
+    if (data && data.request && data.request.type === "POST") {
       if (data.request.url) {
         data.body = this.helpService.postRequestDataParameters(
           data.body,
@@ -27,7 +27,7 @@ export class CallApiService {
         data.body ? data.body : router.body
       );
     } else {
-      if (data && data.request.url) {
+      if (data && data.request && data.request.url) {
         const dataValue = this.helpService.getRequestDataParameters(
           router.snapshot.params,
           data.request.url
@@ -67,7 +67,7 @@ export class CallApiService {
     return this.http.post(api, data, { headers: this.headers });
   }
 
-  callGetMethod(api: string, data: any) {
+  callGetMethod(api: string, data?: any) {
     if (data === undefined) {
       data = "";
     }

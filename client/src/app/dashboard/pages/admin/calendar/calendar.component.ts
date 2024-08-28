@@ -1043,13 +1043,15 @@ export class CalendarComponent {
   }
 
   onPopupClose(event: any) {
-    if (this.isDirty) {
-      event.cancel = true;
-      this.dialogUnsavedContentConfirm.showQuestionModal();
-    }
-    if (event.type === "Editor" && !event.data) {
-      this.popupOpen = false;
-    }
+    setTimeout(() => {
+      if (this.isDirty) {
+        event.cancel = true;
+        this.dialogUnsavedContentConfirm.showQuestionModal();
+      }
+      if (event.type === "Editor" && !event.data) {
+        this.popupOpen = false;
+      }
+    }, 10);
   }
 
   confirmUnsavedContent() {
@@ -1410,13 +1412,16 @@ export class CalendarComponent {
 
   createNewClient(event: any) {
     console.log(event);
-    this._service.callPostMethod("/api/setClient", event).subscribe((data) => {
-      this.allClients = null;
-      setTimeout(() => {
-        this.getMyClients();
-        this.openSidebarForCreteClient();
-      }, 100);
-    });
+    this._service
+      .callPostMethod("/api/setClient", event)
+      .subscribe((data: any) => {
+        this.allClients = null;
+        this.onChangeClient(data);
+        setTimeout(() => {
+          this.getMyClients();
+          this.openSidebarForCreteClient();
+        }, 100);
+      });
   }
 
   openSidebarForCreteService() {
@@ -1427,6 +1432,7 @@ export class CalendarComponent {
     console.log(event);
     this._service.callPostMethod("/api/setService", event).subscribe((data) => {
       this.allServices = null;
+      this.onChangeService(data);
       setTimeout(() => {
         this.getMyServices();
         this.openSidebarForCreteService();

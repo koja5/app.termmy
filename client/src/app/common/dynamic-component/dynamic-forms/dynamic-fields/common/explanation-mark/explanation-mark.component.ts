@@ -8,4 +8,5 @@ import { Component, Input } from "@angular/core";
 export class ExplanationMarkComponent {
   @Input() explanation!: any;
   @Input() fontSize: string = "";
+  @Input() text: string;
 }

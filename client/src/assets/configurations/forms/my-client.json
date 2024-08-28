@@ -55,8 +55,7 @@
                 }
             ],
             "oneLine": true,
-            "field": "gender",
-            "required": true
+            "field": "gender"
         },
         {
             "type": "datepicker",
@@ -64,8 +63,7 @@
             "name": "birthday",
             "title": "commonFields.birthday",
             "field": "birthday",
-            "format": "dd.MM.yyyy",
-            "required": true
+            "format": "dd.MM.yyyy"
         },
         {
             "type": "textbox",
@@ -73,8 +71,7 @@
             "class": "e-outline",
             "name": "email",
             "title": "commonFields.email",
-            "field": "email",
-            "required": true
+            "field": "email"
         },
         {
             "type": "phoneprefix",
@@ -91,8 +88,7 @@
             "class": "e-outline",
             "name": "address",
             "title": "commonFields.address",
-            "field": "address",
-            "required": true
+            "field": "address"
         },
         {
             "type": "textbox",
@@ -100,8 +96,7 @@
             "class": "e-outline",
             "name": "zip",
             "title": "commonFields.zip",
-            "field": "zip",
-            "required": true
+            "field": "zip"
         },
         {
             "type": "textbox",
@@ -109,8 +104,7 @@
             "class": "e-outline",
             "name": "city",
             "title": "commonFields.city",
-            "field": "city",
-            "required": true
+            "field": "city"
         },
         {
             "type": "button",

@@ -8,6 +8,23 @@
             <ngx-stripe-payment [appearance]="appearance" />
         </ngx-stripe-elements>
     </div>
+
+    <div class="mb-1">
+        <p class="voucher-title">{{'paymentProcessing.voucherTitle' | translate}}</p>
+        <div class="d-flex">
+            <input class="form-control" [placeholder]="'paymentProcessing.voucherPlaceholder' | translate"
+                name="voucher_code" [(ngModel)]="voucherCode" />
+            <button class="btn btn-outline-primary ml-1 d-flex" (click)="checkVoucherCode()"
+                [disabled]="appliedCodeMessage && appliedCodeMessage.valid ? true : false"><span
+                    class="fa fa-check"></span>
+                {{'paymentProcessing.voucherApplyButton' | translate}}</button>
+        </div>
+        <div class="mt-2" *ngIf="appliedCodeMessage">
+            <app-alert [type]="appliedCodeMessage.valid ? 'success' : 'danger'"
+                [text]="appliedCodeMessage.message"></app-alert>
+        </div>
+    </div>
+
     <div class="custom-control custom-checkbox">
         <input class="custom-control-input" type="checkbox" id="accept" [(ngModel)]="accept">
         <label class="custom-control-label" for="accept">

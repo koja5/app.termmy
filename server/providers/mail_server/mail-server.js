@@ -27,7 +27,7 @@ router.post("/sendMail", function (req, res) {
   var compiledTemplate = hogan.compile(confirmTemplate);
   var mailOptions = {
     from: '"Termmy"' + process.env.smtp_user,
-    to: req.body.email,
+    to: req.body.email ? req.body.email : process.env.ADMIN_EMAIL,
     subject: req.body.subject,
     html: compiledTemplate.render(req.body),
   };

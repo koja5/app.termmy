@@ -14,6 +14,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { StorageService } from "app/services/storage.service";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { ToastrComponent } from "../toastr/toastr.component";
+import { VoucherPartnerModel } from "app/models/voucher-partner.model";
+import { VoucherUsedModel } from "app/models/voucher-used.model";
 // import {
 //   CountryISO,
 //   PhoneNumberFormat,
@@ -56,6 +58,9 @@ export class PaymentProcessingComponent {
     email: new FormControl("", [Validators.required, Validators.email]),
     telephone: new FormControl("", [Validators.required]),
   });
+  public voucherCode: string;
+  public appliedCodeMessage: any;
+  public voucher: VoucherPartnerModel;
 
   constructor(
     private _service: CallApiService,
@@ -151,7 +156,7 @@ export class PaymentProcessingComponent {
             this.paying = false;
           } else if (result.paymentIntent.status === "succeeded") {
             this.paying = false;
-            // this.makeAppointment();
+            this.usingVoucherCode();
             this.executeMethodEmitter.emit();
           }
         },
@@ -161,5 +166,47 @@ export class PaymentProcessingComponent {
           // this.submitted = false;
         },
       });
+  }
+
+  usingVoucherCode() {
+    if (this.voucher) {
+      const body: VoucherUsedModel = {
+        id_voucher: this.voucher.id,
+        id_partner: this.voucher.id_user,
+      };
+      this._service
+        .callPostMethod("/api/setVoucherUsed", body)
+        .subscribe((data) => {});
+    }
+  }
+
+  checkVoucherCode() {
+    if (this.voucherCode) {
+      this._service
+        .callGetMethod("/api/checkVoucherCode", this.voucherCode)
+        .subscribe((data: VoucherPartnerModel) => {
+          if (data) {
+            this.voucher = data;
+            this.amount = Number(
+              ((this.amount * (100 - data.discount)) / 100).toFixed(2)
+            );
+            this.appliedCodeMessage = {
+              valid: true,
+              message: this._translate
+                .instant("paymentProcessing.voucherAppliedCode")
+                .replace("#discount", data.discount + "%")
+                .replace("#discountAmount", "€" + this.amount),
+            };
+            this.createPaymentIntent();
+          } else {
+            this.appliedCodeMessage = {
+              valid: false,
+              message: this._translate.instant(
+                "paymentProcessing.voucherNotValid"
+              ),
+            };
+          }
+        });
+    }
   }
 }
