@@ -315,6 +315,7 @@ router.post("/findOrCreateUserViaMicrosoft", function (req, res, next) {
             type: 1,
             active: 1,
             verified: 1,
+            signup_date: new Date(),
           };
 
           conn.query(

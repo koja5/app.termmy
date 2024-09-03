@@ -30,7 +30,10 @@
         "discardChangesTitle": "Odbacite promene?",
         "discardChangesText": "Vaše promene nisu sačuvane. Da li želite da napustite formu pre nego što sačuvate?",
         "discardChangesConfirm": "Odbaci promene",
-        "discardChangesCancel": "Otkaži"
+        "discardChangesCancel": "Otkaži",
+        "readMore": "Pročitaj više o ovome",
+        "executeActionQuestionTitle": "Da li ste sigurni?",
+        "executeActionQuestionText": "Da li želite da izvršite ovu akciju?"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
@@ -70,7 +73,10 @@
         "createNewClient": "Kreiraj novog klijenta",
         "createNewService": "Kreiraj novu uslugu",
         "noDataFoundFor": "Nije pronađen podatak za",
-        "doYouWantToCreateNew": "Da li želite da kreirate novi?"
+        "doYouWantToCreateNew": "Da li želite da kreirate novi?",
+        "voucherCode": "Vaučer kod",
+        "discount": "Popust",
+        "signupTime": "Datum kreiranja naloga"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -111,7 +117,8 @@
         "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
         "mailExists": "Ova mail adresa već postoji. Molimo vas unesite drugu email adresu ili obnovite lozinku.",
         "verifyYouMail": "Molimo proverite Vašu email poštu kako bi ste verifikovali email adresu.",
-        "passwordNotMatch": "Lozinka i ponovljena lozinka se ne poklapaju. Neophodno je da budu iste!"
+        "passwordNotMatch": "Lozinka i ponovljena lozinka se ne poklapaju. Neophodno je da budu iste!",
+        "privacyAndTermsNeedToAccept": "Molimo prihvatite politiku privatnosti i opšte uslove!"
     },
     "forgot": {
         "title": "Zaboravili ste lozinku? 🔒",
@@ -146,10 +153,14 @@
         "recommended": "Preporuči",
         "smsPackages": "SMS paketi",
         "gatewayCountryPrefix": "SMS kontrolnik",
-        "licenses": "Licence"
+        "licenses": "Licence",
+        "allVoucherPartners": "Svi vaučer partneri"
     },
     "navBar": {
         "profile": "Profil",
+        "settings": "Podešavanja",
+        "help": "Pomoć",
+        "plans": "Licence",
         "logout": "Odjavi se"
     },
     "generalDialog": {
@@ -293,7 +304,15 @@
         "utilizedDate": "Datum iskorišćenja bonusa",
         "successfullyPickedUpSms": "Uspešno ste dodali besplatne SMS poruke na Vaš nalog",
         "goToCheckAvailableSms": "Proveri trenutni broj mojih SMS poruka",
-        "successfullyCopiedRecommendedLinkToClipboard": "Uspešno ste kopirali link preporuke. Sada ga možete poslati Vašim prijateljima i čekati da dobijete besplatne SMS poruke."
+        "successfullyCopiedRecommendedLinkToClipboard": "Uspešno ste kopirali link preporuke. Sada ga možete poslati Vašim prijateljima i čekati da dobijete besplatne SMS poruke.",
+        "voucherCode": "Vaš vaučer kod",
+        "termmyPartnerTitle": "Da li želite da postanete Termmy partner?",
+        "copyVoucherCode": "KOPIRAJ VAUČER KOD",
+        "successfullyCopiedVoucherCodeToClipboard": "Uspešno ste kopirali vaučer kod",
+        "becomeATermmyPartner": "POSTANITE TERMMY PARTNER",
+        "becomeATermmyPartnerQuestion": "Da li želite da postanete Termmy partner?",
+        "explanationForTermmyPartner": "Ukoliko postanete Termmy partner dobićete vaučer kod. Vaučer kod koji dobijete možete poslati svojim prijateljima, oni će dobiti popust na cenu licenci, a vi ćete u znak naše zahvalnosti dobiti bodove koje možete da iskoristite kao popust prilikom sledećeg obnavljanja licence.",
+        "successfullySendRequestToBePartner": "Uspešno ste poslali zahtev za Termmy partnera. Naš tim će proveriti Vaš profil i ukoliko ispunjavate uslove, postajete Termmy parter i dobijate svoj vlastiti vaučer kod."
     },
     "adminSettings": {
         "adminSettings": "Administratorksa podešavanja",
@@ -609,7 +628,12 @@
         "fillLastname": "Molimo vas unesite vaše prezime",
         "fillEmail": "Molimo vas unesite vaš email",
         "fillPhone": "Molimo vas unesite vaš telefon",
-        "errorPayment": "Desila se greška prilikom plaćanja! Molimo vas proverite ispravnost unetih podataka i proverite stanje na Vašoj kartici."
+        "errorPayment": "Desila se greška prilikom plaćanja! Molimo vas proverite ispravnost unetih podataka i proverite stanje na Vašoj kartici.",
+        "voucherTitle": "Vaučer kod",
+        "voucherPlaceholder": "Unesite vaučer kod kako bi dobili popust",
+        "voucherApplyButton": "PRIMENI VAUČER",
+        "voucherAppliedCode": "Vaučer kod je uspešno unet i dobili ste #discount%. Iznos za plaćanje sa popustom je #discountAmount€.",
+        "voucherNotValid": "Vaučer kod nije ispravan! Molimo vas unesite uspravan vaučer kod kako bi dobili popust!"
     },
     "buyMoreSms": {
         "title": "Kupi SMS",

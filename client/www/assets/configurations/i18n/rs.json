@@ -26,9 +26,16 @@
         "noInformation": "Nema informacija",
         "ok": "U redu",
         "noData": "Nema informacija za prikaz",
-        "here": "ovde"
+        "here": "ovde",
+        "discardChangesTitle": "Odbacite promene?",
+        "discardChangesText": "Vaše promene nisu sačuvane. Da li želite da napustite formu pre nego što sačuvate?",
+        "discardChangesConfirm": "Odbaci promene",
+        "discardChangesCancel": "Otkaži",
+        "readMore": "Pročitaj više o ovome",
+        "executeActionQuestionTitle": "Da li ste sigurni?",
+        "executeActionQuestionText": "Da li želite da izvršite ovu akciju?"
     },
-   "actionMessage": {
+    "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
         "successExecuteActionTextDefault": "Akcija je uspešno izvršena.",
         "errorExecuteActionTitleDefault": "Nešto se dogodilo",
@@ -66,8 +73,11 @@
         "createNewClient": "Kreiraj novog klijenta",
         "createNewService": "Kreiraj novu uslugu",
         "noDataFoundFor": "Nije pronađen podatak za",
-        "doYouWantToCreateNew": "Da li želite da kreirate novi?"
-   },
+        "doYouWantToCreateNew": "Da li želite da kreirate novi?",
+        "voucherCode": "Vaučer kod",
+        "discount": "Popust",
+        "signupTime": "Datum kreiranja naloga"
+    },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -107,7 +117,8 @@
         "fillRequredFields": "Molimo Vas popunite sva neophodna polja!",
         "mailExists": "Ova mail adresa već postoji. Molimo vas unesite drugu email adresu ili obnovite lozinku.",
         "verifyYouMail": "Molimo proverite Vašu email poštu kako bi ste verifikovali email adresu.",
-        "passwordNotMatch": "Lozinka i ponovljena lozinka se ne poklapaju. Neophodno je da budu iste!"
+        "passwordNotMatch": "Lozinka i ponovljena lozinka se ne poklapaju. Neophodno je da budu iste!",
+        "privacyAndTermsNeedToAccept": "Molimo prihvatite politiku privatnosti i opšte uslove!"
     },
     "forgot": {
         "title": "Zaboravili ste lozinku? 🔒",
@@ -142,7 +153,8 @@
         "recommended": "Preporuči",
         "smsPackages": "SMS paketi",
         "gatewayCountryPrefix": "SMS kontrolnik",
-        "licenses": "Licence"
+        "licenses": "Licence",
+        "allVoucherPartners": "Svi vaučer partneri"
     },
     "navBar": {
         "profile": "Profil",
@@ -224,7 +236,7 @@
         "selectedFullPayment": "Klijent je platio pun iznos za zakazanu uslugu(#amount €)",
         "selectedPartOfFullPayment": "Klijet je platio deo iznosa za zakazanu uslugu(#amount €). Neophodno je da plati iznos od #amountRest € prilikom dolaska.",
         "googleAdditionalCalendars": "Moji ostali kalendari"
-   },
+    },
     "accountSettings": {
         "title": "Podešavanja naloga",
         "general": "Opšta",
@@ -253,7 +265,7 @@
         "ownersCalendarsExplanation": "Za ove kalendare imate potpuna prava. To znači da možete da vidite, dodajete, menjate ili brišete događaje koji su vezani za njih.",
         "readonlyCalendars": "Kalendari samo sa dozvolom čitanja",
         "readonlyCalendarsExplanation": "Za ove kalendare imate samo mogućnost prikaza događaja na vašem kalendaru u Termmy aplikaciji. To znači da ne postoji mogućnost dodavanja ili menjanja događaja koji se nalaze u ovim kalendarima."
-   },
+    },
     "worktime": {
         "monday": "Ponedeljak",
         "tuesday": "Utorak",
@@ -289,7 +301,15 @@
         "utilizedDate": "Datum iskorišćenja bonusa",
         "successfullyPickedUpSms": "Uspešno ste dodali besplatne SMS poruke na Vaš nalog",
         "goToCheckAvailableSms": "Proveri trenutni broj mojih SMS poruka",
-        "successfullyCopiedRecommendedLinkToClipboard": "Uspešno ste kopirali link preporuke. Sada ga možete poslati Vašim prijateljima i čekati da dobijete besplatne SMS poruke."
+        "successfullyCopiedRecommendedLinkToClipboard": "Uspešno ste kopirali link preporuke. Sada ga možete poslati Vašim prijateljima i čekati da dobijete besplatne SMS poruke.",
+        "voucherCode": "Vaš vaučer kod",
+        "termmyPartnerTitle": "Da li želite da postanete Termmy partner?",
+        "copyVoucherCode": "KOPIRAJ VAUČER KOD",
+        "successfullyCopiedVoucherCodeToClipboard": "Uspešno ste kopirali vaučer kod",
+        "becomeATermmyPartner": "POSTANITE TERMMY PARTNER",
+        "becomeATermmyPartnerQuestion": "Da li želite da postanete Termmy partner?",
+        "explanationForTermmyPartner": "Ukoliko postanete Termmy partner dobićete vaučer kod. Vaučer kod koji dobijete možete poslati svojim prijateljima, oni će dobiti popust na cenu licenci, a vi ćete u znak naše zahvalnosti dobiti bodove koje možete da iskoristite kao popust prilikom sledećeg obnavljanja licence.",
+        "successfullySendRequestToBePartner": "Uspešno ste poslali zahtev za Termmy partnera. Naš tim će proveriti Vaš profil i ukoliko ispunjavate uslove, postajete Termmy parter i dobijate svoj vlastiti vaučer kod."
     },
     "adminSettings": {
         "adminSettings": "Administratorksa podešavanja",
@@ -416,7 +436,7 @@
             }
         },
         "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja SMS poruka vašim klijentima umesto vas! Podatke možete popuniti "
-   },
+    },
     "emailReminder": {
         "title": "Email podsetnik",
         "text": "Podesi automatizovani Email podsetnik",
@@ -475,11 +495,14 @@
             }
         },
         "pleaseFillPersonalData": "Molimo Vas da popunite lične podatke, jer podatke kao što su adresa, Vaše ime/ime firme i slično, koristimo prilikom slanja email-a vašim klijentima umesto vas! Podatke možete popuniti"
-   },
+    },
     "licenses": {
         "name": "Ime",
         "monthlyPrice": "Mesečna cena",
-        "annualPrice": "Godišnja cena"
+        "annualPrice": "Godišnja cena",
+        "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+        "licenseLimitForClients": "Popunili ste maksimalni broj klijenata dozvoljenih u besplatnoj licenci. Molimo Vas proširite Vašu licencu. Ponudu možete pogledati",
+        "here": "ovde."
     },
     "licenseStatus": {
         "currentPlan": "Trenutni paket",
@@ -602,7 +625,12 @@
         "fillLastname": "Molimo vas unesite vaše prezime",
         "fillEmail": "Molimo vas unesite vaš email",
         "fillPhone": "Molimo vas unesite vaš telefon",
-        "errorPayment": "Desila se greška prilikom plaćanja! Molimo vas proverite ispravnost unetih podataka i proverite stanje na Vašoj kartici."
+        "errorPayment": "Desila se greška prilikom plaćanja! Molimo vas proverite ispravnost unetih podataka i proverite stanje na Vašoj kartici.",
+        "voucherTitle": "Vaučer kod",
+        "voucherPlaceholder": "Unesite vaučer kod kako bi dobili popust",
+        "voucherApplyButton": "PRIMENI VAUČER",
+        "voucherAppliedCode": "Vaučer kod je uspešno unet i dobili ste #discount%. Iznos za plaćanje sa popustom je #discountAmount€.",
+        "voucherNotValid": "Vaučer kod nije ispravan! Molimo vas unesite uspravan vaučer kod kako bi dobili popust!"
     },
     "buyMoreSms": {
         "title": "Kupi SMS",

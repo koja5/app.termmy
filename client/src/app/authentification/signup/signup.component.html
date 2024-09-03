@@ -81,7 +81,7 @@
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="register-privacy-policy"
-                                tabindex="4" />
+                                tabindex="4" [(ngModel)]="privacyAndTerms" [ngModelOptions]="{standalone: true}" />
                             <label class="custom-control-label" for="register-privacy-policy">
                                 {{'signUp.IAgreeTo' | translate}} <a href="https://termmy.com/privacy-policy"
                                     target="_blank">{{'signUp.privacyPolicy' |
@@ -109,6 +109,12 @@
                         <div *ngIf="response.passwordNotMatch" class="text-center">
                             <p class="badge badge-light-danger badge-pill full-width p-1 white-space-break">
                                 {{'signUp.passwordNotMatch' |
+                                translate}}</p>
+                        </div>
+
+                        <div *ngIf="submitted && !privacyAndTerms" class="text-center">
+                            <p class="badge badge-light-danger badge-pill full-width p-1">
+                                {{'signUp.privacyAndTermsNeedToAccept' |
                                 translate}}</p>
                         </div>
 

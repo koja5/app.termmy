@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
   public loading = false;
   public lang: string;
   public authSubscription!: Subscription;
+  public privacyAndTerms = false;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -96,6 +97,10 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      return;
+    }
+
+    if (!this.privacyAndTerms) {
       return;
     }
 

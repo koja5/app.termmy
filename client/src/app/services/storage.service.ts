@@ -117,6 +117,10 @@ export class StorageService {
     return false;
   }
 
+  
+
+
+
   getUserId() {
     if (this.getToken()) {
       return this.helper.decodeToken(this.getToken()).user.id;

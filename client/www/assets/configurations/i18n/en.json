@@ -26,9 +26,16 @@
         "noInformation": "No information",
         "ok": "OK",
         "noData": "There is no information to display",
-        "here": "here"
-   },
-    "actionMessage": {
+        "here": "here",
+        "discardChangesTitle": "Discard changes?",
+        "discardChangesText": "You have unsaved changes. Are you sure you want to discard them?",
+        "discardChangesConfirm": "Discard changes",
+        "discardChangesCancel": "Cancel",
+        "readMore": "Read more",
+        "executeActionQuestionTitle": "Are you sure?",
+        "executeActionQuestionText": "Do you want to execute this action?"
+    },
+   "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
         "successExecuteActionTextDefault": "Action is successfully executed!",
         "errorExecuteActionTitleDefault": "Something is happened",
@@ -66,8 +73,11 @@
         "createNewClient": "Create new client",
         "createNewService": "Create new service",
         "noDataFoundFor": "No data found for",
-        "doYouWantToCreateNew": "Do you want to create new?"
-    },
+        "doYouWantToCreateNew": "Do you want to create new?",
+        "voucherCode": "Voucher code",
+        "discount": "Discount",
+        "signupTime": "Sign up time"
+   },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -107,7 +117,8 @@
         "fillRequredFields": "Please fill required fields",
         "mailExists": "This mail address exists. Please enter another email address or reset your password.",
         "verifyYouMail": "Please check your email to verify it.",
-        "passwordNotMatch": "Password and Re-password do not match! Need to be same!"
+        "passwordNotMatch": "Password and Re-password do not match! Need to be same!",
+        "privacyAndTermsNeedToAccept": "Please accept privacy policy and terms!"
     },
     "forgot": {
         "title": "Forgot Password? 🔒",
@@ -142,8 +153,9 @@
         "recommended": "Recommended",
         "smsPackages": "Sms packages",
         "gatewayCountryPrefix": "Country prefix",
-        "licenses": "Licenses"
-    },
+        "licenses": "Licenses",
+        "allVoucherPartners": "All voucher partners"
+   },
     "navBar": {
         "profile": "Profile",
         "logout": "Logout"
@@ -290,8 +302,16 @@
         "utilizedDate": "Utilized date",
         "successfullyPickedUpSms": "Successfuly picked up sms",
         "goToCheckAvailableSms": "Go to check available sms",
-        "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard."
-    },
+        "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard.",
+        "voucherCode": "Your voucher code",
+        "termmyPartnerTitle": "Do you want to be a Termmy partner?",
+        "copyVoucherCode": "COPY VOUCHER CODE",
+        "successfullyCopiedVoucherCodeToClipboard": "Successfully copied voucher code to clipboard.",
+        "becomeATermmyPartner": "BECOME A TERMMY PARTNER",
+        "becomeATermmyPartnerQuestion": "Do you want to become a Termmy partner?",
+        "explanationForTermmyPartner": "If you want to be Termmy partner, we will give you voucher code. That voucher code you can send to your friends, they will get discount price for licenses and you also will received on your account percentage of the payment.",
+        "successfullySendRequestToBePartner": "Successfuly send request to become a Termmy partner. You will received voucher code after Termmy team check your account and approve this offer for you."
+   },
     "adminSettings": {
         "adminSettings": "Admin settings",
         "onlinePayment": "Online payment",
@@ -480,8 +500,11 @@
     "licenses": {
         "name": "Name",
         "monthlyPrice": "Monthly price",
-        "annualPrice": "Annual price"
-    },
+        "annualPrice": "Annual price",
+        "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+        "licenseLimitForClients": "You have reached the maximum number of clients allowed in the free license. Please extend your license. You can view the offer",
+        "here": "here."
+   },
     "licenseStatus": {
         "currentPlan": "Current plan",
         "yourCurrentPlan": "Your Current Plan is",
@@ -597,8 +620,13 @@
         "fillLastname": "Please fill your lastname",
         "fillEmail": "Please fill your email",
         "fillPhone": "Please fill your phone",
-        "errorPayment": "An error occurred during payment! Please check the correctness of the entered data and check the balance on your card."
-    },
+        "errorPayment": "An error occurred during payment! Please check the correctness of the entered data and check the balance on your card.",
+        "voucherTitle": "Voucher code",
+        "voucherPlaceholder": "Enter the voucher code to get a discount on this price",
+        "voucherApplyButton": "APPLY",
+        "voucherAppliedCode": "You have successfully entered the discount code from #discount. Payment amount is discounted #discountAmount.",
+        "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!"
+   },
     "buyMoreSms": {
         "title": "Buy SMS",
         "text": "Buy more messages and achieve better communication with clients",

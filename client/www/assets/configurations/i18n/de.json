@@ -26,7 +26,14 @@
       "noInformation": "Keine Information",
       "ok": "OK",
       "noData": "Es sind keine Informationen zum Anzeigen vorhanden",
-      "here": "hier"
+      "here": "hier",
+      "discardChangesTitle": "Änderungen verwerfen?",
+      "discardChangesText": "Sie haben nicht gespeicherte Änderungen. Sind Sie sicher, dass Sie sie verwerfen möchten?",
+      "discardChangesConfirm": "Änderungen verwerfen",
+      "discardChangesCancel": "Abbrechen",
+      "readMore": "Mehr lesen",
+      "executeActionQuestionTitle": "Bist du sicher?",
+      "executeActionQuestionText": "Möchten Sie diese Aktion ausführen?"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
@@ -66,7 +73,10 @@
       "createNewClient": "Neuen Client erstellen",
       "createNewService": "Neuen Dienst erstellen",
       "noDataFoundFor": "Keine Daten gefunden für",
-      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?"
+      "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?",
+      "voucherCode": "Gutscheincode",
+      "discount": "Rabatt",
+      "signupTime": "Anmeldezeit"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -107,7 +117,8 @@
       "recommended": "Empfehlung",
       "smsPackages": "SMS Paket",
       "gatewayCountryPrefix": "Länder-Vorwahl",
-      "licenses": "Lizenzen"
+      "licenses": "Lizenzen",
+      "allVoucherPartners": "Alle Gutscheinpartner"
    },
    "navBar": {
       "profile": "Profil",
@@ -255,7 +266,15 @@
       "utilizedDate": "Nutzungsdatum",
       "successfullyPickedUpSms": "SMS erfolgreich abgeholt",
       "goToCheckAvailableSms": "Verfügbare SMS überprüfen",
-      "successfullyCopiedRecommendedLinkToClipboard": "Empfehlungs-Link erfolgreich in die Zwischenablage kopiert."
+      "successfullyCopiedRecommendedLinkToClipboard": "Empfehlungs-Link erfolgreich in die Zwischenablage kopiert.",
+      "voucherCode": "Ihr Gutscheincode",
+      "termmyPartnerTitle": "Möchten Sie Termmy-Partner werden?",
+      "copyVoucherCode": "GUTSCHEINCODE KOPIEREN",
+      "successfullyCopiedVoucherCodeToClipboard": "Gutscheincode erfolgreich in die Zwischenablage kopiert.",
+      "becomeATermmyPartner": "WERDEN SIE TERMMY-PARTNER",
+      "becomeATermmyPartnerQuestion": "Möchten Sie Termmy-Partner werden?",
+      "explanationForTermmyPartner": "Wenn Sie Termmy-Partner werden möchten, erhalten Sie von uns einen Gutscheincode. Diesen Gutscheincode können Sie an Ihre Freunde senden. Diese erhalten einen Rabatt auf die Lizenzen und Sie erhalten außerdem einen Prozentsatz der Zahlung auf Ihr Konto.",
+      "successfullySendRequestToBePartner": "Die Anfrage, Termmy-Partner zu werden, wurde erfolgreich gesendet. Sie erhalten den Gutscheincode, nachdem das Termmy-Team Ihr Konto überprüft und dieses Angebot für Sie genehmigt hat."
    },
    "adminSettings": {
       "adminSettings": "Admin-Einstellungen",
@@ -353,7 +372,7 @@
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
             "text": "Die Buchungsbestätigung wird sofort nach der Buchung gesendet",
-            "message": "Sie haben einen verbindlichen Termin am #date um #time gebucht. Unsere Adresse ist #Adresse. Beste Grüße #company"
+            "message": "Sie haben einen verbindlichen Termin am #date um #time gebucht. Unsere Adresse ist #address. Beste Grüße #company"
          },
          "clientDayBeforeReminder": {
             "title": "Termin-Erinnerung",
@@ -368,7 +387,7 @@
          "clientThankForCommingToUs": {
             "title": "Danke fürs Kommen",
             "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
-            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #company"
          },
          "employeeImmediatelyReminder": {
             "title": "Buchungsbestätigung",
@@ -407,7 +426,7 @@
             "title": "Buchungsbestätigung",
             "text": "Die Buchungsbestätigung wird sofort nach der Buchung gesendet",
             "subject": "Buchungsbestätigung",
-            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #Adresse. #company"
+            "message": "Ihr Termin #date um #time wurde bestätigt. Unsere Adresse lautet #address. #company"
          },
          "clientDayBeforeReminder": {
             "title": "Termin-Erinnerung",
@@ -425,7 +444,7 @@
             "title": "Danke fürs Kommen",
             "text": "Der Versand erfolgt 1 Stunde nach dem Termin",
             "subject": "Danke!",
-            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #Unternehmen"
+            "message": "Vielen Dank für Ihren Besuch, wir hoffen, dass Ihnen der Service gefallen hat. Vielen Dank für Ihr Vertrauen! #company"
          },
          "employeeImmediatelyReminder": {
             "title": "Buchungsbestätigung",
@@ -445,11 +464,14 @@
    "licenses": {
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
-      "annualPrice": "Jährlicher Preis"
+      "annualPrice": "Jährlicher Preis",
+      "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
+      "licenseLimitForClients": "Sie haben die maximal zulässige Anzahl an Clients in der kostenlosen Lizenz erreicht. Bitte verlängern Sie Ihre Lizenz. Sie können das Angebot einsehen",
+      "here": "hier."
    },
    "licenseStatus": {
       "currentPlan": "Aktuelles Abo",
-      "yourCurrentPlan": "Ihr aktuellers Abo ist",
+      "yourCurrentPlan": "Ihr aktuelles Abo ist",
       "simpleStartForEveryone": "Ein einfacher Start für jeden",
       "activeUntil": "Aktiv bis",
       "forever": "IMMER",
@@ -459,7 +481,7 @@
       "planDescription": "Standard-Abo für kleine bis mittlere Unternehmen",
       "days": "Tage",
       "of": "von",
-      "daysReminder": "Verbleibende Tage, bis Ihr Abo aktualisiert werden muss",
+      "daysReminder": "verbleibende Tage, bis Ihr Abo aktualisiert werden muss",
       "updatePlan": "Abo verlängern",
       "cancelSubscription": "Abonnement kündigen",
       "cancelSubscriptionQuestion": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten?",
@@ -547,7 +569,8 @@
       "fillRequredFields": "Bitte füllen Sie die erforderlichen Felder aus",
       "mailExists": "Diese E-Mail-Adresse existiert bereits. Bitte geben Sie eine andere E-Mail-Adresse ein oder setzen Sie Ihr Passwort zurück.",
       "verifyYouMail": "Bitte überprüfen Sie Ihre E-Mail, um sie zu verifizieren.",
-      "passwordNotMatch": "Passwort und Passwort erneut stimmen nicht überein! Sie müssen gleich sein"
+      "passwordNotMatch": "Passwort und Passwort erneut stimmen nicht überein! Sie müssen gleich sein",
+      "privacyAndTermsNeedToAccept": "Bitte akzeptieren Sie die Datenschutzbestimmungen und Nutzungsbedingungen!"
    },
    "forgot": {
       "title": "Passwort vergessen? 🔒",
@@ -598,7 +621,12 @@
       "fillLastname": "Bitte füllen Sie Ihren Nachnamen aus",
       "fillEmail": "Bitte füllen Sie Ihre E-Mail aus",
       "fillPhone": "Bitte füllen Sie Ihr Telefon aus",
-      "errorPayment": "Bei der Zahlung ist ein Fehler aufgetreten! Bitte überprüfen Sie die Richtigkeit der eingegebenen Daten und überprüfen Sie das Guthaben auf Ihrer Karte."
+      "errorPayment": "Bei der Zahlung ist ein Fehler aufgetreten! Bitte überprüfen Sie die Richtigkeit der eingegebenen Daten und überprüfen Sie das Guthaben auf Ihrer Karte.",
+      "voucherTitle": "Gutscheincode",
+      "voucherPlaceholder": "Geben Sie den Gutscheincode ein, um einen Rabatt auf diesen Preis zu erhalten",
+      "voucherApplyButton": "ANWENDEN",
+      "voucherAppliedCode": "Sie haben den Rabattcode von #discount erfolgreich eingegeben. Der Zahlungsbetrag wird um #discountAmount rabattiert.",
+      "voucherNotValid": "Gutscheincode ist ungültig! Bitte geben Sie einen gültigen Gutscheincode für den Rabattpreis ein!"
    },
    "buyMoreSms": {
       "title": "SMS kaufen",
@@ -621,11 +649,11 @@
       "setup": "Termmy einrichten",
       "title": "Richten Sie Termmy für den Erfolg ein",
       "text": "Führen Sie die folgenden Schritte aus, damit Sie das volle Potenzial Ihres Unternehmens ausschöpfen können.",
-      "accountDataText": "Fill in personal data",
+      "accountDataText": "Persönliche Daten",
       "accountDataTitle": "Fügen Sie Informationen über Sie/Ihr Unternehmen hinzu, wie z. B. Name, Telefonnummer, E-Mail-Adresse usw.",
       "clientTitle": "Kunden anlegen",
       "clientText": "Legen Sie ihre Kunden an, mit allen wichtigen Informationen.",
-      "serviceTitle": "Passen Sie Ihre Dienste an",
+      "serviceTitle": "Legen Sie ihre Dienstleistungen an",
       "serviceText": "Legen Sie ihre Dienstleistungen an, mit Preis, Dauer, Farbe und reservieren Sie sich bei Bedarf zusätzliche Zeit zur Nachbereitung.",
       "worktimeTitle": "Arbeitszeit",
       "worktimeText": "Legen Sie Ihre Arbeitszeiten fest, wann Sie online buchbar sind.",

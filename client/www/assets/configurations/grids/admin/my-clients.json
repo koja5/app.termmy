@@ -152,6 +152,18 @@
             }
         },
         {
+            "title": "commonFields.telephone",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "telephone",
+            "validation": {
+                "required": true
+            }
+        },
+        {
             "title": "commonFields.email",
             "filterable": true,
             "hideable": true,
@@ -204,6 +216,23 @@
             "required": true
         },
         {
+            "type": "phoneprefix",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email"
+        },
+        {
             "type": "radio",
             "width": "col-md-6",
             "name": "gender",
@@ -220,8 +249,7 @@
                 }
             ],
             "oneLine": true,
-            "field": "gender",
-            "required": true
+            "field": "gender"
         },
         {
             "type": "datepicker",
@@ -229,26 +257,7 @@
             "name": "birthday",
             "title": "commonFields.birthday",
             "field": "birthday",
-            "format": "dd.MM.yyyy",
-            "required": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "email",
-            "title": "commonFields.email",
-            "field": "email",
-            "required": true
-        },
-        {
-            "type": "phoneprefix",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "telephone",
-            "title": "commonFields.telephone",
-            "field": "telephone",
-            "required": true
+            "format": "dd.MM.yyyy"
         },
         {
             "type": "textbox",
@@ -256,8 +265,7 @@
             "class": "e-outline",
             "name": "address",
             "title": "commonFields.address",
-            "field": "address",
-            "required": true
+            "field": "address"
         },
         {
             "type": "textbox",
@@ -265,8 +273,7 @@
             "class": "e-outline",
             "name": "zip",
             "title": "commonFields.zip",
-            "field": "zip",
-            "required": true
+            "field": "zip"
         },
         {
             "type": "textbox",
@@ -274,8 +281,7 @@
             "class": "e-outline",
             "name": "city",
             "title": "commonFields.city",
-            "field": "city",
-            "required": true
+            "field": "city"
         },
         {
             "type": "button",

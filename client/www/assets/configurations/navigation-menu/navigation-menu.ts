@@ -99,4 +99,13 @@ export const menu = [
     url: "dashboard/superadmin/licenses",
     users: ["superadmin"],
   },
+  {
+    id: "all-voucher-partners",
+    title: "all-voucher-partners",
+    translate: "navigations.allVoucherPartners",
+    type: "item",
+    icon: "credit-card",
+    url: "dashboard/superadmin/all-voucher-partners",
+    users: ["superadmin"],
+  },
 ];

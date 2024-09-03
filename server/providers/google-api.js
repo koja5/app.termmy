@@ -178,6 +178,7 @@ router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
             type: 1,
             active: 1,
             verified: 1,
+            signup_date: new Date(),
           };
 
           conn.query(
@@ -404,10 +405,10 @@ router.post("/createTermine", auth, async (req, res) => {
         summary: req.body.Subject,
         description: JSON.stringify(req.body),
         start: {
-          dateTime: moment(req.body.StartTime)
+          dateTime: moment(req.body.StartTime),
         },
         end: {
-          dateTime: moment(req.body.EndTime)
+          dateTime: moment(req.body.EndTime),
         },
       },
     },

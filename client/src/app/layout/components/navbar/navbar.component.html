@@ -70,8 +70,8 @@
         </div>
         <span class="avatar">
 
-          <img *ngIf="currentUser.avatar && currentUser.avatar.startsWith('http')" class="round" src="{{currentUser.avatar}}" alt="avatar"
-            height="40" width="40" />
+          <img *ngIf="currentUser.avatar && currentUser.avatar.startsWith('http')" class="round"
+            src="{{currentUser.avatar}}" alt="avatar" height="40" width="40" />
           <img *ngIf="currentUser.avatar && !currentUser.avatar.startsWith('http')" class="round"
             src="../../../../assets/images/avatars/{{currentUser.avatar}}" alt="avatar" height="40" width="40" />
           <app-letter-profile *ngIf="!currentUser.avatar" [firstname]="currentUser.firstname"
@@ -81,6 +81,15 @@
       <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
         <a ngbDropdownItem [routerLink]="['/dashboard/account-settings/general']"><span [data-feather]="'user'"
             [class]="'mr-50'"></span> {{'navBar.profile' | translate}}</a>
+        <a ngbDropdownItem [routerLink]="['/dashboard/admin/settings/booking-settings']"><span
+            [data-feather]="'settings'" [class]="'mr-50'"></span>
+          {{'navBar.settings' | translate}}</a>
+        <a ngbDropdownItem href="https://support.bcigmbh.com/" target="_blank"><span [data-feather]="'help-circle'"
+            [class]="'mr-50'"></span>
+          {{'navBar.help' | translate}}</a>
+        <a ngbDropdownItem routerLink="dashboard/admin/payment/license-packages"><span [data-feather]="'layout'"
+            [class]="'mr-50'"></span>
+          {{'navBar.plans' | translate}}</a>
         <!-- <a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'" [class]="'mr-50'"></span> Inbox</a>
         <a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'check-square'" [class]="'mr-50'"></span>
           Task</a>

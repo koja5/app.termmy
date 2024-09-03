@@ -108,6 +108,7 @@ router.post("/signUp", function (req, res, next) {
           req.body.data.type = 1;
           req.body.data.id = uuid.v4();
           req.body.data.admin_id = req.body.data.id;
+          req.body.data.signup_time = new Date();
 
           conn.query(
             "insert into users set ?",
@@ -595,7 +596,17 @@ router.post("/saveProfileInfo", auth, function (req, res, next) {
       res.json(err);
     }
 
+    console.log(req.user);
+
     const query = prepareProperty(req.body);
+
+    /*if (req.user.user.firstname != req.body.firstname) {
+      req.user.user.firstname = req.body.firstname;
+    }
+    if (req.user.user.lastname != req.body.lastname) {
+      req.user.user.lastname = req.body.lastname;
+    }*/
+
     conn.query(
       "update users set " + query + " where id = ?",
       [req.user.user.id],
@@ -605,7 +616,8 @@ router.post("/saveProfileInfo", auth, function (req, res, next) {
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(false);
         } else {
-          res.json(true);
+          const token = generateToken(req.body);
+          res.json({ token: token });
         }
       }
     );
@@ -2325,7 +2337,7 @@ router.post("/upload", multipartMiddleware, auth, (req, res) => {
       req.body.id = uuid.v4();
     }
 
-    req.body.avatar = req.files.uploads[0].path.split("\\avatars\\")[1];
+    req.body.avatar = req.files.uploads[0].path.split("/avatars/")[1];
     conn.query(
       "select avatar from booking_config where admin_id = ?",
       [req.user.user.admin_id],
@@ -2371,7 +2383,7 @@ router.post("/uploadUserProfile", multipartMiddleware, auth, (req, res) => {
 
     console.log(req.files);
 
-    req.body.avatar = req.files.uploads[0].path.split("\\avatars\\")[1];
+    req.body.avatar = req.files.uploads[0].path.split("/avatars/")[1];
     conn.query(
       "select avatar from users where id = ?",
       [req.body.id],

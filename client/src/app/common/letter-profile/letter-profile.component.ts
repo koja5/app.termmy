@@ -12,12 +12,26 @@ export class LetterProfileComponent {
   public initiale!: string;
 
   ngOnInit() {
+    this.generateInitial();
+  }
+
+  ngOnChanges() {
+    this.generateInitial();
+  }
+
+  generateInitial() {
     if (this.firstname && this.lastname) {
-      this.initiale = this.firstname.charAt(0).toUpperCase() + this.lastname.charAt(0).toUpperCase();
+      this.initiale =
+        this.firstname.charAt(0).toUpperCase() +
+        this.lastname.charAt(0).toUpperCase();
     } else if (this.firstname && !this.lastname) {
-      this.initiale = this.firstname.charAt(0).toUpperCase() + this.firstname.charAt(1).toUpperCase();
+      this.initiale =
+        this.firstname.charAt(0).toUpperCase() +
+        this.firstname.charAt(1).toUpperCase();
     } else if (!this.firstname && this.lastname) {
-      this.initiale = this.lastname.charAt(0).toUpperCase() + this.lastname.charAt(1).toUpperCase();
+      this.initiale =
+        this.lastname.charAt(0).toUpperCase() +
+        this.lastname.charAt(1).toUpperCase();
     } else {
       this.initiale = "NN";
     }

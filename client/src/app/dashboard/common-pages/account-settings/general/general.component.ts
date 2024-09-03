@@ -52,6 +52,8 @@ export class GeneralComponent implements CanComponentDeactivate {
           if (data) {
             this._toastr.showSuccess();
             this.sendInfoForSetupApp();
+            // this._storageService.setToken(data);
+            this._messageService.sendCurrentUser(event);
           } else {
             this._toastr.showError();
           }

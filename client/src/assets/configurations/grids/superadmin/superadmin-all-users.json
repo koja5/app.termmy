@@ -15,7 +15,13 @@
         }
     },
     "sorting": {
-        "enable": true
+        "enable": true,
+        "fields": [
+            {
+                "prop": "signup_time",
+                "dir": "desc"
+            }
+        ]
     },
     "grouping": {
         "enable": true,
@@ -280,6 +286,19 @@
             "type": "string",
             "class": "text-align-right",
             "field": "city",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.signupTime",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "format": "dd.MM.yyyy HH:mm",
+            "type": "date",
+            "class": "text-align-right",
+            "field": "signup_time",
             "validation": {
                 "required": true
             }

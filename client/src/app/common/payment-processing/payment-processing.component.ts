@@ -194,8 +194,8 @@ export class PaymentProcessingComponent {
               valid: true,
               message: this._translate
                 .instant("paymentProcessing.voucherAppliedCode")
-                .replace("#discount", data.discount + "%")
-                .replace("#discountAmount", "€" + this.amount),
+                .replace("#discount", data.discount)
+                .replace("#discountAmount", this.amount),
             };
             this.createPaymentIntent();
           } else {

@@ -9,6 +9,7 @@ export class MessageService {
   public setupApp = new Subject<any>();
   public avatarProfile = new Subject<string>();
   public configValue = new Subject<any>();
+  public currentUser = new Subject<any>();
 
   constructor() {}
 
@@ -42,5 +43,13 @@ export class MessageService {
 
   getConfigValueEmit(): Observable<any> {
     return this.configValue.asObservable();
+  }
+
+  sendCurrentUser(value: any) {
+    this.currentUser.next(value);
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.currentUser.asObservable();
   }
 }

@@ -230,6 +230,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.currentUser.avatar = data;
       });
+
+    this._messageService
+      .getCurrentUser()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
+        this.currentUser = data;
+      });
   }
 
   /**
