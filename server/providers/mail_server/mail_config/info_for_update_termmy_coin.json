@@ -1,0 +1,15 @@
+{
+    "template": "info_for_update_termmy_coin.hjs",
+    "subject": "Sie haben neue Termmy münzen erhalten",
+    "greetings": "Hey,",
+    "thanksForSignup": "Danke für's Registrieren! 👋",
+    "message": "Der Benutzer hat den Termmy-Gutschein verwendet, den Sie ihm gesendet haben, und als Zeichen der Dankbarkeit schenken wir Ihnen Termmy-Coins, die Sie beim Kauf oder bei der Erneuerung einer Lizenz oder beim Kauf von SMS-Nachrichten verwenden können.",
+    "ifYouNotSignUp": "Wenn Sie sich nicht bei Termmy angemeldet haben, ignorieren Sie bitte diese E-Mail oder kontaktieren Sie uns unter",
+    "verifyNow": "E-Mail jetzt bestätigen →",
+    "greetingsEnd": "Danke,",
+    "termmyTeam": "Das Termmy-Team",
+    "acceptOurTerms": "Die Nutzung unseres Dienstes und unserer Website unterliegt unseren",
+    "terms": "Nutzungsbedingungen",
+    "and": "und",
+    "privacyPolicy": "Datenschutzrichtlinie"
+}

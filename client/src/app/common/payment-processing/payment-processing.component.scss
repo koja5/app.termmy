@@ -2,3 +2,32 @@
   margin: 0;
   color: #000;
 }
+
+.termmy-coin {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.termmy-coin .container-coin {
+  border: 1px solid lightgray;
+  padding: 14px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.container-coin .info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-coin span {
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.termmy-coin img {
+  width: 25px;
+  padding-left: 3px;
+}

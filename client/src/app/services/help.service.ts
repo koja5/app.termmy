@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { UserTypes } from "app/enums/user-types";
 import { StorageService } from "./storage.service";
 import Holidays from "date-holidays";
+import { LicensesType } from "app/enums/licenses-type";
 
 @Injectable({
   providedIn: "root",
@@ -202,5 +203,9 @@ export class HelpService {
       return holidays.getHolidays(new Date().getFullYear());
     }
     return [];
+  }
+
+  getBasicLicense() {
+    return this._storageService.getLicenseId() === LicensesType.Basic;
   }
 }

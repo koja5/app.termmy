@@ -1,7 +1,24 @@
+@media (max-width: 992px) {
+  .termmy-coin-container {
+    margin-top: 20px;
+  }
+}
+
 .gift-icon {
   font-size: 75px;
 }
 
 .read-more {
   text-decoration: underline;
+}
+
+.termmy-coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.termmy-coin img {
+  width: 25px;
+  padding-left: 3px;
 }

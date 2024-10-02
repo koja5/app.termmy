@@ -32,7 +32,7 @@ export class ClientsComponent implements CanComponentDeactivate {
     private _messageService: MessageService,
     private _storageService: StorageService,
     private _activatedRouter: ActivatedRoute,
-    private _helpService: HelpService
+    public _helpService: HelpService
   ) {}
 
   unsavedChanges(): boolean {
@@ -73,9 +73,5 @@ export class ClientsComponent implements CanComponentDeactivate {
         this._messageService.sendSetupApp(setup);
       }
     }
-  }
-
-  getBasicLicense() {
-    return this.licenseId === LicensesType.Standard;
   }
 }

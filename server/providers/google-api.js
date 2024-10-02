@@ -200,6 +200,11 @@ router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
                 );
                 makeRequest(options);
 
+                // set up voucher for created user
+                makeRequest(
+                  prepareOptionsForRequest(data, "/setUpVoucherCodeForNewUser")
+                );
+
                 const token = generateToken(data);
                 // res.json("wizard/" + token);
                 res.json("auth/user-auth/" + token);
@@ -497,13 +502,18 @@ router.post("/getMyTermines", async (req, res) => {
 
   let events = await calendar.events.list({
     calendarId: "primary",
+    timeMin: req.body.min,
+    timeMax: req.body.max,
     auth: oauth2Client,
   });
 
   for (let key in req.body.google_additional_calendars) {
+    console.log(req.body.google_additional_calendars);
     if (req.body.google_additional_calendars[key].active) {
       let eventsFromAdditionalCalendar = await calendar.events.list({
         calendarId: req.body.google_additional_calendars[key].id,
+        timeMin: req.body.min,
+        timeMax: req.body.max,
         auth: oauth2Client,
       });
       events.data.items = events.data.items.concat(

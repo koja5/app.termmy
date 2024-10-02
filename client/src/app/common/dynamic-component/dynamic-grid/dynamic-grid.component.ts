@@ -442,11 +442,15 @@ export class DynamicGridComponent implements CanComponentDeactivate {
     if (this.externalAccounts && this.externalAccounts.google) {
       body.token = this.externalAccounts.google;
       if (body.resourceName) {
-        this._service
-          .callPostMethod("api/google/deleteClient", body)
-          .subscribe((data) => {
+        this._service.callPostMethod("api/google/deleteClient", body).subscribe(
+          (data) => {
+            console.log(data);
             this.refreshDataFromServer();
-          });
+          },
+          (error) => {
+            this.refreshDataFromServer();
+          }
+        );
       }
     } else {
       this.refreshDataFromServer();

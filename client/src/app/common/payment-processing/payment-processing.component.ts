@@ -38,7 +38,7 @@ export class PaymentProcessingComponent {
   public elementsOptions: StripeElementsOptions = {
     locale: "en",
   };
-  readonly stripe = this.stripeAccount
+  public stripe = this.stripeAccount
     ? injectStripe(environment.STRIPE_KEY, {
         stripeAccount: this.stripeAccount,
       })
@@ -59,8 +59,16 @@ export class PaymentProcessingComponent {
     telephone: new FormControl("", [Validators.required]),
   });
   public voucherCode: string;
-  public appliedCodeMessage: any;
+  public appliedCodeMessage: any = {
+    disabled: false,
+  };
   public voucher: VoucherPartnerModel;
+  public loader = false;
+  public paymentId: string;
+  public originalAmount: number;
+  public termmyCoinCount: number = 0;
+  public convertedTermmyCoin: number = 0;
+  public usedTermmyCoin = false;
 
   constructor(
     private _service: CallApiService,
@@ -72,11 +80,21 @@ export class PaymentProcessingComponent {
 
   ngOnInit() {
     this.setPaymentProcessingLanguage();
+    this.getTermmyCoin();
   }
 
   ngOnChanges(event: Event) {
     this.getProfileInfo();
     this.createPaymentIntent();
+    this.originalAmount = this.amount;
+  }
+
+  ngOnDestroy() {
+    this._service
+      .callPostMethod("api/payment/stripe/cancelPaymentIntent", {
+        paymentId: this.paymentId,
+      })
+      .subscribe((data: any) => {});
   }
 
   setPaymentProcessingLanguage() {
@@ -115,9 +133,33 @@ export class PaymentProcessingComponent {
       });
   }
 
+  getTermmyCoin() {
+    this._service
+      .callGetMethod("/api/getTermmyCoin")
+      .subscribe((data: number) => {
+        this.termmyCoinCount = data;
+        this.convertedTermmyCoin = data * environment.TERMMY_COIN_PER_EURO;
+      });
+  }
+
   createPaymentIntent() {
+    this.loader = true;
     this._service
       .callPostMethod("api/payment/stripe/createPaymentIntent", {
+        amount: Number(this.amount),
+        stripeAccount: this.stripeAccount,
+      })
+      .subscribe((data: any) => {
+        this.elementsOptions.clientSecret = data.client_secret as string;
+        this.paymentId = data.id;
+        this.loader = false;
+      });
+  }
+
+  updatePaymentIntent() {
+    this._service
+      .callPostMethod("api/payment/stripe/updatePaymentIntent", {
+        paymentId: this.paymentId,
         amount: Number(this.amount),
         stripeAccount: this.stripeAccount,
       })
@@ -157,11 +199,15 @@ export class PaymentProcessingComponent {
           } else if (result.paymentIntent.status === "succeeded") {
             this.paying = false;
             this.usingVoucherCode();
+            this.resetTermmyCoins();
             this.executeMethodEmitter.emit();
+            this.voucherCode = null;
+            this.amount = this.originalAmount;
+            this.appliedCodeMessage.disabled = false;
+            this.createPaymentIntent();
           }
         },
         error: (err) => {
-          console.log(err);
           this.paying = false;
           // this.submitted = false;
         },
@@ -173,6 +219,7 @@ export class PaymentProcessingComponent {
       const body: VoucherUsedModel = {
         id_voucher: this.voucher.id,
         id_partner: this.voucher.id_user,
+        amount: this.amount,
       };
       this._service
         .callPostMethod("/api/setVoucherUsed", body)
@@ -192,21 +239,47 @@ export class PaymentProcessingComponent {
             );
             this.appliedCodeMessage = {
               valid: true,
+              disabled: true,
               message: this._translate
                 .instant("paymentProcessing.voucherAppliedCode")
                 .replace("#discount", data.discount)
                 .replace("#discountAmount", this.amount),
             };
-            this.createPaymentIntent();
+            this.updatePaymentIntent();
           } else {
             this.appliedCodeMessage = {
               valid: false,
+              disabled: false,
               message: this._translate.instant(
                 "paymentProcessing.voucherNotValid"
               ),
             };
           }
         });
+    }
+  }
+
+  useTermmyCoins() {
+    this.amount -= this.convertedTermmyCoin;
+    this.appliedCodeMessage = {
+      valid: true,
+      disabled: false,
+      message: this._translate
+        .instant("paymentProcessing.usingTermmyCoinMessage")
+        .replace("#discount", this.convertedTermmyCoin.toFixed(2))
+        .replace("#discountAmount", this.amount),
+    };
+    this.usedTermmyCoin = true;
+    this.updatePaymentIntent();
+  }
+
+  resetTermmyCoins() {
+    if (this.usedTermmyCoin) {
+      this.termmyCoinCount = 0;
+      this.convertedTermmyCoin = 0;
+      this._service.callPostMethod("api/resetTermmyCoin").subscribe((data) => {
+        this.usedTermmyCoin = false;
+      });
     }
   }
 }

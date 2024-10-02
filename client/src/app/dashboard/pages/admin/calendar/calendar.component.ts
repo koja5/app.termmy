@@ -81,6 +81,9 @@ export class CalendarComponent {
   public calendarType: CalendarType;
   public isDirty = false;
   public calendarEditor: any;
+  public limitClientsForFreeLicenses = 30;
+  public minDate: any;
+  public maxDate: any;
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -101,6 +104,7 @@ export class CalendarComponent {
       this.schedulerHeight = "calc(100vh - 19vh)";
     }
     this.setCalendarLanguage();
+    this.getPersonalInfo();
     this.getConfigurations();
   }
 
@@ -109,12 +113,18 @@ export class CalendarComponent {
     this.initializeForm();
     this.checkStorage();
     if (this.multiCalendar) {
-      this.getWorktimeForEmployees();
       this.getExternalAccountsForMultiCalendar();
+    } else {
+      this.getMyExternalAccounts();
+    }
+  }
+
+  getPersonalInfo() {
+    if (this.multiCalendar) {
+      this.getWorktimeForEmployees();
     } else {
       this.getMyLocation();
       this.getMyWorkTime();
-      this.getMyExternalAccounts();
     }
   }
 
@@ -461,8 +471,8 @@ export class CalendarComponent {
           ? this.calendarSettings.externalAccounts[this.employeeId]
               .google_additional_calendars
           : this.calendarSettings.externalAccounts.google_additional_calendars,
-        // min: selectedWeek.min,
-        // max: selectedWeek.max,
+        min: this.minDate ? this.minDate : this.getMinAndMaxDate().minDate,
+        max: this.maxDate ? this.maxDate : this.getMinAndMaxDate().maxDate,
       })
       .subscribe((data: any) => {
         this.loader = false;
@@ -999,6 +1009,34 @@ export class CalendarComponent {
     }
   }
 
+  onActionEnd(event) {
+    if (
+      event.requestType === "dateNavigate" ||
+      event.requestType === "viewNavigate"
+    ) {
+      this.minDate = this.getMinAndMaxDate().minDate;
+      this.maxDate = this.getMinAndMaxDate().maxDate;
+      this.getTermines();
+    }
+  }
+
+  getMinAndMaxDate() {
+    return {
+      minDate: this.calendar
+        ? this.calendar.activeView.renderDates[0]
+        : undefined,
+      maxDate: this.calendar
+        ? new Date(
+            new Date().setDate(
+              this.calendar.activeView.renderDates[
+                this.calendar.activeView.renderDates.length - 1
+              ].getDate() + 1
+            )
+          ).toISOString()
+        : undefined,
+    };
+  }
+
   executeActionForCalendar(event) {
     this.isDirty = false;
     if (
@@ -1411,17 +1449,25 @@ export class CalendarComponent {
   }
 
   createNewClient(event: any) {
-    console.log(event);
-    this._service
-      .callPostMethod("/api/setClient", event)
-      .subscribe((data: any) => {
-        this.allClients = null;
-        this.onChangeClient(data);
-        setTimeout(() => {
-          this.getMyClients();
-          this.openSidebarForCreteClient();
-        }, 100);
-      });
+    if (
+      this._helpService.getBasicLicense() &&
+      this.allClients.length >= this.limitClientsForFreeLicenses
+    ) {
+      this._toastr.showErrorCustom(
+        this._translate.instant("licenses.licenseLimitForClients")
+      );
+    } else {
+      this._service
+        .callPostMethod("/api/setClient", event)
+        .subscribe((data: any) => {
+          this.allClients = null;
+          this.onChangeClient(data);
+          setTimeout(() => {
+            this.getMyClients();
+            this.openSidebarForCreteClient();
+          }, 100);
+        });
+    }
   }
 
   openSidebarForCreteService() {

@@ -1,7 +1,41 @@
-<div *ngIf="!elementsOptions.clientSecret">
+<div *ngIf="!elementsOptions.clientSecret&&loader">
     <app-loader></app-loader>
 </div>
-<div *ngIf="elementsOptions.clientSecret" style="margin-bottom: 10px">
+<div *ngIf="elementsOptions.clientSecret&&!loader" style="margin-bottom: 10px">
+
+    <div class="termmy-coin">
+        <div class="container-coin">
+            <div class="info">
+                <div>
+                    <div>
+                        <h3 class="mb-0 font-weight-bolder">{{termmyCoinCount}} <img
+                                src="./assets/images/icons/termmy-coin.png" title="{{'recommended.termmyCoin' |
+    translate}}">
+                            <br>
+                        </h3>
+                    </div>
+                    <span>{{'paymentProcessing.totalTermmyCoin' | translate}}</span>
+                </div>
+
+                <div class="ml-2 mr-2">
+                    =
+                </div>
+                <div>
+                    <div>
+                        <h3 class="mb-0 font-weight-bolder">{{convertedTermmyCoin.toFixed(2)}} €
+                            <br>
+                        </h3>
+                    </div>
+                    <span>{{'paymentProcessing.discountPrice' | translate}}</span>
+                </div>
+            </div>
+            <div class="mt-2">
+                <button class="btn-sm btn-outline-primary" [disabled]="termmyCoinCount > 0 ? false : true"
+                    (click)="useTermmyCoins()">{{'paymentProcessing.usingTermmyCoin' | translate}}</button>
+            </div>
+        </div>
+
+    </div>
 
     <div class="mb-2">
         <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
@@ -15,8 +49,7 @@
             <input class="form-control" [placeholder]="'paymentProcessing.voucherPlaceholder' | translate"
                 name="voucher_code" [(ngModel)]="voucherCode" />
             <button class="btn btn-outline-primary ml-1 d-flex" (click)="checkVoucherCode()"
-                [disabled]="appliedCodeMessage && appliedCodeMessage.valid ? true : false"><span
-                    class="fa fa-check"></span>
+                [disabled]="appliedCodeMessage.disabled"><span class="fa fa-check"></span>
                 {{'paymentProcessing.voucherApplyButton' | translate}}</button>
         </div>
         <div class="mt-2" *ngIf="appliedCodeMessage">

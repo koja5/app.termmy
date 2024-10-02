@@ -10,4 +10,5 @@ export const environment = {
   GOOGLE_AUTH_URL: "https://app.termmy.com:3003/api/google/auth",
   MICROSOFT_CLIENT_ID: "f8d10920-2603-45a7-9c7a-d474a32f4758",
   MICROSOFT_AUTH_URL: "https://app.termmy.com",
+  TERMMY_COIN_PER_EURO: 0.05,
 };

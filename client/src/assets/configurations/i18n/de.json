@@ -76,7 +76,10 @@
       "doYouWantToCreateNew": "Möchten Sie etwas Neues erstellen?",
       "voucherCode": "Gutscheincode",
       "discount": "Rabatt",
-      "signupTime": "Anmeldezeit"
+      "signupTime": "Anmeldezeit",
+      "validFrom": "Gültig ab",
+      "validTo": "Gültig bis",
+      "bonusForPartner": "Bonus für Partner"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -270,7 +273,9 @@
       "successfullyPickedUpSms": "SMS erfolgreich abgeholt",
       "goToCheckAvailableSms": "Verfügbare SMS überprüfen",
       "successfullyCopiedRecommendedLinkToClipboard": "Empfehlungs-Link erfolgreich in die Zwischenablage kopiert.",
+      "termmyCoin": "münzen",
       "voucherCode": "Ihr Gutscheincode",
+      "explanationVoucherBonus": "Sie können diesen Gutscheincode an Ihre Freunde senden und diese erhalten #discount % Rabattpreis beim Lizenz- oder SMS-Kauf und Sie erhalten #bonusForPartner % des Gesamtpreises, umgewandelt in Termmy-Token. Dieses Token können Sie später als Rabatt verwenden, wenn Sie Ihre Lizenz aktualisieren oder verlängern möchten.",
       "termmyPartnerTitle": "Möchten Sie Termmy-Partner werden?",
       "copyVoucherCode": "GUTSCHEINCODE KOPIEREN",
       "successfullyCopiedVoucherCodeToClipboard": "Gutscheincode erfolgreich in die Zwischenablage kopiert.",
@@ -370,6 +375,11 @@
       "sentTestSMSTo": "Test-SMS an #telephone gesendet",
       "needToInsertTelephoneAtSettings": "Sie haben keine Telefonnummer angegeben. Bitte fügen Sie diese hinzu!",
       "activeSmsReminder": "Aktiviere SMS-Erinnerung",
+      "edit": "Benachrichtigung bearbeiten",
+      "name": "Name",
+      "messageTemplate": "Nachrichtenvorlage *",
+      "messagePreview": "Nachrichtenvorschau",
+      "dynamicValue": "Dynamischer Wert",
       "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen.",
       "contents": {
          "clientImmediatelyReminder": {
@@ -468,8 +478,8 @@
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
       "annualPrice": "Jährlicher Preis",
-      "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
-      "licenseLimitForClients": "Sie haben die maximal zulässige Anzahl an Clients in der kostenlosen Lizenz erreicht. Bitte verlängern Sie Ihre Lizenz. Sie können das Angebot einsehen",
+      "licenseLimitForClientsNotification": "Die kostenlosen Lizenz erlaubt eine maximale Anzahl von 30 Kunden. Für eine uneingeschränkte Nutzung klicken Sie ",
+      "licenseLimitForClients": "ACHTUNG: Ihre Kunden können weiterhin Online Buchungen durchführen. Sie können auch neue Termine vergeben. Ein Updagrade für eine uneingeschränkte Nutzung finden Sie ",
       "here": "hier."
    },
    "licenseStatus": {
@@ -628,8 +638,12 @@
       "voucherTitle": "Gutscheincode",
       "voucherPlaceholder": "Geben Sie den Gutscheincode ein, um einen Rabatt auf diesen Preis zu erhalten",
       "voucherApplyButton": "ANWENDEN",
-      "voucherAppliedCode": "Sie haben den Rabattcode von #discount erfolgreich eingegeben. Der Zahlungsbetrag wird um #discountAmount rabattiert.",
-      "voucherNotValid": "Gutscheincode ist ungültig! Bitte geben Sie einen gültigen Gutscheincode für den Rabattpreis ein!"
+      "voucherAppliedCode": "Sie haben den Rabattcode von #discount% erfolgreich eingegeben. Der Zahlungsbetrag wird um €#discountAmount rabattiert.",
+      "voucherNotValid": "Gutscheincode ist ungültig! Bitte geben Sie einen gültigen Gutscheincode für den Rabattpreis ein!",
+      "totalTermmyCoin": "Insgesamt Termmy-Münzen",
+      "discountPrice": "Rabatt",
+      "usingTermmyCoin": "Verwenden Sie Termmy-Münzen",
+      "usingTermmyCoinMessage": "Sie haben Termmy-Münzen im Wert von #discount € eingelöst. Der zu zahlende Gesamtbetrag beträgt nun #discountAmount €."
    },
    "buyMoreSms": {
       "title": "SMS kaufen",

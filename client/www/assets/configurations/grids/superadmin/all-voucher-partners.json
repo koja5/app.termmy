@@ -141,7 +141,7 @@
             "filter": "date",
             "type": "string",
             "class": "text-align-right",
-            "field": "discount",
+            "field": "discount_column",
             "validation": {
                 "required": true
             }
@@ -257,6 +257,30 @@
             "title": "commonFields.discount",
             "field": "discount",
             "required": true
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "valid_from",
+            "title": "commonFields.validFrom",
+            "field": "valid_from"
+        },
+        {
+            "type": "datetimepicker",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "valid_to",
+            "title": "commonFields.validTo",
+            "field": "valid_to"
+        },
+        {
+            "type": "numeric",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "bonus_for_partner",
+            "title": "commonFields.bonusForPartner",
+            "field": "bonus_for_partner"
         },
         {
             "type": "switch",

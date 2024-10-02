@@ -177,6 +177,33 @@ router.post("/sendRequestToBeAPartner", function (req, res, next) {
   });
 });
 
+router.post(
+  "/sendInfoForUpdateTermmyCoinForPartner",
+  function (req, res, next) {
+    var body = JSON.parse(
+      fs.readFileSync(
+        "./providers/mail_server/mail_config/info_for_update_termmy_coin.json",
+        "utf-8"
+      )
+    );
+
+    body["email"] = req.body.user_partner_email;
+    body["previous_coin_number"] = req.body.previous_coin_number;
+    body["new_coin_number"] = req.body.new_coin_number;
+    body["user_user_voucher"] = req.body.user_user_voucher;
+
+    var options = prepareOptionsForRequest(body);
+
+    request(options, function (error, response, body) {
+      if (!error) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    });
+  }
+);
+
 //#region FUNCTIONS
 
 function prepareOptionsForRequest(body) {

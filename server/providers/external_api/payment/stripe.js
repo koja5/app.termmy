@@ -183,6 +183,38 @@ router.post("/createPaymentIntent", async (req, res, next) => {
     currency: "eur",
   });
 
+  res.json({
+    id: paymentIntent.id,
+    client_secret: paymentIntent.client_secret,
+  });
+});
+
+router.post("/updatePaymentIntent", async (req, res, next) => {
+  const paymentIntent = await require("stripe")(
+    req.body.stripeAccount
+      ? (process.env.STRIPE_KEY,
+        {
+          stripeAccount: req.body.stripeAccount,
+        })
+      : process.env.STRIPE_KEY
+  ).paymentIntents.update(req.body.paymentId, {
+    amount: (req.body.amount * 100.0).toFixed(0),
+    currency: "eur",
+  });
+
+  res.json(paymentIntent.client_secret);
+});
+
+router.post("/cancelPaymentIntent", async (req, res, next) => {
+  const paymentIntent = await require("stripe")(
+    req.body.stripeAccount
+      ? (process.env.STRIPE_KEY,
+        {
+          stripeAccount: req.body.stripeAccount,
+        })
+      : process.env.STRIPE_KEY
+  ).paymentIntents.cancel(req.body.paymentId);
+
   res.json(paymentIntent.client_secret);
 });
 //#endregion

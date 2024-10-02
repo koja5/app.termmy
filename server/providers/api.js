@@ -38,7 +38,7 @@ router.post("/login", function (req, res, next) {
     }
     conn.query(
       // "select u.*, ul.license_id from users u join user_license ul on u.admin_id = ul.admin_id WHERE u.email=? AND u.password=?",
-      "select * from users WHERE email=? AND password=?",
+      "select u.*, ul.license_id  from users u join user_license ul on u.admin_id = ul.admin_id WHERE email=? AND password=?",
       [req.body.email, sha1(req.body.password)],
       function (err, rows, fields) {
         conn.release();
@@ -143,6 +143,14 @@ router.post("/signUp", function (req, res, next) {
                     }
                   }
                 );
+
+                // set up voucher for created user
+                makeRequest(
+                  prepareOptionsForRequest(
+                    req.body.data,
+                    "/setUpVoucherCodeForNewUser"
+                  )
+                );
               }
             }
           );
@@ -176,6 +184,42 @@ router.post("/setUpSettingsAfterUserSignUp", function (req, res, next) {
       function (err, rows, fields) {
         conn.release();
       }
+    );
+  });
+});
+
+router.post("/setUpVoucherCodeForNewUser", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    // generate voucher code for recommended app
+
+    const voucherPartner = {
+      id_user: req.body.id,
+      voucher_code: generateVoucherCode(),
+      discount: process.env.DEFAULT_VOUCHER_DISCOUNT,
+      bonus_for_partner: process.env.DEFAULT_BONUS_FOR_PARTER,
+      active: 1,
+    };
+
+    conn.query(
+      "insert into voucher_partner set ?",
+      [voucherPartner],
+      function (err, rows, fields) {}
+    );
+
+    const termmyCoin = {
+      id_user: req.body.id,
+      coins: 0,
+    };
+
+    conn.query(
+      "insert into termmy_coins set ?",
+      [termmyCoin],
+      function (err, rows, fields) {}
     );
   });
 });
@@ -2116,7 +2160,7 @@ router.get("/checkVoucherCode/:voucherCode", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from voucher_partner where voucher_code like ?",
+          "select * from voucher_partner where voucher_code like ? and ((valid_from is NULL and valid_to is NULL) or (valid_from <= CAST(CURRENT_TIMESTAMP AS DATETIME) and valid_to >= CAST(CURRENT_TIMESTAMP AS DATETIME)))",
           [req.params.voucherCode],
           function (err, rows, fields) {
             conn.release();
@@ -2145,13 +2189,25 @@ router.post("/setVoucherUsed", auth, function (req, res, next) {
 
     req.body.id_user_used_voucher = req.user.user.id;
 
+    const amount = copyValue(req.body.amount);
+    delete req.body.amount;
+
     conn.query(
       "INSERT INTO vouchers_used set ? ON DUPLICATE KEY UPDATE ?",
       [req.body, req.body],
       function (err, rows) {
         conn.release();
         if (!err) {
-          res.json(true);
+          var options = prepareOptionsForRequest(
+            {
+              id_user: req.body.id_partner,
+              coins: (amount * process.env.TERMMY_COIN_PER_EURO).toFixed(0),
+              id_user_used_voucher: req.body.id_user_used_voucher,
+            },
+            "/saveTermmyCoin"
+          );
+
+          makeRequest(options, res);
         } else {
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(false);
@@ -2201,7 +2257,7 @@ router.get("/getVoucherPartners", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select vp.*, CONCAT(vp.discount, '%') as 'discount',u.firstname, u.lastname, u.email, u.telephone from voucher_partner vp join users u on vp.id_user = u.id",
+          "select vp.*, CONCAT(vp.discount, '%') as 'discount_column', NULLIF(bonus_for_partner, 0) as 'bonus_for_partner',u.firstname, u.lastname, u.email, u.telephone from voucher_partner vp join users u on vp.id_user = u.id",
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -2227,9 +2283,176 @@ router.post("/setVoucherPartner", auth, function (req, res, next) {
       res.json(err);
     }
 
+    req.body.valid_from = convertToDate(req.body.valid_from);
+    req.body.valid_to = convertToDate(req.body.valid_to);
+
     conn.query(
       "INSERT INTO voucher_partner set ? ON DUPLICATE KEY UPDATE ?",
       [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.post("/saveTermmyCoin", function (req, res, next) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from termmy_coin where id_user = ?",
+      [req.body.id_user],
+      function (err, rows) {
+        if (!err) {
+          if (rows.length) {
+            conn.query(
+              "update termmy_coin set coins = coins + ? where id_user = ?",
+              [req.body.coins, req.body.id_user],
+              function (err, termmy_coin) {
+                if (!err) {
+                  conn.query(
+                    "select * from users where id = ?",
+                    [req.body.id_user_used_voucher],
+                    function (err, user_used) {
+                      if (!err) {
+                        conn.query(
+                          "select * from users where id = ?",
+                          [req.body.id_user_used_voucher],
+                          function (err, user_partner) {
+                            conn.release();
+                            if (!err) {
+                              var options = prepareOptionsForRequest(
+                                {
+                                  previous_coin_number: rows[0].coins,
+                                  new_coin_number:
+                                    Number(rows[0].coins) +
+                                    Number(req.body.coins),
+                                  user_partner_email: user_partner[0].email,
+                                  user_user_voucher: user_used[0].firstname
+                                    ? user_used[0].firstname
+                                    : "" + " " + user_used[0].lastname
+                                    ? user_used[0].lastname
+                                    : "",
+                                },
+                                "mail-server/sendInfoForUpdateTermmyCoinForPartner"
+                              );
+
+                              makeRequest(options, res);
+                            }
+                          }
+                        );
+                      } else {
+                        logger.log("error", err.sql + ". " + err.sqlMessage);
+                        res.json(false);
+                      }
+                    }
+                  );
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          } else {
+            conn.query(
+              "insert into termmy_coin set ?",
+              [req.body],
+              function (err, rows) {
+                if (!err) {
+                  conn.query(
+                    "select * from users where id = ?",
+                    [req.body.id_user_used_voucher],
+                    function (err, user_used) {
+                      if (!err) {
+                        conn.query(
+                          "select * from users where id = ?",
+                          [req.body.id_user_used_voucher],
+                          function (err, user_partner) {
+                            conn.release();
+                            if (!err) {
+                              var options = prepareOptionsForRequest(
+                                {
+                                  previous_coin_number: 0,
+                                  new_coin_number: req.body.coins,
+                                  user_partner_email: user_partner[0].email,
+                                  user_user_voucher: user_used[0].firstname
+                                    ? user_used[0].firstname
+                                    : "" + " " + user_used[0].lastname
+                                    ? user_used[0].lastname
+                                    : "",
+                                },
+                                "mail-server/sendInfoForUpdateTermmyCoinForPartner"
+                              );
+
+                              makeRequest(options, res);
+                            }
+                          }
+                        );
+                      } else {
+                        logger.log("error", err.sql + ". " + err.sqlMessage);
+                        res.json(false);
+                      }
+                    }
+                  );
+                } else {
+                  logger.log("error", err.sql + ". " + err.sqlMessage);
+                  res.json(false);
+                }
+              }
+            );
+          }
+        } else {
+          conn.release();
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
+});
+
+router.get("/getTermmyCoin", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "select * from termmy_coin where id_user = ?",
+      [req.user.user.id],
+      function (err, rows) {
+        conn.release();
+        if (err) {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(err);
+        }
+        res.json(rows.length ? rows[0].coins : 0);
+      }
+    );
+  });
+});
+
+router.post("/resetTermmyCoin", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    conn.query(
+      "update termmy_coin set coins = 0 where id_user = ?",
+      [req.user.user.id],
       function (err, rows) {
         conn.release();
         if (!err) {
@@ -2455,12 +2678,24 @@ function generateRandomPassword() {
   return Math.random().toString(36).slice(-8);
 }
 
+function generateVoucherCode() {
+  return Math.random().toString(36).slice(-8);
+}
+
 function copyValue(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
 function convertToString(value) {
   return JSON.stringify(value);
+}
+
+function convertToDate(value) {
+  if (value) {
+    value = new Date(value);
+    return value;
+  }
+  return value;
 }
 
 function convertToObject(value) {

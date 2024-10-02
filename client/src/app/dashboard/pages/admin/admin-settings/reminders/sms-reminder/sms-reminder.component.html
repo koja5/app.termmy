@@ -55,11 +55,11 @@
 
                 <div>
                     <div class="row mt-2">
-                        <div class="col-lg-4 col-12">
+                        <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientImmediatelyReminder"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
-                        <div class="col-lg-4 col-12">
+                        <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientDayBeforeReminder"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
@@ -71,11 +71,11 @@
                     <h5>{{'smsReminder.clientLoyalityTitle' | translate}} </h5>
 
                     <div class="row mt-2">
-                        <div class="col-lg-4 col-12">
+                        <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientHappyBirthday"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
-                        <!-- <div class="col-lg-4 col-12">
+                        <!-- <div class="col-md-6 col-12">
                         <app-sms-reminder-card [item]="smsReminder.clientThankForCommingToUs"
                             (changeValue)="changeValue($event)"></app-sms-reminder-card>
                     </div> -->
@@ -88,11 +88,11 @@
                     <h5>{{'smsReminder.reminderEmployeeTitle' | translate}} </h5>
 
                     <div class="row mt-2">
-                        <div class="col-lg-4 col-12">
+                        <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.employeeImmediatelyReminder"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
-                        <div class="col-lg-4 col-12">
+                        <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.employeeDayBeforeReminder"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>

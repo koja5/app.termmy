@@ -331,6 +331,18 @@ router.post("/findOrCreateUserViaMicrosoft", function (req, res, next) {
                   "info",
                   `USER: ${req.body.email} CREATE ACCOUNT at ${new Date()}.`
                 );
+
+                var options = prepareOptionsForRequest(
+                  data,
+                  "/setUpSettingsAfterUserSignUp"
+                );
+                makeRequest(options);
+
+                // set up voucher for created user
+                makeRequest(
+                  prepareOptionsForRequest(data, "/setUpVoucherCodeForNewUser")
+                );
+
                 const token = generateToken(data);
                 // res.json("wizard/" + token);
                 res.json("auth/user-auth/" + token);

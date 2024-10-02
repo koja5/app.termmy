@@ -76,7 +76,10 @@
         "doYouWantToCreateNew": "Da li želite da kreirate novi?",
         "voucherCode": "Vaučer kod",
         "discount": "Popust",
-        "signupTime": "Datum kreiranja naloga"
+        "signupTime": "Datum kreiranja naloga",
+        "validFrom": "Važi od",
+        "validTo": "Važi do",
+        "bonusForPartner": "Bonus za partnera"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -158,6 +161,9 @@
     },
     "navBar": {
         "profile": "Profil",
+        "settings": "Podešavanja",
+        "help": "Pomoć",
+        "plans": "Licence",
         "logout": "Odjavi se"
     },
     "generalDialog": {
@@ -402,6 +408,11 @@
         "sentTestSMSTo": "Testna SMS poruka podsetnika je poslata na broj telefona #telephone",
         "needToInsertTelephoneAtSettings": "Još uvek niste podesili Vaš broj telefona. Molimo Vas da podesite broj telefona u podešavanjima profila, kako bi mogli da testirate podsetnik.",
         "activeSmsReminder": "Aktiviraj SMS podsetnik",
+        "edit": "Uredi obaveštenje",
+        "name": "Ime",
+        "messageTemplate": "Poruka *",
+        "messagePreview": "Pregled",
+        "dynamicValue": "Promenljive vrednosti",
         "warning": "Naš predlog je da aktivirate SMS podsetnik, jer 97% ljudi vidi poruku u prvih 10 minuta od prijema.",
         "contents": {
             "clientImmediatelyReminder": {

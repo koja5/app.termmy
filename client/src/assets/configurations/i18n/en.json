@@ -35,7 +35,7 @@
         "executeActionQuestionTitle": "Are you sure?",
         "executeActionQuestionText": "Do you want to execute this action?"
     },
-   "actionMessage": {
+    "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
         "successExecuteActionTextDefault": "Action is successfully executed!",
         "errorExecuteActionTitleDefault": "Something is happened",
@@ -76,8 +76,11 @@
         "doYouWantToCreateNew": "Do you want to create new?",
         "voucherCode": "Voucher code",
         "discount": "Discount",
-        "signupTime": "Sign up time"
-   },
+        "signupTime": "Sign up time",
+        "validFrom": "Valid from",
+        "validTo": "Valid to",
+        "bonusForPartner": "Bonus for partner"
+    },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -155,7 +158,7 @@
         "gatewayCountryPrefix": "Country prefix",
         "licenses": "Licenses",
         "allVoucherPartners": "All voucher partners"
-   },
+    },
     "navBar": {
         "profile": "Profile",
         "settings": "Settings",
@@ -306,7 +309,9 @@
         "successfullyPickedUpSms": "Successfuly picked up sms",
         "goToCheckAvailableSms": "Go to check available sms",
         "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard.",
+        "termmyCoin": "coins",
         "voucherCode": "Your voucher code",
+        "explanationVoucherBonus": "You can send this voucher code to your friends and they will get #discount % discount price during license or SMS purchase and you will get #bonusForParter % of full price converted in Termmy token. That token you can later using like discount when you want to upgrade or extend your licence.",
         "termmyPartnerTitle": "Do you want to be a Termmy partner?",
         "copyVoucherCode": "COPY VOUCHER CODE",
         "successfullyCopiedVoucherCodeToClipboard": "Successfully copied voucher code to clipboard.",
@@ -314,7 +319,7 @@
         "becomeATermmyPartnerQuestion": "Do you want to become a Termmy partner?",
         "explanationForTermmyPartner": "If you want to be Termmy partner, we will give you voucher code. That voucher code you can send to your friends, they will get discount price for licenses and you also will received on your account percentage of the payment.",
         "successfullySendRequestToBePartner": "Successfuly send request to become a Termmy partner. You will received voucher code after Termmy team check your account and approve this offer for you."
-   },
+    },
     "adminSettings": {
         "adminSettings": "Admin settings",
         "onlinePayment": "Online payment",
@@ -406,6 +411,11 @@
         "sentTestSMSTo": "Sent test sms to #telephone",
         "needToInsertTelephoneAtSettings": "You did't set telephone number. Please add it on your settings profile!",
         "activeSmsReminder": "Active SMS reminder",
+        "edit": "Edit notification",
+        "name": "Name",
+        "messageTemplate": "Message template *",
+        "messagePreview": "Message preview",
+        "dynamicValue": "Dynamic value",
         "warning": "Our suggestion is to activate an SMS reminder, because 97% of people open SMS messages within 10 minutes of their arrival.",
         "contents": {
             "clientImmediatelyReminder": {
@@ -440,7 +450,7 @@
             }
         },
         "pleaseFillPersonalData": "Please enter your personal information, as we use information such as address, your name/company name, etc. when we send SMS to your clients for you! You can fill in the information"
-   },
+    },
     "emailReminder": {
         "title": "Email Reminder",
         "text": "Configure automated Email reminders",
@@ -499,7 +509,7 @@
             }
         },
         "pleaseFillPersonalData": "Please enter your personal information, as we use information such as address, your name/company name, etc. when we email your customers for you! You can fill in the information"
-   },
+    },
     "licenses": {
         "name": "Name",
         "monthlyPrice": "Monthly price",
@@ -507,7 +517,7 @@
         "licenseLimitForClientsNotification": "You're getting close to reaching your client count and the 30 free client limit. Please extend your license. See the offer",
         "licenseLimitForClients": "You have reached the maximum number of clients allowed in the free license. Please extend your license. You can view the offer",
         "here": "here."
-   },
+    },
     "licenseStatus": {
         "currentPlan": "Current plan",
         "yourCurrentPlan": "Your Current Plan is",
@@ -627,9 +637,13 @@
         "voucherTitle": "Voucher code",
         "voucherPlaceholder": "Enter the voucher code to get a discount on this price",
         "voucherApplyButton": "APPLY",
-        "voucherAppliedCode": "You have successfully entered the discount code from #discount. Payment amount is discounted #discountAmount.",
-        "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!"
-   },
+        "voucherAppliedCode": "You have successfully entered the discount code from #discount%. Payment amount is discounted €#discountAmount.",
+        "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!",
+        "totalTermmyCoin": "Total Termmy coins",
+        "discountPrice": "Discount price",
+        "usingTermmyCoin": "Use Termmy coins",
+        "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €."
+    },
     "buyMoreSms": {
         "title": "Buy SMS",
         "text": "Buy more messages and achieve better communication with clients",

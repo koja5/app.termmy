@@ -14,7 +14,7 @@
         </div>
         <div class="col-12 pt-2 pb-2 border-top">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-md-12">
                     <div class="status text-center">
                         <span class="fa fa-gift gift-icon"></span>
                         <h4 class="mb-0 font-weight-bolder">{{smsCount}} {{'recommended.smsBonus' | translate}}</h4>
@@ -40,12 +40,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-md-12 termmy-coin-container">
                     <div class="status text-center">
                         <span class="fa fa-credit-card gift-icon"></span>
                         <div *ngIf="voucher">
-                            <h4 class="mb-0 font-weight-bolder">{{voucher.voucher_code}}</h4>
-                            <p>{{'recommended.voucherCode' | translate}}</p>
+                            <div class="termmy-coin">
+                                <h3 class="mb-0 font-weight-bolder">{{termmyCoinCount}} </h3> <img
+                                    src="./assets/images/icons/termmy-coin.png" title="{{'recommended.termmyCoin' |
+                        translate}}">
+                            </div>
+                            <p>{{'recommended.voucherCode' | translate}}: <b>{{voucher.voucher_code}}</b>
+                                <app-explanation-mark [explanation]="explanationForVoucherBonus"></app-explanation-mark>
+                            </p>
                             <a class="btn btn-outline-primary" (click)="copyRecommendedVoucherCodeToClipboard()"><span
                                     class="fa fa-link"></span> {{'recommended.copyVoucherCode'
                                 | translate}}</a>

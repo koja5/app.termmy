@@ -3,7 +3,7 @@
 
 <app-loader *ngIf="loader"></app-loader>
 <app-loader *ngIf="loaderContent"></app-loader>
-<div class="content-wrapper p-0" *ngIf="config&&!loader">
+<div class="content-wrapper p-0" *ngIf="config">
     <div class="content-body">
         <section class="users-list-wrapper">
             <div class="row mb-2" *ngIf="multiCalendar">
@@ -25,15 +25,17 @@
                     </ng-select>
                 </div>
             </div>
-            <div class="card" *ngIf="checkCalendarVisibility()">
-                <ejs-schedule #calendar width='100%' [height]="multiCalendar ? '71vh' : schedulerHeight"
-                    [eventSettings]="eventSettings" [showWeekNumber]="true"
+            <div class="card" *ngIf="workTimes">
+                <ejs-schedule *ngIf="checkCalendarVisibility()" #calendar width='100%'
+                    [height]="multiCalendar ? '71vh' : schedulerHeight"
+                    [eventSettings]="eventSettings ? eventSettings : []" [showWeekNumber]="true"
                     currentView="{{calendarSettings && calendarSettings.currentView ? calendarSettings.currentView : 'WorkWeek'}}"
                     [startHour]="getStartHourForLocation()" [endHour]="getEndHourForLocation()" [showQuickInfo]="false"
-                    (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)"
-                    (popupClose)="onPopupClose($event)" (eventRendered)="onEventRendered($event)"
-                    (dataBound)="onDataBound($event)" (renderCell)="onRenderCell($event)"
-                    (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" [loading]="loader">
+                    (actionBegin)="onActionBegin($event)" (actionComplete)="onActionEnd($event)"
+                    (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
+                    (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
+                    (renderCell)="onRenderCell($event)" (cellClick)="onCellClick($event)"
+                    (eventClick)="onEventClick($event)" [loading]="loader">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1">
@@ -64,7 +66,7 @@
                     <ng-template #eventTemplate let-data>
 
                     </ng-template>
-                    <ng-template #editorTemplate let-data *ngIf="!loader">
+                    <ng-template #editorTemplate let-data>
                         <table class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <div>

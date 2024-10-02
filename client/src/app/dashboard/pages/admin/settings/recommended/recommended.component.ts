@@ -20,8 +20,10 @@ export class RecommendedComponent {
   public file = "recommended-bonus.json";
   public data: any;
   public smsCount: number = 0;
+  public termmyCoinCount: number = 0;
   public pickedUpSms = false;
   public voucher = new VoucherPartnerModel();
+  public explanationForVoucherBonus: string;
 
   constructor(
     private _helpService: HelpService,
@@ -40,6 +42,7 @@ export class RecommendedComponent {
       });
 
     this.getVoucherCode();
+    this.getTermmyCoin();
   }
 
   copyRecommendedLinkToClipboard() {
@@ -86,6 +89,18 @@ export class RecommendedComponent {
       .callGetMethod("api/getVoucherCode")
       .subscribe((data: VoucherPartnerModel) => {
         this.voucher = data;
+        this.explanationForVoucherBonus = this._translate
+          .instant("recommended.explanationVoucherBonus")
+          .replaceAll("#discount", this.voucher.discount)
+          .replaceAll("#bonusForPartner", this.voucher.bonus_for_partner);
+      });
+  }
+
+  getTermmyCoin() {
+    this._service
+      .callGetMethod("/api/getTermmyCoin")
+      .subscribe((data: number) => {
+        this.termmyCoinCount = data;
       });
   }
 

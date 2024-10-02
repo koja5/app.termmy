@@ -3,4 +3,5 @@ export class VoucherPartnerModel {
   id_user: string;
   voucher_code: string;
   discount: number;
+  bonus_for_partner: number;
 }

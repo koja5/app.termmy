@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateService } from "@ngx-translate/core";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
@@ -12,13 +20,25 @@ import { HelpService } from "app/services/help.service";
 export class SmsReminderCardComponent {
   @Input() item: any;
   @Output() changeValue = new EventEmitter<any>();
+  @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
+
+  public reminderEditDialog: any;
+  public test = '<h1>Test</h1>'
 
   constructor(
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _translate: TranslateService,
-    private _helpService: HelpService
+    private _helpService: HelpService,
+    private _modalService: NgbModal
   ) {}
+
+  ngOnInit() {
+    // this.item.message = this.item.message.replaceAll(
+    //   "#time",
+    //   '<span>#time</span>'
+    // );
+  }
 
   modelChangeFn(event) {
     console.log(this.item);
@@ -48,5 +68,17 @@ export class SmsReminderCardComponent {
           );
         }
       });
+  }
+
+  showReminderEditDialog() {
+    this.reminderEditDialog = this._modalService.open(this.reminderEdit, {
+      centered: true,
+      windowClass: "modal modal-default",
+      size: "lg",
+    });
+  }
+
+  calculateNumberOfMessage() {
+    return Math.ceil(this.item.message.length / 160);
   }
 }

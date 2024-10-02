@@ -9,6 +9,9 @@
         <div ngbDropdown>
             <i class="fa fa-cog config-icon" aria-hidden="true" ngbDropdownToggle id="dropdownMenuButton"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                <!-- <a ngbDropdownItem (click)="showReminderEditDialog()"><span class="fa fa-edit"></span>
+                    {{'smsReminder.edit' |
+                    translate}}</a> -->
                 <a ngbDropdownItem (click)="item.active = !item.active; change()"><span
                         class="fa fa-{{item.active ? 'pause' : 'play'}}"></span> {{item.active ?
                     ('smsReminder.deactiveNotification' | translate) : ('smsReminder.activeNotification' |
@@ -26,3 +29,52 @@
         <span *ngIf="!item.active" class="badge badge-light-danger">{{'smsReminder.inactive' | translate}}</span>
     </div>
 </div>
+
+<ng-template #reminderEdit let-modal class="modal-dialog modal-lg modal-dialog-centered display-none">
+    <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel160">{{'general.edit' | translate}}</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div>
+            <label class="custom-label">{{'smsReminder.name' | translate}}</label>
+            <input class="form-control" [(ngModel)]="item.title" name="title">
+        </div>
+
+        <div class="edit-reminder mt-2">
+            <div class="message-template">
+                <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="item.message" name="message-template"></textarea>
+                <!-- <div [innerHtml]="test" contenteditable="true">
+                </div> -->
+                <div class="dynamic-buttons mt-1 full-width">
+                    <label>{{'smsReminder.dynamicValue' | translate}}
+                        <app-explanation-mark></app-explanation-mark></label> <br>
+                    <button class="btn-sm btn-outline-primary"><span class="fa fa-clock-o"></span> #time</button>
+                    <button class="btn-sm btn-outline-primary"><span class="fa fa-calendar"></span> #date</button>
+                    <button class="btn-sm btn-outline-primary"><span class="fa fa-address-book-o"></span>
+                        #address</button>
+                    <button class="btn-sm btn-outline-primary"><span class="fa fa-building-o"></span> #company</button>
+                </div>
+            </div>
+            <div class="reminder-info">
+                <p class="fa fa-info-circle"></p>
+                <p class="fa fa-arrow-right m-0"></p>
+                <span>{{item.message.length}}</span>
+                <p class="fa fa-commenting-o m-0"></p>
+                <span>{{calculateNumberOfMessage()}} </span>
+            </div>
+            <div class="message-preview">
+                <label class="custom-label">{{'smsReminder.messagePreview' | translate}}</label>
+                <textarea class="form-control" rows="4"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary">{{'general.save' | translate}}</button>
+    </div>
+</ng-template>
