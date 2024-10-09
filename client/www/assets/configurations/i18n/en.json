@@ -325,7 +325,7 @@
         "onlinePayment": "Online payment",
         "bookingSettings": "Booking online",
         "reminders": "Reminders",
-        "license": "License",
+        "license": "License and SMS",
         "holidays": "Holidays"
     },
     "onlinePayment": {
@@ -615,6 +615,8 @@
         "backToHome": "Back to Home"
     },
     "paymentProcessing": {
+        "title": "Billing",
+        "cardInformation": "Card information",
         "buttonText": "Pay #amount €",
         "acceptTermsAndPrivacyPolicyOne": "By submitting this order, you accept the ",
         "acceptTermsAndPrivacyPolicyTerms": "General Terms",
@@ -639,10 +641,13 @@
         "voucherApplyButton": "APPLY",
         "voucherAppliedCode": "You have successfully entered the discount code from #discount%. Payment amount is discounted €#discountAmount.",
         "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!",
+        "termmyCoins": "Termmy coins",
         "totalTermmyCoin": "Total Termmy coins",
         "discountPrice": "Discount price",
         "usingTermmyCoin": "Use Termmy coins",
-        "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €."
+        "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €.",
+        "useTermmyCoinsInsteadPayment": "* You have the possibility to use the collection of coins instead to use payment options. The number of coins used would be",
+        "coins": "coins"
     },
     "buyMoreSms": {
         "title": "Buy SMS",

@@ -5,15 +5,20 @@
 
 .termmy-coin {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
 .termmy-coin .container-coin {
   border: 1px solid lightgray;
+  border-radius: 6px;
+  max-width: 400px;
+  padding: 5px;
+}
+
+.coin-counts {
   padding: 14px;
   text-align: center;
-  border-radius: 6px;
 }
 
 .container-coin .info {
@@ -30,4 +35,17 @@
 .termmy-coin img {
   width: 25px;
   padding-left: 3px;
+}
+
+.enought-coins {
+  font-size: 12px;
+  margin-top: 15px;
+  background: rgba(40, 199, 111, 0.12) !important;
+  color: #28c76f !important;
+  padding: 5px;
+}
+
+.enought-coins span {
+  font-size: 14px;
+  font-weight: bold;
 }

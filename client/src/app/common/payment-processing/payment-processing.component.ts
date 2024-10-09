@@ -30,7 +30,7 @@ import { VoucherUsedModel } from "app/models/voucher-used.model";
 export class PaymentProcessingComponent {
   @ViewChild(StripePaymentElementComponent)
   paymentElement!: StripePaymentElementComponent;
-  @Input() amount: number;
+  @Input() amount: any;
   @Input() buttonText!: string;
   @Input() stripeAccount!: string;
   @Output() executeMethodEmitter = new EventEmitter<null>();
@@ -67,7 +67,8 @@ export class PaymentProcessingComponent {
   public paymentId: string;
   public originalAmount: number;
   public termmyCoinCount: number = 0;
-  public convertedTermmyCoin: number = 0;
+  public discount: number = 0;
+  public convertedTemmyCoinCopy: number = 0;
   public usedTermmyCoin = false;
 
   constructor(
@@ -85,7 +86,9 @@ export class PaymentProcessingComponent {
 
   ngOnChanges(event: Event) {
     this.getProfileInfo();
-    this.createPaymentIntent();
+    setTimeout(() => {
+      this.createPaymentIntent();
+    }, 100);
     this.originalAmount = this.amount;
   }
 
@@ -138,7 +141,8 @@ export class PaymentProcessingComponent {
       .callGetMethod("/api/getTermmyCoin")
       .subscribe((data: number) => {
         this.termmyCoinCount = data;
-        this.convertedTermmyCoin = data * environment.TERMMY_COIN_PER_EURO;
+        this.discount = data * environment.TERMMY_COIN_PER_EURO;
+        this.convertedTemmyCoinCopy = data * environment.TERMMY_COIN_PER_EURO;
       });
   }
 
@@ -204,7 +208,7 @@ export class PaymentProcessingComponent {
             this.voucherCode = null;
             this.amount = this.originalAmount;
             this.appliedCodeMessage.disabled = false;
-            this.createPaymentIntent();
+            // this.createPaymentIntent();
           }
         },
         error: (err) => {
@@ -212,6 +216,16 @@ export class PaymentProcessingComponent {
           // this.submitted = false;
         },
       });
+  }
+
+  payWithCode() {
+    this.usingVoucherCode();
+    this.resetTermmyCoins();
+    this.executeMethodEmitter.emit();
+    this.voucherCode = null;
+    this.amount = this.originalAmount;
+    this.appliedCodeMessage.disabled = false;
+    this.createPaymentIntent();
   }
 
   usingVoucherCode() {
@@ -260,26 +274,52 @@ export class PaymentProcessingComponent {
   }
 
   useTermmyCoins() {
-    this.amount -= this.convertedTermmyCoin;
+    if (this.convertCoinsToEuro() >= this.amount) {
+      this.discount = Number(this.amount);
+      this.termmyCoinCount -=
+        Number(this.amount) / environment.TERMMY_COIN_PER_EURO;
+      this.amount = 0;
+    } else {
+      this.discount = this.convertCoinsToEuro();
+      this.amount = Number((this.amount -= this.discount)).toFixed(2);
+      this.termmyCoinCount = 0;
+    }
     this.appliedCodeMessage = {
       valid: true,
       disabled: false,
       message: this._translate
         .instant("paymentProcessing.usingTermmyCoinMessage")
-        .replace("#discount", this.convertedTermmyCoin.toFixed(2))
+        .replace("#discount", this.discount.toFixed(2))
         .replace("#discountAmount", this.amount),
     };
     this.usedTermmyCoin = true;
-    this.updatePaymentIntent();
+
+    if (this.amount) {
+      this.updatePaymentIntent();
+    }
   }
 
   resetTermmyCoins() {
     if (this.usedTermmyCoin) {
-      this.termmyCoinCount = 0;
-      this.convertedTermmyCoin = 0;
-      this._service.callPostMethod("api/resetTermmyCoin").subscribe((data) => {
-        this.usedTermmyCoin = false;
-      });
+      this._service
+        .callPostMethod("api/resetTermmyCoin", { coins: this.termmyCoinCount })
+        .subscribe((data) => {
+          this.usedTermmyCoin = false;
+        });
+    }
+  }
+
+  convertCoinsToEuro() {
+    return this.termmyCoinCount * environment.TERMMY_COIN_PER_EURO;
+  }
+
+  calculateHowManyCoinsNeedToSpent() {
+    if (Number(this.amount)) {
+      return (Number(this.amount) / environment.TERMMY_COIN_PER_EURO).toFixed(
+        0
+      );
+    } else {
+      return 0;
     }
   }
 }

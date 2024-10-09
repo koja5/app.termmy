@@ -1,4 +1,5 @@
 import { Component, Input, SimpleChanges, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
@@ -35,7 +36,8 @@ export class LicenseStatusComponent {
     private _helpService: HelpService,
     private _storageService: StorageService,
     private _toastr: ToastrComponent,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _router: Router
   ) {}
 
   ngOnInit() {
@@ -151,6 +153,9 @@ export class LicenseStatusComponent {
           this._toastr.showSuccessCustom(
             this._translate.instant("licenseStatus.successfullyPaidLicense")
           );
+          setTimeout(() => {
+            window.open("dashboard/admin/settings/license", "_self");
+          }, 1500);
         }
       });
   }

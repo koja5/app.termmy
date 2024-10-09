@@ -18,7 +18,7 @@
         "enable": true,
         "fields": [
             {
-                "prop": "dateBuy",
+                "prop": "date",
                 "dir": "desc"
             }
         ]

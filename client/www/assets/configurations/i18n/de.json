@@ -289,7 +289,7 @@
       "onlinePayment": "Online-Zahlung",
       "bookingSettings": "Online buchen",
       "reminders": "Erinnerung",
-      "license": "Lizenz",
+      "license": "Lizenz Und SMS",
       "holidays": "Feiertage"
    },
    "onlinePayment": {
@@ -616,6 +616,8 @@
       "backToHome": "Zurück zur Startseite"
    },
    "paymentProcessing": {
+      "title": "Abrechnung",
+      "cardInformation": "Karteninformationen",
       "buttonText": "Zahlen Sie € #amount",
       "acceptTermsAndPrivacyPolicyOne": "Mit dem Absenden dieser Bestellung akzeptieren Sie die",
       "acceptTermsAndPrivacyPolicyTerms": "Allgemeine Geschäftsbedingungen",
@@ -640,10 +642,13 @@
       "voucherApplyButton": "ANWENDEN",
       "voucherAppliedCode": "Sie haben den Rabattcode von #discount% erfolgreich eingegeben. Der Zahlungsbetrag wird um €#discountAmount rabattiert.",
       "voucherNotValid": "Gutscheincode ist ungültig! Bitte geben Sie einen gültigen Gutscheincode für den Rabattpreis ein!",
+      "termmyCoins": "Termmy-Münzen",
       "totalTermmyCoin": "Insgesamt Termmy-Münzen",
       "discountPrice": "Rabatt",
       "usingTermmyCoin": "Verwenden Sie Termmy-Münzen",
-      "usingTermmyCoinMessage": "Sie haben Termmy-Münzen im Wert von #discount € eingelöst. Der zu zahlende Gesamtbetrag beträgt nun #discountAmount €."
+      "usingTermmyCoinMessage": "Sie haben Termmy-Münzen im Wert von #discount € eingelöst. Der zu zahlende Gesamtbetrag beträgt nun #discountAmount €.",
+      "useTermmyCoinsInsteadPayment": "* Sie haben die Möglichkeit, anstelle der Zahlungsoptionen das Sammeln von Münzen zu nutzen. Der Anzahl von verwendete Münzen wären",
+      "coins": "münzen"
    },
    "buyMoreSms": {
       "title": "SMS kaufen",

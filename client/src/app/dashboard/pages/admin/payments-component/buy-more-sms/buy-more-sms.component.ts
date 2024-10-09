@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { ToastrComponent } from "app/common/toastr/toastr.component";
 import { CallApiService } from "app/services/call-api.service";
 import { HelpService } from "app/services/help.service";
 
@@ -17,7 +19,9 @@ export class BuyMoreSmsComponent {
 
   constructor(
     private _service: CallApiService,
-    public _helpService: HelpService
+    public _helpService: HelpService,
+    private _toastr: ToastrComponent,
+    private _translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -51,7 +55,18 @@ export class BuyMoreSmsComponent {
       .callPostMethod("/api/updateNumberOfSms", {
         count: this.selectedSmsPackage.count,
       })
-      .subscribe((data) => {});
+      .subscribe((data) => {
+        if (data) {
+          this._toastr.showSuccessCustom(
+            this._translate
+              .instant("buyMoreSms.successfullyBoughtNewSms")
+              .replace("#count", this.selectedSmsPackage.count)
+          );
+          setTimeout(() => {
+            window.open("dashboard/admin/settings/license", "_self");
+          }, 1500);
+        }
+      });
   }
 
   createSmsPayment() {

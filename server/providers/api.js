@@ -2451,8 +2451,8 @@ router.post("/resetTermmyCoin", auth, function (req, res) {
     }
 
     conn.query(
-      "update termmy_coin set coins = 0 where id_user = ?",
-      [req.user.user.id],
+      "update termmy_coin set coins = ? where id_user = ?",
+      [req.body.coins, req.user.user.id],
       function (err, rows) {
         conn.release();
         if (!err) {

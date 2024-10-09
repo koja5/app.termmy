@@ -80,7 +80,7 @@
         "validFrom": "Valid from",
         "validTo": "Valid to",
         "bonusForPartner": "Bonus for partner"
-    },
+   },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -309,7 +309,6 @@
         "successfullyPickedUpSms": "Successfuly picked up sms",
         "goToCheckAvailableSms": "Go to check available sms",
         "successfullyCopiedRecommendedLinkToClipboard": "Successfully copied recommended link to clipboard.",
-        "termmyCoin": "coins",
         "voucherCode": "Your voucher code",
         "explanationVoucherBonus": "You can send this voucher code to your friends and they will get #discount % discount price during license or SMS purchase and you will get #bonusForParter % of full price converted in Termmy token. That token you can later using like discount when you want to upgrade or extend your licence.",
         "termmyPartnerTitle": "Do you want to be a Termmy partner?",
@@ -325,7 +324,7 @@
         "onlinePayment": "Online payment",
         "bookingSettings": "Booking online",
         "reminders": "Reminders",
-        "license": "License",
+        "license": "License and SMS",
         "holidays": "Holidays"
     },
     "onlinePayment": {
@@ -615,6 +614,8 @@
         "backToHome": "Back to Home"
     },
     "paymentProcessing": {
+        "title": "Billing",
+        "cardInformation": "Card information",
         "buttonText": "Pay #amount €",
         "acceptTermsAndPrivacyPolicyOne": "By submitting this order, you accept the ",
         "acceptTermsAndPrivacyPolicyTerms": "General Terms",
@@ -639,11 +640,14 @@
         "voucherApplyButton": "APPLY",
         "voucherAppliedCode": "You have successfully entered the discount code from #discount%. Payment amount is discounted €#discountAmount.",
         "voucherNotValid": "Voucher code is not valid! Please enter valid voucher code for discount price!",
+        "termmyCoins": "Termmy coins",
         "totalTermmyCoin": "Total Termmy coins",
         "discountPrice": "Discount price",
         "usingTermmyCoin": "Use Termmy coins",
-        "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €."
-    },
+        "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €.",
+        "useTermmyCoinsInsteadPayment": "* You have the possibility to use the collection of coins instead to use payment options. The number of coins used would be",
+        "coins": "coins"
+   },
     "buyMoreSms": {
         "title": "Buy SMS",
         "text": "Buy more messages and achieve better communication with clients",

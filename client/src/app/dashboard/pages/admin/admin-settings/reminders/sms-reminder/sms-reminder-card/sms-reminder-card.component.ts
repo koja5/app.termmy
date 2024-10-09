@@ -23,7 +23,7 @@ export class SmsReminderCardComponent {
   @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
 
   public reminderEditDialog: any;
-  public test = '<h1>Test</h1>'
+  public test = "<h1>Test</h1>";
 
   constructor(
     private _service: CallApiService,
@@ -40,9 +40,7 @@ export class SmsReminderCardComponent {
     // );
   }
 
-  modelChangeFn(event) {
-    console.log(this.item);
-  }
+  modelChangeFn(event) {}
 
   change() {
     this.changeValue.emit(this.item);

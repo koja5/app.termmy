@@ -20,13 +20,9 @@ export class EmailReminderCardComponent {
     private _translate: TranslateService
   ) {}
 
-  modelChangeFn(event) {
-    console.log(this.item);
-  }
+  modelChangeFn(event) {}
 
-  ngOnChanges() {
-    console.log(this.item);
-  }
+  ngOnChanges() {}
 
   change() {
     this.changeValue.emit(this.item);
