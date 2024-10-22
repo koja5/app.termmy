@@ -182,7 +182,7 @@
                                                         bgcolor="rgba(115, 103, 240, var(--bg-opacity))">
                                                         <a href="https://app.termmy.com"
                                                             style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff !important; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;">
-                                                            Kreni sa podešavanjem &rarr;</a>
+                                                            Start setting up &rarr;</a>
                                                     </td>
                                                 </tr>
                                             </table>
