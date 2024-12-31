@@ -502,8 +502,6 @@ router.post("/getMyTermines", async (req, res) => {
 
   let events = await calendar.events.list({
     calendarId: "primary",
-    timeMin: req.body.min,
-    timeMax: req.body.max,
     auth: oauth2Client,
   });
 
@@ -512,8 +510,6 @@ router.post("/getMyTermines", async (req, res) => {
     if (req.body.google_additional_calendars[key].active) {
       let eventsFromAdditionalCalendar = await calendar.events.list({
         calendarId: req.body.google_additional_calendars[key].id,
-        timeMin: req.body.min,
-        timeMax: req.body.max,
         auth: oauth2Client,
       });
       events.data.items = events.data.items.concat(

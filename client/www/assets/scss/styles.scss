@@ -386,3 +386,15 @@
   text-decoration: underline;
 }
 
+.e-schedule .e-vertical-view .e-all-day-appointment-wrapper .e-appointment {
+  position: static !important;
+  // width: 100% !important;
+}
+
+.e-all-day-row {
+  display: none !important;
+}
+
+.e-schedule .e-vertical-view .e-header-cells {
+  height: 85px !important;
+}

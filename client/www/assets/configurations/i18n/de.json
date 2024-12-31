@@ -478,8 +478,8 @@
       "name": "Name",
       "monthlyPrice": "Monatlicher Preis",
       "annualPrice": "Jährlicher Preis",
-      "licenseLimitForClientsNotification": "Die kostenlosen Lizenz erlaubt eine maximale Anzahl von 30 Kunden. Für eine uneingeschränkte Nutzung klicken Sie ",
-      "licenseLimitForClients": "ACHTUNG: Ihre Kunden können weiterhin Online Buchungen durchführen. Sie können auch neue Termine vergeben. Ein Updagrade für eine uneingeschränkte Nutzung finden Sie ",
+      "licenseLimitForClientsNotification": "ACHTUNG: Die kostenlosen Lizenz erlaubt eine maximale Anzahl von 30 Kunden. Jetzt updaten für eine uneingeschränkte Nutzung ",
+      "licenseLimitForClients": "ACHTUNG: Die kostenlosen Lizenz erlaubt eine maximale Anzahl von 30 Kunden. Ihre Kunden können weiterhin Online Buchen. Auch Sie können neue Termine vergeben. Jetzt updaten für eine uneingeschränkte Nutzung  ",
       "here": "hier."
    },
    "licenseStatus": {
@@ -529,7 +529,7 @@
          "monthly_price": "0",
          "annual_price": "0",
          "plans": [
-            "maximum 10 Kunden",
+            "Maximum 30 Kunden",
             "Terminplanung",
             "SMS-Erinnerung",
             "Email-Erinnerung",

@@ -618,6 +618,8 @@
         "backToHome": "Vratite se na početnu"
     },
     "paymentProcessing": {
+        "title": "Naplata",
+        "cardInformation": "Informacija o kartici",
         "buttonText": "Plati #amount €",
         "acceptTermsAndPrivacyPolicyOne": "Ovim plaćanjem prihvatam ",
         "acceptTermsAndPrivacyPolicyTerms": "opšte uslove ",
@@ -641,7 +643,14 @@
         "voucherPlaceholder": "Unesite vaučer kod kako bi dobili popust",
         "voucherApplyButton": "PRIMENI VAUČER",
         "voucherAppliedCode": "Vaučer kod je uspešno unet i dobili ste #discount%. Iznos za plaćanje sa popustom je #discountAmount€.",
-        "voucherNotValid": "Vaučer kod nije ispravan! Molimo vas unesite uspravan vaučer kod kako bi dobili popust!"
+        "voucherNotValid": "Vaučer kod nije ispravan! Molimo vas unesite uspravan vaučer kod kako bi dobili popust!",
+        "termmyCoins": "Termmy novčići",
+        "totalTermmyCoin": "Ukupni Termmy novčići",
+        "discountPrice": "Cena sa popustom",
+        "usingTermmyCoin": "Iskoristite Termmy novčiće",
+        "usingTermmyCoinMessage": "Iskoristili ste Termmy novčiće u vrednosti od #discount €. Ukupan iznos koji treba platiti je sada #discountAmount €.",
+        "useTermmyCoinsInsteadPayment": "* Imate mogućnost da koristite kolekciju novčića umesto da koristite opciju plaćanja. Broj upotrebljenih novčića bi bio",
+        "coins": "novčići"
     },
     "buyMoreSms": {
         "title": "Kupi SMS",
