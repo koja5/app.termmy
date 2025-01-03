@@ -398,3 +398,11 @@
 .e-schedule .e-vertical-view .e-header-cells {
   height: 85px !important;
 }
+
+.editable-text .special {
+  display: inline-flex;
+  background: var(--primary);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #fff;
+}

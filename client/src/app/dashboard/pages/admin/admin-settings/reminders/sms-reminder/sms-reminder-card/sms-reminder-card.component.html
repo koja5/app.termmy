@@ -9,9 +9,9 @@
         <div ngbDropdown>
             <i class="fa fa-cog config-icon" aria-hidden="true" ngbDropdownToggle id="dropdownMenuButton"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-                <!-- <a ngbDropdownItem (click)="showReminderEditDialog()"><span class="fa fa-edit"></span>
+                <a ngbDropdownItem (click)="showReminderEditDialog()"><span class="fa fa-edit"></span>
                     {{'smsReminder.edit' |
-                    translate}}</a> -->
+                    translate}}</a>
                 <a ngbDropdownItem (click)="item.active = !item.active; change()"><span
                         class="fa fa-{{item.active ? 'pause' : 'play'}}"></span> {{item.active ?
                     ('smsReminder.deactiveNotification' | translate) : ('smsReminder.activeNotification' |
@@ -43,12 +43,25 @@
             <input class="form-control" [(ngModel)]="item.title" name="title">
         </div>
 
+        <!-- <div>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="item.active">
+            <label class="form-check-label" [for]="config.name">{{
+                config.title | translate
+                }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span>
+                <app-explanation-mark *ngIf="config.explanation"
+                    [explanation]="config.explanation"></app-explanation-mark>
+            </label>
+        </div> -->
+
         <div class="edit-reminder mt-2">
             <div class="message-template">
                 <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
-                <textarea class="form-control" rows="4" [(ngModel)]="item.message" name="message-template"></textarea>
-                <!-- <div [innerHtml]="test" contenteditable="true">
-                </div> -->
+                <!-- <textarea class="form-control" rows="4" [innerHTML]="convertMessageForSpecificWord()"
+                    name="message-template"></textarea> -->
+                <div #editableText id="editable-text" class="editable-text" [innerText]="item.message"
+                    [innerHtml]="convertMessageForSpecificWord()" (keypress)="changeMessage($event)"
+                    contenteditable="true" spellcheck="false">
+                </div>
                 <div class="dynamic-buttons mt-1 full-width">
                     <label>{{'smsReminder.dynamicValue' | translate}}
                         <app-explanation-mark></app-explanation-mark></label> <br>
@@ -75,6 +88,6 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-primary">{{'general.save' | translate}}</button>
+        <button class="btn btn-primary" (click)="saveMessage()">{{'general.save' | translate}}</button>
     </div>
 </ng-template>

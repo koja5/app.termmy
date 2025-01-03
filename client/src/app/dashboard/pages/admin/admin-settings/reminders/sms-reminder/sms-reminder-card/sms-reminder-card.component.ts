@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from "@angular/core";
@@ -21,9 +22,11 @@ export class SmsReminderCardComponent {
   @Input() item: any;
   @Output() changeValue = new EventEmitter<any>();
   @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
+  @ViewChild("editableText") editableText: TemplateRef<any>;
 
   public reminderEditDialog: any;
-  public test = "<h1>Test</h1>";
+  public test =
+    "Sie haben einen verbindlichen Termin am #date um #time gebucht. Unsere Adresse ist #address. Beste Grüße #company";
 
   constructor(
     private _service: CallApiService,
@@ -33,11 +36,12 @@ export class SmsReminderCardComponent {
     private _modalService: NgbModal
   ) {}
 
-  ngOnInit() {
-    // this.item.message = this.item.message.replaceAll(
-    //   "#time",
-    //   '<span>#time</span>'
-    // );
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    if (changes.item) {
+    }
   }
 
   modelChangeFn(event) {}
@@ -78,5 +82,54 @@ export class SmsReminderCardComponent {
 
   calculateNumberOfMessage() {
     return Math.ceil(this.item.message.length / 160);
+  }
+
+  convertMessageForSpecificWord() {
+    let text = document.getElementById("editable-text");
+    return (
+      this.item.message == text.innerText ? this.item.message : text.innerText
+    ).replaceAll(
+      "#company",
+      "<div class='special' (change)='changeSpecificWord()'>#company</div>"
+    );
+  }
+
+  changeMessage(message: any) {
+    setTimeout(() => {
+      this.convertMessageForSpecificWord();
+      this.item.message = message.target.innerText;
+      this.positionCursor();
+    }, 100);
+  }
+
+  positionCursor() {
+    let tag = document.getElementById("editable-text");
+
+    // Creates range object
+    let setpos = document.createRange();
+
+    // Creates object for selection
+    let set = window.getSelection();
+
+    // Set start position of range
+    setpos.setStart(tag.childNodes[0], 12);
+
+    // Collapse range within its boundary points
+    // Returns boolean
+    setpos.collapse(true);
+
+    // Remove all ranges set
+    set.removeAllRanges();
+
+    // Add range with respect to range object.
+    set.addRange(setpos);
+
+    // Set cursor on focus
+    tag.focus();
+  }
+
+  saveMessage() {
+    this.change();
+    this.reminderEditDialog.close();
   }
 }
