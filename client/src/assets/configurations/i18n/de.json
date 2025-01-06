@@ -433,6 +433,9 @@
       "testMessage": "Test Email",
       "subject": "Betreff",
       "message": "Nachricht",
+      "messagePreview": "Nachrichtenvorschau",
+      "dynamicValue": "Dynamische Werte",
+      "edit": "Benachrichtigung bearbeiten",
       "sentTestEmailTo": "Test-E-Mail an #email senden",
       "contents": {
          "clientImmediatelyReminder": {

@@ -1,8 +1,10 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
+  Renderer2,
   SimpleChanges,
   TemplateRef,
   ViewChild,
@@ -22,27 +24,32 @@ export class SmsReminderCardComponent {
   @Input() item: any;
   @Output() changeValue = new EventEmitter<any>();
   @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
-  @ViewChild("editableText") editableText: TemplateRef<any>;
+  @ViewChild("editableText") editableText: ElementRef;
 
   public reminderEditDialog: any;
-  public test =
-    "Sie haben einen verbindlichen Termin am #date um #time gebucht. Unsere Adresse ist #address. Beste Grüße #company";
+  public currentPossitionCursor = 0;
+  public companyInfo: any;
 
   constructor(
     private _service: CallApiService,
     private _toastr: ToastrComponent,
     private _translate: TranslateService,
     private _helpService: HelpService,
-    private _modalService: NgbModal
+    private _modalService: NgbModal,
+    private renderer: Renderer2
   ) {}
 
-  ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    if (changes.item) {
-    }
+  ngOnInit() {
+    this.getCompanyInfo();
   }
+
+  getCompanyInfo() {
+    this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
+      this.companyInfo = data;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {}
 
   modelChangeFn(event) {}
 
@@ -81,7 +88,7 @@ export class SmsReminderCardComponent {
   }
 
   calculateNumberOfMessage() {
-    return Math.ceil(this.item.message.length / 160);
+    return Math.ceil(this.previewMessage().length / 160);
   }
 
   convertMessageForSpecificWord() {
@@ -94,42 +101,42 @@ export class SmsReminderCardComponent {
     );
   }
 
-  changeMessage(message: any) {
-    setTimeout(() => {
-      this.convertMessageForSpecificWord();
-      this.item.message = message.target.innerText;
-      this.positionCursor();
-    }, 100);
+  changeMessage(event: any) {
+    this.currentPossitionCursor = event.target.selectionStart + 1;
   }
 
-  positionCursor() {
-    let tag = document.getElementById("editable-text");
-
-    // Creates range object
-    let setpos = document.createRange();
-
-    // Creates object for selection
-    let set = window.getSelection();
-
-    // Set start position of range
-    setpos.setStart(tag.childNodes[0], 12);
-
-    // Collapse range within its boundary points
-    // Returns boolean
-    setpos.collapse(true);
-
-    // Remove all ranges set
-    set.removeAllRanges();
-
-    // Add range with respect to range object.
-    set.addRange(setpos);
-
-    // Set cursor on focus
-    tag.focus();
+  getCurrentPossition(event: any) {
+    this.currentPossitionCursor = event.target.selectionStart;
   }
 
   saveMessage() {
     this.change();
     this.reminderEditDialog.close();
+  }
+
+  addDynamicValue(value: string) {
+    this.item.message =
+      this.item.message.slice(0, this.currentPossitionCursor) +
+      value +
+      this.item.message.slice(
+        this.currentPossitionCursor,
+        this.item.message.length
+      );
+  }
+
+  previewMessage() {
+    const date = new Date();
+    const message = this.item.message
+      .replaceAll("#time", date.getHours() + ":" + date.getUTCMinutes())
+      .replaceAll(
+        "#date",
+        date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+      )
+      .replaceAll("#company", this.companyInfo.company)
+      .replaceAll("#address", this.companyInfo.address);
+    return {
+      value: message,
+      length: message.length,
+    };
   }
 }

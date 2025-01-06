@@ -466,6 +466,9 @@
         "testMessage": "Testiraj Email podsetnik",
         "subject": "Naslov",
         "message": "Poruka",
+        "messagePreview": "Pregled poruke",
+        "dynamicValue": "Promenljive vrednosti",
+        "edit": "Uredi obaveštenje",
         "sentTestEmailTo": "Testin email podsetnik je poslat na #email",
         "contents": {
             "clientImmediatelyReminder": {

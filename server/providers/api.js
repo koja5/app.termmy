@@ -604,6 +604,37 @@ router.post("/setSetupApp", auth, function (req, res, next) {
 
 //#endregion
 
+//#region COMPANY INFO
+router.get("/getCompanyInfo", auth, async (req, res, next) => {
+  try {
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where id = ?",
+          [req.user.user.admin_id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows.length ? rows[0] : null);
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
+//#endregion
+
 // #region PROFILE INFO
 router.get("/getProfileInfo", auth, async (req, res, next) => {
   try {

@@ -468,6 +468,9 @@
         "testMessage": "Test Email",
         "subject": "Subject",
         "message": "Message",
+        "messagePreview": "Message preview",
+        "dynamicValue": "Dynamic values",
+        "edit": "Edit notification",
         "sentTestEmailTo": "Send test email to #email",
         "contents": {
             "clientImmediatelyReminder": {

@@ -39,7 +39,7 @@
     </div>
     <div class="modal-body" tabindex="0" ngbAutofocus>
         <div>
-            <label class="custom-label">{{'smsReminder.name' | translate}}</label>
+            <label class="custom-label">{{'emailReminder.name' | translate}}</label>
             <input class="form-control" [(ngModel)]="item.title" name="title">
         </div>
 
@@ -56,32 +56,38 @@
         <div class="edit-reminder mt-2">
             <div class="message-template">
                 <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
-                <!-- <textarea class="form-control" rows="4" [innerHTML]="convertMessageForSpecificWord()"
-                    name="message-template"></textarea> -->
-                <div #editableText id="editable-text" class="editable-text" [innerText]="item.message"
+                <textarea #editableText id="editable-text" class="form-control" rows="4" [(ngModel)]="item.message"
+                    (keypress)="changeMessage($event)" (click)="getCurrentPossition($event)"
+                    name="message-template"></textarea>
+                <!-- <div #editableText id="editable-text" class="editable-text" [innerText]="item.message"
                     [innerHtml]="convertMessageForSpecificWord()" (keypress)="changeMessage($event)"
                     contenteditable="true" spellcheck="false">
-                </div>
+                </div> -->
                 <div class="dynamic-buttons mt-1 full-width">
                     <label>{{'smsReminder.dynamicValue' | translate}}
                         <app-explanation-mark></app-explanation-mark></label> <br>
-                    <button class="btn-sm btn-outline-primary"><span class="fa fa-clock-o"></span> #time</button>
-                    <button class="btn-sm btn-outline-primary"><span class="fa fa-calendar"></span> #date</button>
-                    <button class="btn-sm btn-outline-primary"><span class="fa fa-address-book-o"></span>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#time')"><span
+                            class="fa fa-clock-o"></span> #time</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#date')"><span
+                            class="fa fa-calendar"></span> #date</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#address')"><span
+                            class="fa fa-address-book-o"></span>
                         #address</button>
-                    <button class="btn-sm btn-outline-primary"><span class="fa fa-building-o"></span> #company</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#company')"><span
+                            class="fa fa-building-o"></span> #company</button>
                 </div>
             </div>
             <div class="reminder-info">
                 <p class="fa fa-info-circle"></p>
                 <p class="fa fa-arrow-right m-0"></p>
-                <span>{{item.message.length}}</span>
+                <span>{{previewMessage().length}}</span>
                 <p class="fa fa-commenting-o m-0"></p>
                 <span>{{calculateNumberOfMessage()}} </span>
             </div>
             <div class="message-preview">
                 <label class="custom-label">{{'smsReminder.messagePreview' | translate}}</label>
-                <textarea class="form-control" rows="4"></textarea>
+                <textarea class="form-control" rows="4" [value]="previewMessage().value"
+                    name="preview-message"></textarea>
             </div>
         </div>
 
