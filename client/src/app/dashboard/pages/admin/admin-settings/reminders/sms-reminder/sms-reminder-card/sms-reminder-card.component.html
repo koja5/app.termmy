@@ -63,6 +63,15 @@
                     <button *ngIf="bookingLink" class="btn-sm btn-outline-primary"
                         (click)="addDynamicValue('#bookingLink')"><span class="fa fa-building-o"></span>
                         #bookingLink</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#employeeName')"><span
+                            class="fa fa-user"></span>
+                        #employeeName</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#employeeTelephone')"><span
+                            class="fa fa-phone"></span>
+                        #employeeTelephone</button>
+                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#employeeEmail')"><span
+                            class="fa fa-envelope-o"></span>
+                        #employeeEmail</button>
                 </div>
 
                 <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
@@ -90,8 +99,8 @@
             </div>
             <div class="message-preview">
                 <label class="custom-label">{{'smsReminder.messagePreview' | translate}}</label>
-                <textarea class="form-control" rows="6" [value]="previewMessage().value"
-                    name="preview-message"></textarea>
+                <textarea class="form-control" rows="6" [value]="previewMessage().value" name="preview-message"
+                    [disabled]="true"></textarea>
             </div>
         </div>
 

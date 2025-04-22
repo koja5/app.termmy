@@ -218,7 +218,16 @@ export class HelpService {
   previewReminderMessage(message: any, companyInfo: any, bookingLink: string) {
     const date = new Date();
     const replacedMessage = message
-      .replaceAll("#time", date.getHours() + ":" + date.getUTCMinutes())
+      .replaceAll(
+        "#time",
+        date.getHours() +
+          ":" +
+          date.getUTCMinutes() +
+          "-" +
+          (date.getHours() + 1) +
+          ":" +
+          date.getUTCMinutes()
+      )
       .replaceAll(
         "#date",
         date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
@@ -228,7 +237,10 @@ export class HelpService {
       .replaceAll("#zip", companyInfo.zip)
       .replaceAll("#city", companyInfo.city)
       .replaceAll("#telephone", companyInfo.telephone)
-      .replaceAll("#bookingLink", bookingLink);
+      .replaceAll("#bookingLink", bookingLink)
+      .replaceAll("#employeeName", bookingLink)
+      .replaceAll("#employeeTelephone", bookingLink)
+      .replaceAll("#employeeEmail", bookingLink);
     return {
       value: replacedMessage,
       length: replacedMessage.length,

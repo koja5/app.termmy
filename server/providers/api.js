@@ -13,6 +13,7 @@ const sql = require("./config/sql-database");
 const uuid = require("uuid");
 const cryptoJS = require("crypto-js");
 const multipart = require("connect-multiparty");
+const userType = require("./enums/user-type");
 const multipartMiddleware = multipart({
   uploadDir: process.env.AVATAR_UPLOAD_FOLDER,
 });
@@ -1205,8 +1206,8 @@ router.get("/getMyEmployees", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from users where admin_id = ?",
-          req.user.user.id,
+          "select * from users where admin_id = ? and type = ?",
+          [req.user.user.id, userType.employee],
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -1232,9 +1233,12 @@ router.post("/setEmployee", auth, function (req, res) {
       res.json(err);
     }
 
-    req.body.admin_id = req.user.user.admin_id;
+    if (req.body.password) {
+      req.body.password = sha1(req.body.password);
+    }
 
     if (req.body.id) {
+      req.body = setIdAndLoginUser(req.body, req.user);
       conn.query(
         "update users set ? where id = ? and admin_id = ?",
         [req.body, req.body.id, req.user.user.id],
@@ -1260,8 +1264,8 @@ router.post("/setEmployee", auth, function (req, res) {
               conn.release();
               res.json(false);
             } else {
-              req.body.type = 3;
-              req.body.password = sha1(req.body.password);
+              req.body = setIdAndLoginUser(req.body, req.user);
+              req.body.type = userType.employee;
               conn.query(
                 "insert into users SET ?",
                 [req.body],
@@ -2683,6 +2687,16 @@ router.post("/uploadUserProfile", multipartMiddleware, auth, (req, res) => {
 //#endregion
 
 //#region HELP FUNCTION
+
+function setIdAndLoginUser(body, user) {
+  if (!body.id) {
+    body.id = uuid.v4();
+  }
+  if (!body.admin_id) {
+    body.admin_id = user.user.id;
+  }
+  return body;
+}
 
 function generateToken(data) {
   return jwt.sign(

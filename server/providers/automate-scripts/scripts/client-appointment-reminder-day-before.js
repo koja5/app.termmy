@@ -29,7 +29,7 @@ function sendAppointmentRemindersLikeSms() {
       logger.log("error", err.sql + ". " + err.sqlMessage);
     } else {
       conn.query(
-        "SELECT c.telephone, s.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTime, a.EndTimeTherapy, a.admin_id, sc.count from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join sms_reminder_config s on a.admin_id = s.admin_id join sms_count sc on a.admin_id = sc.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and sc.count > 0 and s.active = 1",
+        "SELECT c.telephone, s.config, c.email, u.company, CONCAT(u.firstname, ' ', u.lastname) as 'employee_name', u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTime, a.EndTimeTherapy, a.admin_id, sc.count, bc.booking_link from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join sms_reminder_config s on a.admin_id = s.admin_id join sms_count sc on a.admin_id = sc.admin_id left join booking_config bc on u.admin_id = bc.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and sc.count > 0 and s.active = 1",
         function (err, rows, fields) {
           if (err) {
             logger.log("error", err.sql + ". " + err.sqlMessage);
@@ -64,16 +64,27 @@ function sendViaSms(config, item, conn) {
     sendSMS(
       item.telephone,
       config.clientDayBeforeReminder.message
-        .replaceAll("#company", item.company)
         .replaceAll(
           "#time",
           moment(item.StartTime).format("HH:mm") +
             "-" +
-            moment(
-              item.EndTimeTherapy ? item.EndTimeTherapy : item.EndTime
-            ).format("HH:mm")
+            moment(item.EndTime ? item.EndTime : item.EndTimeTherapy).format(
+              "HH:mm"
+            )
         )
+        .replaceAll("#date", moment(item.StartTime).format("DD.MM.yyyy"))
         .replaceAll("#address", generateAddress(item))
+        .replaceAll("#zip", item.zip)
+        .replaceAll("#city", item.city)
+        .replaceAll("#telephone", item.telephone)
+        .replaceAll("#company", item.company)
+        .replaceAll(
+          "#bookingLink",
+          process.env.link_client + "booking/" + item.booking_link
+        )
+        .replaceAll("#employeeName", item.employee_name)
+        .replaceAll("#employeeTelephone", item.employee_telephone)
+        .replaceAll("#employeeEmail", item.employee_email)
     );
     conn.query(
       "update sms_count set count = count - 1 where admin_id = ?",
@@ -86,16 +97,24 @@ function sendViaSms(config, item, conn) {
       sendSMS(
         item.employee_telephone,
         config.employeeDayBeforeReminder.message
-          .replaceAll("#company", item.company)
           .replaceAll(
             "#time",
             moment(item.StartTime).format("HH:mm") +
               "-" +
-              moment(
-                item.EndTimeTherapy ? item.EndTimeTherapy : item.EndTime
-              ).format("HH:mm")
+              moment(item.EndTime ? item.EndTime : item.EndTimeTherapy).format(
+                "HH:mm"
+              )
           )
+          .replaceAll("#date", moment(item.StartTime).format("DD.MM.yyyy"))
           .replaceAll("#address", generateAddress(item))
+          .replaceAll("#zip", item.zip)
+          .replaceAll("#city", item.city)
+          .replaceAll("#telephone", item.telephone)
+          .replaceAll("#company", item.company)
+          .replaceAll(
+            "#bookingLink",
+            process.env.link_client + "booking/" + item.booking_link
+          )
       );
       conn.query(
         "update sms_count set count = count - 1 where admin_id = ?",
@@ -117,7 +136,7 @@ function sendAppointmentRemindersLikeEmail() {
       logger.log("error", err.sql + ". " + err.sqlMessage);
     } else {
       conn.query(
-        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTimeTherapy, a.admin_id from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and e.active = 1",
+        "SELECT c.telephone, e.config, c.email, u.company, u.telephone as 'employee_telephone', u.email as 'employee_email', u.address, u.zip, u.city, a.StartTime, a.EndTimeTherapy, a.admin_id, bc.booking_link from appointments a join clients c on a.client_id = c.id join users u on a.employee_id = u.id left join email_reminder_config e on a.admin_id = e.admin_id left join booking_config bc on u.admin_id = bc.admin_id WHERE CAST(a.StartTime AS DATE) = CAST((NOW() + interval 1 DAY) as DATE) and e.active = 1",
         function (err, rows, fields) {
           if (err) {
             logger.log("error", err.sql + ". " + err.sqlMessage);
@@ -153,14 +172,24 @@ function sendViaEmail(config, item) {
       item.email,
       config.clientDayBeforeReminder.subject,
       config.clientDayBeforeReminder.message
-        .replaceAll("#company", item.company)
         .replaceAll(
           "#time",
           moment(item.StartTime).format("HH:mm") +
             "-" +
-            moment(item.EndTimeTherapy).format("HH:mm")
+            moment(item.EndTime ? item.EndTime : item.EndTimeTherapy).format(
+              "HH:mm"
+            )
         )
+        .replaceAll("#date", moment(item.StartTime).format("DD.MM.yyyy"))
         .replaceAll("#address", generateAddress(item))
+        .replaceAll("#zip", item.zip)
+        .replaceAll("#city", item.city)
+        .replaceAll("#telephone", item.telephone)
+        .replaceAll("#company", item.company)
+        .replaceAll(
+          "#bookingLink",
+          process.env.link_client + "booking/" + item.booking_link
+        )
     );
   }
   setTimeout(() => {
@@ -169,14 +198,24 @@ function sendViaEmail(config, item) {
         item.employee_email,
         config.employeeDayBeforeReminder.subject,
         config.employeeDayBeforeReminder.message
-          .replaceAll("#company", item.company)
           .replaceAll(
             "#time",
             moment(item.StartTime).format("HH:mm") +
               "-" +
-              moment(item.EndTimeTherapy).format("HH:mm")
+              moment(item.EndTime ? item.EndTime : item.EndTimeTherapy).format(
+                "HH:mm"
+              )
           )
+          .replaceAll("#date", moment(item.StartTime).format("DD.MM.yyyy"))
           .replaceAll("#address", generateAddress(item))
+          .replaceAll("#zip", item.zip)
+          .replaceAll("#city", item.city)
+          .replaceAll("#telephone", item.telephone)
+          .replaceAll("#company", item.company)
+          .replaceAll(
+            "#bookingLink",
+            process.env.link_client + "booking/" + item.booking_link
+          )
       );
     }
   }, 1000);

@@ -11,7 +11,7 @@ function executeAutomateScript() {
     happyBirthdayClient();
   });
 
-  schedule.scheduleJob("55 46 12 * * *", function () {
+  schedule.scheduleJob("55 47 12 * * *", function () {
     clientAppointmentReminderDayBefore();
   });
 }
