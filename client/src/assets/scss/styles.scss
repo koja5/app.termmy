@@ -407,6 +407,12 @@
   color: #fff;
 }
 
-.e-schedule .e-schedule-table > tbody > tr > th, .e-schedule .e-schedule-table > tbody > tr > td:nth-child(2) {
+.e-schedule .e-schedule-table > tbody > tr > th,
+.e-schedule .e-schedule-table > tbody > tr > td:nth-child(2) {
   border-bottom: 1px solid lightgray;
+}
+
+.ngx-datatable .datatable-footer {
+  position: absolute !important;
+  bottom: 0px;
 }

@@ -33,7 +33,10 @@
         "discardChangesCancel": "Otkaži",
         "readMore": "Pročitaj više o ovome",
         "executeActionQuestionTitle": "Da li ste sigurni?",
-        "executeActionQuestionText": "Da li želite da izvršite ovu akciju?"
+        "executeActionQuestionText": "Da li želite da izvršite ovu akciju?",
+        "footerPrivacyPolicy": "Zaštita podataka",
+        "footerTerms": "Opšti uslovi poslovanja",
+        "footerImpressum": "Impressum"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
@@ -79,7 +82,8 @@
         "signupTime": "Datum kreiranja naloga",
         "validFrom": "Važi od",
         "validTo": "Važi do",
-        "bonusForPartner": "Bonus za partnera"
+        "bonusForPartner": "Bonus za partnera",
+        "previewGeneratedLink": "Pregled generisanog linka:"
     },
     "userTypes": {
         "superadmin": "Superadmin",
@@ -414,6 +418,7 @@
         "messagePreview": "Pregled",
         "dynamicValue": "Promenljive vrednosti",
         "warning": "Naš predlog je da aktivirate SMS podsetnik, jer 97% ljudi vidi poruku u prvih 10 minuta od prijema.",
+        "activeOrDeactive": "Uključi ili isključi podsetnik",
         "contents": {
             "clientImmediatelyReminder": {
                 "title": "Potvrda nakon rezervacije",
@@ -470,6 +475,7 @@
         "dynamicValue": "Promenljive vrednosti",
         "edit": "Uredi obaveštenje",
         "sentTestEmailTo": "Testin email podsetnik je poslat na #email",
+        "activeOrDeactive": "Uključi ili isključi podsetnik",
         "contents": {
             "clientImmediatelyReminder": {
                 "title": "Potvrda nakon rezervacije",
@@ -690,6 +696,8 @@
         "calendarText": "Termmy vam pojednostavljuje život povezivanjem sa svim vašim drugim kalendarima.",
         "bookingTitle": "Online zakazivanje",
         "bookingText": "Dozvolite klijentima da sami rezervišu termine online na osnovu vašeg rasporeda na vašoj personalizovanoj web stranici za rezervacije.",
+        "bookingPageActive": "Vaša stranica za rezervaciju je aktivna!",
+        "bookingPageDeactive": "Vaša stranica za rezervaciju nije aktivna!",
         "paymentTitle": "Online plaćanje",
         "paymentText": "Dodajte svoju karticu i primajte novac direktno na svoj račun.",
         "holidayTitle": "Praznici",

@@ -18,6 +18,7 @@ export class BookingSettingsComponent implements CanComponentDeactivate {
   public file = "booking-settings.json";
   public disableEdit = false;
   public data: any;
+  public bookingStatus = true;
 
   constructor(
     private _service: CallApiService,
@@ -37,6 +38,7 @@ export class BookingSettingsComponent implements CanComponentDeactivate {
       .subscribe((data: any) => {
         if (data && data.length) {
           this.data = data[0];
+          this.bookingStatus = this.data.active;
         } else {
           this.data.avatar = null;
         }
@@ -50,6 +52,7 @@ export class BookingSettingsComponent implements CanComponentDeactivate {
   }
 
   handleSubmit(event: any) {
+    this.bookingStatus = event.active;
     this._service
       .callPostMethod("/api/booking/setBookingConfig", event)
       .subscribe((data) => {

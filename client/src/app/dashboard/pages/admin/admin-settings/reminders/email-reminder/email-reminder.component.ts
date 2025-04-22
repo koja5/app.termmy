@@ -14,6 +14,8 @@ export class EmailReminderComponent {
   public reminderConfig: any;
   public emailReminder: any;
   public notFillPersonalData = false;
+  public companyInfo: any;
+  public bookingLink: string;
 
   constructor(
     private _service: CallApiService,
@@ -26,6 +28,8 @@ export class EmailReminderComponent {
 
   initialize() {
     this.getEmailReminderConfig();
+    this.getCompanyInfo();
+    this.getBookingLink();
 
     this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this._translate.use(event.lang);
@@ -34,6 +38,24 @@ export class EmailReminderComponent {
       this.setEmailReminderConfig();
       this.loader = false;
     });
+  }
+
+  getCompanyInfo() {
+    this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
+      this.companyInfo = data;
+    });
+  }
+
+  getBookingLink() {
+    this._service
+      .callGetMethod("api/booking/getBookingLink")
+      .subscribe((data: any) => {
+        if (data) {
+          this.bookingLink =
+            this._translate.instant("bookingSettings.bookingRootLink") +
+            data.booking_link;
+        }
+      });
   }
 
   getEmailReminderConfig() {
@@ -63,7 +85,7 @@ export class EmailReminderComponent {
             )
             .subscribe((data) => {
               this.reminderConfig.id = data;
-              this.notFillPersonalData = true;
+              this.notFillPersonalData = false;
             });
         } else {
           this.reminderConfig.active = false;

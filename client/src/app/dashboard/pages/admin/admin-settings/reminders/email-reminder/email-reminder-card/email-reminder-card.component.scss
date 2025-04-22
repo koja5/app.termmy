@@ -1,3 +1,5 @@
+@import url("../../../../../../../common/dynamic-component/dynamic-forms/dynamic-fields/buttons/switch/switch.component.scss");
+
 .config-icon {
   font-size: 18px;
   cursor: pointer;
@@ -25,4 +27,8 @@
 
 .dynamic-buttons button {
   margin: 2px;
+}
+
+.card-body {
+  white-space: break-spaces;
 }

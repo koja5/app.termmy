@@ -214,4 +214,24 @@ export class HelpService {
   getBasicLicense() {
     return this._storageService.getLicenseId() === LicensesType.Basic;
   }
+
+  previewReminderMessage(message: any, companyInfo: any, bookingLink: string) {
+    const date = new Date();
+    const replacedMessage = message
+      .replaceAll("#time", date.getHours() + ":" + date.getUTCMinutes())
+      .replaceAll(
+        "#date",
+        date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+      )
+      .replaceAll("#company", companyInfo.company)
+      .replaceAll("#address", companyInfo.address)
+      .replaceAll("#zip", companyInfo.zip)
+      .replaceAll("#city", companyInfo.city)
+      .replaceAll("#telephone", companyInfo.telephone)
+      .replaceAll("#bookingLink", bookingLink);
+    return {
+      value: replacedMessage,
+      length: replacedMessage.length,
+    };
+  }
 }

@@ -33,7 +33,10 @@
         "discardChangesCancel": "Cancel",
         "readMore": "Read more",
         "executeActionQuestionTitle": "Are you sure?",
-        "executeActionQuestionText": "Do you want to execute this action?"
+        "executeActionQuestionText": "Do you want to execute this action?",
+        "footerPrivacyPolicy": "Privacy Policy",
+        "footerTerms": "Terms & Conditions",
+        "footerImpressum": "Impressum"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
@@ -79,8 +82,9 @@
         "signupTime": "Sign up time",
         "validFrom": "Valid from",
         "validTo": "Valid to",
-        "bonusForPartner": "Bonus for partner"
-   },
+        "bonusForPartner": "Bonus for partner",
+        "previewGeneratedLink": "Generated link:"
+    },
     "userTypes": {
         "superadmin": "Superadmin",
         "admin": "Admin",
@@ -416,6 +420,7 @@
         "messagePreview": "Message preview",
         "dynamicValue": "Dynamic value",
         "warning": "Our suggestion is to activate an SMS reminder, because 97% of people open SMS messages within 10 minutes of their arrival.",
+        "activeOrDeactive": "Active or deactive reminder",
         "contents": {
             "clientImmediatelyReminder": {
                 "title": "Confirmation of booking",
@@ -472,6 +477,7 @@
         "dynamicValue": "Dynamic values",
         "edit": "Edit notification",
         "sentTestEmailTo": "Send test email to #email",
+        "activeOrDeactive": "Active or deactive reminder",
         "contents": {
             "clientImmediatelyReminder": {
                 "title": "Confirmation of booking",
@@ -650,7 +656,7 @@
         "usingTermmyCoinMessage": "You have redeemed #discount € worth of Termmy coins. The total amount to be paid is now #discountAmount €.",
         "useTermmyCoinsInsteadPayment": "* You have the possibility to use the collection of coins instead to use payment options. The number of coins used would be",
         "coins": "coins"
-   },
+    },
     "buyMoreSms": {
         "title": "Buy SMS",
         "text": "Buy more messages and achieve better communication with clients",
@@ -686,6 +692,8 @@
         "calendarText": "Termmy simplifies your life by connecting to all of your other calendars.",
         "bookingTitle": "Activate your booking website",
         "bookingText": "Allow clients to book themselves based on your schedule on your personalised booking website",
+        "bookingPageActive": "Your booking page is active!",
+        "bookingPageDeactive": "Your booking page is deactive!",
         "paymentTitle": "Allow money online",
         "paymentText": "Set up your card and receive money directly online to your account",
         "holidayTitle": "Holiday",

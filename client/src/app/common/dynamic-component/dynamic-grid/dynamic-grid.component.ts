@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { ColumnMode, DatatableComponent } from "@swimlane/ngx-datatable";
 
-import { Subject } from "rxjs";
+import { Observable, Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 import { CoreConfigService } from "@core/services/config.service";
@@ -41,6 +41,8 @@ export class DynamicGridComponent implements CanComponentDeactivate {
   @Input() public data: any;
   @Input() externalAccounts: any;
   @Input() disabledCreateNew: boolean = false;
+  @Input() partOfTab: boolean = false;
+  @Input() lessHeight!: number;
   @Output() submit = new EventEmitter();
   @ViewChild("grid") grid: any;
   @ViewChild("modal") modal: TemplateRef<any>;
@@ -74,6 +76,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
   public googleContacts: any;
   public createNewRecords = true;
   public stayOpened = false;
+  public tableHeight?: string;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -281,6 +284,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
    */
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
+    this.setTableHeight();
     this.initialize();
   }
 
@@ -335,6 +339,27 @@ export class DynamicGridComponent implements CanComponentDeactivate {
       this.tempData = this.rows;
       this.loader = false;
     }
+  }
+
+  setTableHeight() {
+    const pixel = document.getElementById("main-content")!.offsetHeight;
+    let convertPxToVh = (100 * pixel) / (window.innerHeight + 250);
+    if (this.partOfTab) {
+      convertPxToVh -= 10;
+    }
+    // if (
+    //   this.config.actionRequest?.createNew &&
+    //   this.config.actionRequest?.createNew.enable === false
+    // ) {
+    //   convertPxToVh += 6.5;
+    // }
+    if (this.lessHeight) {
+      convertPxToVh -= this.lessHeight;
+    }
+    if (window.innerWidth < 992) {
+      convertPxToVh -= 5;
+    }
+    this.tableHeight = convertPxToVh + "vh";
   }
 
   submitEmitter(event: any) {

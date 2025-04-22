@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="card-body mt-2 font-italic">
+    <div class="card-body pb-0 mt-2 font-italic">
         {{item.message | translate}}
     </div>
     <div class="text-right status">
@@ -38,31 +38,8 @@
         </button>
     </div>
     <div class="modal-body" tabindex="0" ngbAutofocus>
-        <div>
-            <label class="custom-label">{{'emailReminder.name' | translate}}</label>
-            <input class="form-control" [(ngModel)]="item.title" name="title">
-        </div>
-
-        <!-- <div>
-            <input type="checkbox" class="form-check-input" [(ngModel)]="item.active">
-            <label class="form-check-label" [for]="config.name">{{
-                config.title | translate
-                }} <span class="error" title="{{fieldIsRequired}}">{{config.required ? '*' : ''}}</span>
-                <app-explanation-mark *ngIf="config.explanation"
-                    [explanation]="config.explanation"></app-explanation-mark>
-            </label>
-        </div> -->
-
-        <div class="edit-reminder mt-2">
+        <div class="edit-reminder">
             <div class="message-template">
-                <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
-                <textarea #editableText id="editable-text" class="form-control" rows="4" [(ngModel)]="item.message"
-                    (keypress)="changeMessage($event)" (click)="getCurrentPossition($event)"
-                    name="message-template"></textarea>
-                <!-- <div #editableText id="editable-text" class="editable-text" [innerText]="item.message"
-                    [innerHtml]="convertMessageForSpecificWord()" (keypress)="changeMessage($event)"
-                    contenteditable="true" spellcheck="false">
-                </div> -->
                 <div class="dynamic-buttons mt-1 full-width">
                     <label>{{'smsReminder.dynamicValue' | translate}}
                         <app-explanation-mark></app-explanation-mark></label> <br>
@@ -70,24 +47,61 @@
                             class="fa fa-clock-o"></span> #time</button>
                     <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#date')"><span
                             class="fa fa-calendar"></span> #date</button>
-                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#address')"><span
-                            class="fa fa-address-book-o"></span>
+                    <button *ngIf="companyInfo.address" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#address')"><span class="fa fa-address-book-o"></span>
                         #address</button>
-                    <button class="btn-sm btn-outline-primary" (click)="addDynamicValue('#company')"><span
-                            class="fa fa-building-o"></span> #company</button>
+                    <button *ngIf="companyInfo.zip" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#zip')"><span class="fa fa-address-book-o"></span>
+                        #zip</button>
+                    <button *ngIf="companyInfo.city" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#city')"><span class="fa fa-address-book-o"></span>
+                        #city</button>
+                    <button *ngIf="companyInfo.telephone" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#telephone')"><span class="fa fa-mobile"></span> #telephone</button>
+                    <button *ngIf="companyInfo.company" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#company')"><span class="fa fa-building-o"></span> #company</button>
+                    <button *ngIf="bookingLink" class="btn-sm btn-outline-primary"
+                        (click)="addDynamicValue('#bookingLink')"><span class="fa fa-building-o"></span>
+                        #bookingLink</button>
                 </div>
+
+                <label class="custom-label">{{'smsReminder.messageTemplate' | translate}}</label>
+                <textarea #editableText id="editable-text" class="form-control" rows="6" [(ngModel)]="item.message"
+                    (input)="changeMessage($event)" (click)="getCurrentPossition($event)"
+                    name="message-template"></textarea>
+                <!-- <div #editableText id="editable-text" class="editable-text" [innerText]="item.message"
+                    [innerHtml]="convertMessageForSpecificWord()" (keypress)="changeMessage($event)"
+                    contenteditable="true" spellcheck="false">
+                </div> -->
+
             </div>
             <div class="reminder-info">
-                <p class="fa fa-info-circle"></p>
-                <p class="fa fa-arrow-right m-0"></p>
-                <span>{{previewMessage().length}}</span>
-                <p class="fa fa-commenting-o m-0"></p>
-                <span>{{calculateNumberOfMessage()}} </span>
+                <div>
+                    <p class="fa fa-info-circle mb-0"></p>
+                </div>
+                <div class="reminder-info-group">
+                    <p class="fa fa-arrow-right mb-0"></p>
+                    <span>{{previewMessage().length}}</span>
+                </div>
+                <div class="reminder-info-group mb-0">
+                    <p class="fa fa-commenting-o"></p>
+                    <span>{{calculateNumberOfMessage()}} </span>
+                </div>
             </div>
             <div class="message-preview">
                 <label class="custom-label">{{'smsReminder.messagePreview' | translate}}</label>
-                <textarea class="form-control" rows="4" [value]="previewMessage().value"
+                <textarea class="form-control" rows="6" [value]="previewMessage().value"
                     name="preview-message"></textarea>
+            </div>
+        </div>
+
+        <div class="form-check mt-2">
+            <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="item.active">
+                <label class="form-check-label">{{
+                    'smsReminder.activeOrDeactive' | translate
+                    }}
+                </label>
             </div>
         </div>
 

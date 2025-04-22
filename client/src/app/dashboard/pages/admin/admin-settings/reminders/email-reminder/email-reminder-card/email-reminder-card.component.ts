@@ -19,12 +19,13 @@ import { HelpService } from "app/services/help.service";
 })
 export class EmailReminderCardComponent {
   @Input() item: any;
+  @Input() companyInfo: any;
+  @Input() bookingLink: string;
   @Output() changeValue = new EventEmitter<any>();
   @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
 
   public reminderEditDialog: any;
   public currentPossitionCursor = 0;
-  public companyInfo: any;
 
   constructor(
     private _service: CallApiService,
@@ -34,15 +35,7 @@ export class EmailReminderCardComponent {
     private _modalService: NgbModal
   ) {}
 
-  ngOnInit() {
-    this.getCompanyInfo();
-  }
-
-  getCompanyInfo() {
-    this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
-      this.companyInfo = data;
-    });
-  }
+  ngOnInit() {}
 
   modelChangeFn(event) {}
 
@@ -77,7 +70,7 @@ export class EmailReminderCardComponent {
   }
 
   changeMessage(event: any) {
-    this.currentPossitionCursor = event.target.selectionStart + 1;
+    this.getCurrentPossition(event);
   }
 
   getCurrentPossition(event: any) {
@@ -100,18 +93,10 @@ export class EmailReminderCardComponent {
   }
 
   previewMessage() {
-    const date = new Date();
-    const message = this.item.message
-      .replaceAll("#time", date.getHours() + ":" + date.getUTCMinutes())
-      .replaceAll(
-        "#date",
-        date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
-      )
-      .replaceAll("#company", this.companyInfo.company)
-      .replaceAll("#address", this.companyInfo.address);
-    return {
-      value: message,
-      length: message.length,
-    };
+    return this._helpService.previewReminderMessage(
+      this.item.message,
+      this.companyInfo,
+      this.bookingLink
+    );
   }
 }

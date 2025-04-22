@@ -16,6 +16,8 @@ export class SmsReminderComponent {
   public loader = true;
   public reminderConfig: any;
   public notFillPersonalData = false;
+  public companyInfo: any;
+  public bookingLink: string;
 
   constructor(
     private _service: CallApiService,
@@ -39,6 +41,26 @@ export class SmsReminderComponent {
 
   initialize() {
     this.getSmsReminderConfig();
+    this.getCompanyInfo();
+    this.getBookingLink();
+  }
+
+  getCompanyInfo() {
+    this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
+      this.companyInfo = data;
+    });
+  }
+
+  getBookingLink() {
+    this._service
+      .callGetMethod("api/booking/getBookingLink")
+      .subscribe((data: any) => {
+        if (data) {
+          this.bookingLink =
+            this._translate.instant("bookingSettings.bookingRootLink") +
+            data.booking_link;
+        }
+      });
   }
 
   getSmsReminderConfig() {

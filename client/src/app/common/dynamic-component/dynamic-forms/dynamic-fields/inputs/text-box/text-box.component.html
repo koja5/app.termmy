@@ -39,6 +39,11 @@
       href="{{config.groupSettings.groupText | translate}}{{group.controls[config.field].value}}" target="_blank"><span
         class="fa fa-external-link"></span></a>
   </div>
+  <div *ngIf="config.subType && config.groupSettings.previewLink">
+    <label>{{'commonFields.previewGeneratedLink' | translate}}</label>&nbsp;<a
+      href="{{config.groupSettings.groupText | translate}}{{group.controls[config.field].value}}"
+      target="_blank">{{config.groupSettings.groupText | translate}}{{group.controls[config.field].value}}</a>
+  </div>
   <!-- / GROUP -->
 
 </div>

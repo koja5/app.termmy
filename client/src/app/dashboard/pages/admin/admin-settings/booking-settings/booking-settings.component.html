@@ -2,6 +2,11 @@
     <app-avatar-uploader [data]="data" (uploadEmitter)="uploadEmitter($event)"></app-avatar-uploader>
 </div>
 
+<div class="status">
+    <app-alert *ngIf="bookingStatus" [type]="'success'" [text]="('setupApp.bookingPageActive' | translate)"></app-alert>
+    <app-alert *ngIf="!bookingStatus" [type]="'danger'" [text]="('setupApp.bookingPageDeactive' | translate)"></app-alert>
+</div>
+
 <app-dynamic-forms #form [path]="path" [file]="file" [disableEdit]="disableEdit" (onChangeData)="onChangeData($event)"
     (submit)="handleSubmit($event)">
 </app-dynamic-forms>

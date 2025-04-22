@@ -39,12 +39,14 @@
 
             <div>
                 <div class="row mt-2">
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-6 col-12">
                         <app-email-reminder-card [item]="reminderConfig.config.clientImmediatelyReminder"
+                            [companyInfo]="companyInfo" [bookingLink]="bookingLink"
                             (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
                     </div>
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-6 col-12">
                         <app-email-reminder-card [item]="reminderConfig.config.clientDayBeforeReminder"
+                            [companyInfo]="companyInfo" [bookingLink]="bookingLink"
                             (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
                     </div>
                 </div>
@@ -55,8 +57,9 @@
                 <h5>{{'emailReminder.clientLoyalityTitle' | translate}} </h5>
 
                 <div class="row mt-2">
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-6 col-12">
                         <app-email-reminder-card [item]="reminderConfig.config.clientHappyBirthday"
+                            [companyInfo]="companyInfo" [bookingLink]="bookingLink"
                             (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
                     </div>
                     <!-- <div class="col-lg-4 col-12">
@@ -72,12 +75,14 @@
                 <h5>{{'emailReminder.reminderEmployeeTitle' | translate}} </h5>
 
                 <div class="row mt-2">
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-6 col-12">
                         <app-email-reminder-card [item]="reminderConfig.config.employeeImmediatelyReminder"
+                            [companyInfo]="companyInfo" [bookingLink]="bookingLink"
                             (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
                     </div>
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-6 col-12">
                         <app-email-reminder-card [item]="reminderConfig.config.employeeDayBeforeReminder"
+                            [companyInfo]="companyInfo" [bookingLink]="bookingLink"
                             (changeValue)="setEmailReminderConfig($event)"></app-email-reminder-card>
                     </div>
                 </div>

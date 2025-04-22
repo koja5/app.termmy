@@ -49,4 +49,9 @@ export class FieldConfig {
   minuteStep: number;
   dependent?: any;
   emitRequest?: boolean;
+  groupSettings?: {
+    groupPosition: any;
+    groupText?: any;
+    previewLink?: any;
+  };
 }

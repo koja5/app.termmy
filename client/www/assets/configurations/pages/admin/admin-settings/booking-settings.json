@@ -28,7 +28,8 @@
             "groupSettings": {
                 "groupText": "bookingSettings.bookingRootLink",
                 "groupPosition": "left",
-                "additionalValue": "external-link"
+                "additionalValue": "external-link",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -233,7 +234,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.facebookRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -246,7 +248,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.instagramRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -259,7 +262,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.youtubeRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -272,7 +276,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.tiktokRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",
@@ -285,7 +290,8 @@
             "subType": "group",
             "groupSettings": {
                 "groupText": "bookingSettings.websiteRootLink",
-                "groupPosition": "left"
+                "groupPosition": "left",
+                "previewLink": true
             },
             "width": "col-md-12",
             "class": "e-outline",

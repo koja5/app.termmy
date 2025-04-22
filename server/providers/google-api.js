@@ -650,70 +650,87 @@ router.post("/setClient", async (req, res, next) => {
     ],
   };
   if (req.body.resourceName) {
-    people.people.get(
-      {
-        resourceName: req.body.resourceName,
-        personFields: ["names"],
-        auth: oauth2Client,
-      },
-      function (err, response) {
-        if (response && response.data) {
+    try {
+      people.people.get(
+        {
+          resourceName: req.body.resourceName,
+          personFields: ["names"],
+          auth: oauth2Client,
+        },
+        function (err, response) {
+          if (response && response.data) {
+            if (response && response.data) {
+              const data = {
+                id: generateCustomUUID(
+                  response.data.resourceName.split("/")[1]
+                ),
+                resourceName: response.data.resourceName,
+              };
+              res.json(data);
+            } else {
+              res.json(false);
+            }
+            body["etag"] = response.data.etag;
+
+            try {
+              people.people.updateContact(
+                {
+                  updatePersonFields: [
+                    "names",
+                    "genders",
+                    "birthdays",
+                    "emailAddresses",
+                    "phoneNumbers",
+                    "addresses",
+                  ],
+                  resourceName: req.body.resourceName,
+                  requestBody: body,
+                  auth: oauth2Client,
+                },
+                function (err, response) {}
+              );
+            } catch (err) {
+              console.log(err);
+            }
+          }
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    try {
+      people.people.createContact(
+        {
+          personFields: [
+            "metadata",
+            "names",
+            "genders",
+            "birthdays",
+            "emailAddresses",
+            "phoneNumbers",
+            "addresses",
+          ],
+          requestBody: body,
+          auth: oauth2Client,
+        },
+        function (err, response) {
           if (response && response.data) {
             const data = {
-              id: generateCustomUUID(response.data.resourceName.split("/")[1]),
+              guuid: generateCustomUUID(
+                response.data.resourceName.split("/")[1]
+              ),
               resourceName: response.data.resourceName,
             };
             res.json(data);
           } else {
             res.json(false);
           }
-          body["etag"] = response.data.etag;
-          people.people.updateContact(
-            {
-              updatePersonFields: [
-                "names",
-                "genders",
-                "birthdays",
-                "emailAddresses",
-                "phoneNumbers",
-                "addresses",
-              ],
-              resourceName: req.body.resourceName,
-              requestBody: body,
-              auth: oauth2Client,
-            },
-            function (err, response) {}
-          );
         }
-      }
-    );
-  } else {
-    people.people.createContact(
-      {
-        personFields: [
-          "metadata",
-          "names",
-          "genders",
-          "birthdays",
-          "emailAddresses",
-          "phoneNumbers",
-          "addresses",
-        ],
-        requestBody: body,
-        auth: oauth2Client,
-      },
-      function (err, response) {
-        if (response && response.data) {
-          const data = {
-            guuid: generateCustomUUID(response.data.resourceName.split("/")[1]),
-            resourceName: response.data.resourceName,
-          };
-          res.json(data);
-        } else {
-          res.json(false);
-        }
-      }
-    );
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
 });
 

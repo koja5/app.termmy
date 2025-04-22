@@ -33,7 +33,10 @@
       "discardChangesCancel": "Abbrechen",
       "readMore": "Mehr lesen",
       "executeActionQuestionTitle": "Bist du sicher?",
-      "executeActionQuestionText": "Möchten Sie diese Aktion ausführen?"
+      "executeActionQuestionText": "Möchten Sie diese Aktion ausführen?",
+      "footerPrivacyPolicy": "Datenschutzerklärung",
+      "footerTerms": "Allgemeine Geschäftsbedingungen",
+      "footerImpressum": "Impressum"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
@@ -79,7 +82,8 @@
       "signupTime": "Anmeldezeit",
       "validFrom": "Gültig ab",
       "validTo": "Gültig bis",
-      "bonusForPartner": "Bonus für Partner"
+      "bonusForPartner": "Bonus für Partner",
+      "previewGeneratedLink": "Generierter Link:"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -126,7 +130,7 @@
    "navBar": {
       "profile": "Profil",
       "settings": "Einstellungen",
-      "help": "Helfen",
+      "help": "Hilfe",
       "plans": "Pläne",
       "logout": "Ausloggen"
    },
@@ -381,6 +385,7 @@
       "messagePreview": "Nachrichtenvorschau",
       "dynamicValue": "Dynamischer Wert",
       "warning": "Wir empfehlen, die SMS-Erinnerung zu aktivieren, da 97% der Personen SMS-Nachrichten innerhalb von 10 Minuten nach ihrem Eintreffen lesen.",
+      "activeOrDeactive": "Aktive oder deaktivierte Erinnerung",
       "contents": {
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
@@ -433,7 +438,11 @@
       "testMessage": "Test Email",
       "subject": "Betreff",
       "message": "Nachricht",
+      "messagePreview": "Nachrichtenvorschau",
+      "dynamicValue": "Dynamische Werte",
+      "edit": "Benachrichtigung bearbeiten",
       "sentTestEmailTo": "Test-E-Mail an #email senden",
+      "activeOrDeactive": "Aktive oder deaktivierte Erinnerung",
       "contents": {
          "clientImmediatelyReminder": {
             "title": "Buchungsbestätigung",
@@ -685,6 +694,8 @@
       "calendarText": "Termmy vereinfacht Ihr Leben, indem es eine Verbindung zu all Ihren anderen Kalendern herstellt.",
       "bookingTitle": "Aktivieren Sie Ihre Buchungswebsite",
       "bookingText": "Ermöglichen Sie Ihren Kunden selbst termine zu buchen. Über Ihre individuelle Buchungs-Website. In der von Ihnen definierten Arbeitszeit.",
+      "bookingPageActive": "Ihre Buchungsseite ist online!",
+      "bookingPageDeactive": "Ihre Buchungsseite ist inaktiv!",
       "paymentTitle": "Online-Zahlung zulassen",
       "paymentText": "Lassen Sie Ihre Kunden für die online gebuchten Termine im Voraus bezahlen. Dazu richten Sie Ihre eigene Kredit-Karten Zahlung ein und erhalten Ihr Geld direkt auf Ihr Konto",
       "holidayTitle": "Urlaub",

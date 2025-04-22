@@ -1,6 +1,6 @@
 <div *ngIf="_helpService.getBasicLicense()">
     <ngb-alert
-        *ngIf="data.length > limitClientsNotificationsForFreeLicenses && data.length < limitClientsForFreeLicenses"
+        *ngIf="data && data.length > limitClientsNotificationsForFreeLicenses && data.length < limitClientsForFreeLicenses"
         [type]="'warning'" [dismissible]="false">
         <div class="alert-body">
             {{'licenses.licenseLimitForClientsNotification' | translate}}
@@ -9,7 +9,7 @@
         </div>
     </ngb-alert>
 
-    <ngb-alert *ngIf="data.length >= limitClientsForFreeLicenses" [type]="'danger'" [dismissible]="false">
+    <ngb-alert *ngIf="data && data.length >= limitClientsForFreeLicenses" [type]="'danger'" [dismissible]="false">
         <div class="alert-body">
             {{'licenses.licenseLimitForClients' | translate}}
             <a routerLink="/dashboard/admin/payment/license-packages" class="alert-link">{{'licenses.here' |

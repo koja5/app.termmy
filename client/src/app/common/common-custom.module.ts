@@ -52,7 +52,8 @@ const appRoutes: Routes = [];
     LetterProfileComponent,
     CardTemplateComponent,
     NoDataComponent,
-    GoogleSigninComponent
+    GoogleSigninComponent,
+    AlertComponent
   ],
 })
 export class CommonCustomModule {}
