@@ -36,7 +36,8 @@
         "executeActionQuestionText": "Do you want to execute this action?",
         "footerPrivacyPolicy": "Privacy Policy",
         "footerTerms": "Terms & Conditions",
-        "footerImpressum": "Impressum"
+        "footerImpressum": "Impressum",
+        "addItem": "Add item"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Successfuly changed!",
@@ -277,6 +278,9 @@
         "readonlyCalendarsExplanation": "For these calendars, you only have the ability to view events on your calendar in the Termmy app. This means that there is no ability to add or change events that are in these calendars."
     },
     "worktime": {
+        "validFromDate": "Work time is valid from",
+        "validFromDateExplanation": "Worktime is valid from selected date in dropdown. If there is no value, than work time is set to be general for all dates.",
+        "delete": "Delete work time",
         "monday": "Monday",
         "tuesday": "Tuesday",
         "wednesday": "Wednesday",

@@ -14,7 +14,35 @@
                 <h6 class="ml-75">{{'worktime.text' | translate}}</h6>
             </div>
         </div>
-        <div class="col-12 pt-2 pb-2 border-top border-bottom" *ngFor="let item of data.value; let i = index">
+        <div class="full-width text-center border-top pt-2">
+            <label>{{'worktime.validFromDate' | translate}} <app-explanation-mark
+                    [explanation]="('worktime.validFromDateExplanation' | translate)"></app-explanation-mark></label>
+            <ng-select *ngIf="allData" [items]="allData" [value]="data.valid_from" [bindLabel]="'valid_from'"
+                [bindValue]="'valid_from'" [clearable]="false" (change)="onChange($event)">
+
+                <ng-template ng-value-tmp let-item="item">
+                    <div>
+                        {{item.valid_from}}
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                    <div>
+                        {{item.valid_from}}
+                    </div>
+                </ng-template>
+                <ng-template ng-footer-tmp>
+                    <p class="m-0 font-weight-bold cursor-pointer" (click)="clickOnTag()"><span
+                            class="fa fa-plus"></span> {{
+                        'general.addItem' | translate
+                        }} </p>
+                </ng-template>
+            </ng-select>
+            <a class="btn btn-outline-danger mt-2" *ngIf="data" (click)="dialogConfirm.showQuestionModal()"><span
+                    class="fa fa-trash"></span>
+                {{'worktime.delete' | translate}}</a>
+
+        </div>
+        <div class="col-12 pt-2 pb-2 border-bottom" *ngFor="let item of data.value; let i = index">
             <div class="m-auto">
                 <div class="form-check form-check-inline col-12 col-sm-12 mb-2 mt-2">
                     <div class="custom-control custom-switch custom-control-inline">
@@ -70,3 +98,5 @@
         </div>
     </div>
 </form>
+
+<app-dialog-confirm #dialogConfirm (confirm)="deleteWorkTime()"></app-dialog-confirm>

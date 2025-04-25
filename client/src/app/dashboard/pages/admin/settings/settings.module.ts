@@ -20,6 +20,7 @@ import { RemindersComponent } from "../admin-settings/reminders/reminders.compon
 import { LicenseComponent } from "../admin-settings/license/license.component";
 import { HolidaysComponent } from "../admin-settings/holidays/holidays.component";
 import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
+import { NgSelectModule } from "@ng-select/ng-select";
 
 const routes = [
   {
@@ -63,6 +64,7 @@ const routes = [
     ColorPickerModule,
     CommonCustomModule,
     CoreThemeCustomizerModule,
+    NgSelectModule,
   ],
   providers: [ToastrComponent],
   exports: [

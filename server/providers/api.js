@@ -874,35 +874,72 @@ router.post("/setWorktime", auth, function (req, res) {
     req.body.user_id = req.user.user.id;
     req.body.value = convertToString(req.body.value);
 
-    if (req.body.id) {
-      conn.query(
-        "update worktimes set ? where id = ?",
-        [req.body, req.body.id],
-        function (err, rows) {
-          conn.release();
-          if (!err) {
-            res.json(true);
-          } else {
-            logger.log("error", err.sql + ". " + err.sqlMessage);
-            res.json(false);
-          }
+    conn.query(
+      "INSERT INTO worktimes set ? ON DUPLICATE KEY UPDATE ?",
+      [req.body, req.body],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
         }
-      );
-    } else {
-      conn.query(
-        "insert into worktimes SET ?",
-        [req.body],
-        function (err, rows) {
-          conn.release();
-          if (!err) {
-            res.json(true);
-          } else {
-            logger.log("error", err.sql + ". " + err.sqlMessage);
-            res.json(false);
-          }
-        }
-      );
+      }
+    );
+
+    // if (req.body.id) {
+    //   conn.query(
+    //     "update worktimes set ? where id = ?",
+    //     [req.body, req.body.id],
+    //     function (err, rows) {
+    //       conn.release();
+    //       if (!err) {
+    //         res.json(true);
+    //       } else {
+    //         logger.log("error", err.sql + ". " + err.sqlMessage);
+    //         res.json(false);
+    //       }
+    //     }
+    //   );
+    // } else {
+    //   conn.query(
+    //     "insert into worktimes SET ?",
+    //     [req.body],
+    //     function (err, rows) {
+    //       conn.release();
+    //       if (!err) {
+    //         res.json(true);
+    //       } else {
+    //         logger.log("error", err.sql + ". " + err.sqlMessage);
+    //         res.json(false);
+    //       }
+    //     }
+    //   );
+    // }
+  });
+});
+
+router.post("/deleteWorktime", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
     }
+
+    conn.query(
+      "delete from worktimes where id = ?",
+      [req.body.id],
+      function (err, rows) {
+        conn.release();
+        if (!err) {
+          res.json(true);
+        } else {
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
   });
 });
 

@@ -36,7 +36,8 @@
       "executeActionQuestionText": "Möchten Sie diese Aktion ausführen?",
       "footerPrivacyPolicy": "Datenschutzerklärung",
       "footerTerms": "Allgemeine Geschäftsbedingungen",
-      "footerImpressum": "Impressum"
+      "footerImpressum": "Impressum",
+      "addItem": "Artikel hinzufügen"
    },
    "actionMessage": {
       "successExecuteActionTitleDefault": "Erfolgreich geändert!",
@@ -241,6 +242,9 @@
       "readonlyCalendarsExplanation": "Für diese Kalender haben Sie nur die Möglichkeit, Ereignisse in Ihrem Kalender in der Termmy-App anzuzeigen. Das bedeutet, dass es keine Möglichkeit gibt, Ereignisse in diesen Kalendern hinzuzufügen oder zu ändern."
    },
    "worktime": {
+      "validFromDate": "Die Arbeitszeit gilt vom",
+      "validFromDateExplanation": "Die Arbeitszeit gilt ab dem in der Dropdown-Liste ausgewählten Datum. Ist kein Wert angegeben, wird die Arbeitszeit für alle Tage allgemein festgelegt.",
+      "delete": "Arbeitszeit löschen",
       "monday": "Montag",
       "tuesday": "Dienstag",
       "wednesday": "Mittwoch",

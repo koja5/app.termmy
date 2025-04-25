@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   NgbDateAdapter,
   NgbDateNativeAdapter,
@@ -14,6 +14,7 @@ import { FieldConfig } from "app/common/dynamic-component/dynamic-forms/models/f
 import { StorageService } from "app/services/storage.service";
 import { MessageService } from "app/services/message.service";
 import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
+import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
 
 @Component({
   selector: "app-worktime",
@@ -22,6 +23,7 @@ import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class WorktimeComponent implements OnInit, CanComponentDeactivate {
+  @ViewChild("dialogConfirm") dialogConfirm: DialogConfirmComponent;
   public value: any;
   public data: any = {};
   public model: any;
@@ -30,6 +32,8 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
   public loader = false;
   public config = new FieldConfig();
   public isDirty = false;
+  public allData: any;
+  public selectedWorkTime: any;
 
   constructor(
     private _helpService: HelpService,
@@ -53,16 +57,38 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
       .callGetMethod("/api/getMyWorktime", "")
       .subscribe((data: any) => {
         if (data && data.length) {
-          this.data = data[0];
-          this.data.value = this._helpService.convertStringToJson(
-            data[0].value
-          );
+          this.allData = data;
+          this.setActiveWorkTime();
+          // this.data = data[0];
+          // this.data.value = this._helpService.convertStringToJson(
+          //   data[0].value
+          // );
         } else {
+          this.allData = [];
           this.data = new WorkTimeEmpty();
         }
         this.loader = false;
       });
     this.config.minuteStep = 30;
+  }
+
+  setActiveWorkTime() {
+    let ind = 1;
+    if (this.allData) {
+      for (let i = 0; i < this.allData.length; i++) {
+        if (this.allData[i].active) {
+          this.data = this.allData[i];
+          this.data.value = this._helpService.convertStringToJson(
+            this.allData[i].value
+          );
+          ind = 0;
+          break;
+        }
+      }
+    }
+    if (ind) {
+      this.data = new WorkTimeEmpty();
+    }
   }
 
   changeValue(event: any) {
@@ -163,4 +189,22 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
       }
     }
   }
+
+  onChange(event: any) {
+    this.data = event;
+    this.data.value = this._helpService.convertStringToJson(event.value);
+  }
+
+  deleteWorkTime() {
+    this._service
+      .callPostMethod("/api/deleteWorkTime", this.data)
+      .subscribe((data) => {
+        if (data) {
+          this.ngOnInit();
+          this._toastr.showSuccess();
+        }
+      });
+  }
+
+  clickOnTag() {}
 }
