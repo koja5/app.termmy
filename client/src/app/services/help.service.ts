@@ -215,7 +215,12 @@ export class HelpService {
     return this._storageService.getLicenseId() === LicensesType.Basic;
   }
 
-  previewReminderMessage(message: any, companyInfo: any, bookingLink: string) {
+  previewReminderMessage(
+    message: any,
+    companyInfo: any,
+    bookingLink: string,
+    user: any
+  ) {
     const date = new Date();
     const replacedMessage = message
       .replaceAll(
@@ -238,9 +243,9 @@ export class HelpService {
       .replaceAll("#city", companyInfo.city)
       .replaceAll("#telephone", companyInfo.telephone)
       .replaceAll("#bookingLink", bookingLink)
-      .replaceAll("#employeeName", bookingLink)
-      .replaceAll("#employeeTelephone", bookingLink)
-      .replaceAll("#employeeEmail", bookingLink);
+      .replaceAll("#employeeName", user.firstname + " " + user.lastname)
+      .replaceAll("#employeeTelephone", user.telephone)
+      .replaceAll("#employeeEmail", user.email);
     return {
       value: replacedMessage,
       length: replacedMessage.length,

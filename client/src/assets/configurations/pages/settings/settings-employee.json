@@ -1,0 +1,19 @@
+{
+    "type": "vertical",
+    "contentHeader": {
+        "headerTitle": "Settings",
+        "actionButton": false
+    },
+    "navigations": [
+        {
+            "title": "settings.worktime",
+            "link": "/dashboard/employee/settings/worktime",
+            "icon": "briefcase"
+        },
+        {
+            "title": "settings.connections",
+            "link": "/dashboard/employee/settings/connections",
+            "icon": "link"
+        }
+    ]
+}

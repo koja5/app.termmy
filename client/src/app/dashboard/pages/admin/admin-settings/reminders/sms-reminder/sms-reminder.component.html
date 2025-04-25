@@ -57,12 +57,12 @@
                     <div class="row mt-2">
                         <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientImmediatelyReminder"
-                                [companyInfo]="companyInfo" [bookingLink]="bookingLink"
+                                [companyInfo]="companyInfo" [user]="user" [bookingLink]="bookingLink"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
                         <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientDayBeforeReminder"
-                                [companyInfo]="companyInfo" [bookingLink]="bookingLink"
+                                [companyInfo]="companyInfo" [user]="user" [bookingLink]="bookingLink"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="row mt-2">
                         <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.clientHappyBirthday"
-                                [companyInfo]="companyInfo" [bookingLink]="bookingLink"
+                                [companyInfo]="companyInfo" [user]="user" [bookingLink]="bookingLink"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
                         <!-- <div class="col-md-6 col-12">
@@ -93,12 +93,12 @@
                     <div class="row mt-2">
                         <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.employeeImmediatelyReminder"
-                                [companyInfo]="companyInfo" [bookingLink]="bookingLink"
+                                [companyInfo]="companyInfo" [user]="user" [bookingLink]="bookingLink"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
                         <div class="col-md-6 col-12">
                             <app-sms-reminder-card [item]="reminderConfig.config.employeeDayBeforeReminder"
-                                [companyInfo]="companyInfo" [bookingLink]="bookingLink"
+                                [companyInfo]="companyInfo" [user]="user" [bookingLink]="bookingLink"
                                 (changeValue)="setSmsReminderConfig($event)"></app-sms-reminder-card>
                         </div>
                     </div>

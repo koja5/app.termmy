@@ -20,6 +20,7 @@ import { HelpService } from "app/services/help.service";
 export class EmailReminderCardComponent {
   @Input() item: any;
   @Input() companyInfo: any;
+  @Input() user: any;
   @Input() bookingLink: string;
   @Output() changeValue = new EventEmitter<any>();
   @ViewChild("reminderEdit") reminderEdit: TemplateRef<any>;
@@ -46,8 +47,10 @@ export class EmailReminderCardComponent {
   }
 
   sendTestMessage() {
+    let item = this._helpService.copyObject(this.item);
+    item.message = this.previewMessage().value;
     this._service
-      .callPostMethod("api/email-reminder/sendTestEmailMessage", this.item)
+      .callPostMethod("api/email-reminder/sendTestEmailMessage", item)
       .subscribe((data) => {
         if (data) {
           this._toastr.showSuccessCustom(
@@ -96,7 +99,8 @@ export class EmailReminderCardComponent {
     return this._helpService.previewReminderMessage(
       this.item.message,
       this.companyInfo,
-      this.bookingLink
+      this.bookingLink,
+      this.user
     );
   }
 }

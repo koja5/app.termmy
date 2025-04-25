@@ -63,6 +63,7 @@ router.get("/getMyTermines", auth, async (req, res, next) => {
         logger.log("error", err.sql + ". " + err.sqlMessage);
         res.json(err);
       } else {
+        console.log(req.user);
         conn.query(
           "select * from appointments where employee_id = ?",
           req.user.user.id,
@@ -72,6 +73,7 @@ router.get("/getMyTermines", auth, async (req, res, next) => {
               logger.log("error", err.sql + ". " + err.sqlMessage);
               res.json(err);
             } else {
+              console.log(rows);
               res.json(rows);
             }
           }

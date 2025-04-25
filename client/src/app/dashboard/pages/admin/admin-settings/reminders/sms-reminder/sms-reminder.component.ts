@@ -17,6 +17,7 @@ export class SmsReminderComponent {
   public reminderConfig: any;
   public notFillPersonalData = false;
   public companyInfo: any;
+  public user: any;
   public bookingLink: string;
 
   constructor(
@@ -42,12 +43,19 @@ export class SmsReminderComponent {
   initialize() {
     this.getSmsReminderConfig();
     this.getCompanyInfo();
+    this.getProfileInfo();
     this.getBookingLink();
   }
 
   getCompanyInfo() {
     this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
       this.companyInfo = data;
+    });
+  }
+
+  getProfileInfo() {
+    this._service.callGetMethod("api/getProfileInfo").subscribe((data) => {
+      this.user = data;
     });
   }
 
@@ -82,7 +90,7 @@ export class SmsReminderComponent {
     this._service
       .callGetMethod("api/getProfileInfo", "")
       .subscribe((profile: any) => {
-        if (profile && profile[0].company && profile[0].address) {
+        if (profile && profile.company && profile.address) {
           this.sendInfoForSetupApp();
           this._service
             .callPostMethod(

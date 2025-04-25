@@ -20,6 +20,7 @@ import {
 } from "@azure/msal-browser";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { environment } from "../../../environments/environment";
+import { UserTypes } from "app/enums/user-types";
 
 @Component({
   selector: "login",
@@ -107,15 +108,15 @@ export class LoginComponent implements OnInit {
       .subscribe((data: any) => {
         if (data && data.token) {
           this._storageService.setToken(data.token);
-          window.open("dashboard/admin", "_self");
-          // const user = this._storageService.getDecodeToken();
-          // if (!user.firstname || !user.lastname) {
-          //   // this._router.navigate(["wizard"]);
-          //   window.open("wizard", "_self");
-          // } else {
-          //   // this._router.navigate(["dashboard/admin"]);
-          //   window.open("dashboard/admin", "_self");
-          // }
+          const user = this._storageService.getDecodeToken();
+          const userType = UserTypes;
+          if (user.type === userType.admin) {
+            window.open("dashboard/admin", "_self");
+          } else if (user.type === userType.employee) {
+            window.open("dashboard/employee", "_self");
+          } else {
+            window.open("dashboard/superadmin", "_self");
+          }
           this.loading = false;
         } else {
           this.error = data.type;

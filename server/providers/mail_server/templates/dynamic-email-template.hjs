@@ -101,7 +101,9 @@
                               bgcolor="rgba(255, 255, 255, var(--bg-opacity))"
                               align="left"
                             >
-                              <p style="margin: 0 0 24px;">
+                              <p
+                                style="margin: 0 0 24px; white-space: pre-line;"
+                              >
                                 {{text}}
                               </p>
 

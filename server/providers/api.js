@@ -653,7 +653,7 @@ router.get("/getProfileInfo", auth, async (req, res, next) => {
               logger.log("error", err.sql + ". " + err.sqlMessage);
               res.json(err);
             } else {
-              res.json(rows);
+              res.json(rows.length ? rows[0] : null);
             }
           }
         );

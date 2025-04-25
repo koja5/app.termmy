@@ -15,6 +15,7 @@ export class EmailReminderComponent {
   public emailReminder: any;
   public notFillPersonalData = false;
   public companyInfo: any;
+  public user: any;
   public bookingLink: string;
 
   constructor(
@@ -29,6 +30,7 @@ export class EmailReminderComponent {
   initialize() {
     this.getEmailReminderConfig();
     this.getCompanyInfo();
+    this.getProfileInfo();
     this.getBookingLink();
 
     this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -43,6 +45,12 @@ export class EmailReminderComponent {
   getCompanyInfo() {
     this._service.callGetMethod("api/getCompanyInfo").subscribe((data) => {
       this.companyInfo = data;
+    });
+  }
+
+  getProfileInfo() {
+    this._service.callGetMethod("api/getProfileInfo").subscribe((data) => {
+      this.user = data;
     });
   }
 
@@ -77,7 +85,7 @@ export class EmailReminderComponent {
     this._service
       .callGetMethod("api/getProfileInfo", "")
       .subscribe((profile: any) => {
-        if (profile && profile[0].company && profile[0].address) {
+        if (profile && profile && profile.address) {
           this._service
             .callPostMethod(
               "/api/email-reminder/setEmailReminderConfig",
