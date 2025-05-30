@@ -81,6 +81,15 @@ export const menu = [
     users: ["admin"],
   },
   {
+    id: "license",
+    title: "License",
+    translate: "adminSettings.license",
+    type: "item",
+    icon: "package",
+    url: "/dashboard/admin/settings/license",
+    users: ["admin"],
+  },
+  {
     id: "settings",
     title: "Settings",
     translate: "navigations.settings",

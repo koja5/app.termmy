@@ -10,7 +10,8 @@
         <div class="col-12">
             <div class="align-items-center mb-2">
                 <i data-feather="link" class="font-medium-3"></i>
-                <h4 class="ml-75">{{'worktime.title' | translate}}</h4>
+                <h4 class="ml-75">{{'worktime.title' | translate}} <span *ngIf="user">- {{user.firstname}}
+                        {{user.lastname}}</span></h4>
                 <h6 class="ml-75">{{'worktime.text' | translate}}</h6>
             </div>
         </div>
@@ -28,7 +29,7 @@
                 </ng-template>
                 <ng-template ng-value-tmp let-item="item">
                     <div>
-                        {{item.valid_from ? (item.valid_from | date: 'dd.MM.yyyy') :('worktime.validForAllDate' |
+                        {{item.valid_from ? (item.valid_from | date: 'dd.MM.yyyy') : ('worktime.validForAllDate' |
                         translate)}}
                     </div>
                 </ng-template>
@@ -41,7 +42,7 @@
                 <ng-template ng-footer-tmp>
                     <p class="m-0 font-weight-bold cursor-pointer" (click)="addNewValidFormWorktime()"><span
                             class="fa fa-plus"></span> {{
-                        'general.addItem' | translate
+                        'worktime.addNewWorktime' | translate
                         }} </p>
                 </ng-template>
             </ng-select>

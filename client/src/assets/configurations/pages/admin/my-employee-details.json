@@ -1,0 +1,10 @@
+{
+    "type": "horizontal",
+    "navigations": [
+        {
+            "title": "adminSettings.bookingSettings",
+            "link": "/dashboard/admin/employee-details/info",
+            "icon": "calendar"
+        }
+    ]
+}

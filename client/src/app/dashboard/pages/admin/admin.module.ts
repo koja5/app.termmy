@@ -46,6 +46,7 @@ import { CoreSidebarModule } from "@core/components";
 import { ServicesMobileViewComponent } from "./services/services-mobile-view/services-mobile-view.component";
 import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { EmployeeDetailsComponent } from "./employees/employee-details/employee-details.component";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -97,6 +98,13 @@ const routes = [
     path: "my-employees",
     canActivate: [AdminGuardService],
     component: EmployeesComponent,
+  },
+  {
+    path: "my-employee-details",
+    loadChildren: () =>
+      import("./employees/employee-details/employee-details.module").then(
+        (m) => m.EmployeeDetailsModule
+      ),
   },
   {
     path: "my-clients",

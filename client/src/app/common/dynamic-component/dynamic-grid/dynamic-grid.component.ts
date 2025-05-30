@@ -507,10 +507,8 @@ export class DynamicGridComponent implements CanComponentDeactivate {
   // check here which is action and then check additionall configuration - l
   actionColumn(item, value, row) {
     if (item.routerLink) {
-      if (value && item.routerLink.indexOf("{{value}}") != -1) {
-        item.routerLink = item.routerLink.replace("{{value}}", value);
-      }
-      this._router.navigate([item.routerLink]);
+      const generateLink = this.getGenerateLink(item.routerLink, row);
+      this._router.navigate([generateLink]);
     } else if (item.type) {
       if (item.type === "edit") {
         this.checkConfigurationFunctionsForEditOption(item, row);
@@ -522,6 +520,17 @@ export class DynamicGridComponent implements CanComponentDeactivate {
         this.showQuestionModal(this.modal, item.executeAction.modalConfig);
       }
     }
+  }
+
+  getGenerateLink(routerLink: any, data: any) {
+    let generateLink = routerLink.link;
+    for (let i = 0; i < routerLink.parameters.length; i++) {
+      generateLink = generateLink.replace(
+        "#" + routerLink.parameters[i],
+        data[routerLink.parameters[i]]
+      );
+    }
+    return generateLink;
   }
 
   checkConfigurationFunctionsForEditOption(item, row) {

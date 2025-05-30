@@ -7,7 +7,6 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { CustomDatepickerI18n } from "app/common/forms/form-elements/date-time-picker/date-picker-i18n/date-picker-i18n.service";
 import { I18n } from "app/common/forms/form-elements/date-time-picker/time-picker-i18n/time-picker-i18n.service";
-import { WorkTimeEmpty } from "./work-time-empty";
 import { HelpService } from "app/services/help.service";
 import { CallApiService } from "app/services/call-api.service";
 import { ToastrComponent } from "app/common/toastr/toastr.component";
@@ -16,6 +15,8 @@ import { StorageService } from "app/services/storage.service";
 import { MessageService } from "app/services/message.service";
 import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
 import { DialogConfirmComponent } from "app/common/dialog-confirm/dialog-confirm.component";
+import { WorkTimeEmpty } from "./work-time-empty";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-worktime",
@@ -39,6 +40,7 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
   public selectedWorkTime: any;
   public newValidFromDate: any;
   public loader1 = false;
+  public user: any;
 
   constructor(
     private _helpService: HelpService,
@@ -46,7 +48,8 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
     private _toastr: ToastrComponent,
     private _storageService: StorageService,
     private _messageService: MessageService,
-    private _modalService: NgbModal
+    private _modalService: NgbModal,
+    private _activatedRouter: ActivatedRoute
   ) {}
 
   unsavedChanges(): boolean {
@@ -58,9 +61,18 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit(): void {
+    this.getUserById();
+    this.getWorktimeForEmployee();
+    this.config.minuteStep = 30;
+  }
+
+  getWorktimeForEmployee() {
     this.loader = true;
     this._service
-      .callGetMethod("/api/getMyWorktime", "")
+      .callGetMethod(
+        "/api/getWorktimeForEmployee",
+        this._activatedRouter.snapshot.params.id
+      )
       .subscribe((data: any) => {
         if (data && data.length) {
           this.allData = data;
@@ -71,7 +83,17 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
         }
         this.loader = false;
       });
-    this.config.minuteStep = 30;
+  }
+
+  getUserById() {
+    this._service
+      .callGetMethod(
+        "/api/getUserById",
+        this._activatedRouter.snapshot.params.id
+      )
+      .subscribe((data) => {
+        this.user = data;
+      });
   }
 
   setActiveWorkTime() {
@@ -165,17 +187,20 @@ export class WorktimeComponent implements OnInit, CanComponentDeactivate {
   saveWorkTime() {
     this.isDirty = false;
     if (this.validBeforeSave()) {
-      this._service.callPostMethod("/api/setWorktime", this.data).subscribe(
-        (data) => {
-          if (data) {
-            this._toastr.showSuccess();
-            this.sendInfoForSetupApp();
+      this.data.user_id = this._activatedRouter.snapshot.params.id;
+      this._service
+        .callPostMethod("/api/setWorktimeForEmployee", this.data)
+        .subscribe(
+          (data) => {
+            if (data) {
+              this._toastr.showSuccess();
+              this.sendInfoForSetupApp();
+            }
+          },
+          (error) => {
+            this._toastr.showError();
           }
-        },
-        (error) => {
-          this._toastr.showError();
-        }
-      );
+        );
     } else {
       this._toastr.showWarning();
     }

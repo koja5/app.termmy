@@ -1,0 +1,23 @@
+@import "../../../../../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../../../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../../../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../../../../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../../../../../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+
+@media (max-width: 992px) {
+  .worktime-color {
+    text-align: center;
+  }
+  .remove-worktime {
+    margin-top: 22px;
+  }
+}
+
+ng-select {
+  max-width: 330px;
+  margin: auto;
+}
+
+.btn-outline-danger {
+  color: #ea5455;
+}

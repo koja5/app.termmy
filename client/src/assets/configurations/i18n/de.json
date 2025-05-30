@@ -9,6 +9,7 @@
       "editEntrie": "Bearbeiten",
       "edit": "Bearbeiten",
       "delete": "Löschen",
+      "view": "Sicht",
       "update": "Aktualisieren",
       "setUp": "Setup",
       "connected": "verbunden",
@@ -84,7 +85,9 @@
       "validFrom": "Gültig ab",
       "validTo": "Gültig bis",
       "bonusForPartner": "Bonus für Partner",
-      "previewGeneratedLink": "Generierter Link:"
+      "previewGeneratedLink": "Generierter Link:",
+      "additionalInfoForReminder": "Zusätzliche Informationen zur Erinnerung (optional)",
+      "additionalInfoForBookingPage": "Zusätzliche Informationen zur Buchungsseite (optional)"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -242,6 +245,7 @@
       "readonlyCalendarsExplanation": "Für diese Kalender haben Sie nur die Möglichkeit, Ereignisse in Ihrem Kalender in der Termmy-App anzuzeigen. Das bedeutet, dass es keine Möglichkeit gibt, Ereignisse in diesen Kalendern hinzuzufügen oder zu ändern."
    },
    "worktime": {
+      "worktime": "Arbeitszeit",
       "validFromDate": "Die Arbeitszeit gilt vom",
       "validFromDateExplanation": "Die Arbeitszeit gilt ab dem in der Dropdown-Liste ausgewählten Datum. Ist kein Wert angegeben, wird die Arbeitszeit für alle Tage allgemein festgelegt.",
       "delete": "Arbeitszeit löschen",
@@ -260,7 +264,12 @@
       "addTime": "Zeit hinzufügen",
       "save": "Zeit speichern",
       "colorTitle": "Farbe",
-      "colorText": "Farbe für Arbeitszeit wurde festgelegt"
+      "colorText": "Farbe für Arbeitszeit wurde festgelegt",
+      "addNewValidFromDate": "Neuer Termin",
+      "chooseNewValidFromDate": "Wählen Sie, ab wann die neuen Arbeitszeiten gültig sind",
+      "startWithNewValidFromDate": "Beginnen Sie mit dem Hinzufügen von Arbeitszeiten",
+      "validForAllDate": "Gültig für alle Termine",
+      "addNewWorktime": "Arbeitszeit hinzufügen"
    },
    "recommended": {
       "title": "Empfehlung",

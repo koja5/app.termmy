@@ -732,6 +732,35 @@ router.get("/getUsers", auth, async (req, res, next) => {
   }
 });
 
+router.get("/getUserById/:id", auth, async (req, res, next) => {
+  try {
+    console.log("USAO SAM");
+    connection.getConnection(function (err, conn) {
+      if (err) {
+        logger.log("error", err.sql + ". " + err.sqlMessage);
+        res.json(err);
+      } else {
+        conn.query(
+          "select * from users where id = ?",
+          [req.params.id],
+          function (err, rows, fields) {
+            conn.release();
+            if (err) {
+              logger.log("error", err.sql + ". " + err.sqlMessage);
+              res.json(err);
+            } else {
+              res.json(rows.length ? rows[0] : {});
+            }
+          }
+        );
+      }
+    });
+  } catch (ex) {
+    logger.log("error", err.sql + ". " + err.sqlMessage);
+    res.json(ex);
+  }
+});
+
 router.post("/setUser", auth, function (req, res, next) {
   connection.getConnection(function (err, conn) {
     if (err) {
@@ -873,50 +902,33 @@ router.post("/setWorktime", auth, function (req, res) {
 
     req.body.user_id = req.user.user.id;
     req.body.value = convertToString(req.body.value);
+    req.body.active = 1;
 
     conn.query(
-      "INSERT INTO worktimes set ? ON DUPLICATE KEY UPDATE ?",
-      [req.body, req.body],
+      "UPDATE worktimes set active = 0 where user_id = ?",
+      [req.user.user.id],
       function (err, rows) {
-        conn.release();
         if (!err) {
-          res.json(true);
+          conn.query(
+            "INSERT INTO worktimes set ? ON DUPLICATE KEY UPDATE ?",
+            [req.body, req.body],
+            function (err, rows) {
+              conn.release();
+              if (!err) {
+                res.json(true);
+              } else {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              }
+            }
+          );
         } else {
+          conn.release();
           logger.log("error", err.sql + ". " + err.sqlMessage);
           res.json(false);
         }
       }
     );
-
-    // if (req.body.id) {
-    //   conn.query(
-    //     "update worktimes set ? where id = ?",
-    //     [req.body, req.body.id],
-    //     function (err, rows) {
-    //       conn.release();
-    //       if (!err) {
-    //         res.json(true);
-    //       } else {
-    //         logger.log("error", err.sql + ". " + err.sqlMessage);
-    //         res.json(false);
-    //       }
-    //     }
-    //   );
-    // } else {
-    //   conn.query(
-    //     "insert into worktimes SET ?",
-    //     [req.body],
-    //     function (err, rows) {
-    //       conn.release();
-    //       if (!err) {
-    //         res.json(true);
-    //       } else {
-    //         logger.log("error", err.sql + ". " + err.sqlMessage);
-    //         res.json(false);
-    //       }
-    //     }
-    //   );
-    // }
   });
 });
 
@@ -951,7 +963,7 @@ router.get("/getMyWorktime", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from worktimes where user_id = ?",
+          "select * from worktimes where user_id = ? and active = 1",
           req.user.user.id,
           function (err, rows, fields) {
             conn.release();
@@ -997,6 +1009,44 @@ router.get("/getWorktimeForEmployee/:id", auth, async (req, res, next) => {
     logger.log("error", err.sql + ". " + err.sqlMessage);
     res.json(ex);
   }
+});
+
+router.post("/setWorktimeForEmployee", auth, function (req, res) {
+  connection.getConnection(function (err, conn) {
+    if (err) {
+      logger.log("error", err.sql + ". " + err.sqlMessage);
+      res.json(err);
+    }
+
+    req.body.value = convertToString(req.body.value);
+    req.body.active = 1;
+
+    conn.query(
+      "UPDATE worktimes set active = 0 where user_id = ?",
+      [req.body.user_id],
+      function (err, rows) {
+        if (!err) {
+          conn.query(
+            "INSERT INTO worktimes set ? ON DUPLICATE KEY UPDATE ?",
+            [req.body, req.body],
+            function (err, rows) {
+              conn.release();
+              if (!err) {
+                res.json(true);
+              } else {
+                logger.log("error", err.sql + ". " + err.sqlMessage);
+                res.json(false);
+              }
+            }
+          );
+        } else {
+          conn.release();
+          logger.log("error", err.sql + ". " + err.sqlMessage);
+          res.json(false);
+        }
+      }
+    );
+  });
 });
 
 // #endregion WORKTIME

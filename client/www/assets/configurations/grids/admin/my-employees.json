@@ -89,6 +89,17 @@
                             }
                         },
                         {
+                            "type": "view",
+                            "actionName": "worktime.title",
+                            "icon": "eye",
+                            "routerLink": {
+                                "link": "dashboard/admin/my-employee-details/worktime/#id",
+                                "parameters": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        {
                             "type": "delete",
                             "actionName": "general.delete",
                             "icon": "trash",
@@ -146,6 +157,42 @@
             "type": "string",
             "class": "text-align-right",
             "field": "email",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.telephone",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "telephone",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.address",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "address",
+            "validation": {
+                "required": true
+            }
+        },
+        {
+            "title": "commonFields.position",
+            "filterable": true,
+            "hideable": true,
+            "filter": "date",
+            "type": "string",
+            "class": "text-align-right",
+            "field": "position",
             "validation": {
                 "required": true
             }
@@ -239,6 +286,30 @@
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
+            "name": "telephone",
+            "title": "commonFields.telephone",
+            "field": "telephone"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "position",
+            "title": "commonFields.position",
+            "field": "position"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "address",
+            "title": "commonFields.address",
+            "field": "address"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
             "name": "email",
             "title": "commonFields.email",
             "field": "email",
@@ -251,37 +322,6 @@
             "name": "password",
             "title": "commonFields.password",
             "field": "password",
-            "required": true
-        },
-        {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "position",
-            "title": "commonFields.position",
-            "field": "position"
-        },
-        {
-            "type": "combobox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "location_id",
-            "title": "commonFields.location",
-            "field": {
-                "text": "name",
-                "value": "id"
-            },
-            "request": {
-                "type": "GET",
-                "api": "/api/getMyLocations",
-                "parameters": [],
-                "fields": "",
-                "root": ""
-            },
-            "fieldConfig": {
-                "ignoreAccent": false,
-                "filter": true
-            },
             "required": true
         },
         {

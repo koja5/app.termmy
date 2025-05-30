@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
           } else if (user.type === userType.employee) {
             window.open("dashboard/employee", "_self");
           } else {
-            window.open("dashboard/superadmin", "_self");
+            window.open("dashboard/superadmin/all-users", "_self");
           }
           this.loading = false;
         } else {

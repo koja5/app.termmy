@@ -89,6 +89,17 @@
                             }
                         },
                         {
+                            "type": "view",
+                            "actionName": "worktime.title",
+                            "icon": "eye",
+                            "routerLink": {
+                                "link": "dashboard/admin/my-employee-details/worktime/#id",
+                                "parameters": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        {
                             "type": "delete",
                             "actionName": "general.delete",
                             "icon": "trash",
@@ -275,6 +286,24 @@
             "type": "textbox",
             "width": "col-md-6",
             "class": "e-outline",
+            "name": "email",
+            "title": "commonFields.email",
+            "field": "email",
+            "required": true
+        },
+        {
+            "type": "password",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "password",
+            "title": "commonFields.password",
+            "field": "password",
+            "required": true
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
             "name": "telephone",
             "title": "commonFields.telephone",
             "field": "telephone"
@@ -296,24 +325,6 @@
             "field": "address"
         },
         {
-            "type": "textbox",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "email",
-            "title": "commonFields.email",
-            "field": "email",
-            "required": true
-        },
-        {
-            "type": "password",
-            "width": "col-md-6",
-            "class": "e-outline",
-            "name": "password",
-            "title": "commonFields.password",
-            "field": "password",
-            "required": true
-        },
-        {
             "type": "switch",
             "width": "col-12",
             "class": "e-outline",
@@ -328,6 +339,22 @@
             "name": "active",
             "title": "commonFields.active",
             "field": "active"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "additional_info_for_reminder",
+            "title": "commonFields.additionalInfoForReminder",
+            "field": "additional_info_for_reminder"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "additional_info_for_booking_page",
+            "title": "commonFields.additionalInfoForBookingPage",
+            "field": "additional_info_for_booking_page"
         },
         {
             "type": "button",

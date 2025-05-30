@@ -321,12 +321,26 @@ export class CalendarComponent {
       .callGetMethod("/api/getMyWorktime", "")
       .subscribe((data: any) => {
         if (data && data.length) {
-          this.workTimes[0] = {
-            color: data[0].color,
-            value: JSON.parse(data[0].value),
-          };
+          this.workTimes[0] = this.setActiveWorkTime(data);
+          // this.workTimes[0] = {
+          //   valid_from: data[0].valid_from,
+          //   color: data[0].color,
+          //   value: JSON.parse(data[0].value),
+          // };
         }
       });
+  }
+
+  setActiveWorkTime(data: any) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].active) {
+        return {
+          valid_from: data[i].valid_from,
+          color: data[i].color,
+          value: JSON.parse(data[i].value),
+        };
+      }
+    }
   }
 
   getMyLocation() {
@@ -399,10 +413,7 @@ export class CalendarComponent {
           .subscribe(
             (data: any) => {
               if (data && data.length) {
-                this.workTimes[i] = {
-                  color: data[0].color,
-                  value: JSON.parse(data[0].value),
-                };
+                this.workTimes[i] = this.setActiveWorkTime(data);
                 br++;
                 if (br === this.calendarSettings.selectedEmployees.length) {
                   this.loader = false;
@@ -1285,7 +1296,8 @@ export class CalendarComponent {
       workTimeForDay &&
       workTimeForDay.active &&
       this.workTimes[groupIndex] &&
-      this.workTimes[groupIndex].color
+      this.workTimes[groupIndex].color &&
+      this.checkWorkTimeValidFromDate(args.date, groupIndex)
     ) {
       let notWorkTime = true;
       for (let i = 0; i < workTimeForDay.times.length; i++) {
@@ -1310,6 +1322,16 @@ export class CalendarComponent {
         }
       }
     }
+  }
+
+  checkWorkTimeValidFromDate(date: any, groupIndex) {
+    if (
+      !this.workTimes[groupIndex].valid_from ||
+      new Date(this.workTimes[groupIndex].valid_from) <= date
+    ) {
+      return true;
+    }
+    return false;
   }
 
   getWorkTimeForDay(day, groupIndex) {

@@ -85,6 +85,10 @@ function sendViaSms(config, item, conn) {
         .replaceAll("#employeeName", item.employee_name)
         .replaceAll("#employeeTelephone", item.employee_telephone)
         .replaceAll("#employeeEmail", item.employee_email)
+        .replaceAll(
+          "#employeeAdditionalInfoForReminder",
+          item.additional_info_for_reminder
+        )
     );
     conn.query(
       "update sms_count set count = count - 1 where admin_id = ?",
@@ -118,6 +122,10 @@ function sendViaSms(config, item, conn) {
           .replaceAll("#employeeName", item.employee_name)
           .replaceAll("#employeeTelephone", item.employee_telephone)
           .replaceAll("#employeeEmail", item.employee_email)
+          .replaceAll(
+            "#employeeAdditionalInfoForReminder",
+            item.additional_info_for_reminder
+          )
       );
       conn.query(
         "update sms_count set count = count - 1 where admin_id = ?",
@@ -196,6 +204,10 @@ function sendViaEmail(config, item) {
         .replaceAll("#employeeName", item.employee_name)
         .replaceAll("#employeeTelephone", item.employee_telephone)
         .replaceAll("#employeeEmail", item.employee_email)
+        .replaceAll(
+          "#employeeAdditionalInfoForReminder",
+          item.additional_info_for_reminder
+        )
     );
   }
   setTimeout(() => {
@@ -225,6 +237,10 @@ function sendViaEmail(config, item) {
           .replaceAll("#employeeName", item.employee_name)
           .replaceAll("#employeeTelephone", item.employee_telephone)
           .replaceAll("#employeeEmail", item.employee_email)
+          .replaceAll(
+            "#employeeAdditionalInfoForReminder",
+            item.additional_info_for_reminder
+          )
       );
     }
   }, 1000);

@@ -245,7 +245,8 @@ export class HelpService {
       .replaceAll("#bookingLink", bookingLink)
       .replaceAll("#employeeName", user.firstname + " " + user.lastname)
       .replaceAll("#employeeTelephone", user.telephone)
-      .replaceAll("#employeeEmail", user.email);
+      .replaceAll("#employeeEmail", user.email)
+      .replaceAll("#employeeAdditionalInfoForReminder", user.additional_info_for_reminder);
     return {
       value: replacedMessage,
       length: replacedMessage.length,

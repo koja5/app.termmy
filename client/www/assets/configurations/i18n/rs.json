@@ -9,6 +9,7 @@
         "editEntrie": "Uredi podatak",
         "edit": "Uredi",
         "delete": "Obriši",
+        "view": "Pogledaj",
         "update": "Ažuriraj",
         "setUp": "Podesi",
         "connected": "Povezano",
@@ -36,7 +37,8 @@
         "executeActionQuestionText": "Da li želite da izvršite ovu akciju?",
         "footerPrivacyPolicy": "Zaštita podataka",
         "footerTerms": "Opšti uslovi poslovanja",
-        "footerImpressum": "Impressum"
+        "footerImpressum": "Impressum",
+        "addItem": "Dodaj novu stavku"
     },
     "actionMessage": {
         "successExecuteActionTitleDefault": "Upešno izvršeno.",
@@ -277,6 +279,10 @@
         "readonlyCalendarsExplanation": "Za ove kalendare imate samo mogućnost prikaza događaja na vašem kalendaru u Termmy aplikaciji. To znači da ne postoji mogućnost dodavanja ili menjanja događaja koji se nalaze u ovim kalendarima."
     },
     "worktime": {
+        "worktime": "Radno vreme",
+        "validFromDate": "Radno vreme je validno od",
+        "validFromDateExplanation": "Radno vreme je validno nakon odabranog datuma u padajućem meniu. Ukoliko ne postoji vrednost za datum, onda radno vreme važi generalno.",
+        "delete": "Obriši radno vreme",
         "monday": "Ponedeljak",
         "tuesday": "Utorak",
         "wednesday": "Sreda",
@@ -291,7 +297,11 @@
         "remove": "Obriši",
         "save": "Sačuvaj",
         "colorTitle": "Boja",
-        "colorText": "Podesite boju radnog vremena u kalendaru za bolju preglednost"
+        "colorText": "Podesite boju radnog vremena u kalendaru za bolju preglednost",
+        "addNewValidFromDate": "Novi podatak",
+        "chooseNewValidFromDate": "Odaberite od kada će novo radno vreme važiti",
+        "startWithNewValidFromDate": "Počni sa dodavanjem radnog vremena",
+        "validForAllDate": "Važi za sve datume"
     },
     "recommended": {
         "title": "Preporuči Termmy",
