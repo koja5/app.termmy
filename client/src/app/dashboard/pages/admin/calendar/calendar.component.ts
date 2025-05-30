@@ -84,6 +84,8 @@ export class CalendarComponent {
   public limitClientsForFreeLicenses = 30;
   public minDate: any;
   public maxDate: any;
+  public allowMultiple = true;
+  public group: GroupModel = { allowGroupEdit: true, resources: [] };
 
   constructor(
     private _configurationService: ConfigurationService,
@@ -186,13 +188,11 @@ export class CalendarComponent {
   }
 
   getAdminEmployees() {
-    if (this.config.filters.employees && this.calendarSettings.location_id) {
+    // if (this.config.filters.employees && this.calendarSettings.location_id) {
+    if (this.config.filters.employees) {
       this.config.filters.employees.body = this.calendarSettings.location_id;
       this._service
-        .callServerMethod(
-          this.config.filters.employees.request,
-          this.calendarSettings.location_id
-        )
+        .callServerMethod(this.config.filters.employees.request)
         .subscribe((data) => {
           this.allEmployees = data;
         });
@@ -520,7 +520,7 @@ export class CalendarComponent {
                   this.packTerminesFromGoogleCalendar(data);
               }
             } else {
-              this.calendar.eventSettings.dataSource = [];
+              // this.calendar.eventSettings.dataSource = [];
             }
             this.getHolidays();
           }
@@ -906,6 +906,7 @@ export class CalendarComponent {
         setTimeout(() => {
           this.calendar.eventSettings.dataSource =
             this.packTerminesFromSQL(data);
+          console.log(this.calendar.eventSettings.dataSource);
           this.getHolidays();
         }, 10);
       });
@@ -1374,6 +1375,9 @@ export class CalendarComponent {
         id: token.id,
         groupIndex: 0,
       });
+    }
+    if(this.resourceDataSource.length && this.group.resources.length == 0) {
+    this.group.resources.push('Employee');
     }
   }
 

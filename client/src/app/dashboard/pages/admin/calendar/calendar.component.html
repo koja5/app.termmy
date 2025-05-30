@@ -7,14 +7,14 @@
     <div class="content-body">
         <section class="users-list-wrapper">
             <div class="row mb-2" *ngIf="multiCalendar">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <label *ngIf="config.filters.locations.title" class="custom-label">{{
                         config.filters.locations.title | translate
                         }} </label>
                     <ng-select *ngIf="allLocations" [items]="allLocations" [bindLabel]="'name'" [bindValue]="'id'"
                         [(ngModel)]="calendarSettings.location_id" (change)="changeLocation($event)">
                     </ng-select>
-                </div>
+                </div> -->
                 <div class="col-md-6">
                     <label *ngIf="config.filters.employees.title" class="custom-label">{{
                         config.filters.employees.title | translate
@@ -35,33 +35,32 @@
                     (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
                     (eventRendered)="onEventRendered($event)" (dataBound)="onDataBound($event)"
                     (renderCell)="onRenderCell($event)" (cellClick)="onCellClick($event)"
-                    (eventClick)="onEventClick($event)" [loading]="loader">
+                    (eventClick)="onEventClick($event)" [loading]="loader" [group]="group">
                     <ng-template #resourceHeaderTemplate let-data let-item let-index>
                         <div class='template-wrap d-inline-flex align-items-center'>
                             <div class="resource-image avatar mr-1">
-                                <!-- <img height="40" width="40"
-                                    src="../../../../assets/images/avatars/no-user-profile.png"> -->
-                                <app-letter-profile [firstname]="item.resourceData.firstname"
-                                    [lastname]="item.resourceData.lastname"></app-letter-profile>
-                                <img class="external-calendar-icon"
-                                    *ngIf="checkExternalAccountForGoogle(item.resourceData.id)"
+                                <app-letter-profile [firstname]="data.resourceData.firstname"
+                                    [lastname]="data.resourceData.lastname"></app-letter-profile>
+                                <!-- <img class="external-calendar-icon"
+                                    *ngIf="checkExternalAccountForGoogle(data.resourceData.id)"
                                     src="../../../../assets/images/icons/google.png"
-                                    title="{{'myCalendar.connectedThisCalendarWithGoogle' | translate}}">
+                                    title="{{'myCalendar.connectedThisCalendarWithGoogle' | translate}}"> -->
                             </div>
                             <div class="resource-details">
                                 <div class="d-flex">
-                                    <div *ngIf="item.resourceData.firstname || item.resourceData.lastname"
+                                    <div *ngIf="data.resourceData.firstname || data.resourceData.lastname"
                                         class="resource-name">
-                                        {{item.resourceData.firstname}} {{item.resourceData.lastname}}
+                                        {{data.resourceData.firstname}} {{data.resourceData.lastname}}
                                     </div>
-                                    <span *ngIf="!workTimes[item.resourceData.groupIndex]"
+                                    <span *ngIf="!workTimes[data.resourceData.groupIndex]"
                                         class="fa fa-exclamation not-set-worktime"
                                         title="{{'myCalendar.notSetWorkTimeForUser' | translate}}"></span>
                                 </div>
-                                <div *ngIf="item.resourceData.position" class="resource-designation">
-                                    {{item.resourceData.position}}</div>
+                                <div *ngIf="data.resourceData.position" class="resource-designation">
+                                    {{data.resourceData.position}}</div>
                             </div>
                         </div>
+                        <!-- {{data.resourceData.id}} -->
                     </ng-template>
                     <ng-template #eventTemplate let-data>
 
@@ -152,8 +151,8 @@
                                                     class="error">
                                                     {{'clientData.fillFirstname' | translate}}
                                                 </span>
-                                                <ejs-datetimepicker cssClass="e-outline" class="date-none"
-                                                    id="EndTime" formControlName="EndTime" format="dd.MM.yyyy HH:mm"
+                                                <ejs-datetimepicker cssClass="e-outline" class="date-none" id="EndTime"
+                                                    formControlName="EndTime" format="dd.MM.yyyy HH:mm"
                                                     timeFormat="HH:mm"></ejs-datetimepicker>
                                             </div>
 
@@ -197,10 +196,16 @@
                             </tbody>
                         </table>
                     </ng-template>
-                    <e-resources *ngIf="resourceDataSource">
-                        <e-resource field='employeeId' title='Employees' name='Doctors'
-                            [dataSource]='resourceDataSource' textField='text' idField='id' colorField='color'
+                    <!-- <e-resources *ngIf="resourceDataSource">
+                        <e-resource field='employee_id' title='Employees' name='Doctors'
+                            [dataSource]='resourceDataSource' textField='text' idField='employee_id' colorField='color'
                             startHourField='startHour' [allowMultiple]="true" endHourField='endHour'>
+                        </e-resource>
+                    </e-resources> -->
+
+                    <e-resources *ngIf="resourceDataSource&&resourceDataSource.length">
+                        <e-resource field='employeeId' title='Employee Name' name='Employee' [allowMultiple]='allowMultiple'
+                            [dataSource]='resourceDataSource' textField='firstname' idField='id'>
                         </e-resource>
                     </e-resources>
                 </ejs-schedule>

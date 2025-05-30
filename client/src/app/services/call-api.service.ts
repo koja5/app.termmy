@@ -48,7 +48,7 @@ export class CallApiService {
     }
   }
 
-  callServerMethod(request: any, data: any, router?: any) {
+  callServerMethod(request: any, data?: any, router?: any) {
     if (request.url) {
       data = this.helpService.postRequestDataParameters(
         data,

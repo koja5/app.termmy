@@ -1686,7 +1686,7 @@ router.get("/getAdminLocations", auth, async (req, res, next) => {
   }
 });
 
-router.get("/getAdminEmployees/:id", auth, async (req, res, next) => {
+router.get("/getAdminEmployees", auth, async (req, res, next) => {
   try {
     connection.getConnection(function (err, conn) {
       if (err) {
@@ -1694,8 +1694,8 @@ router.get("/getAdminEmployees/:id", auth, async (req, res, next) => {
         res.json(err);
       } else {
         conn.query(
-          "select * from users where location_id = ?",
-          [req.params.id],
+          "select * from users where admin_id = ?",
+          [req.user.user.id],
           function (err, rows, fields) {
             conn.release();
             if (err) {

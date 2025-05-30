@@ -189,7 +189,7 @@ function packStringFromArrayForWhereCondition(
   let condition = "";
   for (let i = 0; i < array.length; i++) {
     condition +=
-      sqlField + " = " + (arrayField ? array[i][arrayField] : array[i]);
+      sqlField + " = '" + (arrayField ? array[i][arrayField] : array[i]) + "'";
     if (i < array.length - 1) {
       condition += " " + connective + " ";
     }
