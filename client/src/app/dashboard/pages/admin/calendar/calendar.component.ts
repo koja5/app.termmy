@@ -62,7 +62,7 @@ export class CalendarComponent {
   public selectedEmployees: any;
   public externalAccounts: any;
   public externalAccountForEmployees: any = {};
-  public workTimes: any = {};
+  public workTimes: any;
   public calendarSettings = new CalendarSettings();
   public employeeId: number;
   public loader = false;
@@ -105,15 +105,14 @@ export class CalendarComponent {
     } else {
       this.schedulerHeight = "calc(100vh - 19vh)";
     }
+    this.checkStorage();
     this.setCalendarLanguage();
-    this.getPersonalInfo();
     this.getConfigurations();
   }
 
   initialize() {
     this.executeFunctionForPopup();
     this.initializeForm();
-    this.checkStorage();
     if (this.multiCalendar) {
       this.getExternalAccountsForMultiCalendar();
     } else {
@@ -164,7 +163,7 @@ export class CalendarComponent {
 
   getTermines() {
     // check for all other users
-    if (this.multiCalendar) {
+    if (this.multiCalendar && this.calendarSettings.selectedEmployees) {
       this.getTerminesForMultiCalendar();
     } else {
       //check for my calendar
@@ -175,6 +174,7 @@ export class CalendarComponent {
   getTerminesForMultiCalendar() {
     this.getTerminesFromGoogleCalendar();
     this.getTerminesFromSQL();
+    this.getHolidays();
   }
 
   getAdminLocations() {
@@ -293,19 +293,22 @@ export class CalendarComponent {
           this.calendarSettings.rights = null;
         }
         // this._storageService.setCalendarConfig(this.calendarSettings);
+
         this.checkCalendarRights();
       });
   }
 
   checkCalendarRights() {
     this.multiCalendar = this.checkMultiCalendarRights();
+    this.getPersonalInfo();
+    setTimeout(() => {
+      this.initialize();
 
-    this.initialize();
-
-    if (this.multiCalendar) {
-      this.getDataForMultiCalendar();
-    }
-    this.packResourceData();
+      if (this.multiCalendar) {
+        this.getDataForMultiCalendar();
+      }
+      this.packResourceData();
+    }, 100);
   }
 
   checkStorage() {
@@ -322,11 +325,6 @@ export class CalendarComponent {
       .subscribe((data: any) => {
         if (data && data.length) {
           this.workTimes[0] = this.setActiveWorkTime(data);
-          // this.workTimes[0] = {
-          //   valid_from: data[0].valid_from,
-          //   color: data[0].color,
-          //   value: JSON.parse(data[0].value),
-          // };
         }
       });
   }
@@ -367,7 +365,7 @@ export class CalendarComponent {
         } else {
           this.calendarSettings.externalAccounts = [];
         }
-        this._storageService.setCalendarConfig(this.calendarSettings);
+        // this._storageService.setCalendarConfig(this.calendarSettings);
         this.getTermines();
       });
   }
@@ -522,7 +520,6 @@ export class CalendarComponent {
             } else {
               // this.calendar.eventSettings.dataSource = [];
             }
-            this.getHolidays();
           }
         },
         (error) => {
@@ -799,6 +796,7 @@ export class CalendarComponent {
   //#region SQL
 
   getTerminesFromSQL() {
+    this.calendar.eventSettings.dataSource = [];
     this._service
       .callPostMethod(
         "/api/calendar/getTermines",
@@ -815,7 +813,6 @@ export class CalendarComponent {
             this.calendar.eventSettings.dataSource =
               this.packTerminesFromSQL(data);
           }
-          this.getHolidays();
         }, 10);
       });
   }
@@ -906,7 +903,6 @@ export class CalendarComponent {
         setTimeout(() => {
           this.calendar.eventSettings.dataSource =
             this.packTerminesFromSQL(data);
-          console.log(this.calendar.eventSettings.dataSource);
           this.getHolidays();
         }, 10);
       });
@@ -1192,9 +1188,16 @@ export class CalendarComponent {
   changeEmployees(event: any) {
     this.calendarSettings.selectedEmployeesFullInfo = event;
     this._storageService.setCalendarConfig(this.calendarSettings);
-    this.packResourceData();
-    this.getWorktimeForEmployees();
-    this.getTermines();
+    if (
+      this.calendarSettings.selectedEmployees &&
+      this.calendarSettings.selectedEmployees.length
+    ) {
+      this.getWorktimeForEmployees();
+      setTimeout(() => {
+        this.packResourceData();
+        this.getTermines();
+      }, 200);
+    }
   }
   //#endregion
 
@@ -1215,6 +1218,7 @@ export class CalendarComponent {
   }
 
   getHolidays() {
+    this.calendar.eventSettings.dataSource = [];
     this._service
       .callGetMethod("/api/getMyHolidays", "")
       .subscribe((data: any) => {
@@ -1258,7 +1262,7 @@ export class CalendarComponent {
       currentView = "Agenda";
     }
     this.calendarSettings.currentView = currentView;
-    this._storageService.setCalendarConfig(this.calendarSettings);
+    // this._storageService.setCalendarConfig(this.calendarSettings);
   }
 
   //#endregion
@@ -1376,8 +1380,8 @@ export class CalendarComponent {
         groupIndex: 0,
       });
     }
-    if(this.resourceDataSource.length && this.group.resources.length == 0) {
-    this.group.resources.push('Employee');
+    if (this.resourceDataSource.length && this.group.resources.length == 0) {
+      this.group.resources.push("Employee");
     }
   }
 

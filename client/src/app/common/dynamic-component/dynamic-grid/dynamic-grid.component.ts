@@ -77,6 +77,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
   public createNewRecords = true;
   public stayOpened = false;
   public tableHeight?: string;
+  public convertedHeightPxToVh: number;
 
   public selectRole: any = [
     { name: "All", value: "" },
@@ -316,6 +317,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
                         this.rows = data;
                         this.tempData = this.rows;
                         this.loader = false;
+                        this.setBodyHeight();
                       });
                   }, 450);
                 } else {
@@ -325,6 +327,7 @@ export class DynamicGridComponent implements CanComponentDeactivate {
                       this.rows = data;
                       this.tempData = this.rows;
                       this.loader = false;
+                      this.setBodyHeight();
                     });
                 }
               });
@@ -332,34 +335,64 @@ export class DynamicGridComponent implements CanComponentDeactivate {
             this.rows = this.data;
             this.tempData = this.rows;
             this.loader = false;
+            this.setBodyHeight();
           }
         });
     } else if (this.data) {
       this.rows = this.data;
       this.tempData = this.rows;
       this.loader = false;
+      this.setBodyHeight();
     }
   }
 
+  // setTableHeight() {
+  //   const pixel = document.getElementById("main-content")!.offsetHeight;
+  //   let convertPxToVh = (100 * pixel) / (window.innerHeight + 250);
+  //   if (this.partOfTab) {
+  //     convertPxToVh -= 10;
+  //   }
+  //   if (this.lessHeight) {
+  //     convertPxToVh -= this.lessHeight;
+  //   }
+  //   if (window.innerWidth < 992) {
+  //     convertPxToVh -= 5;
+  //   }
+  //   this.tableHeight = convertPxToVh + "vh";
+  // }
+
   setTableHeight() {
     const pixel = document.getElementById("main-content")!.offsetHeight;
-    let convertPxToVh = (100 * pixel) / (window.innerHeight + 250);
+    const displayHeight = window.visualViewport
+      ? window.visualViewport.height
+      : window.innerHeight;
+    const tableHeader = (119 / displayHeight) * 100;
+    const pagination = (56 / displayHeight) * 100;
+    let convertPxToVh =
+      (pixel / displayHeight) * 100 - tableHeader - pagination;
     if (this.partOfTab) {
-      convertPxToVh -= 10;
+      const tabHeight = (57 / displayHeight) * 100;
+      convertPxToVh -= tabHeight;
+      convertPxToVh -= 5.5;
     }
-    // if (
-    //   this.config.actionRequest?.createNew &&
-    //   this.config.actionRequest?.createNew.enable === false
-    // ) {
-    //   convertPxToVh += 6.5;
-    // }
+
     if (this.lessHeight) {
       convertPxToVh -= this.lessHeight;
     }
     if (window.innerWidth < 992) {
-      convertPxToVh -= 5;
+      convertPxToVh -= 5.5;
     }
     this.tableHeight = convertPxToVh + "vh";
+    this.convertedHeightPxToVh = convertPxToVh;
+  }
+
+  setBodyHeight() {
+    const bodyHeight = this.convertedHeightPxToVh - 11 + "vh";
+    setTimeout(() => {
+      (
+        document.getElementsByClassName("datatable-body")[0] as HTMLElement
+      ).style.height = bodyHeight;
+    }, 2);
   }
 
   submitEmitter(event: any) {

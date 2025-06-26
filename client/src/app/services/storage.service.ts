@@ -171,18 +171,18 @@ export class StorageService {
   }
 
   setCalendarConfig(value: any) {
-    let config = this.getLocalStorage("config");
-    if (config) {
-      config.calendar = value ? value : new CalendarSettings();
-      this.setLocalStorage("config", config);
-    }
+    // let config = this.getLocalStorage("calendar")
+    //   ? this.getLocalStorage("calendar")
+    //   : {};
+    let config = value ? value : new CalendarSettings();
+    this.setLocalStorage("calendar", config);
   }
 
   getCalendarConfig() {
-    let config = this.getLocalStorage("config");
+    let config = this.getLocalStorage("calendar");
     return config
-      ? Object.values(config.calendar).length != 0
-        ? config.calendar
+      ? Object.values(config).length != 0
+        ? config
         : new CalendarSettings()
       : new CalendarSettings();
   }

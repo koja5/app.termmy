@@ -85,7 +85,9 @@
       "validFrom": "Gültig ab",
       "validTo": "Gültig bis",
       "bonusForPartner": "Bonus für Partner",
-      "previewGeneratedLink": "Generierter Link:"
+      "previewGeneratedLink": "Generierter Link:",
+      "additionalInfoForReminder": "Zusätzliche Informationen zur Erinnerung (optional)",
+      "additionalInfoForBookingPage": "Zusätzliche Informationen zur Buchungsseite (optional)"
    },
    "userTypes": {
       "superadmin": "Superadmin",
@@ -266,7 +268,8 @@
       "addNewValidFromDate": "Neuer Termin",
       "chooseNewValidFromDate": "Wählen Sie, ab wann die neuen Arbeitszeiten gültig sind",
       "startWithNewValidFromDate": "Beginnen Sie mit dem Hinzufügen von Arbeitszeiten",
-      "validForAllDate": "Gültig für alle Termine"
+      "validForAllDate": "Gültig für alle Termine",
+      "addNewWorktime": "Arbeitszeit hinzufügen"
    },
    "recommended": {
       "title": "Empfehlung",
