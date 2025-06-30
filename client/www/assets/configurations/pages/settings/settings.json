@@ -11,11 +11,6 @@
       "icon": "calendar"
     },
     {
-      "title": "settings.worktime",
-      "link": "/dashboard/admin/settings/worktime",
-      "icon": "briefcase"
-    },
-    {
       "title": "settings.connections",
       "link": "/dashboard/admin/settings/connections",
       "icon": "link"

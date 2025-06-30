@@ -346,45 +346,48 @@ export class DynamicGridComponent implements CanComponentDeactivate {
     }
   }
 
+  setTableHeight() {
+    setTimeout(() => {
+      const pixel = document.getElementById("main-content")!.offsetHeight;
+      let convertPxToVh = (100 * pixel) / (window.innerHeight + 250);
+      if (this.partOfTab) {
+        convertPxToVh -= 10;
+      }
+      if (this.lessHeight) {
+        convertPxToVh -= this.lessHeight;
+      }
+      if (window.innerWidth < 992) {
+        convertPxToVh -= 5;
+      }
+      this.tableHeight = convertPxToVh + "vh";
+      this.convertedHeightPxToVh = convertPxToVh;
+    }, 1);
+  }
+
   // setTableHeight() {
   //   const pixel = document.getElementById("main-content")!.offsetHeight;
-  //   let convertPxToVh = (100 * pixel) / (window.innerHeight + 250);
+  //   const displayHeight = window.visualViewport
+  //     ? window.visualViewport.height
+  //     : window.innerHeight;
+  //   const tableHeader = (119 / displayHeight) * 100;
+  //   const pagination = (56 / displayHeight) * 100;
+  //   let convertPxToVh =
+  //     (pixel / displayHeight) * 100 - tableHeader - pagination;
   //   if (this.partOfTab) {
-  //     convertPxToVh -= 10;
+  //     const tabHeight = (57 / displayHeight) * 100;
+  //     convertPxToVh -= tabHeight;
+  //     convertPxToVh -= 5.5;
   //   }
+
   //   if (this.lessHeight) {
   //     convertPxToVh -= this.lessHeight;
   //   }
   //   if (window.innerWidth < 992) {
-  //     convertPxToVh -= 5;
+  //     convertPxToVh -= 5.5;
   //   }
   //   this.tableHeight = convertPxToVh + "vh";
+  //   this.convertedHeightPxToVh = convertPxToVh;
   // }
-
-  setTableHeight() {
-    const pixel = document.getElementById("main-content")!.offsetHeight;
-    const displayHeight = window.visualViewport
-      ? window.visualViewport.height
-      : window.innerHeight;
-    const tableHeader = (119 / displayHeight) * 100;
-    const pagination = (56 / displayHeight) * 100;
-    let convertPxToVh =
-      (pixel / displayHeight) * 100 - tableHeader - pagination;
-    if (this.partOfTab) {
-      const tabHeight = (57 / displayHeight) * 100;
-      convertPxToVh -= tabHeight;
-      convertPxToVh -= 5.5;
-    }
-
-    if (this.lessHeight) {
-      convertPxToVh -= this.lessHeight;
-    }
-    if (window.innerWidth < 992) {
-      convertPxToVh -= 5.5;
-    }
-    this.tableHeight = convertPxToVh + "vh";
-    this.convertedHeightPxToVh = convertPxToVh;
-  }
 
   setBodyHeight() {
     const bodyHeight = this.convertedHeightPxToVh - 11 + "vh";
