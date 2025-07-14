@@ -41,7 +41,7 @@ export const menu = [
     translate: "navigations.settings",
     type: "item",
     icon: "settings",
-    url: "dashboard/employee/settings/worktime",
+    url: "dashboard/employee/settings/connections",
     users: ["employee"],
   },
   // {

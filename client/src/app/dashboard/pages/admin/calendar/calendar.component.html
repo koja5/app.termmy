@@ -162,7 +162,7 @@
                                                     rows="3"></textarea>
                                             </div>
 
-                                            <div class="col-12 mb-1" *ngIf="googleAdditionalCalendarsList.length">
+                                            <div class="col-12 mb-1" *ngIf="googleAdditionalCalendarsList && googleAdditionalCalendarsList.length">
                                                 <label>{{'myCalendar.googleAdditionalCalendars' | translate}}</label>
                                                 <span *ngIf="submited&&!appointment.controls.service_id.valid"
                                                     class="error">
@@ -204,8 +204,9 @@
                     </e-resources> -->
 
                     <e-resources *ngIf="resourceDataSource&&resourceDataSource.length">
-                        <e-resource field='employeeId' title='Employee Name' name='Employee' [allowMultiple]='allowMultiple'
-                            [dataSource]='resourceDataSource' textField='firstname' idField='id'>
+                        <e-resource field='employeeId' title='Employee Name' name='Employee'
+                            [allowMultiple]='allowMultiple' [dataSource]='resourceDataSource' textField='firstname'
+                            idField='id'>
                         </e-resource>
                     </e-resources>
                 </ejs-schedule>

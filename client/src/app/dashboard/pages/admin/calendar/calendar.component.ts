@@ -324,7 +324,7 @@ export class CalendarComponent {
       .callGetMethod("/api/getMyWorktime", "")
       .subscribe((data: any) => {
         if (data && data.length) {
-          this.workTimes[0] = this.setActiveWorkTime(data);
+          this.workTimes = [this.setActiveWorkTime(data)];
         }
       });
   }
@@ -1218,7 +1218,6 @@ export class CalendarComponent {
   }
 
   getHolidays() {
-    this.calendar.eventSettings.dataSource = [];
     this._service
       .callGetMethod("/api/getMyHolidays", "")
       .subscribe((data: any) => {
