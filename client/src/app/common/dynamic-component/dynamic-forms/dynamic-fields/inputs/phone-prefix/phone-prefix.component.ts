@@ -7,6 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-phone-prefix",
   templateUrl: "./phone-prefix.component.html",
   styleUrls: ["./phone-prefix.component.scss"],
+  standalone: false
 })
 export class PhonePrefixComponent {
   public config: FieldConfig;

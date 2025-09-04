@@ -43,10 +43,10 @@
     <li ngbDropdown class="nav-item dropdown dropdown-language">
       <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle>
         <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i><span
-          class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a>
+          class="selected-language">{{ languageOptions[_translateService.currentLang].title | translate }}</span></a>
       <div ngbDropdownMenu aria-labelledby="dropdown-flag">
         <a *ngFor="let lang of _translateService.getLangs()" ngbDropdownItem (click)="setLanguage(lang)">
-          <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
+          <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title | translate }}
         </a>
       </div>
     </li>

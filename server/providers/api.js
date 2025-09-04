@@ -1577,7 +1577,7 @@ router.get("/getExternalAccounts", auth, async (req, res, next) => {
       } else {
         conn.query(
           "select * from external_accounts where user_id = ?",
-          req.user.user.id,
+          [req.user.user.id],
           function (err, rows, fields) {
             conn.release();
             if (err) {
@@ -1637,6 +1637,9 @@ router.post("/getExternalAccountsForMultiCalendar", auth, function (req, res) {
       "user_id",
       "or"
     );
+
+    console.log("----------------EXTERNAL ACCOUNTS ----------------------");
+    console.log(condition);
 
     conn.query(
       "select * from external_accounts where " + condition,
@@ -2888,7 +2891,7 @@ function packStringFromArrayForWhereCondition(
   let condition = "";
   for (let i = 0; i < array.length; i++) {
     condition +=
-      sqlField + " = " + (arrayField ? array[i][arrayField] : array[i]);
+      sqlField + " like '" + (arrayField ? array[i][arrayField] : array[i]) + "'";
     if (i < array.length - 1) {
       condition += " " + connective + " ";
     }

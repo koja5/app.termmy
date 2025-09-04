@@ -28,6 +28,7 @@ import { PhonePrefixComponent } from "../dynamic-fields/inputs/phone-prefix/phon
 import { InternationalPhoneModule } from "ng4-intl-phone";
 import { Ng2TelInputModule } from "ng2-tel-input";
 import { CommonCustomModule } from "app/common/common-custom.module";
+import { CheckboxComponent } from "../dynamic-fields/buttons/checkbox/checkbox.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CommonCustomModule } from "app/common/common-custom.module";
     ButtonComponent,
     SwitchComponent,
     RadioComponent,
+    CheckboxComponent,
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,
@@ -57,6 +59,7 @@ import { CommonCustomModule } from "app/common/common-custom.module";
     ButtonComponent,
     SwitchComponent,
     RadioComponent,
+    CheckboxComponent,
     ComboboxComponent,
     MultiselectComponent,
     TimepickerComponent,

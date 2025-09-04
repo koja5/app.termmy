@@ -20,12 +20,13 @@ import { DynamicTabsComponent } from "./dynamic-tabs/dynamic-tabs.component";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { CommonCustomModule } from "../common-custom.module";
 import { ExplanationMarkComponent } from "./dynamic-forms/dynamic-fields/common/explanation-mark/explanation-mark.component";
+import { CheckboxComponent } from './dynamic-forms/dynamic-fields/buttons/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
     DynamicGridComponent,
     DynamicFormsComponent,
-    DynamicTabsComponent,
+    DynamicTabsComponent
   ],
   imports: [
     CommonModule,

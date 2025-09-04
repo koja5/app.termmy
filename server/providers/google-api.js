@@ -114,6 +114,8 @@ router.get("/login", (req, res) => {
     prompt: "consent",
   });
 
+  console.log(url);
+
   res.json(url);
 });
 
@@ -178,7 +180,7 @@ router.post("/findOrCreateUserViaGoogle", function (req, res, next) {
             type: 1,
             active: 1,
             verified: 1,
-            signup_date: new Date(),
+            signup_time: new Date(),
           };
 
           conn.query(
@@ -490,38 +492,43 @@ router.post("/deleteTermine", async (req, res) => {
 });
 
 router.post("/getMyTermines", async (req, res) => {
-  oauth2Client.setCredentials({
-    refresh_token: req.body.id,
-  });
+  try {
+    oauth2Client.setCredentials({
+      refresh_token: req.body.id,
+    });
 
-  if (req.body.google_additional_calendars) {
-    req.body.google_additional_calendars = JSON.parse(
-      req.body.google_additional_calendars
-    );
-  }
+    let events = await calendar.events.list({
+      calendarId: "primary",
+      auth: oauth2Client,
+    });
 
-  let events = await calendar.events.list({
-    calendarId: "primary",
-    auth: oauth2Client,
-  });
-
-  for (let key in req.body.google_additional_calendars) {
-    console.log(req.body.google_additional_calendars);
-    if (req.body.google_additional_calendars[key].active) {
-      let eventsFromAdditionalCalendar = await calendar.events.list({
-        calendarId: req.body.google_additional_calendars[key].id,
-        auth: oauth2Client,
-      });
-      events.data.items = events.data.items.concat(
-        eventsFromAdditionalCalendar.data.items
+    if (req.body.google_additional_calendars) {
+      console.log(req.body);
+      req.body.google_additional_calendars = JSON.parse(
+        req.body.google_additional_calendars
       );
-    }
-  }
 
-  if (events && events.data) {
-    res.send(events.data.items);
-  } else {
-    res.send([]);
+      for (let key in req.body.google_additional_calendars) {
+        if (req.body.google_additional_calendars[key].active) {
+          let eventsFromAdditionalCalendar = await calendar.events.list({
+            calendarId: req.body.google_additional_calendars[key].id,
+            auth: oauth2Client,
+          });
+          console.log(eventsFromAdditionalCalendar);
+          events.data.items = events.data.items.concat(
+            eventsFromAdditionalCalendar.data.items
+          );
+        }
+      }
+    }
+
+    if (events && events.data) {
+      res.send(events.data.items);
+    } else {
+      res.send([]);
+    }
+  } catch (ex) {
+    console.log("Credential problem");
   }
 });
 
@@ -554,6 +561,28 @@ router.post("/getTerminesForMultiCalendar", async (req, res) => {
               calendarId: "primary",
               auth: oauth2Client,
             });
+
+            if (rows[i].google_additional_calendars) {
+              console.log(rows[i]);
+              rows[i].google_additional_calendars = JSON.parse(
+                rows[i].google_additional_calendars
+              );
+
+              for (let key in rows[i].google_additional_calendars) {
+                if (rows[i].google_additional_calendars[key].active) {
+                  let eventsFromAdditionalCalendar = await calendar.events.list(
+                    {
+                      calendarId: rows[i].google_additional_calendars[key].id,
+                      auth: oauth2Client,
+                    }
+                  );
+                  console.log(eventsFromAdditionalCalendar);
+                  events.data.items = events.data.items.concat(
+                    eventsFromAdditionalCalendar.data.items
+                  );
+                }
+              }
+            }
 
             if (events && events.data) {
               allEvents = allEvents.concat(events.data.items);
@@ -768,7 +797,7 @@ function packStringFromArrayForWhereCondition(
   let condition = "";
   for (let i = 0; i < array.length; i++) {
     condition +=
-      sqlField + " = " + (arrayField ? array[i][arrayField] : array[i]);
+      sqlField + " = '" + (arrayField ? array[i][arrayField] : array[i]) + "'";
     if (i < array.length - 1) {
       condition += " " + connective + " ";
     }

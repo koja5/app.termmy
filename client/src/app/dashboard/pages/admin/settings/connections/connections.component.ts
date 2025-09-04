@@ -144,4 +144,8 @@ export class ConnectionsComponent {
         }
       });
   }
+
+  getActiveStatus(itemId: string): boolean {
+    return this.data.google_additional_calendars[itemId]?.active || false;
+  }
 }

@@ -10,6 +10,7 @@ import {
   templateUrl: "./card-template.component.html",
   styleUrls: ["./card-template.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class CardTemplateComponent {
   @Input() template: TemplateRef<any>;

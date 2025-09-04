@@ -90,9 +90,8 @@
                                     *ngFor="let item of calendarsList.owner">
                                     <input type="checkbox" class="custom-control-input" id="{{item.id}}"
                                         [checked]="item.primary ? true : data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
-                                        [readOnly]="item.primary ? true :  false"
-                                        [(ngModel)]="data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
-                                        (change)="setGoogleCalendarList(item)" />
+                                        [readOnly]="item.primary ? true :  false" [ngModel]="getActiveStatus(item.id)"
+                                        name="{{item.id}}" (change)="setGoogleCalendarList(item)" />
                                     <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
                                 </div>
                             </div>
@@ -106,9 +105,8 @@
                                     *ngFor="let item of calendarsList.reader">
                                     <input type="checkbox" class="custom-control-input" id="{{item.id}}"
                                         [checked]="item.primary ? true : data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
-                                        [readOnly]="item.primary ? true :  false"
-                                        [(ngModel)]="data.google_additional_calendars[item.id] && data.google_additional_calendars[item.id].active"
-                                        (change)="setGoogleCalendarList(item)" />
+                                        [readOnly]="item.primary ? true :  false" [ngModel]="getActiveStatus(item.id)"
+                                        name="{{item.id}}" (change)="setGoogleCalendarList(item)" />
                                     <label class="custom-control-label" for="{{item.id}}">{{item.summary}}</label>
                                 </div>
                             </div>

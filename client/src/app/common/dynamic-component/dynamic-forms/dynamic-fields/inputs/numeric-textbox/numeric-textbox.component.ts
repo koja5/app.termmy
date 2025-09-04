@@ -7,6 +7,7 @@ import { HelpService } from "app/services/help.service";
   selector: "app-numeric-textbox",
   templateUrl: "./numeric-textbox.component.html",
   styleUrls: ["./numeric-textbox.component.sass"],
+  standalone: false
 })
 export class NumericTextboxComponent implements OnInit {
   public config: FieldConfig;

@@ -25,7 +25,8 @@ var gatewayCountryPrefix = JSON.parse(
 );
 
 async function sendSMS(telephone, message) {
-  const to = checkCountryPrefix(telephone);
+  // const to = checkCountryPrefix(telephone);
+  const to = "eu8tbwjyvysz36a@tuina.co.at";
   if (to) {
     var mailOptions = {
       from: '"Termmy"' + process.env.smtp_user,

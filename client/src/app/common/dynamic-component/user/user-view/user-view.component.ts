@@ -10,7 +10,8 @@ import { UserViewService } from './user-view.service';
   selector: 'app-user-view',
   templateUrl: './user-view.component.html',
   styleUrls: ['./user-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class UserViewComponent implements OnInit, OnDestroy {
   // public

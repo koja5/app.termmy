@@ -9,6 +9,7 @@ import { Subject } from "rxjs";
   selector: "app-datetimepicker",
   templateUrl: "./datetimepicker.component.html",
   styleUrls: ["./datetimepicker.component.scss"],
+  standalone: false
 })
 export class DatetimepickerComponent implements OnInit {
   public config: FieldConfig;

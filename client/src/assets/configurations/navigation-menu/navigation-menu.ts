@@ -90,6 +90,34 @@ export const menu = [
     users: ["admin"],
   },
   {
+    id: "marketing",
+    title: "Marketing",
+    translate: "navigations.marketing",
+    type: "collapsible",
+    icon: "mail",
+    users: ["admin"],
+    children: [
+      {
+        id: "smsMarketing",
+        title: "SMS marketing",
+        translate: "navigations.smsMarketing",
+        type: "item",
+        icon: "send",
+        url: "/dashboard/admin/marketing/sms-marketing",
+        users: ["admin"],
+      },
+      {
+        id: "emailMarketing",
+        title: "Email marketing",
+        translate: "navigations.emailMarketing",
+        type: "item",
+        icon: "mail",
+        url: "/dashboard/admin/marketing/email-marketing",
+        users: ["admin"],
+      },
+    ],
+  },
+  {
     id: "settings",
     title: "Settings",
     translate: "navigations.settings",
@@ -136,7 +164,7 @@ export const menu = [
   },
   {
     id: "all-voucher-partners",
-    title: "all-voucher-partners",
+    title: "navigations.allVoucherPartners",
     translate: "navigations.allVoucherPartners",
     type: "item",
     icon: "credit-card",

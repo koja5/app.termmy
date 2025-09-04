@@ -8,6 +8,7 @@ import { CoreTranslationService } from "@core/services/translation.service";
   selector: "app-timepicker",
   templateUrl: "./timepicker.component.html",
   styleUrls: ["./timepicker.component.scss"],
+  standalone: false
 })
 export class TimepickerComponent {
   @Input() minuteStep: number;

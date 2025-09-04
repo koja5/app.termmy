@@ -12,6 +12,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "app-dialog-confirm",
   templateUrl: "./dialog-confirm.component.html",
   styleUrls: ["./dialog-confirm.component.scss"],
+  standalone: false
 })
 export class DialogConfirmComponent {
   @Input() title!: string;

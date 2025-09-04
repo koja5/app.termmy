@@ -163,6 +163,11 @@ export class CalendarComponent {
 
   getTermines() {
     // check for all other users
+
+    if (this.calendar) {
+      this.calendar.eventSettings.dataSource = [];
+    }
+    
     if (this.multiCalendar && this.calendarSettings.selectedEmployees) {
       this.getTerminesForMultiCalendar();
     } else {
@@ -172,7 +177,29 @@ export class CalendarComponent {
   }
 
   getTerminesForMultiCalendar() {
-    this.getTerminesFromGoogleCalendar();
+    for (let i = 0; i < this.calendarSettings.selectedEmployees.length; i++) {
+      if (
+        this.calendarSettings.externalAccounts[
+          this.calendarSettings.selectedEmployees[i]
+        ]
+      ) {
+        if (
+          this.calendarSettings.externalAccounts[
+            this.calendarSettings.selectedEmployees[i]
+          ].google
+        ) {
+          this.getTerminesFromGoogleCalendar();
+        } else if (
+          this.calendarSettings.externalAccounts[
+            this.calendarSettings.selectedEmployees[i]
+          ].microsoft
+        ) {
+          // NEED TO IMPLEMENT THIS
+          // this.getTerminesFromMicrosoftCalendar();
+        }
+      }
+    }
+
     this.getTerminesFromSQL();
     this.getHolidays();
   }
@@ -467,8 +494,6 @@ export class CalendarComponent {
 
   getMyTerminesFromGoogleCalendar() {
     this.loader = true;
-    // const selectedWeek = this.getMinAndMaxDateForSelectedWeek();
-
     this._service
       .callPostMethod("/api/google/getMyTermines", {
         id: this.calendarSettings.externalAccounts[this.employeeId]
@@ -575,8 +600,6 @@ export class CalendarComponent {
         uuid: data.uuid,
       });
     }
-
-    console.log(prepactedTermines);
 
     return prepactedTermines;
   }
@@ -796,7 +819,6 @@ export class CalendarComponent {
   //#region SQL
 
   getTerminesFromSQL() {
-    this.calendar.eventSettings.dataSource = [];
     this._service
       .callPostMethod(
         "/api/calendar/getTermines",
@@ -1195,7 +1217,7 @@ export class CalendarComponent {
       this.getWorktimeForEmployees();
       setTimeout(() => {
         this.packResourceData();
-        this.getTermines();
+        this.getExternalAccountsForMultiCalendar();
       }, 200);
     }
   }
@@ -1339,7 +1361,7 @@ export class CalendarComponent {
   }
 
   getWorkTimeForDay(day, groupIndex) {
-    if (this.workTimes[groupIndex]) {
+    if (this.workTimes && this.workTimes[groupIndex]) {
       for (let j = 0; j < this.workTimes[groupIndex].value.length; j++) {
         if (this.workTimes[groupIndex].value[j].id == day) {
           return this.workTimes[groupIndex].value[j];

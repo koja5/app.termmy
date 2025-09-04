@@ -26,6 +26,7 @@ import { VoucherUsedModel } from "app/models/voucher-used.model";
   selector: "app-payment-processing",
   templateUrl: "./payment-processing.component.html",
   styleUrls: ["./payment-processing.component.scss"],
+  standalone: false
 })
 export class PaymentProcessingComponent {
   @ViewChild(StripePaymentElementComponent)

@@ -16,6 +16,8 @@ const payment = require("./providers/external_api/payment/payment.js");
 const bookingApi = require("./providers/booking-api.js");
 const smsReminderApi = require("./providers/sms-reminder-api.js");
 const emailReminderApi = require("./providers/email-reminder-api.js");
+const smsMarketingApi = require("./providers/sms-marketing-api.js");
+const emailMarketingApi = require("./providers/email-marketing-api.js");
 //END API
 
 //CUSTOM FUNCTIONS
@@ -79,6 +81,8 @@ app.use("/api/payment", payment);
 app.use("/api/booking", bookingApi);
 app.use("/api/sms-reminder", smsReminderApi);
 app.use("/api/email-reminder", emailReminderApi);
+app.use("/api/sms-marketing", smsMarketingApi);
+app.use("/api/email-marketing", emailMarketingApi);
 
 executeAutomateScript();
 

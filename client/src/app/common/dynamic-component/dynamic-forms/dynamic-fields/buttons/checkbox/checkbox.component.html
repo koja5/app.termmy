@@ -1,0 +1,17 @@
+<div [ngClass]="[config.width]" [formGroup]="group" class="form-group form-custom mb-0">
+    <p *ngIf="group.controls[config.field].status === 'INVALID' && (group.pending || group.controls[config.field].touched)"
+        class="error must-label m-0">{{'form.mustFillThisField' |
+        translate}}</p>
+    <div class="{{config.oneLine ? 'd-flex' : ''}} mt-75">
+        <div>
+            <input class="form-check-input" type="checkbox" [name]="config.name" [value]="config.value"
+                [id]="config.name" [formControlName]="config.name">
+            <label class="form-check-label" [for]="config.name">{{
+                config.title | translate
+                }}
+                <app-explanation-mark *ngIf="config.explanation"
+                    [explanation]="config.explanation"></app-explanation-mark>
+            </label>
+        </div>
+    </div>
+</div>

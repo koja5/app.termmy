@@ -22,6 +22,7 @@ import { FormControl } from "@angular/forms";
   templateUrl: "./dynamic-schedule.component.html",
   styleUrls: ["./dynamic-schedule.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class DynamicScheduleComponent {
   @Input() path!: string;

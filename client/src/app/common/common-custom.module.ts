@@ -14,9 +14,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LetterProfileComponent } from "./letter-profile/letter-profile.component";
 import { CardTemplateComponent } from "./card-template/card-template.component";
 import { NoDataComponent } from "./no-data/no-data.component";
-import { GoogleSigninComponent } from './google-signin/google-signin.component';
-import { DialogConfirmTemplateComponent } from './discard-changes-template/discard-changes-template.component';
-import { AlertComponent } from './alert/alert.component';
+import { GoogleSigninComponent } from "./google-signin/google-signin.component";
+import { DialogConfirmTemplateComponent } from "./discard-changes-template/discard-changes-template.component";
+import { AlertComponent } from "./alert/alert.component";
+import { DialogComponent } from "./dialog/dialog.component";
 
 const appRoutes: Routes = [];
 
@@ -32,6 +33,7 @@ const appRoutes: Routes = [];
     GoogleSigninComponent,
     DialogConfirmTemplateComponent,
     AlertComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ const appRoutes: Routes = [];
     CardTemplateComponent,
     NoDataComponent,
     GoogleSigninComponent,
-    AlertComponent
+    AlertComponent,
+    DialogComponent,
   ],
 })
 export class CommonCustomModule {}

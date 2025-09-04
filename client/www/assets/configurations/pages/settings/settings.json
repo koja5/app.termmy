@@ -16,6 +16,11 @@
       "icon": "link"
     },
     {
+      "title": "settings.worktime",
+      "link": "/dashboard/admin/settings/worktime",
+      "icon": "briefcase"
+    },
+    {
       "title": "adminSettings.onlinePayment",
       "link": "/dashboard/admin/settings/online-payment",
       "icon": "briefcase"

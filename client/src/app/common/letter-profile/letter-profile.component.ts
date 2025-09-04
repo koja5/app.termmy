@@ -4,6 +4,7 @@ import { Component, Input } from "@angular/core";
   selector: "app-letter-profile",
   templateUrl: "./letter-profile.component.html",
   styleUrls: ["./letter-profile.component.scss"],
+  standalone: false
 })
 export class LetterProfileComponent {
   @Input() firstname: string;

@@ -6,6 +6,7 @@ import { FieldConfig } from "app/common/dynamic-component/dynamic-forms/models/f
   selector: "app-password-box",
   templateUrl: "./password-box.component.html",
   styleUrls: ["./password-box.component.scss"],
+  standalone: false
 })
 export class PasswordBoxComponent {
   public config: FieldConfig;

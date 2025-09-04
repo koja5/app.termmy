@@ -28,6 +28,7 @@ import { Subject } from "rxjs";
   selector: "app-dynamic-forms",
   templateUrl: "./dynamic-forms.component.html",
   styleUrls: ["./dynamic-forms.component.scss"],
+  standalone: false
 })
 export class DynamicFormsComponent implements OnInit, CanComponentDeactivate {
   @Input()
@@ -78,9 +79,15 @@ export class DynamicFormsComponent implements OnInit, CanComponentDeactivate {
     this._messageService
       .getConfigValueEmit()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
+
+    setTimeout(() => {
+      if (this.config.onChangeEmit) {
+        this.form.valueChanges.subscribe((formValues) => {
+          this.onChangeData.emit(formValues);
+        });
+      }
+    }, 100);
   }
 
   ngOnInit() {

@@ -1,0 +1,110 @@
+{
+    "onChangeEmit": true,
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "id",
+            "title": "ID",
+            "field": "id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "label",
+            "width": "col-md-12",
+            "title": "emailMarketing.title",
+            "text": "emailMarketing.text"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "campaign_name",
+            "title": "emailMarketing.campaignName",
+            "field": "campaign_name",
+            "placeholder": "emailMarketing.campaignNamePlaceholder"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mb-0 border-bottom",
+            "text": "smsMarketing.fillFields"
+        },
+        {
+            "type": "checkbox",
+            "width": "col-md-12",
+            "name": "man",
+            "title": "emailMarketing.man",
+            "field": "man"
+        },
+        {
+            "type": "checkbox",
+            "width": "col-md-12 mb-1",
+            "name": "woman",
+            "title": "emailMarketing.woman",
+            "field": "woman"
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "from_birthday",
+            "title": "emailMarketing.birthdayFrom",
+            "field": "from_birthday",
+            "format": "dd.MM.yyyy"
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "to_birthday",
+            "title": "emailMarketing.birthdayTo",
+            "field": "to_birthday",
+            "format": "dd.MM.yyyy"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "zip",
+            "title": "commonFields.zip",
+            "field": "zip"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "city",
+            "title": "commonFields.city",
+            "field": "city"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "subject",
+            "title": "emailMarketing.subject",
+            "placeholder": "emailMarketing.subjectPlaceholder",
+            "field": "subject"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "message",
+            "title": "emailMarketing.message",
+            "placeholder": "emailMarketing.messagePlaceholder",
+            "field": "message",
+            "multiline": true,
+            "rows": 5
+        },
+        {
+            "type": "button",
+            "width": "col-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "emailMarketing.sendCampaign",
+            "field": "submit",
+            "positionClass": "text-right mt-2 col-12"
+        }
+    ]
+}

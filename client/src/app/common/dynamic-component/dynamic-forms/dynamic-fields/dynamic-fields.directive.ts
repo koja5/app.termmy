@@ -25,6 +25,7 @@ import { PasswordBoxComponent } from "./inputs/text-box/password-box/password-bo
 import { ColorPickerComponent } from "./inputs/color-picker/color-picker.component";
 import { RadioComponent } from "./buttons/radio/radio.component";
 import { PhonePrefixComponent } from "./inputs/phone-prefix/phone-prefix.component";
+import { CheckboxComponent } from "./buttons/checkbox/checkbox.component";
 
 const components: { [type: string]: Type<Field> } = {
   textbox: TextBoxComponent,
@@ -34,6 +35,7 @@ const components: { [type: string]: Type<Field> } = {
   button: ButtonComponent,
   switch: SwitchComponent,
   radio: RadioComponent,
+  checkbox: CheckboxComponent,
   combobox: ComboboxComponent,
   multiselect: MultiselectComponent,
   datepicker: DatepickerComponent,
@@ -45,6 +47,7 @@ const components: { [type: string]: Type<Field> } = {
 
 @Directive({
   selector: "[dynamicField]",
+  standalone: false
 })
 export class DynamicFieldsDirective implements Field, OnChanges, OnInit {
   @Input()

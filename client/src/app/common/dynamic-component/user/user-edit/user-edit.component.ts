@@ -13,7 +13,8 @@ import { UserEditService } from './user-edit.service';
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   // Public

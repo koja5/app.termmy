@@ -10,6 +10,7 @@ declare global {
   selector: "app-google-signin",
   templateUrl: "./google-signin.component.html",
   styleUrls: ["./google-signin.component.scss"],
+  standalone: false
 })
 export class GoogleSigninComponent {
   @Output() loginWithGoogle: EventEmitter<any> = new EventEmitter<any>();

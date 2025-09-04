@@ -34,6 +34,7 @@ import { CanComponentDeactivate } from "app/services/guards/dirtycheck.guard";
   templateUrl: "./dynamic-grid.component.html",
   styleUrls: ["./dynamic-grid.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class DynamicGridComponent implements CanComponentDeactivate {
   @Input() public path: string;

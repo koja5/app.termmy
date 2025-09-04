@@ -47,6 +47,7 @@ import { ServicesMobileViewComponent } from "./services/services-mobile-view/ser
 import { DirtycheckGuard } from "app/services/guards/dirtycheck.guard";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { EmployeeDetailsComponent } from "./employees/employee-details/employee-details.component";
+import { SmsMarketingComponent } from "./marketing/sms-marketing/sms-marketing.component";
 
 type PathMatch = "full" | "prefix" | undefined;
 
@@ -123,6 +124,11 @@ const routes = [
       import("./payments-component/payment.module").then(
         (m) => m.PaymentModule
       ),
+  },
+  {
+    path: "marketing",
+    loadChildren: () =>
+      import("./marketing/marketing.module").then((m) => m.MarketingModule),
   },
 ];
 

@@ -9,6 +9,7 @@ import { Subject } from "rxjs";
   selector: "app-datepicker",
   templateUrl: "./datepicker.component.html",
   styleUrls: ["./datepicker.component.scss"],
+  standalone: false
 })
 export class DatepickerComponent {
   public config: FieldConfig;

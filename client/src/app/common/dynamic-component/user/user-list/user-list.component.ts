@@ -23,6 +23,7 @@ import { ActivatedRoute } from "@angular/router";
   templateUrl: "./user-list.component.html",
   styleUrls: ["./user-list.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class UserListComponent implements OnInit {
   @Input() public path: string;

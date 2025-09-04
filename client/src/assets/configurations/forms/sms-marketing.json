@@ -1,0 +1,101 @@
+{
+    "onChangeEmit": true,
+    "config": [
+        {
+            "type": "textbox",
+            "width": "col-md-12 hidden",
+            "class": "e-outline",
+            "name": "id",
+            "title": "ID",
+            "field": "id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "type": "label",
+            "width": "col-md-12",
+            "title": "smsMarketing.title",
+            "text": "smsMarketing.text"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "campaign_name",
+            "title": "smsMarketing.campaignName",
+            "field": "campaign_name",
+            "placeholder": "smsMarketing.campaignNamePlaceholder"
+        },
+        {
+            "type": "label",
+            "width": "col-md-12 mb-0 border-bottom",
+            "text": "smsMarketing.fillFields"
+        },
+        {
+            "type": "checkbox",
+            "width": "col-md-12",
+            "name": "man",
+            "title": "smsMarketing.man",
+            "field": "man"
+        },
+        {
+            "type": "checkbox",
+            "width": "col-md-12 mb-1",
+            "name": "woman",
+            "title": "smsMarketing.woman",
+            "field": "woman"
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "from_birthday",
+            "title": "smsMarketing.birthdayFrom",
+            "field": "from_birthday",
+            "format": "dd.MM.yyyy"
+        },
+        {
+            "type": "datepicker",
+            "width": "col-md-6",
+            "name": "to_birthday",
+            "title": "smsMarketing.birthdayTo",
+            "field": "to_birthday",
+            "format": "dd.MM.yyyy"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "zip",
+            "title": "commonFields.zip",
+            "field": "zip"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-6",
+            "class": "e-outline",
+            "name": "city",
+            "title": "commonFields.city",
+            "field": "city"
+        },
+        {
+            "type": "textbox",
+            "width": "col-md-12",
+            "class": "e-outline",
+            "name": "message",
+            "title": "smsMarketing.message",
+            "placeholder": "smsMarketing.messagePlaceholder",
+            "field": "message",
+            "multiline": true,
+            "rows": 5
+        },
+        {
+            "type": "button",
+            "width": "col-12",
+            "class": "btn btn-primary",
+            "name": "submit",
+            "title": "smsMarketing.sendCampaign",
+            "field": "submit",
+            "positionClass": "text-right mt-2 col-12"
+        }
+    ]
+}

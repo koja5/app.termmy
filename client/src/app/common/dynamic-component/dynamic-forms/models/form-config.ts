@@ -10,4 +10,5 @@ export class FormConfig {
   config?: FieldConfig[];
   childrens?: FormConfig[];
   class?: string;
+  onChangeEmit: boolean = false;
 }

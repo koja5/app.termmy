@@ -17,6 +17,7 @@ import { HelpService } from "app/services/help.service";
   selector: "app-dynamic-tabs",
   templateUrl: "./dynamic-tabs.component.html",
   styleUrls: ["./dynamic-tabs.component.scss"],
+  standalone: false
 })
 export class DynamicTabsComponent {
   @Input() path!: string;

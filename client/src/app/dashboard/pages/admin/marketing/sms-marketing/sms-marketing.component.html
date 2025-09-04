@@ -1,0 +1,98 @@
+<div class="container">
+    <div>
+        <app-dynamic-forms *ngIf="!loading" [config]="config" [data]="data" (submit)="submit($event)"
+            (onChangeData)="onChange($event)"></app-dynamic-forms>
+        <div class="text-right col-12">
+            <button class="btn btn-outline-primary mt-1" (click)="saveCampaign()">{{'smsMarketing.saveCampaign' |
+                translate}}</button>
+        </div>
+    </div>
+    <!-- 
+    <div class="preview-box">
+        📩 <strong>Pregled poruke:</strong><br>
+        Poštovani, imamo slobodne termine za <em>masažu</em> u periodu <em>15-20. avgust</em>. Pozovite nas za
+        zakazivanje.
+    </div> -->
+
+    <div class="saved-campaigns">
+        <h2>{{'smsMarketing.savedCampaigns' | translate}}</h2>
+        <p *ngIf="!savedCampaigns.length" class="no-saved-campaigns">{{'smsMarketing.noSavedCampaigns' | translate}}</p>
+        <div *ngFor="let item of savedCampaigns; let i = index" class="campaign-container">
+            <div class="campaign-card" (click)="openSavedCampaign(item)">
+                <h3>{{item.campaign_name}}</h3>
+                <p>{{item.message ? item.message : '/'}}</p>
+            </div>
+            <div>
+                <button class="delete-btn" (click)="removeSavedCampaign(item, i)"><img
+                        src="../../../../../../assets/images/icons/trash.png"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #template>
+    <div *ngIf="!sending">
+        <p class="mb-0">{{ 'smsMarketing.listOfFilteredUsers' | translate }}</p>
+        <p>
+            {{ 'smsMarketing.listOfFilteredUsersTotal' | translate }}
+            <span class="font-weight-bolder">{{ selectedCount }}</span>
+        </p>
+
+        <!-- Global select toggle -->
+        <div class="global-select d-flex align-items-center justify-content-between mb-3">
+            <span class="fw-bold">
+                {{ allSelected ? ('smsMarketing.deselectAll' | translate) : ('smsMarketing.selectAll' | translate) }}
+            </span>
+            <label class="switch">
+                <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll($event.target.checked)" />
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <!-- User list -->
+        <div class="user-list">
+            <div class="user-item d-flex align-items-center justify-content-between"
+                *ngFor="let item of filteredUsers; let i = index">
+                <div class="user-info">
+                    <span class="user-name fw-bold">{{ item.firstname }} {{ item.lastname }}</span>
+                    <span class="user-phone text-muted ms-2">{{ item.telephone }}</span>
+                </div>
+                <!-- Individual toggle -->
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="item.selected" (change)="checkIfAllSelected()" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Send button -->
+        <div class="text-right mt-3" *ngIf="filteredUsers.length">
+            <a class="btn btn-primary" [class.disabled]="!anySelected" (click)="send()">
+                {{ 'smsMarketing.send' | translate }}
+            </a>
+        </div>
+    </div>
+
+    <div *ngIf="sending" class="sending">
+        <img src="../../../../../../assets/images/icons/send_sms.gif">
+        <p>{{ 'smsMarketing.sendingInProgress' | translate }}</p>
+    </div>
+</ng-template>
+
+<app-dialog #modal [template]="template" [width]="'20vw'"></app-dialog>
+
+<ng-template #templateSaveCampaign>
+    <div class="text-right">
+        <label class="custom-label">{{ 'smsMarketing.campaignName' | translate }}</label>
+        <input class="e-outline form-control" [(ngModel)]="campaignName" type="text" id="campaign_name"
+            name="campaign_name" placeholder="{{ 'smsMarketing.campaignNamePlaceholder' | translate }}">
+
+        <button class="btn btn-primary" (click)="saveCampaign()">
+            {{ 'smsMarketing.saveCampaign' | translate }}
+        </button>
+    </div>
+</ng-template>
+
+<app-dialog #modalSaveCampaign [template]="templateSaveCampaign" [width]="'20vw'"></app-dialog>
+
+<app-dialog-confirm #dialogConfirm (confirm)="removeSavedCampaignConfirm()"></app-dialog-confirm>

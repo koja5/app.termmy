@@ -54,4 +54,5 @@ export class FieldConfig {
     groupText?: any;
     previewLink?: any;
   };
+  explanation: string;
 }

@@ -102,6 +102,7 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     this._storageService.deleteToken();
+    this._storageService.removeAllLocalStorage();
     // notify
     this.currentUserSubject.next(null);
   }
